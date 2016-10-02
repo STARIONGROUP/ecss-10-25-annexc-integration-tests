@@ -58,6 +58,7 @@
     <Compile Include="Net\WebClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\SiteDirectory\Person\PersonTestFixture.cs" />
+    <Compile Include="Tests\SiteDirectory\SiteDirectoryTestFixture.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

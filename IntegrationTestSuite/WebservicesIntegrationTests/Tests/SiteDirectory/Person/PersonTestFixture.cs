@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace WebservicesIntegrationTests.SiteDirectory.Person
+namespace WebservicesIntegrationTests
 {
     using System;
     using System.Collections.Generic;
@@ -33,7 +33,7 @@ namespace WebservicesIntegrationTests.SiteDirectory.Person
     public class PersonTestFixture: WebClientTestFixtureBase
     {
         /// <summary>
-        /// Verifucation that the Person objects are returned from the data-source and that the 
+        /// Verification that the Person objects are returned from the data-source and that the 
         /// values of the person properties are equal to to expected value
         /// </summary>
         [Test]
@@ -51,22 +51,57 @@ namespace WebservicesIntegrationTests.SiteDirectory.Person
             // get a specific person from the result by it's unique id
             var person = jArray.Single(x => (string)x["iid"] == "77791b12-4c2c-4499-93fa-869df3692d22");
 
+            PersonTestFixture.VerifyProperties(person);
+        }
+
+        [Test]
+        public void VerifyThatExpectedPersonWithContainerIsReturnedFromWebApi()
+        {
+            // define the URI on which to perform a GET request
+            var personsUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/person?includeAllContainers=true"));
+
+            // Get the response from the data-source as a JArray (JSON Array)
+            var jArray = this.WebClient.GetDto(personsUri);
+
+            // assert that the returned person count = 2
+            Assert.AreEqual(2, jArray.Count);
+
+            var siteDirectory = jArray.Single(x => (string)x["iid"] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
+            SiteDirectoryTestFixture.VerifyProperties(siteDirectory);
+
+            // get a specific person from the result by it's unique id
+            var person = jArray.Single(x => (string)x["iid"] == "77791b12-4c2c-4499-93fa-869df3692d22");
+            PersonTestFixture.VerifyProperties(person);
+        }
+
+        /// <summary>
+        /// Verifies the properties of the Person <see cref="JToken"/>
+        /// </summary>
+        /// <param name="person">
+        /// The <see cref="JToken"/> that contains the properties of
+        /// the Person object
+        /// </param>
+        public static void VerifyProperties(JToken person)
+        {
             // verify that the amount of returned properties 
-            Assert.AreEqual(18, person.Children().Count()); 
+            Assert.AreEqual(18, person.Children().Count());
+
+            Assert.AreEqual("77791b12-4c2c-4499-93fa-869df3692d22", (string)person["iid"]);
+            Assert.AreEqual(1, (int)person["revisionNumber"]);
 
             // assert that the properties are what is expected
-            Assert.AreEqual("John", (string)person["givenName"]);            
+            Assert.AreEqual("John", (string)person["givenName"]);
             Assert.AreEqual("Doe", (string)person["surname"]);
-            Assert.AreEqual("", (string)person["organizationalUnit"]);            
+            Assert.AreEqual("", (string)person["organizationalUnit"]);
             Assert.AreEqual(null, (string)person["organization"]);
             Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string)person["defaultDomain"]);
             Assert.IsTrue((bool)person["isActive"]);
             Assert.AreEqual("2428f4d9-f26d-4112-9d56-1c940748df69", (string)person["role"]);
             Assert.AreEqual(null, (string)person["defaultEmailAddress"]);
-            Assert.AreEqual(null, (string)person["defaultTelephoneNumber"]);            
+            Assert.AreEqual(null, (string)person["defaultTelephoneNumber"]);
             Assert.AreEqual("admin", (string)person["shortName"]);
             Assert.IsFalse((bool)person["isDeprecated"]);
-            
+
             // verify that there is one email with the specified unique id
             var emails = (JArray)person["emailAddress"];
             IList<string> e = emails.Select(x => (string)x).ToList();
@@ -81,19 +116,6 @@ namespace WebservicesIntegrationTests.SiteDirectory.Person
             var userPreferences = (JArray)person["userPreference"];
             IList<string> up = userPreferences.Select(x => (string)x).ToList();
             Assert.IsEmpty(up);
-        }
-
-        [Test]
-        public void VerifyThatExpectedPersonWithContainerIsReturnedFromWebApi()
-        {
-            // define the URI on which to perform a GET request
-            var personsUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/person?includeAllContainers=true"));
-
-            // Get the response from the data-source as a JArray (JSON Array)
-            var jArray = this.WebClient.GetDto(personsUri);
-
-            // assert that the returned person count = 2
-            Assert.AreEqual(2, jArray.Count);
         }
     }
 }

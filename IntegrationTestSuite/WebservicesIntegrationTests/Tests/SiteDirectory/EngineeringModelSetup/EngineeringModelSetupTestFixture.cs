@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace WebservicesIntegrationTests.SiteDirectory.EngineeringModelSetup
+namespace WebservicesIntegrationTests
 {
     using System;
     using NUnit.Framework;

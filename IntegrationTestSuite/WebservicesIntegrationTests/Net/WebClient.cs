@@ -129,37 +129,18 @@ namespace WebservicesIntegrationTests.Net
             {
                 return null;
             }
-
-            var reader = new StreamReader(responseStream);
-            var response = reader.ReadToEnd();
-            var jArray = JArray.Parse(response);
-            return jArray;
-        }
-
-        /// <summary>
-        /// Extracts a <see cref="IEnumerable{Dictionary{string, string}}"/> from the provided <see cref="WebResponse"/>
-        /// </summary>
-        /// <param name="webResponse">
-        /// The <see cref="WebResponse"/> that from which the Dictionaries are extracted
-        /// </param>
-        /// <returns>
-        /// A <see cref="IEnumerable{Dictionary{string, string}}"/> with the response or null if the response was empty
-        /// </returns>
-        private IEnumerable<Dictionary<string, string>> ExtractDictionariesFromResponse(WebResponse webResponse)
-        {
-            var responseStream = webResponse.GetResponseStream();
-            if (responseStream == null)
-            {
-                return null;
-            }
-
+            
             var reader = new StreamReader(responseStream);
             var response = reader.ReadToEnd();
             
-            var dictionaries = JsonConvert.DeserializeObject<List<Dictionary<string, string>>>(response);
-            return dictionaries;
+            using (JsonReader jsonReader = new JsonTextReader(new StringReader(response)))
+            {
+                jsonReader.DateParseHandling = DateParseHandling.None;
+                var jArray = JArray.Load(jsonReader);
+                return jArray;
+            }
         }
-
+        
         /// <summary>
         /// Performs a POST request on the provided <see cref="Uri"/> and return a  <see cref="HttpWebResponse"/>
         /// </summary>
