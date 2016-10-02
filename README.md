@@ -30,9 +30,9 @@ The RHEA Concurrent Design Platform (CDP&trade;) is the RHEA implementation of E
   * CDP4-ADDIN&trade;: A Microsoft Excel ADDIN
   * CDP4-WEBAPP&trade;: A Web Application hosted by the CDP4 WebServices
 
-More information about the CDP&trade; can be found on the RHEA GROUP [Website](http://www.rheagroup.com/products/cdp/).
+More information about the CDP&trade; can be found on the RHEA GROUP [Website](http://www.rheagroup.com/products/cdp/). A demo installer of the CDP4-IME&trade; application can be downloaded after registration here: http://products.rheagroup.com/CDP.  
 
-A Public instance of the CDP4&trade; WebServices is available at http://cdp4services-public.rheagroup.com. The username and password are: admin/pass.  
+A Public instance of the CDP4&trade; WebServices that is used to verify CDP4&trade; WebServices compliance is available at http://cdp4services-test.rheagroup.com. The content that is serviced by this instance is loaded by the contents of the [Data folder](./Data/) . The username and password to access this CDP4&trade; WebServices are: admin/pass.   
 
 # OCDT
 
