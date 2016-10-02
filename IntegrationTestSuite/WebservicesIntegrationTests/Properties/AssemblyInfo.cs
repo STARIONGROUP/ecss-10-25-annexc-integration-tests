@@ -1,6 +1,20 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="AssemblyInfo.cs" company="RHEA S.A.">
-//   Copyright (c) 2016 RHEA S.A.
+// <copyright file="AssemblyInfo.cs" company="RHEA System">
+//
+//   Copyright 2016 RHEA System 
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
+//
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -14,9 +28,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("WebservicesIntegrationTests")]
 [assembly: AssemblyDescription("ECSS-E-TM-10-25 Annex C Integration tests")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("RHEA S.A.")]
+[assembly: AssemblyCompany("RHEA System")]
 [assembly: AssemblyProduct("WebservicesIntegrationTests")]
-[assembly: AssemblyCopyright("Copyright © RHEA 2016")]
+[assembly: AssemblyCopyright("Copyright © RHEA System 2016")]
 [assembly: AssemblyTrademark("CDP4")]
 [assembly: AssemblyCulture("")]
 
