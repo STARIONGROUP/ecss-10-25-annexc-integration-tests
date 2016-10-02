@@ -1,0 +1,53 @@
+﻿{
+  "_delete": [],
+  "_create": [
+    {
+      "activeDomain": [],
+      "alias": [],
+      "classKind": "EngineeringModelSetup",
+      "definition": [],
+      "engineeringModelIid": "1f3c2199-2ddf-4a52-a53a-97436a695d35",
+      "hyperLink": [],
+      "iid": "ba097bf8-c916-4134-8471-4a1eb4efb2f7",
+      "iterationSetup": [],
+      "kind": "STUDY_MODEL",
+      "name": "integrationtest",
+      "participant": [],
+      "requiredRdl": [ "325a98b0-e8e9-4a7f-a038-98b9b618b705" ],
+      "revisionNumber": 0,
+      "shortName": "integrationtest",
+      "sourceEngineeringModelSetupIid": null,
+      "studyPhase": "PREPARATION_PHASE"
+    },
+    {
+      "alias": [],
+      "baseQuantityKind": [],
+      "baseUnit": [],
+      "classKind": "ModelReferenceDataLibrary",
+      "constant": [],
+      "definedCategory": [],
+      "definition": [],
+      "fileType": [],
+      "glossary": [],
+      "hyperLink": [],
+      "iid": "325a98b0-e8e9-4a7f-a038-98b9b618b705",
+      "name": "integrationtest Model RDL",
+      "parameterType": [],
+      "referenceSource": [],
+      "requiredRdl": "bff9f871-3b7f-4e57-ac82-5ab499f9baf5",
+      "revisionNumber": 0,
+      "rule": [],
+      "scale": [],
+      "shortName": "integrationtest",
+      "unit": [],
+      "unitPrefix": []
+    }
+  ],
+  "_update": [
+    {
+      "classKind": "SiteDirectory",
+      "iid": "f13de6f8-b03a-46e7-a492-53b2f260f294",
+      "model": [ "ba097bf8-c916-4134-8471-4a1eb4efb2f7" ]
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+﻿{
+  "_delete": [],
+  "_create": [
+    {
+      "activeDomain": [],
+      "alias": [],
+      "classKind": "EngineeringModelSetup",
+      "definition": [],
+      "engineeringModelIid": "ae1eca97-77bd-4d0b-a17f-fc9fb76b04bd",
+      "hyperLink": [],
+      "iid": "a54467e2-5cb4-450b-a081-1e2f8a6dcd80",
+      "iterationSetup": [],
+      "kind": "STUDY_MODEL",
+      "name": "testderivefromexistingmodel",
+      "participant": [],
+      "requiredRdl": [],
+      "revisionNumber": 0,
+      "shortName": "testderivefromexistingmodel",
+      "sourceEngineeringModelSetupIid": "116f6253-89bb-47d4-aa24-d11d197e43c9",
+      "studyPhase": "PREPARATION_PHASE"
+    }
+  ],
+  "_update": [
+    {
+      "classKind": "SiteDirectory",
+      "iid": "f13de6f8-b03a-46e7-a492-53b2f260f294",
+      "model": [ "a54467e2-5cb4-450b-a081-1e2f8a6dcd80" ]
+    }
+  ]
+}
