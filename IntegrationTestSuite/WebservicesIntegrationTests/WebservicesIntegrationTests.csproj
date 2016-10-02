@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Net\Settings.cs" />
+    <Compile Include="Tests\SiteDirectory\DomainOfExpertise\DomainOfExpertiseTestFixture.cs" />
     <Compile Include="Tests\SiteDirectory\EngineeringModelSetup\EngineeringModelSetupTestFixture.cs" />
     <Compile Include="Tests\BaseClasses\WebClientTestFixtureBase.cs" />
     <Compile Include="Net\WebClient.cs" />
