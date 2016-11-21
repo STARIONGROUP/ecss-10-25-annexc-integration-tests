@@ -30,41 +30,41 @@ namespace WebservicesIntegrationTests
     public class DomainOfExpertiseTestFixture : WebClientTestFixtureBase
     {
         /// <summary>
-        /// Verification that the Person objects are returned from the data-source and that the 
-        /// values of the person properties are equal to to expected value
+        /// Verification that the DomainOfExpertise objects are returned from the data-source and that the 
+        /// values of the DomainOfExpertise properties are equal to to expected value
         /// </summary>
         [Test]
-        public void VerifyThatExpectedPersonIsReturnedFromWebApi()
+        public void VerifyThatExpectedDomainOfExpertiseIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var personsUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/domain"));
+            var domainOfExpertiseUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/domain"));
 
             // Get the response from the data-source as a JArray (JSON Array)
-            var jArray = this.WebClient.GetDto(personsUri);
+            var jArray = this.WebClient.GetDto(domainOfExpertiseUri);
            
             Assert.AreEqual(1, jArray.Count);
 
-            // get a specific domain from the result by it's unique id
+            // get a specific DomainOfExpertise from the result by it's unique id
             var domainOfExpertise = jArray.Single(x => (string)x["iid"] == "0e92edde-fdff-41db-9b1d-f2e484f12535");
 
             DomainOfExpertiseTestFixture.VerifyProperties(domainOfExpertise);
         }
 
         [Test]
-        public void VerifyThatExpectedPersonWithContainerIsReturnedFromWebApi()
+        public void VerifyThatExpectedDomainOfExpertiseWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var personsUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/domain?includeAllContainers=true"));
+            var domainOfExpertiseUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/domain?includeAllContainers=true"));
 
             // Get the response from the data-source as a JArray (JSON Array)
-            var jArray = this.WebClient.GetDto(personsUri);
+            var jArray = this.WebClient.GetDto(domainOfExpertiseUri);
             
             Assert.AreEqual(2, jArray.Count);
 
             var siteDirectory = jArray.Single(x => (string)x["iid"] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
             SiteDirectoryTestFixture.VerifyProperties(siteDirectory);
 
-            // get a specific domain from the result by it's unique id
+            // get a specific DomainOfExpertise from the result by it's unique id
             var domainOfExpertise = jArray.Single(x => (string)x["iid"] == "0e92edde-fdff-41db-9b1d-f2e484f12535");
             DomainOfExpertiseTestFixture.VerifyProperties(domainOfExpertise);
         }
@@ -74,7 +74,7 @@ namespace WebservicesIntegrationTests
         /// </summary>
         /// <param name="domainOfExpertise">
         /// The <see cref="JToken"/> that contains the properties of
-        /// the Person object
+        /// the DomainOfExpertise object
         /// </param>
         public static void VerifyProperties(JToken domainOfExpertise)
         {

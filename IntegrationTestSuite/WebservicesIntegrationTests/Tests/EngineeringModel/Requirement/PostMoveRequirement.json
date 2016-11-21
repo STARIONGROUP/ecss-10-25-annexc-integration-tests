@@ -1,0 +1,13 @@
+﻿{
+  "_delete": [],
+  "_create": [],
+  "_update": [
+    {
+      "classKind": "RequirementsSpecification",
+      "iid": "8d0734f4-ca4b-4611-9187-f6970e2b02bc",
+      "requirement": [
+        "614e2a69-d602-46be-9311-2fb4d3273e87"
+      ]
+    }
+  ]
+}

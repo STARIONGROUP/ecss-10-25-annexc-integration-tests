@@ -1,0 +1,12 @@
+﻿{
+  "_delete": [],
+  "_create": [
+  ],
+  "_update": [
+    {
+      "classKind": "Glossary",
+      "iid": "bb08686b-ae03-49eb-9f48-c196b5ad6bda",
+      "isDeprecated": true
+    }
+  ]
+}

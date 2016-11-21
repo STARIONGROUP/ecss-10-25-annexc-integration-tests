@@ -1,0 +1,29 @@
+﻿{
+  "_delete": [],
+  "_create": [
+    {
+      "iid": "e90e4bcd-6e17-4b75-80fb-6cded78bed57",
+      "revisionNumber": 0,
+      "classKind": "Option",
+      "name": "test option",
+      "shortName": "testoption",
+      "alias": [],
+      "definition": [],
+      "hyperlink": [],
+      "category": [],
+      "nestedElement": []
+    }
+  ],
+  "_update": [
+    {
+      "classKind": "Iteration",
+      "iid": "e163c5ad-f32b-4387-b805-f4b34600bc2c",
+      "option": [
+        {
+          "k": 2,
+          "v": "e90e4bcd-6e17-4b75-80fb-6cded78bed57"
+        }
+      ] 
+    }
+  ]
+}

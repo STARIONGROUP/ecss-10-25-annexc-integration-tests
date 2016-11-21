@@ -1,4 +1,4 @@
-[    
+[
   {
     "revisionNumber": 1,
     "classKind": "SimpleUnit",
@@ -106,7 +106,7 @@
     "numberSet": "REAL_NUMBER_SET",
     "minimumPermissibleValue": "0",
     "isMinimumInclusive": false,
-    "maximumPermissibleValue": "",
+    "maximumPermissibleValue": null,
     "isMaximumInclusive": true,
     "positiveValueConnotation": "",
     "negativeValueConnotation": "",
@@ -167,12 +167,12 @@
     "unit": "56842970-3915-4369-8712-61cfd8273ef9",
     "valueDefinition": [],
     "numberSet": "REAL_NUMBER_SET",
-    "minimumPermissibleValue": "",
+    "minimumPermissibleValue": null,
     "isMinimumInclusive": true,
-    "maximumPermissibleValue": "",
+    "maximumPermissibleValue": null,
     "isMaximumInclusive": true,
-    "positiveValueConnotation": "",
-    "negativeValueConnotation": "",
+    "positiveValueConnotation": null,
+    "negativeValueConnotation": null,
     "mappingToReferenceScale": [],
     "isDeprecated": false,
     "alias": [],
@@ -193,7 +193,7 @@
     "isMinimumInclusive": true,
     "maximumPermissibleValue": "360",
     "isMaximumInclusive": true,
-    "positiveValueConnotation": "",
+    "positiveValueConnotation": null,
     "negativeValueConnotation": "",
     "mappingToReferenceScale": [],
     "isDeprecated": false,
@@ -220,6 +220,22 @@
     "name": "Test Category",
     "shortName": "TestCategory",
     "iid": "cf059b19-235c-48be-87a3-9a8942c8e3e0"
+  },
+  {
+    "revisionNumber": 1,
+    "classKind": "Category",
+    "superCategory": [],
+    "permissibleClass": [
+      "Requirement"
+    ],
+    "isAbstract": false,
+    "isDeprecated": false,
+    "alias": [],
+    "definition": [],
+    "hyperLink": [],
+    "name": "Requirement Category",
+    "shortName": "RequirementCategory",
+    "iid": "167b5cb0-766e-4ab2-b728-a9c9a662b017"
   },
   {
     "revisionNumber": 1,
@@ -314,8 +330,8 @@
     "classKind": "MultiRelationshipRule",
     "isDeprecated": false,
     "relationshipCategory": "107fc408-7e6d-4f1a-895a-1b6a6025ac20",
-    "relatedCategory": [ 
-      "cf059b19-235c-48be-87a3-9a8942c8e3e0" 
+    "relatedCategory": [
+      "cf059b19-235c-48be-87a3-9a8942c8e3e0"
     ],
     "minRelated": 0,
     "maxRelated": -1,
@@ -345,9 +361,8 @@
   {
     "revisionNumber": 1,
     "classKind": "ReferencerRule",
-    "category": "107fc408-7e6d-4f1a-895a-1b6a6025ac20",
     "referencingCategory": "cf059b19-235c-48be-87a3-9a8942c8e3e0",
-    "referencedCategory": [ "cf059b19-235c-48be-87a3-9a8942c8e3e0" ],
+    "referencedCategory": ["cf059b19-235c-48be-87a3-9a8942c8e3e0"],
     "isDeprecated": false,
     "alias": [],
     "definition": [],
@@ -485,7 +500,7 @@
   {
     "revisionNumber": 1,
     "classKind": "SimpleQuantityKind",
-    "possibleScale": [ "53e82aeb-c42c-475c-b6bf-a102af883471" ],
+    "possibleScale": ["53e82aeb-c42c-475c-b6bf-a102af883471"],
     "defaultScale": "53e82aeb-c42c-475c-b6bf-a102af883471",
     "quantityDimensionSymbol": "testQuantityDimensionSymbol",
     "symbol": "testsymbol",
@@ -502,7 +517,7 @@
     "revisionNumber": 1,
     "classKind": "SpecializedQuantityKind",
     "general": "4f9f3d9b-f3de-4ef5-b6cb-2e22199fab0d",
-    "possibleScale": [ "53e82aeb-c42c-475c-b6bf-a102af883471" ],
+    "possibleScale": ["53e82aeb-c42c-475c-b6bf-a102af883471"],
     "defaultScale": "53e82aeb-c42c-475c-b6bf-a102af883471",
     "quantityDimensionSymbol": "",
     "symbol": "testsymbol",
@@ -516,7 +531,7 @@
     "iid": "0a6dc59d-4292-43be-a247-b8d7074d5d52"
   },
   {
-    "revisionNumber": 2,
+    "revisionNumber": 1,
     "classKind": "DerivedQuantityKind",
     "quantityKindFactor": [
       {
@@ -528,7 +543,7 @@
       "53e82aeb-c42c-475c-b6bf-a102af883471"
     ],
     "defaultScale": "53e82aeb-c42c-475c-b6bf-a102af883471",
-    "quantityDimensionSymbol": "",
+    "quantityDimensionSymbol": null,
     "symbol": "symbol",
     "isDeprecated": false,
     "category": [],
@@ -644,7 +659,7 @@
   {
     "revisionNumber": 1,
     "classKind": "ReferenceSource",
-    "versionIdentifier": "",
+    "versionIdentifier": null,
     "versionDate": null,
     "author": "",
     "publicationYear": 1999,

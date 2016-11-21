@@ -10,20 +10,91 @@
         "v": "bebcc9f4-ff20-4569-bbf6-d1acf27a8107"
       }
     ],
-    "publication": [],
-    "possibleFiniteStateList": [],
+    "publication": [
+      "790b9e60-476b-4b6d-8aba-0af15178535e"
+    ],
+    "possibleFiniteStateList": [
+      "449a5bca-34fd-454a-93f8-a56ac8383fee"
+    ],
     "topElement": null,
     "element": [
-      "F73860B2-12F0-43E4-B8B2-C81862C0A159"
+      "f73860b2-12f0-43e4-b8b2-c81862c0a159"
     ],
-    "relationship": [],
-    "externalIdentifierMap": [],
-    "requirementsSpecification": [],
-    "domainFileStore": [],
-    "actualFiniteStateList": [],
+    "relationship": [
+      "320869e4-f6d6-4dd2-a696-1b1604f4c4b7"
+    ],
+    "externalIdentifierMap": [
+      "a0cadcd1-b14f-4552-8f97-bec386a715d0"
+    ],
+    "requirementsSpecification": [
+      "bf0cde90-9086-43d5-bcff-32a2f8331800",
+      "8d0734f4-ca4b-4611-9187-f6970e2b02bc"
+    ],
+    "domainFileStore": [
+      "da7dddaa-02aa-4897-9935-e8d66c811a96"
+    ],
+    "actualFiniteStateList": [
+      "db690d7d-761c-47fd-96d3-840d698a89dc"
+    ],
     "defaultOption": "bebcc9f4-ff20-4569-bbf6-d1acf27a8107",
-    "ruleVerificationList": [],
+    "ruleVerificationList": [
+      "dc482120-2a11-439b-913d-6a924de9ee5f"
+    ],
     "iid": "e163c5ad-f32b-4387-b805-f4b34600bc2c"
+  },
+  {
+    "revisionNumber": 1,
+    "classKind": "PossibleFiniteStateList",
+    "alias": [],
+    "definition": [],
+    "hyperLink": [],
+    "name": "Test Possible FiniteState List",
+    "shortName": "TestPossibleFiniteStateList",
+    "possibleState": [
+      {
+        "k": "73203278",
+        "v": "b8fdfac4-1c40-475a-ac6c-968654b689b6"
+      }
+    ],
+    "defaultState": "b8fdfac4-1c40-475a-ac6c-968654b689b6",
+    "category": [],
+    "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+    "iid": "449a5bca-34fd-454a-93f8-a56ac8383fee"
+  },
+  {
+    "revisionNumber": 1,
+    "classKind": "PossibleFiniteState",
+    "alias": [],
+    "definition": [],
+    "hyperLink": [],
+    "name": "Test Possible Finite State",
+    "shortName": "TestPossibleFiniteState",
+    "iid": "b8fdfac4-1c40-475a-ac6c-968654b689b6"
+  },
+  {
+    "revisionNumber":1,
+    "classKind":"ActualFiniteStateList",
+	"actualState":  [
+	  "b91bfdbb-4277-4a03-b519-e4db839ef5d4"
+	],
+    "excludeOption":[],
+    "owner":"0e92edde-fdff-41db-9b1d-f2e484f12535",
+    "possibleFiniteStateList":[
+      {
+        "k":4598335,
+        "v":"449a5bca-34fd-454a-93f8-a56ac8383fee"
+      }
+    ],
+    "iid":"db690d7d-761c-47fd-96d3-840d698a89dc"
+  },
+  {
+    "revisionNumber":1,
+    "classKind":"ActualFiniteState",
+    "kind":"MANDATORY",
+    "possibleState":  [
+      "b8fdfac4-1c40-475a-ac6c-968654b689b6"
+    ],
+    "iid":"b91bfdbb-4277-4a03-b519-e4db839ef5d4"
   },
   {
     "revisionNumber": 1,
@@ -40,11 +111,15 @@
   {
     "revisionNumber": 1,
     "classKind": "ElementDefinition",
-    "containedElement": [],
-    "parameter": [
-      "6C5AFF74-F983-4AA8-A9D6-293B3429307C"
+    "containedElement": [
+      "75399754-ee45-4bca-b033-63e2019870d1"
     ],
-    "parameterGroup": [],
+    "parameter": [
+      "6c5aff74-f983-4aa8-a9d6-293b3429307c"
+    ],
+    "parameterGroup": [
+      "b739b3c6-9cc0-4e64-9cc4-ef7463edf559"
+    ],
     "referencedElement": [],
     "category": [],
     "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
@@ -53,25 +128,27 @@
     "hyperLink": [],
     "name": "Test Element Definition",
     "shortName": "TestElementDefinition",
-    "iid": "F73860B2-12F0-43E4-B8B2-C81862C0A159"
+    "iid": "f73860b2-12f0-43e4-b8b2-c81862c0a159"
   },
   {
     "revisionNumber": 1,
     "classKind": "Parameter",
     "requestedBy": null,
     "valueSet": [
-      "AF5C88C6-301F-497B-81F7-53748C3900ED"
+      "af5c88c6-301f-497b-81f7-53748c3900ed"
     ],
     "allowDifferentOwnerOfOverride": false,
     "expectsOverride": false,
-    "parameterSubscription": [],
+    "parameterSubscription": [
+      "f1f076c4-5307-42b8-a171-3263a9e7bb21"
+    ],
     "parameterType": "a21c15c4-3e1e-46b5-b109-5063dec1e254",
     "scale": null,
     "stateDependence": null,
     "group": null,
     "isOptionDependent": false,
     "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
-    "iid": "6C5AFF74-F983-4AA8-A9D6-293B3429307C"
+    "iid": "6c5aff74-f983-4aa8-a9d6-293b3429307c"
   },
   {
     "revisionNumber": 1,
@@ -84,6 +161,358 @@
     "reference": "[\"-\"]",
     "actualState": null,
     "actualOption": null,
-    "iid": "AF5C88C6-301F-497B-81F7-53748C3900ED"
+    "iid": "af5c88c6-301f-497b-81f7-53748c3900ed"
+  },
+  {
+    "revisionNumber": 1,
+    "classKind": "ExternalIdentifierMap",
+    "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+    "name": "TestExternalIdentifierMap",
+    "externalFormat": null,
+    "externalToolVersion": "1.0",
+    "externalToolName": "externalTool",
+    "externalModelName": "externalModel",
+    "correspondence": ["ff6956dc-1882-4d61-8840-dedb3fba7b43"],
+    "iid": "a0cadcd1-b14f-4552-8f97-bec386a715d0"
+  },
+  {
+    "name": "Test ParameterGroup",
+    "classKind": "ParameterGroup",
+    "revisionNumber": 1,
+    "containingGroup": null,
+    "iid": "b739b3c6-9cc0-4e64-9cc4-ef7463edf559"
+  },
+  {
+    "revisionNumber": 1,
+    "classKind": "RequirementsSpecification",
+    "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+    "name": "Test Requirements Specification",
+    "shortName": "TestRequirementsSpecification",
+    "isDeprecated": false,
+    "alias": [],
+    "definition": [],
+    "hyperLink": [],
+    "group": ["d3474e6a-f9ac-4d1a-91d9-6f8be06a03b5"],
+    "requirement": [ 
+      "614e2a69-d602-46be-9311-2fb4d3273e87" 
+    ],
+    "iid": "bf0cde90-9086-43d5-bcff-32a2f8331800"
+  },
+  {
+    "revisionNumber": 1,
+    "classKind": "RequirementsSpecification",
+    "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+    "name": "Test Requirements Specification 2",
+    "shortName": "TestRequirementsSpecification2",
+    "isDeprecated": false,
+    "alias": [],
+    "definition": [],
+    "hyperLink": [],
+    "group": [],
+    "requirement": [],
+    "iid": "8d0734f4-ca4b-4611-9187-f6970e2b02bc"
+  },
+  {
+    "revisionNumber": 1,
+    "classKind": "RequirementsGroup",
+    "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+    "name": "Test Requirements Group",
+    "shortName": "TestRequirementsGroup",
+    "alias": [],
+    "definition": [],
+    "hyperLink": [],
+    "group": [],
+    "iid": "d3474e6a-f9ac-4d1a-91d9-6f8be06a03b5"
+  },
+  {
+    "revisionNumber": 1,
+    "classKind": "Requirement",
+    "isDeprecated": false,
+    "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+    "name": "Test Requirement",
+    "shortName": "TestRequirement",
+    "category": [
+      "167b5cb0-766e-4ab2-b728-a9c9a662b017"
+    ],
+    "alias": [ ],
+    "definition": [ ],
+    "hyperLink": [ ],
+    "parameterValue": [
+      "ef3b5740-6e0e-463c-99df-f255e38a32b6",
+      "bcedefb0-b3ee-4a0b-8137-6561fa23b37f"
+    ],
+    "group": null,
+    "parametricConstraint": [
+      {
+        "k": 1,
+        "v": "88200dbc-711a-47e0-a54a-dac4baca6e83"
+      }
+    ],
+    "iid": "614e2a69-d602-46be-9311-2fb4d3273e87"
+  },
+  {
+    "revisionNumber": 1,
+    "classKind": "SimpleParameterValue",
+    "scale": null,
+    "value": "[\"true\"]",
+    "parameterType": "35a9cf05-4eba-4cda-b60c-7cfeaac8f892",
+    "iid": "ef3b5740-6e0e-463c-99df-f255e38a32b6"
+  },
+  {
+    "revisionNumber": 1,
+    "classKind": "SimpleParameterValue",
+    "scale": null,
+    "value": "[\"test\"]",
+    "parameterType": "a21c15c4-3e1e-46b5-b109-5063dec1e254",
+    "iid": "bcedefb0-b3ee-4a0b-8137-6561fa23b37f"
+  },
+  {
+    "revisionNumber": 1,
+    "classKind": "ParametricConstraint",
+    "topExpression": "30cb785a-9e72-477f-ad1a-8df6ab623e3d",
+    "expression": [
+      "000484d0-cefd-47be-9317-a9eae72c94ce",
+      "30cb785a-9e72-477f-ad1a-8df6ab623e3d",
+      "5f90327f-95a2-4c5a-9efe-581f8daf08ed",
+      "8c6df21f-07ae-4d0b-ab9b-866dd1f90158",
+      "deaa2560-b704-4b2c-950b-aad02ff84052",
+      "a6e44651-7c4a-4a57-bdf9-c0290497f392"
+    ],
+    "iid": "88200dbc-711a-47e0-a54a-dac4baca6e83"
+  },
+  {
+    "revisionNumber": 1,
+    "classKind": "AndExpression",
+    "term": [
+      "deaa2560-b704-4b2c-950b-aad02ff84052",
+      "a6e44651-7c4a-4a57-bdf9-c0290497f392"
+    ],
+    "iid": "000484d0-cefd-47be-9317-a9eae72c94ce"
+  },
+  {
+    "revisionNumber": 1,
+    "classKind": "NotExpression",
+    "term": "5f90327f-95a2-4c5a-9efe-581f8daf08ed",
+    "iid": "30cb785a-9e72-477f-ad1a-8df6ab623e3d"
+  },
+  {
+    "revisionNumber": 1,
+    "classKind": "OrExpression",
+    "term": [
+      "8c6df21f-07ae-4d0b-ab9b-866dd1f90158",
+      "a6e44651-7c4a-4a57-bdf9-c0290497f392"
+    ],
+    "iid": "5f90327f-95a2-4c5a-9efe-581f8daf08ed"
+  },
+  {
+    "revisionNumber": 1,
+    "classKind": "ExclusiveOrExpression",
+    "term": [
+      "000484d0-cefd-47be-9317-a9eae72c94ce",
+      "deaa2560-b704-4b2c-950b-aad02ff84052"
+    ],
+    "iid": "8c6df21f-07ae-4d0b-ab9b-866dd1f90158"
+  },
+  {
+    "revisionNumber": 1,
+    "classKind": "RelationalExpression",
+    "scale": null,
+    "value": "[\"true\"]",
+    "relationalOperator": "EQ",
+    "parameterType": "35a9cf05-4eba-4cda-b60c-7cfeaac8f892",
+    "iid": "deaa2560-b704-4b2c-950b-aad02ff84052"
+  },
+  {
+    "revisionNumber": 1,
+    "classKind": "RelationalExpression",
+    "scale": null,
+    "value": "[\"test\"]",
+    "relationalOperator": "EQ",
+    "parameterType": "a21c15c4-3e1e-46b5-b109-5063dec1e254",
+    "iid": "a6e44651-7c4a-4a57-bdf9-c0290497f392"
+  },
+  {
+    "revisionNumber": 1,
+    "classKind": "ElementUsage",
+    "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+    "name": "Test ElementUsage",
+    "shortName": "TestElementUsage",
+    "excludeOption": [],
+    "category": [],
+    "hyperLink": [],
+    "definition": [],
+    "alias": [],
+    "parameterOverride": [
+      "93f767ed-4d22-45f6-ae97-d1dab0d36e1c"
+    ],
+    "interfaceEnd": "UNDIRECTED",
+    "elementDefinition": "f73860b2-12f0-43e4-b8b2-c81862c0a159",
+    "iid": "75399754-ee45-4bca-b033-63e2019870d1"
+  },
+  {
+    "revisionNumber": 1,
+    "classKind": "IdCorrespondence",
+    "externalId": "internalThing",
+    "internalThing": "35a8ee03-6786-4c39-967d-3c5b438f0c64",
+    "iid": "ff6956dc-1882-4d61-8840-dedb3fba7b43"
+  },
+  {
+    "revisionNumber": 1,
+    "classKind": "ParameterOverride",
+    "parameterSubscription": [],
+    "valueSet": [
+      "985db346-a297-4ce6-956b-e675d53d415e"
+    ],
+    "parameter": "6c5aff74-f983-4aa8-a9d6-293b3429307c",
+    "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+    "iid": "93f767ed-4d22-45f6-ae97-d1dab0d36e1c"
+  },
+  {
+    "revisionNumber": 1,
+    "classKind": "ParameterOverrideValueSet",
+    "valueSwitch": "MANUAL",
+    "published": "[\"-\"]",
+    "formula": "[\"-\"]",
+    "computed": "[\"-\"]",
+    "manual": "[\"-\"]",
+    "reference": "[\"-\"]",
+    "parameterValueSet": "af5c88c6-301f-497b-81f7-53748c3900ed",
+    "iid": "985db346-a297-4ce6-956b-e675d53d415e"
+  },
+  {
+    "revisionNumber": 1,
+    "classKind": "ParameterSubscription",
+    "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+    "valueSet": [
+      "a179af79-fd09-44c8-a8a6-3c4c602c7dbf"
+    ],
+    "iid": "f1f076c4-5307-42b8-a171-3263a9e7bb21"
+  },
+  {
+    "revisionNumber": 1,
+    "classKind": "ParameterSubscriptionValueSet",
+    "subscribedValueSet": "af5c88c6-301f-497b-81f7-53748c3900ed",
+    "manual": "[\"-\"]",
+    "valueSwitch": "MANUAL",
+    "iid": "a179af79-fd09-44c8-a8a6-3c4c602c7dbf"
+  },
+  {
+    "revisionNumber": 1,
+    "classKind": "Publication",
+    "domain": [],
+    "publishedParameter": [],
+    "createdOn": "2016-10-25T09:00:35.936Z",
+    "iid": "790b9e60-476b-4b6d-8aba-0af15178535e"
+  },
+  {
+    "revisionNumber": 1,
+    "classKind": "RuleVerificationList",
+    "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+    "name": "Test RuleVerificationList",
+    "shortName": "TestRuleVerificationList",
+    "hyperLink": [],
+    "definition": [],
+    "alias": [],
+    "ruleVerification": [
+      {
+        "k": 1,
+        "v": "c953263c-fc25-4048-9bb6-343a10200a0c"
+      },
+      {
+        "k": 2,
+        "v": "ccb44a8e-2460-4892-ab75-02d8828db233"
+      }
+    ],
+    "iid": "dc482120-2a11-439b-913d-6a924de9ee5f"
+  },
+  {
+    "revisionNumber": 1,
+    "classKind": "UserRuleVerification",
+    "status": "PASSED",
+    "executedOn": null,
+    "violation": [
+      "4333ba99-4a64-460b-971c-3ee00350470f"
+    ],
+    "isActive": true,
+    "rule": "8a5cd66e-7313-4843-813f-37081ca81bb8",
+    "iid": "c953263c-fc25-4048-9bb6-343a10200a0c"
+  },
+  {
+    "revisionNumber": 1,
+    "classKind": "RuleViolation",
+    "violatingThing": [],
+    "description": "RuleViolationTest",
+    "iid": "4333ba99-4a64-460b-971c-3ee00350470f"
+  },
+  {
+    "revisionNumber": 1,
+    "classKind": "BuiltInRuleVerification",
+    "name": "Test BuiltInRuleVerification",
+    "status": "NONE",
+    "executedOn": null,
+    "violation": [],
+    "isActive": false,
+    "iid": "ccb44a8e-2460-4892-ab75-02d8828db233"
+  },
+  {
+    "revisionNumber": 1,
+    "classKind": "BinaryRelationship",
+    "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+    "category": [],
+    "source": "790b9e60-476b-4b6d-8aba-0af15178535e",
+    "target": "ff6956dc-1882-4d61-8840-dedb3fba7b43",
+    "iid": "320869e4-f6d6-4dd2-a696-1b1604f4c4b7"
+  },
+  {
+    "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+    "createdOn": "2016-11-02T13:58:35.936Z",
+    "name": "Test DomainFileStore",
+    "revisionNumber": 1,
+    "classKind": "DomainFileStore",
+    "file": [
+      "95bf0f17-1273-4338-98ae-839016242775"
+    ],
+    "folder": [
+      "67cdb7de-7721-40a0-9ca2-10a5cf7742fc"
+    ],
+    "isHidden": false,
+    "iid": "da7dddaa-02aa-4897-9935-e8d66c811a96"
+  },
+  {
+    "createdOn": "2016-11-02T13:58:35.936Z",
+    "name": "Test Folder",
+    "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+    "revisionNumber": 1,
+    "classKind": "Folder",
+    "containingFolder": null,
+    "creator": "284334dd-e8e5-42d6-bc8a-715c507a7f02",
+    "iid": "67cdb7de-7721-40a0-9ca2-10a5cf7742fc"
+  },
+  {
+    "category": [],
+    "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+    "classKind": "File",
+    "revisionNumber": 1,
+    "lockedBy": null,
+    "fileRevision": [
+      "5544bb87-dc38-45d5-9d92-c580d3fe0442"
+    ],
+    "iid": "95bf0f17-1273-4338-98ae-839016242775"
+  },
+  {
+    "name": "FileRevision",
+    "createdOn": "2016-11-02T13:58:35.936Z",
+    "classKind": "FileRevision",
+    "revisionNumber": 1,
+    "fileType": [
+      {
+        "k": 2,
+        "v": "db04ac55-dd60-4607-a4e1-a9f91c9704e6"
+      }
+    ],
+    "containingFolder": null,
+    "creator": "284334dd-e8e5-42d6-bc8a-715c507a7f02",
+    "contentHash": "B95EC201AE3EE89D407449D692E69BB97C228A7E",
+    "iid": "5544bb87-dc38-45d5-9d92-c580d3fe0442"
   }
 ]

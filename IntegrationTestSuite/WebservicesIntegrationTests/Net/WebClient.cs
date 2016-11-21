@@ -82,6 +82,31 @@ namespace WebservicesIntegrationTests.Net
         public string Password { get; private set; }
 
         /// <summary>
+        /// Restores the data-set on the data-source
+        /// </summary>
+        /// <param name="hostname">
+        /// The hostname where the services are hosted
+        /// </param>
+        public void Restore(string hostname)
+        {
+            var uriBuilder = new UriBuilder(hostname);
+            uriBuilder.Path = "/Data/Restore";
+
+            var uri = uriBuilder.Uri;
+
+            var request = this.CreateWebRequest(uri, HttpPostMethod);
+
+            using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+            {
+                streamWriter.Write("");
+                streamWriter.Flush();
+                streamWriter.Close();
+            }
+
+            var webResponse = (HttpWebResponse)request.GetResponse();            
+        }
+        
+        /// <summary>
         /// Performs a GET request on the provided URI and returns an <see cref="JArray"/>
         /// </summary>
         /// <param name="uri">

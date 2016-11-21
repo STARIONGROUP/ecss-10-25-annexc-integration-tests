@@ -34,29 +34,30 @@ namespace WebservicesIntegrationTests
     {
         /// <summary>
         /// Verification that the SiteDirectory object is returned from the data-source and that the 
-        /// values of the SiteDirectory properties are equal to to expected value
+        /// values of the SiteDirectory properties are equal to to expected value.
         /// </summary>
         [Test]
         public void VerifyThatExpectedSiteDirectoryIsReturnedFromWebApi()
         {
-            // define the URI on which to perform a GET request
+            // define the URI on which to perform a GET request.
             var siteDirectoryUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
 
-            // Get the response from the data-source as a JArray (JSON Array)
+            // Get the response from the data-source as a JArray (JSON Array).
             var jArray = this.WebClient.GetDto(siteDirectoryUri);
 
-            // assert that the returned SiteDirectory count = 1
+            // assert that the returned SiteDirectory count = 1.
             Assert.AreEqual(1, jArray.Count);
 
-            // get a specific SiteDirectory from the result by it's unique id
+            // get a specific SiteDirectory from the result by it's unique id.
             var siteDirectory = jArray.Single(x => (string)x["iid"] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
 
+            // verify the properties.
             SiteDirectoryTestFixture.VerifyProperties(siteDirectory);
         }
 
         /// <summary>
         /// Verification that the SiteDirectory object is returned from the data-source and that the 
-        /// values of the SiteDirectory properties are equal to to expected value
+        /// values of the SiteDirectory properties are equal to to expected value.
         /// </summary>
         [Test]
         public void VerifyThatExpectedSiteDirectoryIsReturnedFromWebApiWhenUniqueIdIsNotSpecified()
@@ -120,9 +121,10 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual("ee3ae5ff-ac5e-4957-bab1-7698fba2a267", (string)siteDirectory["defaultParticipantRole"]);
             Assert.AreEqual("2428f4d9-f26d-4112-9d56-1c940748df69", (string)siteDirectory["defaultPersonRole"]);
 
+            var expectedOrganizations = new string[] { "cd22fc45-d898-4fac-85fc-fbcb7d7b12a7" };
             var organizationArray = (JArray)siteDirectory["organization"];
             IList<string> organizations = organizationArray.Select(x => (string)x).ToList();
-            Assert.IsEmpty(organizations);
+            CollectionAssert.AreEquivalent(expectedOrganizations, organizations);
 
             var expectedPersons = new string[] { "77791b12-4c2c-4499-93fa-869df3692d22" };
             var personArray = (JArray)siteDirectory["person"];
@@ -149,12 +151,16 @@ namespace WebservicesIntegrationTests
             IList<string> personRoles = personRoleArray.Select(x => (string)x).ToList();
             CollectionAssert.AreEquivalent(expectedPersonRoles, personRoles);
 
-            var expectedlogEntries = new string[] { };
+            var expectedlogEntries = new string[]
+            {
+                "98ba7b8a-1a1b-4569-a17c-b1ff620246a5",
+                "66220289-e6ee-43cb-8fcd-d8e59a3dbf97"
+            };
             var logEntryArray = (JArray)siteDirectory["logEntry"];
             IList<string> logEntries = logEntryArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(logEntryArray, logEntries);
+            CollectionAssert.AreEquivalent(expectedlogEntries, logEntries);
 
-            var expecteddomainGroups = new string[] { };
+            var expecteddomainGroups = new string[] { "86992db5-8ce2-4431-8ff5-6fe794d14687" };
             var domainGroupArray = (JArray)siteDirectory["domainGroup"];
             IList<string> domainGroups = domainGroupArray.Select(x => (string)x).ToList();
             CollectionAssert.AreEquivalent(expecteddomainGroups, domainGroups);
@@ -164,7 +170,7 @@ namespace WebservicesIntegrationTests
             IList<string> domains = domainArray.Select(x => (string)x).ToList();
             CollectionAssert.AreEquivalent(expectedDomains, domains);
 
-            var expectedNaturalLanguages = new string[] { };
+            var expectedNaturalLanguages = new string[] { "73bf30cc-3573-488f-8746-6c03ba47973e" };
             var naturalLanguageArray = (JArray)siteDirectory["naturalLanguage"];
             IList<string> naturalLanguages = naturalLanguageArray.Select(x => (string)x).ToList();
             CollectionAssert.AreEquivalent(expectedNaturalLanguages, naturalLanguages);

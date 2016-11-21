@@ -37,14 +37,14 @@ namespace WebservicesIntegrationTests
         protected const string UriFormat = "{0}{1}";
         
         [SetUp]
-        public void SetUp()
+        public virtual void SetUp()
         {
             this.LoadSettings();
             this.WebClient = new WebClient(this.Settings.Username, this.Settings.Password);
         }
 
         [TearDown]
-        public void TearDown()
+        public virtual void TearDown()
         {
             this.WebClient = null;
         }
