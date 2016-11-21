@@ -17,6 +17,25 @@ The following interface technologies shall be supported by a fully compliant imp
 * Annex C.3 - JSON Exchange File Format
   * The file format that is used to serialize ECSS-E-TM-10-25 datasets to a file for the purpose of file based exchange
 
+## Definition of ECSS-E-TM-10-25 Annex C - Integration test suite extensions
+
+In order to support the integration testing. 2 routes have been added to Annex C.2 with the following purpose:
+
+  - An "upload an Annex C.3 compliant seed file" service. The seed file forms the basis for the tests and is the known state of the data set on which the tests have been based. By uploading such a seed file the complete data set is reset to the state described in the seed file.
+  - A "restore" service that restores the dataset on the service to the last seeded file.
+  
+### Upload
+
+The URL of the upload service is the following: "http(s)://hostname:port/Data/Exchange". The seed file shall be uploaded in a multi-part message. We use curl to upload an Annex C.3 file:
+
+```
+curl --form file=@"Data.zip" http://cdp4services-test.rheagroup.com/Data/Exchange
+```
+
+### Restore  
+
+The URL of the restore service takes the following form: "http(s)://hostname:port/Data/Restore".
+  
 # CDP4
 
 The RHEA Concurrent Design Platform (CDP&trade;) is the RHEA implementation of ECSS-E-TM-10-25. The CDP4&trade; is a typical 3-tier application that contains the following application layers:
