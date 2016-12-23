@@ -1,0 +1,57 @@
+﻿{
+  "_delete": [],
+  "_create": [
+    {
+      "revisionNumber": 0,
+      "classKind": "PossibleFiniteStateList",
+      "alias": [ ],
+      "definition": [ ],
+      "hyperLink": [ ],
+      "name": "Test 2 Possible FiniteState List",
+      "shortName": "TestPossibleFiniteStateList2",
+      "possibleState": [
+        {
+          "k": "12158",
+          "v": "20f4d6aa-f9d3-4e91-aae9-bfbe77ae9b79"
+        },
+        {
+          "k": "12159",
+          "v": "e6eabd4f-6145-4788-8070-53bd031195bd"
+        }
+      ],
+      "defaultState": "20f4d6aa-f9d3-4e91-aae9-bfbe77ae9b79",
+      "category": [ ],
+      "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+      "iid": "bf42cb66-f340-4764-ab48-a3938a7c59eb"
+    },
+    {
+      "alias": [ ],
+      "classKind": "PossibleFiniteState",
+      "definition": [ ],
+      "hyperLink": [ ],
+      "iid": "20f4d6aa-f9d3-4e91-aae9-bfbe77ae9b79",
+      "name": "On",
+      "revisionNumber": 0,
+      "shortName": "On"
+    }, 
+    {
+			"alias": [],
+			"classKind": "PossibleFiniteState",
+			"definition": [],
+			"hyperLink": [],
+			"iid": "e6eabd4f-6145-4788-8070-53bd031195bd",
+			"name": "Off",
+			"revisionNumber": 0,
+			"shortName": "Off"
+		}
+  ],
+  "_update": [
+    {
+      "classKind": "Iteration",
+      "iid": "e163c5ad-f32b-4387-b805-f4b34600bc2c",
+      "possibleFiniteStateList": [
+        "bf42cb66-f340-4764-ab48-a3938a7c59eb"
+      ]
+    }
+  ]
+}

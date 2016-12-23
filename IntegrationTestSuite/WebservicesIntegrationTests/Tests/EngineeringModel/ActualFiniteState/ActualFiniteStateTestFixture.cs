@@ -97,10 +97,10 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual("ActualFiniteState", (string)actualFiniteState[PropertyNames.ClassKind]);
             Assert.AreEqual("MANDATORY", (string)actualFiniteState[PropertyNames.Kind]);
 
-            var expectedActualStates = new string[] { "b8fdfac4-1c40-475a-ac6c-968654b689b6" };
+            var expectedPossibleStates = new string[] { "b8fdfac4-1c40-475a-ac6c-968654b689b6" };
             var possibleStateArray = (JArray)actualFiniteState[PropertyNames.PossibleState];
             IList<string> possibleStates = possibleStateArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedActualStates, possibleStates);
+            CollectionAssert.AreEquivalent(expectedPossibleStates, possibleStates);
         }
     }
 }

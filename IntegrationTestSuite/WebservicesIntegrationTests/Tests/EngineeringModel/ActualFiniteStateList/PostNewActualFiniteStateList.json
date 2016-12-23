@@ -1,0 +1,28 @@
+﻿{
+  "_delete": [],
+  "_create": [
+    {
+      "classKind": "ActualFiniteStateList",
+      "excludeOption": [],
+      "actualState": [],
+      "iid": "f4640b3f-7840-4cfc-9a15-80127f91c8db",
+      "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+      "possibleFiniteStateList": [
+        {
+          "k": 2356,
+          "v": "449a5bca-34fd-454a-93f8-a56ac8383fee"
+        }
+      ],
+      "revisionNumber": 0
+    }
+  ],
+  "_update": [
+    {
+      "classKind": "Iteration",
+      "iid": "e163c5ad-f32b-4387-b805-f4b34600bc2c",
+      "actualFiniteStateList": [
+        "f4640b3f-7840-4cfc-9a15-80127f91c8db"
+      ]
+    }
+  ]
+}

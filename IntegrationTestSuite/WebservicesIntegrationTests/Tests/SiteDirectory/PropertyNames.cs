@@ -715,5 +715,55 @@ namespace WebservicesIntegrationTests
         {
             get { return "term"; }
         }
+        
+        public static string RelationalOperator
+        {
+            get { return "relationalOperator"; }
+        }
+
+        public static string NaturalLanguage
+        {
+            get { return "naturalLanguage"; }
+        }
+
+        public static string DomainGroup
+        {
+            get { return "domainGroup"; }
+        }
+
+        public static string LogEntry
+        {
+            get { return "logEntry"; }
+        }
+
+        public static string PersonRole
+        {
+            get { return "personRole"; }
+        }
+
+        public static string SiteReferenceDataLibrary
+        {
+            get { return "siteReferenceDataLibrary"; }
+        }
+
+        public static string ParticipantRole
+        {
+            get { return "participantRole"; }
+        }
+
+        public static string DefaultPersonRole
+        {
+            get { return "defaultPersonRole"; }
+        }
+
+        public static string DefaultParticipantRole
+        {
+            get { return "defaultParticipantRole"; }
+        }
+
+        public static string LastModifiedOn
+        {
+            get { return "lastModifiedOn"; }
+        }        
     }
 }

@@ -1,0 +1,27 @@
+﻿{
+  "_delete": [],
+  "_create": [
+    {
+      "alias": [ ],
+      "classKind": "PossibleFiniteState",
+      "definition": [ ],
+      "hyperLink": [ ],
+      "iid": "20f4d6aa-f9d3-4e91-aae9-bfbe77ae9b79",
+      "name": "On",
+      "revisionNumber": 0,
+      "shortName": "On"
+    }
+  ],
+  "_update": [
+    {
+      "classKind": "PossibleFiniteStateList",
+      "iid": "449a5bca-34fd-454a-93f8-a56ac8383fee",
+      "possibleState": [
+        {
+        "k": "73203279",
+        "v": "20f4d6aa-f9d3-4e91-aae9-bfbe77ae9b79"
+        }
+      ]
+    }
+  ]
+}

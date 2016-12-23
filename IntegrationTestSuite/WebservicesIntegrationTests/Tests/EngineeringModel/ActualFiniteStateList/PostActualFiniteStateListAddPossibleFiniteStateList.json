@@ -1,0 +1,17 @@
+﻿{
+  "_delete": [],
+  "_create": [
+  ],
+  "_update": [
+    {
+      "classKind": "ActualFiniteStateList",
+      "iid": "db690d7d-761c-47fd-96d3-840d698a89dc",
+      "possibleFiniteStateList": [
+        {
+          "k": 4598336,
+          "v": "bf42cb66-f340-4764-ab48-a3938a7c59eb"
+        }
+      ]
+    }
+  ]
+}

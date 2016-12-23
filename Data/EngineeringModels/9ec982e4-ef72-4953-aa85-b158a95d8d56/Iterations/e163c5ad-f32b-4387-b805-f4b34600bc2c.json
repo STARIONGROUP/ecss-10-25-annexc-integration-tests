@@ -21,7 +21,8 @@
       "f73860b2-12f0-43e4-b8b2-c81862c0a159"
     ],
     "relationship": [
-      "320869e4-f6d6-4dd2-a696-1b1604f4c4b7"
+      "320869e4-f6d6-4dd2-a696-1b1604f4c4b7",
+      "138f8a3e-69c6-4e21-b459-bc26b1319a2c"
     ],
     "externalIdentifierMap": [
       "a0cadcd1-b14f-4552-8f97-bec386a715d0"
@@ -85,7 +86,7 @@
         "v":"449a5bca-34fd-454a-93f8-a56ac8383fee"
       }
     ],
-    "iid":"db690d7d-761c-47fd-96d3-840d698a89dc"
+    "iid": "db690d7d-761c-47fd-96d3-840d698a89dc"
   },
   {
     "revisionNumber":1,
@@ -462,6 +463,17 @@
     "source": "790b9e60-476b-4b6d-8aba-0af15178535e",
     "target": "ff6956dc-1882-4d61-8840-dedb3fba7b43",
     "iid": "320869e4-f6d6-4dd2-a696-1b1604f4c4b7"
+  },
+  {
+    "revisionNumber": 1,
+    "classKind": "BinaryRelationship",
+    "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+    "category": [
+      "107fc408-7e6d-4f1a-895a-1b6a6025ac20"
+    ],
+    "source": "67cdb7de-7721-40a0-9ca2-10a5cf7742fc",
+    "target": "95bf0f17-1273-4338-98ae-839016242775",
+    "iid": "138f8a3e-69c6-4e21-b459-bc26b1319a2c"
   },
   {
     "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",

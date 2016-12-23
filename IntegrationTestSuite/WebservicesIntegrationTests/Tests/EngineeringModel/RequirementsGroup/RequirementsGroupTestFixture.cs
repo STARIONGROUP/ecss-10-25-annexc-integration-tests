@@ -30,6 +30,20 @@ namespace WebservicesIntegrationTests
     [TestFixture]
     public class RequirementsGroupTestFixture : WebClientTestFixtureBase
     {
+        public override void SetUp()
+        {
+            base.SetUp();
+
+            this.WebClient.Restore(this.Settings.Hostname);
+        }
+
+        public override void TearDown()
+        {
+            this.WebClient.Restore(this.Settings.Hostname);
+
+            base.TearDown();
+        }
+
         /// <summary>
         /// Verification that the RequirementsGroup objects are returned from the data-source and that the 
         /// values of the RequirementsGroup properties are equal to the expected value
@@ -53,7 +67,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
-        public void VerifyThatExpectedRequirementsSpecificationWithContainerIsReturnedFromWebApi()
+        public void VerifyThatExpectedRequirementsGroupWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
             var requirementsGroupUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/requirementsSpecification/bf0cde90-9086-43d5-bcff-32a2f8331800/group?includeAllContainers=true"));
@@ -75,6 +89,68 @@ namespace WebservicesIntegrationTests
             // get a specific RequirementsSpecification from the result by it's unique id
             var requirementsGroup = jArray.Single(x => (string)x[PropertyNames.Iid] == "d3474e6a-f9ac-4d1a-91d9-6f8be06a03b5");
             RequirementsGroupTestFixture.VerifyProperties(requirementsGroup);
+        }
+
+        [Test]
+        public void VerifyThatARequirementsGroupCanBeCreatedWithWebApi()
+        {
+            var iterationUri =
+                new Uri(string.Format(UriFormat, this.Settings.Hostname,
+                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var postBodyPath = this.GetPath("Tests/EngineeringModel/RequirementsGroup/PostNewRequirementsGroup.json");
+
+            var postBody = base.GetJsonFromFile(postBodyPath);
+            var jArray = this.WebClient.PostDto(iterationUri, postBody);
+            Console.Write(jArray);
+            var engineeeringModel =
+                jArray.Single(x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            Assert.AreEqual(2, (int) engineeeringModel[PropertyNames.RevisionNumber]);
+
+            // get a specific RequirementsSpecification from the result by it's unique id
+            var requirementsSpecification =
+                jArray.Single(x => (string)x[PropertyNames.Iid] == "8d0734f4-ca4b-4611-9187-f6970e2b02bc");
+            Assert.AreEqual(2, (int)requirementsSpecification[PropertyNames.RevisionNumber]);
+
+            var expectedRequirementsGroups = new string[] { "cffa1f05-41b8-4b89-922b-9a9505809601" };
+            var requirementsGroupsArray = (JArray)requirementsSpecification[PropertyNames.Group];
+            IList<string> groups = requirementsGroupsArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedRequirementsGroups, groups);
+
+            // get the added RequirementsGroup from the result by it's unique id
+            var requirementsGroup = jArray.Single(x => (string)x[PropertyNames.Iid] == "cffa1f05-41b8-4b89-922b-9a9505809601");
+
+            // verify the amount of returned properties 
+            Assert.AreEqual(10, requirementsGroup.Children().Count());
+
+            // assert that the properties are what is expected
+            Assert.AreEqual("cffa1f05-41b8-4b89-922b-9a9505809601", (string)requirementsGroup[PropertyNames.Iid]);
+            Assert.AreEqual(2, (int)requirementsGroup[PropertyNames.RevisionNumber]);
+            Assert.AreEqual("RequirementsGroup", (string)requirementsGroup[PropertyNames.ClassKind]);
+
+            Assert.AreEqual("Test Requirements Group post test", (string)requirementsGroup[PropertyNames.Name]);
+            Assert.AreEqual("TestRequirementsGroupPostTest", (string)requirementsGroup[PropertyNames.ShortName]);
+
+            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string)requirementsGroup[PropertyNames.Owner]);
+
+            var expectedAliases = new string[] { };
+            var aliasesArray = (JArray)requirementsGroup[PropertyNames.Alias];
+            IList<string> aliases = aliasesArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedAliases, aliases);
+
+            var expectedDefinitions = new string[] { };
+            var definitionsArray = (JArray)requirementsGroup[PropertyNames.Definition];
+            IList<string> definitions = definitionsArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedDefinitions, definitions);
+
+            var expectedHyperlinks = new string[] { };
+            var hyperlinksArray = (JArray)requirementsGroup[PropertyNames.HyperLink];
+            IList<string> hyperlinks = hyperlinksArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedHyperlinks, hyperlinks);
+
+            expectedRequirementsGroups = new string[] { };
+            requirementsGroupsArray = (JArray)requirementsGroup[PropertyNames.Group];
+            groups = requirementsGroupsArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedRequirementsGroups, groups);
         }
 
         public static void VerifyProperties(JToken requirementsGroup)

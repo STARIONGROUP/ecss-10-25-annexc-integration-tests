@@ -182,6 +182,176 @@ namespace WebservicesIntegrationTests
             Assert.IsNull((string) parameterValueSet[PropertyNames.ActualOption]);
         }
 
+        [Test]
+        public void VerifyThatAParameterOfCompoundParameterTypeCanBeCreatedWithWebApi()
+        {
+            var iterationUri =
+                new Uri(string.Format(UriFormat, this.Settings.Hostname,
+                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var postBodyPath =
+                this.GetPath("Tests/EngineeringModel/Parameter/PostNewParameterOfCompoundParameterType.json");
+
+            var postBody = base.GetJsonFromFile(postBodyPath);
+            var jArray = this.WebClient.PostDto(iterationUri, postBody);
+
+            var engineeeringModel =
+                jArray.Single(x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            Assert.AreEqual(2, (int) engineeeringModel[PropertyNames.RevisionNumber]);
+
+            // get a specific ElementDefinition from the result by it's unique id
+            var elementDefinition =
+                jArray.Single(x => (string) x[PropertyNames.Iid] == "f73860b2-12f0-43e4-b8b2-c81862c0a159");
+            Assert.AreEqual(2, (int) elementDefinition[PropertyNames.RevisionNumber]);
+
+            var expectedParameters = new string[]
+            {
+                "6c5aff74-f983-4aa8-a9d6-293b3429307c",
+                "2460b6a5-08ff-4cc3-a2cc-8fd5c5cf2736"
+            };
+            var parametersArray = (JArray) elementDefinition[PropertyNames.Parameter];
+            IList<string> parameters = parametersArray.Select(x => (string) x).ToList();
+            CollectionAssert.AreEquivalent(expectedParameters, parameters);
+
+            // get the added Parameter from the result by it's unique id
+            var parameter = jArray.Single(x => (string) x[PropertyNames.Iid] == "2460b6a5-08ff-4cc3-a2cc-8fd5c5cf2736");
+
+            // verify the amount of returned properties 
+            Assert.AreEqual(14, parameter.Children().Count());
+
+            // assert that the properties are what is expected
+            Assert.AreEqual("2460b6a5-08ff-4cc3-a2cc-8fd5c5cf2736",
+                (string) parameter[PropertyNames.Iid]);
+            Assert.AreEqual(2, (int) parameter[PropertyNames.RevisionNumber]);
+            Assert.AreEqual("Parameter", (string) parameter[PropertyNames.ClassKind]);
+
+            Assert.IsNull((string) parameter[PropertyNames.RequestedBy]);
+            Assert.IsFalse((bool) parameter[PropertyNames.AllowDifferentOwnerOfOverride]);
+            Assert.IsFalse((bool) parameter[PropertyNames.ExpectsOverride]);
+            Assert.AreEqual("4a783624-b2bc-4e6d-95b3-11d036f6e917", (string) parameter[PropertyNames.ParameterType]);
+            Assert.IsNull((string) parameter[PropertyNames.Scale]);
+            Assert.IsNull((string) parameter[PropertyNames.StateDependence]);
+            Assert.IsNull((string) parameter[PropertyNames.Group]);
+            Assert.IsFalse((bool) parameter[PropertyNames.IsOptionDependent]);
+            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string) parameter[PropertyNames.Owner]);
+
+            var expectedParameterSubscriptions = new string[] {};
+            var parameterSubscriptionsArray = (JArray) parameter[PropertyNames.ParameterSubscription];
+            IList<string> parameterSubscriptions = parameterSubscriptionsArray.Select(x => (string) x).ToList();
+            CollectionAssert.AreEquivalent(expectedParameterSubscriptions, parameterSubscriptions);
+
+            // get the created ParameterValueSet as a side effect of creating Parameter from the result by it's unique id
+            var valueSetsArray = (JArray) parameter[PropertyNames.ValueSet];
+            IList<string> valueSets = valueSetsArray.Select(x => (string) x).ToList();
+            Assert.AreEqual(1, valueSets.Count);
+
+            var parameterValueSet = jArray.Single(x => (string) x[PropertyNames.Iid] == valueSets[0]);
+
+            // verify the amount of returned properties 
+            Assert.AreEqual(11, parameterValueSet.Children().Count());
+            // assert that the properties are what is expected
+            Assert.AreEqual(valueSets[0],
+                (string) parameterValueSet[PropertyNames.Iid]);
+            Assert.AreEqual(2, (int) parameterValueSet[PropertyNames.RevisionNumber]);
+            Assert.AreEqual("ParameterValueSet", (string) parameterValueSet[PropertyNames.ClassKind]);
+
+            Assert.AreEqual("MANUAL", (string) parameterValueSet[PropertyNames.ValueSwitch]);
+
+            const string emptyProperty = "[\"-\",\"-\"]";
+            Assert.AreEqual(emptyProperty, (string) parameterValueSet[PropertyNames.Published]);
+            Assert.AreEqual(emptyProperty, (string) parameterValueSet[PropertyNames.Formula]);
+            Assert.AreEqual(emptyProperty, (string) parameterValueSet[PropertyNames.Computed]);
+            Assert.AreEqual(emptyProperty, (string) parameterValueSet[PropertyNames.Manual]);
+            Assert.AreEqual(emptyProperty, (string) parameterValueSet[PropertyNames.Reference]);
+
+            Assert.IsNull((string) parameterValueSet[PropertyNames.ActualState]);
+            Assert.IsNull((string) parameterValueSet[PropertyNames.ActualOption]);
+        }
+
+        [Test]
+        public void VerifyThatAnOptionDependentParameterCanBeCreatedWithWebApi()
+        {
+            var iterationUri =
+                new Uri(string.Format(UriFormat, this.Settings.Hostname,
+                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var postBodyPath = this.GetPath("Tests/EngineeringModel/Parameter/PostNewOptionDependentParameter.json");
+
+            var postBody = base.GetJsonFromFile(postBodyPath);
+            var jArray = this.WebClient.PostDto(iterationUri, postBody);
+
+            var engineeeringModel =
+                jArray.Single(x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            Assert.AreEqual(2, (int) engineeeringModel[PropertyNames.RevisionNumber]);
+
+            // get a specific ElementDefinition from the result by it's unique id
+            var elementDefinition =
+                jArray.Single(x => (string) x[PropertyNames.Iid] == "f73860b2-12f0-43e4-b8b2-c81862c0a159");
+            Assert.AreEqual(2, (int) elementDefinition[PropertyNames.RevisionNumber]);
+
+            var expectedParameters = new string[]
+            {
+                "6c5aff74-f983-4aa8-a9d6-293b3429307c",
+                "9600b225-a4be-47b1-92b1-4dc2d8894ea3"
+            };
+            var parametersArray = (JArray) elementDefinition[PropertyNames.Parameter];
+            IList<string> parameters = parametersArray.Select(x => (string) x).ToList();
+            CollectionAssert.AreEquivalent(expectedParameters, parameters);
+
+            // get the added Parameter from the result by it's unique id
+            var parameter = jArray.Single(x => (string) x[PropertyNames.Iid] == "9600b225-a4be-47b1-92b1-4dc2d8894ea3");
+
+            // verify the amount of returned properties 
+            Assert.AreEqual(14, parameter.Children().Count());
+
+            // assert that the properties are what is expected
+            Assert.AreEqual("9600b225-a4be-47b1-92b1-4dc2d8894ea3",
+                (string) parameter[PropertyNames.Iid]);
+            Assert.AreEqual(2, (int) parameter[PropertyNames.RevisionNumber]);
+            Assert.AreEqual("Parameter", (string) parameter[PropertyNames.ClassKind]);
+
+            Assert.IsNull((string) parameter[PropertyNames.RequestedBy]);
+            Assert.IsFalse((bool) parameter[PropertyNames.AllowDifferentOwnerOfOverride]);
+            Assert.IsFalse((bool) parameter[PropertyNames.ExpectsOverride]);
+            Assert.AreEqual("a21c15c4-3e1e-46b5-b109-5063dec1e254", (string) parameter[PropertyNames.ParameterType]);
+            Assert.IsNull((string) parameter[PropertyNames.Scale]);
+            Assert.IsNull((string) parameter[PropertyNames.StateDependence]);
+            Assert.IsNull((string) parameter[PropertyNames.Group]);
+            Assert.IsTrue((bool) parameter[PropertyNames.IsOptionDependent]);
+            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string) parameter[PropertyNames.Owner]);
+
+            var expectedParameterSubscriptions = new string[] {};
+            var parameterSubscriptionsArray = (JArray) parameter[PropertyNames.ParameterSubscription];
+            IList<string> parameterSubscriptions = parameterSubscriptionsArray.Select(x => (string) x).ToList();
+            CollectionAssert.AreEquivalent(expectedParameterSubscriptions, parameterSubscriptions);
+
+            // get the created ParameterValueSet as a side effect of creating Parameter from the result by it's unique id
+            var valueSetsArray = (JArray) parameter[PropertyNames.ValueSet];
+            IList<string> valueSets = valueSetsArray.Select(x => (string) x).ToList();
+            Assert.AreEqual(1, valueSets.Count);
+
+            var parameterValueSet = jArray.Single(x => (string) x[PropertyNames.Iid] == valueSets[0]);
+
+            // verify the amount of returned properties 
+            Assert.AreEqual(11, parameterValueSet.Children().Count());
+            // assert that the properties are what is expected
+            Assert.AreEqual(valueSets[0],
+                (string) parameterValueSet[PropertyNames.Iid]);
+            Assert.AreEqual(2, (int) parameterValueSet[PropertyNames.RevisionNumber]);
+            Assert.AreEqual("ParameterValueSet", (string) parameterValueSet[PropertyNames.ClassKind]);
+
+            Assert.AreEqual("MANUAL", (string) parameterValueSet[PropertyNames.ValueSwitch]);
+
+            const string emptyProperty = "[\"-\"]";
+            Assert.AreEqual(emptyProperty, (string) parameterValueSet[PropertyNames.Published]);
+            Assert.AreEqual(emptyProperty, (string) parameterValueSet[PropertyNames.Formula]);
+            Assert.AreEqual(emptyProperty, (string) parameterValueSet[PropertyNames.Computed]);
+            Assert.AreEqual(emptyProperty, (string) parameterValueSet[PropertyNames.Manual]);
+            Assert.AreEqual(emptyProperty, (string) parameterValueSet[PropertyNames.Reference]);
+
+            Assert.IsNull((string) parameterValueSet[PropertyNames.ActualState]);
+            Assert.AreEqual("bebcc9f4-ff20-4569-bbf6-d1acf27a8107",
+                (string) parameterValueSet[PropertyNames.ActualOption]);
+        }
+
         /// <summary>
         /// Verifies all properties of the Parameter <see cref="JToken"/>
         /// </summary>

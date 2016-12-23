@@ -62,7 +62,7 @@ namespace WebservicesIntegrationTests
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(personPermissionUri);
 
-            //check if there are 26 objects
+            //check if there are 17 objects
             Assert.AreEqual(17, jArray.Count);
 
             // get a specific SiteDirectory from the result by it's unique id

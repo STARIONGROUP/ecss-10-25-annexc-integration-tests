@@ -1,0 +1,28 @@
+﻿{
+  "_delete": [],
+  "_create": [
+    {
+      "revisionNumber": 1,
+      "classKind": "RequirementsSpecification",
+      "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+      "name": "Test Requirements Specification 3",
+      "shortName": "TestRequirementsSpecification3",
+      "isDeprecated": false,
+      "alias": [],
+      "definition": [],
+      "hyperLink": [],
+      "group": [],
+      "requirement": [],
+      "iid": "272e59f8-267a-4e5f-84eb-6d1b495bf4c7"
+    }
+  ],
+  "_update": [
+    {
+      "classKind": "Iteration",
+      "iid": "e163c5ad-f32b-4387-b805-f4b34600bc2c",
+      "requirementsSpecification": [
+        "272e59f8-267a-4e5f-84eb-6d1b495bf4c7"
+      ]
+    }
+  ]
+}

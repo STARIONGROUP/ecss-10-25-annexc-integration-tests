@@ -44,14 +44,18 @@ namespace WebservicesIntegrationTests
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(binaryRelationshipUri);
 
-            //check if there is the only one BinaryRelationship object 
-            Assert.AreEqual(1, jArray.Count);
+            //check if there is required amount of BinaryRelationship object 
+            Assert.AreEqual(2, jArray.Count);
 
             // get a specific BinaryRelationship from the result by it's unique id
             var binaryRelationship =
                 jArray.Single(x => (string)x[PropertyNames.Iid] == "320869e4-f6d6-4dd2-a696-1b1604f4c4b7");
-
             BinaryRelationShipTestFixture.VerifyProperties(binaryRelationship);
+
+            // get a specific BinaryRelationship from the result by it's unique id
+            var binaryRelationshipWithCategoryEntry =
+                jArray.Single(x => (string)x[PropertyNames.Iid] == "138f8a3e-69c6-4e21-b459-bc26b1319a2c");
+            BinaryRelationShipTestFixture.VerifyPropertiesWithCategoryEntry(binaryRelationshipWithCategoryEntry);
         }
 
         [Test]
@@ -66,7 +70,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(binaryRelationshipUri);
 
             //check if there are 3 objects
-            Assert.AreEqual(3, jArray.Count);
+            Assert.AreEqual(4, jArray.Count);
 
             // get a specific Iteration from the result by it's unique id
             var iteration =
@@ -77,6 +81,11 @@ namespace WebservicesIntegrationTests
             var binaryRelationship =
                 jArray.Single(x => (string)x[PropertyNames.Iid] == "320869e4-f6d6-4dd2-a696-1b1604f4c4b7");
             BinaryRelationShipTestFixture.VerifyProperties(binaryRelationship);
+
+            // get a specific BinaryRelationship from the result by it's unique id
+            var binaryRelationshipWithCategoryEntry =
+                jArray.Single(x => (string)x[PropertyNames.Iid] == "138f8a3e-69c6-4e21-b459-bc26b1319a2c");
+            BinaryRelationShipTestFixture.VerifyPropertiesWithCategoryEntry(binaryRelationshipWithCategoryEntry);
         }
 
         /// <summary>
@@ -101,6 +110,29 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual("ff6956dc-1882-4d61-8840-dedb3fba7b43", (string)binaryRelationship[PropertyNames.Target]);
             
             var expectedCategories = new string[] {};
+            var categoriesArray = (JArray)binaryRelationship[PropertyNames.Category];
+            IList<string> categories = categoriesArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedCategories, categories);
+        }
+
+        public static void VerifyPropertiesWithCategoryEntry(JToken binaryRelationship)
+        {
+            // verify the amount of returned properties 
+            Assert.AreEqual(7, binaryRelationship.Children().Count());
+
+            // assert that the properties are what is expected
+            Assert.AreEqual("138f8a3e-69c6-4e21-b459-bc26b1319a2c", (string)binaryRelationship[PropertyNames.Iid]);
+            Assert.AreEqual(1, (int)binaryRelationship[PropertyNames.RevisionNumber]);
+            Assert.AreEqual("BinaryRelationship", (string)binaryRelationship[PropertyNames.ClassKind]);
+
+            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string)binaryRelationship[PropertyNames.Owner]);
+            Assert.AreEqual("67cdb7de-7721-40a0-9ca2-10a5cf7742fc", (string)binaryRelationship[PropertyNames.Source]);
+            Assert.AreEqual("95bf0f17-1273-4338-98ae-839016242775", (string)binaryRelationship[PropertyNames.Target]);
+
+            var expectedCategories = new string[]
+            {
+                "107fc408-7e6d-4f1a-895a-1b6a6025ac20"
+            };
             var categoriesArray = (JArray)binaryRelationship[PropertyNames.Category];
             IList<string> categories = categoriesArray.Select(x => (string)x).ToList();
             CollectionAssert.AreEquivalent(expectedCategories, categories);

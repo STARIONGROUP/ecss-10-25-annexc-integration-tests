@@ -6,11 +6,11 @@
       "classKind": "Parameter",
       "expectsOverride": false,
       "group": null,
-      "iid": "2cd4eb9c-e92c-41b2-968c-f03ff7010bad",
+      "iid": "2460b6a5-08ff-4cc3-a2cc-8fd5c5cf2736",
       "isOptionDependent": false,
       "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
       "parameterSubscription": [ ],
-      "parameterType": "a21c15c4-3e1e-46b5-b109-5063dec1e254",
+      "parameterType": "4a783624-b2bc-4e6d-95b3-11d036f6e917",
       "requestedBy": null,
       "revisionNumber": 0,
       "scale": null,
@@ -23,7 +23,7 @@
       "classKind": "ElementDefinition",
       "iid": "f73860b2-12f0-43e4-b8b2-c81862c0a159",
       "parameter": [
-        "2cd4eb9c-e92c-41b2-968c-f03ff7010bad"
+        "2460b6a5-08ff-4cc3-a2cc-8fd5c5cf2736"
       ]
     }
   ]

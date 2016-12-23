@@ -131,7 +131,8 @@ namespace WebservicesIntegrationTests
 
             var expectedRelationships = new string[]
             {
-                "320869e4-f6d6-4dd2-a696-1b1604f4c4b7"
+                "320869e4-f6d6-4dd2-a696-1b1604f4c4b7",
+                "138f8a3e-69c6-4e21-b459-bc26b1319a2c"
             };
             var relationshipsArray = (JArray) iteration[PropertyNames.Relationship];
             IList<string> relationships = relationshipsArray.Select(x => (string) x).ToList();

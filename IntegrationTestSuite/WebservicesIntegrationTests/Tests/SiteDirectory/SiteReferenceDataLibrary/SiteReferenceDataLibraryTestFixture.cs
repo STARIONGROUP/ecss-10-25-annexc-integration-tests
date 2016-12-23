@@ -78,6 +78,34 @@ namespace WebservicesIntegrationTests
             SiteReferenceDataLibraryTestFixture.VerifyProperties(siteReferenceDataLibrary);
         }
 
+        [Test]
+        public void VerifyLibraryInReturnedFromWebApi()
+        {
+            // define the URI on which to perform a GET request
+            var siteReferenceDataLibrariesUri =
+                new Uri(string.Format(UriFormat, this.Settings.Hostname,
+                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary?includeReferenceData=true&includeAllContainers=true&extent=deep"));
+
+            // get a response from the data-source as a JArray (JSON Array)
+            var jArray = this.WebClient.GetDto(siteReferenceDataLibrariesUri);
+
+            var setOfUniqueParameterTypeIids = new HashSet<string>();
+            var sumOfParameterTypeElements = 0;
+
+            //check for all objects whose classKind name contains ParameterType or QuantityKind
+            foreach (var obj in jArray)
+            {
+                if (((string) obj[PropertyNames.ClassKind]).Contains("ParameterType") ||
+                    ((string) obj[PropertyNames.ClassKind]).Contains("QuantityKind"))
+                {
+                    sumOfParameterTypeElements++;
+                    setOfUniqueParameterTypeIids.Add((string) obj[PropertyNames.Iid]);
+                }
+            }
+
+            Assert.AreEqual(sumOfParameterTypeElements, setOfUniqueParameterTypeIids.Count);
+        }
+
         /// <summary>
         /// Verifies all properties of the SiteReferenceDataLibrary <see cref="JToken"/>
         /// </summary>

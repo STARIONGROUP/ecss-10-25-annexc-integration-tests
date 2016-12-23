@@ -30,6 +30,20 @@ namespace WebservicesIntegrationTests
     [TestFixture]
     public class ActualFiniteStateListTestFixture : WebClientTestFixtureBase
     {
+        public override void SetUp()
+        {
+            base.SetUp();
+
+            this.WebClient.Restore(this.Settings.Hostname);
+        }
+
+        public override void TearDown()
+        {
+            this.WebClient.Restore(this.Settings.Hostname);
+
+            base.TearDown();
+        }
+
         /// <summary>
         /// Verification that the ActualFiniteStateList objects are returned from the data-source and that the 
         /// values of the ActualFiniteStateList properties are equal to the expected value
@@ -49,7 +63,8 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(1, jArray.Count);
 
             // get a specific ActualFiniteStateList from the result by it's unique id
-            var actualFiniteStateList = jArray.Single(x => (string)x[PropertyNames.Iid] == "db690d7d-761c-47fd-96d3-840d698a89dc");
+            var actualFiniteStateList =
+                jArray.Single(x => (string) x[PropertyNames.Iid] == "db690d7d-761c-47fd-96d3-840d698a89dc");
 
             ActualFiniteStateListTestFixture.VerifyProperties(actualFiniteStateList);
         }
@@ -59,7 +74,7 @@ namespace WebservicesIntegrationTests
         {
             // define the URI on which to perform a GET request
             var actualFiniteStateListUri = new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/actualFiniteStateList?includeAllContainers=true"));
+                "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/actualFiniteStateList?includeAllContainers=true"));
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(actualFiniteStateListUri);
@@ -68,13 +83,364 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(3, jArray.Count);
 
             // get a specific Iteration from the result by it's unique id
-            var iteration = jArray.Single(x => (string)x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
+            var iteration = jArray.Single(x => (string) x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
             IterationTestFixture.VerifyProperties(iteration);
 
             // get a specific ActualFiniteStateList from the result by it's unique id
-            var actualFiniteStateList =  jArray.Single(x => (string)x[PropertyNames.Iid] == "db690d7d-761c-47fd-96d3-840d698a89dc");
+            var actualFiniteStateList =
+                jArray.Single(x => (string) x[PropertyNames.Iid] == "db690d7d-761c-47fd-96d3-840d698a89dc");
 
             ActualFiniteStateListTestFixture.VerifyProperties(actualFiniteStateList);
+        }
+
+        [Test]
+        public void VerifyThatActualStateCanBeCreatedWhenActualFiniteStateListIsCreatedWithWebApi()
+        {
+            var iterationUri =
+                new Uri(string.Format(UriFormat, this.Settings.Hostname,
+                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var postBodyPath =
+                this.GetPath("Tests/EngineeringModel/ActualFiniteStateList/PostNewActualFiniteStateList.json");
+
+            var postBody = base.GetJsonFromFile(postBodyPath);
+            var jArray = this.WebClient.PostDto(iterationUri, postBody);
+
+            var engineeeringModel =
+                jArray.Single(x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            Assert.AreEqual(2, (int) engineeeringModel[PropertyNames.RevisionNumber]);
+
+            var iteration =
+                jArray.Single(x => (string) x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
+            Assert.AreEqual(2, (int) iteration[PropertyNames.RevisionNumber]);
+
+            var expectedActualFiniteStateLists = new string[]
+            {
+                "db690d7d-761c-47fd-96d3-840d698a89dc",
+                "f4640b3f-7840-4cfc-9a15-80127f91c8db"
+            };
+            var actualFiniteStateListsArray = (JArray) iteration[PropertyNames.ActualFiniteStateList];
+            IList<string> actualFiniteStateLists = actualFiniteStateListsArray.Select(x => (string) x).ToList();
+            CollectionAssert.AreEquivalent(expectedActualFiniteStateLists, actualFiniteStateLists);
+
+            var actualFiniteStateList =
+                jArray.Single(x => (string) x[PropertyNames.Iid] == "f4640b3f-7840-4cfc-9a15-80127f91c8db");
+
+            // verify the amount of returned properties 
+            Assert.AreEqual(7, actualFiniteStateList.Children().Count());
+
+            // assert that the properties are what is expected
+            Assert.AreEqual("f4640b3f-7840-4cfc-9a15-80127f91c8db", (string) actualFiniteStateList[PropertyNames.Iid]);
+            Assert.AreEqual(2, (int) actualFiniteStateList[PropertyNames.RevisionNumber]);
+            Assert.AreEqual("ActualFiniteStateList", (string) actualFiniteStateList[PropertyNames.ClassKind]);
+            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string) actualFiniteStateList[PropertyNames.Owner]);
+
+            var expectedPossibleFiniteStateLists = new List<OrderedItem>
+            {
+                new OrderedItem(2356, "449a5bca-34fd-454a-93f8-a56ac8383fee")
+            };
+
+            var possibleFiniteStateLists =
+                JsonConvert.DeserializeObject<List<OrderedItem>>(
+                    actualFiniteStateList[PropertyNames.PossibleFiniteStateList].ToString());
+            CollectionAssert.AreEquivalent(expectedPossibleFiniteStateLists, possibleFiniteStateLists);
+
+            var expectedExcludedOptions = new string[] {};
+            var excludedOptionsArray = (JArray) actualFiniteStateList[PropertyNames.ExcludeOption];
+            IList<string> excludedOptions = excludedOptionsArray.Select(x => (string) x).ToList();
+            CollectionAssert.AreEquivalent(expectedExcludedOptions, excludedOptions);
+
+            // get the created ActualState as a side effect of creating ActualFiniteStateList from the result 
+            var actualStatesArray = (JArray) actualFiniteStateList[PropertyNames.ActualState];
+            IList<string> actualStates = actualStatesArray.Select(x => (string) x).ToList();
+            Assert.AreEqual(1, actualStates.Count);
+
+            // get a specific ActualFiniteStateList from the result 
+            var actualFiniteState = jArray.Single(x => (string) x[PropertyNames.Iid] == actualStates[0]);
+
+            // verify the amount of returned properties 
+            Assert.AreEqual(5, actualFiniteState.Children().Count());
+
+            // assert that the properties are what is expected
+            Assert.AreEqual(2, (int) actualFiniteState[PropertyNames.RevisionNumber]);
+            Assert.AreEqual("ActualFiniteState", (string) actualFiniteState[PropertyNames.ClassKind]);
+            Assert.AreEqual("MANDATORY", (string) actualFiniteState[PropertyNames.Kind]);
+
+            var expectedPossibleStates = new string[] {"b8fdfac4-1c40-475a-ac6c-968654b689b6"};
+            var possibleStateArray = (JArray) actualFiniteState[PropertyNames.PossibleState];
+            IList<string> possibleStates = possibleStateArray.Select(x => (string) x).ToList();
+            CollectionAssert.AreEquivalent(expectedPossibleStates, possibleStates);
+        }
+
+        [Test]
+        public void VerifyThatActualStateCanBeCreatedWhenPossibleFiniteStateListIsAddedWithWebApi()
+        {
+            //POST a new PossibleFiniteStateList
+            var iterationUri =
+                new Uri(string.Format(UriFormat, this.Settings.Hostname,
+                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var postBodyPath =
+                this.GetPath("Tests/EngineeringModel/ActualFiniteStateList/PostPossibleFiniteStateList.json");
+
+            var postBody = base.GetJsonFromFile(postBodyPath);
+            var jArray = this.WebClient.PostDto(iterationUri, postBody);
+
+            var engineeeringModel =
+                jArray.Single(x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            Assert.AreEqual(2, (int) engineeeringModel[PropertyNames.RevisionNumber]);
+
+            var iteration =
+                jArray.Single(x => (string) x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
+            Assert.AreEqual(2, (int) iteration[PropertyNames.RevisionNumber]);
+
+            var expectedPossibleFiniteStateLists = new string[]
+            {
+                "449a5bca-34fd-454a-93f8-a56ac8383fee",
+                "bf42cb66-f340-4764-ab48-a3938a7c59eb"
+            };
+            var possibleFiniteStateListsArray = (JArray) iteration[PropertyNames.PossibleFiniteStateList];
+            IList<string> possibleFiniteStateLists = possibleFiniteStateListsArray.Select(x => (string) x).ToList();
+            CollectionAssert.AreEquivalent(expectedPossibleFiniteStateLists, possibleFiniteStateLists);
+
+            var possibleFiniteStateList =
+                jArray.Single(x => (string) x[PropertyNames.Iid] == "bf42cb66-f340-4764-ab48-a3938a7c59eb");
+            Assert.AreEqual(2, (int) iteration[PropertyNames.RevisionNumber]);
+
+            // verify the amount of returned properties 
+            Assert.AreEqual(12, possibleFiniteStateList.Children().Count());
+
+            // assert that the properties are what is expected
+            Assert.AreEqual("PossibleFiniteStateList", (string) possibleFiniteStateList[PropertyNames.ClassKind]);
+
+            Assert.AreEqual("Test 2 Possible FiniteState List", (string) possibleFiniteStateList[PropertyNames.Name]);
+            Assert.AreEqual("TestPossibleFiniteStateList2", (string) possibleFiniteStateList[PropertyNames.ShortName]);
+
+            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535",
+                (string) possibleFiniteStateList[PropertyNames.Owner]);
+
+            var expectedPossibleFiniteStates = new List<OrderedItem>
+            {
+                new OrderedItem(12158, "20f4d6aa-f9d3-4e91-aae9-bfbe77ae9b79"),
+                new OrderedItem(12159, "e6eabd4f-6145-4788-8070-53bd031195bd")
+            };
+            var possibleFiniteStates = JsonConvert.DeserializeObject<List<OrderedItem>>(
+                possibleFiniteStateList[PropertyNames.PossibleState].ToString());
+            CollectionAssert.AreEquivalent(expectedPossibleFiniteStates, possibleFiniteStates);
+
+            Assert.AreEqual("20f4d6aa-f9d3-4e91-aae9-bfbe77ae9b79",
+                (string) possibleFiniteStateList[PropertyNames.DefaultState]);
+
+            var expectedCategories = new string[] {};
+            var categoriesArray = (JArray) possibleFiniteStateList[PropertyNames.Category];
+            IList<string> categories = categoriesArray.Select(x => (string) x).ToList();
+            CollectionAssert.AreEquivalent(expectedCategories, categories);
+
+            var expectedAliases = new string[] {};
+            var aliasesArray = (JArray) possibleFiniteStateList[PropertyNames.Alias];
+            IList<string> aliases = aliasesArray.Select(x => (string) x).ToList();
+            CollectionAssert.AreEquivalent(expectedAliases, aliases);
+
+            var expectedDefinitions = new string[] {};
+            var definitionsArray = (JArray) possibleFiniteStateList[PropertyNames.Definition];
+            IList<string> definitions = definitionsArray.Select(x => (string) x).ToList();
+            CollectionAssert.AreEquivalent(expectedDefinitions, definitions);
+
+            var expectedHyperlinks = new string[] {};
+            var hyperlinksArray = (JArray) possibleFiniteStateList[PropertyNames.HyperLink];
+            IList<string> h = hyperlinksArray.Select(x => (string) x).ToList();
+            CollectionAssert.AreEquivalent(expectedHyperlinks, h);
+
+            //Check PossibleFiniteStates
+            var possibleFiniteState =
+                jArray.Single(x => (string) x[PropertyNames.Iid] == "20f4d6aa-f9d3-4e91-aae9-bfbe77ae9b79");
+            Assert.AreEqual(2, (int) iteration[PropertyNames.RevisionNumber]);
+
+            // verify the amount of returned properties 
+            Assert.AreEqual(8, possibleFiniteState.Children().Count());
+
+            // assert that the properties are what is expected
+            Assert.AreEqual("PossibleFiniteState", (string) possibleFiniteState[PropertyNames.ClassKind]);
+            Assert.AreEqual("On", (string) possibleFiniteState[PropertyNames.Name]);
+            Assert.AreEqual("On", (string) possibleFiniteState[PropertyNames.ShortName]);
+
+            expectedAliases = new string[] {};
+            aliasesArray = (JArray) possibleFiniteState[PropertyNames.Alias];
+            aliases = aliasesArray.Select(x => (string) x).ToList();
+            CollectionAssert.AreEquivalent(expectedAliases, aliases);
+
+            expectedDefinitions = new string[] {};
+            definitionsArray = (JArray) possibleFiniteState[PropertyNames.Definition];
+            definitions = definitionsArray.Select(x => (string) x).ToList();
+            CollectionAssert.AreEquivalent(expectedDefinitions, definitions);
+
+            expectedHyperlinks = new string[] {};
+            hyperlinksArray = (JArray) possibleFiniteState[PropertyNames.HyperLink];
+            h = hyperlinksArray.Select(x => (string) x).ToList();
+            CollectionAssert.AreEquivalent(expectedHyperlinks, h);
+
+            possibleFiniteState =
+                jArray.Single(x => (string) x[PropertyNames.Iid] == "e6eabd4f-6145-4788-8070-53bd031195bd");
+            Assert.AreEqual(2, (int) iteration[PropertyNames.RevisionNumber]);
+
+            // verify the amount of returned properties 
+            Assert.AreEqual(8, possibleFiniteState.Children().Count());
+
+            // assert that the properties are what is expected
+            Assert.AreEqual("PossibleFiniteState", (string) possibleFiniteState[PropertyNames.ClassKind]);
+            Assert.AreEqual("Off", (string) possibleFiniteState[PropertyNames.Name]);
+            Assert.AreEqual("Off", (string) possibleFiniteState[PropertyNames.ShortName]);
+
+            expectedAliases = new string[] {};
+            aliasesArray = (JArray) possibleFiniteState[PropertyNames.Alias];
+            aliases = aliasesArray.Select(x => (string) x).ToList();
+            CollectionAssert.AreEquivalent(expectedAliases, aliases);
+
+            expectedDefinitions = new string[] {};
+            definitionsArray = (JArray) possibleFiniteState[PropertyNames.Definition];
+            definitions = definitionsArray.Select(x => (string) x).ToList();
+            CollectionAssert.AreEquivalent(expectedDefinitions, definitions);
+
+            expectedHyperlinks = new string[] {};
+            hyperlinksArray = (JArray) possibleFiniteState[PropertyNames.HyperLink];
+            h = hyperlinksArray.Select(x => (string) x).ToList();
+            CollectionAssert.AreEquivalent(expectedHyperlinks, h);
+
+            //Add a new PossibleFiniteStateList to ActualFiniteStateList
+            postBodyPath =
+                this.GetPath(
+                    "Tests/EngineeringModel/ActualFiniteStateList/PostActualFiniteStateListAddPossibleFiniteStateList.json");
+            postBody = base.GetJsonFromFile(postBodyPath);
+            jArray = this.WebClient.PostDto(iterationUri, postBody);
+            Console.Write(jArray);
+
+            engineeeringModel =
+                jArray.Single(x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            Assert.AreEqual(3, (int) engineeeringModel[PropertyNames.RevisionNumber]);
+
+            var actualFiniteStateList =
+                jArray.Single(x => (string) x[PropertyNames.Iid] == "db690d7d-761c-47fd-96d3-840d698a89dc");
+            Assert.AreEqual(3, (int) actualFiniteStateList[PropertyNames.RevisionNumber]);
+
+            var expectedPossibleFiniteStateListsInActualFiniteStateList = new List<OrderedItem>
+            {
+                new OrderedItem(4598335, "449a5bca-34fd-454a-93f8-a56ac8383fee"),
+                new OrderedItem(4598336, "bf42cb66-f340-4764-ab48-a3938a7c59eb")
+            };
+
+            var possibleFiniteStateListsInActualFiniteStateList =
+                JsonConvert.DeserializeObject<List<OrderedItem>>(
+                    actualFiniteStateList[PropertyNames.PossibleFiniteStateList].ToString());
+            CollectionAssert.AreEquivalent(expectedPossibleFiniteStateListsInActualFiniteStateList,
+                possibleFiniteStateListsInActualFiniteStateList);
+
+            // get the created ActualState as a side effect of adding PossibleFiniteStateList from the result by it's unique id
+            var actualStatesArray = (JArray) actualFiniteStateList[PropertyNames.ActualState];
+            IList<string> actualStates = actualStatesArray.Select(x => (string) x).ToList();
+            Assert.AreEqual(2, actualStates.Count);
+
+            // get a specific ActualFiniteStateList from the result by it's unique id
+            var actualFiniteState = jArray.Single(x => (string)x[PropertyNames.Iid] == "b91bfdbb-4277-4a03-b519-e4db839ef5d4");
+
+            // verify the amount of returned properties 
+            Assert.AreEqual(5, actualFiniteState.Children().Count());
+
+            // assert that the properties are what is expected
+            Assert.AreEqual("b91bfdbb-4277-4a03-b519-e4db839ef5d4", (string)actualFiniteState[PropertyNames.Iid]);
+            Assert.AreEqual(3, (int)actualFiniteState[PropertyNames.RevisionNumber]);
+            Assert.AreEqual("ActualFiniteState", (string)actualFiniteState[PropertyNames.ClassKind]);
+            Assert.AreEqual("MANDATORY", (string)actualFiniteState[PropertyNames.Kind]);
+
+            var expectedPossibleStates = new string[]
+            {
+                "b8fdfac4-1c40-475a-ac6c-968654b689b6",
+                "20f4d6aa-f9d3-4e91-aae9-bfbe77ae9b79"
+            };
+            var possibleStateArray = (JArray)actualFiniteState[PropertyNames.PossibleState];
+            IList<string> possibleStates = possibleStateArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEqual(expectedPossibleStates, possibleStates);
+
+            // get a ActualFiniteStateList from the result by unknown id
+            actualFiniteState = jArray.Single(x => ((string)x[PropertyNames.Iid] != "b91bfdbb-4277-4a03-b519-e4db839ef5d4") && ((string)x[PropertyNames.ClassKind] == "ActualFiniteState"));
+
+            // verify the amount of returned properties 
+            Assert.AreEqual(5, actualFiniteState.Children().Count());
+
+            // assert that the properties are what is expected
+            Assert.AreEqual(3, (int)actualFiniteState[PropertyNames.RevisionNumber]);
+            Assert.AreEqual("ActualFiniteState", (string)actualFiniteState[PropertyNames.ClassKind]);
+            Assert.AreEqual("MANDATORY", (string)actualFiniteState[PropertyNames.Kind]);
+
+            expectedPossibleStates = new string[]
+            {
+                "b8fdfac4-1c40-475a-ac6c-968654b689b6",
+                "e6eabd4f-6145-4788-8070-53bd031195bd"
+            };
+            possibleStateArray = (JArray)actualFiniteState[PropertyNames.PossibleState];
+            possibleStates = possibleStateArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEqual(expectedPossibleStates, possibleStates);
+        }
+
+        [Test]
+        public void VerifyThatActualStateCanBeCreatedWhenPossibleFiniteStateIsAddedWithWebApi()
+        {
+            //POST a new PossibleFiniteState
+            var iterationUri =
+                new Uri(string.Format(UriFormat, this.Settings.Hostname,
+                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var postBodyPath =
+                this.GetPath("Tests/EngineeringModel/ActualFiniteStateList/PostNewPossibleFiniteState.json");
+
+            var postBody = base.GetJsonFromFile(postBodyPath);
+            var jArray = this.WebClient.PostDto(iterationUri, postBody);
+
+            var engineeeringModel =
+                jArray.Single(x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            Assert.AreEqual(2, (int) engineeeringModel[PropertyNames.RevisionNumber]);
+
+            var iteration =
+                jArray.Single(x => (string)x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
+            Assert.AreEqual(2, (int)iteration[PropertyNames.RevisionNumber]);
+
+            var possibleFiniteStateList =
+               jArray.Single(x => (string)x[PropertyNames.Iid] == "449a5bca-34fd-454a-93f8-a56ac8383fee");
+            Assert.AreEqual(2, (int)iteration[PropertyNames.RevisionNumber]);
+            
+            var expectedPossibleFiniteStates = new List<OrderedItem>
+            {
+                new OrderedItem(73203278, "b8fdfac4-1c40-475a-ac6c-968654b689b6"),
+                new OrderedItem(73203279, "20f4d6aa-f9d3-4e91-aae9-bfbe77ae9b79")
+            };
+            var possibleFiniteStates = JsonConvert.DeserializeObject<List<OrderedItem>>(
+                possibleFiniteStateList[PropertyNames.PossibleState].ToString());
+            CollectionAssert.AreEquivalent(expectedPossibleFiniteStates, possibleFiniteStates);
+
+            var actualFiniteStateList =
+                jArray.Single(x => (string)x[PropertyNames.Iid] == "db690d7d-761c-47fd-96d3-840d698a89dc");
+            Assert.AreEqual(2, (int)actualFiniteStateList[PropertyNames.RevisionNumber]);
+            
+            // get the created ActualState as a side effect of creating PossibleFiniteState from the result by it's unique id
+            var actualStatesArray = (JArray)actualFiniteStateList[PropertyNames.ActualState];
+            IList<string> actualStates = actualStatesArray.Select(x => (string)x).ToList();
+            Assert.AreEqual(2, actualStates.Count);
+
+            // get a specific ActualFiniteStateList from the result by unknown id
+            var actualFiniteState = jArray.Single(x => ((string)x[PropertyNames.Iid] != "b91bfdbb-4277-4a03-b519-e4db839ef5d4")&&((string)x[PropertyNames.ClassKind] == "ActualFiniteState"));
+
+            // verify the amount of returned properties 
+            Assert.AreEqual(5, actualFiniteState.Children().Count());
+
+            // assert that the properties are what is expected
+            Assert.AreEqual("b91bfdbb-4277-4a03-b519-e4db839ef5d4", (string)actualFiniteState[PropertyNames.Iid]);
+            Assert.AreEqual(2, (int)actualFiniteState[PropertyNames.RevisionNumber]);
+            Assert.AreEqual("ActualFiniteState", (string)actualFiniteState[PropertyNames.ClassKind]);
+            Assert.AreEqual("MANDATORY", (string)actualFiniteState[PropertyNames.Kind]);
+
+            var expectedPossibleStates = new string[]
+            {
+                "20f4d6aa-f9d3-4e91-aae9-bfbe77ae9b79"
+            };
+            var possibleStateArray = (JArray)actualFiniteState[PropertyNames.PossibleState];
+            IList<string> possibleStates = possibleStateArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEqual(expectedPossibleStates, possibleStates);
         }
 
         /// <summary>
@@ -90,27 +456,29 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(7, actualFiniteStateList.Children().Count());
 
             // assert that the properties are what is expected
-            Assert.AreEqual("db690d7d-761c-47fd-96d3-840d698a89dc", (string)actualFiniteStateList[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int)actualFiniteStateList[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("ActualFiniteStateList", (string)actualFiniteStateList[PropertyNames.ClassKind]);
-            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string)actualFiniteStateList[PropertyNames.Owner]);
+            Assert.AreEqual("db690d7d-761c-47fd-96d3-840d698a89dc", (string) actualFiniteStateList[PropertyNames.Iid]);
+            Assert.AreEqual(1, (int) actualFiniteStateList[PropertyNames.RevisionNumber]);
+            Assert.AreEqual("ActualFiniteStateList", (string) actualFiniteStateList[PropertyNames.ClassKind]);
+            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string) actualFiniteStateList[PropertyNames.Owner]);
 
             var expectedPossibleFiniteStateLists = new List<OrderedItem>
             {
                 new OrderedItem(4598335, "449a5bca-34fd-454a-93f8-a56ac8383fee")
             };
 
-            var possibleFiniteStateLists = JsonConvert.DeserializeObject<List<OrderedItem>>(actualFiniteStateList[PropertyNames.PossibleFiniteStateList].ToString());
+            var possibleFiniteStateLists =
+                JsonConvert.DeserializeObject<List<OrderedItem>>(
+                    actualFiniteStateList[PropertyNames.PossibleFiniteStateList].ToString());
             CollectionAssert.AreEquivalent(expectedPossibleFiniteStateLists, possibleFiniteStateLists);
 
-            var expectedActualStates = new string[] { "b91bfdbb-4277-4a03-b519-e4db839ef5d4" };
-            var actualStatesArray = (JArray)actualFiniteStateList[PropertyNames.ActualState];
-            IList<string> actualStates = actualStatesArray.Select(x => (string)x).ToList();
+            var expectedActualStates = new string[] {"b91bfdbb-4277-4a03-b519-e4db839ef5d4"};
+            var actualStatesArray = (JArray) actualFiniteStateList[PropertyNames.ActualState];
+            IList<string> actualStates = actualStatesArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedActualStates, actualStates);
 
-            var expectedExcludedOptions = new string[] { };
-            var excludedOptionsArray = (JArray)actualFiniteStateList[PropertyNames.ExcludeOption];
-            IList<string> excludedOptions = excludedOptionsArray.Select(x => (string)x).ToList();
+            var expectedExcludedOptions = new string[] {};
+            var excludedOptionsArray = (JArray) actualFiniteStateList[PropertyNames.ExcludeOption];
+            IList<string> excludedOptions = excludedOptionsArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedExcludedOptions, excludedOptions);
         }
     }

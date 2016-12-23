@@ -1,0 +1,26 @@
+﻿{
+  "_delete": [],
+  "_create": [
+    {
+    "revisionNumber": 0,
+    "classKind": "RequirementsGroup",
+    "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+    "name": "Test Requirements Group post test",
+    "shortName": "TestRequirementsGroupPostTest",
+    "alias": [],
+    "definition": [],
+    "hyperLink": [],
+    "group": [],
+    "iid": "cffa1f05-41b8-4b89-922b-9a9505809601"
+  }
+  ],
+  "_update": [
+    {
+      "classKind": "RequirementsSpecification",
+      "iid": "8d0734f4-ca4b-4611-9187-f6970e2b02bc",
+      "group": [
+        "cffa1f05-41b8-4b89-922b-9a9505809601"
+      ]
+    }
+  ]
+}

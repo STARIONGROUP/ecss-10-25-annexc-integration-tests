@@ -81,6 +81,7 @@
     <Compile Include="Tests\EngineeringModel\ParametricConstraint\ParametricConstraintTestFixture.cs" />
     <Compile Include="Tests\EngineeringModel\Publication\PublicationTestFixture.cs" />
     <Compile Include="Tests\EngineeringModel\PossibleFiniteStateList\PossibleFiniteStateListTestFixture.cs" />
+    <Compile Include="Tests\EngineeringModel\RelationalExpression\RelationalExpressionTestFixture.cs" />
     <Compile Include="Tests\EngineeringModel\RequirementsGroup\RequirementsGroupTestFixture.cs" />
     <Compile Include="Tests\EngineeringModel\PossibleFiniteState\PossibleFiniteStateTestFixture.cs" />
     <Compile Include="Tests\EngineeringModel\RequirementsSpecification\RequirementsSpecificationTestFixture.cs" />
@@ -153,10 +154,34 @@
     <None Include="settings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Tests\EngineeringModel\ActualFiniteStateList\PostActualFiniteStateListAddPossibleFiniteStateList.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tests\EngineeringModel\ActualFiniteStateList\PostNewPossibleFiniteState.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tests\EngineeringModel\ActualFiniteStateList\PostPossibleFiniteStateList.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tests\EngineeringModel\ActualFiniteStateList\PostNewActualFiniteStateList.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Tests\EngineeringModel\Option\PostNewOption.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Tests\EngineeringModel\Parameter\PostNewOptionDependentParameter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Tests\EngineeringModel\Parameter\PostNewParameter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tests\EngineeringModel\Parameter\PostNewParameterOfCompoundParameterType.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tests\EngineeringModel\RequirementsGroup\PostNewRequirementsGroup.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tests\EngineeringModel\RequirementsSpecification\PostNewRequirementsSpecification.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Tests\EngineeringModel\Requirement\PostMoveRequirement.json">
