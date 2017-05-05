@@ -257,14 +257,40 @@
     "revisionNumber": 1,
     "classKind": "FileType",
     "extension": "tst",
+    "category": [ ],
+    "isDeprecated": false,
+    "alias": [ ],
+    "definition": [ ],
+    "hyperLink": [ ],
+    "name": "Test File Type",
+    "shortName": "TestFileType",
+    "iid": "db04ac55-dd60-4607-a4e1-a9f91c9704e6"
+  },
+  {
+    "revisionNumber": 1,
+    "classKind": "FileType",
+    "extension": "txt",
+    "category": [ ],
+    "isDeprecated": false,
+    "alias": [ ],
+    "definition": [ ],
+    "hyperLink": [ ],
+    "name": "Test Text Type",
+    "shortName": "Text",
+    "iid": "b16894e4-acb5-4e81-a118-16c00eb86d8f"
+  },
+  {
+    "revisionNumber": 1,
+    "classKind": "FileType",
+    "extension": "?",
     "category": [],
     "isDeprecated": false,
     "alias": [],
     "definition": [],
     "hyperLink": [],
-    "name": "Test File Type",
-    "shortName": "TestFileType",
-    "iid": "db04ac55-dd60-4607-a4e1-a9f91c9704e6"
+    "name": "Test Unknown Type",
+    "shortName": "Unknown",
+    "iid": "f340df66-d65b-4814-a063-01d4dea1941c"
   },
   {
     "revisionNumber": 1,

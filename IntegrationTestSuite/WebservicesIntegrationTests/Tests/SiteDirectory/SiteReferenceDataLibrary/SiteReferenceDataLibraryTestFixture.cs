@@ -219,7 +219,9 @@ namespace WebservicesIntegrationTests
 
             var expectedFileTypes = new string[]
             {
-                "db04ac55-dd60-4607-a4e1-a9f91c9704e6"
+                "db04ac55-dd60-4607-a4e1-a9f91c9704e6",
+                "b16894e4-acb5-4e81-a118-16c00eb86d8f",
+                "f340df66-d65b-4814-a063-01d4dea1941c"
             };
             var fileTypesArray = (JArray) siteReferenceDataLibrary["fileType"];
             IList<string> fileTypesList = fileTypesArray.Select(x => (string) x).ToList();

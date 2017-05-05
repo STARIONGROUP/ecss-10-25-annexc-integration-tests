@@ -56,9 +56,282 @@ namespace WebservicesIntegrationTests
             var postBodyPath = this.GetPath("Tests/SiteDirectory/EngineeringModelSetup/PostEngineeringModelSetup.json");
 
             var postBody = base.GetJsonFromFile(postBodyPath);
-            var response = this.WebClient.PostDto(siteDirectoryUri, postBody);
+            var jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
 
-            Console.WriteLine(response);
+            //Check the amount of objects 
+            Assert.AreEqual(5, jArray.Count);
+
+            //SiteDirectory properties
+            var siteDirectory = jArray.Single(x => (string)x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
+            Assert.AreEqual(2, (int)siteDirectory[PropertyNames.RevisionNumber]);
+            var expectedModels = new string[]
+            {
+                "116f6253-89bb-47d4-aa24-d11d197e43c9",
+                "ba097bf8-c916-4134-8471-4a1eb4efb2f7"
+            };
+            var modelArray = (JArray)siteDirectory[PropertyNames.Model];
+            IList<string> models = modelArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedModels, models);
+
+            //EngineeringModelSetup properties
+            var engineeringModelSetup = jArray.Single(x => (string)x[PropertyNames.Iid] == "ba097bf8-c916-4134-8471-4a1eb4efb2f7");
+            var participantsArray = (JArray)engineeringModelSetup[PropertyNames.Participant];
+            Assert.AreEqual(1, participantsArray.Count);
+
+            Assert.AreEqual("1f3c2199-2ddf-4a52-a53a-97436a695d35", (string)engineeringModelSetup[PropertyNames.EngineeringModelIid]);
+            Assert.AreEqual("integrationtest", (string)engineeringModelSetup[PropertyNames.Name]);
+            Assert.AreEqual("integrationtest", (string)engineeringModelSetup[PropertyNames.ShortName]);
+            Assert.AreEqual(2, (int)engineeringModelSetup[PropertyNames.RevisionNumber]);
+            Assert.AreEqual("STUDY_MODEL", (string)engineeringModelSetup[PropertyNames.Kind]);
+            Assert.AreEqual("PREPARATION_PHASE", (string)engineeringModelSetup[PropertyNames.StudyPhase]);
+            Assert.AreEqual("EngineeringModelSetup", (string)engineeringModelSetup[PropertyNames.ClassKind]);
+            Assert.IsEmpty(engineeringModelSetup[PropertyNames.SourceEngineeringModelSetupIid]);
+
+            var expectedAliases = new string[] { };
+            var aliasesArray = (JArray)engineeringModelSetup[PropertyNames.Alias];
+            IList<string> aliases = aliasesArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedAliases, aliases);
+
+            var expectedDefinitions = new string[] { };
+            var definitionsArray = (JArray)engineeringModelSetup[PropertyNames.Definition];
+            IList<string> definitions = definitionsArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedDefinitions, definitions);
+
+            var expectedHyperlinks = new string[] { };
+            var hyperlinksArray = (JArray)engineeringModelSetup[PropertyNames.HyperLink];
+            IList<string> h = hyperlinksArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedHyperlinks, h);
+
+            var expectedActiveDomains = new string[]
+            {
+                "0e92edde-fdff-41db-9b1d-f2e484f12535"
+            };
+            var activeDomainsArray = (JArray)engineeringModelSetup[PropertyNames.ActiveDomain];
+            IList<string> activeDomainsList = activeDomainsArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedActiveDomains, activeDomainsList);
+
+            var expectedRequiredRdls = new string[]
+            {
+                "325a98b0-e8e9-4a7f-a038-98b9b618b705"
+            };
+            var requiredRdlsArray = (JArray)engineeringModelSetup[PropertyNames.RequiredRdl];
+            IList<string> requiredRdlsList = requiredRdlsArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedRequiredRdls, requiredRdlsList);
+
+            var iterationSetupsArray = (JArray)engineeringModelSetup[PropertyNames.IterationSetup];
+            Assert.AreEqual(1, iterationSetupsArray.Count);
+
+            //ModelReferenceDataLibrary properties
+            var modelReferenceDataLibrary = jArray.Single(x => (string)x[PropertyNames.Iid] == "325a98b0-e8e9-4a7f-a038-98b9b618b705");
+            Assert.AreEqual(2, (int)modelReferenceDataLibrary[PropertyNames.RevisionNumber]);
+            Assert.AreEqual("ModelReferenceDataLibrary", (string)modelReferenceDataLibrary[PropertyNames.ClassKind]);
+            Assert.AreEqual("integrationtest", (string)modelReferenceDataLibrary[PropertyNames.ShortName]);
+            Assert.AreEqual("integrationtest Model RDL", (string)modelReferenceDataLibrary[PropertyNames.Name]);
+            Assert.AreEqual("c454c687-ba3e-44c4-86bc-44544b2c7880", (string)modelReferenceDataLibrary[PropertyNames.RequiredRdl]);
+
+             expectedAliases = new string[] { };
+             aliasesArray = (JArray)modelReferenceDataLibrary[PropertyNames.Alias];
+             aliases = aliasesArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedAliases, aliases);
+
+            var expectedBaseQuantityKinds = new string[] { };
+            var baseQuantityKindsArray = (JArray)modelReferenceDataLibrary[PropertyNames.BaseQuantityKind];
+            IList<string> baseQuantityKinds = baseQuantityKindsArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedBaseQuantityKinds, baseQuantityKinds);
+
+            var expectedBaseUnits = new string[] { };
+            var baseUnitsArray = (JArray)modelReferenceDataLibrary[PropertyNames.BaseUnit];
+            IList<string> baseUnits = baseUnitsArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedBaseUnits, baseUnits);
+
+            var expectedConstants = new string[] { };
+            var constantsArray = (JArray)modelReferenceDataLibrary[PropertyNames.Constant];
+            IList<string> constants = constantsArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedConstants, constants);
+
+            var expectedDefinedCategories = new string[] { };
+            var definedCategoriesArray = (JArray)modelReferenceDataLibrary[PropertyNames.DefinedCategory];
+            IList<string> definedCategories = definedCategoriesArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedDefinedCategories, definedCategories);
+
+            expectedDefinitions = new string[] { };
+            definitionsArray = (JArray)modelReferenceDataLibrary[PropertyNames.Definition];
+            definitions = definitionsArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedDefinitions, definitions);
+
+            var expectedFileTypes = new string[] { };
+            var fileTypesArray = (JArray)modelReferenceDataLibrary[PropertyNames.FileType];
+            IList<string> fileTypes = fileTypesArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedFileTypes, fileTypes);
+
+            var expectedGlossaries = new string[] { };
+            var glossariesArray = (JArray)modelReferenceDataLibrary[PropertyNames.Glossary];
+            IList<string> glossaries = glossariesArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedGlossaries, glossaries);
+
+            expectedHyperlinks = new string[] { };
+            hyperlinksArray = (JArray)modelReferenceDataLibrary[PropertyNames.HyperLink];
+            h = hyperlinksArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedHyperlinks, h);
+
+            var expectedParameterTypes = new string[] { };
+            var parameterTypesArray = (JArray)modelReferenceDataLibrary[PropertyNames.ParameterType];
+            IList<string> parameterTypes = parameterTypesArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedParameterTypes, parameterTypes);
+
+            var expectedReferenceSources = new string[] { };
+            var referenceSourcesArray = (JArray)modelReferenceDataLibrary[PropertyNames.ReferenceSource];
+            IList<string> referenceSources = referenceSourcesArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedReferenceSources, referenceSources);
+
+            var expectedRules = new string[] { };
+            var rulesArray = (JArray)modelReferenceDataLibrary[PropertyNames.Rule];
+            IList<string> rules = rulesArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedRules, rules);
+
+            var expectedScales = new string[] { };
+            var scalesArray = (JArray)modelReferenceDataLibrary[PropertyNames.Scale];
+            IList<string> scales = scalesArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedScales, scales);
+
+            var expectedUnitPrefixes = new string[] { };
+            var unitPrefixesArray = (JArray)modelReferenceDataLibrary[PropertyNames.UnitPrefix];
+            IList<string> unitPrefixes = unitPrefixesArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedUnitPrefixes, unitPrefixes);
+
+            var expectedUnits = new string[] { };
+            var unitsArray = (JArray)modelReferenceDataLibrary[PropertyNames.Unit];
+            IList<string> units = unitsArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedUnits, units);
+
+            //IterationSetup properties
+            var iterationSetup = jArray.Single(x => (string)x[PropertyNames.Iid] == iterationSetupsArray[0].ToString());
+            Assert.AreEqual(2, (int)iterationSetup[PropertyNames.RevisionNumber]);
+            Assert.AreEqual(1, (int)iterationSetup[PropertyNames.IterationNumber]);
+            Assert.AreEqual("IterationSetup", (string)iterationSetup[PropertyNames.ClassKind]);
+            Assert.AreEqual(false, (bool)iterationSetup[PropertyNames.IsDeleted]);
+            Assert.IsEmpty(iterationSetup[PropertyNames.SourceIterationSetup]);
+            Assert.IsEmpty(iterationSetup[PropertyNames.FrozenOn]);
+
+            //Participant properties
+            var participant = jArray.Single(x => (string)x[PropertyNames.Iid] == participantsArray[0].ToString());
+            Assert.AreEqual("Participant", (string)participant[PropertyNames.ClassKind]);
+            Assert.AreEqual(2, (int)participant[PropertyNames.RevisionNumber]);
+            Assert.IsTrue((bool)participant[PropertyNames.IsActive]);
+            Assert.AreEqual("77791b12-4c2c-4499-93fa-869df3692d22", (string)participant[PropertyNames.Person]);
+            Assert.AreEqual("ee3ae5ff-ac5e-4957-bab1-7698fba2a267", (string)participant[PropertyNames.Role]);
+
+            var expectedDomains = new string[]
+            {
+                "0e92edde-fdff-41db-9b1d-f2e484f12535"
+            };
+            var domainsArray = (JArray)participant[PropertyNames.Domain];
+            IList<string> domains = domainsArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedDomains, domains);
+
+            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string)participant[PropertyNames.SelectedDomain]);
+
+            //GET EngineeringModel
+            // define the URI on which to perform a GET request
+            var engineeringModelUri =
+                new Uri(string.Format(UriFormat, this.Settings.Hostname,
+                    "/EngineeringModel/1f3c2199-2ddf-4a52-a53a-97436a695d35"));
+
+            // get a response from the data-source as a JArray (JSON Array)
+            jArray = this.WebClient.GetDto(engineeringModelUri);
+
+            //check if there is only one EngineeringModel object
+            Assert.AreEqual(1, jArray.Count);
+
+            // get a specific EngineeringModel from the result by it's unique id
+            var engineeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "1f3c2199-2ddf-4a52-a53a-97436a695d35");
+
+            Assert.AreEqual("EngineeringModel", (string)engineeringModel[PropertyNames.ClassKind]);
+            Assert.AreEqual(1, (int)engineeringModel[PropertyNames.RevisionNumber]);
+            Assert.AreEqual("ba097bf8-c916-4134-8471-4a1eb4efb2f7", (string)engineeringModel[PropertyNames.EngineeringModelSetup]);
+            var iterationsArray = (JArray)engineeringModel[PropertyNames.Iteration];
+            Assert.AreEqual(1, iterationsArray.Count);
+
+            var expectedCommonFileStores = new string[] { };
+            var commonFileStoresArray = (JArray)engineeringModel[PropertyNames.CommonFileStore];
+            IList<string> commonFileStores = commonFileStoresArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedCommonFileStores, commonFileStores);
+
+            var expectedLogEntries = new string[] { };
+            var logEntriesArray = (JArray)engineeringModel[PropertyNames.LogEntry];
+            IList<string> logEntries = logEntriesArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedLogEntries, logEntries);
+
+            //GET Iteration
+            // define the URI on which to perform a GET request
+            var iterationUri =
+                new Uri(string.Format(UriFormat, this.Settings.Hostname,
+                    "/EngineeringModel/1f3c2199-2ddf-4a52-a53a-97436a695d35/iteration/" + iterationsArray[0].ToString()));
+
+            // get a response from the data-source as a JArray (JSON Array)
+            jArray = this.WebClient.GetDto(iterationUri);
+
+            //check if there is only one Iteration object
+            Assert.AreEqual(1, jArray.Count);
+
+            // get a specific Iteration from the result by it's unique id
+            var iteration = jArray.Single(x => (string)x[PropertyNames.Iid] == iterationsArray[0].ToString());
+
+            Assert.AreEqual(1, (int)iteration[PropertyNames.RevisionNumber]);
+            Assert.AreEqual("Iteration", (string)iteration[PropertyNames.ClassKind]);
+
+            Assert.AreEqual(iterationSetupsArray[0].ToString(), (string)iteration[PropertyNames.IterationSetup]);
+            Assert.IsNull((string)iteration[PropertyNames.SourceIterationIid]);
+            
+            var expectedPublications = new string[]{};
+            var publicationsArray = (JArray)iteration[PropertyNames.Publication];
+            IList<string> publications = publicationsArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedPublications, publications);
+
+            var expectedPossibleFiniteStateLists = new string[]{};
+            var possibleFiniteStateListsArray = (JArray)iteration[PropertyNames.PossibleFiniteStateList];
+            IList<string> possibleFiniteStateLists = possibleFiniteStateListsArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedPossibleFiniteStateLists, possibleFiniteStateLists);
+
+            Assert.IsNull((string)iteration[PropertyNames.TopElement]);
+
+            var expectedElements = new string[]{};
+            var elementsArray = (JArray)iteration[PropertyNames.Element];
+            IList<string> elements = elementsArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedElements, elements);
+
+            var expectedRelationships = new string[]{};
+            var relationshipsArray = (JArray)iteration[PropertyNames.Relationship];
+            IList<string> relationships = relationshipsArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedRelationships, relationships);
+
+            var expectedExternalIdentifierMaps = new string[]{};
+            var externalIdentifierMapsArray = (JArray)iteration[PropertyNames.ExternalIdentifierMap];
+            IList<string> externalIdentifierMaps = externalIdentifierMapsArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedExternalIdentifierMaps, externalIdentifierMaps);
+
+            var expectedRequirementsSpecifications = new string[] {};
+            var requirementsSpecificationsArray = (JArray)iteration[PropertyNames.RequirementsSpecification];
+            IList<string> requirementsSpecifications = requirementsSpecificationsArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedRequirementsSpecifications, requirementsSpecifications);
+            
+            var domainFileStoresArray = (JArray)iteration[PropertyNames.DomainFileStore];
+            Assert.AreEqual(1, domainFileStoresArray.Count);
+
+            var expectedActualFiniteStateLists = new string[] {};
+            var actualFiniteStateListsArray = (JArray)iteration[PropertyNames.ActualFiniteStateList];
+            IList<string> actualFiniteStateLists = actualFiniteStateListsArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedActualFiniteStateLists, actualFiniteStateLists);
+
+            Assert.IsNull((string)iteration[PropertyNames.DefaultOption]);
+
+            var expectedRuleVerificationLists = new string[]{};
+            var ruleVerificationListsArray = (JArray)iteration[PropertyNames.RuleVerificationList];
+            IList<string> ruleVerificationLists = ruleVerificationListsArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedRuleVerificationLists, ruleVerificationLists);
+
+            var optionsArray = (JArray)iteration[PropertyNames.Option];
+            Assert.AreEqual(1, optionsArray.Count);
         }
 
         [Test]
@@ -74,7 +347,7 @@ namespace WebservicesIntegrationTests
             var postBody = base.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
 
-            //check if there is the only one Glossary object 
+            //Check the amount of objects 
             Assert.AreEqual(5, jArray.Count);
 
             var siteDirectory = jArray.Single(x => (string)x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
@@ -104,10 +377,10 @@ namespace WebservicesIntegrationTests
             Assert.IsTrue((bool)participant[PropertyNames.IsActive]);
             Assert.AreEqual("77791b12-4c2c-4499-93fa-869df3692d22", (string)participant[PropertyNames.Person]);
             var expectedDomains = new string[] { "0e92edde-fdff-41db-9b1d-f2e484f12535" };
-            var domainsArray = (JArray)engineeringModelSetup[PropertyNames.Domain];
+            var domainsArray = (JArray)participant[PropertyNames.Domain];
             IList<string> domains = domainsArray.Select(x => (string)x).ToList();
             CollectionAssert.AreEquivalent(expectedDomains, domains);
-            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", participant[PropertyNames.SelectedDomain]);
+            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string)participant[PropertyNames.SelectedDomain]);
         }
 
         /// <summary>
@@ -129,7 +402,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(1, jArray.Count);
 
             // get a specific EngineeringModelSetup from the result by it's unique id
-            var engineeringModelSetup = jArray.Single(x => (string) x["iid"] == "116f6253-89bb-47d4-aa24-d11d197e43c9");
+            var engineeringModelSetup = jArray.Single(x => (string) x[PropertyNames.Iid] == "116f6253-89bb-47d4-aa24-d11d197e43c9");
 
             EngineeringModelSetupTestFixture.VerifyProperties(engineeringModelSetup);
         }
@@ -149,11 +422,11 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(2, jArray.Count);
 
             // get a specific SiteDirectory from the result by it's unique id
-            var siteDirectory = jArray.Single(x => (string) x["iid"] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
+            var siteDirectory = jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
             SiteDirectoryTestFixture.VerifyProperties(siteDirectory);
 
             // get a specific PersonRole from the result by it's unique id
-            var personRole = jArray.Single(x => (string) x["iid"] == "116f6253-89bb-47d4-aa24-d11d197e43c9");
+            var personRole = jArray.Single(x => (string) x[PropertyNames.Iid] == "116f6253-89bb-47d4-aa24-d11d197e43c9");
             EngineeringModelSetupTestFixture.VerifyProperties(personRole);
         }
 
@@ -170,53 +443,53 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(16, engineeringModelSetup.Children().Count());
 
             // assert that the properties are what is expected
-            Assert.AreEqual("116f6253-89bb-47d4-aa24-d11d197e43c9", (string) engineeringModelSetup["iid"]);
-            Assert.AreEqual(1, (int) engineeringModelSetup["revisionNumber"]);
-            Assert.AreEqual("EngineeringModelSetup", (string) engineeringModelSetup["classKind"]);
+            Assert.AreEqual("116f6253-89bb-47d4-aa24-d11d197e43c9", (string) engineeringModelSetup[PropertyNames.Iid]);
+            Assert.AreEqual(1, (int) engineeringModelSetup[PropertyNames.RevisionNumber]);
+            Assert.AreEqual("EngineeringModelSetup", (string) engineeringModelSetup[PropertyNames.ClassKind]);
 
-            Assert.AreEqual("Test Engineering ModelSetup", (string) engineeringModelSetup["name"]);
-            Assert.AreEqual("TestEngineeringModelSetup", (string) engineeringModelSetup["shortName"]);
+            Assert.AreEqual("Test Engineering ModelSetup", (string) engineeringModelSetup[PropertyNames.Name]);
+            Assert.AreEqual("TestEngineeringModelSetup", (string) engineeringModelSetup[PropertyNames.ShortName]);
 
             var expectedAliases = new string[] {};
-            var aliasesArray = (JArray) engineeringModelSetup["alias"];
+            var aliasesArray = (JArray) engineeringModelSetup[PropertyNames.Alias];
             IList<string> aliases = aliasesArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedAliases, aliases);
 
             var expectedDefinitions = new string[] {};
-            var definitionsArray = (JArray) engineeringModelSetup["definition"];
+            var definitionsArray = (JArray) engineeringModelSetup[PropertyNames.Definition];
             IList<string> definitions = definitionsArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedDefinitions, definitions);
 
             var expectedHyperlinks = new string[] {};
-            var hyperlinksArray = (JArray) engineeringModelSetup["hyperLink"];
+            var hyperlinksArray = (JArray) engineeringModelSetup[PropertyNames.HyperLink];
             IList<string> h = hyperlinksArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedHyperlinks, h);
 
-            Assert.IsEmpty(engineeringModelSetup["sourceEngineeringModelSetupIid"]);
+            Assert.IsEmpty(engineeringModelSetup[PropertyNames.SourceEngineeringModelSetupIid]);
 
             var expectedParticipants = new string[] {"284334dd-e8e5-42d6-bc8a-715c507a7f02"};
-            var participantsArray = (JArray) engineeringModelSetup["participant"];
+            var participantsArray = (JArray) engineeringModelSetup[PropertyNames.Participant];
             IList<string> participantsList = participantsArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedParticipants, participantsList);
 
             var expectedActiveDomains = new string[] {"0e92edde-fdff-41db-9b1d-f2e484f12535"};
-            var activeDomainsArray = (JArray) engineeringModelSetup["activeDomain"];
+            var activeDomainsArray = (JArray) engineeringModelSetup[PropertyNames.ActiveDomain];
             IList<string> activeDomainsList = activeDomainsArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedActiveDomains, activeDomainsList);
 
-            Assert.AreEqual("STUDY_MODEL", (string) engineeringModelSetup["kind"]);
-            Assert.AreEqual("PREPARATION_PHASE", (string) engineeringModelSetup["studyPhase"]);
+            Assert.AreEqual("STUDY_MODEL", (string) engineeringModelSetup[PropertyNames.Kind]);
+            Assert.AreEqual("PREPARATION_PHASE", (string) engineeringModelSetup[PropertyNames.StudyPhase]);
 
             var expectedRequiredRdls = new string[] {"3483f2b5-ea29-45cc-8a46-f5f598558fc3"};
-            var requiredRdlsArray = (JArray) engineeringModelSetup["requiredRdl"];
+            var requiredRdlsArray = (JArray) engineeringModelSetup[PropertyNames.RequiredRdl];
             IList<string> requiredRdlsList = requiredRdlsArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedRequiredRdls, requiredRdlsList);
 
             Assert.AreEqual("9ec982e4-ef72-4953-aa85-b158a95d8d56",
-                (string) engineeringModelSetup["engineeringModelIid"]);
+                (string) engineeringModelSetup[PropertyNames.EngineeringModelIid]);
 
             var expectedIterationSetups = new string[] {"86163b0e-8341-4316-94fc-93ed60ad0dcf"};
-            var iterationSetupsArray = (JArray) engineeringModelSetup["iterationSetup"];
+            var iterationSetupsArray = (JArray) engineeringModelSetup[PropertyNames.IterationSetup];
             IList<string> iterationSetupsList = iterationSetupsArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedIterationSetups, iterationSetupsList);
         }

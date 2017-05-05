@@ -25,10 +25,24 @@ namespace WebservicesIntegrationTests
     using System.Linq;
     using NUnit.Framework;
     using Newtonsoft.Json.Linq;
-    
+
     [TestFixture]
     public class ElementDefinitionTestFixture : WebClientTestFixtureBase
     {
+        public override void SetUp()
+        {
+            base.SetUp();
+
+            this.WebClient.Restore(this.Settings.Hostname);
+        }
+
+        public override void TearDown()
+        {
+            this.WebClient.Restore(this.Settings.Hostname);
+
+            base.TearDown();
+        }
+
         /// <summary>
         /// Verification that the ElementDefinition objects are returned from the data-source and that the 
         /// values of the ElementDefinition properties are equal to the expected value
@@ -77,6 +91,43 @@ namespace WebservicesIntegrationTests
             var elementDefinition =
                 jArray.Single(x => (string) x[PropertyNames.Iid] == "f73860b2-12f0-43e4-b8b2-c81862c0a159");
             ElementDefinitionTestFixture.VerifyProperties(elementDefinition);
+        }
+
+        //The given test is prepared for a development server 
+        //and is not eligible for the current data
+        [Test]
+        public void VerifyThatCategoryDeletionFromElementDefinitionCanBeDoneFromWebApi()
+        {
+            var iterationUri =
+                new Uri(string.Format(UriFormat, this.Settings.Hostname,
+                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var postBodyPath =
+                this.GetPath("Tests/EngineeringModel/ElementDefinition/POSTDeleteCategory.json");
+
+            var postBody = base.GetJsonFromFile(postBodyPath);
+            var jArray = this.WebClient.PostDto(iterationUri, postBody);
+
+            //check if there are 3 objects
+            Assert.AreEqual(3, jArray.Count);
+
+            // get a specific EngineeringModel from the result by it's unique id
+            var engineeeringModel =
+                jArray.Single(x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            Assert.AreEqual(2, (int) engineeeringModel[PropertyNames.RevisionNumber]);
+
+            // get a specific Iteration from the result by it's unique id
+            var iteration =
+                jArray.Single(x => (string) x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
+            Assert.AreEqual(2, (int) iteration[PropertyNames.RevisionNumber]);
+
+            // get a specific ElementDefinition from the result by it's unique id
+            var elementDefinition =
+                jArray.Single(x => (string) x[PropertyNames.Iid] == "f73860b2-12f0-43e4-b8b2-c81862c0a159");
+            Assert.AreEqual(2, (int) elementDefinition[PropertyNames.RevisionNumber]);
+            var expectedCategories = new string[] {};
+            var categoriesArray = (JArray) elementDefinition[PropertyNames.Category];
+            IList<string> categories = categoriesArray.Select(x => (string) x).ToList();
+            CollectionAssert.AreEquivalent(expectedCategories, categories);
         }
 
         /// <summary>
@@ -131,7 +182,10 @@ namespace WebservicesIntegrationTests
 
             Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string) elementDefinition[PropertyNames.Owner]);
 
-            var expectedCategories = new string[] {};
+            var expectedCategories = new string[]
+            {
+                "cf059b19-235c-48be-87a3-9a8942c8e3e0"
+            };
             var categoriesArray = (JArray) elementDefinition[PropertyNames.Category];
             IList<string> categories = categoriesArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedCategories, categories);

@@ -124,7 +124,10 @@
   {
     "revisionNumber": 1,
     "classKind": "ModelReferenceDataLibrary",
-    "definedCategory": [],
+    "definedCategory": [
+      "9ee5ba72-6cfa-432f-bc21-932aa3b82814",
+      "2fd0ce0a-e4d1-4438-a35b-8c312c2c901a"
+    ],
     "parameterType": [],
     "baseQuantityKind": [],
     "scale": [],
@@ -134,7 +137,10 @@
     "fileType": [],
     "glossary": [],
     "referenceSource": [],
-    "rule": [],
+    "rule": [
+      "2fe3d938-394c-4c97-8422-d7916cff5c9b",
+      "9a472bc5-86c0-4cad-8a1d-47d0fbf37e53"
+    ],
     "requiredRdl": "c454c687-ba3e-44c4-86bc-44544b2c7880",
     "constant": [],
     "alias": [],
@@ -397,7 +403,9 @@
       "56842970-3915-4369-8712-61cfd8273ef9"
     ],
     "fileType": [
-      "db04ac55-dd60-4607-a4e1-a9f91c9704e6"
+      "db04ac55-dd60-4607-a4e1-a9f91c9704e6",
+      "b16894e4-acb5-4e81-a118-16c00eb86d8f",
+      "f340df66-d65b-4814-a063-01d4dea1941c"
     ],
     "glossary": [
       "bb08686b-ae03-49eb-9f48-c196b5ad6bda"

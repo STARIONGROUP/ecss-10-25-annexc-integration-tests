@@ -1,2 +1,67 @@
-[   
+[
+  {
+    "revisionNumber": 1,
+    "classKind": "BinaryRelationshipRule",
+    "relationshipCategory": "9ee5ba72-6cfa-432f-bc21-932aa3b82814",
+    "sourceCategory": "2fd0ce0a-e4d1-4438-a35b-8c312c2c901a",
+    "targetCategory": "2fd0ce0a-e4d1-4438-a35b-8c312c2c901a",
+    "forwardRelationshipName": "forward",
+    "inverseRelationshipName": "inverse",
+    "isDeprecated": false,
+    "alias": [ ],
+    "definition": [ ],
+    "hyperLink": [ ],
+    "name": "Test Binary Relationship Rule in Model RDL",
+    "shortName": "TestBinaryRelationshipRuleInModelRDL",
+    "iid": "2fe3d938-394c-4c97-8422-d7916cff5c9b"
+  },
+  {
+    "revisionNumber": 1,
+    "classKind": "BinaryRelationshipRule",
+    "relationshipCategory": "107fc408-7e6d-4f1a-895a-1b6a6025ac20",
+    "sourceCategory": "cf059b19-235c-48be-87a3-9a8942c8e3e0",
+    "targetCategory": "cf059b19-235c-48be-87a3-9a8942c8e3e0",
+    "forwardRelationshipName": "forward",
+    "inverseRelationshipName": "inverse",
+    "isDeprecated": false,
+    "alias": [ ],
+    "definition": [ ],
+    "hyperLink": [ ],
+    "name": "Test Binary Relationship Rule in Model RDL",
+    "shortName": "TestBinaryRelationshipRuleInModelRDL",
+    "iid": "9a472bc5-86c0-4cad-8a1d-47d0fbf37e53"
+  },
+  {
+    "revisionNumber": 1,
+    "classKind": "Category",
+    "superCategory": [ ],
+    "permissibleClass": [
+      "BinaryRelationship"
+    ],
+    "isAbstract": false,
+    "isDeprecated": false,
+    "alias": [ ],
+    "definition": [ ],
+    "hyperLink": [ ],
+    "name": "Test Category - BinaryRelationship",
+    "shortName": "TestCategoryBinaryRelationship",
+    "iid": "9ee5ba72-6cfa-432f-bc21-932aa3b82814"
+  },
+  {
+    "revisionNumber": 1,
+    "classKind": "Category",
+    "superCategory": [],
+    "permissibleClass": [
+      "ElementDefinition",
+      "ElementUsage"
+    ],
+    "isAbstract": false,
+    "isDeprecated": false,
+    "alias": [],
+    "definition": [],
+    "hyperLink": [],
+    "name": "Test Category",
+    "shortName": "TestCategory",
+    "iid": "2fd0ce0a-e4d1-4438-a35b-8c312c2c901a"
+  }
 ]

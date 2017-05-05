@@ -25,11 +25,25 @@ namespace WebservicesIntegrationTests
     using System.Linq;
     using NUnit.Framework;
     using Newtonsoft.Json.Linq;
-    using Newtonsoft.Json;
+    using System.Net;
 
     [TestFixture]
     public class ModelReferenceDataLibraryTestFixture : WebClientTestFixtureBase
     {
+        public override void SetUp()
+        {
+            base.SetUp();
+
+            this.WebClient.Restore(this.Settings.Hostname);
+        }
+
+        public override void TearDown()
+        {
+            this.WebClient.Restore(this.Settings.Hostname);
+
+            base.TearDown();
+        }
+
         /// <summary>
         /// Verification that the ModelReferenceDataLibrary objects are returned from the data-source and that the 
         /// values of the ModelReferenceDataLibrary properties are equal to the expected value
@@ -85,6 +99,154 @@ namespace WebservicesIntegrationTests
             ModelReferenceDataLibraryTestFixture.VerifyProperties(modelReferenceDataLibrary);
         }
 
+        [Test]
+        public void VerifyThatARuleCannotBeMovedFromModelRdlToSiteRdlWithoutCategoriesFromWebApi()
+        {
+            var siteDirectoryUri =
+                new Uri(string.Format(UriFormat, this.Settings.Hostname,
+                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            var postBodyPath =
+                this.GetPath(
+                    "Tests/SiteDirectory/ModelReferenceDataLibrary/POSTIncorrectMoveBinaryRelationShipRuleFromModelRDLToSiteRDL.json");
+
+            var postBody = base.GetJsonFromFile(postBodyPath);
+
+            var ex =
+                Assert.Throws<WebException>(() => this.WebClient.PostDto(siteDirectoryUri, postBody));
+            Assert.AreEqual(HttpStatusCode.InternalServerError, ((HttpWebResponse) ex.Response).StatusCode);
+        }
+
+        [Test]
+        public void VerifyThatARuleWithoutSpecificCategoriesForItCanBeMovedFromModelRdlToSiteRdlFromWebApi()
+        {
+            var siteDirectoryUri =
+                new Uri(string.Format(UriFormat, this.Settings.Hostname,
+                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            var postBodyPath =
+                this.GetPath(
+                    "Tests/SiteDirectory/ModelReferenceDataLibrary/POSTMoveIndependentBinaryRelShipRuleFromModelRDLToSiteRDL.json");
+
+            var postBody = base.GetJsonFromFile(postBodyPath);
+            var jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
+
+            //Check the amount of objects 
+            Assert.AreEqual(4, jArray.Count);
+
+            //SiteDirectory properties
+            var siteDirectory =
+                jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
+            Assert.AreEqual(2, (int) siteDirectory[PropertyNames.RevisionNumber]);
+
+            //EngineeringModelSetup properties
+            var engineeringModelSetup =
+                jArray.Single(x => (string) x[PropertyNames.Iid] == "116f6253-89bb-47d4-aa24-d11d197e43c9");
+            Assert.AreEqual(2, (int) engineeringModelSetup[PropertyNames.RevisionNumber]);
+
+            //SiteReferenceDataLibrary properties
+            var siteRdl = jArray.Single(x => (string) x[PropertyNames.Iid] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
+            Assert.AreEqual(2, (int) siteRdl[PropertyNames.RevisionNumber]);
+
+            var expectedRules = new string[]
+            {
+                "8569bd5c-de3c-4d92-855f-b2c0ca94de0e",
+                "8a5cd66e-7313-4843-813f-37081ca81bb8",
+                "2615f9ec-30a4-4c0e-a9d3-1d067959c248",
+                "7a6186ca-10c1-4074-bec1-4a92ce6ae59d",
+                "e7e4eec5-ad39-40a0-9548-9c40d8e6df1b",
+                "9a472bc5-86c0-4cad-8a1d-47d0fbf37e53"
+            };
+            var rulesArray = (JArray) siteRdl[PropertyNames.Rule];
+            IList<string> rulesList = rulesArray.Select(x => (string) x).ToList();
+            CollectionAssert.AreEquivalent(expectedRules, rulesList);
+
+            //ModelReferenceDataLibrary properties
+            var modelRdl = jArray.Single(x => (string) x[PropertyNames.Iid] == "3483f2b5-ea29-45cc-8a46-f5f598558fc3");
+            Assert.AreEqual(2, (int) modelRdl[PropertyNames.RevisionNumber]);
+
+            expectedRules = new string[]
+            {
+                "2fe3d938-394c-4c97-8422-d7916cff5c9b"
+            };
+            rulesArray = (JArray) modelRdl[PropertyNames.Rule];
+            IList<string> rules = rulesArray.Select(x => (string) x).ToList();
+            CollectionAssert.AreEquivalent(expectedRules, rules);
+            Console.Write(jArray);
+        }
+
+
+        [Test]
+        public void VerifyThatARuleCanBeMovedFromModelRdlToSiteRdlFromWebApi()
+        {
+            var siteDirectoryUri =
+                new Uri(string.Format(UriFormat, this.Settings.Hostname,
+                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            var postBodyPath =
+                this.GetPath(
+                    "Tests/SiteDirectory/ModelReferenceDataLibrary/POSTMoveBinaryRelationShipRuleFromModelRDLToSiteRDL.json");
+
+            var postBody = base.GetJsonFromFile(postBodyPath);
+            var jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
+
+            //Check the amount of objects 
+            Assert.AreEqual(4, jArray.Count);
+
+            //SiteDirectory properties
+            var siteDirectory =
+                jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
+            Assert.AreEqual(2, (int) siteDirectory[PropertyNames.RevisionNumber]);
+
+            //EngineeringModelSetup properties
+            var engineeringModelSetup =
+                jArray.Single(x => (string) x[PropertyNames.Iid] == "116f6253-89bb-47d4-aa24-d11d197e43c9");
+            Assert.AreEqual(2, (int) engineeringModelSetup[PropertyNames.RevisionNumber]);
+
+            //SiteReferenceDataLibrary properties
+            var siteRdl = jArray.Single(x => (string) x[PropertyNames.Iid] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
+            Assert.AreEqual(2, (int) siteRdl[PropertyNames.RevisionNumber]);
+
+            var expectedRules = new string[]
+            {
+                "8569bd5c-de3c-4d92-855f-b2c0ca94de0e",
+                "8a5cd66e-7313-4843-813f-37081ca81bb8",
+                "2615f9ec-30a4-4c0e-a9d3-1d067959c248",
+                "7a6186ca-10c1-4074-bec1-4a92ce6ae59d",
+                "e7e4eec5-ad39-40a0-9548-9c40d8e6df1b",
+                "2fe3d938-394c-4c97-8422-d7916cff5c9b"
+            };
+            var rulesArray = (JArray) siteRdl[PropertyNames.Rule];
+            IList<string> rulesList = rulesArray.Select(x => (string) x).ToList();
+            CollectionAssert.AreEquivalent(expectedRules, rulesList);
+
+            var expectedDefinedCategories = new string[]
+            {
+                "cf059b19-235c-48be-87a3-9a8942c8e3e0",
+                "107fc408-7e6d-4f1a-895a-1b6a6025ac20",
+                "167b5cb0-766e-4ab2-b728-a9c9a662b017",
+                "9ee5ba72-6cfa-432f-bc21-932aa3b82814",
+                "2fd0ce0a-e4d1-4438-a35b-8c312c2c901a"
+            };
+            var definedCategoriesArray = (JArray) siteRdl["definedCategory"];
+            IList<string> definedCategoriesList = definedCategoriesArray.Select(x => (string) x).ToList();
+            CollectionAssert.AreEquivalent(expectedDefinedCategories, definedCategoriesList);
+
+            //ModelReferenceDataLibrary properties
+            var modelRdl = jArray.Single(x => (string) x[PropertyNames.Iid] == "3483f2b5-ea29-45cc-8a46-f5f598558fc3");
+            Assert.AreEqual(2, (int) modelRdl[PropertyNames.RevisionNumber]);
+
+            expectedRules = new string[]
+            {
+                "9a472bc5-86c0-4cad-8a1d-47d0fbf37e53"
+            };
+            rulesArray = (JArray) modelRdl[PropertyNames.Rule];
+            IList<string> rules = rulesArray.Select(x => (string) x).ToList();
+            CollectionAssert.AreEquivalent(expectedRules, rules);
+
+            expectedDefinedCategories = new string[] {};
+            definedCategoriesArray = (JArray) modelRdl[PropertyNames.DefinedCategory];
+            IList<string> definedCategories = definedCategoriesArray.Select(x => (string) x).ToList();
+            CollectionAssert.AreEquivalent(expectedDefinedCategories, definedCategories);
+        }
+
         /// <summary>
         /// Verifies all properties of the ModelReferenceDataLibrary <see cref="JToken"/>
         /// </summary>
@@ -109,7 +271,11 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual("c454c687-ba3e-44c4-86bc-44544b2c7880",
                 (string) modelReferenceDataLibrary[PropertyNames.RequiredRdl]);
 
-            var expectedDefinedCategories = new string[] {};
+            var expectedDefinedCategories = new string[]
+            {
+                "9ee5ba72-6cfa-432f-bc21-932aa3b82814",
+                "2fd0ce0a-e4d1-4438-a35b-8c312c2c901a"
+            };
             var definedCategoriesArray = (JArray) modelReferenceDataLibrary[PropertyNames.DefinedCategory];
             IList<string> definedCategories = definedCategoriesArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedDefinedCategories, definedCategories);
@@ -159,7 +325,11 @@ namespace WebservicesIntegrationTests
             IList<string> referenceSources = referenceSourcesArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedReferenceSources, referenceSources);
 
-            var expectedRules = new string[] {};
+            var expectedRules = new string[]
+            {
+                "2fe3d938-394c-4c97-8422-d7916cff5c9b",
+                "9a472bc5-86c0-4cad-8a1d-47d0fbf37e53"
+            };
             var rulesArray = (JArray) modelReferenceDataLibrary[PropertyNames.Rule];
             IList<string> rules = rulesArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedRules, rules);

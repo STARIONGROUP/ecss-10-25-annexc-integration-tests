@@ -166,7 +166,16 @@
     <None Include="Tests\EngineeringModel\ActualFiniteStateList\PostNewActualFiniteStateList.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Tests\EngineeringModel\ElementDefinition\POSTDeleteCategory.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tests\EngineeringModel\Iteration\POSTNewIterationSetup.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Tests\EngineeringModel\Option\PostNewOption.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tests\EngineeringModel\Parameter\PostDeleteCreateParameter.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Tests\EngineeringModel\Parameter\PostNewOptionDependentParameter.json">
@@ -176,6 +185,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Tests\EngineeringModel\Parameter\PostNewParameterOfCompoundParameterType.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tests\EngineeringModel\ParameterValueSet\PostNewParameterValueSetAndDeleteOne.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tests\EngineeringModel\Parameter\PostUpdateParameterToOptionDependent.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Tests\EngineeringModel\RequirementsGroup\PostNewRequirementsGroup.json">
@@ -194,6 +209,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Tests\SiteDirectory\Glossary\PostGlossaryUpdate.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tests\SiteDirectory\ModelReferenceDataLibrary\POSTIncorrectMoveBinaryRelationShipRuleFromModelRDLToSiteRDL.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tests\SiteDirectory\ModelReferenceDataLibrary\POSTMoveBinaryRelationShipRuleFromModelRDLToSiteRDL.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tests\SiteDirectory\ModelReferenceDataLibrary\POSTMoveIndependentBinaryRelShipRuleFromModelRDLToSiteRDL.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

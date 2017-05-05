@@ -1,0 +1,13 @@
+﻿{
+  "_delete": [],
+  "_create": [],
+  "_update": [
+    {
+      "classKind": "SiteReferenceDataLibrary",
+      "iid": "c454c687-ba3e-44c4-86bc-44544b2c7880",
+      "rule": [
+        "9a472bc5-86c0-4cad-8a1d-47d0fbf37e53"
+      ]
+    }
+  ]
+}

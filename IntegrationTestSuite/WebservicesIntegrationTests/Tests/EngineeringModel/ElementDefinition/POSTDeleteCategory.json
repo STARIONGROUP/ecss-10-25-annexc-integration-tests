@@ -1,0 +1,18 @@
+﻿{
+  "_delete": [
+    {
+      "classKind": "ElementDefinition",
+      "iid": "f73860b2-12f0-43e4-b8b2-c81862c0a159",
+      "category": ["cf059b19-235c-48be-87a3-9a8942c8e3e0"]
+    }
+  ],
+  "_create": [],
+  "_update": [
+    {
+      "classKind": "ElementDefinition",
+      "iid": "f73860b2-12f0-43e4-b8b2-c81862c0a159",
+      "modifiedOn": "2017-01-20T16:46:46.376Z"
+    }
+  ],
+  "_copy": []
+}

@@ -1,0 +1,32 @@
+﻿{
+  "_delete": [
+    {
+      "classKind": "ParameterValueSet",
+      "iid": "af5c88c6-301f-497b-81f7-53748c3900ed"
+    }
+  ],
+  "_create": [
+    {
+      "revisionNumber": 1,
+      "classKind": "ParameterValueSet",
+      "valueSwitch": "MANUAL",
+      "published": "[\"-\"]",
+      "formula": "[\"-\"]",
+      "computed": "[\"-\"]",
+      "manual": "[\"-\"]",
+      "reference": "[\"-\"]",
+      "actualState": null,
+      "actualOption": null,
+      "iid": "d2936657-95b3-4b27-bf98-a19752dc2c7f"
+    }
+  ],
+  "_update": [
+    {
+      "classKind": "Parameter",
+      "iid": "6c5aff74-f983-4aa8-a9d6-293b3429307c",
+      "valueSet": [
+        "d2936657-95b3-4b27-bf98-a19752dc2c7f"
+      ]
+    }
+  ]
+}

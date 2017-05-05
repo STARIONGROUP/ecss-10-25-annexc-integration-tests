@@ -764,6 +764,61 @@ namespace WebservicesIntegrationTests
         public static string LastModifiedOn
         {
             get { return "lastModifiedOn"; }
-        }        
+        }
+
+        public static string SourceEngineeringModelSetupIid
+        {
+            get { return "sourceEngineeringModelSetupIid"; }
+        }
+
+        public static string ActiveDomain
+        {
+            get { return "activeDomain"; }
+        }
+
+        public static string IterationNumber
+        {
+            get { return "iterationNumber"; }
+        }
+
+        public static string IsDeleted
+        {
+            get { return "isDeleted"; }
+        }
+
+        public static string SourceIterationSetup
+        {
+            get { return "sourceIterationSetup"; }
+        }
+
+        public static string FrozenOn
+        {
+            get { return "frozenOn"; }
+        }
+
+        public static string EngineeringModelSetup
+        {
+            get { return "engineeringModelSetup"; }
+        }
+
+        public static string Iteration
+        {
+            get { return "iteration"; }
+        }
+
+        public static string CommonFileStore
+        {
+            get { return "commonFileStore"; }
+        }
+
+        public static string IterationIid
+        {
+            get { return "iterationIid"; }
+        }
+
+        public static string Extension
+        {
+            get { return "extension"; }
+        }
     }
 }
