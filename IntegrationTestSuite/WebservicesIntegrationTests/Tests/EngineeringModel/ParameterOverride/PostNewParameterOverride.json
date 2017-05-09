@@ -1,0 +1,22 @@
+﻿{
+  "_delete": [],
+  "_create": [
+    {
+      "classKind": "ParameterOverride",
+      "iid": "3587bb05-0db4-4741-b5e3-da43393e13ed",
+      "modifiedOn": "0001-01-01T00:00:00.000Z",
+      "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+      "parameter": "6c5aff74-f983-4aa8-a9d6-293b3429307c",
+      "parameterSubscription": [],
+      "revisionNumber": 0,
+      "valueSet": []
+    }
+  ],
+  "_update": [
+    {
+      "classKind": "ElementUsage",
+      "iid": "f95a1580-e533-4185-b520-208615780afe",
+      "parameterOverride": [ "3587bb05-0db4-4741-b5e3-da43393e13ed" ]
+    }
+  ] 
+}

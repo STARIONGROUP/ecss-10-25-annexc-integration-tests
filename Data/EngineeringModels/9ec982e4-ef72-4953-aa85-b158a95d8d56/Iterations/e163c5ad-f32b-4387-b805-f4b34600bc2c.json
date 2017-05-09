@@ -352,6 +352,22 @@
   },
   {
     "revisionNumber": 1,
+    "classKind": "ElementUsage",
+    "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+    "name": "Test ElementUsage 2",
+    "shortName": "TestElementUsage2",
+    "excludeOption": [],
+    "category": [],
+    "hyperLink": [],
+    "definition": [],
+    "alias": [],
+    "parameterOverride": [],
+    "interfaceEnd": "UNDIRECTED",
+    "elementDefinition": "f73860b2-12f0-43e4-b8b2-c81862c0a159",
+    "iid": "f95a1580-e533-4185-b520-208615780afe"
+  },
+  {
+    "revisionNumber": 1,
     "classKind": "IdCorrespondence",
     "externalId": "internalThing",
     "internalThing": "35a8ee03-6786-4c39-967d-3c5b438f0c64",
