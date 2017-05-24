@@ -144,18 +144,29 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
             // verify that the correct amount of objects is returned
-            Assert.AreEqual(2, jArray.Count);
+            Assert.AreEqual(4, jArray.Count);
 
             var engineeeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
             Assert.AreEqual(2, (int)engineeeringModel[PropertyNames.RevisionNumber]);
 
-            var requirementsSpecification = jArray.Single(x => (string)x[PropertyNames.Iid] == "8d0734f4-ca4b-4611-9187-f6970e2b02bc");
-            Assert.AreEqual(2, (int)requirementsSpecification[PropertyNames.RevisionNumber]);
+            var requirementsSpecificationWithMovedRequirement = jArray.Single(x => (string)x[PropertyNames.Iid] == "8d0734f4-ca4b-4611-9187-f6970e2b02bc");
+            Assert.AreEqual(2, (int)requirementsSpecificationWithMovedRequirement[PropertyNames.RevisionNumber]);
 
             var expectedRequirements = new string[] { "614e2a69-d602-46be-9311-2fb4d3273e87" };
-            var requirementsArray = (JArray)requirementsSpecification[PropertyNames.Requirement];
+            var requirementsArray = (JArray)requirementsSpecificationWithMovedRequirement[PropertyNames.Requirement];
             IList<string> requirements = requirementsArray.Select(x => (string)x).ToList();
             CollectionAssert.AreEquivalent(expectedRequirements, requirements);
+
+            var requirementsSpecificationWithoutMovedRequirement = jArray.Single(x => (string)x[PropertyNames.Iid] == "bf0cde90-9086-43d5-bcff-32a2f8331800");
+            Assert.AreEqual(2, (int)requirementsSpecificationWithoutMovedRequirement[PropertyNames.RevisionNumber]);
+
+            expectedRequirements = new string[] { };
+            requirementsArray = (JArray)requirementsSpecificationWithoutMovedRequirement[PropertyNames.Requirement];
+            requirements = requirementsArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedRequirements, requirements);
+
+            var requirement = jArray.Single(x => (string)x[PropertyNames.Iid] == "614e2a69-d602-46be-9311-2fb4d3273e87");
+            Assert.AreEqual(2, (int)requirement[PropertyNames.RevisionNumber]);
         }
 
         public static void VerifyProperties(JToken requirement)
