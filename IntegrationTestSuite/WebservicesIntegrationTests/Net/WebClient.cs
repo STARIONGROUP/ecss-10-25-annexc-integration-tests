@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="WebClient.cs" company="RHEA System">
 //
-//   Copyright 2016 RHEA System 
+//   Copyright 2017 RHEA System 
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -21,10 +21,9 @@
 namespace WebservicesIntegrationTests.Net
 {
     using System;
-    using System.Collections.Generic;
     using System.IO;
     using System.Net;
-    using System.Runtime.CompilerServices;
+    using System.Net.Http;
     using System.Text;
 
     using Newtonsoft.Json;
@@ -98,7 +97,7 @@ namespace WebservicesIntegrationTests.Net
 
             using (var streamWriter = new StreamWriter(request.GetRequestStream()))
             {
-                streamWriter.Write("");
+                streamWriter.Write(string.Empty);
                 streamWriter.Flush();
                 streamWriter.Close();
             }
@@ -139,6 +138,27 @@ namespace WebservicesIntegrationTests.Net
         }
 
         /// <summary>
+        /// Performs a POST request on the provided <see cref="Uri"/>, uploads a file and returns a pretty printed JSON string.
+        /// </summary>
+        /// <param name="uri">
+        /// The <see cref="Uri"/> that the POST request is performed on
+        /// </param>
+        /// <param name="postJsonPath">
+        /// The path to a file that contains JSON post message.
+        /// </param>
+        /// <param name="postFilePath">
+        /// The path to a file that is uploaded.
+        /// </param>
+        /// <returns>
+        /// A <see cref="JArray"/> with the response or null if the response was empty.
+        /// </returns>
+        public JArray PostFile(Uri uri, string postJsonPath, string postFilePath)
+        {
+            var response = this.RetrieveHttpPostResponse(uri, postJsonPath, postFilePath);
+            return this.ExtractJarrayFromResponse(response);
+        }
+
+        /// <summary>
         /// Extracts a JSON Array from the provided <see cref="WebResponse"/>
         /// </summary>
         /// <param name="webResponse">
@@ -165,7 +185,21 @@ namespace WebservicesIntegrationTests.Net
                 return jArray;
             }
         }
-        
+
+        /// <summary>
+        /// Extracts a JSON Array from the provided <see cref="string"/>
+        /// </summary>
+        /// <param name="response">
+        /// The response.
+        /// </param>
+        /// <returns>
+        /// A <see cref="JArray"/> with the response or null if the response was empty.
+        /// </returns>
+        private JArray ExtractJarrayFromResponse(string response)
+        {
+            return JArray.Parse(response);
+        }
+
         /// <summary>
         /// Performs a POST request on the provided <see cref="Uri"/> and return a  <see cref="HttpWebResponse"/>
         /// </summary>
@@ -191,6 +225,56 @@ namespace WebservicesIntegrationTests.Net
 
             var webResponse = (HttpWebResponse)request.GetResponse();
             return webResponse;
+        }
+
+        /// <summary>
+        /// Performs a POST request on the provided <see cref="Uri"/> and returns a  <see cref="string"/>
+        /// </summary>
+        /// <param name="uri">
+        /// The <see cref="Uri"/> that the POST request is performed on
+        /// </param>
+        /// <param name="postJsonPath">
+        /// The path to a file that contains JSON post message.
+        /// </param>
+        /// <param name="postFilePath">
+        /// The path to a file that is uploaded.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        private string RetrieveHttpPostResponse(Uri uri, string postJsonPath, string postFilePath)
+        {
+            var httpClient = new HttpClient();
+            var encoded = Convert.ToBase64String(Encoding.GetEncoding(Utf8).GetBytes(this.UserName + ":" + this.Password));
+            httpClient.DefaultRequestHeaders.Add("Authorization", "Basic " + encoded);
+
+            var json = File.ReadAllBytes(postJsonPath);
+            var jsonContent = new ByteArrayContent(json);
+            jsonContent.Headers.Add("Content-Type", "application/json");
+
+            var file = File.ReadAllBytes(postFilePath);
+            var fileContent = new ByteArrayContent(file);
+            fileContent.Headers.Add("Content-Type", "application/octet-stream");
+
+            var form = new MultipartFormDataContent
+                                                {
+                                                        {
+                                                            jsonContent,
+                                                            "files[]", "jsonFile"
+                                                        },
+                                                        {
+                                                            fileContent,
+                                                            "files[]", "file"
+                                                        }
+                                                };
+
+            var httpResponse = httpClient.PostAsync(uri, form).Result;
+
+            httpResponse.EnsureSuccessStatusCode();
+            httpClient.Dispose();
+            var response = httpResponse.Content.ReadAsStringAsync().Result;
+
+            return response;
         }
 
         /// <summary>

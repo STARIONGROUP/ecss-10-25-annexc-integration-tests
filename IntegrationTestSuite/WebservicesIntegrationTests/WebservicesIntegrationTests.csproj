@@ -171,6 +171,12 @@
     <None Include="Tests\EngineeringModel\ElementDefinition\POSTDeleteCategory.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Tests\EngineeringModel\File\B95EC201AE3EE89D407449D692E69BB97C228A7E">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tests\EngineeringModel\File\PostNewFile.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Tests\EngineeringModel\Iteration\POSTNewIterationSetup.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
