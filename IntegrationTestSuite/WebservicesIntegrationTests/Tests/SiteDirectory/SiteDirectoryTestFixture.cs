@@ -150,7 +150,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual("f13de6f8-b03a-46e7-a492-53b2f260f294", (string)siteDirectory[PropertyNames.Iid]);
             Assert.AreEqual(1, (int)siteDirectory[PropertyNames.RevisionNumber]);
             Assert.AreEqual("SiteDirectory", (string)siteDirectory[PropertyNames.ClassKind]);
-            Assert.AreEqual("2015-04-17T07:48:14.56Z", (string)siteDirectory[PropertyNames.LastModifiedOn]);
+            Assert.AreEqual("2015-04-17T07:48:14.560Z", (string)siteDirectory[PropertyNames.LastModifiedOn]);
             Assert.AreEqual("2016-09-01T08:14:45.461Z", (string)siteDirectory[PropertyNames.CreatedOn]);
             Assert.AreEqual("Test Site Directory", (string)siteDirectory[PropertyNames.Name]);
             Assert.AreEqual("TEST-SiteDir", (string)siteDirectory[PropertyNames.ShortName]);

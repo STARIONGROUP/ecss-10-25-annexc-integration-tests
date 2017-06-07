@@ -88,7 +88,6 @@
     <Compile Include="Tests\EngineeringModel\SimpleParameterValue\SimpleParameterValueTestFixture.cs" />
     <Compile Include="Tests\EngineeringModel\UserRuleVerification\UserRuleVerificationTestFixture.cs" />
     <Compile Include="Tests\EngineeringModel\Requirement\RequirementTestFixture.cs" />
-    <Compile Include="Tests\EngineeringModel\RuleViolation\RuleViolationTestFixture.cs" />
     <Compile Include="Tests\EngineeringModel\BinaryRelationship\BinaryRelationShipTestFixture.cs" />
     <Compile Include="Tests\EngineeringModel\RuleVerificationList\RuleVerificationListTestFixture.cs" />
     <Compile Include="Tests\SiteDirectory\CompoundParameterType\CompoundParameterTypeTestFixture.cs" />
@@ -183,7 +182,18 @@
     <None Include="Tests\EngineeringModel\Option\PostNewOption.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\ParameterOverride\PostNewParameterOverride.json" />
+    <None Include="Tests\EngineeringModel\ParameterOverride\PostNewParameterOverride.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tests\EngineeringModel\ParameterValueSet\PostNewPossibleFiniteState.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tests\EngineeringModel\ParameterValueSet\PostNewPossibleFiniteStateList.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tests\EngineeringModel\ParameterValueSet\PostNewStateDependentParameter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Tests\EngineeringModel\Parameter\PostDeleteCreateParameter.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -200,6 +210,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Tests\EngineeringModel\Parameter\PostUpdateParameterToOptionDependent.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tests\EngineeringModel\Parameter\PostUpdateParameterToStateDependent.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Tests\EngineeringModel\RequirementsGroup\PostNewRequirementsGroup.json">

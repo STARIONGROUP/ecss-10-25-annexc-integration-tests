@@ -1,0 +1,54 @@
+﻿{
+  "_delete": [],
+	"_create": [{
+			"alias": [],
+			"category": [],
+			"classKind": "PossibleFiniteStateList",
+			"defaultState": null,
+			"definition": [],
+			"excludedDomain": [],
+			"excludedPerson": [],
+			"hyperLink": [],
+			"iid": "dc3e3763-b8ed-4159-acee-d6a0f4de3dba",
+			"modifiedOn": "2017-05-29T12:52:52.078Z",
+			"name": "PossibleFiniteStateList Test",
+			"owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+			"possibleState": [{
+					"k": -2577538,
+					"v": "d9ed3b43-ba45-45d5-ba1b-196703998a01"
+				}
+			],
+			"revisionNumber": 0,
+			"shortName": "PossibleFiniteStateListTest"
+		}, {
+			"alias": [],
+			"classKind": "PossibleFiniteState",
+			"definition": [],
+			"excludedDomain": [],
+			"excludedPerson": [],
+			"hyperLink": [],
+			"iid": "d9ed3b43-ba45-45d5-ba1b-196703998a01",
+			"modifiedOn": "2017-05-29T12:50:50.356Z",
+			"name": "PossibleFiniteState Test",
+			"revisionNumber": 0,
+			"shortName": "PossibleFiniteStateTest"
+		}
+	],
+  "_update": [
+    {
+      "classKind": "Iteration",
+      "iid": "e163c5ad-f32b-4387-b805-f4b34600bc2c",
+      "possibleFiniteStateList": [ "dc3e3763-b8ed-4159-acee-d6a0f4de3dba" ]
+    },
+    {
+      "classKind": "ActualFiniteStateList",
+      "possibleFiniteStateList": [
+        {
+          "k": 4598336,
+          "v": "dc3e3763-b8ed-4159-acee-d6a0f4de3dba"
+        }
+      ],
+      "iid": "db690d7d-761c-47fd-96d3-840d698a89dc"
+    }
+  ]
+}

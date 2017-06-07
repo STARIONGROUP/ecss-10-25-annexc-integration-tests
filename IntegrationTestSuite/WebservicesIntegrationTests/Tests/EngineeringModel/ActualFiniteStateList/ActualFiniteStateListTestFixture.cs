@@ -457,7 +457,7 @@ namespace WebservicesIntegrationTests
 
             // assert that the properties are what is expected
             Assert.AreEqual("db690d7d-761c-47fd-96d3-840d698a89dc", (string) actualFiniteStateList[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) actualFiniteStateList[PropertyNames.RevisionNumber]);
+            Assert.AreEqual(1, (int)actualFiniteStateList[PropertyNames.RevisionNumber]);
             Assert.AreEqual("ActualFiniteStateList", (string) actualFiniteStateList[PropertyNames.ClassKind]);
             Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string) actualFiniteStateList[PropertyNames.Owner]);
 

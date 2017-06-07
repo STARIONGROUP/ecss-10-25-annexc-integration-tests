@@ -1,0 +1,27 @@
+﻿{
+  "_delete": [],
+  "_create": [
+    {
+      "shortName": "TestPossibleFiniteState",
+      "name": "Test PossibleFiniteState",
+      "classKind": "PossibleFiniteState",
+      "revisionNumber": 0,
+      "iid": "b8fdfac4-1c40-475a-ac6c-968654b689b7",
+      "hyperLink": [],
+      "definition": [],
+      "alias": []
+    }
+  ],
+  "_update": [
+    {
+      "classKind": "PossibleFiniteStateList",
+      "iid": "449a5bca-34fd-454a-93f8-a56ac8383fee",
+      "possibleState": [
+        {
+          "k": "73203279",
+          "v": "b8fdfac4-1c40-475a-ac6c-968654b689b7"
+        }
+      ]
+    }
+  ]
+}
