@@ -28,6 +28,7 @@ namespace WebservicesIntegrationTests
     /// <summary>
     /// The web client test fixture base class.
     /// </summary>
+    [SingleThreaded] 
     [TestFixture]
     public abstract class WebClientTestFixtureBase
     {
