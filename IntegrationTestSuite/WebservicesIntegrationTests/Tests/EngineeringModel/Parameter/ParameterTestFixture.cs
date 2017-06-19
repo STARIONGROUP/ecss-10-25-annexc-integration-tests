@@ -513,8 +513,6 @@ namespace WebservicesIntegrationTests
             var postBody = this.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
-            Console.WriteLine(jArray);
-
             var engineeeringModel =
                 jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
             Assert.AreEqual(2, (int)engineeeringModel[PropertyNames.RevisionNumber]);

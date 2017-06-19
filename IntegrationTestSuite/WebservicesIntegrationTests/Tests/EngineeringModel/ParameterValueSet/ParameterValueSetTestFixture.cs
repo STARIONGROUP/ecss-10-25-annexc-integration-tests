@@ -455,8 +455,11 @@ namespace WebservicesIntegrationTests
             actualFiniteState1 = jArray.Single(x => (string)x[PropertyNames.Iid] == actualStates[1]);
             Assert.AreEqual(4, (int)actualFiniteState1[PropertyNames.RevisionNumber]);
 
-            var parameterValueSets = jArray.Select(x => (string)x[PropertyNames.ClassKind] == "ParameterValueSet");
-            Assert.AreEqual(2, parameterValueSets.Count());
+            parameterValueSet = jArray.Single(x => (string)x[PropertyNames.ClassKind] == "ParameterValueSet" && (string)x[PropertyNames.ActualState] == actualStates[0]);
+            Assert.AreEqual(4, (int)parameterValueSet[PropertyNames.RevisionNumber]);
+
+            parameterValueSet = jArray.Single(x => (string)x[PropertyNames.ClassKind] == "ParameterValueSet" && (string)x[PropertyNames.ActualState] == actualStates[1]);
+            Assert.AreEqual(4, (int)parameterValueSet[PropertyNames.RevisionNumber]);
 
             // get a specific Parameter from the result by it's unique id
             parameter = jArray.Single(x => (string)x[PropertyNames.Iid] == "2cd4eb9c-e92c-41b2-968c-f03ff7010bad");

@@ -170,7 +170,6 @@ namespace WebservicesIntegrationTests
             rulesArray = (JArray) modelRdl[PropertyNames.Rule];
             IList<string> rules = rulesArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedRules, rules);
-            Console.Write(jArray);
         }
 
 
