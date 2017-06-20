@@ -117,7 +117,7 @@ namespace WebservicesIntegrationTests
             var engineeeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
             Assert.AreEqual(2, (int)engineeeringModel[PropertyNames.RevisionNumber]);
 
-            var elementUsage = jArray.Single(x => (string) x[PropertyNames.Iid] == "f95a1580-e533-4185-b520-208615780afe");
+            var elementUsage = jArray.Single(x => (string) x[PropertyNames.Iid] == "75399754-ee45-4bca-b033-63e2019870d1");
             Assert.AreEqual(2, (int)elementUsage[PropertyNames.RevisionNumber]);
 
             var expectedParameterOverrides = new string[]
@@ -153,7 +153,7 @@ namespace WebservicesIntegrationTests
             var parameterOverrideValueSet = jArray.Single(x => (string)x[PropertyNames.Iid] == valueSets[0]);
             Assert.AreEqual(10, parameterOverrideValueSet.Children().Count());
 
-            Assert.AreEqual("af5c88c6-301f-497b-81f7-53748c3900ed", (string)parameterOverride[PropertyNames.ParameterValueSet]);
+            Assert.AreEqual("af5c88c6-301f-497b-81f7-53748c3900ed", (string)parameterOverrideValueSet[PropertyNames.ParameterValueSet]);
             
             Assert.AreEqual(2, (int)parameterOverrideValueSet[PropertyNames.RevisionNumber]);
             Assert.AreEqual("ParameterOverrideValueSet", (string)parameterOverrideValueSet[PropertyNames.ClassKind]);

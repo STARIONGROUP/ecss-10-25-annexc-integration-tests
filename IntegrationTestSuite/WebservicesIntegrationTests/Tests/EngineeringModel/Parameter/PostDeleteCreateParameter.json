@@ -1,11 +1,8 @@
 ﻿{
   "_delete": [
     {
-      "classKind": "ElementDefinition",
-      "iid": "f73860b2-12f0-43e4-b8b2-c81862c0a159",
-      "parameter": [
-        "6c5aff74-f983-4aa8-a9d6-293b3429307c"
-      ]
+        "classKind": "Parameter",
+        "iid": "6c5aff74-f983-4aa8-a9d6-293b3429307c"
     }
   ],
   "_create": [

@@ -187,7 +187,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
 
             //Check the amount of objects 
-            Assert.AreEqual(4, jArray.Count);
+            Assert.AreEqual(6, jArray.Count);
 
             //SiteDirectory properties
             var siteDirectory =
