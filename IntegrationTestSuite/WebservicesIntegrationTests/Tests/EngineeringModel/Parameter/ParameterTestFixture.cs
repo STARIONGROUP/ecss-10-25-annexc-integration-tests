@@ -228,7 +228,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual("a21c15c4-3e1e-46b5-b109-5063dec1e254", (string)parameter[PropertyNames.ParameterType]);
             Assert.IsNull((string)parameter[PropertyNames.Scale]);
             Assert.IsNull((string)parameter[PropertyNames.StateDependence]);
-            Assert.IsNull((string)parameter[PropertyNames.Group]);
+            Assert.AreEqual((string)parameter[PropertyNames.Group], "b739b3c6-9cc0-4e64-9cc4-ef7463edf559");
             Assert.IsFalse((bool)parameter[PropertyNames.IsOptionDependent]);
             Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string)parameter[PropertyNames.Owner]);
 
@@ -614,7 +614,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual("a21c15c4-3e1e-46b5-b109-5063dec1e254", (string)parameter[PropertyNames.ParameterType]);
             Assert.IsNull((string)parameter[PropertyNames.Scale]);
             Assert.IsNull((string)parameter[PropertyNames.StateDependence]);
-            Assert.IsNull((string)parameter[PropertyNames.Group]);
+            Assert.AreEqual((string)parameter[PropertyNames.Group], "b739b3c6-9cc0-4e64-9cc4-ef7463edf559");
             Assert.IsFalse((bool)parameter[PropertyNames.IsOptionDependent]);
             Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string)parameter[PropertyNames.Owner]);
 

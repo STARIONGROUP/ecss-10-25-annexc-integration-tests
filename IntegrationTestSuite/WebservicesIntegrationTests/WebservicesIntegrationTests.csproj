@@ -182,6 +182,9 @@
     <None Include="Tests\EngineeringModel\Option\PostNewOption.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Tests\EngineeringModel\ParameterGroup\PostDeleteParameterGroup.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Tests\EngineeringModel\ParameterOverride\PostNewParameterOverride.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

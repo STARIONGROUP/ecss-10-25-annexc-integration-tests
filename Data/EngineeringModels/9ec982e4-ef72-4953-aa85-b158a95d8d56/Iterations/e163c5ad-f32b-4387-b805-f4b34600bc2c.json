@@ -146,7 +146,7 @@
     "parameterType": "a21c15c4-3e1e-46b5-b109-5063dec1e254",
     "scale": null,
     "stateDependence": null,
-    "group": null,
+    "group": "b739b3c6-9cc0-4e64-9cc4-ef7463edf559",
     "isOptionDependent": false,
     "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
     "iid": "6c5aff74-f983-4aa8-a9d6-293b3429307c"
@@ -447,19 +447,10 @@
     "classKind": "UserRuleVerification",
     "status": "PASSED",
     "executedOn": null,
-    "violation": [
-      "4333ba99-4a64-460b-971c-3ee00350470f"
-    ],
+    "violation": [],
     "isActive": true,
     "rule": "8a5cd66e-7313-4843-813f-37081ca81bb8",
     "iid": "c953263c-fc25-4048-9bb6-343a10200a0c"
-  },
-  {
-    "revisionNumber": 1,
-    "classKind": "RuleViolation",
-    "violatingThing": [],
-    "description": "RuleViolationTest",
-    "iid": "4333ba99-4a64-460b-971c-3ee00350470f"
   },
   {
     "revisionNumber": 1,

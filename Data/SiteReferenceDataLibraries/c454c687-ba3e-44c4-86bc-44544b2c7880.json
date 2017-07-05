@@ -676,14 +676,6 @@
   },
   {
     "revisionNumber": 1,
-    "classKind": "NaturalLanguage",
-    "name": "Test Natural Language",
-    "languageCode": "en-GB",
-    "nativeName": "TestNaturalLanguage",
-    "iid": "520ef6a8-246a-4e87-9880-fb3d119620f0"
-  },
-  {
-    "revisionNumber": 1,
     "classKind": "ReferenceSource",
     "versionIdentifier": null,
     "versionDate": null,

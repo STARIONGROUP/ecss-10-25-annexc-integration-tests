@@ -30,6 +30,20 @@ namespace WebservicesIntegrationTests
     [TestFixture]
     public class ParameterGroupTestFixture : WebClientTestFixtureBase
     {
+        public override void SetUp()
+        {
+            base.SetUp();
+
+            this.WebClient.Restore(this.Settings.Hostname);
+        }
+
+        public override void TearDown()
+        {
+            this.WebClient.Restore(this.Settings.Hostname);
+
+            base.TearDown();
+        }
+
         /// <summary>
         /// Verification that the ParameterGroup objects are returned from the data-source and that the 
         /// values of the ParameterGroup properties are equal to the expected value
@@ -83,6 +97,42 @@ namespace WebservicesIntegrationTests
             var parameterGroup =
                 jArray.Single(x => (string) x[PropertyNames.Iid] == "b739b3c6-9cc0-4e64-9cc4-ef7463edf559");
             ParameterGroupTestFixture.VerifyProperties(parameterGroup);
+        }
+
+        [Test]
+        public void VerifyThatParameterGroupCanBeDeletedAndContainedParametersReturnedFromWebApi()
+        {
+            var iterationUri =
+                new Uri(
+                    string.Format(
+                        UriFormat,
+                        this.Settings.Hostname,
+                        "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var postBodyPath = this.GetPath("Tests/EngineeringModel/ParameterGroup/PostDeleteParameterGroup.json");
+
+            var postBody = this.GetJsonFromFile(postBodyPath);
+            var jArray = this.WebClient.PostDto(iterationUri, postBody);
+
+            // check if there are appropriate amount of objects
+            Assert.AreEqual(3, jArray.Count);
+
+            var engineeeringModel =
+                jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            Assert.AreEqual(2, (int)engineeeringModel[PropertyNames.RevisionNumber]);
+
+            // get a specific ElementDefinition from the result by it's unique id
+            var elementDefinition =
+                jArray.Single(x => (string)x[PropertyNames.Iid] == "f73860b2-12f0-43e4-b8b2-c81862c0a159");
+            Assert.AreEqual(2, (int)elementDefinition[PropertyNames.RevisionNumber]);
+            var expectedParameterGroups = new string[] { };
+            var parameterGroupsArray = (JArray)elementDefinition[PropertyNames.ParameterGroup];
+            IList<string> parameterGroups = parameterGroupsArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedParameterGroups, parameterGroups);
+
+            // get a specific Parameter from the result by it's unique id
+            var parameter = jArray.Single(x => (string)x[PropertyNames.Iid] == "6c5aff74-f983-4aa8-a9d6-293b3429307c");
+            Assert.AreEqual(2, (int)parameter[PropertyNames.RevisionNumber]);
+            Assert.IsNull((string)parameter[PropertyNames.Group]);
         }
 
         /// <summary>
