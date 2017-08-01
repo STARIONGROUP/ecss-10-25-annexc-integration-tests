@@ -153,6 +153,43 @@ namespace WebservicesIntegrationTests
             CollectionAssert.AreEquivalent(expectedRequirementsGroups, groups);
         }
 
+        [Test]
+        public void VerifyThatRequirementsGroupCanBeDeletedAndContainedRequirementsReturnedFromWebApi()
+        {
+            var iterationUri = new Uri(
+                string.Format(
+                    UriFormat,
+                    this.Settings.Hostname,
+                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var postBodyPath = this.GetPath("Tests/EngineeringModel/RequirementsGroup/PostDeleteRequirementsGroup.json");
+
+            var postBody = this.GetJsonFromFile(postBodyPath);
+            var jArray = this.WebClient.PostDto(iterationUri, postBody);
+
+            Console.WriteLine(jArray);
+
+            // check if there are appropriate amount of objects
+            Assert.AreEqual(3, jArray.Count);
+
+            var engineeeringModel = jArray.Single(
+                x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            Assert.AreEqual(2, (int)engineeeringModel[PropertyNames.RevisionNumber]);
+
+            // get a specific RequirementsSpecification from the result by it's unique id
+            var requirementsSpecification = jArray.Single(
+                x => (string)x[PropertyNames.Iid] == "bf0cde90-9086-43d5-bcff-32a2f8331800");
+            Assert.AreEqual(2, (int)requirementsSpecification[PropertyNames.RevisionNumber]);
+            var expectedRequirementsGroups = new string[] { };
+            var requirementsGroupsArray = (JArray)requirementsSpecification[PropertyNames.Group];
+            IList<string> groups = requirementsGroupsArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedRequirementsGroups, groups);
+
+            // get a specific Requirement from the result by it's unique id
+            var requirement = jArray.Single(x => (string)x[PropertyNames.Iid] == "614e2a69-d602-46be-9311-2fb4d3273e88");
+            Assert.AreEqual(2, (int)requirement[PropertyNames.RevisionNumber]);
+            Assert.IsNull((string)requirement[PropertyNames.Group]);
+        }
+
         public static void VerifyProperties(JToken requirementsGroup)
         {
             // verify the amount of returned properties 

@@ -315,7 +315,8 @@ namespace WebservicesIntegrationTests
 
             var expectedElements = new string[]
             {
-                "f73860b2-12f0-43e4-b8b2-c81862c0a159"
+                "f73860b2-12f0-43e4-b8b2-c81862c0a159",
+                "f73860b2-12f0-43e4-b8b2-c81862c0a160"
             };
             var elementsArray = (JArray) iteration[PropertyNames.Element];
             IList<string> elements = elementsArray.Select(x => (string) x).ToList();

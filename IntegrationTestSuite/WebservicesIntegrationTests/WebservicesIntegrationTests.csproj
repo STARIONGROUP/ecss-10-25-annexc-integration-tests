@@ -218,6 +218,9 @@
     <None Include="Tests\EngineeringModel\Parameter\PostUpdateParameterToStateDependent.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Tests\EngineeringModel\RequirementsGroup\PostDeleteRequirementsGroup.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Tests\EngineeringModel\RequirementsGroup\PostNewRequirementsGroup.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

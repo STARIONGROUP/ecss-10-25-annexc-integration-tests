@@ -23,8 +23,10 @@ namespace WebservicesIntegrationTests
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using NUnit.Framework;
+
     using Newtonsoft.Json.Linq;
+
+    using NUnit.Framework;
 
     [TestFixture]
     public class ElementUsageTestFixture : WebClientTestFixtureBase
@@ -37,68 +39,64 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedElementUsageIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var elementUsageUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
+            var elementUsageUri = new Uri(
+                string.Format(
+                    UriFormat,
+                    this.Settings.Hostname,
                     "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/f73860b2-12f0-43e4-b8b2-c81862c0a159/containedElement"));
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(elementUsageUri);
 
-            //check if there is the only one ElementUsage object 
-            Assert.AreEqual(1, jArray.Count);
+            // check if there are the only two ElementUsage object 
+            Assert.AreEqual(2, jArray.Count);
 
-            // get a specific ElementUsage from the result by it's unique id
-            var elementUsage =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "75399754-ee45-4bca-b033-63e2019870d1");
-
-            ElementUsageTestFixture.VerifyProperties(elementUsage);
+            ElementUsageTestFixture.VerifyProperties(jArray);
         }
 
         [Test]
         public void VerifyThatExpectedElementUsageWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var elementUsageUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
+            var elementUsageUri = new Uri(
+                string.Format(
+                    UriFormat,
+                    this.Settings.Hostname,
                     "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/f73860b2-12f0-43e4-b8b2-c81862c0a159/containedElement?includeAllContainers=true"));
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(elementUsageUri);
 
-            //check if there are 4 objects
-            Assert.AreEqual(4, jArray.Count);
+            // check if there are 5 objects
+            Assert.AreEqual(5, jArray.Count);
 
             // get a specific Iteration from the result by it's unique id
-            var iteration =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
+            var iteration = jArray.Single(x => (string)x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
             IterationTestFixture.VerifyProperties(iteration);
 
             // get a specific ElementDefinition from the result by it's unique id
-            var elementDefinition =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "f73860b2-12f0-43e4-b8b2-c81862c0a159");
-            ElementDefinitionTestFixture.VerifyProperties(elementDefinition);
+            ElementDefinitionTestFixture.VerifyProperties(jArray);
 
-            // get a specific ElementUsage from the result by it's unique id
-            var elementUsage =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "75399754-ee45-4bca-b033-63e2019870d1");
-            ElementUsageTestFixture.VerifyProperties(elementUsage);
+            ElementUsageTestFixture.VerifyProperties(jArray);
         }
 
         /// <summary>
         /// Verifies all properties of the ElementUsage <see cref="JToken"/>
         /// </summary>
-        /// <param name="elementUsage">
-        /// The <see cref="JToken"/> that contains the properties of
-        /// the ElementUsage object
+        /// <param name="jArray">
+        /// The JSON array.
         /// </param>
-        public static void VerifyProperties(JToken elementUsage)
+        public static void VerifyProperties(JArray jArray)
         {
+            // get a specific Requirement from the result by it's unique id
+            var elementUsage = jArray.Single(
+                x => (string)x[PropertyNames.Iid] == "75399754-ee45-4bca-b033-63e2019870d1");
+
             // verify the amount of returned properties 
             Assert.AreEqual(14, elementUsage.Children().Count());
 
             // assert that the properties are what is expected
-            Assert.AreEqual("75399754-ee45-4bca-b033-63e2019870d1",
-                (string)elementUsage[PropertyNames.Iid]);
+            Assert.AreEqual("75399754-ee45-4bca-b033-63e2019870d1", (string)elementUsage[PropertyNames.Iid]);
             Assert.AreEqual(1, (int)elementUsage[PropertyNames.RevisionNumber]);
             Assert.AreEqual("ElementUsage", (string)elementUsage[PropertyNames.ClassKind]);
 
@@ -107,7 +105,9 @@ namespace WebservicesIntegrationTests
 
             Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string)elementUsage[PropertyNames.Owner]);
             Assert.AreEqual("UNDIRECTED", (string)elementUsage[PropertyNames.InterfaceEnd]);
-            Assert.AreEqual("f73860b2-12f0-43e4-b8b2-c81862c0a159", (string)elementUsage[PropertyNames.ElementDefinition]);
+            Assert.AreEqual(
+                "f73860b2-12f0-43e4-b8b2-c81862c0a160",
+                (string)elementUsage[PropertyNames.ElementDefinition]);
 
             var expectedExcludedOptions = new string[] { };
             var excludedOptionsArray = (JArray)elementUsage[PropertyNames.ExcludeOption];
@@ -134,13 +134,63 @@ namespace WebservicesIntegrationTests
             IList<string> h = hyperlinksArray.Select(x => (string)x).ToList();
             CollectionAssert.AreEquivalent(expectedHyperlinks, h);
 
-            var expectedParameterOverride = new string[]
-            {
-                "93f767ed-4d22-45f6-ae97-d1dab0d36e1c"
-            };
+            var expectedParameterOverride = new[] { "93f767ed-4d22-45f6-ae97-d1dab0d36e1c" };
             var parameterOverride = (JArray)elementUsage[PropertyNames.ParameterOverride];
             IList<string> p = parameterOverride.Select(x => (string)x).ToList();
             CollectionAssert.AreEquivalent(expectedParameterOverride, p);
+
+            // get a specific Requirement from the result by it's unique id
+            elementUsage = jArray.SingleOrDefault(x => (string)x[PropertyNames.Iid] == "f95a1580-e533-4185-b520-208615780afe");
+
+            if (elementUsage != null)
+            {
+                // verify the amount of returned properties 
+            Assert.AreEqual(14, elementUsage.Children().Count());
+
+            // assert that the properties are what is expected
+            Assert.AreEqual("f95a1580-e533-4185-b520-208615780afe", (string)elementUsage[PropertyNames.Iid]);
+            Assert.AreEqual(1, (int)elementUsage[PropertyNames.RevisionNumber]);
+            Assert.AreEqual("ElementUsage", (string)elementUsage[PropertyNames.ClassKind]);
+
+            Assert.AreEqual("Test ElementUsage 2", (string)elementUsage[PropertyNames.Name]);
+            Assert.AreEqual("TestElementUsage2", (string)elementUsage[PropertyNames.ShortName]);
+
+            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string)elementUsage[PropertyNames.Owner]);
+            Assert.AreEqual("UNDIRECTED", (string)elementUsage[PropertyNames.InterfaceEnd]);
+            Assert.AreEqual(
+                "f73860b2-12f0-43e4-b8b2-c81862c0a160",
+                (string)elementUsage[PropertyNames.ElementDefinition]);
+
+            expectedExcludedOptions = new string[] { };
+            excludedOptionsArray = (JArray)elementUsage[PropertyNames.ExcludeOption];
+            excludedOptions = excludedOptionsArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedExcludedOptions, excludedOptions);
+
+            expectedCategories = new string[] { };
+            categoriesArray = (JArray)elementUsage[PropertyNames.Category];
+            categories = categoriesArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedCategories, categories);
+
+            expectedAliases = new string[] { };
+            aliasesArray = (JArray)elementUsage[PropertyNames.Alias];
+            aliases = aliasesArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedAliases, aliases);
+
+            expectedDefinitions = new string[] { };
+            definitionsArray = (JArray)elementUsage[PropertyNames.Definition];
+            definitions = definitionsArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedDefinitions, definitions);
+
+            expectedHyperlinks = new string[] { };
+            hyperlinksArray = (JArray)elementUsage[PropertyNames.HyperLink];
+            h = hyperlinksArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedHyperlinks, h);
+
+            expectedParameterOverride = new string[] { };
+            parameterOverride = (JArray)elementUsage[PropertyNames.ParameterOverride];
+            p = parameterOverride.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedParameterOverride, p);
+            }            
         }
     }
 }

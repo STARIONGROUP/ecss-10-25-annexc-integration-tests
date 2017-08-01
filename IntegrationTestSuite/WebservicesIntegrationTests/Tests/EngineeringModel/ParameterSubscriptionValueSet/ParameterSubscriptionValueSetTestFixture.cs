@@ -73,9 +73,7 @@ namespace WebservicesIntegrationTests
             IterationTestFixture.VerifyProperties(iteration);
 
             // get a specific ElementDefinition from the result by it's unique id
-            var elementDefinition =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "f73860b2-12f0-43e4-b8b2-c81862c0a159");
-            ElementDefinitionTestFixture.VerifyProperties(elementDefinition);
+            ElementDefinitionTestFixture.VerifyProperties(jArray);
 
             // get a specific Parameter from the result by it's unique id
             var parameter =

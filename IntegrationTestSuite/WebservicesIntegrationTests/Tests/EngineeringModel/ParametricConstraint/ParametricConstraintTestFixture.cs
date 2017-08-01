@@ -77,8 +77,7 @@ namespace WebservicesIntegrationTests
             RequirementsSpecificationTestFixture.VerifyProperties(requirementsSpecification);
 
             // get a specific Requirement from the result by it's unique id
-            var requirement = jArray.Single(x => (string) x[PropertyNames.Iid] == "614e2a69-d602-46be-9311-2fb4d3273e87");
-            RequirementTestFixture.VerifyProperties(requirement);
+            RequirementTestFixture.VerifyProperties(jArray);
 
             // get a specific ParametricConstraint from the result by it's unique id
             var parametricConstraint =

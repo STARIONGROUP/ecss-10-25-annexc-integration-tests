@@ -73,14 +73,10 @@ namespace WebservicesIntegrationTests
             IterationTestFixture.VerifyProperties(iteration);
 
             // get a specific ElementDefinition from the result by it's unique id
-            var elementDefinition =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "f73860b2-12f0-43e4-b8b2-c81862c0a159");
-            ElementDefinitionTestFixture.VerifyProperties(elementDefinition);
+            ElementDefinitionTestFixture.VerifyProperties(jArray);
 
             // get a specific ElementUsage from the result by it's unique id
-            var elementUsage =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "75399754-ee45-4bca-b033-63e2019870d1");
-            ElementUsageTestFixture.VerifyProperties(elementUsage);
+            ElementUsageTestFixture.VerifyProperties(jArray);
 
             // get a specific ParameterOverride from the result by it's unique id
             var parameterOverride =
