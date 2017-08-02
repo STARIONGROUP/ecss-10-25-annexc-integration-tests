@@ -221,6 +221,12 @@
     <None Include="Tests\EngineeringModel\RequirementsGroup\PostDeleteRequirementsGroup.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+     <None Include="Tests\EngineeringModel\Publication\PostNewPublication.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tests\EngineeringModel\Publication\PostUpdateParameterValueSet.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Tests\EngineeringModel\RequirementsGroup\PostNewRequirementsGroup.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

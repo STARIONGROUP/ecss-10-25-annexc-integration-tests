@@ -38,7 +38,7 @@ namespace WebservicesIntegrationTests
             // define the URI on which to perform a GET request 
             var parameterOverrideValueSetUri =
                 new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/f73860b2-12f0-43e4-b8b2-c81862c0a159/containedElement/75399754-ee45-4bca-b033-63e2019870d1/parameterOverride/93f767ed-4d22-45f6-ae97-d1dab0d36e1c/valueSet"));
+                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/fe9295c5-af99-494e-86ff-e715837806ae/containedElement/75399754-ee45-4bca-b033-63e2019870d1/parameterOverride/93f767ed-4d22-45f6-ae97-d1dab0d36e1c/valueSet"));
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(parameterOverrideValueSetUri);
@@ -59,7 +59,7 @@ namespace WebservicesIntegrationTests
             // define the URI on which to perform a GET request
             var parameterOverrideValueSetUri =
                 new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/f73860b2-12f0-43e4-b8b2-c81862c0a159/containedElement/75399754-ee45-4bca-b033-63e2019870d1/parameterOverride/93f767ed-4d22-45f6-ae97-d1dab0d36e1c/valueSet?includeAllContainers=true"));
+                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/fe9295c5-af99-494e-86ff-e715837806ae/containedElement/75399754-ee45-4bca-b033-63e2019870d1/parameterOverride/93f767ed-4d22-45f6-ae97-d1dab0d36e1c/valueSet?includeAllContainers=true"));
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(parameterOverrideValueSetUri);

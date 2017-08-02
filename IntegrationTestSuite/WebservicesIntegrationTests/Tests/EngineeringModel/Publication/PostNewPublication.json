@@ -1,0 +1,21 @@
+﻿{
+	"_delete": [],
+	"_create": [
+		{
+			"revisionNumber": 1,
+			"classKind": "Publication",
+			"domain": ["0e92edde-fdff-41db-9b1d-f2e484f12535"],
+			"publishedParameter": ["3f05483f-66ff-4f21-bc76-45956779f66e"],
+			"iid": "aec92178-186c-40d5-b23a-78f0423906f6"
+		}
+	],
+	"_update": [
+		{
+			"classKind": "Iteration",
+			"iid": "e163c5ad-f32b-4387-b805-f4b34600bc2c",
+			"publication": [
+				"aec92178-186c-40d5-b23a-78f0423906f6"
+			]
+		}
+	]
+}

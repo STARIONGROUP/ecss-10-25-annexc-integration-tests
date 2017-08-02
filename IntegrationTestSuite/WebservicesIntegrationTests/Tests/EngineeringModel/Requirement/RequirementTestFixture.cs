@@ -126,6 +126,7 @@ namespace WebservicesIntegrationTests
             var expectedRequirements = new[]
                                            {
                                                "614e2a69-d602-46be-9311-2fb4d3273e87",
+                                               "614e2a69-d602-46be-9311-2fb4d3273e88",
                                                "09af5432-b7a5-4932-a983-b1065723efb7"
                                            };
             var requirementsArray = (JArray)requirementsSpecification[PropertyNames.Requirement];
@@ -173,7 +174,7 @@ namespace WebservicesIntegrationTests
                 jArray.Single(x => (string)x[PropertyNames.Iid] == "bf0cde90-9086-43d5-bcff-32a2f8331800");
             Assert.AreEqual(2, (int)requirementsSpecificationWithoutMovedRequirement[PropertyNames.RevisionNumber]);
 
-            expectedRequirements = new string[] { };
+            expectedRequirements = new string[] { "614e2a69-d602-46be-9311-2fb4d3273e88" };
             requirementsArray = (JArray)requirementsSpecificationWithoutMovedRequirement[PropertyNames.Requirement];
             requirements = requirementsArray.Select(x => (string)x).ToList();
             CollectionAssert.AreEquivalent(expectedRequirements, requirements);

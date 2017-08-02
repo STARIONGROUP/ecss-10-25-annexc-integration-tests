@@ -183,6 +183,7 @@ namespace WebservicesIntegrationTests
             var expectedParameters = new[]
                                          {
                                              "6c5aff74-f983-4aa8-a9d6-293b3429307c",
+                                             "3f05483f-66ff-4f21-bc76-45956779f66e",
                                              "2cd4eb9c-e92c-41b2-968c-f03ff7010bad"
                                          };
             var parametersArray = (JArray)elementDefinition[PropertyNames.Parameter];

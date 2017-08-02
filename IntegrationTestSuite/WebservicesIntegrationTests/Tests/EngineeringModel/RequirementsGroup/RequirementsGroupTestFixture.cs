@@ -166,8 +166,6 @@ namespace WebservicesIntegrationTests
             var postBody = this.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
-            Console.WriteLine(jArray);
-
             // check if there are appropriate amount of objects
             Assert.AreEqual(3, jArray.Count);
 

@@ -12,6 +12,7 @@
 //   limitations under the License.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace WebservicesIntegrationTests
 {
     using System;
@@ -47,18 +48,17 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedParameterIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var parameterUri =
-                new Uri(
-                    string.Format(
-                        UriFormat,
-                        this.Settings.Hostname,
-                        "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/f73860b2-12f0-43e4-b8b2-c81862c0a159/parameter"));
+            var parameterUri = new Uri(
+                string.Format(
+                    UriFormat,
+                    this.Settings.Hostname,
+                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/f73860b2-12f0-43e4-b8b2-c81862c0a159/parameter"));
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(parameterUri);
 
-            // check if there is the only one Parameter object 
-            Assert.AreEqual(1, jArray.Count);
+            // check if there appropriate amount of Parameter objects 
+            Assert.AreEqual(2, jArray.Count);
 
             // get a specific Parameter from the result by it's unique id
             var parameter = jArray.Single(x => (string)x[PropertyNames.Iid] == "6c5aff74-f983-4aa8-a9d6-293b3429307c");
@@ -70,18 +70,17 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedParameterWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var parameterUri =
-                new Uri(
-                    string.Format(
-                        UriFormat,
-                        this.Settings.Hostname,
-                        "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/f73860b2-12f0-43e4-b8b2-c81862c0a159/parameter?includeAllContainers=true"));
+            var parameterUri = new Uri(
+                string.Format(
+                    UriFormat,
+                    this.Settings.Hostname,
+                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/f73860b2-12f0-43e4-b8b2-c81862c0a159/parameter?includeAllContainers=true"));
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(parameterUri);
 
-            // check if there are 4 objects
-            Assert.AreEqual(4, jArray.Count);
+            // check if there are appropriate amount of objects
+            Assert.AreEqual(5, jArray.Count);
 
             // get a specific Iteration from the result by it's unique id
             var iteration = jArray.Single(x => (string)x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
@@ -98,29 +97,29 @@ namespace WebservicesIntegrationTests
         [Test]
         public void VerifyThatAParameterCanBeCreatedWithWebApi()
         {
-            var iterationUri =
-                new Uri(
-                    string.Format(
-                        UriFormat,
-                        this.Settings.Hostname,
-                        "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var iterationUri = new Uri(
+                string.Format(
+                    UriFormat,
+                    this.Settings.Hostname,
+                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
             var postBodyPath = this.GetPath("Tests/EngineeringModel/Parameter/PostNewParameter.json");
 
             var postBody = this.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
-            var engineeeringModel =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            var engineeeringModel = jArray.Single(
+                x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
             Assert.AreEqual(2, (int)engineeeringModel[PropertyNames.RevisionNumber]);
 
             // get a specific ElementDefinition from the result by it's unique id
-            var elementDefinition =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "f73860b2-12f0-43e4-b8b2-c81862c0a159");
+            var elementDefinition = jArray.Single(
+                x => (string)x[PropertyNames.Iid] == "f73860b2-12f0-43e4-b8b2-c81862c0a159");
             Assert.AreEqual(2, (int)elementDefinition[PropertyNames.RevisionNumber]);
 
             var expectedParameters = new[]
                                          {
                                              "6c5aff74-f983-4aa8-a9d6-293b3429307c",
+                                             "3f05483f-66ff-4f21-bc76-45956779f66e",
                                              "2cd4eb9c-e92c-41b2-968c-f03ff7010bad"
                                          };
             var parametersArray = (JArray)elementDefinition[PropertyNames.Parameter];
@@ -184,27 +183,30 @@ namespace WebservicesIntegrationTests
         [Test]
         public void VerifyThatAParameterCanBeDeletedAndCreatedInOnRequestWithWebApi()
         {
-            var iterationUri =
-                new Uri(
-                    string.Format(
-                        UriFormat,
-                        this.Settings.Hostname,
-                        "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var iterationUri = new Uri(
+                string.Format(
+                    UriFormat,
+                    this.Settings.Hostname,
+                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
             var postBodyPath = this.GetPath("Tests/EngineeringModel/Parameter/PostDeleteCreateParameter.json");
 
             var postBody = this.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
-            var engineeeringModel =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            var engineeeringModel = jArray.Single(
+                x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
             Assert.AreEqual(2, (int)engineeeringModel[PropertyNames.RevisionNumber]);
 
             // get a specific ElementDefinition from the result by it's unique id
-            var elementDefinition =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "f73860b2-12f0-43e4-b8b2-c81862c0a159");
+            var elementDefinition = jArray.Single(
+                x => (string)x[PropertyNames.Iid] == "f73860b2-12f0-43e4-b8b2-c81862c0a159");
             Assert.AreEqual(2, (int)elementDefinition[PropertyNames.RevisionNumber]);
 
-            var expectedParameters = new[] { "2cd4eb9c-e92c-41b2-968c-f03ff7010bad" };
+            var expectedParameters = new[]
+                                         {
+                                             "3f05483f-66ff-4f21-bc76-45956779f66e",
+                                             "2cd4eb9c-e92c-41b2-968c-f03ff7010bad"
+                                         };
             var parametersArray = (JArray)elementDefinition[PropertyNames.Parameter];
             IList<string> parameters = parametersArray.Select(x => (string)x).ToList();
             CollectionAssert.AreEquivalent(expectedParameters, parameters);
@@ -226,7 +228,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual("a21c15c4-3e1e-46b5-b109-5063dec1e254", (string)parameter[PropertyNames.ParameterType]);
             Assert.IsNull((string)parameter[PropertyNames.Scale]);
             Assert.IsNull((string)parameter[PropertyNames.StateDependence]);
-            Assert.AreEqual((string)parameter[PropertyNames.Group], "b739b3c6-9cc0-4e64-9cc4-ef7463edf559");
+            Assert.IsNull((string)parameter[PropertyNames.Group]);
             Assert.IsFalse((bool)parameter[PropertyNames.IsOptionDependent]);
             Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string)parameter[PropertyNames.Owner]);
 
@@ -266,30 +268,30 @@ namespace WebservicesIntegrationTests
         [Test]
         public void VerifyThatAParameterOfCompoundParameterTypeCanBeCreatedWithWebApi()
         {
-            var iterationUri =
-                new Uri(
-                    string.Format(
-                        UriFormat,
-                        this.Settings.Hostname,
-                        "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
-            var postBodyPath =
-                this.GetPath("Tests/EngineeringModel/Parameter/PostNewParameterOfCompoundParameterType.json");
+            var iterationUri = new Uri(
+                string.Format(
+                    UriFormat,
+                    this.Settings.Hostname,
+                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var postBodyPath = this.GetPath(
+                "Tests/EngineeringModel/Parameter/PostNewParameterOfCompoundParameterType.json");
 
             var postBody = this.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
-            var engineeeringModel =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            var engineeeringModel = jArray.Single(
+                x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
             Assert.AreEqual(2, (int)engineeeringModel[PropertyNames.RevisionNumber]);
 
             // get a specific ElementDefinition from the result by it's unique id
-            var elementDefinition =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "f73860b2-12f0-43e4-b8b2-c81862c0a159");
+            var elementDefinition = jArray.Single(
+                x => (string)x[PropertyNames.Iid] == "f73860b2-12f0-43e4-b8b2-c81862c0a159");
             Assert.AreEqual(2, (int)elementDefinition[PropertyNames.RevisionNumber]);
 
             var expectedParameters = new[]
                                          {
                                              "6c5aff74-f983-4aa8-a9d6-293b3429307c",
+                                             "3f05483f-66ff-4f21-bc76-45956779f66e",
                                              "2460b6a5-08ff-4cc3-a2cc-8fd5c5cf2736"
                                          };
             var parametersArray = (JArray)elementDefinition[PropertyNames.Parameter];
@@ -353,29 +355,29 @@ namespace WebservicesIntegrationTests
         [Test]
         public void VerifyThatAnOptionDependentParameterCanBeCreatedWithWebApi()
         {
-            var iterationUri =
-                new Uri(
-                    string.Format(
-                        UriFormat,
-                        this.Settings.Hostname,
-                        "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var iterationUri = new Uri(
+                string.Format(
+                    UriFormat,
+                    this.Settings.Hostname,
+                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
             var postBodyPath = this.GetPath("Tests/EngineeringModel/Parameter/PostNewOptionDependentParameter.json");
 
             var postBody = this.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
-            var engineeeringModel =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            var engineeeringModel = jArray.Single(
+                x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
             Assert.AreEqual(2, (int)engineeeringModel[PropertyNames.RevisionNumber]);
 
             // get a specific ElementDefinition from the result by it's unique id
-            var elementDefinition =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "f73860b2-12f0-43e4-b8b2-c81862c0a159");
+            var elementDefinition = jArray.Single(
+                x => (string)x[PropertyNames.Iid] == "f73860b2-12f0-43e4-b8b2-c81862c0a159");
             Assert.AreEqual(2, (int)elementDefinition[PropertyNames.RevisionNumber]);
 
             var expectedParameters = new[]
                                          {
                                              "6c5aff74-f983-4aa8-a9d6-293b3429307c",
+                                             "3f05483f-66ff-4f21-bc76-45956779f66e",
                                              "9600b225-a4be-47b1-92b1-4dc2d8894ea3"
                                          };
             var parametersArray = (JArray)elementDefinition[PropertyNames.Parameter];
@@ -441,27 +443,26 @@ namespace WebservicesIntegrationTests
         [Test]
         public void VerifyThatAParameterCanBeUpdatedToOptionDependentWithWebApi()
         {
-            var iterationUri =
-                new Uri(
-                    string.Format(
-                        UriFormat,
-                        this.Settings.Hostname,
-                        "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var iterationUri = new Uri(
+                string.Format(
+                    UriFormat,
+                    this.Settings.Hostname,
+                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
             var postBodyPath = this.GetPath(
                 "Tests/EngineeringModel/Parameter/PostUpdateParameterToOptionDependent.json");
 
             var postBody = this.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
-            var engineeeringModel =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            var engineeeringModel = jArray.Single(
+                x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
             Assert.AreEqual(2, (int)engineeeringModel[PropertyNames.RevisionNumber]);
 
             var parameterValueSet = jArray.Single(x => (string)x[PropertyNames.ClassKind] == "ParameterValueSet");
             Assert.AreEqual(2, (int)parameterValueSet[PropertyNames.RevisionNumber]);
 
-            var parameterOverrideValueSet =
-                jArray.Single(x => (string)x[PropertyNames.ClassKind] == "ParameterOverrideValueSet");
+            var parameterOverrideValueSet = jArray.Single(
+                x => (string)x[PropertyNames.ClassKind] == "ParameterOverrideValueSet");
             Assert.AreEqual(2, (int)parameterOverrideValueSet[PropertyNames.RevisionNumber]);
             Assert.AreEqual(
                 (string)parameterValueSet[PropertyNames.Iid],
@@ -474,8 +475,8 @@ namespace WebservicesIntegrationTests
                 (string)parameterValueSet[PropertyNames.Iid],
                 (string)parameterSubscriptionValueSet[PropertyNames.SubscribedValueSet]);
 
-            var parameterSubscription =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "f1f076c4-5307-42b8-a171-3263a9e7bb21");
+            var parameterSubscription = jArray.Single(
+                x => (string)x[PropertyNames.Iid] == "f1f076c4-5307-42b8-a171-3263a9e7bb21");
             Assert.AreEqual(2, (int)parameterSubscription[PropertyNames.RevisionNumber]);
             Assert.AreEqual(
                 (string)parameterSubscriptionValueSet[PropertyNames.Iid],
@@ -488,8 +489,8 @@ namespace WebservicesIntegrationTests
             IList<string> valueSets = valueSetsArray.Select(x => (string)x).ToList();
             CollectionAssert.AreEquivalent(expectedValueSets, valueSets);
 
-            var parameterOverride =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "93f767ed-4d22-45f6-ae97-d1dab0d36e1c");
+            var parameterOverride = jArray.Single(
+                x => (string)x[PropertyNames.Iid] == "93f767ed-4d22-45f6-ae97-d1dab0d36e1c");
             Assert.AreEqual(2, (int)parameterOverride[PropertyNames.RevisionNumber]);
             expectedValueSets = new[] { (string)parameterOverrideValueSet[PropertyNames.Iid] };
             valueSetsArray = (JArray)parameterOverride[PropertyNames.ValueSet];
@@ -500,19 +501,19 @@ namespace WebservicesIntegrationTests
         [Test]
         public void VerifyThatAParameterCanBeUpdatedToStateDependentWithWebApi()
         {
-            var iterationUri =
-                new Uri(
-                    string.Format(
-                        UriFormat,
-                        this.Settings.Hostname,
-                        "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
-            var postBodyPath = this.GetPath("Tests/EngineeringModel/Parameter/PostUpdateParameterToStateDependent.json");
+            var iterationUri = new Uri(
+                string.Format(
+                    UriFormat,
+                    this.Settings.Hostname,
+                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var postBodyPath = this.GetPath(
+                "Tests/EngineeringModel/Parameter/PostUpdateParameterToStateDependent.json");
 
             var postBody = this.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
-            var engineeeringModel =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            var engineeeringModel = jArray.Single(
+                x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
             Assert.AreEqual(2, (int)engineeeringModel[PropertyNames.RevisionNumber]);
 
             var parameterValueSet = jArray.Single(x => (string)x[PropertyNames.ClassKind] == "ParameterValueSet");
@@ -544,8 +545,8 @@ namespace WebservicesIntegrationTests
             IList<string> parameterSubscriptions = parameterSubscriptionsArray.Select(x => (string)x).ToList();
             CollectionAssert.AreEquivalent(expectedParameterSubscriptions, parameterSubscriptions);
 
-            var parameterOverrideValueSet =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == (string)parameterOverride[PropertyNames.ValueSet][0]);
+            var parameterOverrideValueSet = jArray.Single(
+                x => (string)x[PropertyNames.Iid] == (string)parameterOverride[PropertyNames.ValueSet][0]);
             Assert.AreEqual(2, (int)parameterOverrideValueSet[PropertyNames.RevisionNumber]);
             Assert.AreEqual(
                 (string)parameterValueSet[PropertyNames.Iid],
@@ -558,8 +559,8 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(EmptyProperty, (string)parameterOverrideValueSet[PropertyNames.Manual]);
             Assert.AreEqual(EmptyProperty, (string)parameterOverrideValueSet[PropertyNames.Reference]);
 
-            var parameterSubscription =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "f1f076c4-5307-42b8-a171-3263a9e7bb21");
+            var parameterSubscription = jArray.Single(
+                x => (string)x[PropertyNames.Iid] == "f1f076c4-5307-42b8-a171-3263a9e7bb21");
             Assert.AreEqual(2, (int)parameterSubscription[PropertyNames.RevisionNumber]);
             Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string)parameterOverride[PropertyNames.Owner]);
 
@@ -567,9 +568,8 @@ namespace WebservicesIntegrationTests
             valueSets = valueSetsArray.Select(x => (string)x).ToList();
             Assert.AreEqual(1, valueSets.Count);
 
-            var parameterSubscriptionValueSet =
-                jArray.Single(
-                    x => (string)x[PropertyNames.Iid] == (string)parameterSubscription[PropertyNames.ValueSet][0]);
+            var parameterSubscriptionValueSet = jArray.Single(
+                x => (string)x[PropertyNames.Iid] == (string)parameterSubscription[PropertyNames.ValueSet][0]);
             Assert.AreEqual(2, (int)parameterSubscriptionValueSet[PropertyNames.RevisionNumber]);
             Assert.AreEqual(
                 (string)parameterValueSet[PropertyNames.Iid],
@@ -598,33 +598,67 @@ namespace WebservicesIntegrationTests
         /// </param>
         public static void VerifyProperties(JToken parameter)
         {
-            // verify the amount of returned properties 
-            Assert.AreEqual(14, parameter.Children().Count());
+            if ((string)parameter[PropertyNames.Iid] == "6c5aff74-f983-4aa8-a9d6-293b3429307c")
+            {
+                // verify the amount of returned properties 
+                Assert.AreEqual(14, parameter.Children().Count());
 
-            // assert that the properties are what is expected
-            Assert.AreEqual("6c5aff74-f983-4aa8-a9d6-293b3429307c", (string)parameter[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int)parameter[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("Parameter", (string)parameter[PropertyNames.ClassKind]);
+                // assert that the properties are what is expected
+                Assert.AreEqual("6c5aff74-f983-4aa8-a9d6-293b3429307c", (string)parameter[PropertyNames.Iid]);
+                Assert.AreEqual(1, (int)parameter[PropertyNames.RevisionNumber]);
+                Assert.AreEqual("Parameter", (string)parameter[PropertyNames.ClassKind]);
 
-            Assert.IsNull((string)parameter[PropertyNames.RequestedBy]);
-            Assert.IsFalse((bool)parameter[PropertyNames.AllowDifferentOwnerOfOverride]);
-            Assert.IsFalse((bool)parameter[PropertyNames.ExpectsOverride]);
-            Assert.AreEqual("a21c15c4-3e1e-46b5-b109-5063dec1e254", (string)parameter[PropertyNames.ParameterType]);
-            Assert.IsNull((string)parameter[PropertyNames.Scale]);
-            Assert.IsNull((string)parameter[PropertyNames.StateDependence]);
-            Assert.AreEqual((string)parameter[PropertyNames.Group], "b739b3c6-9cc0-4e64-9cc4-ef7463edf559");
-            Assert.IsFalse((bool)parameter[PropertyNames.IsOptionDependent]);
-            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string)parameter[PropertyNames.Owner]);
+                Assert.IsNull((string)parameter[PropertyNames.RequestedBy]);
+                Assert.IsFalse((bool)parameter[PropertyNames.AllowDifferentOwnerOfOverride]);
+                Assert.IsFalse((bool)parameter[PropertyNames.ExpectsOverride]);
+                Assert.AreEqual("a21c15c4-3e1e-46b5-b109-5063dec1e254", (string)parameter[PropertyNames.ParameterType]);
+                Assert.IsNull((string)parameter[PropertyNames.Scale]);
+                Assert.IsNull((string)parameter[PropertyNames.StateDependence]);
+                Assert.AreEqual((string)parameter[PropertyNames.Group], "b739b3c6-9cc0-4e64-9cc4-ef7463edf559");
+                Assert.IsFalse((bool)parameter[PropertyNames.IsOptionDependent]);
+                Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string)parameter[PropertyNames.Owner]);
 
-            var expectedValueSets = new[] { "af5c88c6-301f-497b-81f7-53748c3900ed" };
-            var valueSetsArray = (JArray)parameter[PropertyNames.ValueSet];
-            IList<string> valueSets = valueSetsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedValueSets, valueSets);
+                var expectedValueSets = new[] { "af5c88c6-301f-497b-81f7-53748c3900ed" };
+                var valueSetsArray = (JArray)parameter[PropertyNames.ValueSet];
+                IList<string> valueSets = valueSetsArray.Select(x => (string)x).ToList();
+                CollectionAssert.AreEquivalent(expectedValueSets, valueSets);
 
-            var expectedParameterSubscriptions = new[] { "f1f076c4-5307-42b8-a171-3263a9e7bb21" };
-            var parameterSubscriptionsArray = (JArray)parameter[PropertyNames.ParameterSubscription];
-            IList<string> parameterSubscriptions = parameterSubscriptionsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedParameterSubscriptions, parameterSubscriptions);
+                var expectedParameterSubscriptions = new[] { "f1f076c4-5307-42b8-a171-3263a9e7bb21" };
+                var parameterSubscriptionsArray = (JArray)parameter[PropertyNames.ParameterSubscription];
+                IList<string> parameterSubscriptions = parameterSubscriptionsArray.Select(x => (string)x).ToList();
+                CollectionAssert.AreEquivalent(expectedParameterSubscriptions, parameterSubscriptions);
+            }
+
+            if ((string)parameter[PropertyNames.Iid] == "3f05483f-66ff-4f21-bc76-45956779f66e")
+            {
+                // verify the amount of returned properties 
+                Assert.AreEqual(14, parameter.Children().Count());
+
+                // assert that the properties are what is expected
+                Assert.AreEqual("3f05483f-66ff-4f21-bc76-45956779f66e", (string)parameter[PropertyNames.Iid]);
+                Assert.AreEqual(1, (int)parameter[PropertyNames.RevisionNumber]);
+                Assert.AreEqual("Parameter", (string)parameter[PropertyNames.ClassKind]);
+
+                Assert.IsNull((string)parameter[PropertyNames.RequestedBy]);
+                Assert.IsFalse((bool)parameter[PropertyNames.AllowDifferentOwnerOfOverride]);
+                Assert.IsFalse((bool)parameter[PropertyNames.ExpectsOverride]);
+                Assert.AreEqual("a21c15c4-3e1e-46b5-b109-5063dec1e254", (string)parameter[PropertyNames.ParameterType]);
+                Assert.IsNull((string)parameter[PropertyNames.Scale]);
+                Assert.IsNull((string)parameter[PropertyNames.StateDependence]);
+                Assert.AreEqual((string)parameter[PropertyNames.Group], "b739b3c6-9cc0-4e64-9cc4-ef7463edf559");
+                Assert.IsFalse((bool)parameter[PropertyNames.IsOptionDependent]);
+                Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string)parameter[PropertyNames.Owner]);
+
+                var expectedValueSets = new[] { "72ec3701-bcb5-4bf6-bd78-30fd1b65e3be" };
+                var valueSetsArray = (JArray)parameter[PropertyNames.ValueSet];
+                IList<string> valueSets = valueSetsArray.Select(x => (string)x).ToList();
+                CollectionAssert.AreEquivalent(expectedValueSets, valueSets);
+
+                var expectedParameterSubscriptions = new[] { "f1f076c4-5307-42b8-a171-3263a9e7bb21" };
+                var parameterSubscriptionsArray = (JArray)parameter[PropertyNames.ParameterSubscription];
+                IList<string> parameterSubscriptions = parameterSubscriptionsArray.Select(x => (string)x).ToList();
+                CollectionAssert.AreEquivalent(expectedParameterSubscriptions, parameterSubscriptions);
+            }
         }
     }
 }

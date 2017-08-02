@@ -1,0 +1,11 @@
+﻿{
+	"_delete": [],
+	"_create": [],
+	"_update": [
+		{
+			"classKind": "ParameterValueSet",
+			"iid": "72ec3701-bcb5-4bf6-bd78-30fd1b65e3be",
+			"manual": "[\"test\"]"
+		}
+	]
+}

@@ -214,7 +214,8 @@ namespace WebservicesIntegrationTests
 
             var expectedElements = new string[]
             {
-                "f73860b2-12f0-43e4-b8b2-c81862c0a159"
+                "f73860b2-12f0-43e4-b8b2-c81862c0a159",
+                "fe9295c5-af99-494e-86ff-e715837806ae"
             };
             var elementsArray = (JArray)iteration[PropertyNames.Element];
             IList<string> elements = elementsArray.Select(x => (string)x).ToList();
@@ -238,7 +239,10 @@ namespace WebservicesIntegrationTests
             CollectionAssert.AreEquivalent(expectedExternalIdentifierMaps, externalIdentifierMaps);
 
             var expectedRequirementsSpecifications = new string[]
-                {"bf0cde90-9086-43d5-bcff-32a2f8331800", "8d0734f4-ca4b-4611-9187-f6970e2b02bc"};
+                                                         {
+                                                             "bf0cde90-9086-43d5-bcff-32a2f8331800",
+                                                             "8d0734f4-ca4b-4611-9187-f6970e2b02bc"
+                                                         };
             var requirementsSpecificationsArray = (JArray)iteration[PropertyNames.RequirementsSpecification];
             IList<string> requirementsSpecifications = requirementsSpecificationsArray.Select(x => (string)x).ToList();
             CollectionAssert.AreEquivalent(expectedRequirementsSpecifications, requirementsSpecifications);
@@ -316,7 +320,7 @@ namespace WebservicesIntegrationTests
             var expectedElements = new string[]
             {
                 "f73860b2-12f0-43e4-b8b2-c81862c0a159",
-                "f73860b2-12f0-43e4-b8b2-c81862c0a160"
+                "fe9295c5-af99-494e-86ff-e715837806ae"
             };
             var elementsArray = (JArray) iteration[PropertyNames.Element];
             IList<string> elements = elementsArray.Select(x => (string) x).ToList();

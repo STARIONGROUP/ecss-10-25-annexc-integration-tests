@@ -19,7 +19,7 @@
 		"topElement": null,
 		"element": [
 			"f73860b2-12f0-43e4-b8b2-c81862c0a159",
-			"f73860b2-12f0-43e4-b8b2-c81862c0a160"
+			"fe9295c5-af99-494e-86ff-e715837806ae"
 		],
 		"relationship": [
 			"320869e4-f6d6-4dd2-a696-1b1604f4c4b7",
@@ -113,7 +113,10 @@
 	{
 		"revisionNumber": 1,
 		"classKind": "ElementDefinition",
-		"containedElement": [],
+		"containedElement": [
+			"75399754-ee45-4bca-b033-63e2019870d1",
+			"f95a1580-e533-4185-b520-208615780afe"
+		],
 		"parameter": [],
 		"parameterGroup": [],
 		"referencedElement": [],
@@ -124,17 +127,15 @@
 		"hyperLink": [],
 		"name": "Test 2 Element Definition",
 		"shortName": "TestTwoElementDefinition",
-		"iid": "f73860b2-12f0-43e4-b8b2-c81862c0a160"
+		"iid": "fe9295c5-af99-494e-86ff-e715837806ae"
 	},
 	{
 		"revisionNumber": 1,
 		"classKind": "ElementDefinition",
-		"containedElement": [
-			"75399754-ee45-4bca-b033-63e2019870d1",
-			"f95a1580-e533-4185-b520-208615780afe"
-		],
+		"containedElement": [],
 		"parameter": [
-			"6c5aff74-f983-4aa8-a9d6-293b3429307c"
+			"6c5aff74-f983-4aa8-a9d6-293b3429307c",
+			"3f05483f-66ff-4f21-bc76-45956779f66e"
 		],
 		"parameterGroup": [
 			"b739b3c6-9cc0-4e64-9cc4-ef7463edf559"
@@ -170,6 +171,24 @@
 		"iid": "6c5aff74-f983-4aa8-a9d6-293b3429307c"
 	},
 	{
+		"allowDifferentOwnerOfOverride": false,
+		"classKind": "Parameter",
+		"expectsOverride": false,
+		"group": null,
+		"iid": "3f05483f-66ff-4f21-bc76-45956779f66e",
+		"isOptionDependent": false,
+		"owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+		"parameterSubscription": [],
+		"parameterType": "a21c15c4-3e1e-46b5-b109-5063dec1e254",
+		"requestedBy": null,
+		"revisionNumber": 2,
+		"scale": null,
+		"stateDependence": null,
+		"valueSet": [
+			"72ec3701-bcb5-4bf6-bd78-30fd1b65e3be"
+		]
+	},
+	{
 		"revisionNumber": 1,
 		"classKind": "ParameterValueSet",
 		"valueSwitch": "MANUAL",
@@ -181,6 +200,19 @@
 		"actualState": null,
 		"actualOption": null,
 		"iid": "af5c88c6-301f-497b-81f7-53748c3900ed"
+	},
+	{
+		"actualOption": null,
+		"actualState": null,
+		"classKind": "ParameterValueSet",
+		"computed": "[\"-\"]",
+		"formula": "[\"-\"]",
+		"iid": "72ec3701-bcb5-4bf6-bd78-30fd1b65e3be",
+		"manual": "[\"-\"]",
+		"published": "[\"-\"]",
+		"reference": "[\"-\"]",
+		"revisionNumber": 2,
+		"valueSwitch": "MANUAL"
 	},
 	{
 		"revisionNumber": 1,
@@ -382,7 +414,7 @@
 			"93f767ed-4d22-45f6-ae97-d1dab0d36e1c"
 		],
 		"interfaceEnd": "UNDIRECTED",
-		"elementDefinition": "f73860b2-12f0-43e4-b8b2-c81862c0a160",
+		"elementDefinition": "f73860b2-12f0-43e4-b8b2-c81862c0a159",
 		"iid": "75399754-ee45-4bca-b033-63e2019870d1"
 	},
 	{
@@ -398,7 +430,7 @@
 		"alias": [],
 		"parameterOverride": [],
 		"interfaceEnd": "UNDIRECTED",
-		"elementDefinition": "f73860b2-12f0-43e4-b8b2-c81862c0a160",
+		"elementDefinition": "f73860b2-12f0-43e4-b8b2-c81862c0a159",
 		"iid": "f95a1580-e533-4185-b520-208615780afe"
 	},
 	{
