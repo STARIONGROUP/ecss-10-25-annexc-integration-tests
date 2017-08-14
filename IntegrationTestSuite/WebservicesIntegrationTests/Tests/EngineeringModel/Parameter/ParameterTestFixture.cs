@@ -647,7 +647,7 @@ namespace WebservicesIntegrationTests
                 Assert.IsNull((string)parameter[PropertyNames.StateDependence]);
                 Assert.AreEqual((string)parameter[PropertyNames.Group], "b739b3c6-9cc0-4e64-9cc4-ef7463edf559");
                 Assert.IsFalse((bool)parameter[PropertyNames.IsOptionDependent]);
-                Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string)parameter[PropertyNames.Owner]);
+                Assert.AreEqual("eb759723-14b9-49f4-8611-544d037bb764", (string)parameter[PropertyNames.Owner]);
 
                 var expectedValueSets = new[] { "72ec3701-bcb5-4bf6-bd78-30fd1b65e3be" };
                 var valueSetsArray = (JArray)parameter[PropertyNames.ValueSet];

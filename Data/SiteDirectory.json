@@ -30,7 +30,8 @@
       "86992db5-8ce2-4431-8ff5-6fe794d14687"
     ],
     "domain": [
-      "0e92edde-fdff-41db-9b1d-f2e484f12535"
+      "0e92edde-fdff-41db-9b1d-f2e484f12535",
+	  "eb759723-14b9-49f4-8611-544d037bb764"
     ],
     "naturalLanguage": [
       "73bf30cc-3573-488f-8746-6c03ba47973e"
@@ -85,12 +86,25 @@
   },
   {
     "revisionNumber": 1,
+    "classKind": "DomainOfExpertise",
+    "isDeprecated": false,
+    "category": [],
+    "alias": [],
+    "definition": [],
+    "hyperLink": [],
+    "name": "Additional Test Domain of Expertise",
+    "shortName": "ADD",
+    "iid": "eb759723-14b9-49f4-8611-544d037bb764"
+  },
+  {
+    "revisionNumber": 1,
     "classKind": "EngineeringModelSetup",
     "participant": [
       "284334dd-e8e5-42d6-bc8a-715c507a7f02"
     ],
     "activeDomain": [
-      "0e92edde-fdff-41db-9b1d-f2e484f12535"
+      "0e92edde-fdff-41db-9b1d-f2e484f12535",
+	  "eb759723-14b9-49f4-8611-544d037bb764"
     ],
     "kind": "STUDY_MODEL",
     "studyPhase": "PREPARATION_PHASE",
@@ -157,7 +171,8 @@
     "person": "77791b12-4c2c-4499-93fa-869df3692d22",
     "role": "ee3ae5ff-ac5e-4957-bab1-7698fba2a267",
     "domain": [
-      "0e92edde-fdff-41db-9b1d-f2e484f12535"
+      "0e92edde-fdff-41db-9b1d-f2e484f12535",
+	  "eb759723-14b9-49f4-8611-544d037bb764"
     ],
     "selectedDomain": "0e92edde-fdff-41db-9b1d-f2e484f12535",
     "iid": "284334dd-e8e5-42d6-bc8a-715c507a7f02"

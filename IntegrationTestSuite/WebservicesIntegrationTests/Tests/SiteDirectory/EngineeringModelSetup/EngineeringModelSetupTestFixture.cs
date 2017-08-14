@@ -472,7 +472,10 @@ namespace WebservicesIntegrationTests
             IList<string> participantsList = participantsArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedParticipants, participantsList);
 
-            var expectedActiveDomains = new string[] {"0e92edde-fdff-41db-9b1d-f2e484f12535"};
+            var expectedActiveDomains = new string[] {
+                "0e92edde-fdff-41db-9b1d-f2e484f12535",
+                "eb759723-14b9-49f4-8611-544d037bb764"
+            };
             var activeDomainsArray = (JArray) engineeringModelSetup[PropertyNames.ActiveDomain];
             IList<string> activeDomainsList = activeDomainsArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedActiveDomains, activeDomainsList);

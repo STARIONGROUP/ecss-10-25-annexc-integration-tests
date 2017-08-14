@@ -188,6 +188,9 @@
     <None Include="Tests\EngineeringModel\ParameterOverride\PostNewParameterOverride.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Tests\EngineeringModel\ParameterSubscription\PostNewParameterSubscription.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Tests\EngineeringModel\ParameterValueSet\PostNewPossibleFiniteState.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -221,7 +224,7 @@
     <None Include="Tests\EngineeringModel\RequirementsGroup\PostDeleteRequirementsGroup.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-     <None Include="Tests\EngineeringModel\Publication\PostNewPublication.json">
+    <None Include="Tests\EngineeringModel\Publication\PostNewPublication.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Tests\EngineeringModel\Publication\PostUpdateParameterValueSet.json">
@@ -245,13 +248,13 @@
     <None Include="Tests\SiteDirectory\Glossary\PostGlossaryUpdate.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\ModelReferenceDataLibrary\POSTIncorrectMoveBinaryRelationShipRuleFromModelRDLToSiteRDL.json">
+    <None Include="Tests\SiteDirectory\ModelReferenceDataLibrary\POSTIncMoveBinaryRelShipRuleFromModelRDLToSiteRDL.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\ModelReferenceDataLibrary\POSTMoveBinaryRelationShipRuleFromModelRDLToSiteRDL.json">
+    <None Include="Tests\SiteDirectory\ModelReferenceDataLibrary\POSTMoveBinaryRelShipRuleFromModelRDLToSiteRDL.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\ModelReferenceDataLibrary\POSTMoveIndependentBinaryRelShipRuleFromModelRDLToSiteRDL.json">
+    <None Include="Tests\SiteDirectory\ModelReferenceDataLibrary\POSTMoveIndBinaryRelShipRuleFromModelRDLToSiteRDL.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

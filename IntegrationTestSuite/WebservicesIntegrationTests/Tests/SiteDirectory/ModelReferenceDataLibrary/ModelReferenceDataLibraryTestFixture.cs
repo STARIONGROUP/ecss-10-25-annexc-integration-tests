@@ -107,7 +107,7 @@ namespace WebservicesIntegrationTests
                     "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
             var postBodyPath =
                 this.GetPath(
-                    "Tests/SiteDirectory/ModelReferenceDataLibrary/POSTIncorrectMoveBinaryRelationShipRuleFromModelRDLToSiteRDL.json");
+                    "Tests/SiteDirectory/ModelReferenceDataLibrary/POSTIncMoveBinaryRelShipRuleFromModelRDLToSiteRDL.json");
 
             var postBody = base.GetJsonFromFile(postBodyPath);
 
@@ -124,7 +124,7 @@ namespace WebservicesIntegrationTests
                     "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
             var postBodyPath =
                 this.GetPath(
-                    "Tests/SiteDirectory/ModelReferenceDataLibrary/POSTMoveIndependentBinaryRelShipRuleFromModelRDLToSiteRDL.json");
+                    "Tests/SiteDirectory/ModelReferenceDataLibrary/POSTMoveIndBinaryRelShipRuleFromModelRDLToSiteRDL.json");
 
             var postBody = base.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
@@ -181,7 +181,7 @@ namespace WebservicesIntegrationTests
                     "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
             var postBodyPath =
                 this.GetPath(
-                    "Tests/SiteDirectory/ModelReferenceDataLibrary/POSTMoveBinaryRelationShipRuleFromModelRDLToSiteRDL.json");
+                    "Tests/SiteDirectory/ModelReferenceDataLibrary/POSTMoveBinaryRelShipRuleFromModelRDLToSiteRDL.json");
 
             var postBody = base.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);

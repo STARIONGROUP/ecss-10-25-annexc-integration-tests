@@ -87,7 +87,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(siteDirectoryUri);
             
             // assert that the returned count is as expected
-            Assert.AreEqual(59, jArray.Count);
+            Assert.AreEqual(60, jArray.Count);
 
             // get a specific SiteDirectory from the result by it's unique id
             var siteDirectory = jArray.Single(x => (string)x["iid"] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
@@ -105,7 +105,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(siteDirectoryUri);
 
             // assert that the returned count is as expected
-            Assert.AreEqual(59, jArray.Count);
+            Assert.AreEqual(60, jArray.Count);
 
             // get a specific SiteDirectory from the result by it's unique id
             var siteDirectory = jArray.Single(x => (string)x["iid"] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
@@ -201,7 +201,10 @@ namespace WebservicesIntegrationTests
             IList<string> domainGroups = domainGroupArray.Select(x => (string)x).ToList();
             CollectionAssert.AreEquivalent(expecteddomainGroups, domainGroups);
 
-            var expectedDomains = new string[] { "0e92edde-fdff-41db-9b1d-f2e484f12535" };
+            var expectedDomains = new string[] {
+                "0e92edde-fdff-41db-9b1d-f2e484f12535",
+                "eb759723-14b9-49f4-8611-544d037bb764"
+            };
             var domainArray = (JArray)siteDirectory[PropertyNames.Domain];
             IList<string> domains = domainArray.Select(x => (string)x).ToList();
             CollectionAssert.AreEquivalent(expectedDomains, domains);
