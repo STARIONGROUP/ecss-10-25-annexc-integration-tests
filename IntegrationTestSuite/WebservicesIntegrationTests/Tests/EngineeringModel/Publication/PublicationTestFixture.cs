@@ -155,7 +155,8 @@ namespace WebservicesIntegrationTests
 
             var expectedDomains = new string[]
                                       {
-                                          "0e92edde-fdff-41db-9b1d-f2e484f12535"
+                                          "0e92edde-fdff-41db-9b1d-f2e484f12535",
+                                          "eb759723-14b9-49f4-8611-544d037bb764"
                                       };
             var domainsArray = (JArray)publication[PropertyNames.Domain];
             IList<string> domains = domainsArray.Select(x => (string)x).ToList();
