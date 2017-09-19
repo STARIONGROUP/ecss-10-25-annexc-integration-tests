@@ -99,7 +99,7 @@ namespace WebservicesIntegrationTests
 
             var postBody = base.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
-
+            
             //Check the amount of objects 
             Assert.AreEqual(4, jArray.Count);
 
@@ -139,7 +139,7 @@ namespace WebservicesIntegrationTests
             Assert.IsEmpty(iterationSetup[PropertyNames.SourceIterationSetup]);
             Assert.IsEmpty(iterationSetup[PropertyNames.FrozenOn]);
 
-            //GET EngineeringModel
+            // GET EngineeringModel
             // define the URI on which to perform a GET request
             var engineeringModelUri =
                 new Uri(string.Format(UriFormat, this.Settings.Hostname,
@@ -147,8 +147,8 @@ namespace WebservicesIntegrationTests
 
             // get a response from the data-source as a JArray (JSON Array)
             jArray = this.WebClient.GetDto(engineeringModelUri);
-
-            //check if there is only one EngineeringModel object
+            
+            // check if there is only one EngineeringModel object
             Assert.AreEqual(1, jArray.Count);
 
             // get a specific EngineeringModel from the result by it's unique id
