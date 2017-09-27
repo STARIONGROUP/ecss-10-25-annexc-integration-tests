@@ -169,8 +169,6 @@ namespace WebservicesIntegrationTests
             var publishedParametersArray = (JArray)publication[PropertyNames.PublishedParameter];
             IList<string> publishedParameters = publishedParametersArray.Select(x => (string)x).ToList();
             CollectionAssert.AreEquivalent(expectedPublishedParameters, publishedParameters);
-
-            Console.WriteLine(jArray);
         }
 
         /// <summary>
