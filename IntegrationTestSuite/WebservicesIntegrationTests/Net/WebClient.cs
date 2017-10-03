@@ -25,6 +25,7 @@ namespace WebservicesIntegrationTests.Net
     using System.Net;
     using System.Net.Http;
     using System.Text;
+    using System.Threading.Tasks;
 
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
@@ -159,6 +160,37 @@ namespace WebservicesIntegrationTests.Net
         }
 
         /// <summary>
+        /// Get file response body.
+        /// </summary>
+        /// <param name="uri">
+        /// The uri.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/> that contain the response body.
+        /// </returns>
+        public byte[] GetFileResponseBody(Uri uri)
+        {
+            return this.RetrieveHttpFileGetResponse(uri);
+        }
+
+        /// <summary>
+        /// Get model export file as byte array.
+        /// </summary>
+        /// <param name="uri">
+        /// The uri.
+        /// </param>
+        /// <param name="engineeringModelSetupIds">
+        /// EngineeringModelSetup Ids.
+        /// </param>
+        /// <returns>
+        /// The <see cref="byte[]"/> of the file.
+        /// </returns>
+        public byte[] GetModelExportFile(Uri uri, string[] engineeringModelSetupIds)
+        {
+            return this.RetrieveHttpModelExportResponse(uri, engineeringModelSetupIds);
+        }
+
+        /// <summary>
         /// Extracts a JSON Array from the provided <see cref="WebResponse"/>
         /// </summary>
         /// <param name="webResponse">
@@ -275,6 +307,55 @@ namespace WebservicesIntegrationTests.Net
             var response = httpResponse.Content.ReadAsStringAsync().Result;
 
             return response;
+        }
+
+        /// <summary>
+        /// Retrieve response body from file get response.
+        /// </summary>
+        /// <param name="uri">
+        /// The uri.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/> that contain the response body.
+        /// </returns>
+        private byte[] RetrieveHttpFileGetResponse(Uri uri)
+        {
+            var request = this.CreateWebRequest(uri, HttpGetMethod);
+            var httpResponse = (HttpWebResponse)request.GetResponse();
+
+            var content = new StreamContent(httpResponse.GetResponseStream());
+
+            var body = content.ReadAsByteArrayAsync().Result;
+
+            return body;
+        }
+
+        /// <summary>
+        /// Retrieve response body from file get response.
+        /// </summary>
+        /// <param name="uri">
+        /// The uri.
+        /// </param>
+        /// <param name="engineeringModelSetupIds">
+        /// The EngineeringModelSetup Ids.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/> that contain the response body.
+        /// </returns>
+        private byte[] RetrieveHttpModelExportResponse(Uri uri, string[] engineeringModelSetupIds)
+        {
+            var request = this.CreateWebRequest(uri, HttpPostMethod);
+
+            using (StreamWriter requestWriter = new StreamWriter(request.GetRequestStream()))
+            {
+                requestWriter.Write(JsonConvert.SerializeObject(engineeringModelSetupIds));
+            }
+
+            var httpResponse = (HttpWebResponse)request.GetResponse();
+            var content = new StreamContent(httpResponse.GetResponseStream());
+            var body = content.ReadAsByteArrayAsync().Result;
+
+            return body;
         }
 
         /// <summary>

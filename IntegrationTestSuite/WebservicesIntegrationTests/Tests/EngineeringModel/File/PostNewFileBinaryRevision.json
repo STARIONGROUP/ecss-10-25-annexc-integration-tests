@@ -1,0 +1,27 @@
+﻿{
+	"_delete": [],
+	"_create": [{
+			"classKind": "FileRevision",
+			"containingFolder": null,
+			"contentHash": "3F64667F0F27A4C4FA1B4BF374033938A542FDD1",
+			"creator": "284334dd-e8e5-42d6-bc8a-715c507a7f02",
+			"excludedDomain": [],
+			"excludedPerson": [],
+			"fileType": [{
+					"k": 6608,
+					"v": "b16894e4-acb5-4e81-a118-16c00eb86d8f"
+				}
+			],
+			"iid": "e5b46d1b-7d51-4433-b515-25d7d37a0b50",
+			"name": "UserManual_3F64667F0F27A4C4FA1B4BF374033938A542FDD1",
+			"revisionNumber": 0
+		}
+	],
+	"_update": [{
+			"classKind": "File",
+			"fileRevision": ["e5b46d1b-7d51-4433-b515-25d7d37a0b50"],
+			"iid": "8ac6db3e-9525-4f3e-93ea-707076c07fc1"
+		}
+	],
+	"_copy": []
+}

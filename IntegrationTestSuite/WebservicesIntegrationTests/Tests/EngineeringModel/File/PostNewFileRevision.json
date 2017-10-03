@@ -1,0 +1,27 @@
+﻿{
+	"_delete": [],
+	"_create": [{
+			"classKind": "FileRevision",
+			"containingFolder": null,
+			"contentHash": "1525ED651E5B609DAE099DEEDA8DBDB49CFF956F",
+			"creator": "284334dd-e8e5-42d6-bc8a-715c507a7f02",
+			"excludedDomain": [],
+			"excludedPerson": [],
+			"fileType": [{
+					"k": 6608,
+					"v": "b16894e4-acb5-4e81-a118-16c00eb86d8f"
+				}
+			],
+			"iid": "1304d40a-cb2e-4608-a353-cb7f65000559",
+			"name": "Revision 2_1525ED651E5B609DAE099DEEDA8DBDB49CFF956F",
+			"revisionNumber": 0
+		}
+	],
+	"_update": [{
+			"classKind": "File",
+			"fileRevision": ["1304d40a-cb2e-4608-a353-cb7f65000559"],
+			"iid": "8ac6db3e-9525-4f3e-93ea-707076c07fc1"
+		}
+	],
+	"_copy": []
+}
