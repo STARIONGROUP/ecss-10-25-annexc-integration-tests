@@ -23,12 +23,28 @@ namespace WebservicesIntegrationTests
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Net.Http;
+
     using NUnit.Framework;
     using Newtonsoft.Json.Linq;
 
     [TestFixture]
     public class PossibleFiniteStateTestFixture : WebClientTestFixtureBase
     {
+        public override void SetUp()
+        {
+            base.SetUp();
+
+            this.WebClient.Restore(this.Settings.Hostname);
+        }
+
+        public override void TearDown()
+        {
+            this.WebClient.Restore(this.Settings.Hostname);
+
+            base.TearDown();
+        }
+
         /// <summary>
         /// Verification that the PossibleFiniteState objects are returned from the data-source and that the 
         /// values of the PossibleFiniteState properties are equal to the expected value
@@ -77,6 +93,18 @@ namespace WebservicesIntegrationTests
             var possibleFiniteState = jArray.Single(x => (string)x[PropertyNames.Iid] == "b8fdfac4-1c40-475a-ac6c-968654b689b6");
 
             PossibleFiniteStateTestFixture.VerifyProperties(possibleFiniteState);
+        }
+
+        [Test]
+        public void VerifyThatTheLastPossibleFiniteStateCannotBeDeletedWithWebApi()
+        {
+            // define the URI on which to perform a GET request
+            var iterationUri = new Uri(string.Format(UriFormat, this.Settings.Hostname,
+                "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var postBodyPath = this.GetPath("Tests/EngineeringModel/PossibleFiniteState/PostDeletePossibleFiniteState.json");
+            var postBody = base.GetJsonFromFile(postBodyPath);
+
+            Assert.That(() => WebClient.PostDto(iterationUri, postBody), Throws.Exception.TypeOf<System.Net.WebException>());
         }
 
         /// <summary>
