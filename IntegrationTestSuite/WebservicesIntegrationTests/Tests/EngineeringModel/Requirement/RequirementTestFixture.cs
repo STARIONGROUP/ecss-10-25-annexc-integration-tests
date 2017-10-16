@@ -184,6 +184,47 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(2, (int)requirement[PropertyNames.RevisionNumber]);
         }
 
+        [Test]
+        public void VerifyThatParametricConstraintDeletionAsPropertyFromRequirementCanBeDoneFromWebApi()
+        {
+            var iterationUri = new Uri(
+                string.Format(
+                    UriFormat,
+                    this.Settings.Hostname,
+                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var postBodyPath = this.GetPath("Tests/EngineeringModel/Requirement/PostDeleteConstraintAsProperty.json");
+
+            var postBody = this.GetJsonFromFile(postBodyPath);
+            var jArray = this.WebClient.PostDto(iterationUri, postBody);
+
+            // check if there are 2 objects
+            Assert.AreEqual(2, jArray.Count);
+
+            var engineeeringModel = jArray.Single(
+                x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            Assert.AreEqual(2, (int)engineeeringModel[PropertyNames.RevisionNumber]);
+
+            // get a specific Requirement from the result by it's unique id
+            var requirement = jArray.Single(
+                x => (string)x[PropertyNames.Iid] == "614e2a69-d602-46be-9311-2fb4d3273e87");
+            Assert.AreEqual(2, (int)requirement[PropertyNames.RevisionNumber]);
+
+            var expectedParametricConstraints = new List<OrderedItem> ();
+            var parametricConstraints =
+                JsonConvert.DeserializeObject<List<OrderedItem>>(
+                    requirement[PropertyNames.ParametricConstraint].ToString());
+            CollectionAssert.AreEquivalent(expectedParametricConstraints, parametricConstraints);
+
+            // define the URI on which to perform a GET request 
+            var constraintUri = new Uri(
+                string.Format(
+                    UriFormat,
+                    this.Settings.Hostname,
+                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/requirementsSpecification/bf0cde90-9086-43d5-bcff-32a2f8331800/requirement/614e2a69-d602-46be-9311-2fb4d3273e87/parametricConstraint/88200dbc-711a-47e0-a54a-dac4baca6e83"));
+
+            Assert.That(() => this.WebClient.GetDto(constraintUri), Throws.Exception.TypeOf<System.Net.WebException>());
+        }
+
         /// <summary>
         /// Verifies properties of supplied Requirements.
         /// </summary>

@@ -30,6 +30,20 @@ namespace WebservicesIntegrationTests
     [TestFixture]
     public class SiteReferenceDataLibraryTestFixture : WebClientTestFixtureBase
     {
+        public override void SetUp()
+        {
+            base.SetUp();
+
+            this.WebClient.Restore(this.Settings.Hostname);
+        }
+
+        public override void TearDown()
+        {
+            this.WebClient.Restore(this.Settings.Hostname);
+
+            base.TearDown();
+        }
+
         /// <summary>
         /// Verification that the SiteReferenceDataLibrary objects are returned from the data-source and that the 
         /// values of the SiteReferenceDataLibrary properties are equal to the expected value
@@ -104,6 +118,31 @@ namespace WebservicesIntegrationTests
             }
 
             Assert.AreEqual(sumOfParameterTypeElements, setOfUniqueParameterTypeIids.Count);
+        }
+
+        [Test]
+        public void VerifyThatUnitDeletionAsPropertyFromRDLIsDoneAsDeprecationFromWebApi()
+        {
+            var uri = new Uri(
+                string.Format(
+                    UriFormat,
+                    this.Settings.Hostname,
+                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            var postBodyPath = this.GetPath("Tests/SiteDirectory/SiteReferenceDataLibrary/PostDeleteUnitAsProperty.json");
+
+            var postBody = this.GetJsonFromFile(postBodyPath);
+            var jArray = this.WebClient.PostDto(uri, postBody);
+
+            //check if there are only two objects
+            Assert.AreEqual(2, jArray.Count);
+
+            var siteDirectory = jArray.Single(x => (string)x["iid"] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
+            Assert.AreEqual(2, (int)siteDirectory[PropertyNames.RevisionNumber]);
+
+            // get a specific SimpleUnit from the result by it's unique id
+            var simpleUnit =
+                jArray.Single(x => (string)x["iid"] == "56842970-3915-4369-8712-61cfd8273ef9");
+            Assert.IsTrue((bool)simpleUnit["isDeprecated"]);
         }
 
         /// <summary>

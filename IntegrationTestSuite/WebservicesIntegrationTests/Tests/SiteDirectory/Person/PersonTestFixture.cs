@@ -32,6 +32,20 @@ namespace WebservicesIntegrationTests
     /// </summary>    
     public class PersonTestFixture : WebClientTestFixtureBase
     {
+        public override void SetUp()
+        {
+            base.SetUp();
+
+            this.WebClient.Restore(this.Settings.Hostname);
+        }
+
+        public override void TearDown()
+        {
+            this.WebClient.Restore(this.Settings.Hostname);
+
+            base.TearDown();
+        }
+
         /// <summary>
         /// Verification that the Person objects are returned from the data-source and that the 
         /// values of the person properties are equal to to expected value.
@@ -78,6 +92,48 @@ namespace WebservicesIntegrationTests
             // get a specific Person from the result by it's unique id
             var person = jArray.Single(x => (string) x[PropertyNames.Iid] == "77791b12-4c2c-4499-93fa-869df3692d22");
             PersonTestFixture.VerifyProperties(person);
+        }
+
+        [Test]
+        public void VerifyThatTelephoneDeletionAsPropertyFromPersonCanBeDoneFromWebApi()
+        {
+            var uri = new Uri(
+                string.Format(
+                    UriFormat,
+                    this.Settings.Hostname,
+                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            var postBodyPath = this.GetPath("Tests/SiteDirectory/Person/PostDeleteTelephoneAsProperty.json");
+
+            var postBody = this.GetJsonFromFile(postBodyPath);
+            var jArray = this.WebClient.PostDto(uri, postBody);
+
+            // check if there are 2 objects
+            Assert.AreEqual(2, jArray.Count);
+
+            // get a specific SiteDirectory from the result by it's unique id
+            var siteDirectory =
+                jArray.Single(x => (string)x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
+            Assert.AreEqual(2, (int)siteDirectory[PropertyNames.RevisionNumber]);
+
+            // get a specific Person from the result by it's unique id
+            var person = jArray.Single(x => (string)x[PropertyNames.Iid] == "77791b12-4c2c-4499-93fa-869df3692d22");
+            Assert.AreEqual(2, (int)person[PropertyNames.RevisionNumber]);
+            var expectedTelephoneNumbers = new string[]
+                                               {
+                                                   "0367167c-80cb-4f99-a24b-e713efd15436"
+                                               };
+            var telephoneNumbers = (JArray)person[PropertyNames.TelephoneNumber];
+            IList<string> t = telephoneNumbers.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedTelephoneNumbers, t);
+
+            // define the URI on which to perform a GET request 
+            var phoneUri = new Uri(
+                string.Format(
+                    UriFormat,
+                    this.Settings.Hostname,
+                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/person/77791b12-4c2c-4499-93fa-869df3692d22/telephoneNumber/7f85a641-1844-4064-b19d-c6a447543ab3"));
+
+            Assert.That(() => this.WebClient.GetDto(phoneUri), Throws.Exception.TypeOf<System.Net.WebException>());
         }
 
         /// <summary>

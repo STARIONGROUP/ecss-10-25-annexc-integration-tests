@@ -7,12 +7,6 @@
     }
   ],
   "_create": [],
-  "_update": [
-    {
-      "classKind": "ElementDefinition",
-      "iid": "f73860b2-12f0-43e4-b8b2-c81862c0a159",
-      "modifiedOn": "2017-01-20T16:46:46.376Z"
-    }
-  ],
+  "_update": [],
   "_copy": []
 }

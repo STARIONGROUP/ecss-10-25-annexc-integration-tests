@@ -1,0 +1,12 @@
+﻿{
+    "_delete": [
+        {
+            "classKind": "ElementDefinition",
+            "iid": "f73860b2-12f0-43e4-b8b2-c81862c0a159",
+            "parameter": [ "3f05483f-66ff-4f21-bc76-45956779f66e" ]
+        }
+    ],
+    "_create": [],
+    "_update": [],
+    "_copy": []
+}

@@ -1,0 +1,12 @@
+﻿{
+    "_delete": [
+        {
+            "classKind": "Person",
+            "iid": "77791b12-4c2c-4499-93fa-869df3692d22",
+            "telephoneNumber": [ "7f85a641-1844-4064-b19d-c6a447543ab3" ]
+        }
+    ],
+    "_create": [],
+    "_update": [],
+    "_copy": []
+}

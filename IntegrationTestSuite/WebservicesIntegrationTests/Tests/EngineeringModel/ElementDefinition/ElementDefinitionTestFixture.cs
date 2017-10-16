@@ -124,6 +124,92 @@ namespace WebservicesIntegrationTests
             CollectionAssert.AreEquivalent(expectedCategories, categories);
         }
 
+        [Test]
+        public void VerifyThatParameterDeletionAsInstanceFromElementDefinitionCanBeDoneFromWebApi()
+        {
+            var iterationUri = new Uri(
+                string.Format(
+                    UriFormat,
+                    this.Settings.Hostname,
+                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var postBodyPath = this.GetPath("Tests/EngineeringModel/ElementDefinition/PostDeleteParameterAsInstance.json");
+
+            var postBody = this.GetJsonFromFile(postBodyPath);
+            var jArray = this.WebClient.PostDto(iterationUri, postBody);
+
+            // check if there are 2 objects
+            Assert.AreEqual(2, jArray.Count);
+
+            // get a specific EngineeringModel from the result by it's unique id
+            var engineeeringModel = jArray.Single(
+                x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            Assert.AreEqual(2, (int)engineeeringModel[PropertyNames.RevisionNumber]);
+
+            // get a specific ElementDefinition from the result by it's unique id
+            var elementDefinition = jArray.Single(
+                x => (string)x[PropertyNames.Iid] == "f73860b2-12f0-43e4-b8b2-c81862c0a159");
+            Assert.AreEqual(2, (int)elementDefinition[PropertyNames.RevisionNumber]);
+            var expectedParameters = new[]
+                                         {
+                                             "6c5aff74-f983-4aa8-a9d6-293b3429307c"
+                                         };
+            var parametersArray = (JArray)elementDefinition[PropertyNames.Parameter];
+            IList<string> parameters = parametersArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedParameters, parameters);
+
+            // define the URI on which to perform a GET request 
+            var parameterUri = new Uri(
+                string.Format(
+                    UriFormat,
+                    this.Settings.Hostname,
+                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/f73860b2-12f0-43e4-b8b2-c81862c0a159/parameter/3f05483f-66ff-4f21-bc76-45956779f66e"));
+
+            Assert.That(() => this.WebClient.GetDto(parameterUri), Throws.Exception.TypeOf<System.Net.WebException>());
+        }
+
+        [Test]
+        public void VerifyThatParameterDeletionAsPropertyFromElementDefinitionCanBeDoneFromWebApi()
+        {
+            var iterationUri = new Uri(
+                string.Format(
+                    UriFormat,
+                    this.Settings.Hostname,
+                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var postBodyPath = this.GetPath("Tests/EngineeringModel/ElementDefinition/PostDeleteParameterAsProperty.json");
+
+            var postBody = this.GetJsonFromFile(postBodyPath);
+            var jArray = this.WebClient.PostDto(iterationUri, postBody);
+            
+            // check if there are 2 objects
+            Assert.AreEqual(2, jArray.Count);
+
+            // get a specific EngineeringModel from the result by it's unique id
+            var engineeeringModel = jArray.Single(
+                x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            Assert.AreEqual(2, (int)engineeeringModel[PropertyNames.RevisionNumber]);
+
+            // get a specific ElementDefinition from the result by it's unique id
+            var elementDefinition = jArray.Single(
+                x => (string)x[PropertyNames.Iid] == "f73860b2-12f0-43e4-b8b2-c81862c0a159");
+            Assert.AreEqual(2, (int)elementDefinition[PropertyNames.RevisionNumber]);
+            var expectedParameters = new[]
+                                         {
+                                             "6c5aff74-f983-4aa8-a9d6-293b3429307c"
+                                         };
+            var parametersArray = (JArray)elementDefinition[PropertyNames.Parameter];
+            IList<string> parameters = parametersArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedParameters, parameters);
+
+            // define the URI on which to perform a GET request 
+            var parameterUri = new Uri(
+                string.Format(
+                    UriFormat,
+                    this.Settings.Hostname,
+                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/f73860b2-12f0-43e4-b8b2-c81862c0a159/parameter/3f05483f-66ff-4f21-bc76-45956779f66e"));
+
+            Assert.That(() => this.WebClient.GetDto(parameterUri), Throws.Exception.TypeOf<System.Net.WebException>());
+        }
+
         /// <summary>
         /// Verifies all properties of the ElementDefinitions
         /// </summary>
