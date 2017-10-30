@@ -1,0 +1,13 @@
+﻿{
+    "_delete": [
+        {
+            "classKind": "Category",
+            "iid": "cf059b19-235c-48be-87a3-9a8942c8e3e0",
+            "permissibleClass": [
+                10
+            ]
+        }
+    ],
+    "_create": [],
+    "_update": []
+}

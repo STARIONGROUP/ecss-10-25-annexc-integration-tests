@@ -278,6 +278,18 @@
     <None Include="Tests\EngineeringModel\Requirement\PostNewRequirement.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Tests\SiteDirectory\Category\PostAddPermissibleClass.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tests\SiteDirectory\Category\PostAddSuperCategory.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tests\SiteDirectory\Category\PostDeletePermissibleClass.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tests\SiteDirectory\Category\PostDeleteSuperCategory.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Tests\SiteDirectory\EngineeringModelSetup\PostEngineeringModelSetup.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

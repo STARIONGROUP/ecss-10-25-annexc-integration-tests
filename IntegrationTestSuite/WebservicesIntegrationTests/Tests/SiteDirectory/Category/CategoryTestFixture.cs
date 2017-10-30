@@ -29,6 +29,20 @@ namespace WebservicesIntegrationTests
     [TestFixture]
     public class CategoryTestFixture : WebClientTestFixtureBase
     {
+        public override void SetUp()
+        {
+            base.SetUp();
+
+            this.WebClient.Restore(this.Settings.Hostname);
+        }
+
+        public override void TearDown()
+        {
+            this.WebClient.Restore(this.Settings.Hostname);
+
+            base.TearDown();
+        }
+
         /// <summary>
         /// Verification that the Category objects are returned from the data-source and that the 
         /// values of the Category properties are equal to the expected value
@@ -74,6 +88,124 @@ namespace WebservicesIntegrationTests
             SiteReferenceDataLibraryTestFixture.VerifyProperties(siteReferenceDataLibrary);
 
             CategoryTestFixture.VerifyProperties(jArray);
+        }
+
+        [Test]
+        public void VerifyThatSuperCategoryCanBeDeletedFromWebApi()
+        {
+            // Add super category
+            var uri = new Uri(
+                string.Format(
+                    UriFormat,
+                    this.Settings.Hostname,
+                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            var postBodyPath = this.GetPath("Tests/SiteDirectory/Category/PostAddSuperCategory.json");
+
+            var postBody = this.GetJsonFromFile(postBodyPath);
+            var jArray = this.WebClient.PostDto(uri, postBody);
+
+            // check if there are 2 objects
+            Assert.AreEqual(2, jArray.Count);
+
+            // get a specific SiteDirectory from the result by it's unique id
+            var siteDirectory =
+                jArray.Single(x => (string)x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
+            Assert.AreEqual(2, (int)siteDirectory[PropertyNames.RevisionNumber]);
+
+            // get a specific Category from the result by it's unique id
+            var category = jArray.Single(x => (string)x[PropertyNames.Iid] == "cf059b19-235c-48be-87a3-9a8942c8e3e0");
+            Assert.AreEqual(2, (int)category[PropertyNames.RevisionNumber]);
+            var expectedSuperCategories = new string[]
+                                              {
+                                                  "167b5cb0-766e-4ab2-b728-a9c9a662b017"
+                                              };
+            var superCategoriesArray = (JArray)category["superCategory"];
+            IList<string> superCategories = superCategoriesArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedSuperCategories, superCategories);
+
+            // Delete super category
+            postBodyPath = this.GetPath("Tests/SiteDirectory/Category/PostDeleteSuperCategory.json");
+
+            postBody = this.GetJsonFromFile(postBodyPath);
+            jArray = this.WebClient.PostDto(uri, postBody);
+
+            // check if there are 2 objects
+            Assert.AreEqual(2, jArray.Count);
+
+            // get a specific SiteDirectory from the result by it's unique id
+            siteDirectory =
+                jArray.Single(x => (string)x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
+            Assert.AreEqual(3, (int)siteDirectory[PropertyNames.RevisionNumber]);
+
+            // get a specific Category from the result by it's unique id
+            category = jArray.Single(x => (string)x[PropertyNames.Iid] == "cf059b19-235c-48be-87a3-9a8942c8e3e0");
+            Assert.AreEqual(3, (int)category[PropertyNames.RevisionNumber]);
+            expectedSuperCategories = new string[]{};
+            superCategoriesArray = (JArray)category["superCategory"];
+            superCategories = superCategoriesArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedSuperCategories, superCategories);
+        }
+
+        [Test]
+        public void VerifyThatPermissibleClassCanBeDeletedFromWebApi()
+        {
+            // Add Book class
+            var uri = new Uri(
+                string.Format(
+                    UriFormat,
+                    this.Settings.Hostname,
+                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            var postBodyPath = this.GetPath("Tests/SiteDirectory/Category/PostAddPermissibleClass.json");
+
+            var postBody = this.GetJsonFromFile(postBodyPath);
+            var jArray = this.WebClient.PostDto(uri, postBody);
+
+            // check if there are 2 objects
+            Assert.AreEqual(2, jArray.Count);
+
+            // get a specific SiteDirectory from the result by it's unique id
+            var siteDirectory =
+                jArray.Single(x => (string)x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
+            Assert.AreEqual(2, (int)siteDirectory[PropertyNames.RevisionNumber]);
+
+            // get a specific Category from the result by it's unique id
+            var category = jArray.Single(x => (string)x[PropertyNames.Iid] == "cf059b19-235c-48be-87a3-9a8942c8e3e0");
+            Assert.AreEqual(2, (int)category[PropertyNames.RevisionNumber]);
+            var expectedPermissibleClasses = new string[]
+                                               {
+                                                   "Book",
+                                                   "ElementDefinition",
+                                                   "ElementUsage"
+                                               };
+            var permissibleClassesArray = (JArray)category["permissibleClass"];
+            IList<string> permissibleClasses = permissibleClassesArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedPermissibleClasses, permissibleClasses);
+
+            // Delete Book class
+            postBodyPath = this.GetPath("Tests/SiteDirectory/Category/PostDeletePermissibleClass.json");
+
+            postBody = this.GetJsonFromFile(postBodyPath);
+            jArray = this.WebClient.PostDto(uri, postBody);
+
+            // check if there are 2 objects
+            Assert.AreEqual(2, jArray.Count);
+
+            // get a specific SiteDirectory from the result by it's unique id
+            siteDirectory =
+                jArray.Single(x => (string)x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
+            Assert.AreEqual(3, (int)siteDirectory[PropertyNames.RevisionNumber]);
+
+            // get a specific Category from the result by it's unique id
+            category = jArray.Single(x => (string)x[PropertyNames.Iid] == "cf059b19-235c-48be-87a3-9a8942c8e3e0");
+            Assert.AreEqual(3, (int)category[PropertyNames.RevisionNumber]);
+            expectedPermissibleClasses = new string[]
+                                                 {
+                                                     "ElementDefinition",
+                                                     "ElementUsage"
+                                                 };
+            permissibleClassesArray = (JArray)category["permissibleClass"];
+            permissibleClasses = permissibleClassesArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedPermissibleClasses, permissibleClasses);
         }
 
         /// <summary>
