@@ -25,7 +25,6 @@ namespace WebservicesIntegrationTests
     using System.Linq;
     using NUnit.Framework;
     using Newtonsoft.Json.Linq;
-    using WebservicesIntegrationTests.Net;
 
     /// <summary>
     /// The purpose of the <see cref="EngineeringModelSetupTestFixture"/> is to GET and POST model objects
@@ -332,6 +331,45 @@ namespace WebservicesIntegrationTests
 
             var optionsArray = (JArray)iteration[PropertyNames.Option];
             Assert.AreEqual(1, optionsArray.Count);
+        }
+
+        [Test]
+        public void VerifyThatActiveDomainCanBeAddedToEngineeringModelSetupWithWebApi()
+        {
+            var siteDirectoryUri =
+                new Uri(string.Format(UriFormat, this.Settings.Hostname,
+                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            var postBodyPath = this.GetPath("Tests/SiteDirectory/EngineeringModelSetup/PostEngineeringModelSetup.json");
+
+            var postBody = base.GetJsonFromFile(postBodyPath);
+            var jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
+
+            // Check the amount of objects 
+            Assert.AreEqual(5, jArray.Count);
+
+            // Add active domain
+            postBodyPath = this.GetPath("Tests/SiteDirectory/EngineeringModelSetup/PostAddActiveDomain.json");
+
+            postBody = base.GetJsonFromFile(postBodyPath);
+            jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
+
+            // SiteDirectory properties
+            var siteDirectory = jArray.Single(x => (string)x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
+            Assert.AreEqual(3, (int)siteDirectory[PropertyNames.RevisionNumber]);
+
+            // EngineeringModelSetup properties
+            var engineeringModelSetup = jArray.Single(x => (string)x[PropertyNames.Iid] == "ba097bf8-c916-4134-8471-4a1eb4efb2f7");
+
+            Assert.AreEqual(3, (int)engineeringModelSetup[PropertyNames.RevisionNumber]);
+
+            var expectedActiveDomains = new string[]
+                                            {
+                                                "0e92edde-fdff-41db-9b1d-f2e484f12535",
+                                                "eb759723-14b9-49f4-8611-544d037bb764"
+                                            };
+            var activeDomainsArray = (JArray)engineeringModelSetup[PropertyNames.ActiveDomain];
+            IList<string> activeDomainsList = activeDomainsArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedActiveDomains, activeDomainsList);
         }
 
         [Test]
