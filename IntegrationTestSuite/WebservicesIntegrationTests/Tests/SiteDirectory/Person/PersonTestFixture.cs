@@ -137,7 +137,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
-        public void Verify_That_person_with_nukk_role_can_be_posted()
+        public void Verify_That_person_with_null_role_and_null_password_can_be_posted()
         {
             var uri = new Uri(
                 string.Format(
