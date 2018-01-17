@@ -136,6 +136,32 @@ namespace WebservicesIntegrationTests
             Assert.That(() => this.WebClient.GetDto(phoneUri), Throws.Exception.TypeOf<System.Net.WebException>());
         }
 
+        [Test]
+        public void Verify_That_person_with_nukk_role_can_be_posted()
+        {
+            var uri = new Uri(
+                string.Format(
+                    UriFormat,
+                    this.Settings.Hostname,
+                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            var postBodyPath = this.GetPath("Tests/SiteDirectory/Person/Post_Person_With_Role_Null.json");
+
+            var postBody = this.GetJsonFromFile(postBodyPath);
+            var jArray = this.WebClient.PostDto(uri, postBody);
+
+            // check if there are 2 objects
+            Assert.AreEqual(2, jArray.Count);
+
+            // get a specific SiteDirectory from the result by it's unique id
+            var siteDirectory =
+                jArray.Single(x => (string)x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
+            Assert.AreEqual(2, (int)siteDirectory[PropertyNames.RevisionNumber]);
+
+            // get a specific Person from the result by it's unique id
+            var person = jArray.Single(x => (string)x[PropertyNames.Iid] == "01a6d208-7bb5-4855-a6fb-eb3d03f1337b");
+            Assert.AreEqual(2, (int)person[PropertyNames.RevisionNumber]);
+        }
+
         /// <summary>
         /// Verifies the properties of the Person <see cref="JToken"/>
         /// </summary>

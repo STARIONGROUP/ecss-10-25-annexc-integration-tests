@@ -311,6 +311,9 @@
     <None Include="Tests\SiteDirectory\Person\PostDeleteTelephoneAsProperty.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Tests\SiteDirectory\Person\Post_Person_With_Role_Null.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Tests\SiteDirectory\SiteReferenceDataLibrary\PostDeleteUnitAsProperty.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

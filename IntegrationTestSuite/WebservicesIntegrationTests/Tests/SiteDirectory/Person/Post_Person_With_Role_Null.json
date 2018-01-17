@@ -1,0 +1,32 @@
+﻿{
+  "_delete": [],
+  "_create": [
+    {
+      "classKind": "Person",
+      "defaultDomain": null,
+      "defaultEmailAddress": null,
+      "defaultTelephoneNumber": null,
+      "emailAddress": [],
+      "givenName": "no",
+      "iid": "01a6d208-7bb5-4855-a6fb-eb3d03f1337b",
+      "isActive": false,
+      "isDeprecated": false,
+      "organization": null,
+      "organizationalUnit": null,
+      "password": null,
+      "revisionNumber": 1,
+      "role": null,
+      "shortName": "norole",
+      "surname": "role",
+      "telephoneNumber": [],
+      "userPreference": []
+    }
+  ],
+  "_update": [
+    {
+      "classKind": "SiteDirectory",
+      "iid": "f13de6f8-b03a-46e7-a492-53b2f260f294",
+      "person": [ "01a6d208-7bb5-4855-a6fb-eb3d03f1337b" ]
+    }
+  ]
+}
