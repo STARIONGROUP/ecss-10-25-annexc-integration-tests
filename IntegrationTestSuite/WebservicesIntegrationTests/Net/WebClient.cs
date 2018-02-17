@@ -286,19 +286,11 @@ namespace WebservicesIntegrationTests.Net
 
             var file = File.ReadAllBytes(postFilePath);
             var fileContent = new ByteArrayContent(file);
+            var fileName = Path.GetFileName(postFilePath);
             fileContent.Headers.Add("Content-Type", "application/octet-stream");
+            fileContent.Headers.Add("Content-Disposition", $"attachment; filename=\"{fileName}\"");
 
-            var form = new MultipartFormDataContent
-                                                {
-                                                        {
-                                                            jsonContent,
-                                                            "files[]", "jsonFile"
-                                                        },
-                                                        {
-                                                            fileContent,
-                                                            "files[]", "file"
-                                                        }
-                                                };
+            var form = new MultipartFormDataContent { jsonContent, fileContent };
 
             var httpResponse = httpClient.PostAsync(uri, form).Result;
 
