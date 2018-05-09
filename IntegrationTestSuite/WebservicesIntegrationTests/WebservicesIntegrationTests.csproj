@@ -235,6 +235,9 @@
     <None Include="Tests\EngineeringModel\ParameterValueSet\PostNewStateDependentParameter.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Tests\EngineeringModel\ParameterValueSet\PostUpdateComputedValueOfParameterValueSet.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Tests\EngineeringModel\Parameter\PostDeleteCreateParameter.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

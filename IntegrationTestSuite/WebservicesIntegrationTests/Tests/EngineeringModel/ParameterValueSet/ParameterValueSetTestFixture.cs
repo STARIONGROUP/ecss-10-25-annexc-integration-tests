@@ -494,5 +494,32 @@ namespace WebservicesIntegrationTests
             Assert.IsNull((string)parameterValueSet[PropertyNames.ActualState]);
             Assert.IsNull((string)parameterValueSet[PropertyNames.ActualOption]);
         }
+
+        [Test]
+        public void Verify_that_the_computed_and_formula_property_of_a_ParameterValueSet_can_updated()
+        {
+            // POST state dependent Parameter and check what is returned
+            var iterationUri =
+                new Uri(
+                    string.Format(
+                        UriFormat,
+                        this.Settings.Hostname,
+                        "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var postBodyPath =
+                this.GetPath("Tests/EngineeringModel/ParameterValueSet/PostUpdateComputedValueOfParameterValueSet.json");
+
+            var postBody = this.GetJsonFromFile(postBodyPath);
+            
+        
+            var jArray = this.WebClient.PostDto(iterationUri, postBody);
+
+            var engineeeringModel =
+                jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            Assert.AreEqual(2, (int)engineeeringModel[PropertyNames.RevisionNumber]);
+
+            var parameterValueSet = jArray.Single(x => (string)x[PropertyNames.Iid] == "72ec3701-bcb5-4bf6-bd78-30fd1b65e3be");
+
+            Assert.AreEqual("72ec3701-bcb5-4bf6-bd78-30fd1b65e3be", (string)parameterValueSet[PropertyNames.Iid]);
+        }
     }
 }
