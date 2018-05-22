@@ -7,17 +7,17 @@
   ],
   "_create": [
     {
-      "revisionNumber": 1,
-      "classKind": "ParameterValueSet",
-      "valueSwitch": "MANUAL",
-      "published": "[\"-\"]",
-      "formula": "[\"-\"]",
-      "computed": "[\"-\"]",
-      "manual": "[\"-\"]",
-      "reference": "[\"-\"]",
-      "actualState": null,
-      "actualOption": null,
-      "iid": "d2936657-95b3-4b27-bf98-a19752dc2c7f"
+        "revisionNumber": 1,
+        "classKind": "ParameterValueSet",
+        "valueSwitch": "MANUAL",
+        "published": "[\"123\"]",
+        "formula": "[\"123\\\"(,)\\\"\"]",
+        "computed": "[\"test\\\\test\\\\\\\\test\\\\\\\\\\\\\"]",
+        "manual": "[\"=Formula(\\\"$1\\\")\"]",
+        "reference": "[\"-\"]",
+        "actualState": null,
+        "actualOption": null,
+        "iid": "d2936657-95b3-4b27-bf98-a19752dc2c7f"
     }
   ],
   "_update": [

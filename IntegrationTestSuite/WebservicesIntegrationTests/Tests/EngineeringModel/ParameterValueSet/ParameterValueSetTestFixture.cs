@@ -144,12 +144,11 @@ namespace WebservicesIntegrationTests
 
             Assert.AreEqual("MANUAL", (string)parameterValueSet[PropertyNames.ValueSwitch]);
 
-            const string emptyProperty = "[\"-\"]";
-            Assert.AreEqual(emptyProperty, (string)parameterValueSet[PropertyNames.Published]);
-            Assert.AreEqual(emptyProperty, (string)parameterValueSet[PropertyNames.Formula]);
-            Assert.AreEqual(emptyProperty, (string)parameterValueSet[PropertyNames.Computed]);
-            Assert.AreEqual(emptyProperty, (string)parameterValueSet[PropertyNames.Manual]);
-            Assert.AreEqual(emptyProperty, (string)parameterValueSet[PropertyNames.Reference]);
+            Assert.AreEqual("[\"123\"]", (string)parameterValueSet[PropertyNames.Published]);
+            Assert.AreEqual("[\"123\\\"(,)\\\"\"]", (string)parameterValueSet[PropertyNames.Formula]);
+            Assert.AreEqual("[\"test\\\\test\\\\\\\\test\\\\\\\\\\\\\"]", (string)parameterValueSet[PropertyNames.Computed]);
+            Assert.AreEqual("[\"=Formula(\\\"$1\\\")\"]", (string)parameterValueSet[PropertyNames.Manual]);
+            Assert.AreEqual("[\"-\"]", (string)parameterValueSet[PropertyNames.Reference]);
 
             Assert.IsNull((string)parameterValueSet[PropertyNames.ActualState]);
             Assert.IsNull((string)parameterValueSet[PropertyNames.ActualOption]);
