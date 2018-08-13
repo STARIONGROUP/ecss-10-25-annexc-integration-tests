@@ -287,6 +287,9 @@
     <None Include="Tests\EngineeringModel\Requirement\PostNewRequirement.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Tests\SiteDirectory\ArrayParameterType\PostArrayParameterTyoe.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Tests\SiteDirectory\Category\PostAddPermissibleClass.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -297,6 +300,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Tests\SiteDirectory\Category\PostDeleteSuperCategory.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tests\SiteDirectory\CompoundParameterType\PostCompoundParameterType.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Tests\SiteDirectory\EngineeringModelSetup\PostAddActiveDomain.json">

@@ -1,0 +1,55 @@
+﻿{
+  "_delete": [],
+  "_create": [
+    {
+      "alias": [],
+      "category": [],
+      "classKind": "CompoundParameterType",
+      "component": [
+        {
+          "k": 5575278,
+          "v": "ff206aaf-ca83-412a-a045-cc73a15259f2"
+        },
+        {
+          "k": 90479315,
+          "v": "9cec7d00-fc6b-43d0-8a0d-13d3d73e5478"
+        }
+      ],
+      "definition": [],
+      "hyperLink": [],
+      "iid": "7a2b0596-bb8f-4692-adc5-04ae813fd9bd",
+      "isDeprecated": false,
+      "isFinalized": false,
+      "modifiedOn": "2018-08-13T05:51:00.626Z",
+      "name": "testCreateCompoundParameterType",
+      "revisionNumber": 0,
+      "shortName": "test_CPT",
+      "symbol": "test_cpt"
+    },
+    {
+      "classKind": "ParameterTypeComponent",
+      "iid": "ff206aaf-ca83-412a-a045-cc73a15259f2",
+      "modifiedOn": "0001-01-01T00:00:00.000Z",
+      "parameterType": "a21c15c4-3e1e-46b5-b109-5063dec1e254",
+      "revisionNumber": 0,
+      "scale": null,
+      "shortName": "a"
+    },
+    {
+      "classKind": "ParameterTypeComponent",
+      "iid": "9cec7d00-fc6b-43d0-8a0d-13d3d73e5478",
+      "modifiedOn": "0001-01-01T00:00:00.000Z",
+      "parameterType": "4f9f3d9b-f3de-4ef5-b6cb-2e22199fab0d",
+      "revisionNumber": 0,
+      "scale": "53e82aeb-c42c-475c-b6bf-a102af883471",
+      "shortName": "b"
+    }
+  ],
+  "_update": [
+    {
+      "classKind": "SiteReferenceDataLibrary",
+      "iid": "c454c687-ba3e-44c4-86bc-44544b2c7880",
+      "parameterType": [ "7a2b0596-bb8f-4692-adc5-04ae813fd9bd" ]
+    }
+  ]
+}
