@@ -209,6 +209,9 @@
     <None Include="Tests\EngineeringModel\File\PostNewFolderWithFile.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Tests\EngineeringModel\Iteration\PostDeleteRelationship.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Tests\EngineeringModel\Iteration\PostDeleteRelationshipAsProperty.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -258,6 +261,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Tests\EngineeringModel\Parameter\PostUpdateParameterToStateDependent.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tests\EngineeringModel\PossibleFiniteStateList\PostCreatePossibleFiniteState.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tests\EngineeringModel\PossibleFiniteStateList\PostDeletePossibleFiniteState.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tests\EngineeringModel\PossibleFiniteStateList\PostDeletePossibleFiniteStateAsProperty.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Tests\EngineeringModel\PossibleFiniteState\PostDeletePossibleFiniteState.json">

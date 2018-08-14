@@ -30,6 +30,20 @@ namespace WebservicesIntegrationTests
     [TestFixture]
     public class PossibleFiniteStateListTestFixture : WebClientTestFixtureBase
     {
+        public override void SetUp()
+        {
+            base.SetUp();
+
+            this.WebClient.Restore(this.Settings.Hostname);
+        }
+
+        public override void TearDown()
+        {
+            this.WebClient.Restore(this.Settings.Hostname);
+
+            base.TearDown();
+        }
+
         /// <summary>
         /// Verification that the PossibleFiniteStateList objects are returned from the data-source and that the 
         /// values of the PossibleFiniteStateList properties are equal to the expected value
@@ -131,6 +145,62 @@ namespace WebservicesIntegrationTests
             var hyperlinksArray = (JArray)possibleFiniteStateList[PropertyNames.HyperLink];
             IList<string> h = hyperlinksArray.Select(x => (string)x).ToList();
             CollectionAssert.AreEquivalent(expectedHyperlinks, h);
+        }
+
+        [Test]
+        public void VerifyThatRelationshipAsPropertyDeletionFromIterationCanBeDoneFromWebApi1()
+        {
+            var uri = new Uri(
+                string.Format(
+                    UriFormat,
+                    this.Settings.Hostname,
+                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/possibleFiniteStateList/449a5bca-34fd-454a-93f8-a56ac8383fee"));
+
+
+            var postBodyPath1 = this.GetPath("Tests/EngineeringModel/PossibleFiniteStateList/PostCreatePossibleFiniteState.json");
+            var postBody1 = this.GetJsonFromFile(postBodyPath1);
+            var jArray1 = this.WebClient.PostDto(uri, postBody1);
+            Assert.AreEqual(6, jArray1.Count);
+
+            var postBodyPath2 = this.GetPath("Tests/EngineeringModel/PossibleFiniteStateList/PostDeletePossibleFiniteStateAsProperty.json");
+
+            var postBody2 = this.GetJsonFromFile(postBodyPath2);
+            var jArray = this.WebClient.PostDto(uri, postBody2);
+            this.VerifyDeleteResponse(jArray);
+        }
+
+        [Test]
+        public void VerifyThatRelationshipAsPropertyDeletionFromIterationCanBeDoneFromWebApi2()
+        {
+            var uri = new Uri(
+                string.Format(
+                    UriFormat,
+                    this.Settings.Hostname,
+                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/possibleFiniteStateList/449a5bca-34fd-454a-93f8-a56ac8383fee"));
+
+            var postBodyPath1 = this.GetPath("Tests/EngineeringModel/PossibleFiniteStateList/PostCreatePossibleFiniteState.json");
+            var postBody1 = this.GetJsonFromFile(postBodyPath1);
+            var jArray1 = this.WebClient.PostDto(uri, postBody1);
+            Assert.AreEqual(6, jArray1.Count);
+
+            var postBodyPath2 = this.GetPath("Tests/EngineeringModel/PossibleFiniteStateList/PostDeletePossibleFiniteState.json");
+
+            var postBody2 = this.GetJsonFromFile(postBodyPath2);
+            var jArray = this.WebClient.PostDto(uri, postBody2);
+            this.VerifyDeleteResponse(jArray);
+        }
+
+        private void VerifyDeleteResponse(JArray jArray)
+        {
+            Assert.AreEqual(4, jArray.Count); // modification in actual states as well as side-effect
+
+            var model = jArray.Single(x => x["classKind"].ToString() == "EngineeringModel");
+            var pfsl = jArray.Single(x => x["classKind"].ToString() == "PossibleFiniteStateList");
+            var afsl = jArray.Single(x => x["classKind"].ToString() == "ActualFiniteStateList");
+            var afs = jArray.Single(x => x["classKind"].ToString() == "ActualFiniteState");
+
+            Assert.AreEqual("9ec982e4-ef72-4953-aa85-b158a95d8d56", model["iid"].ToString());
+            Assert.AreEqual("449a5bca-34fd-454a-93f8-a56ac8383fee", pfsl["iid"].ToString());
         }
     }
 }

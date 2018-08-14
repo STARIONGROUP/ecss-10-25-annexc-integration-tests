@@ -283,7 +283,26 @@ namespace WebservicesIntegrationTests
 
             var postBody = this.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(uri, postBody);
-            Assert.AreEqual(0, jArray.Count);
+            Assert.AreEqual(2, jArray.Count);
+            Assert.AreEqual("EngineeringModel", jArray[0]["classKind"].ToString());
+            Assert.AreEqual("Iteration", jArray[1]["classKind"].ToString());
+        }
+
+        [Test]
+        public void VerifyThatRelationshipDeletionFromIterationCannotBeDoneFromWebApi()
+        {
+            var uri = new Uri(
+                string.Format(
+                    UriFormat,
+                    this.Settings.Hostname,
+                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/relationship/320869e4-f6d6-4dd2-a696-1b1604f4c4b7"));
+            var postBodyPath = this.GetPath("Tests/EngineeringModel/Iteration/PostDeleteRelationship.json");
+
+            var postBody = this.GetJsonFromFile(postBodyPath);
+            var jArray = this.WebClient.PostDto(uri, postBody);
+            Assert.AreEqual(2, jArray.Count);
+            Assert.AreEqual("EngineeringModel", jArray[0]["classKind"].ToString());
+            Assert.AreEqual("Iteration", jArray[1]["classKind"].ToString());
         }
 
         /// <summary>

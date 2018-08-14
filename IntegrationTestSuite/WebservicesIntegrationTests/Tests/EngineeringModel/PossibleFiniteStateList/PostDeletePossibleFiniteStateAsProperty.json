@@ -1,0 +1,19 @@
+﻿{
+    "_delete": [
+        {
+            "classKind": "PossibleFiniteStateList",
+            "iid": "449a5bca-34fd-454a-93f8-a56ac8383fee",
+            "possibleState": [
+                {
+                    "k": 73203278,
+                    "v": "b8fdfac4-1c40-475a-ac6c-968654b689b6"
+                }
+            ]
+        }
+    ],
+    "_create": [
+    ],
+    "_update": [
+    ],
+    "_copy": []
+}
