@@ -272,7 +272,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
-        public void VerifyThatRelationshipAsPropertyDeletionFromIterationCannotBeDoneFromWebApi()
+        public void VerifyThatRelationshipAsPropertyDeletionFromIterationCanBeDoneFromWebApi()
         {
             var uri = new Uri(
                 string.Format(
@@ -289,7 +289,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
-        public void VerifyThatRelationshipDeletionFromIterationCannotBeDoneFromWebApi()
+        public void VerifyThatRelationshipDeletionFromIterationCanBeDoneFromWebApi()
         {
             var uri = new Uri(
                 string.Format(
