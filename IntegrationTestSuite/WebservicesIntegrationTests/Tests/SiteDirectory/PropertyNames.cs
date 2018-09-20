@@ -820,5 +820,10 @@ namespace WebservicesIntegrationTests
         {
             get { return "extension"; }
         }
+
+        public static string IsSynonym
+        {
+            get { return "isSynonym"; }
+        }
     }
 }
