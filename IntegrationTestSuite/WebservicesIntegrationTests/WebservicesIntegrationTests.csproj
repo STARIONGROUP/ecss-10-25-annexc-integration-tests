@@ -180,12 +180,12 @@
     <None Include="Tests\EngineeringModel\ActualFiniteStateList\PostNewActualFiniteStateList.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\Alias\PostNewAlias.json" >
-	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	</None>
-    <None Include="Tests\EngineeringModel\AndExpression\PostNewAndExpression.json" >
-	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	</None>
+    <None Include="Tests\EngineeringModel\Alias\PostNewAlias.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tests\EngineeringModel\AndExpression\PostNewAndExpression.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Tests\EngineeringModel\ElementDefinition\POSTDeleteCategory.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -321,6 +321,9 @@
     <None Include="Tests\SiteDirectory\Category\PostDeleteSuperCategory.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Tests\SiteDirectory\Category\PostNewCategory.json" >
+	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</None>
     <None Include="Tests\SiteDirectory\CompoundParameterType\PostCompoundParameterType.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

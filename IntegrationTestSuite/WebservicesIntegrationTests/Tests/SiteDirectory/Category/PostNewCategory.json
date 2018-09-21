@@ -1,0 +1,28 @@
+{
+  "_delete": [],
+  "_create": [
+    {
+      "iid": "0d3f0a61-49ca-40d5-9a92-9a650c837c72",
+      "revisionNumber": 0,
+      "classKind": "Category",
+      "name": "New Category",
+      "shortName": "NewCat",
+      "alias": [],
+      "definition": [],
+      "hyperlink": [],
+      "permissibleClass": [ "ElementDefinition", "ElementUsage" ],
+      "superCategory": [],  
+      "isDeprecated": false,
+      "isAbstract": false  
+    }
+  ],
+  "_update": [
+    {
+      "classKind": "SiteReferenceDataLibrary",
+      "iid": "c454c687-ba3e-44c4-86bc-44544b2c7880",
+      "definedCategory": [
+        "0d3f0a61-49ca-40d5-9a92-9a650c837c72"
+      ]
+    }
+  ]
+}
