@@ -66,6 +66,7 @@
     <Compile Include="Net\Settings.cs" />
     <Compile Include="Tests\EngineeringModel\ActualFiniteStateList\ActualFiniteStateListTestFixture.cs" />
     <Compile Include="Tests\EngineeringModel\ActualFiniteState\ActualFiniteStateTestFixture.cs" />
+    <Compile Include="Tests\EngineeringModel\Alias\AliasTestFixture.cs" />
     <Compile Include="Tests\EngineeringModel\AndExpression\AndExpressionTestFixture.cs" />
     <Compile Include="Tests\EngineeringModel\CommonFileStore\CommonFileStoreTestFixture.cs" />
     <Compile Include="Tests\EngineeringModel\BuiltInRuleVerification\BuiltInRuleVerificationTestFixture.cs" />
@@ -179,6 +180,12 @@
     <None Include="Tests\EngineeringModel\ActualFiniteStateList\PostNewActualFiniteStateList.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Tests\EngineeringModel\Alias\PostNewAlias.json" >
+	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</None>
+    <None Include="Tests\EngineeringModel\AndExpression\PostNewAndExpression.json" >
+	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</None>
     <None Include="Tests\EngineeringModel\ElementDefinition\POSTDeleteCategory.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

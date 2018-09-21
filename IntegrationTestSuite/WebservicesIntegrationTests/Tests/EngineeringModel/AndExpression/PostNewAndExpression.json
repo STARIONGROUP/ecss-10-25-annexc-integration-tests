@@ -1,0 +1,20 @@
+{
+  "_delete": [],
+  "_create": [
+    {
+      "iid": "c99662c1-4f80-4f98-b6c1-0008980f930d",
+      "revisionNumber": 0,
+      "classKind": "AndExpression",
+      "term": [ "deaa2560-b704-4b2c-950b-aad02ff84052", "a6e44651-7c4a-4a57-bdf9-c0290497f392" ]
+    }
+  ],
+  "_update": [
+    {
+      "classKind": "ParametricConstraint",
+      "iid": "88200dbc-711a-47e0-a54a-dac4baca6e83",
+      "expression": [
+        "c99662c1-4f80-4f98-b6c1-0008980f930d"
+      ]
+    }
+  ]
+}
