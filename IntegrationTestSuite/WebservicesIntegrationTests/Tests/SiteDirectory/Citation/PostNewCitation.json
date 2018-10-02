@@ -1,0 +1,22 @@
+{
+  "_delete": [],
+  "_create": [
+    {
+      "iid": "b80c270b-8c00-4ed1-979e-9b72611aa6a0",
+      "revisionNumber": 0,
+      "classKind": "Citation",
+      "shortName": "NewCitation",
+      "location": "Chapter 1",
+      "source": "ffd6c100-6c72-4d2a-8565-ff24bd576a89",
+      "isAdaptation": false,
+      "remark": "none"
+    }
+  ],
+  "_update": [
+    {
+      "classKind": "Definition",
+      "iid": "23658615-a170-4c0f-ba71-da1a15c736ca",
+      "citation": [ "b80c270b-8c00-4ed1-979e-9b72611aa6a0" ]
+    }
+  ]
+}

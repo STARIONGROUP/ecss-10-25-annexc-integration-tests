@@ -1,0 +1,21 @@
+{
+  "_delete": [],
+  "_create": [
+    {
+      "iid": "28c9798f-df28-48c8-b5b2-2f190b575dd1",
+      "revisionNumber": 0,
+      "classKind": "Definition",
+      "content": "words",
+      "languageCode": "nl"
+    }
+  ],
+  "_update": [
+    {
+      "classKind": "SiteReferenceDataLibrary",
+      "iid": "c454c687-ba3e-44c4-86bc-44544b2c7880",
+      "definition": [
+        "28c9798f-df28-48c8-b5b2-2f190b575dd1"
+      ]
+    }
+  ]
+}

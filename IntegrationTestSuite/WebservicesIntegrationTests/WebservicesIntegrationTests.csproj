@@ -70,6 +70,7 @@
     <Compile Include="Tests\EngineeringModel\AndExpression\AndExpressionTestFixture.cs" />
     <Compile Include="Tests\EngineeringModel\CommonFileStore\CommonFileStoreTestFixture.cs" />
     <Compile Include="Tests\EngineeringModel\BuiltInRuleVerification\BuiltInRuleVerificationTestFixture.cs" />
+    <Compile Include="Tests\SiteDirectory\DefinedThing\DefinedThingTestFixture.cs" />
     <Compile Include="Tests\EngineeringModel\DomainFileStore\DomainFileStoreTestFixture.cs" />
     <Compile Include="Tests\EngineeringModel\ElementDefinition\ElementDefinitionTestFixture.cs" />
     <Compile Include="Tests\EngineeringModel\ElementUsage\ElementUsageTestFixture.cs" />
@@ -102,9 +103,11 @@
     <Compile Include="Tests\EngineeringModel\Requirement\RequirementTestFixture.cs" />
     <Compile Include="Tests\EngineeringModel\BinaryRelationship\BinaryRelationShipTestFixture.cs" />
     <Compile Include="Tests\EngineeringModel\RuleVerificationList\RuleVerificationListTestFixture.cs" />
+    <Compile Include="Tests\SiteDirectory\Citation\CitationTestFixture.cs" />
     <Compile Include="Tests\SiteDirectory\CompoundParameterType\CompoundParameterTypeTestFixture.cs" />
     <Compile Include="Tests\EngineeringModel\Iteration\IterationTestFixture.cs" />
     <Compile Include="Tests\SiteDirectory\Constant\ConstantTestFixture.cs" />
+    <Compile Include="Tests\SiteDirectory\Definition\DefinitionTestFixture.cs" />
     <Compile Include="Tests\SiteDirectory\EmailAddress\EmailAddressTestFixture.cs" />
     <Compile Include="Tests\SiteDirectory\ModelReferenceDataLibrary\ModelReferenceDataLibraryTestFixture.cs" />
     <Compile Include="Tests\SiteDirectory\PropertyNames.cs" />
@@ -321,12 +324,18 @@
     <None Include="Tests\SiteDirectory\Category\PostDeleteSuperCategory.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\Category\PostNewCategory.json" >
-	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	</None>
+    <None Include="Tests\SiteDirectory\Category\PostNewCategory.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tests\SiteDirectory\Citation\PostNewCitation.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Tests\SiteDirectory\CompoundParameterType\PostCompoundParameterType.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Tests\SiteDirectory\Definition\PostNewDefinition.json">
+	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</None>
     <None Include="Tests\SiteDirectory\EngineeringModelSetup\PostAddActiveDomain.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

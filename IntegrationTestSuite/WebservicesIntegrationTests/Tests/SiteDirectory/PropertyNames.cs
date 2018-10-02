@@ -825,5 +825,34 @@ namespace WebservicesIntegrationTests
         {
             get { return "isSynonym"; }
         }
+
+        public static string Example
+        {
+            get { return "example"; }
+        }
+
+        public static string Note
+        {
+            get { return "note"; }
+        }
+
+        public static string Citation
+        {
+            get { return "citation"; }
+        }
+
+        public static string IsAdaptation
+        {
+            get { return "isAdaptation"; }
+        }
+
+        public static string Location
+        {
+            get { return "location"; }
+        }
+        public static string Remark
+        {
+            get { return "remark"; }
+        }
     }
 }
