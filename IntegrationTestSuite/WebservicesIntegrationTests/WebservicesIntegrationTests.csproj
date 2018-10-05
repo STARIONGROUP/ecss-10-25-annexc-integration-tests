@@ -70,7 +70,6 @@
     <Compile Include="Tests\EngineeringModel\AndExpression\AndExpressionTestFixture.cs" />
     <Compile Include="Tests\EngineeringModel\CommonFileStore\CommonFileStoreTestFixture.cs" />
     <Compile Include="Tests\EngineeringModel\BuiltInRuleVerification\BuiltInRuleVerificationTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\DefinedThing\DefinedThingTestFixture.cs" />
     <Compile Include="Tests\EngineeringModel\DomainFileStore\DomainFileStoreTestFixture.cs" />
     <Compile Include="Tests\EngineeringModel\ElementDefinition\ElementDefinitionTestFixture.cs" />
     <Compile Include="Tests\EngineeringModel\ElementUsage\ElementUsageTestFixture.cs" />
@@ -187,6 +186,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Tests\EngineeringModel\AndExpression\PostNewAndExpression.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tests\EngineeringModel\CommonFileStore\PostNewCommonFileStore.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Tests\EngineeringModel\ElementDefinition\POSTDeleteCategory.json">
@@ -333,9 +335,15 @@
     <None Include="Tests\SiteDirectory\CompoundParameterType\PostCompoundParameterType.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\Definition\PostNewDefinition.json">
+    <None Include="Tests\SiteDirectory\Constant\PostNewConstant.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tests\SiteDirectory\CyclicRatioScale\PostNewCyclicRatioScale.json" >
 	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	</None>
+    </None>
+    <None Include="Tests\SiteDirectory\Definition\PostNewDefinition.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Tests\SiteDirectory\EngineeringModelSetup\PostAddActiveDomain.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

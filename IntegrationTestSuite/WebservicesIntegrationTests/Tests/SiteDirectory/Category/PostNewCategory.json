@@ -9,7 +9,7 @@
       "shortName": "NewCat",
       "alias": [],
       "definition": [],
-      "hyperlink": [],
+      "hyperLink": [],
       "permissibleClass": [ "ElementDefinition", "ElementUsage" ],
       "superCategory": [],  
       "isDeprecated": false,

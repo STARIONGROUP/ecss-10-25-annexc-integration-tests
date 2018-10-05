@@ -1,0 +1,36 @@
+{
+  "_delete": [],
+  "_create": [
+    {
+      "iid": "738a8fa8-552d-40c0-a5cb-94c31ce78fa9",
+      "revisionNumber": 0,
+      "classKind": "CyclicRatioScale",
+      "name": "New CyclicRatioScale",
+      "shortName": "NewCyclic",
+      "alias": [],
+      "definition": [],
+      "hyperLink": [],
+      "isDeprecated": false,
+      "mappingToReferenceScale": [],
+      "negativeValueConnotation": "",
+      "positiveValueConnotation": "",
+      "isMaximumInclusive": true,
+      "maximumPermissibleValue": "360",
+      "isMinimumInclusive": true,
+      "minimumPermissibleValue": "0",
+      "numberSet": "NATURAL_NUMBER_SET",
+      "valueDefinition": [],
+      "unit": "56842970-3915-4369-8712-61cfd8273ef9",
+      "modulus": "360"
+    }
+  ],
+  "_update": [
+    {
+      "classKind": "SiteReferenceDataLibrary",
+      "iid": "c454c687-ba3e-44c4-86bc-44544b2c7880",
+      "scale": [
+        "738a8fa8-552d-40c0-a5cb-94c31ce78fa9"
+      ]
+    }
+  ]
+}
