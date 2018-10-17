@@ -29,6 +29,20 @@ namespace WebservicesIntegrationTests
     [TestFixture]
     public class ExclusiveOrExpressionTestFixture : WebClientTestFixtureBase
     {
+        public override void SetUp()
+        {
+            base.SetUp();
+
+            this.WebClient.Restore(this.Settings.Hostname);
+        }
+
+        public override void TearDown()
+        {
+            this.WebClient.Restore(this.Settings.Hostname);
+
+            base.TearDown();
+        }
+
         /// <summary>
         /// Verification that the ExclusiveOrExpression objects are returned from the data-source and that the 
         /// values of the ExclusiveOrExpression properties are equal to the expected value
@@ -88,6 +102,94 @@ namespace WebservicesIntegrationTests
             var exclusiveOrExpression =
                 jArray.Single(x => (string) x[PropertyNames.Iid] == "8c6df21f-07ae-4d0b-ab9b-866dd1f90158");
             ExclusiveOrExpressionTestFixture.VerifyProperties(exclusiveOrExpression);
+        }
+
+        [Test]
+        public void VerifyThatAnExclusiveOrExpressionCanBeCreatedWithWebApi()
+        {
+            var iterationUri = new Uri(string.Format(UriFormat, this.Settings.Hostname,
+                "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var postBodyPath = this.GetPath("Tests/EngineeringModel/ExclusiveOrExpression/PostNewExclusiveOrExpression.json");
+
+            var postBody = base.GetJsonFromFile(postBodyPath);
+            var jArray = this.WebClient.PostDto(iterationUri, postBody);
+
+            var engineeringModel =
+                jArray.Single(x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+
+            // Verify the amount of returned properties of the EngineeringModel
+            Assert.AreEqual(8, engineeringModel.Children().Count());
+
+            // Assert the properties of EngineeringModel have expected values
+            var expectedIterations = new[] {"e163c5ad-f32b-4387-b805-f4b34600bc2c"};
+            var iterationsArray = (JArray) engineeringModel[PropertyNames.Iteration];
+            IList<string> iterations = iterationsArray.Select(x => (string) x).ToList();
+            CollectionAssert.AreEquivalent(expectedIterations, iterations);
+
+            var expectedLogEntries = new[] {"4e2375eb-8e37-4df2-9c7b-dd896683a891"};
+            var logEntriesArray = (JArray) engineeringModel[PropertyNames.LogEntry];
+            IList<string> logEntries = logEntriesArray.Select(x => (string) x).ToList();
+            CollectionAssert.AreEquivalent(expectedLogEntries, logEntries);
+
+            var expectedCommonFileStores = new[] {"8e5ca9cc-3da8-4e66-9172-7c3b2464a59c"};
+            var commonFileStoresArray = (JArray) engineeringModel[PropertyNames.CommonFileStore];
+            IList<string> commonFileStores = commonFileStoresArray.Select(x => (string) x).ToList();
+            CollectionAssert.AreEquivalent(expectedCommonFileStores, commonFileStores);
+
+            Assert.AreEqual("EngineeringModel", (string) engineeringModel[PropertyNames.ClassKind]);
+            Assert.AreEqual("116f6253-89bb-47d4-aa24-d11d197e43c9",
+                (string) engineeringModel[PropertyNames.EngineeringModelSetup]);
+            Assert.AreEqual("9ec982e4-ef72-4953-aa85-b158a95d8d56", (string) engineeringModel[PropertyNames.Iid]);
+            Assert.AreEqual(2, (int) engineeringModel[PropertyNames.RevisionNumber]);
+
+            // Get a specific ParametricConstraint from the result by it's unique id
+            var parametricConstraint =
+                jArray.Single(x => (string) x[PropertyNames.Iid] == "88200dbc-711a-47e0-a54a-dac4baca6e83");
+
+            // verify the amount of returned properties of ParametricConstraint
+            Assert.AreEqual(5, parametricConstraint.Children().Count());
+
+            // assert that the properties of ParametricConstraint are what is expected
+            var expectedExpressions = new string[]
+            {
+                "000484d0-cefd-47be-9317-a9eae72c94ce",
+                "30cb785a-9e72-477f-ad1a-8df6ab623e3d",
+                "5f90327f-95a2-4c5a-9efe-581f8daf08ed",
+                "8c6df21f-07ae-4d0b-ab9b-866dd1f90158",
+                "deaa2560-b704-4b2c-950b-aad02ff84052",
+                "a6e44651-7c4a-4a57-bdf9-c0290497f392",
+                "3160a8e3-a17d-4037-a834-4083c4333c2a"
+            };
+            var expressionArray = (JArray) parametricConstraint[PropertyNames.Expression];
+            IList<string> expressions = expressionArray.Select(x => (string) x).ToList();
+            CollectionAssert.AreEquivalent(expectedExpressions, expressions);
+
+            Assert.AreEqual("ParametricConstraint", (string) parametricConstraint[PropertyNames.ClassKind]);
+            Assert.AreEqual("88200dbc-711a-47e0-a54a-dac4baca6e83", (string) parametricConstraint[PropertyNames.Iid]);
+            Assert.AreEqual(2, (int) parametricConstraint[PropertyNames.RevisionNumber]);
+            Assert.AreEqual("30cb785a-9e72-477f-ad1a-8df6ab623e3d",
+                (string) parametricConstraint[PropertyNames.TopExpression]);
+
+            // Get the added AndExpression from the result by it's unique id
+            var exclusiveOrExpression =
+                jArray.Single(x => (string) x[PropertyNames.Iid] == "3160a8e3-a17d-4037-a834-4083c4333c2a");
+            
+            // verify the amount of returned properties 
+            Assert.AreEqual(4, exclusiveOrExpression.Children().Count());
+
+            // assert that the properties are what is expected
+            Assert.AreEqual("3160a8e3-a17d-4037-a834-4083c4333c2a", (string)exclusiveOrExpression[PropertyNames.Iid]);
+            Assert.AreEqual(2, (int)exclusiveOrExpression[PropertyNames.RevisionNumber]);
+            Assert.AreEqual("ExclusiveOrExpression", (string)exclusiveOrExpression[PropertyNames.ClassKind]);
+
+            var expectedTerms = new string[]
+            {
+                "000484d0-cefd-47be-9317-a9eae72c94ce",
+                "deaa2560-b704-4b2c-950b-aad02ff84052"
+            };
+            var termsArray = (JArray)exclusiveOrExpression[PropertyNames.Term];
+            IList<string> terms = termsArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedTerms, terms);
         }
 
         /// <summary>

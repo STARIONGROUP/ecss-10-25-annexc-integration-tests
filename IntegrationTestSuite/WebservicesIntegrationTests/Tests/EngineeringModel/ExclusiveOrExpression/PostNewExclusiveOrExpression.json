@@ -1,0 +1,23 @@
+{
+  "_delete": [],
+  "_create": [
+    {
+      "iid": "3160a8e3-a17d-4037-a834-4083c4333c2a",
+      "revisionNumber": 0,
+      "classKind": "ExclusiveOrExpression",
+      "term": [
+        "000484d0-cefd-47be-9317-a9eae72c94ce",
+        "deaa2560-b704-4b2c-950b-aad02ff84052"
+      ]
+    }
+  ],
+  "_update": [
+    {
+      "classKind": "ParametricConstraint",
+      "iid": "88200dbc-711a-47e0-a54a-dac4baca6e83",
+      "expression": [
+        "3160a8e3-a17d-4037-a834-4083c4333c2a"
+      ]
+    }
+  ]
+}
