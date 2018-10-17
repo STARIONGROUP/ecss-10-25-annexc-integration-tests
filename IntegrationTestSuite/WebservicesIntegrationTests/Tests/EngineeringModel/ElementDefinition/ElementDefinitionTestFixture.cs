@@ -210,6 +210,97 @@ namespace WebservicesIntegrationTests
             Assert.That(() => this.WebClient.GetDto(parameterUri), Throws.Exception.TypeOf<System.Net.WebException>());
         }
 
+        [Test]
+        public void VerifyThatAnElementDefinitionCanBeCreatedWithWebApi()
+        {
+            var iterationUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var postBodyPath = this.GetPath("Tests/EngineeringModel/ElementDefinition/PostNewElementDefinition.json");
+
+            var postBody = base.GetJsonFromFile(postBodyPath);
+            var jArray = this.WebClient.PostDto(iterationUri, postBody);
+
+            var engineeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+
+            // Verify the amount of returned properties of the EngineeringModel
+            Assert.AreEqual(8, engineeringModel.Children().Count());
+
+            // Assert the properties of EngineeringModel have expected values
+            var expectedIterations = new[] { "e163c5ad-f32b-4387-b805-f4b34600bc2c" };
+            var iterationsArray = (JArray)engineeringModel[PropertyNames.Iteration];
+            IList<string> iterations = iterationsArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedIterations, iterations);
+
+            var expectedLogEntries = new[] { "4e2375eb-8e37-4df2-9c7b-dd896683a891" };
+            var logEntriesArray = (JArray)engineeringModel[PropertyNames.LogEntry];
+            IList<string> logEntries = logEntriesArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedLogEntries, logEntries);
+
+            var expectedCommonFileStores = new[] { "8e5ca9cc-3da8-4e66-9172-7c3b2464a59c" };
+            var commonFileStoresArray = (JArray)engineeringModel[PropertyNames.CommonFileStore];
+            IList<string> commonFileStores = commonFileStoresArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedCommonFileStores, commonFileStores);
+
+            Assert.AreEqual("EngineeringModel", (string)engineeringModel[PropertyNames.ClassKind]);
+            Assert.AreEqual("116f6253-89bb-47d4-aa24-d11d197e43c9", (string)engineeringModel[PropertyNames.EngineeringModelSetup]);
+            Assert.AreEqual("9ec982e4-ef72-4953-aa85-b158a95d8d56", (string)engineeringModel[PropertyNames.Iid]);
+            Assert.AreEqual(2, (int)engineeringModel[PropertyNames.RevisionNumber]);
+
+            // get a specific ElementDefinition from the result by it's unique id
+            var elementDefinition = jArray.Single(x => (string)x[PropertyNames.Iid] == "f959dc33-58ff-4b6f-a3b0-d265690b4084");
+
+            // verify the amount of returned properties 
+            Assert.AreEqual(14, elementDefinition.Children().Count());
+
+            // assert that the properties are what is expected
+            Assert.AreEqual("f959dc33-58ff-4b6f-a3b0-d265690b4084", (string)elementDefinition[PropertyNames.Iid]);
+            Assert.AreEqual(2, (int)elementDefinition[PropertyNames.RevisionNumber]);
+            Assert.AreEqual("ElementDefinition", (string)elementDefinition[PropertyNames.ClassKind]);
+            Assert.AreEqual("Test Element Definition", (string)elementDefinition[PropertyNames.Name]);
+            Assert.AreEqual("TestElementDefinition", (string)elementDefinition[PropertyNames.ShortName]);
+
+            var expectedContainedElements = new string[] { };
+            var containedElementsArray = (JArray)elementDefinition[PropertyNames.ContainedElement];
+            IList<string> containedElements = containedElementsArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedContainedElements, containedElements);
+
+            var expectedParameters = new string[] { };
+            var parametersArray = (JArray)elementDefinition[PropertyNames.Parameter];
+            IList<string> parameters = parametersArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedParameters, parameters);
+
+            var expectedParameterGroups = new string[] { };
+            var parameterGroupsArray = (JArray)elementDefinition[PropertyNames.ParameterGroup];
+            IList<string> parameterGroups = parameterGroupsArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedParameterGroups, parameterGroups);
+
+            var expectedreferencedElements = new string[] { };
+            var referencedElementsArray = (JArray)elementDefinition[PropertyNames.ReferencedElement];
+            IList<string> referencedElements = referencedElementsArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedreferencedElements, referencedElements);
+
+            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string)elementDefinition[PropertyNames.Owner]);
+
+            var expectedCategories = new string[] { };
+            var categoriesArray = (JArray)elementDefinition[PropertyNames.Category];
+            IList<string> categories = categoriesArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedCategories, categories);
+
+            var expectedAliases = new string[] { };
+            var aliasesArray = (JArray)elementDefinition[PropertyNames.Alias];
+            IList<string> aliases = aliasesArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedAliases, aliases);
+
+            var expectedDefinitions = new string[] { };
+            var definitionsArray = (JArray)elementDefinition[PropertyNames.Definition];
+            IList<string> definitions = definitionsArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedDefinitions, definitions);
+
+            var expectedHyperlinks = new string[] { };
+            var hyperlinksArray = (JArray)elementDefinition[PropertyNames.HyperLink];
+            IList<string> h = hyperlinksArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedHyperlinks, h);
+        }
+
         /// <summary>
         /// Verifies all properties of the ElementDefinitions
         /// </summary>
