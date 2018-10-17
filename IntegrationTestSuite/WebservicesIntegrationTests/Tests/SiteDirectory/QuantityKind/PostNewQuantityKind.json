@@ -1,0 +1,92 @@
+{
+  "_delete": [],
+  "_create": [
+    {
+      "iid": "c36e050a-b4f9-4567-b29d-67af9216878e",
+      "revisionNumber": 0,
+      "classKind": "DerivedQuantityKind",
+      "name": "Test Derived QuantityKind",
+      "shortName": "TestDerivedQuantityKind",
+      "category": [],
+      "symbol": "testSymbol",
+      "quantityDimensionSymbol": "testQuantityDimensionSymbol",
+      "defaultScale": "53e82aeb-c42c-475c-b6bf-a102af883471",
+      "possibleScale": [ "53e82aeb-c42c-475c-b6bf-a102af883471" ],
+      "quantityKindFactor": [
+        {
+          "k": 2948456,
+          "v": "3cec3570-df25-4b73-9283-2c6461dc8c36"
+        }
+      ],
+      "alias": [],
+      "definition": [],
+      "hyperLink": [],
+      "isDeprecated": false
+    },
+    {
+      "iid": "3cec3570-df25-4b73-9283-2c6461dc8c36",
+      "revisionNumber": 0,
+      "classKind": "QuantityKindFactor",
+      "exponent": "-1",
+      "quantityKind": "199bec0a-661d-408c-8ca7-718c636c5681"
+    },
+    {
+      "iid": "199bec0a-661d-408c-8ca7-718c636c5681",
+      "revisionNumber": 0,
+      "classKind": "SimpleQuantityKind",
+      "name": "Test Simple QuantityKind",
+      "shortName": "TestSimpleQuantityKind",
+      "category": [],
+      "symbol": "testSymbol",
+      "quantityDimensionSymbol": "testQuantityDimensionSymbol",
+      "defaultScale": "53e82aeb-c42c-475c-b6bf-a102af883471",
+      "possibleScale": [ "53e82aeb-c42c-475c-b6bf-a102af883471" ],
+      "alias": [],
+      "definition": [],
+      "hyperLink": [],
+      "isDeprecated": false
+    },
+    {
+      "iid": "8b8a44cd-0071-4acf-b33e-b8c3052821c5",
+      "revisionNumber": 0,
+      "classKind": "SpecializedQuantityKind",
+      "name": "Test Specialized QuantityKind",
+      "shortName": "TestSpecializedQuantityKind",
+      "category": [],
+      "symbol": "testSymbol",
+      "quantityDimensionSymbol": "testQuantityDimensionSymbol",
+      "general": "199bec0a-661d-408c-8ca7-718c636c5681",
+      "defaultScale": "53e82aeb-c42c-475c-b6bf-a102af883471",
+      "possibleScale": [ "53e82aeb-c42c-475c-b6bf-a102af883471" ],
+      "alias": [],
+      "definition": [],
+      "hyperLink": [],
+      "isDeprecated": false
+    }
+  ],
+  "_update": [
+    {
+      "classKind": "SiteReferenceDataLibrary",
+      "iid": "c454c687-ba3e-44c4-86bc-44544b2c7880",
+      "parameterType": [
+        "c36e050a-b4f9-4567-b29d-67af9216878e",
+        "199bec0a-661d-408c-8ca7-718c636c5681",
+        "8b8a44cd-0071-4acf-b33e-b8c3052821c5"
+      ],
+      "baseQuantityKind": [
+        {
+          "k": 2948451,
+          "v": "c36e050a-b4f9-4567-b29d-67af9216878e"
+        },
+        {
+          "k": 2948452,
+          "v": "199bec0a-661d-408c-8ca7-718c636c5681"
+        },
+        {
+          "k": 2948453,
+          "v": "8b8a44cd-0071-4acf-b33e-b8c3052821c5"
+        }
+      ]
+    }
+  ]
+}

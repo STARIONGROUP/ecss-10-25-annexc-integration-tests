@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\NUnit3TestAdapter.3.10.0\build\net35\NUnit3TestAdapter.props" Condition="Exists('..\packages\NUnit3TestAdapter.3.10.0\build\net35\NUnit3TestAdapter.props')" />
   <Import Project="..\packages\NUnit.3.10.1\build\NUnit.props" Condition="Exists('..\packages\NUnit.3.10.1\build\NUnit.props')" />
@@ -127,7 +127,6 @@
     <Compile Include="Tests\BaseClasses\WebClientTestFixtureBase.cs" />
     <Compile Include="Net\WebClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tests\SiteDirectory\EnumerationParameterType\EnumerationPerameterTypeTestFixture.cs" />
     <Compile Include="Tests\SiteDirectory\LinearConversionUnit\LinearConversionUnitTestFixture.cs" />
     <Compile Include="Tests\SiteDirectory\LogarithmicScale\LogarithmicScaleTestFixture.cs" />
     <Compile Include="Tests\SiteDirectory\Glossary\GlossaryTestFixture.cs" />
@@ -145,6 +144,7 @@
     <Compile Include="Tests\SiteDirectory\PersonRole\PersonRoleTestFixture.cs" />
     <Compile Include="Tests\SiteDirectory\Person\PersonTestFixture.cs" />
     <Compile Include="Tests\SiteDirectory\QuantityKindFactor\QuantityKindFactorTestFixture.cs" />
+    <Compile Include="Tests\SiteDirectory\QuantityKind\QuantityKindTestFixture.cs" />
     <Compile Include="Tests\SiteDirectory\RatioScale\RatioScaleTestFixture.cs" />
     <Compile Include="Tests\SiteDirectory\ReferenceSource\ReferenceSourceTestFixture.cs" />
     <Compile Include="Tests\SiteDirectory\ReferencerRule\ReferencerRuleTestFixture.cs" />
@@ -186,9 +186,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Tests\EngineeringModel\AndExpression\PostNewAndExpression.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Tests\EngineeringModel\CommonFileStore\PostNewCommonFileStore.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Tests\EngineeringModel\ElementDefinition\POSTDeleteCategory.json">
@@ -338,8 +335,8 @@
     <None Include="Tests\SiteDirectory\Constant\PostNewConstant.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\CyclicRatioScale\PostNewCyclicRatioScale.json" >
-	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Include="Tests\SiteDirectory\CyclicRatioScale\PostNewCyclicRatioScale.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Tests\SiteDirectory\Definition\PostNewDefinition.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -367,6 +364,9 @@
     </None>
     <None Include="Tests\SiteDirectory\Person\Post_Person_With_Role_Null.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tests\SiteDirectory\QuantityKind\PostNewQuantityKind.json" >
+	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Tests\SiteDirectory\SiteReferenceDataLibrary\PostDeleteUnitAsProperty.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
