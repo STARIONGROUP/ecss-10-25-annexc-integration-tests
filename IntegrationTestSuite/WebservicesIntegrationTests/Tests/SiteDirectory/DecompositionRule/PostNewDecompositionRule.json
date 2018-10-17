@@ -1,0 +1,31 @@
+{
+  "_delete": [],
+  "_create": [
+    {
+      "iid": "11a67246-c08d-43e2-9ef5-b7dd8f3ca687",
+      "revisionNumber": 0,
+      "classKind": "DecompositionRule",
+      "content": "words",
+      "languageCode": "nl",
+      "name": "Test Decomposition Rule",
+      "shortName": "TestDecompositionRule",
+      "hyperLink": [],
+      "definition": [],
+      "alias": [],
+      "maxContained": null,
+      "minContained": 0,
+      "containedCategory": [ "cf059b19-235c-48be-87a3-9a8942c8e3e0" ],
+      "containingCategory": "cf059b19-235c-48be-87a3-9a8942c8e3e0",
+      "isDeprecated": false
+    }
+  ],
+  "_update": [
+    {
+      "classKind": "SiteReferenceDataLibrary",
+      "iid": "c454c687-ba3e-44c4-86bc-44544b2c7880",
+      "rule": [
+        "11a67246-c08d-43e2-9ef5-b7dd8f3ca687"
+      ]
+    }
+  ]
+}
