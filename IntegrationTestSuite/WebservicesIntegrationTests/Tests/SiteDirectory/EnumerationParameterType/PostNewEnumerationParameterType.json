@@ -1,0 +1,44 @@
+{
+  "_delete": [],
+  "_create": [
+    {
+      "iid": "af1615f0-b9c8-4654-94aa-11587d1faa59",
+      "classKind": "EnumerationParameterType",
+      "revisionNumber": 0,
+      "category": [],
+      "shortName": "TestEnumerationParameterType",
+      "name": "Test Enumeration ParameterType",
+      "hyperLink": [],
+      "definition": [],
+      "alias": [],
+      "symbol": "enumerationparametertype",
+      "valueDefinition": [
+        {
+          "k": 211917123,
+          "v": "896eb954-25ba-4221-b994-763d8d866674"
+        }
+      ],
+      "allowMultiSelect": false,
+      "isDeprecated": false
+    },
+    {
+      "iid": "896eb954-25ba-4221-b994-763d8d866674",
+      "classKind": "EnumerationValueDefinition",
+      "revisionNumber": 0,
+      "shortName": "TestEnumerationValueDefinitionC",
+      "name": "Test Enumeration Value Definition C",
+      "hyperLink": [],
+      "definition": [],
+      "alias": []
+    }
+  ],
+  "_update": [
+    {
+      "classKind": "SiteReferenceDataLibrary",
+      "iid": "c454c687-ba3e-44c4-86bc-44544b2c7880",
+      "parameterType": [
+        "af1615f0-b9c8-4654-94aa-11587d1faa59"
+      ]
+    }
+  ]
+}
