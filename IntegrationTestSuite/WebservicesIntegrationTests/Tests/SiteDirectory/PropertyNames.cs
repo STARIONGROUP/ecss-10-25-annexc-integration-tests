@@ -854,5 +854,13 @@ namespace WebservicesIntegrationTests
         {
             get { return "remark"; }
         }
+        public static string Prefix
+        {
+            get { return "prefix"; }
+        }
+        public static string ReferenceUnit
+        {
+            get { return "referenceUnit"; }
+        }
     }
 }
