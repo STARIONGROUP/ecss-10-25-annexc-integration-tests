@@ -1,0 +1,31 @@
+{
+  "_delete": [],
+  "_create": [
+    {
+      "iid": "b46088aa-14dd-4fbc-9f45-c4acdaf6e9f5",
+      "revisionNumber": 0,
+      "classKind": "ReferenceSource",
+      "isDeprecated": false,
+      "category": [],
+      "name": "test referenceSource",
+      "shortName": "testReferenceSource",
+      "hyperLink": [],
+      "definition": [],
+      "alias": [],
+      "language": "en-GB",
+      "publishedIn": "ffd6c100-6c72-4d2a-8565-ff24bd576a89",
+      "publisher": "cd22fc45-d898-4fac-85fc-fbcb7d7b12a7",
+      "publicationYear": 1999,
+      "author": "testAuthor",
+      "versionDate": null,
+      "versionIdentifier": null
+    }
+  ],
+  "_update": [
+    {
+      "classKind": "SiteReferenceDataLibrary",
+      "iid": "c454c687-ba3e-44c4-86bc-44544b2c7880",
+      "referenceSource": [ "b46088aa-14dd-4fbc-9f45-c4acdaf6e9f5" ]
+    }
+  ]
+}

@@ -854,6 +854,30 @@ namespace WebservicesIntegrationTests
         {
             get { return "remark"; }
         }
+        public static string VersionIdentifier
+        {
+            get { return "versionIdentifier"; }
+        }
+        public static string VersionDate
+        {
+            get { return "versionDate"; }
+        }
+        public static string PublicationYear
+        {
+            get { return "publicationYear"; }
+        }
+        public static string Publisher
+        {
+            get { return "publisher"; }
+        }
+        public static string PublishedIn
+        {
+            get { return "publishedIn"; }
+        }
+        public static string Language
+        {
+            get { return "language"; }
+        }
         public static string Prefix
         {
             get { return "prefix"; }

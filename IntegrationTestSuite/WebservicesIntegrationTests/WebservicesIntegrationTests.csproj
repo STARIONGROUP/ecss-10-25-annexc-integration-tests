@@ -385,6 +385,9 @@
     <None Include="Tests\SiteDirectory\PrefixedUnit\PostNewPrefixedUnit.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Tests\SiteDirectory\ReferenceSource\PostNewReferenceSource.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Tests\SiteDirectory\QuantityKind\PostNewQuantityKind.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
