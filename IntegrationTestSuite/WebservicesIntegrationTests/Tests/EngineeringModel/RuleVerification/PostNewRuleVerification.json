@@ -1,0 +1,21 @@
+{
+  "_delete": [],
+  "_create": [
+    {
+      "classKind": "CompoundParameterType",
+      "iid": "4efbc475-37f3-4219-8571-e896a78545d5",
+      "name": "testCreateCompoundParameterType",
+      "revisionNumber": 0,
+      "status": "NONE",
+      "executedOn": null,
+      "isActive": false
+    }
+  ],
+  "_update": [
+    {
+      "classKind": "RuleVerificationList",
+      "iid": "dc482120-2a11-439b-913d-6a924de9ee5f",
+      "ruleVerification": [ "4efbc475-37f3-4219-8571-e896a78545d5" ]
+    }
+  ]
+}
