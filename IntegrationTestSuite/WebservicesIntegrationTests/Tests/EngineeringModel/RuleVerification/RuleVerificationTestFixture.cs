@@ -50,7 +50,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatARuleVerificationCanBeCreatedWithWebApi()
         {
             var iterationUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
-            var postBodyPath = this.GetPath("Tests/EngineeringModel/ElementDefinition/PostNewElementDefinition.json");
+            var postBodyPath = this.GetPath("Tests/EngineeringModel/RuleVerification/PostNewRuleVerification.json");
 
             var postBody = base.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
@@ -82,14 +82,14 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(2, (int)engineeringModel[PropertyNames.RevisionNumber]);
 
             // get a specific RuleVerification from the result by it's unique id
-            var ruleVerificationList = jArray.Single(x => (string)x[PropertyNames.Iid] == "f959dc33-58ff-4b6f-a3b0-d265690b4084");
+            var ruleVerificationList = jArray.Single(x => (string)x[PropertyNames.Iid] == "dc482120-2a11-439b-913d-6a924de9ee5f");
 
             // verify the amount of returned properties 
             Assert.AreEqual(10, ruleVerificationList.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("dc482120-2a11-439b-913d-6a924de9ee5f", (string)ruleVerificationList[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int)ruleVerificationList[PropertyNames.RevisionNumber]);
+            Assert.AreEqual(2, (int)ruleVerificationList[PropertyNames.RevisionNumber]);
             Assert.AreEqual("RuleVerificationList", (string)ruleVerificationList[PropertyNames.ClassKind]);
 
             Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string)ruleVerificationList[PropertyNames.Owner]);
@@ -114,26 +114,43 @@ namespace WebservicesIntegrationTests
             var expectedRuleVerifications = new List<OrderedItem>
             {
                 new OrderedItem(1, "c953263c-fc25-4048-9bb6-343a10200a0c"),
-                new OrderedItem(2, "ccb44a8e-2460-4892-ab75-02d8828db233")
+                new OrderedItem(2, "ccb44a8e-2460-4892-ab75-02d8828db233"),
+                new OrderedItem(3, "4efbc475-37f3-4219-8571-e896a78545d5"),
+                new OrderedItem(4, "486f4b97-fcb1-409e-b5c0-057c240f41b6")
             };
             var ruleVerificationsArray = JsonConvert.DeserializeObject<List<OrderedItem>>(
                 ruleVerificationList[PropertyNames.RuleVerification].ToString());
             CollectionAssert.AreEquivalent(expectedRuleVerifications, ruleVerificationsArray);
 
             // get a specific RuleVerification from the result by it's unique id
-            var ruleVerification = jArray.Single(x => (string)x[PropertyNames.Iid] == "f959dc33-58ff-4b6f-a3b0-d265690b4084");
+            var builtInRuleVerification = jArray.Single(x => (string)x[PropertyNames.Iid] == "4efbc475-37f3-4219-8571-e896a78545d5");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(14, ruleVerification.Children().Count());
+            Assert.AreEqual(7, builtInRuleVerification.Children().Count());
 
             // assert that the properties are what is expected
-            Assert.AreEqual("f959dc33-58ff-4b6f-a3b0-d265690b4084", (string)ruleVerification[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int)ruleVerification[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("RuleVerification", (string)ruleVerification[PropertyNames.ClassKind]);
-            Assert.AreEqual("Test Rule Verification", (string)ruleVerification[PropertyNames.Name]);
-            Assert.AreEqual("TestRuleVerification", (string)ruleVerification[PropertyNames.Status]);
-            Assert.AreEqual("TestRuleVerification", (string)ruleVerification[PropertyNames.ExecutedOn]);
-            Assert.IsFalse((bool)ruleVerification[PropertyNames.IsActive]);
+            Assert.AreEqual("4efbc475-37f3-4219-8571-e896a78545d5", (string)builtInRuleVerification[PropertyNames.Iid]);
+            Assert.AreEqual(2, (int)builtInRuleVerification[PropertyNames.RevisionNumber]);
+            Assert.AreEqual("BuiltInRuleVerification", (string)builtInRuleVerification[PropertyNames.ClassKind]);
+            Assert.AreEqual("Test Built In Rule Verification", (string)builtInRuleVerification[PropertyNames.Name]);
+            Assert.AreEqual("NONE", (string)builtInRuleVerification[PropertyNames.Status]);
+            Assert.IsNull((string)builtInRuleVerification[PropertyNames.ExecutedOn]);
+            Assert.IsFalse((bool)builtInRuleVerification[PropertyNames.IsActive]);
+
+            // get a specific RuleVerification from the result by it's unique id
+            var userRuleVerification = jArray.Single(x => (string)x[PropertyNames.Iid] == "486f4b97-fcb1-409e-b5c0-057c240f41b6");
+
+            // verify the amount of returned properties 
+            Assert.AreEqual(7, userRuleVerification.Children().Count());
+
+            // assert that the properties are what is expected
+            Assert.AreEqual("486f4b97-fcb1-409e-b5c0-057c240f41b6", (string)userRuleVerification[PropertyNames.Iid]);
+            Assert.AreEqual(2, (int)userRuleVerification[PropertyNames.RevisionNumber]);
+            Assert.AreEqual("UserRuleVerification", (string)userRuleVerification[PropertyNames.ClassKind]);
+            Assert.AreEqual("NONE", (string)userRuleVerification[PropertyNames.Status]);
+            Assert.IsNull((string)userRuleVerification[PropertyNames.ExecutedOn]);
+            Assert.IsFalse((bool)userRuleVerification[PropertyNames.IsActive]);
+            Assert.AreEqual("8a5cd66e-7313-4843-813f-37081ca81bb8", (string)userRuleVerification[PropertyNames.Rule]);
         }
     }
 }

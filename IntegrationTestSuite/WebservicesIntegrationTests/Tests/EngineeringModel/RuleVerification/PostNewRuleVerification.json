@@ -2,20 +2,40 @@
   "_delete": [],
   "_create": [
     {
-      "classKind": "CompoundParameterType",
+      "classKind": "BuiltInRuleVerification",
       "iid": "4efbc475-37f3-4219-8571-e896a78545d5",
-      "name": "testCreateCompoundParameterType",
+      "name": "Test Built In Rule Verification",
       "revisionNumber": 0,
       "status": "NONE",
       "executedOn": null,
-      "isActive": false
+      "isActive": false,
+      "violation": []
+    },
+    {
+      "classKind": "UserRuleVerification",
+      "iid": "486f4b97-fcb1-409e-b5c0-057c240f41b6",
+      "revisionNumber": 0,
+      "status": "NONE",
+      "executedOn": null,
+      "isActive": false,
+      "rule": "8a5cd66e-7313-4843-813f-37081ca81bb8",
+      "violation": []
     }
   ],
   "_update": [
     {
       "classKind": "RuleVerificationList",
       "iid": "dc482120-2a11-439b-913d-6a924de9ee5f",
-      "ruleVerification": [ "4efbc475-37f3-4219-8571-e896a78545d5" ]
+      "ruleVerification": [
+        {
+          "k": 3,
+          "v": "4efbc475-37f3-4219-8571-e896a78545d5"
+        },
+        {
+          "k": 4,
+          "v": "486f4b97-fcb1-409e-b5c0-057c240f41b6"
+        }
+      ]
     }
   ]
 }
