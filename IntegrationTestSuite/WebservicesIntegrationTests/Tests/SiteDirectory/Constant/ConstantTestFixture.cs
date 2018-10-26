@@ -212,8 +212,7 @@ namespace WebservicesIntegrationTests
             {
                 "cf059b19-235c-48be-87a3-9a8942c8e3e0",
                 "107fc408-7e6d-4f1a-895a-1b6a6025ac20",
-                "167b5cb0-766e-4ab2-b728-a9c9a662b017",
-                "0d3f0a61-49ca-40d5-9a92-9a650c837c72"
+                "167b5cb0-766e-4ab2-b728-a9c9a662b017"
             };
             var definedCategoriesArray = (JArray)siteReferenceDataLibrary[PropertyNames.DefinedCategory];
             IList<string> definedCategoriesList = definedCategoriesArray.Select(x => (string)x).ToList();
@@ -348,9 +347,9 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual("New Constant", (string)constant[PropertyNames.Name]);
             Assert.AreEqual("NewConstant", (string)constant[PropertyNames.ShortName]);
 
-            Assert.AreEqual("35a9cf05-4eba-4cda-b60c-7cfeaac8f892", (string)constant[PropertyNames.ParameterType]);
+            Assert.AreEqual("a21c15c4-3e1e-46b5-b109-5063dec1e254", (string)constant[PropertyNames.ParameterType]);
 
-            Assert.AreEqual("[\"true\"]", (string)constant[PropertyNames.Value]);
+            Assert.AreEqual("[\"word\"]", (string)constant[PropertyNames.Value]);
 
             Assert.IsNull((string)constant[PropertyNames.Scale]);
 

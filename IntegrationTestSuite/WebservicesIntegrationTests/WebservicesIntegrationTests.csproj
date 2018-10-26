@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\NUnit3TestAdapter.3.10.0\build\net35\NUnit3TestAdapter.props" Condition="Exists('..\packages\NUnit3TestAdapter.3.10.0\build\net35\NUnit3TestAdapter.props')" />
   <Import Project="..\packages\NUnit.3.10.1\build\NUnit.props" Condition="Exists('..\packages\NUnit.3.10.1\build\NUnit.props')" />
@@ -109,6 +109,7 @@
     <Compile Include="Tests\SiteDirectory\Constant\ConstantTestFixture.cs" />
     <Compile Include="Tests\SiteDirectory\Definition\DefinitionTestFixture.cs" />
     <Compile Include="Tests\SiteDirectory\EmailAddress\EmailAddressTestFixture.cs" />
+    <Compile Include="Tests\SiteDirectory\EnumerationParameterType\EnumerationParameterTypeTestFixture.cs" />
     <Compile Include="Tests\SiteDirectory\ModelReferenceDataLibrary\ModelReferenceDataLibraryTestFixture.cs" />
     <Compile Include="Tests\SiteDirectory\PropertyNames.cs" />
     <Compile Include="Tests\SiteDirectory\ArrayParameterType\ArrayParameterTypeTestFixture.cs" />
@@ -198,7 +199,12 @@
     <None Include="Tests\EngineeringModel\ElementDefinition\PostDeleteParameterAsProperty.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\ElementDefinition\PostNewElementDefinition.json" />
+    <None Include="Tests\EngineeringModel\ElementDefinition\PostNewElementDefinition.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tests\EngineeringModel\ExclusiveOrExpression\PostNewExclusiveOrExpression.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Tests\EngineeringModel\File\1525ED651E5B609DAE099DEEDA8DBDB49CFF956F">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -310,7 +316,9 @@
     <None Include="Tests\EngineeringModel\Requirement\PostNewRequirement.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\RuleVerification\PostNewRuleVerification.json" />
+    <None Include="Tests\EngineeringModel\RuleVerification\PostNewRuleVerification.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Tests\SiteDirectory\ArrayParameterType\PostArrayParameterTyoe.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -341,6 +349,9 @@
     <None Include="Tests\SiteDirectory\CyclicRatioScale\PostNewCyclicRatioScale.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Tests\SiteDirectory\DecompositionRule\PostNewDecompositionRule.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Tests\SiteDirectory\Definition\PostNewDefinition.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -348,6 +359,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Tests\SiteDirectory\EngineeringModelSetup\PostEngineeringModelSetup.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tests\SiteDirectory\EnumerationParameterType\PostNewEnumerationParameterType.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Tests\SiteDirectory\Glossary\PostGlossaryUpdate.json">
@@ -368,11 +382,14 @@
     <None Include="Tests\SiteDirectory\Person\Post_Person_With_Role_Null.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Tests\SiteDirectory\PrefixedUnit\PostNewPrefixedUnit.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Tests\SiteDirectory\QuantityKind\PostNewQuantityKind.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\QuantityKind\PostNewQuantityKind.json" >
-	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Include="Tests\SiteDirectory\QuantityKind\PostNewQuantityKind.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Tests\SiteDirectory\SiteReferenceDataLibrary\PostDeleteUnitAsProperty.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
