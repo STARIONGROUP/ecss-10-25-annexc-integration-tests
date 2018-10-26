@@ -397,6 +397,9 @@
     <None Include="Tests\SiteDirectory\SiteReferenceDataLibrary\PostDeleteUnitAsProperty.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Tests\SiteDirectory\TelephoneNumber\PostNewTelephoneNumber.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Tests\SiteDirectory\EngineeringModelSetup\PostEngineeringModelSetupBasedOnExistingModel.json">

@@ -1,0 +1,19 @@
+{
+  "_delete": [],
+  "_create": [
+    {
+      "classKind": "TelephoneNumber",
+      "iid": "2e6559d6-2ccb-4627-a5f4-5906fb59e969",
+      "revisionNumber": 0,
+      "value": "+38-012-345-67-89",
+      "vcardType": ["HOME"] 
+    }
+  ],
+  "_update": [
+    {
+      "classKind": "Person",
+      "iid": "77791b12-4c2c-4499-93fa-869df3692d22",
+      "telephoneNumber": [ "2e6559d6-2ccb-4627-a5f4-5906fb59e969" ]
+    }
+  ]
+}
