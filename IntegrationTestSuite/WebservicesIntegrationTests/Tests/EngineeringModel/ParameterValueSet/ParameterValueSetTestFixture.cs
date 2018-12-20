@@ -17,7 +17,7 @@ namespace WebservicesIntegrationTests
     using System;
     using System.Collections.Generic;
     using System.Linq;
-
+    using System.Net;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
 
@@ -104,7 +104,7 @@ namespace WebservicesIntegrationTests
 
         [Test]
         public void VerifyThatAParameteValueSetCanBeDeletedAndCreatedtWithWebApi()
-        {
+        { 
             var iterationUri =
                 new Uri(
                     string.Format(
@@ -115,43 +115,7 @@ namespace WebservicesIntegrationTests
                 this.GetPath("Tests/EngineeringModel/ParameterValueSet/PostNewParameterValueSetAndDeleteOne.json");
 
             var postBody = this.GetJsonFromFile(postBodyPath);
-            var jArray = this.WebClient.PostDto(iterationUri, postBody);
-
-            var engineeeringModel =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
-            Assert.AreEqual(2, (int)engineeeringModel[PropertyNames.RevisionNumber]);
-
-            var parameterSubscription =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "f1f076c4-5307-42b8-a171-3263a9e7bb21");
-            Assert.AreEqual(2, (int)parameterSubscription[PropertyNames.RevisionNumber]);
-
-            var parameterOverride =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "93f767ed-4d22-45f6-ae97-d1dab0d36e1c");
-            Assert.AreEqual(2, (int)parameterOverride[PropertyNames.RevisionNumber]);
-
-            var parameter = jArray.Single(x => (string)x[PropertyNames.Iid] == "6c5aff74-f983-4aa8-a9d6-293b3429307c");
-            Assert.AreEqual(2, (int)parameter[PropertyNames.RevisionNumber]);
-
-            var expectedValueSets = new[] { "d2936657-95b3-4b27-bf98-a19752dc2c7f" };
-            var valueSetsArray = (JArray)parameter[PropertyNames.ValueSet];
-            IList<string> valueSets = valueSetsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedValueSets, valueSets);
-
-            var parameterValueSet =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "d2936657-95b3-4b27-bf98-a19752dc2c7f");
-            Assert.AreEqual(2, (int)parameter[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("ParameterValueSet", (string)parameterValueSet[PropertyNames.ClassKind]);
-
-            Assert.AreEqual("MANUAL", (string)parameterValueSet[PropertyNames.ValueSwitch]);
-
-            Assert.AreEqual("[\"123\"]", (string)parameterValueSet[PropertyNames.Published]);
-            Assert.AreEqual("[\"123\\\"(,)\\\"\"]", (string)parameterValueSet[PropertyNames.Formula]);
-            Assert.AreEqual("[\"test\\\\test\\\\\\\\test\\\\\\\\\\\\\"]", (string)parameterValueSet[PropertyNames.Computed]);
-            Assert.AreEqual("[\"=Formula(\\\"$1\\\")\"]", (string)parameterValueSet[PropertyNames.Manual]);
-            Assert.AreEqual("[\"-\"]", (string)parameterValueSet[PropertyNames.Reference]);
-
-            Assert.IsNull((string)parameterValueSet[PropertyNames.ActualState]);
-            Assert.IsNull((string)parameterValueSet[PropertyNames.ActualOption]);
+            Assert.Throws<WebException>(() => this.WebClient.PostDto(iterationUri, postBody));
         }
 
         [Test]
