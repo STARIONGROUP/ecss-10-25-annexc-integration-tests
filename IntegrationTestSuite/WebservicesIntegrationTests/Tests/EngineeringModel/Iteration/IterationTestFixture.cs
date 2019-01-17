@@ -200,7 +200,7 @@ namespace WebservicesIntegrationTests
             };
             var publicationsArray = (JArray)iteration[PropertyNames.Publication];
             IList<string> publications = publicationsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedPublications, publications);
+            CollectionAssert.IsEmpty(publications); // publication shoudl be empty
 
             var expectedPossibleFiniteStateLists = new string[]
             {
@@ -223,7 +223,6 @@ namespace WebservicesIntegrationTests
 
             var expectedRelationships = new string[]
             {
-                "320869e4-f6d6-4dd2-a696-1b1604f4c4b7",
                 "138f8a3e-69c6-4e21-b459-bc26b1319a2c"
             };
             var relationshipsArray = (JArray)iteration[PropertyNames.Relationship];
@@ -260,8 +259,7 @@ namespace WebservicesIntegrationTests
             IList<string> actualFiniteStateLists = actualFiniteStateListsArray.Select(x => (string)x).ToList();
             CollectionAssert.AreEquivalent(expectedActualFiniteStateLists, actualFiniteStateLists);
 
-            Assert.IsNull((string)iteration[PropertyNames.DefaultOption]);
-
+            Assert.AreEqual("bebcc9f4-ff20-4569-bbf6-d1acf27a8107", (string)iteration[PropertyNames.DefaultOption]);
             var expectedRuleVerificationLists = new string[]
             {
                 "dc482120-2a11-439b-913d-6a924de9ee5f"

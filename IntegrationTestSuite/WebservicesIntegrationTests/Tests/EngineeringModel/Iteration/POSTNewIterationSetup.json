@@ -2,17 +2,17 @@
   "_delete": [],
   "_create": [
     {
-    "revisionNumber": 0,
-    "iterationNumber": 0,
-    "classKind": "IterationSetup",
-    "iterationIid": "699da906-d22e-4969-b606-1fcb4bf5affd",
-    "description": "IterationSetup Description",
-    "sourceIterationSetup": null,
-    "frozenOn": null,
-    "isDeleted": false,
-    "createdOn": "2017-02-14T14:05:00.666Z",
-    "iid": "836e6e3c-722f-49a7-b8fa-3fc7f4ac9531"
-  }
+        "revisionNumber": 0,
+        "iterationNumber": 0,
+        "classKind": "IterationSetup",
+        "iterationIid": "699da906-d22e-4969-b606-1fcb4bf5affd",
+        "description": "IterationSetup Description",
+        "sourceIterationSetup": "86163b0e-8341-4316-94fc-93ed60ad0dcf",
+        "frozenOn": null,
+        "isDeleted": false,
+        "createdOn": "2017-02-14T14:05:00.666Z",
+        "iid": "836e6e3c-722f-49a7-b8fa-3fc7f4ac9531"
+    }
   ],
   "_update": [
     {
