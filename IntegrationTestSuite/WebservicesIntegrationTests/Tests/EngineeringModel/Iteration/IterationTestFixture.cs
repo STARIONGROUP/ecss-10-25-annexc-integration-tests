@@ -184,7 +184,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual("Iteration", (string)iteration[PropertyNames.ClassKind]);
 
             Assert.AreEqual("836e6e3c-722f-49a7-b8fa-3fc7f4ac9531", (string)iteration[PropertyNames.IterationSetup]);
-            Assert.IsNull((string)iteration[PropertyNames.SourceIterationIid]);
+            Assert.AreEqual("e163c5ad-f32b-4387-b805-f4b34600bc2c", (string)iteration[PropertyNames.SourceIterationIid]);
 
             var expectedOptions = new List<OrderedItem>
             {
