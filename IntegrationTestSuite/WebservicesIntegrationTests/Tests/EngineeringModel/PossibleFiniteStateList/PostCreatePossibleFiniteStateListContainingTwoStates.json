@@ -1,0 +1,55 @@
+﻿{
+  "_delete": [],
+  "_create": [
+    {
+      "alias": [],
+      "category": [],
+      "classKind": "PossibleFiniteStateList",
+      "defaultState": "a6f9789d-26a7-45e6-a528-3cbd1fce3880",
+      "definition": [],
+      "hyperLink": [],
+      "iid": "b5f08cf6-a7eb-4174-b6a8-88bf23d4aa75",
+      "name": "possiblestatelist with 2 contained states",
+      "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+      "possibleState": [
+        {
+          "k": 13512213,
+          "v": "a6f9789d-26a7-45e6-a528-3cbd1fce3880"
+        },
+        {
+          "k": 125842400,
+          "v": "8ca48538-d39d-4b09-8944-77c34535ce7a"
+        }
+      ],
+      "revisionNumber": 0,
+      "shortName": "pslw2cs"
+    },
+    {
+      "alias": [],
+      "classKind": "PossibleFiniteState",
+      "definition": [],
+      "hyperLink": [],
+      "iid": "a6f9789d-26a7-45e6-a528-3cbd1fce3880",
+      "name": "ps1",
+      "revisionNumber": 0,
+      "shortName": "ps1"
+    },
+    {
+      "alias": [],
+      "classKind": "PossibleFiniteState",
+      "definition": [],
+      "hyperLink": [],
+      "iid": "8ca48538-d39d-4b09-8944-77c34535ce7a",
+      "name": "ps2",
+      "revisionNumber": 0,
+      "shortName": "ps2"
+    }
+  ],
+  "_update": [
+    {
+      "classKind": "Iteration",
+      "iid": "e163c5ad-f32b-4387-b805-f4b34600bc2c",
+      "possibleFiniteStateList": [ "b5f08cf6-a7eb-4174-b6a8-88bf23d4aa75" ]
+    }
+  ]
+}

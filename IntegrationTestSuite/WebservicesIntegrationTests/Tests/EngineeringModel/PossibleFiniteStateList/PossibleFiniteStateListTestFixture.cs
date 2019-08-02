@@ -202,5 +202,27 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual("9ec982e4-ef72-4953-aa85-b158a95d8d56", model["iid"].ToString());
             Assert.AreEqual("449a5bca-34fd-454a-93f8-a56ac8383fee", pfsl["iid"].ToString());
         }
+
+        [Test]
+        public void Verify_that_Possible_states_in_PossibleFiniteStateList_can_be_reordered()
+        {
+            var uri = new Uri(
+                string.Format(
+                    UriFormat,
+                    this.Settings.Hostname,
+                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+
+            var postBodyPath1 = this.GetPath("Tests/EngineeringModel/PossibleFiniteStateList/PostCreatePossibleFiniteStateListContainingTwoStates.json");
+            var postBody1 = this.GetJsonFromFile(postBodyPath1);
+            var jArray1 = this.WebClient.PostDto(uri, postBody1);
+            Assert.AreEqual(5, jArray1.Count);
+
+            var postBodyPath2 = this.GetPath("Tests/EngineeringModel/PossibleFiniteStateList/PostReorderStatesOfPossibleFiniteStateList.json");
+            var postBody2 = this.GetJsonFromFile(postBodyPath2);
+            var jArray2 = this.WebClient.PostDto(uri, postBody2);
+
+            //response should only contain EngineeeringModel and PossibleFiiniteStateList
+            Assert.AreEqual(2, jArray2.Count);
+        }
     }
 }

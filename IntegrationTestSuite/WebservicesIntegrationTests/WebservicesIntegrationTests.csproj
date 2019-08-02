@@ -280,6 +280,12 @@
     <None Include="Tests\EngineeringModel\Parameter\PostUpdateParameterToStateDependent.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Tests\EngineeringModel\PossibleFiniteStateList\PostCreatePossibleFiniteStateListContainingTwoStates.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tests\EngineeringModel\PossibleFiniteStateList\PostReorderStatesOfPossibleFiniteStateList.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Tests\EngineeringModel\PossibleFiniteStateList\PostCreatePossibleFiniteState.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
