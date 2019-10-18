@@ -1,0 +1,17 @@
+﻿{
+  "_delete": [],
+  "_create": [],
+  "_update": [
+    {
+      "classKind": "ParameterValueSet",
+      "computed": [ <INNERJSON> ],
+      "formula": [ <INNERJSON> ],
+      "iid": "72ec3701-bcb5-4bf6-bd78-30fd1b65e3be",
+      "manual": [ <INNERJSON> ],
+      "published": [ <INNERJSON> ],
+      "reference": [ <INNERJSON>, <INNERJSON> ],
+      "revisionNumber": 0,
+      "valueSwitch": "MANUAL"
+    }
+  ]
+}
