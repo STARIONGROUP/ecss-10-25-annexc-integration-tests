@@ -247,6 +247,9 @@
     <None Include="Tests\EngineeringModel\ParameterSubscription\PostNewParameterSubscription.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Content Include="Tests\EngineeringModel\ParameterValueSet\PostUpdateParameterValueSetTemplate.json.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Tests\EngineeringModel\ParameterValueSet\PostNewPossibleFiniteState.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -20,7 +20,6 @@ namespace WebservicesIntegrationTests
     using System.Net;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
-
     using NUnit.Framework;
 
     [TestFixture]
@@ -103,7 +102,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
-        public void VerifyThatAParameteValueSetCanBeDeletedAndCreatedtWithWebApi()
+        public void VerifyThatAParameterValueSetCannotBeDeletedAndCreatedWithWebApi()
         { 
             var iterationUri =
                 new Uri(
@@ -119,7 +118,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
-        public void VerifyThatAParameteValueSetIsCreatedWhenPossibleStateIsAddedWithWebApi()
+        public void VerifyThatAParameterValueSetIsCreatedWhenPossibleStateIsAddedWithWebApi()
         {
             // POST state dependent Parameter and check what is returned
             var iterationUri =
@@ -134,9 +133,9 @@ namespace WebservicesIntegrationTests
             var postBody = this.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
-            var engineeeringModel =
+            var engineeringModel =
                 jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
-            Assert.AreEqual(2, (int)engineeeringModel[PropertyNames.RevisionNumber]);
+            Assert.AreEqual(2, (int)engineeringModel[PropertyNames.RevisionNumber]);
 
             // get a specific ElementDefinition from the result by it's unique id
             var elementDefinition =
@@ -185,9 +184,9 @@ namespace WebservicesIntegrationTests
             postBody = this.GetJsonFromFile(postBodyPath);
             jArray = this.WebClient.PostDto(iterationUri, postBody);
 
-            engineeeringModel =
+            engineeringModel =
                 jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
-            Assert.AreEqual(3, (int)engineeeringModel[PropertyNames.RevisionNumber]);
+            Assert.AreEqual(3, (int)engineeringModel[PropertyNames.RevisionNumber]);
 
             // get a specific ActualFiniteStateList from the result by it's unique id
             var actualFiniteStateList =
@@ -302,9 +301,9 @@ namespace WebservicesIntegrationTests
             postBody = this.GetJsonFromFile(postBodyPath);
             jArray = this.WebClient.PostDto(iterationUri, postBody);
 
-            engineeeringModel =
+            engineeringModel =
                 jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
-            Assert.AreEqual(4, (int)engineeeringModel[PropertyNames.RevisionNumber]);
+            Assert.AreEqual(4, (int)engineeringModel[PropertyNames.RevisionNumber]);
 
             // get a specific Iteration from the result by it's unique id
             var iteration = jArray.Single(x => (string)x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
@@ -472,8 +471,6 @@ namespace WebservicesIntegrationTests
                 this.GetPath("Tests/EngineeringModel/ParameterValueSet/PostUpdateComputedValueOfParameterValueSet.json");
 
             var postBody = this.GetJsonFromFile(postBodyPath);
-            
-        
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
             var engineeeringModel =
@@ -484,5 +481,129 @@ namespace WebservicesIntegrationTests
 
             Assert.AreEqual("72ec3701-bcb5-4bf6-bd78-30fd1b65e3be", (string)parameterValueSet[PropertyNames.Iid]);
         }
+
+        [Test]
+        public void VerifyThatParameterValueSetValuesAreSerializedAndDeserializedCorrectly([ValueSource(nameof(TestStrings))] string inputValue)
+        {
+            var iterationUri =
+                new Uri(
+                    string.Format(
+                        UriFormat,
+                        this.Settings.Hostname,
+                        "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var postBodyPath =
+                this.GetPath("Tests/EngineeringModel/ParameterValueSet/PostUpdateParameterValueSetTemplate.json.txt");
+
+            var postBody = this.GetJsonFromFile(postBodyPath);
+            var inputAsInnerJson = JsonConvert.ToString(inputValue); 
+            postBody = postBody.Replace("<INNERJSON>", inputAsInnerJson);
+
+            var jArray = this.WebClient.PostDto(iterationUri, postBody);
+
+            var parameterValueSet = jArray.Single(x => (string)x[PropertyNames.Iid] == "72ec3701-bcb5-4bf6-bd78-30fd1b65e3be");
+
+            Assert.AreEqual(inputValue, JsonConvert.DeserializeObject<List<string>>((string)parameterValueSet[PropertyNames.Formula])[0]);
+            Assert.AreEqual(inputValue, JsonConvert.DeserializeObject<List<string>>((string)parameterValueSet[PropertyNames.Published])[0]);
+            Assert.AreEqual(inputValue, JsonConvert.DeserializeObject<List<string>>((string)parameterValueSet[PropertyNames.Computed])[0]);
+            Assert.AreEqual(inputValue, JsonConvert.DeserializeObject<List<string>>((string)parameterValueSet[PropertyNames.Manual])[0]);
+            Assert.AreEqual(new List<string> {inputValue, inputValue}, JsonConvert.DeserializeObject<List<string>>((string)parameterValueSet[PropertyNames.Reference]));
+        }
+
+        private const string JsonString = @"{""widget"": {
+                ""debug"": ""on"",
+                ""window"": {
+                    ""title"": ""Sample Konfabulator Widget"",
+                    ""name"": ""main_window"",
+                    ""width"": 500,
+                    ""height"": 500
+                },
+                ""image"": { 
+                    ""src"": ""Images/Sun.png"",
+                    ""name"": ""sun1"",
+                    ""hOffset"": 250,
+                    ""vOffset"": 250,
+                    ""alignment"": ""center""
+                },
+                ""text"": {
+                    ""data"": ""Click Here"",
+                    ""size"": 36,
+                    ""style"": ""bold"",
+                    ""name"": ""text1"",
+                    ""hOffset"": 250,
+                    ""vOffset"": 100,
+                    ""alignment"": ""center"",
+                    ""onMouseUp"": ""sun1.opacity = (sun1.opacity / 100) * 90;""
+                }
+            }}";
+
+        private const string XmlString = @"<?xml version=""1.0"" encoding=""UTF-8""?>
+            <bookstore>
+                <book category=""cooking"">
+                    <title lang=""en"">Everyday Italian</title>
+                    <author>Giada De Laurentiis</author>
+                    <year>2005</year>
+                    <price>30.00</price>
+                    <data><![CDATA[Within this Character Data block I can
+                        use double dashes as much as I want (along with <, &, ', and "")
+                        *and* %MyParamEntity; will be expanded to the text
+                        ""Has been expanded"" ... however, I can't use
+                        the CEND sequence.If I need to use CEND I must escape one of the
+                        brackets or the greater-than sign using concatenated CDATA sections.
+                        ]]></data>
+                </book>
+                <book category=""children"">
+                    <title lang=""en"">Harry Potter</title>
+                    <author>J K. Rowling</author>
+                    <year>2005</year>
+                    <price>29.99</price>
+                </book>
+                <book category=""web"">
+                    <title lang=""en"">Learning XML</title>
+                    <author>Erik T. Ray</author>
+                    <year>2003</year>
+                    <price>39.95</price>
+                </book>
+            </bookstore>";
+
+        private static readonly string[] TestStrings = 
+        {
+            // See https://github.com/RHEAGROUP/CDP4-SDK-Community-Edition/issues/67
+            //"value with trailing spaces  ",
+            //"value with trailing space ",
+            //" value with leading spaces",
+            //"  value with leading space",
+            "=2*(2+2)",
+            "=2*\n(2+2)",
+            "=2*\r(2+2)",
+            "=2*\r\n(2+2)",
+            "=2*\n\r(2+2)",
+            "= 2 * \n ( 2 + 2 )",
+            "=2*\b(2+2)",
+            "=2*\f(2+2)",
+            "=2*\t(2+2)",
+            "Ar54WbBu + yhw - R:G!d)C!X_H % Vy ? V",
+            "qm+L/{hp,qU[F\nnSyFymmZ\n+F(G/pP8@",
+            "JSfJzH!U5:*wcnzT+{a5-L&+Xaq[g4",
+            "EfRKJ[*A%uiM9MJ_h-z?9X(KYJQ/xL",
+            "B_Dw+Tw.7g,.36]7(j8(k3/hxX,K_y",
+            "qKt_C}@).D!ik.4W48ESR}w*VGvaub",
+            "33CDr2NPZ[fJQ]p?aXT2L{giUUm}g#",
+            "mpb-!ump7S{D)]Z9B@S([FXMRSq/9S",
+            "D,VeZQRnV/}?}*qxMeX}N7*%R]!Tf/",
+            "L$X7@P,JhcYM,-e4Z5,!ft.UbC[Y{n",
+            "QWuAr.P$RUCf(NiV{7}tcwnia:.Fnp",
+            "L%%t?cdpa?g#-PE4w6=[yU72Cgxz:f",
+            ",GCeVX=$6R,(JJW[mLd4uF@{,Yr%NL",
+            "i?5,/.G%D,M3im?8:,+ju}(CMh_E77",
+            "}8Bn)rtS4BGTWThmT,=nu,q{[H?):9",
+            "ScVmbHjSB[HS$8A*C{awPvvp{%@5Xr",
+            "wy6bDVDuim}YLhB24=[y6!4vpM2pTw",
+            "f:][.LfcN#(gH=Dq$6Lcp7TWQP7LH!",
+            "!&.v8L44$ep69u+W-_5jq?DV@fi($H",
+            "?_uB5Z(U$B6,cVPMPJv%q}d[+2PAMZ",
+            "[_*q5d$U{qE7}r_7$fdf$h5yBFpPG+",
+            XmlString,
+            JsonString
+        };
     }
 }
