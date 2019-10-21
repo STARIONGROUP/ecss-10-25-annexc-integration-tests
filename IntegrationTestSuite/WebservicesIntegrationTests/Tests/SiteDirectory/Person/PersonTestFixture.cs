@@ -30,22 +30,8 @@ namespace WebservicesIntegrationTests
     /// The purpose of the <see cref="PersonTestFixture"/> is to execute integration tests using the GET and POST
     /// verbs on Person objects.
     /// </summary>    
-    public class PersonTestFixture : WebClientTestFixtureBase
+    public class PersonTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
-        public override void SetUp()
-        {
-            base.SetUp();
-
-            this.WebClient.Restore(this.Settings.Hostname);
-        }
-
-        public override void TearDown()
-        {
-            this.WebClient.Restore(this.Settings.Hostname);
-
-            base.TearDown();
-        }
-
         /// <summary>
         /// Verification that the Person objects are returned from the data-source and that the 
         /// values of the person properties are equal to to expected value.

@@ -30,22 +30,8 @@ namespace WebservicesIntegrationTests
     using Newtonsoft.Json.Linq;
     
     [TestFixture]
-    public class OptionTestFixture : WebClientTestFixtureBase
+    public class OptionTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
-        public override void SetUp()
-        {
-            base.SetUp();
-
-            this.WebClient.Restore(this.Settings.Hostname);
-        }
-
-        public override void TearDown()
-        {
-            this.WebClient.Restore(this.Settings.Hostname);
-
-            base.TearDown();
-        }
-
         [Test]
         public void VerifyThatNewOptionCanBeCreatedWithWebApi()
         {

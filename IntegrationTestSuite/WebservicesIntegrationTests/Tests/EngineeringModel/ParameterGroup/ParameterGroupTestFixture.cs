@@ -29,22 +29,8 @@ namespace WebservicesIntegrationTests
     using NUnit.Framework;
 
     [TestFixture]
-    public class ParameterGroupTestFixture : WebClientTestFixtureBase
+    public class ParameterGroupTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
-        public override void SetUp()
-        {
-            base.SetUp();
-
-            this.WebClient.Restore(this.Settings.Hostname);
-        }
-
-        public override void TearDown()
-        {
-            this.WebClient.Restore(this.Settings.Hostname);
-
-            base.TearDown();
-        }
-
         /// <summary>
         /// Verification that the ParameterGroup objects are returned from the data-source and that the 
         /// values of the ParameterGroup properties are equal to the expected value

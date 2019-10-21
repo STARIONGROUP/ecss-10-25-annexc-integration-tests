@@ -23,22 +23,8 @@ namespace WebservicesIntegrationTests
     using NUnit.Framework;
 
     [TestFixture]
-    public class ParameterValueSetTestFixture : WebClientTestFixtureBase
+    public class ParameterValueSetTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
-        public override void SetUp()
-        {
-            base.SetUp();
-
-            this.WebClient.Restore(this.Settings.Hostname);
-        }
-
-        public override void TearDown()
-        {
-            this.WebClient.Restore(this.Settings.Hostname);
-
-            base.TearDown();
-        }
-
         /// <summary>
         /// Verification that the ParameterValueSet objects are returned from the data-source and that the 
         /// values of the ParameterValueSet properties are equal to the expected value
@@ -567,11 +553,12 @@ namespace WebservicesIntegrationTests
 
         private static readonly string[] TestStrings = 
         {
-            // See https://github.com/RHEAGROUP/CDP4-SDK-Community-Edition/issues/67
-            //"value with trailing spaces  ",
-            //"value with trailing space ",
-            //" value with leading spaces",
-            //"  value with leading space",
+            "value with trailing spaces  ",
+            "value with trailing space ",
+            " value with leading spaces",
+            "  value with leading space",
+            "\t\t\tvalue with leading and trailing tabs \t",
+            "\nvalue with leading and trailing linebreaks \r",
             "=2*(2+2)",
             "=2*\n(2+2)",
             "=2*\r(2+2)",

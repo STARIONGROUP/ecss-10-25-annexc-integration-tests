@@ -28,22 +28,8 @@ namespace WebservicesIntegrationTests
     using Newtonsoft.Json;
 
     [TestFixture]
-    public class PossibleFiniteStateListTestFixture : WebClientTestFixtureBase
+    public class PossibleFiniteStateListTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
-        public override void SetUp()
-        {
-            base.SetUp();
-
-            this.WebClient.Restore(this.Settings.Hostname);
-        }
-
-        public override void TearDown()
-        {
-            this.WebClient.Restore(this.Settings.Hostname);
-
-            base.TearDown();
-        }
-
         /// <summary>
         /// Verification that the PossibleFiniteStateList objects are returned from the data-source and that the 
         /// values of the PossibleFiniteStateList properties are equal to the expected value
@@ -221,7 +207,7 @@ namespace WebservicesIntegrationTests
             var postBody2 = this.GetJsonFromFile(postBodyPath2);
             var jArray2 = this.WebClient.PostDto(uri, postBody2);
 
-            //response should only contain EngineeeringModel and PossibleFiiniteStateList
+            //response should only contain EngineeeringModel and PossibleFiniteStateList
             Assert.AreEqual(2, jArray2.Count);
         }
     }

@@ -28,22 +28,8 @@ namespace WebservicesIntegrationTests
     using Newtonsoft.Json.Linq;
 
     [TestFixture]
-    public class SiteReferenceDataLibraryTestFixture : WebClientTestFixtureBase
+    public class SiteReferenceDataLibraryTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
-        public override void SetUp()
-        {
-            base.SetUp();
-
-            this.WebClient.Restore(this.Settings.Hostname);
-        }
-
-        public override void TearDown()
-        {
-            this.WebClient.Restore(this.Settings.Hostname);
-
-            base.TearDown();
-        }
-
         /// <summary>
         /// Verification that the SiteReferenceDataLibrary objects are returned from the data-source and that the 
         /// values of the SiteReferenceDataLibrary properties are equal to the expected value

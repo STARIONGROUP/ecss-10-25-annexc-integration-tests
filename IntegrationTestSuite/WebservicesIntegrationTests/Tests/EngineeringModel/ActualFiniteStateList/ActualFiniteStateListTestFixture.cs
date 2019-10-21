@@ -30,22 +30,8 @@ namespace WebservicesIntegrationTests
     using NUnit.Framework;
 
     [TestFixture]
-    public class ActualFiniteStateListTestFixture : WebClientTestFixtureBase
-    {
-        public override void SetUp()
-        {
-            base.SetUp();
-
-            this.WebClient.Restore(this.Settings.Hostname);
-        }
-
-        public override void TearDown()
-        {
-            this.WebClient.Restore(this.Settings.Hostname);
-
-            base.TearDown();
-        }
-
+    public class ActualFiniteStateListTestFixture : WebClientTestFixtureBaseWithDatabaseRestore 
+    { 
         /// <summary>
         /// Verification that the ActualFiniteStateList objects are returned from the data-source and that the 
         /// values of the ActualFiniteStateList properties are equal to the expected value

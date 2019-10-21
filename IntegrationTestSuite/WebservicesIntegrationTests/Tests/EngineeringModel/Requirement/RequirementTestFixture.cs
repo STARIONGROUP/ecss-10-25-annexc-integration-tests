@@ -34,22 +34,8 @@ namespace WebservicesIntegrationTests
     /// values of the Requirement properties are equal to the expected value
     /// </summary>
     [TestFixture]
-    public class RequirementTestFixture : WebClientTestFixtureBase
+    public class RequirementTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
-        public override void SetUp()
-        {
-            base.SetUp();
-
-            this.WebClient.Restore(this.Settings.Hostname);
-        }
-
-        public override void TearDown()
-        {
-            this.WebClient.Restore(this.Settings.Hostname);
-
-            base.TearDown();
-        }
-
         /// <summary>
         /// Verification that the Requirement objects are returned from the data-source and that the 
         /// values of the Requirement properties are equal to the expected value

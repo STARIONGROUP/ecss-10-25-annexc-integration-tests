@@ -27,22 +27,8 @@ namespace WebservicesIntegrationTests
     using System.Collections.Generic;
 
     [TestFixture]
-    public class ExclusiveOrExpressionTestFixture : WebClientTestFixtureBase
+    public class ExclusiveOrExpressionTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
-        public override void SetUp()
-        {
-            base.SetUp();
-
-            this.WebClient.Restore(this.Settings.Hostname);
-        }
-
-        public override void TearDown()
-        {
-            this.WebClient.Restore(this.Settings.Hostname);
-
-            base.TearDown();
-        }
-
         /// <summary>
         /// Verification that the ExclusiveOrExpression objects are returned from the data-source and that the 
         /// values of the ExclusiveOrExpression properties are equal to the expected value
@@ -109,7 +95,8 @@ namespace WebservicesIntegrationTests
         {
             var iterationUri = new Uri(string.Format(UriFormat, this.Settings.Hostname,
                 "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
-            var postBodyPath = this.GetPath("Tests/EngineeringModel/ExclusiveOrExpression/PostNewExclusiveOrExpression.json");
+            var postBodyPath =
+                this.GetPath("Tests/EngineeringModel/ExclusiveOrExpression/PostNewExclusiveOrExpression.json");
 
             var postBody = base.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
@@ -173,22 +160,22 @@ namespace WebservicesIntegrationTests
             // Get the added AndExpression from the result by it's unique id
             var exclusiveOrExpression =
                 jArray.Single(x => (string) x[PropertyNames.Iid] == "3160a8e3-a17d-4037-a834-4083c4333c2a");
-            
+
             // verify the amount of returned properties 
             Assert.AreEqual(4, exclusiveOrExpression.Children().Count());
 
             // assert that the properties are what is expected
-            Assert.AreEqual("3160a8e3-a17d-4037-a834-4083c4333c2a", (string)exclusiveOrExpression[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int)exclusiveOrExpression[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("ExclusiveOrExpression", (string)exclusiveOrExpression[PropertyNames.ClassKind]);
+            Assert.AreEqual("3160a8e3-a17d-4037-a834-4083c4333c2a", (string) exclusiveOrExpression[PropertyNames.Iid]);
+            Assert.AreEqual(2, (int) exclusiveOrExpression[PropertyNames.RevisionNumber]);
+            Assert.AreEqual("ExclusiveOrExpression", (string) exclusiveOrExpression[PropertyNames.ClassKind]);
 
             var expectedTerms = new string[]
             {
                 "000484d0-cefd-47be-9317-a9eae72c94ce",
                 "deaa2560-b704-4b2c-950b-aad02ff84052"
             };
-            var termsArray = (JArray)exclusiveOrExpression[PropertyNames.Term];
-            IList<string> terms = termsArray.Select(x => (string)x).ToList();
+            var termsArray = (JArray) exclusiveOrExpression[PropertyNames.Term];
+            IList<string> terms = termsArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedTerms, terms);
         }
 
