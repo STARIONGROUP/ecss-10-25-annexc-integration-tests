@@ -30,22 +30,8 @@ namespace WebservicesIntegrationTests
     /// The purpose of the <see cref="EngineeringModelSetupTestFixture"/> is to GET and POST model objects
     /// </summary>
     [TestFixture]
-    public class EngineeringModelSetupTestFixture : WebClientTestFixtureBase
+    public class EngineeringModelSetupTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
-        public override void SetUp()
-        {
-            base.SetUp();
-
-            this.WebClient.Restore(this.Settings.Hostname);
-        }
-
-        public override void TearDown()
-        {
-            this.WebClient.Restore(this.Settings.Hostname);
-
-            base.TearDown();
-        }
-
         [Test]
         public void VerifyThatNewEngineeringModelCanBeCreatedWithWebApi()
         {

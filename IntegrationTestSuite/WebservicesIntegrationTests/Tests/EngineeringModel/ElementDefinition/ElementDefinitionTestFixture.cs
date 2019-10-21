@@ -29,22 +29,8 @@ namespace WebservicesIntegrationTests
     using NUnit.Framework;
 
     [TestFixture]
-    public class ElementDefinitionTestFixture : WebClientTestFixtureBase
+    public class ElementDefinitionTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
-        public override void SetUp()
-        {
-            base.SetUp();
-
-            this.WebClient.Restore(this.Settings.Hostname);
-        }
-
-        public override void TearDown()
-        {
-            this.WebClient.Restore(this.Settings.Hostname);
-
-            base.TearDown();
-        }
-
         /// <summary>
         /// Verification that the ElementDefinition objects are returned from the data-source and that the 
         /// values of the ElementDefinition properties are equal to the expected value

@@ -28,21 +28,8 @@ namespace WebservicesIntegrationTests
     using Newtonsoft.Json;
 
     [TestFixture]
-    public class EnumerationParameterTypeTestFixture : WebClientTestFixtureBase
+    public class EnumerationParameterTypeTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
-        public override void SetUp()
-        {
-            base.SetUp();
-
-            this.WebClient.Restore(this.Settings.Hostname);
-        }
-
-        public override void TearDown()
-        {
-            this.WebClient.Restore(this.Settings.Hostname);
-
-            base.TearDown();
-        }
         /// <summary>
         /// Verification that the EnumerationParameterType objects are returned from the data-source and that the 
         /// values of the EnumerationParameterType properties are equal to the expected value

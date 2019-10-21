@@ -28,22 +28,8 @@ namespace WebservicesIntegrationTests
     using Newtonsoft.Json;
 
     [TestFixture]
-    public class CompoundParameterTypeTestFixture : WebClientTestFixtureBase
+    public class CompoundParameterTypeTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
-        public override void SetUp()
-        {
-            base.SetUp();
-
-            this.WebClient.Restore(this.Settings.Hostname);
-        }
-
-        public override void TearDown()
-        {
-            this.WebClient.Restore(this.Settings.Hostname);
-
-            base.TearDown();
-        }
-
         /// <summary>
         /// Verification that the CompoundParameterType objects are returned from the data-source and that the 
         /// values of the CompoundParameterType properties are equal to the expected value

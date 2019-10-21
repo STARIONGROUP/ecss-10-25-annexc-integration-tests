@@ -30,22 +30,8 @@ namespace WebservicesIntegrationTests
     using NUnit.Framework;
 
     [TestFixture]
-    public class RuleVerificationTestFixture : WebClientTestFixtureBase
+    public class RuleVerificationTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
-        public override void SetUp()
-        {
-            base.SetUp();
-
-            this.WebClient.Restore(this.Settings.Hostname);
-        }
-
-        public override void TearDown()
-        {
-            this.WebClient.Restore(this.Settings.Hostname);
-
-            base.TearDown();
-        }
-
         [Test]
         public void VerifyThatARuleVerificationCanBeCreatedWithWebApi()
         {

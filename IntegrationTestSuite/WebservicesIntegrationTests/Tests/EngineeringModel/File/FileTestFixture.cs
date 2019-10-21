@@ -38,22 +38,8 @@ namespace WebservicesIntegrationTests
     using NLog.LayoutRenderers;
 
     [TestFixture]
-    public class FileTestFixture : WebClientTestFixtureBase
+    public class FileTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
-        public override void SetUp()
-        {
-            base.SetUp();
-
-            this.WebClient.Restore(this.Settings.Hostname);
-        }
-
-        public override void TearDown()
-        {
-            this.WebClient.Restore(this.Settings.Hostname);
-
-            base.TearDown();
-        }
-
         /// <summary>
         /// Verification that the File objects are returned from the data-source and that the 
         /// values of the File properties are equal to the expected value

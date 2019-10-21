@@ -28,22 +28,9 @@ namespace WebservicesIntegrationTests
     using System.Net;
 
     [TestFixture]
-    public class ModelReferenceDataLibraryTestFixture : WebClientTestFixtureBase
+    public class ModelReferenceDataLibraryTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
-        public override void SetUp()
-        {
-            base.SetUp();
-
-            this.WebClient.Restore(this.Settings.Hostname);
-        }
-
-        public override void TearDown()
-        {
-            this.WebClient.Restore(this.Settings.Hostname);
-
-            base.TearDown();
-        }
-
+      
         /// <summary>
         /// Verification that the ModelReferenceDataLibrary objects are returned from the data-source and that the 
         /// values of the ModelReferenceDataLibrary properties are equal to the expected value
