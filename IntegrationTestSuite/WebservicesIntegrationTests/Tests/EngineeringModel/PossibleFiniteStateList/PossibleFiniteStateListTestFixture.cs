@@ -207,8 +207,26 @@ namespace WebservicesIntegrationTests
             var postBody2 = this.GetJsonFromFile(postBodyPath2);
             var jArray2 = this.WebClient.PostDto(uri, postBody2);
 
-            //response should only contain EngineeeringModel and PossibleFiniteStateList
-            Assert.AreEqual(2, jArray2.Count);
+            //response should only contain EngineeeringModel, PossibleFiniteStateList and 2 PossibleFiniteState objects
+            var engineeringModel = jArray2.Where(x => x["classKind"].ToString() == "EngineeringModel").ToList();
+            var possibleFiniteStateList = jArray2.Where(x => x["classKind"].ToString() == "PossibleFiniteStateList").ToList();
+            var possibleFiniteStates = jArray2.Where(x => x["classKind"].ToString() == "PossibleFiniteState").ToList();
+
+            Assert.AreEqual(engineeringModel.Count, 1);
+            Assert.AreEqual(possibleFiniteStateList.Count, 1);
+            Assert.AreEqual(possibleFiniteStates.Count, 2);
+
+            Assert.AreEqual(possibleFiniteStateList.First()["possibleState"].Count(), 2);
+
+            var firstPossibleState = possibleFiniteStateList.First()["possibleState"].First();
+            var secondPossibleState = possibleFiniteStateList.First()["possibleState"].Last();
+
+            Assert.AreEqual((int)firstPossibleState["k"], 125842400);
+            Assert.AreEqual((string)firstPossibleState["v"], "a6f9789d-26a7-45e6-a528-3cbd1fce3880");
+
+            Assert.AreEqual((int)secondPossibleState["k"], 13512213);
+            Assert.AreEqual((string)secondPossibleState["v"], "8ca48538-d39d-4b09-8944-77c34535ce7a");
+
         }
     }
 }
