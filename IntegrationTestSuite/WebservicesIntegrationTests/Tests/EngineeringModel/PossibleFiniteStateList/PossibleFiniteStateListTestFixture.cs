@@ -221,11 +221,11 @@ namespace WebservicesIntegrationTests
             var firstPossibleState = possibleFiniteStateList.First()["possibleState"].First();
             var secondPossibleState = possibleFiniteStateList.First()["possibleState"].Last();
 
-            Assert.AreEqual((int)firstPossibleState["k"], 125842400);
-            Assert.AreEqual((string)firstPossibleState["v"], "a6f9789d-26a7-45e6-a528-3cbd1fce3880");
+            Assert.AreEqual((int)firstPossibleState["k"], 13512213);
+            Assert.AreEqual((string)firstPossibleState["v"], "8ca48538-d39d-4b09-8944-77c34535ce7a");
 
-            Assert.AreEqual((int)secondPossibleState["k"], 13512213);
-            Assert.AreEqual((string)secondPossibleState["v"], "8ca48538-d39d-4b09-8944-77c34535ce7a");
+            Assert.AreEqual((int)secondPossibleState["k"], 125842400);
+            Assert.AreEqual((string)secondPossibleState["v"], "a6f9789d-26a7-45e6-a528-3cbd1fce3880");
 
         }
     }

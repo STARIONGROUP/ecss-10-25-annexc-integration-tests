@@ -336,7 +336,7 @@ namespace WebservicesIntegrationTests
             // get a specific ActualFiniteStateList from the result by it's unique id
             var actualFiniteState = jArray.Single(
                 x => (string)x[PropertyNames.ClassKind] == "ActualFiniteState"
-                     && (string)x[PropertyNames.PossibleState][1] == "20f4d6aa-f9d3-4e91-aae9-bfbe77ae9b79");
+                     && (string)x[PropertyNames.PossibleState][0] == "20f4d6aa-f9d3-4e91-aae9-bfbe77ae9b79");
 
             // verify the amount of returned properties 
             Assert.AreEqual(5, actualFiniteState.Children().Count());
@@ -348,8 +348,8 @@ namespace WebservicesIntegrationTests
 
             var expectedPossibleStates = new[]
                                              {
-                                                 "b8fdfac4-1c40-475a-ac6c-968654b689b6",
-                                                 "20f4d6aa-f9d3-4e91-aae9-bfbe77ae9b79"
+                                                 "20f4d6aa-f9d3-4e91-aae9-bfbe77ae9b79",
+                                                 "b8fdfac4-1c40-475a-ac6c-968654b689b6"
                                              };
             var possibleStateArray = (JArray)actualFiniteState[PropertyNames.PossibleState];
             IList<string> possibleStates = possibleStateArray.Select(x => (string)x).ToList();

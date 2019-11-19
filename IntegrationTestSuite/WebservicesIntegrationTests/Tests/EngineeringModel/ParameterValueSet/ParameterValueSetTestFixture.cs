@@ -183,30 +183,30 @@ namespace WebservicesIntegrationTests
             IList<string> actualStates = actualStatesArray.Select(x => (string)x).ToList();
             Assert.AreEqual(2, actualStates.Count);
 
-            // get an ActualFiniteState from the result by it's unique id for existed PossibleFiniteState
-            var actualFiniteState0 = jArray.Single(x => (string)x[PropertyNames.Iid] == actualStates[0]);
-            Assert.AreEqual(3, (int)actualFiniteState0[PropertyNames.RevisionNumber]);
+            var expectedPossibleStates = new List<string> { "b8fdfac4-1c40-475a-ac6c-968654b689b6", "b8fdfac4-1c40-475a-ac6c-968654b689b7" };
 
-            Assert.AreEqual(3, (int)actualFiniteState0[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("ActualFiniteState", (string)actualFiniteState0[PropertyNames.ClassKind]);
-            Assert.AreEqual("MANDATORY", (string)actualFiniteState0[PropertyNames.Kind]);
+            foreach (var actualState in actualStates)
+            {
+                // get an ActualFiniteState from the result by it's unique id for existed PossibleFiniteState
+                var actualFiniteState = jArray.Single(x => (string)x[PropertyNames.Iid] == actualState);
+                Assert.AreEqual(3, (int)actualFiniteState[PropertyNames.RevisionNumber]);
 
-            var expectedPossibleStates = new[] { "b8fdfac4-1c40-475a-ac6c-968654b689b6" };
-            var possibleStateArray = (JArray)actualFiniteState0[PropertyNames.PossibleState];
-            IList<string> possibleStates = possibleStateArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedPossibleStates, possibleStates);
+                Assert.AreEqual(3, (int)actualFiniteState[PropertyNames.RevisionNumber]);
+                Assert.AreEqual("ActualFiniteState", (string)actualFiniteState[PropertyNames.ClassKind]);
+                Assert.AreEqual("MANDATORY", (string)actualFiniteState[PropertyNames.Kind]);
 
-            // get a specific ActualFiniteState from the result by it's unique id
-            var actualFiniteState1 = jArray.Single(x => (string)x[PropertyNames.Iid] == actualStates[1]);
+                var possibleStateArray = (JArray)actualFiniteState[PropertyNames.PossibleState];
+                IList<string> possibleStates = possibleStateArray.Select(x => (string)x).ToList();
+                Assert.AreEqual(possibleStates.Count, 1);
 
-            Assert.AreEqual(3, (int)actualFiniteState1[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("ActualFiniteState", (string)actualFiniteState1[PropertyNames.ClassKind]);
-            Assert.AreEqual("MANDATORY", (string)actualFiniteState1[PropertyNames.Kind]);
+                var possibleState = possibleStates.First();
+                CollectionAssert.Contains(expectedPossibleStates, possibleState);
+                expectedPossibleStates.Remove(possibleState);
+            }
 
-            expectedPossibleStates = new[] { "b8fdfac4-1c40-475a-ac6c-968654b689b7" };
-            possibleStateArray = (JArray)actualFiniteState1[PropertyNames.PossibleState];
-            possibleStates = possibleStateArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedPossibleStates, possibleStates);
+            CollectionAssert.IsEmpty(expectedPossibleStates, 
+                "There still are expected possible states in the collection. " +
+                "The ones that are still present there have not been found in the result set where they should have.");
 
             // get a specific PossibleFiniteStateList from the result by it's unique id
             var possibleFiniteStateList =
@@ -253,33 +253,30 @@ namespace WebservicesIntegrationTests
             valueSets = valueSetsArray.Select(x => (string)x).ToList();
             Assert.AreEqual(2, valueSets.Count);
 
-            var parameterValueSet0 = jArray.Single(x => (string)x[PropertyNames.Iid] == valueSets[0]);
-            Assert.AreEqual(3, (int)parameterValueSet0[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("ParameterValueSet", (string)parameterValueSet0[PropertyNames.ClassKind]);
+            var actualStatesCheckList = actualStates.ToList();
 
-            Assert.AreEqual("MANUAL", (string)parameterValueSet0[PropertyNames.ValueSwitch]);
-            Assert.AreEqual(EmptyProperty, (string)parameterValueSet0[PropertyNames.Published]);
-            Assert.AreEqual(EmptyProperty, (string)parameterValueSet0[PropertyNames.Formula]);
-            Assert.AreEqual(EmptyProperty, (string)parameterValueSet0[PropertyNames.Computed]);
-            Assert.AreEqual(EmptyProperty, (string)parameterValueSet0[PropertyNames.Manual]);
-            Assert.AreEqual(EmptyProperty, (string)parameterValueSet0[PropertyNames.Reference]);
+            foreach (var valueSet in valueSets)
+            {
+                parameterValueSet = jArray.Single(x => (string)x[PropertyNames.Iid] == valueSet);
+                Assert.AreEqual(3, (int)parameterValueSet[PropertyNames.RevisionNumber]);
+                Assert.AreEqual("ParameterValueSet", (string)parameterValueSet[PropertyNames.ClassKind]);
 
-            Assert.AreEqual(actualStates[0], (string)parameterValueSet0[PropertyNames.ActualState]);
-            Assert.IsNull((string)parameterValueSet0[PropertyNames.ActualOption]);
+                Assert.AreEqual("MANUAL", (string)parameterValueSet[PropertyNames.ValueSwitch]);
+                Assert.AreEqual(EmptyProperty, (string)parameterValueSet[PropertyNames.Published]);
+                Assert.AreEqual(EmptyProperty, (string)parameterValueSet[PropertyNames.Formula]);
+                Assert.AreEqual(EmptyProperty, (string)parameterValueSet[PropertyNames.Computed]);
+                Assert.AreEqual(EmptyProperty, (string)parameterValueSet[PropertyNames.Manual]);
+                Assert.AreEqual(EmptyProperty, (string)parameterValueSet[PropertyNames.Reference]);
 
-            var parameterValueSet1 = jArray.Single(x => (string)x[PropertyNames.Iid] == valueSets[1]);
-            Assert.AreEqual(3, (int)parameterValueSet1[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("ParameterValueSet", (string)parameterValueSet1[PropertyNames.ClassKind]);
+                var actualStatesCheck = (string) parameterValueSet[PropertyNames.ActualState];
+                CollectionAssert.Contains(actualStatesCheckList, actualStatesCheck);
+                actualStatesCheckList.Remove(actualStatesCheck);
+                Assert.IsNull((string)parameterValueSet[PropertyNames.ActualOption]);
+            }
 
-            Assert.AreEqual("MANUAL", (string)parameterValueSet1[PropertyNames.ValueSwitch]);
-            Assert.AreEqual(EmptyProperty, (string)parameterValueSet1[PropertyNames.Published]);
-            Assert.AreEqual(EmptyProperty, (string)parameterValueSet1[PropertyNames.Formula]);
-            Assert.AreEqual(EmptyProperty, (string)parameterValueSet1[PropertyNames.Computed]);
-            Assert.AreEqual(EmptyProperty, (string)parameterValueSet1[PropertyNames.Manual]);
-            Assert.AreEqual(EmptyProperty, (string)parameterValueSet1[PropertyNames.Reference]);
-
-            Assert.AreEqual(actualStates[1], (string)parameterValueSet1[PropertyNames.ActualState]);
-            Assert.IsNull((string)parameterValueSet1[PropertyNames.ActualOption]);
+            CollectionAssert.IsEmpty(actualStatesCheckList,
+                "There still are expected actual states in the collection. " +
+                "The ones that are still present there have not been found in the result set where they should have.");
 
             // POST PossibleFiniteStateList and check what is returned
             postBodyPath = this.GetPath("Tests/EngineeringModel/ParameterValueSet/PostNewPossibleFiniteStateList.json");
@@ -396,10 +393,10 @@ namespace WebservicesIntegrationTests
                 possibleFiniteStateListsInActualFiniteStateList);
 
             // get a specific ActualFiniteState from the result by it's unique id
-            actualFiniteState0 = jArray.Single(x => (string)x[PropertyNames.Iid] == actualStates[0]);
+            var actualFiniteState0 = jArray.Single(x => (string)x[PropertyNames.Iid] == actualStates[0]);
             Assert.AreEqual(4, (int)actualFiniteState0[PropertyNames.RevisionNumber]);
 
-            actualFiniteState1 = jArray.Single(x => (string)x[PropertyNames.Iid] == actualStates[1]);
+            var actualFiniteState1 = jArray.Single(x => (string)x[PropertyNames.Iid] == actualStates[1]);
             Assert.AreEqual(4, (int)actualFiniteState1[PropertyNames.RevisionNumber]);
 
             parameterValueSet = jArray.Single(x => (string)x[PropertyNames.ClassKind] == "ParameterValueSet" && (string)x[PropertyNames.ActualState] == actualStates[0]);
