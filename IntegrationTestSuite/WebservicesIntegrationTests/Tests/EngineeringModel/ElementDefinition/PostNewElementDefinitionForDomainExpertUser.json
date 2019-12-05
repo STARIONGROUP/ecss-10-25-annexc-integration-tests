@@ -1,0 +1,30 @@
+{
+  "_delete": [],
+  "_create": [
+    {
+      "iid": "f959dc33-58ff-4b6f-a3b0-d265690b4085",
+      "classKind": "ElementDefinition",
+      "revisionNumber": 0,
+      "owner": "eb759723-14b9-49f4-8611-544d037bb764",
+      "category": [],
+      "shortName": "TestElementDefinition2",
+      "name": "Test Element Definition 2",
+      "hyperLink": [],
+      "definition": [],
+      "alias": [],
+      "referencedElement": [],
+      "parameterGroup": [],
+      "parameter": [],
+      "containedElement": []
+    }
+  ],
+  "_update": [
+    {
+      "classKind": "Iteration",
+      "iid": "e163c5ad-f32b-4387-b805-f4b34600bc2c",
+      "element": [
+        "f959dc33-58ff-4b6f-a3b0-d265690b4085"
+      ]
+    }
+  ]
+}

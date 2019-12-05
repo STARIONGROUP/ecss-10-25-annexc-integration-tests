@@ -200,6 +200,9 @@
     <None Include="Tests\EngineeringModel\ElementDefinition\PostDeleteParameterAsProperty.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Tests\EngineeringModel\ElementDefinition\PostNewElementDefinitionForDomainExpertUser.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Tests\EngineeringModel\ElementDefinition\PostNewElementDefinition.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -231,6 +234,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Tests\EngineeringModel\Iteration\PostDeleteRelationshipAsProperty.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tests\EngineeringModel\ElementDefinition\POSTNewDomainExpertUser.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Tests\EngineeringModel\Iteration\POSTNewIterationSetup.json">

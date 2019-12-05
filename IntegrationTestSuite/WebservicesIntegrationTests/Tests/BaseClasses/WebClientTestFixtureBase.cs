@@ -60,6 +60,11 @@ namespace WebservicesIntegrationTests
         /// </summary>
         public WebClient WebClient { get; private set; }
 
+        public void CreateNewWebClientForUser(string userName, string passWord)
+        {
+            this.WebClient = new WebClient(userName, passWord);
+        }
+
         /// <summary>
         /// Load the <see cref="WebservicesIntegrationTests.Net.Settings"/> and populate the <see cref="Settings"/> property.
         /// </summary>
