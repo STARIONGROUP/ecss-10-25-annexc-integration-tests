@@ -23,6 +23,8 @@ namespace WebservicesIntegrationTests
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Net;
+
     using NUnit.Framework;
     using Newtonsoft.Json.Linq;
 
@@ -244,6 +246,73 @@ namespace WebservicesIntegrationTests
             var userPreferences = (JArray)person[PropertyNames.UserPreference];
             IList<string> up = userPreferences.Select(x => (string)x).ToList();
             Assert.IsEmpty(up);
+        }
+
+        [Test]
+        public void Verify_That_password_policies_are_implemented_correctly()
+        {
+            var uri = new Uri(
+                string.Format(
+                    UriFormat,
+                    this.Settings.Hostname,
+                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
+
+            var postBodyPath = this.GetPath("Tests/SiteDirectory/Person/Post_Persons_With_Passwords.json");
+
+            var postBody = this.GetJsonFromFile(postBodyPath);
+            var jArray = this.WebClient.PostDto(uri, postBody);
+
+            // check if there are 4 objects
+            Assert.AreEqual(4, jArray.Count);
+
+            // get a specific SiteDirectory from the result by it's unique id
+            var siteDirectory =
+                jArray.Single(x => (string)x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
+
+            var expectedPersons = new []
+            {
+                "77791b12-4c2c-4499-93fa-869df3692d22", 
+                "01a6d208-7bb5-4855-a6fb-eb3d03f1337b",
+                "01a6d208-7bb5-4855-a6fb-eb3d03f1337c",
+                "01a6d208-7bb5-4855-a6fb-eb3d03f1337d"
+            };
+
+            var personArray = (JArray)siteDirectory[PropertyNames.Person];
+            IList<string> persons = personArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedPersons, persons);
+
+            // get a specific Person from the result by it's unique id
+            var personWithNullPassword = jArray.Single(x => (string)x[PropertyNames.Iid] == "01a6d208-7bb5-4855-a6fb-eb3d03f1337b");
+            var personWithEmptyPassword = jArray.Single(x => (string)x[PropertyNames.Iid] == "01a6d208-7bb5-4855-a6fb-eb3d03f1337c");
+            var personWithPassword = jArray.Single(x => (string)x[PropertyNames.Iid] == "01a6d208-7bb5-4855-a6fb-eb3d03f1337d");
+
+            var personWithNullPasswordUri =
+                new Uri(string.Format(UriFormat, this.Settings.Hostname,
+                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/person/01a6d208-7bb5-4855-a6fb-eb3d03f1337b"));
+
+            this.CreateNewWebClientForUser(personWithNullPassword[PropertyNames.ShortName].ToString(), null);
+            var exception = Assert.Catch<WebException>(() => this.WebClient.GetDto(personWithNullPasswordUri));
+            Assert.AreEqual(HttpStatusCode.Unauthorized, ((HttpWebResponse)exception.Response).StatusCode);
+
+            var personWithEmptyPasswordUri =
+                new Uri(string.Format(UriFormat, this.Settings.Hostname,
+                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/person/01a6d208-7bb5-4855-a6fb-eb3d03f1337c"));
+
+            this.CreateNewWebClientForUser(personWithEmptyPassword[PropertyNames.ShortName].ToString(), "");
+            exception = Assert.Catch<WebException>(() => this.WebClient.GetDto(personWithEmptyPasswordUri));
+            var errorMessage = this.WebClient.ExtractExceptionStringFromResponse(exception.Response);
+            Assert.AreEqual(HttpStatusCode.InternalServerError, ((HttpWebResponse)exception.Response).StatusCode);
+            Assert.IsTrue(errorMessage.Contains("Sequence contains no elements"));
+
+            var personWithPasswordUri =
+                new Uri(string.Format(UriFormat, this.Settings.Hostname,
+                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/person/01a6d208-7bb5-4855-a6fb-eb3d03f1337d"));
+
+            this.CreateNewWebClientForUser(personWithPassword[PropertyNames.ShortName].ToString(), "pass");
+            exception = Assert.Catch<WebException>(() => this.WebClient.GetDto(personWithPasswordUri));
+            errorMessage = this.WebClient.ExtractExceptionStringFromResponse(exception.Response);
+            Assert.AreEqual(HttpStatusCode.InternalServerError, ((HttpWebResponse) exception.Response).StatusCode);
+            Assert.IsTrue(errorMessage.Contains("Sequence contains no elements"));
         }
 
         /// <summary>

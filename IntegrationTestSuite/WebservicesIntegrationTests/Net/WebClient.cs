@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="WebClient.cs" company="RHEA System">
 //
-//   Copyright 2017 RHEA System 
+//   Copyright 2017-2020 RHEA System 
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -25,7 +25,6 @@ namespace WebservicesIntegrationTests.Net
     using System.Net;
     using System.Net.Http;
     using System.Text;
-    using System.Threading.Tasks;
 
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
@@ -202,20 +201,45 @@ namespace WebservicesIntegrationTests.Net
         private JArray ExtractJarrayFromResponse(WebResponse webResponse)
         {
             var responseStream = webResponse.GetResponseStream();
+
             if (responseStream == null)
             {
                 return null;
             }
-            
+
             var reader = new StreamReader(responseStream);
             var response = reader.ReadToEnd();
-            
+
             using (JsonReader jsonReader = new JsonTextReader(new StringReader(response)))
             {
                 jsonReader.DateParseHandling = DateParseHandling.None;
                 var jArray = JArray.Load(jsonReader);
                 return jArray;
             }
+        }
+
+        /// <summary>
+        /// Extracts a <see cref="string"/> from the provided <see cref="WebResponse"/>
+        /// </summary>
+        /// <param name="webResponse">
+        /// The <see cref="WebResponse"/> 
+        /// </param>
+        /// <returns>
+        /// A <see cref="string"/>
+        /// </returns>
+        public string ExtractExceptionStringFromResponse(WebResponse webResponse)
+        {
+            var responseStream = webResponse.GetResponseStream();
+
+            if (responseStream == null)
+            {
+                return null;
+            }
+
+            var reader = new StreamReader(responseStream);
+            var response = reader.ReadToEnd();
+
+            return JsonConvert.DeserializeObject<string>(response);
         }
 
         /// <summary>
