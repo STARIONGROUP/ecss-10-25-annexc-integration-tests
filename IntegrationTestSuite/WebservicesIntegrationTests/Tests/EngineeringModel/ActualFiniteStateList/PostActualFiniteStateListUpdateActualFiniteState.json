@@ -1,0 +1,17 @@
+﻿{
+  "_delete": [],
+  "_create": [],
+  "_update": [
+    {
+      "classKind": "ActualFiniteStateList",
+      "iid": "db690d7d-761c-47fd-96d3-840d698a89dc",
+      "modifiedOn": "2020-02-14T08:13:52.993Z"
+    },
+    {
+      "classKind": "ActualFiniteState",
+      "iid": "b91bfdbb-4277-4a03-b519-e4db839ef5d4",
+      "kind": "FORBIDDEN"
+    }
+  ],
+  "_copy": []
+}

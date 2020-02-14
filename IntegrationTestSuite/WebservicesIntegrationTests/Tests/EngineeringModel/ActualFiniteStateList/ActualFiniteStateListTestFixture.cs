@@ -494,5 +494,43 @@ namespace WebservicesIntegrationTests
             IList<string> excludedOptions = excludedOptionsArray.Select(x => (string)x).ToList();
             CollectionAssert.AreEquivalent(expectedExcludedOptions, excludedOptions);
         }
+
+        /// <summary>
+        /// Verify that actual inite stae can be saved when kind changed to forbidden
+        /// </summary>
+        [Test]
+        public void VerifyThatActualFiniteStateCanBeUpdatedWithWebApi()
+        {
+            // POST a new PossibleFiniteState
+            var iterationUri = new Uri(
+                string.Format(
+                    UriFormat,
+                    this.Settings.Hostname,
+                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var postBodyPath = this.GetPath(
+                "Tests/EngineeringModel/ActualFiniteStateList/PostActualFiniteStateListUpdateActualFiniteState.json");
+
+            var postBody = this.GetJsonFromFile(postBodyPath);
+            var jArray = this.WebClient.PostDto(iterationUri, postBody);
+
+            var engineeringModel = jArray.Single(
+                x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            Assert.AreEqual(2, (int)engineeringModel[PropertyNames.RevisionNumber]);
+
+            var actualFiniteStateList = jArray.Single(
+                x => (string)x[PropertyNames.Iid] == "db690d7d-761c-47fd-96d3-840d698a89dc");
+            Assert.AreEqual(2, (int)actualFiniteStateList[PropertyNames.RevisionNumber]);
+
+            // get a specific ActualFiniteStateList from the result by unknown id
+            var actualFiniteState = jArray.Single(x => (string)x[PropertyNames.ClassKind] == "ActualFiniteState");
+
+            // verify the amount of returned properties
+            Assert.AreEqual(5, actualFiniteState.Children().Count());
+
+            // assert that the properties are what is expected
+            Assert.AreEqual(2, (int)actualFiniteState[PropertyNames.RevisionNumber]);
+            Assert.AreEqual("ActualFiniteState", (string)actualFiniteState[PropertyNames.ClassKind]);
+            Assert.AreEqual("FORBIDDEN", (string)actualFiniteState[PropertyNames.Kind]);
+        }
     }
 }
