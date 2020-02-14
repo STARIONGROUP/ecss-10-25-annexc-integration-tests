@@ -496,7 +496,7 @@ namespace WebservicesIntegrationTests
         }
 
         /// <summary>
-        /// Verify that actual inite stae can be saved when kind changed to forbidden
+        /// Verify that ActualFiniteState can be saved when kind is changed to forbidden
         /// </summary>
         [Test]
         public void VerifyThatActualFiniteStateCanBeUpdatedWithWebApi()
