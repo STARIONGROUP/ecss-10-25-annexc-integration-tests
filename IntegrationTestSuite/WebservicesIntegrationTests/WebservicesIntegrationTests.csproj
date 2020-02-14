@@ -176,6 +176,9 @@
     <None Include="Tests\EngineeringModel\ActualFiniteStateList\PostActualFiniteStateListAddPossibleFiniteStateList.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Tests\EngineeringModel\ActualFiniteStateList\PostActualFiniteStateListUpdateActualFiniteState.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Tests\EngineeringModel\ActualFiniteStateList\PostNewPossibleFiniteState.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
