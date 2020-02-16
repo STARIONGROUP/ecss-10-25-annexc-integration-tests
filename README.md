@@ -32,26 +32,30 @@ The URL of the upload service is the following: "http(s)://hostname:port/Data/Ex
 curl --form file=@"Data.zip" http://cdp4services-test.rheagroup.com/Data/Exchange
 ```
 
-### Restore  
+### Restore
 
 The URL of the restore service takes the following form: "http(s)://hostname:port/Data/Restore".
-  
+
+## Integration test suite how-to
+
+Read more about setting up your development environnment [here](https://github.com/RHEAGROUP/ecss-10-25-annexc-integration-tests/wiki)
+
 # CDP4
 
-The RHEA Concurrent Design Platform (CDP&trade;) is the RHEA implementation of ECSS-E-TM-10-25. The CDP4&trade; is a typical 3-tier application that contains the following application layers:
+The RHEA Concurrent Design Platform (CDP&reg;) is the RHEA implementation of ECSS-E-TM-10-25. The CDP4&reg; is a typical 3-tier application that contains the following application layers:
 * Layer-1: Persistent Data Store (data layer)
   * implemented using [PostgreSQL](http://www.postgresql.org)
 * Layer-2: REST Web Services (application layer)
-  * CDP4&trade; WebServices
+  * CDP4&reg; WebServices
   * compliant with ECSS-E-TM-10-25 Annex C.2
 * Layer-3: Client tools (presentation layer), the following applications are available:
-  * CDP4-IME&trade;: A desktop application
-  * CDP4-ADDIN&trade;: A Microsoft Excel ADDIN
-  * CDP4-WEBAPP&trade;: A Web Application hosted by the CDP4 WebServices
+  * CDP4-IME&reg;: A desktop application
+  * CDP4-ADDIN&reg;: A Microsoft Excel ADDIN
+  * CDP4-WEBAPP&reg;: A Web Application hosted by the CDP4 WebServices
 
-More information about the CDP&trade; can be found on the RHEA GROUP [Website](http://www.rheagroup.com/products/cdp/). A demo installer of the CDP4-IME&trade; application can be downloaded after registration here: http://products.rheagroup.com/CDP.  
+More information about the CDP&reg; can be found on the RHEA GROUP [Website](http://www.rheagroup.com/products/cdp/). A demo installer of the CDP4-IME&reg; application can be downloaded after registration here: http://products.rheagroup.com/CDP.  
 
-A Public instance of the CDP4&trade; WebServices that is used to verify CDP4&trade; WebServices compliance is available at http://cdp4services-test.rheagroup.com. The content that is serviced by this instance is loaded by the contents of the [Data folder](./Data/) . The username and password to access this CDP4&trade; WebServices are: admin/pass.   
+A Public instance of the CDP4&reg; WebServices that is used to verify CDP4&reg; WebServices compliance is available at http://cdp4services-test.rheagroup.com. The content that is serviced by this instance is loaded by the contents of the [Data folder](./Data/) . The username and password to access this CDP4&reg; WebServices are: admin/pass.   
 
 # OCDT
 
