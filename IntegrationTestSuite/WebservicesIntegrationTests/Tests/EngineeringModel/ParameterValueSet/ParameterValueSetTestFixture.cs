@@ -490,7 +490,56 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(inputValue, JsonConvert.DeserializeObject<List<string>>((string)parameterValueSet[PropertyNames.Computed])[0]);
             Assert.AreEqual(inputValue, JsonConvert.DeserializeObject<List<string>>((string)parameterValueSet[PropertyNames.Manual])[0]);
             Assert.AreEqual(new List<string> {inputValue, inputValue}, JsonConvert.DeserializeObject<List<string>>((string)parameterValueSet[PropertyNames.Reference]));
+
+            var parameterValueSetUri1 =
+                new Uri(
+                    string.Format(
+                        UriFormat,
+                        this.Settings.Hostname,
+                        "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/f73860b2-12f0-43e4-b8b2-c81862c0a159/parameter/3f05483f-66ff-4f21-bc76-45956779f66e/valueSet/72ec3701-bcb5-4bf6-bd78-30fd1b65e3be?revisionFrom=1&revisionTo=2"));
         }
+
+        [Test]
+        public void VerifyThatGettingRevisionsWorks()
+        {
+            var iterationUri =
+                new Uri(
+                    string.Format(
+                        UriFormat,
+                        this.Settings.Hostname,
+                        "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+
+            var postBodyPath =
+                this.GetPath("Tests/EngineeringModel/ParameterValueSet/PostUpdateParameterValueSetTemplate.json.txt");
+
+            var postBody = this.GetJsonFromFile(postBodyPath);
+            var inputAsInnerJson = JsonConvert.ToString("Test Revisions");
+            postBody = postBody.Replace("<INNERJSON>", inputAsInnerJson);
+
+            var jArray1 = this.WebClient.PostDto(iterationUri, postBody);
+            Assert.AreEqual(2, jArray1.Count);
+
+            var parameterValueSetUri1 =
+                new Uri(
+                    string.Format(
+                        UriFormat,
+                        this.Settings.Hostname,
+                        "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/f73860b2-12f0-43e4-b8b2-c81862c0a159/parameter/3f05483f-66ff-4f21-bc76-45956779f66e/valueSet/72ec3701-bcb5-4bf6-bd78-30fd1b65e3be?revisionFrom=1&revisionTo=2"));
+
+            var jArray2 = this.WebClient.GetDto(parameterValueSetUri1);
+            Assert.AreEqual(2, jArray2.Count);
+
+            var parameterValueSetUri2 =
+                new Uri(
+                    string.Format(
+                        UriFormat,
+                        this.Settings.Hostname,
+                        "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/f73860b2-12f0-43e4-b8b2-c81862c0a159/parameter/3f05483f-66ff-4f21-bc76-45956779f66e/valueSet/72ec3701-bcb5-4bf6-bd78-30fd1b65e3be?revisionFrom=2000-01-01T12:00:00&revisionTo=2120-12-31T12:00:00"));
+
+            var jArray3 = this.WebClient.GetDto(parameterValueSetUri2);
+            Assert.AreEqual(2, jArray3.Count);
+        }
+
 
         private const string JsonString = @"{""widget"": {
                 ""debug"": ""on"",
