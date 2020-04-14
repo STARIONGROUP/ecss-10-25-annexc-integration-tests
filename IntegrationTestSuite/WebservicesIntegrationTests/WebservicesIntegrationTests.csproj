@@ -112,6 +112,7 @@
     <Compile Include="Tests\SiteDirectory\EmailAddress\EmailAddressTestFixture.cs" />
     <Compile Include="Tests\SiteDirectory\EnumerationParameterType\EnumerationParameterTypeTestFixture.cs" />
     <Compile Include="Tests\SiteDirectory\ModelReferenceDataLibrary\ModelReferenceDataLibraryTestFixture.cs" />
+    <Compile Include="Tests\SiteDirectory\Participant\ParticipantTestFixture.cs" />
     <Compile Include="Tests\SiteDirectory\PropertyNames.cs" />
     <Compile Include="Tests\SiteDirectory\ArrayParameterType\ArrayParameterTypeTestFixture.cs" />
     <Compile Include="Tests\SiteDirectory\ParameterTypeComponent\ParameterTypeComponentTestFixture.cs" />
@@ -395,6 +396,9 @@
     <None Include="Tests\SiteDirectory\ModelReferenceDataLibrary\POSTMoveIndBinaryRelShipRuleFromModelRDLToSiteRDL.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Tests\SiteDirectory\Participant\Post_Participant_With_Null_Domain.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Tests\SiteDirectory\Person\PostDeleteTelephoneAsProperty.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -431,6 +435,7 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
