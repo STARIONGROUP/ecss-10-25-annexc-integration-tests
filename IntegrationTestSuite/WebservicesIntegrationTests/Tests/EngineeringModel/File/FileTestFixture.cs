@@ -203,34 +203,57 @@ namespace WebservicesIntegrationTests
         [Test]
         public void VerifyThatAFileRevisionCanBeDownloadedWithWebApi()
         {
-            var iterationUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var iterationUri = new Uri(
+                string.Format(
+                    UriFormat, 
+                    this.Settings.Hostname, 
+                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+
             var postJsonPath = this.GetPath("Tests/EngineeringModel/File/PostNewFile.json");
             var postFilePath = this.GetPath("Tests/EngineeringModel/File/2990BA2444A937A28E7B1E2465FCDF949B8F5368");
             this.WebClient.PostFile(iterationUri, postJsonPath, postFilePath);
 
-            var fileUri2 = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/file/86e1d711-9e12-406c-8017-555fefa94757"));
+            var fileUri2 = new Uri(
+                string.Format(
+                    UriFormat, 
+                    this.Settings.Hostname, 
+                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/file/86e1d711-9e12-406c-8017-555fefa94757"
+                    ));
+
             postJsonPath = this.GetPath("Tests/EngineeringModel/File/PostNewFileBinaryRevision.json");
             postFilePath = this.GetPath("Tests/EngineeringModel/File/3F64667F0F27A4C4FA1B4BF374033938A542FDD1");
             this.WebClient.PostFile(fileUri2, postJsonPath, postFilePath);
 
             // Download a revision of the plain text file
-            var getFileUri1 = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/commonFileStore/8e5ca9cc-3da8-4e66-9172-7c3b2464a59c/file/8ac6db3e-9525-4f3e-93ea-707076c07fc1/fileRevision/76e9b7fc-edc4-4ca3-89ba-eac014e7d9f8?includeFileData=true"));
-            var responseBody1 = this.WebClient.GetFileResponseBody(getFileUri1).GetAwaiter().GetResult();
+            var getFileUriForTxt = new Uri(
+                string.Format(
+                    UriFormat, 
+                    this.Settings.Hostname, 
+                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/commonFileStore/8e5ca9cc-3da8-4e66-9172-7c3b2464a59c/file/8ac6db3e-9525-4f3e-93ea-707076c07fc1/fileRevision/76e9b7fc-edc4-4ca3-89ba-eac014e7d9f8?includeFileData=true"
+                    ));
+
+            var responseBodyForTxt = this.WebClient.GetFileResponseBody(getFileUriForTxt).GetAwaiter().GetResult();
 
             // Download a revision of the pdf file
-            var getFileUri2 = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/commonFileStore/8e5ca9cc-3da8-4e66-9172-7c3b2464a59c/file/8ac6db3e-9525-4f3e-93ea-707076c07fc1/fileRevision/e5b46d1b-7d51-4433-b515-25d7d37a0b50?includeFileData=true"));
-            var responseBody2 = this.WebClient.GetFileResponseBody(getFileUri2).GetAwaiter().GetResult();
+            var getFileUriForPdf = new Uri(
+                string.Format(
+                    UriFormat, 
+                    this.Settings.Hostname, 
+                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/commonFileStore/8e5ca9cc-3da8-4e66-9172-7c3b2464a59c/file/8ac6db3e-9525-4f3e-93ea-707076c07fc1/fileRevision/e5b46d1b-7d51-4433-b515-25d7d37a0b50?includeFileData=true"
+                    ));
 
-            using (SHA1Managed sha1 = new SHA1Managed())
+            var responseBodyForPdf = this.WebClient.GetFileResponseBody(getFileUriForPdf).GetAwaiter().GetResult();
+
+            using (var sha1 = new SHA1Managed())
             {
-                var hash = BitConverter.ToString(sha1.ComputeHash(responseBody1)).Replace("-", string.Empty);
+                var hash = BitConverter.ToString(sha1.ComputeHash(responseBodyForTxt)).Replace("-", string.Empty);
 
                 Assert.AreEqual("2990BA2444A937A28E7B1E2465FCDF949B8F5368", hash); 
             }
 
-            using (SHA1Managed sha1 = new SHA1Managed())
+            using (var sha1 = new SHA1Managed())
             {
-                var hash = BitConverter.ToString(sha1.ComputeHash(responseBody2)).Replace("-", string.Empty);
+                var hash = BitConverter.ToString(sha1.ComputeHash(responseBodyForPdf)).Replace("-", string.Empty);
 
                 Assert.AreEqual("3F64667F0F27A4C4FA1B4BF374033938A542FDD1", hash);
             }
