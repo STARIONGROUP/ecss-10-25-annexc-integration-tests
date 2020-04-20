@@ -25,7 +25,7 @@ namespace WebservicesIntegrationTests.Net
     using System.Net;
     using System.Net.Http;
     using System.Text;
-
+    using System.Threading.Tasks;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
 
@@ -165,11 +165,11 @@ namespace WebservicesIntegrationTests.Net
         /// The uri.
         /// </param>
         /// <returns>
-        /// The <see cref="string"/> that contain the response body.
+        /// The <see cref="string"/> that contain the file body.
         /// </returns>
-        public byte[] GetFileResponseBody(Uri uri)
+        public async Task<byte[]> GetFileResponseBody(Uri uri)
         {
-            return this.RetrieveHttpFileGetResponse(uri);
+            return await this.RetrieveHttpFileGetResponse(uri);
         }
 
         /// <summary>
@@ -334,14 +334,18 @@ namespace WebservicesIntegrationTests.Net
         /// <returns>
         /// The <see cref="string"/> that contain the response body.
         /// </returns>
-        private byte[] RetrieveHttpFileGetResponse(Uri uri)
+        private async Task<byte[]> RetrieveHttpFileGetResponse(Uri uri)
         {
             var request = this.CreateWebRequest(uri, HttpGetMethod);
             var httpResponse = (HttpWebResponse)request.GetResponse();
 
             var content = new StreamContent(httpResponse.GetResponseStream());
 
-            var body = content.ReadAsByteArrayAsync().Result;
+            content.Headers.Add("Content-Type", httpResponse.ContentType);
+
+            var multipartContent = await content.ReadAsMultipartAsync();
+
+            var body = await multipartContent.Contents[1].ReadAsByteArrayAsync();
 
             return body;
         }
