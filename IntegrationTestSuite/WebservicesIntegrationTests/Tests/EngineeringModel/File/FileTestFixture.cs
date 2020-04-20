@@ -25,8 +25,6 @@ namespace WebservicesIntegrationTests
     using System.IO;
     using System.Linq;
     using System.Security.Cryptography;
-    using System.Text;
-    using System.Text.RegularExpressions;
 
     using Ionic.Zip;
 
@@ -34,8 +32,6 @@ namespace WebservicesIntegrationTests
 
     using NUnit.Framework;
     using Newtonsoft.Json.Linq;
-
-    using NLog.LayoutRenderers;
 
     [TestFixture]
     public class FileTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
@@ -219,22 +215,22 @@ namespace WebservicesIntegrationTests
 
             // Download a revision of the plain text file
             var getFileUri1 = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/commonFileStore/8e5ca9cc-3da8-4e66-9172-7c3b2464a59c/file/8ac6db3e-9525-4f3e-93ea-707076c07fc1/fileRevision/76e9b7fc-edc4-4ca3-89ba-eac014e7d9f8?includeFileData=true"));
-            var responseBody1 = this.WebClient.GetFileResponseBody(getFileUri1);
+            var responseBody1 = this.WebClient.GetFileResponseBody(getFileUri1).GetAwaiter().GetResult();
 
             // Download a revision of the pdf file
             var getFileUri2 = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/commonFileStore/8e5ca9cc-3da8-4e66-9172-7c3b2464a59c/file/8ac6db3e-9525-4f3e-93ea-707076c07fc1/fileRevision/e5b46d1b-7d51-4433-b515-25d7d37a0b50?includeFileData=true"));
-            var responseBody2 = this.WebClient.GetFileResponseBody(getFileUri2);
+            var responseBody2 = this.WebClient.GetFileResponseBody(getFileUri2).GetAwaiter().GetResult();
 
             using (SHA1Managed sha1 = new SHA1Managed())
             {
-                var hash = BitConverter.ToString(sha1.ComputeHash(this.GetFileContent(responseBody1))).Replace("-", string.Empty);
+                var hash = BitConverter.ToString(sha1.ComputeHash(responseBody1)).Replace("-", string.Empty);
 
                 Assert.AreEqual("2990BA2444A937A28E7B1E2465FCDF949B8F5368", hash); 
             }
 
             using (SHA1Managed sha1 = new SHA1Managed())
             {
-                var hash = BitConverter.ToString(sha1.ComputeHash(this.GetFileContent(responseBody2))).Replace("-", string.Empty);
+                var hash = BitConverter.ToString(sha1.ComputeHash(responseBody2)).Replace("-", string.Empty);
 
                 Assert.AreEqual("3F64667F0F27A4C4FA1B4BF374033938A542FDD1", hash);
             }
@@ -250,11 +246,11 @@ namespace WebservicesIntegrationTests
 
             // Download a zip archive of the folder
             var getFileUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/commonFileStore/8e5ca9cc-3da8-4e66-9172-7c3b2464a59c/folder/e80daca0-5c6e-4236-ae34-d23c36244059?includeFileData=true"));
-            var responseBody = this.WebClient.GetFileResponseBody(getFileUri);
+            var responseBody = this.WebClient.GetFileResponseBody(getFileUri).GetAwaiter().GetResult();
 
             var path = Path.GetTempFileName();
-            File.WriteAllBytes(path, this.GetFileContent(responseBody));
-            ZipFile zip = new ZipFile(path);
+            File.WriteAllBytes(path, responseBody);
+            var zip = new ZipFile(path);
 
             // It is assumed that if some information is retrieved from the archive than it is not corrupted
             Assert.AreEqual(2, zip.Count);
@@ -264,6 +260,7 @@ namespace WebservicesIntegrationTests
                                              "TestFolder/",
                                              "TestFolder/FileTest.txt"
                                          };
+
             CollectionAssert.AreEquivalent(expectedZipEntries, zip.EntryFileNames.ToArray());
         }
 
@@ -282,11 +279,11 @@ namespace WebservicesIntegrationTests
 
             // Download a zip archive of the folder
             var getFileUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/commonFileStore/8e5ca9cc-3da8-4e66-9172-7c3b2464a59c?includeFileData=true"));
-            var responseBody = this.WebClient.GetFileResponseBody(getFileUri);
+            var responseBody = this.WebClient.GetFileResponseBody(getFileUri).GetAwaiter().GetResult();
 
             var path = Path.GetTempFileName();
-            File.WriteAllBytes(path, this.GetFileContent(responseBody));
-            ZipFile zip = new ZipFile(path);
+            File.WriteAllBytes(path, responseBody);
+            var zip = new ZipFile(path);
             
             // It is assumed that if some information is retrieved from the archive than it is not corrupted
             Assert.AreEqual(3, zip.Count);
@@ -297,6 +294,7 @@ namespace WebservicesIntegrationTests
                                              "TestFolder/",
                                              "TestFolder/FileTest.txt"
                                          };
+
             CollectionAssert.AreEquivalent(expectedZipEntries, zip.EntryFileNames.ToArray());
         }
 
@@ -332,40 +330,6 @@ namespace WebservicesIntegrationTests
             var fileRevisionsArray = (JArray) file[PropertyNames.FileRevision];
             IList<string> fileRevisions = fileRevisionsArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedFileRevisions, fileRevisions);
-        }
-
-        /// <summary>
-        /// Get file content.
-        /// </summary>
-        /// <param name="responseBody">
-        /// The response body.
-        /// </param>
-        /// <returns>
-        /// The <see cref="byte[]"/> of the content.
-        /// </returns>
-        private byte[] GetFileContent(byte[] responseBody)
-        {
-            var responseBodyString = Encoding.Default.GetString(responseBody);
-
-            var boundaryRegex = new Regex("^-*\\w+");
-            var boundary = boundaryRegex.Matches(responseBodyString);
-
-            var regexWithBoundaryAtTheEnd = new Regex("Content-Length:\\s\\d+(\\r\\n|\\r|\\n){2}([\\s\\S]*)(\\r\\n)" + boundary[0], RegexOptions.IgnoreCase);
-            var regexWithoutBoundaryAtTheEnd = new Regex("Content-Length:\\s\\d+(\\r\\n|\\r|\\n){2}([\\s\\S]*)", RegexOptions.IgnoreCase);
-
-            var body = regexWithBoundaryAtTheEnd.Matches(responseBodyString);
-
-            if (body.Count == 0)
-            {
-                body = regexWithoutBoundaryAtTheEnd.Matches(responseBodyString);
-            }
-
-            if (body.Count == 0)
-            {
-                Assert.Fail();
-            }
-
-            return Encoding.Default.GetBytes(body[0].Groups[2].Value);
         }
     }
 }
