@@ -248,6 +248,9 @@
     <None Include="Tests\EngineeringModel\Iteration\POSTNewIterationSetup.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Tests\EngineeringModel\Iteration\PostUpdateIterationSetup.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Tests\EngineeringModel\Option\PostNewOption.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

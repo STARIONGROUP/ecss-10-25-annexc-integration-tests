@@ -1,0 +1,11 @@
+{
+  "_delete": [],
+  "_create": [],
+  "_update": [
+    {
+      "classKind": "IterationSetup",
+      "iid": "86163b0e-8341-4316-94fc-93ed60ad0dcf",
+      "isDeleted": true
+    }
+  ]
+}
