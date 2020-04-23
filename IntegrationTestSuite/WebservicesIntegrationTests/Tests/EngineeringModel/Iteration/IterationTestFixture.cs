@@ -313,7 +313,7 @@ namespace WebservicesIntegrationTests
             Assert.IsEmpty(iterationSetup[PropertyNames.SourceIterationSetup]);
             Assert.IsNotNull(iterationSetup[PropertyNames.FrozenOn]);
 
-            // Check existing iterationSetup
+            //Check existing iterationSetup
             iterationSetupUri = new Uri(
                 string.Format(
                     UriFormat,
