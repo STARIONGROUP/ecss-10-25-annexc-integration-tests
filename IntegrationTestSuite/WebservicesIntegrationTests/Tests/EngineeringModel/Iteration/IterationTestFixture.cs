@@ -256,7 +256,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
-        public void VerifyThatIterationSetupCanBeMarkAsDeleted()
+        public void VerifyThatIterationSetupCanBeMarkAsDeletedFromWebApi()
         {
             var siteDirectoryUri =
                 new Uri(string.Format(UriFormat, this.Settings.Hostname,
