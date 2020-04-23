@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="IterationTestFixture.cs" company="RHEA System">
 //
-//   Copyright 2016 RHEA System 
+//   Copyright 2016-2020 RHEA System 
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -258,7 +258,6 @@ namespace WebservicesIntegrationTests
         [Test]
         public void VerifyThatIterationSetupCanBeMarkAsDeleted()
         {
-            //SetUp object
             var siteDirectoryUri =
                 new Uri(string.Format(UriFormat, this.Settings.Hostname,
                     "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
@@ -267,19 +266,17 @@ namespace WebservicesIntegrationTests
             var postBody = base.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
 
-            //Check the amount of objects 
-            Assert.AreEqual(4, jArray.Count);
-
-            var expectedIterationSetups = new string[]
-            {
-                "836e6e3c-722f-49a7-b8fa-3fc7f4ac9531",
-                "86163b0e-8341-4316-94fc-93ed60ad0dcf"
-            };
-
             //Existing iterationSetup
             var iterationSetup =
                 jArray.Single(x => (string)x[PropertyNames.Iid] == "86163b0e-8341-4316-94fc-93ed60ad0dcf");
             Assert.AreEqual(2, (int)iterationSetup[PropertyNames.RevisionNumber]);
+            Assert.AreEqual(1, (int)iterationSetup[PropertyNames.IterationNumber]);
+            Assert.AreEqual("IterationSetup", (string)iterationSetup[PropertyNames.ClassKind]);
+            Assert.AreEqual("IterationSetup Description", (string)iterationSetup[PropertyNames.Description]);
+            Assert.AreEqual("e163c5ad-f32b-4387-b805-f4b34600bc2c", (string)iterationSetup[PropertyNames.IterationIid]);
+            Assert.AreEqual(false, (bool)iterationSetup[PropertyNames.IsDeleted]);
+            Assert.IsEmpty(iterationSetup[PropertyNames.SourceIterationSetup]);
+            Assert.IsNotNull(iterationSetup[PropertyNames.FrozenOn]);
 
             //New iterationSetup
             iterationSetup =
@@ -293,18 +290,18 @@ namespace WebservicesIntegrationTests
             Assert.IsEmpty(iterationSetup[PropertyNames.SourceIterationSetup]);
             Assert.IsEmpty(iterationSetup[PropertyNames.FrozenOn]);
 
-            //Update iterationSetup
+            //PostDelete iterationSetup
             var iterationSetupUri = new Uri(
                 string.Format(
                     UriFormat,
                     this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/model/116f6253-89bb-47d4-aa24-d11d197e43c9/iterationSetup/86163b0e-8341-4316-94fc-93ed60ad0dcf"));
-            postBodyPath = this.GetPath("Tests/EngineeringModel/Iteration/PostUpdateIterationSetup.json");
+                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/model/116f6253-89bb-47d4-aa24-d11d197e43c9"));
+            postBodyPath = this.GetPath("Tests/EngineeringModel/Iteration/PostDeleteIterationSetup.json");
 
             postBody = this.GetJsonFromFile(postBodyPath);
             jArray = this.WebClient.PostDto(iterationSetupUri, postBody);
 
-            //Existing iterationSetup
+            //Check deleted iterationSetup
             iterationSetup =
                 jArray.Single(x => (string)x[PropertyNames.Iid] == "86163b0e-8341-4316-94fc-93ed60ad0dcf");
             Assert.AreEqual(3, (int)iterationSetup[PropertyNames.RevisionNumber]);
@@ -314,6 +311,27 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual("e163c5ad-f32b-4387-b805-f4b34600bc2c", (string)iterationSetup[PropertyNames.IterationIid]);
             Assert.AreEqual(true, (bool)iterationSetup[PropertyNames.IsDeleted]);
             Assert.IsEmpty(iterationSetup[PropertyNames.SourceIterationSetup]);
+            Assert.IsNotNull(iterationSetup[PropertyNames.FrozenOn]);
+
+            // Check existing iterationSetup
+            iterationSetupUri = new Uri(
+                string.Format(
+                    UriFormat,
+                    this.Settings.Hostname,
+                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/model/116f6253-89bb-47d4-aa24-d11d197e43c9/iterationSetup"));
+            jArray = this.WebClient.GetDto(iterationSetupUri);
+
+            Assert.AreEqual(2, jArray.Count);
+            iterationSetup =
+                jArray.Single(x => (string)x[PropertyNames.Iid] == "86163b0e-8341-4316-94fc-93ed60ad0dcf");
+            Assert.AreEqual(true, (bool)iterationSetup[PropertyNames.IsDeleted]);
+            Assert.IsNotNull(iterationSetup[PropertyNames.FrozenOn]);
+
+            iterationSetup =
+                jArray.Single(x => (string)x[PropertyNames.Iid] == "836e6e3c-722f-49a7-b8fa-3fc7f4ac9531");
+            Assert.AreEqual(false, (bool)iterationSetup[PropertyNames.IsDeleted]);
+            Assert.IsEmpty(iterationSetup[PropertyNames.SourceIterationSetup]);
+            Assert.IsEmpty(iterationSetup[PropertyNames.FrozenOn]);
         }
 
         [Test]
