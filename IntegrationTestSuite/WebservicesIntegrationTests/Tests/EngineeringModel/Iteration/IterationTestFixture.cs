@@ -364,13 +364,13 @@ namespace WebservicesIntegrationTests
                 jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
             Assert.AreEqual(3, (int)engineeringModel[PropertyNames.RevisionNumber]);
 
-            expectedIterations = new string[]
+             var expectedIteration = new string[]
             {
                 "699da906-d22e-4969-b606-1fcb4bf5affd"
             };
             iterationsArray = (JArray)engineeringModel[PropertyNames.Iteration];
             iterations = iterationsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedIterations, iterations);
+            CollectionAssert.AreEquivalent(expectedIteration, iterations);
 
             var deletedIterationUri =
                 new Uri(string.Format(UriFormat, this.Settings.Hostname,
