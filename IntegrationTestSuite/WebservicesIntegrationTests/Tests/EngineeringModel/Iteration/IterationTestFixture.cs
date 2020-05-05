@@ -293,19 +293,23 @@ namespace WebservicesIntegrationTests
             Assert.IsEmpty(iterationSetup[PropertyNames.FrozenOn]);
 
             //Check iteration before iterationSetup delete
-            var uri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
-            jArray = this.WebClient.GetDto(uri);
+            var engineeringModelUri =
+                new Uri(string.Format(UriFormat, this.Settings.Hostname,
+                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56"));
+            jArray = this.WebClient.GetDto(engineeringModelUri);
 
-            uri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/699da906-d22e-4969-b606-1fcb4bf5affd"));
-            jArray = this.WebClient.GetDto(uri);
+            var engineeringModel =
+                jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            Assert.AreEqual(2, (int)engineeringModel[PropertyNames.RevisionNumber]);
+
+            var expectedIterations = new string[]
+            {
+                "699da906-d22e-4969-b606-1fcb4bf5affd",
+                "e163c5ad-f32b-4387-b805-f4b34600bc2c"
+            };
+            var iterationsArray = (JArray)engineeringModel[PropertyNames.Iteration];
+            IList<string> iterations = iterationsArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedIterations, iterations);
 
             //PostDelete iterationSetup
             var iterationSetupUri = new Uri(
@@ -351,21 +355,29 @@ namespace WebservicesIntegrationTests
             Assert.IsEmpty(iterationSetup[PropertyNames.FrozenOn]);
 
             //Check existing iteration after delete iterationSetup
-            var persistIterationUri =
+            engineeringModelUri =
                 new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/699da906-d22e-4969-b606-1fcb4bf5affd"));
-            jArray = this.WebClient.GetDto(persistIterationUri);
+                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56"));
+            jArray = this.WebClient.GetDto(engineeringModelUri);
 
-            var iteration = jArray.Single(x => (string)x[PropertyNames.Iid] == "699da906-d22e-4969-b606-1fcb4bf5affd");
-            Assert.AreEqual(1, jArray.Count);
-            Assert.AreEqual("699da906-d22e-4969-b606-1fcb4bf5affd", (string)iteration[PropertyNames.Iid]);
+            engineeringModel =
+                jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            Assert.AreEqual(3, (int)engineeringModel[PropertyNames.RevisionNumber]);
+
+            expectedIterations = new string[]
+            {
+                "699da906-d22e-4969-b606-1fcb4bf5affd"
+            };
+            iterationsArray = (JArray)engineeringModel[PropertyNames.Iteration];
+            iterations = iterationsArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedIterations, iterations);
 
             var deletedIterationUri =
                 new Uri(string.Format(UriFormat, this.Settings.Hostname,
                     "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
 
             var exception = Assert.Catch<WebException>(() => this.WebClient.GetDto(deletedIterationUri));
-            Assert.AreEqual(HttpStatusCode.InternalServerError, ((HttpWebResponse)exception.Response).StatusCode);
+            Assert.AreEqual(HttpStatusCode.InternalServerError, ((HttpWebResponse) exception.Response).StatusCode);
         }
 
         [Test]
