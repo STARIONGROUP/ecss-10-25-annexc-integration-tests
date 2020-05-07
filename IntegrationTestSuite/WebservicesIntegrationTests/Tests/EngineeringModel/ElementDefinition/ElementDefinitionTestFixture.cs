@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="ElementDefinitionTestFixture.cs" company="RHEA System">
 //
-//   Copyright 2017 RHEA System S.A.
+//   Copyright 2017-2020 RHEA System S.A.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -28,32 +28,22 @@ namespace WebservicesIntegrationTests
 
     using NUnit.Framework;
 
+    using WebservicesIntegrationTests.Tests.SiteDirectory;
+
     [TestFixture]
     public class ElementDefinitionTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
         [Test]
         public void VerifyThatADomainExpertUserCanCreateAnElementDefinition()
         {
-            // define the URI on which to perform a GET request
-            var uri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
-
-            var postBodyPath = this.GetPath("Tests/EngineeringModel/ElementDefinition/POSTNewDomainExpertUser.json");
-
-            var postBody = this.GetJsonFromFile(postBodyPath);
-            var jArray = this.WebClient.PostDto(uri, postBody);
-
-            // check if there are 29 objects
-            Assert.AreEqual(29, jArray.Count);
-
-            this.CreateNewWebClientForUser("Jane", "Jane");
+            SiteDirectoryTestFixture.AddDomainExpertUserJane(this, out var userName, out var passWord);
+            this.CreateNewWebClientForUser(userName, passWord);
 
             var iterationUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
-            postBodyPath = this.GetPath("Tests/EngineeringModel/ElementDefinition/PostNewElementDefinitionForDomainExpertUser.json");
+            var postBodyPath = this.GetPath("Tests/EngineeringModel/ElementDefinition/PostNewElementDefinitionForDomainExpertUser.json");
 
-            postBody = base.GetJsonFromFile(postBodyPath);
-            jArray = this.WebClient.PostDto(iterationUri, postBody);
+            var postBody = base.GetJsonFromFile(postBodyPath);
+            var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
             Assert.AreEqual(3, jArray.Count);
 

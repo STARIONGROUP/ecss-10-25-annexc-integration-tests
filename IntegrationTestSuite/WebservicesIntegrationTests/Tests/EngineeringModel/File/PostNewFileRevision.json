@@ -17,10 +17,11 @@
 			"revisionNumber": 0
 		}
 	],
-	"_update": [{
+	"_update": [
+		{
 			"classKind": "File",
-			"fileRevision": ["1304d40a-cb2e-4608-a353-cb7f65000559"],
-			"iid": "8ac6db3e-9525-4f3e-93ea-707076c07fc1"
+			"fileRevision": [ "1304d40a-cb2e-4608-a353-cb7f65000559" ],
+			"iid": "95bf0f17-1273-4338-98ae-839016242775"
 		}
 	],
 	"_copy": []

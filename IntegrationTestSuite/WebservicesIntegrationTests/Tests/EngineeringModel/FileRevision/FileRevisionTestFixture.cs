@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="FileRevisionTestFixture.cs" company="RHEA System">
 //
-//   Copyright 2016 RHEA System 
+//   Copyright 2016-2020 RHEA System 
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -23,7 +23,10 @@ namespace WebservicesIntegrationTests
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Net.Http;
+
     using NUnit.Framework;
+
     using Newtonsoft.Json.Linq;
     using Newtonsoft.Json;
 
@@ -87,6 +90,21 @@ namespace WebservicesIntegrationTests
             var fileRevision =
                 jArray.Single(x => (string) x[PropertyNames.Iid] == "5544bb87-dc38-45d5-9d92-c580d3fe0442");
             FileRevisionTestFixture.VerifyProperties(fileRevision);
+        }
+
+        [Test]
+        public void VerifyThatFileRevisionCannotBeUploadedWhenParticipantIsNotOwner()
+        {
+            SiteDirectoryTestFixture.AddDomainExpertUserJane(this, out var userName, out var passWord);
+            this.CreateNewWebClientForUser(userName, passWord);
+
+            // Subsequent revision
+            var fileUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/file/95bf0f17-1273-4338-98ae-839016242775"));
+            var postJsonPath = this.GetPath("Tests/EngineeringModel/File/PostNewFileRevision.json");
+            var postFilePath = this.GetPath("Tests/EngineeringModel/File/1525ED651E5B609DAE099DEEDA8DBDB49CFF956F");
+
+            // Jane is not allowed to upload
+            Assert.Throws<HttpRequestException>(() => this.WebClient.PostFile(fileUri, postJsonPath, postFilePath));
         }
 
         /// <summary>

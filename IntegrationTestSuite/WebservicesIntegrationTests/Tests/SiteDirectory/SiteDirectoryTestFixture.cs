@@ -24,12 +24,14 @@ namespace WebservicesIntegrationTests
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-    using System.Security.Cryptography;
 
     using Ionic.Zip;
 
     using NUnit.Framework;
+
     using Newtonsoft.Json.Linq;
+
+    using WebservicesIntegrationTests.Net;
 
     /// <summary>
     /// The purpose of the <see cref="SiteDirectoryTestFixture"/> is to execute integration tests using the GET and POST
@@ -249,6 +251,28 @@ namespace WebservicesIntegrationTests
             var naturalLanguageArray = (JArray)siteDirectory[PropertyNames.NaturalLanguage];
             IList<string> naturalLanguages = naturalLanguageArray.Select(x => (string)x).ToList();
             CollectionAssert.AreEquivalent(expectedNaturalLanguages, naturalLanguages);
+        }
+
+        /// <summary>
+        /// An isolated method that can add a specific user to the datastore using a <see cref="WebClientTestFixtureBase"/>'s <see cref="WebClient"/>
+        /// </summary>
+        public static void AddDomainExpertUserJane(WebClientTestFixtureBase testFixture, out string userName, out string passWord)
+        {
+            // define the URI on which to perform a GET request
+            var uri =
+                new Uri(string.Format(UriFormat, testFixture.Settings.Hostname,
+                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
+
+            var postBodyPath = testFixture.GetPath("Tests/SiteDirectory/POSTNewDomainExpertUser.json");
+
+            var postBody = testFixture.GetJsonFromFile(postBodyPath);
+            var jArray = testFixture.WebClient.PostDto(uri, postBody);
+
+            // check if there are 29 objects
+            Assert.AreEqual(29, jArray.Count);
+
+            userName = "Jane";
+            passWord = "Jane";
         }
     }
 }

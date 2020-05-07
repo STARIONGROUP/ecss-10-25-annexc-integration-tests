@@ -26,11 +26,11 @@
   }
   ],
   "_update": [
-  {
-    "classKind": "CommonFileStore",
-    "iid": "8e5ca9cc-3da8-4e66-9172-7c3b2464a59c",
-    "file": ["8ac6db3e-9525-4f3e-93ea-707076c07fc1"]
-  }
+    {
+      "classKind": "DomainFileStore",
+      "iid": "da7dddaa-02aa-4897-9935-e8d66c811a96",
+      "file": [ "8ac6db3e-9525-4f3e-93ea-707076c07fc1" ]
+    }
   ],
   "_copy": []
 }

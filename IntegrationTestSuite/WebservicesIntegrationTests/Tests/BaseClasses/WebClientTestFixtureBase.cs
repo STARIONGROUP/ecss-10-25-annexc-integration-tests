@@ -1,7 +1,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 // <copyright file="WebClientTestFixtureBase.cs" company="RHEA System">
 //
-//   Copyright 2016 RHEA System 
+//   Copyright 2016-2020 RHEA System 
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -87,7 +87,7 @@ namespace WebservicesIntegrationTests
         /// <returns>
         /// The supplied partial path with the current test directory prefixed.
         /// </returns>
-        protected string GetPath(string path)
+        public string GetPath(string path)
         {
             var expectedJsonPath = System.IO.Path.Combine(TestContext.CurrentContext.TestDirectory, path);
             return expectedJsonPath;
@@ -102,7 +102,7 @@ namespace WebservicesIntegrationTests
         /// <returns>
         /// a JSON string
         /// </returns>
-        protected string GetJsonFromFile(string path)
+        public string GetJsonFromFile(string path)
         {
             var content = System.IO.File.ReadAllText(path);
             return content;
