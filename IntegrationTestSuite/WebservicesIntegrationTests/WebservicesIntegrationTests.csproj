@@ -381,6 +381,12 @@
     <None Include="Tests\SiteDirectory\Definition\PostNewDefinition.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Tests\SiteDirectory\Definition\PostNoteExampleNewDefinition.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tests\SiteDirectory\Definition\PostReorderNoteExampleInDefinition.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Tests\SiteDirectory\EngineeringModelSetup\PostAddActiveDomain.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
