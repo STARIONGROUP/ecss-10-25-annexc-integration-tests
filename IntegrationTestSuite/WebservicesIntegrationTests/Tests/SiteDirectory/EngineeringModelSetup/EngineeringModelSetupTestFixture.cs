@@ -301,7 +301,7 @@ namespace WebservicesIntegrationTests
             CollectionAssert.AreEquivalent(expectedRequirementsSpecifications, requirementsSpecifications);
             
             var domainFileStoresArray = (JArray)iteration[PropertyNames.DomainFileStore];
-            Assert.AreEqual(1, domainFileStoresArray.Count);
+            Assert.AreEqual(0, domainFileStoresArray.Count);
 
             var expectedActualFiniteStateLists = new string[] {};
             var actualFiniteStateListsArray = (JArray)iteration[PropertyNames.ActualFiniteStateList];
