@@ -198,6 +198,12 @@
     <None Include="Tests\EngineeringModel\AndExpression\PostNewAndExpression.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Tests\EngineeringModel\DomainFileStore\PostAddDomainOfExpertise.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tests\EngineeringModel\DomainFileStore\PostDeleteDomainOfExpertise.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Tests\EngineeringModel\ElementDefinition\POSTDeleteCategory.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
