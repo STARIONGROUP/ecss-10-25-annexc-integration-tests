@@ -1,0 +1,41 @@
+{
+  "_delete": [],
+  "_create": [
+    {
+      "iid": "28c9798f-df28-48c8-b5b2-2f190b575dd1",
+      "revisionNumber": 0,
+      "classKind": "Definition",
+      "content": "words",
+      "languageCode": "nl",
+      "note": [
+        {
+          "k": 13512213,
+          "v": "a6f9789d-26a7-45e6-a528-3cbd1fce3880"
+        },
+        {
+          "k": 125842400,
+          "v": "8ca48538-d39d-4b09-8944-77c34535ce7a"
+        }
+      ],
+      "example": [
+        {
+          "k": 13512213,
+          "v": "a6f9789d-26a7-45e6-a528-3cbd1fce3880"
+        },
+        {
+          "k": 125842400,
+          "v": "8ca48538-d39d-4b09-8944-77c34535ce7a"
+        }
+      ]
+    }
+  ],
+  "_update": [
+    {
+      "classKind": "SiteReferenceDataLibrary",
+      "iid": "c454c687-ba3e-44c4-86bc-44544b2c7880",
+      "definition": [
+        "28c9798f-df28-48c8-b5b2-2f190b575dd1"
+      ]
+    }
+  ]
+}

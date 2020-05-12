@@ -265,7 +265,7 @@ namespace WebservicesIntegrationTests
             IList<string> constantsList = constantsArray.Select(x => (string)x).ToList();
             CollectionAssert.AreEquivalent(expectedConstants, constantsList);
 
-            //Definition
+            // Definition
             var definition = jArray.Single(x => (string)x[PropertyNames.Iid] == "28c9798f-df28-48c8-b5b2-2f190b575dd1");
 
             // verify that the amount of returned properties 
@@ -293,5 +293,61 @@ namespace WebservicesIntegrationTests
                 definition["note"].ToString());
             CollectionAssert.AreEquivalent(expectedNotes, notesArray);
         }
+
+        [Test]
+        public void VerifyDefinitionThatNotesAndExamplesCanBeReordered()
+        {
+            var uri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            var postBodyPath1 = this.GetPath("Tests/SiteDirectory/Definition/PostNoteExampleNewDefinition.json");
+            var postBody = base.GetJsonFromFile(postBodyPath1);
+            var jArray1 = this.WebClient.PostDto(uri, postBody);
+
+            // Verify that the amount of returned properties in Definition 
+            var definition = jArray1.Single(x => (string)x[PropertyNames.Iid] == "28c9798f-df28-48c8-b5b2-2f190b575dd1");
+            Assert.AreEqual(8, definition.Children().Count());
+            Assert.AreEqual("28c9798f-df28-48c8-b5b2-2f190b575dd1", (string)definition[PropertyNames.Iid]);
+            Assert.AreEqual(2, (int)definition[PropertyNames.RevisionNumber]);
+            Assert.AreEqual("Definition", (string)definition[PropertyNames.ClassKind]);
+            Assert.AreEqual("words", (string)definition[PropertyNames.Content]);
+            Assert.AreEqual("nl", (string)definition[PropertyNames.LanguageCode]);
+            Assert.AreEqual(2, (definition[PropertyNames.Note]).Count());
+            Assert.AreEqual(2, (definition[PropertyNames.Example]).Count());
+
+            var firstNote = definition[PropertyNames.Note].ToList()[0];
+            var secondNote = definition[PropertyNames.Note].ToList()[1];
+            Assert.AreEqual("a6f9789d-26a7-45e6-a528-3cbd1fce3880",(string)firstNote["v"]);
+            Assert.AreEqual("8ca48538-d39d-4b09-8944-77c34535ce7a",(string)secondNote["v"]);
+
+            var firstExample = definition[PropertyNames.Example].ToList()[0];
+            var secondExample = definition[PropertyNames.Example].ToList()[1];
+            Assert.AreEqual("a6f9789d-26a7-45e6-a528-3cbd1fce3880", (string)firstExample["v"]);
+            Assert.AreEqual("8ca48538-d39d-4b09-8944-77c34535ce7a", (string)secondExample["v"]);
+
+            // Reorder Notes in Definition
+            var postBodyPath2 = this.GetPath("Tests/SiteDirectory/Definition/ReorderNoteExampleInDefinition.json");
+            var postBody2 = this.GetJsonFromFile(postBodyPath2);
+            var jArray2 = this.WebClient.PostDto(uri, postBody2);
+
+            // Verify that the amount of returned properties in Definition 
+            definition = jArray2.Single(x => (string)x[PropertyNames.Iid] == "28c9798f-df28-48c8-b5b2-2f190b575dd1");
+            Assert.AreEqual(8, definition.Children().Count());
+            Assert.AreEqual("28c9798f-df28-48c8-b5b2-2f190b575dd1", (string)definition[PropertyNames.Iid]);
+            Assert.AreEqual(3, (int)definition[PropertyNames.RevisionNumber]);
+            Assert.AreEqual("Definition", (string)definition[PropertyNames.ClassKind]);
+            Assert.AreEqual("words", (string)definition[PropertyNames.Content]);
+            Assert.AreEqual("nl", (string)definition[PropertyNames.LanguageCode]);
+            Assert.AreEqual(2, (definition[PropertyNames.Note]).Count());
+            Assert.AreEqual(2, (definition[PropertyNames.Example]).Count());
+
+            firstNote = definition[PropertyNames.Note].ToList()[0];
+            secondNote = definition[PropertyNames.Note].ToList()[1];
+            Assert.AreEqual("8ca48538-d39d-4b09-8944-77c34535ce7a", (string)firstNote["v"]);
+            Assert.AreEqual("a6f9789d-26a7-45e6-a528-3cbd1fce3880", (string)secondNote["v"]);
+
+            firstExample = definition[PropertyNames.Example].ToList()[0];
+            secondExample = definition[PropertyNames.Example].ToList()[1];
+            Assert.AreEqual("8ca48538-d39d-4b09-8944-77c34535ce7a", (string)firstExample["v"]);
+            Assert.AreEqual("a6f9789d-26a7-45e6-a528-3cbd1fce3880", (string)secondExample["v"]);
+           }
     }
 }
