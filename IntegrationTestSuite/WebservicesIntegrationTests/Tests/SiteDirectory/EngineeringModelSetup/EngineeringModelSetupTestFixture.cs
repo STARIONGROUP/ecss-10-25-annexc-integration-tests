@@ -23,6 +23,9 @@ namespace WebservicesIntegrationTests
     using System;
     using System.Collections.Generic;
     using System.Linq;
+
+    using Newtonsoft.Json;
+
     using NUnit.Framework;
     using Newtonsoft.Json.Linq;
 
@@ -522,6 +525,154 @@ namespace WebservicesIntegrationTests
             var iterationSetupsArray = (JArray) engineeringModelSetup[PropertyNames.IterationSetup];
             IList<string> iterationSetupsList = iterationSetupsArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedIterationSetups, iterationSetupsList);
+        }
+
+        [Test]
+        public void VerifyThatDomainFileStoreWillNotBeCreateWhenDomainOfExpertiseWillBeAddedToExistingEngineeringModelSetup()
+        {
+            var siteDirectoryUri =
+                new Uri(string.Format(UriFormat, this.Settings.Hostname,
+                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
+
+            var postBodyPath = this.GetPath("Tests/SiteDirectory/EngineeringModelSetup/PostEngineeringModelSetup.json");
+            var postBody = base.GetJsonFromFile(postBodyPath);
+            var jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
+
+            var engineeringModelSetupsUri =
+                new Uri(string.Format(UriFormat, this.Settings.Hostname,
+                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/model"));
+
+            jArray = this.WebClient.GetDto(engineeringModelSetupsUri);
+            Assert.AreEqual(2, jArray.Count);
+            var engineeringModelSetup = jArray.Single(x => (string) x[PropertyNames.Iid] == "ba097bf8-c916-4134-8471-4a1eb4efb2f7");
+            Assert.AreEqual("ba097bf8-c916-4134-8471-4a1eb4efb2f7", (string) engineeringModelSetup[PropertyNames.Iid]);
+            var model = (string) engineeringModelSetup[PropertyNames.EngineeringModelIid];
+            Assert.AreEqual("1f3c2199-2ddf-4a52-a53a-97436a695d35", model);
+
+            // Check DomainOfExpertise in EngineeringModelSetup
+            var expectedActiveDomains = new string[]
+            {
+                "0e92edde-fdff-41db-9b1d-f2e484f12535"
+            };
+
+            var activeDomainsArray = (JArray) engineeringModelSetup[PropertyNames.ActiveDomain];
+            IList<string> activeDomainsList = activeDomainsArray.Select(x => (string) x).ToList();
+            CollectionAssert.AreEquivalent(expectedActiveDomains, activeDomainsList);
+
+            // Check DomainFileStore in EngineeringModel correlated to EngineeringModelSetup
+            var engineeringModelUri =
+                new Uri(string.Format(UriFormat, this.Settings.Hostname,
+                    "/EngineeringModel/" + model));
+
+            jArray = this.WebClient.GetDto(engineeringModelUri);
+            var engineeringModel = jArray.Single(x => (string) x[PropertyNames.Iid] == model.ToString());
+            var iterationsArray = (JArray) engineeringModel[PropertyNames.Iteration];
+
+            var iterationUri =
+                new Uri(string.Format(UriFormat, this.Settings.Hostname,
+                    "/EngineeringModel/1f3c2199-2ddf-4a52-a53a-97436a695d35/iteration/" + iterationsArray[0].ToString()));
+
+            jArray = this.WebClient.GetDto(iterationUri);
+            var iteration = jArray.Single(x => (string) x[PropertyNames.Iid] == iterationsArray[0].ToString());
+            var domainFileStoresArray = (JArray) iteration[PropertyNames.DomainFileStore];
+            Assert.AreEqual(0, domainFileStoresArray.Count);
+
+            // Check DomainFileStore after postAdd DomainOfExpertise in EngineeringModelSetup
+
+            postBodyPath = this.GetPath("Tests/SiteDirectory/EngineeringModelSetup/PostAddActiveDomain.json");
+            postBody = base.GetJsonFromFile(postBodyPath);
+            jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
+
+            engineeringModelSetupsUri =
+                new Uri(string.Format(UriFormat, this.Settings.Hostname,
+                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/model/ba097bf8-c916-4134-8471-4a1eb4efb2f7"));
+
+            jArray = this.WebClient.GetDto(engineeringModelSetupsUri);
+            engineeringModelSetup = jArray.Single(x => (string) x[PropertyNames.Iid] == "ba097bf8-c916-4134-8471-4a1eb4efb2f7");
+
+            expectedActiveDomains = new string[]
+            {
+                "0e92edde-fdff-41db-9b1d-f2e484f12535",
+                "eb759723-14b9-49f4-8611-544d037bb764"
+            };
+
+            activeDomainsArray = (JArray) engineeringModelSetup[PropertyNames.ActiveDomain];
+            activeDomainsList = activeDomainsArray.Select(x => (string) x).ToList();
+            CollectionAssert.AreEquivalent(expectedActiveDomains, activeDomainsList);
+
+            jArray = this.WebClient.GetDto(iterationUri);
+            iteration = jArray.Single(x => (string) x[PropertyNames.Iid] == iterationsArray[0].ToString());
+            domainFileStoresArray = (JArray) iteration[PropertyNames.DomainFileStore];
+            Assert.AreEqual(0, domainFileStoresArray.Count);
+
+        }
+
+        [Test]
+        public void VerifyThatDomainFileStoreWillNotBeDeletedWhenDomainOfExpertiseWillBeRemovedFromExistingEngineeringModelSetup()
+        {
+
+            //add Json with domain file store
+            var siteDirectoryUri =
+                new Uri(string.Format(UriFormat, this.Settings.Hostname,
+                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            var postBodyPath = this.GetPath("Tests/SiteDirectory/EngineeringModelSetup/PostEngineeringModelSetup.json");
+            var postBody = base.GetJsonFromFile(postBodyPath);
+            var jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
+
+            var engineeringModelSetupsUri =
+                new Uri(string.Format(UriFormat, this.Settings.Hostname,
+                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/model"));
+
+            jArray = this.WebClient.GetDto(engineeringModelSetupsUri);
+            Assert.AreEqual(2, jArray.Count);
+            var engineeringModelSetup = jArray.Single(x => (string)x[PropertyNames.Iid] == "ba097bf8-c916-4134-8471-4a1eb4efb2f7");
+            Assert.AreEqual("ba097bf8-c916-4134-8471-4a1eb4efb2f7", (string)engineeringModelSetup[PropertyNames.Iid]);
+            var model = (string)engineeringModelSetup[PropertyNames.EngineeringModelIid];
+            Assert.AreEqual("1f3c2199-2ddf-4a52-a53a-97436a695d35", model);
+
+            var engineeringModelUri =
+                new Uri(string.Format(UriFormat, this.Settings.Hostname,
+                    "/EngineeringModel/" + model));
+
+            jArray = this.WebClient.GetDto(engineeringModelUri);
+            var engineeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == model.ToString());
+            var iterationsArray = (JArray)engineeringModel[PropertyNames.Iteration];
+
+            var iterationUri =
+                new Uri(string.Format(UriFormat, this.Settings.Hostname,
+                    "/EngineeringModel/1f3c2199-2ddf-4a52-a53a-97436a695d35/iteration/" + iterationsArray[0].ToString()));
+
+            postBodyPath = this.GetPath("Tests/SiteDirectory/EngineeringModelSetup/PostUpdateIteration.json");
+            postBody = base.GetJsonFromFile(postBodyPath);
+            var index = postBody.IndexOf('!');
+            var postBodyChanged =  postBody.Remove(index,1).Insert(index, iterationsArray[0].ToString());
+            jArray = this.WebClient.PostDto(iterationUri, postBodyChanged);
+
+
+            //// Check DomainFileStore after delete DomainOfExpertise in EngineeringModelSetup
+            //siteDirectoryUri =
+            //    new Uri(string.Format(UriFormat, this.Settings.Hostname,
+            //        "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
+
+            //postBodyPath = this.GetPath("Tests/SiteDirectory/EngineeringModelSetup/PostDeleteActiveDomain.json");
+            //postBody = base.GetJsonFromFile(postBodyPath);
+            //jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
+
+            //engineeringModelSetupsUri =
+            //    new Uri(string.Format(UriFormat, this.Settings.Hostname,
+            //        "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/model/ba097bf8-c916-4134-8471-4a1eb4efb2f7"));
+
+            //jArray = this.WebClient.GetDto(engineeringModelSetupsUri);
+            //engineeringModelSetup = jArray.Single(x => (string)x[PropertyNames.Iid] == "ba097bf8-c916-4134-8471-4a1eb4efb2f7");
+            //expectedActiveDomains = new string[] {};
+            //activeDomainsArray = (JArray)engineeringModelSetup[PropertyNames.ActiveDomain];
+            //activeDomainsList = activeDomainsArray.Select(x => (string)x).ToList();
+            //CollectionAssert.AreEquivalent(expectedActiveDomains, activeDomainsList);
+
+            //jArray = this.WebClient.GetDto(iterationUri);
+            //iteration = jArray.Single(x => (string)x[PropertyNames.Iid] == iterationsArray[0].ToString());
+            //domainFileStoresArray = (JArray)iteration[PropertyNames.DomainFileStore];
+            //Assert.AreEqual(0, domainFileStoresArray.Count);
         }
     }
 }

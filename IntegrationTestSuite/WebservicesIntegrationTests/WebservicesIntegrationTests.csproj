@@ -198,12 +198,6 @@
     <None Include="Tests\EngineeringModel\AndExpression\PostNewAndExpression.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\DomainFileStore\PostAddDomainOfExpertise.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Tests\EngineeringModel\DomainFileStore\PostDeleteDomainOfExpertise.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="Tests\EngineeringModel\ElementDefinition\POSTDeleteCategory.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -390,7 +384,13 @@
     <None Include="Tests\SiteDirectory\EngineeringModelSetup\PostAddActiveDomain.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Tests\SiteDirectory\EngineeringModelSetup\PostDeleteActiveDomain.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Tests\SiteDirectory\EngineeringModelSetup\PostEngineeringModelSetup.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tests\SiteDirectory\EngineeringModelSetup\PostUpdateIteration.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Tests\SiteDirectory\EnumerationParameterType\PostNewEnumerationParameterType.json">
