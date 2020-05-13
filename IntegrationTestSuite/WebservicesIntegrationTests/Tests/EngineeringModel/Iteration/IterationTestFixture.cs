@@ -353,7 +353,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(false, (bool)iterationSetup[PropertyNames.IsDeleted]);
             Assert.IsEmpty(iterationSetup[PropertyNames.SourceIterationSetup]);
             Assert.IsEmpty(iterationSetup[PropertyNames.FrozenOn]);
-
+            
             //Check existing iteration after delete iterationSetup
             engineeringModelUri =
                 new Uri(string.Format(UriFormat, this.Settings.Hostname,

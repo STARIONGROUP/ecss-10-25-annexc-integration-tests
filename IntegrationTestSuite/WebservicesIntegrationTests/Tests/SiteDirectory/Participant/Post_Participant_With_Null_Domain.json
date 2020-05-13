@@ -1,0 +1,14 @@
+﻿{
+  "_delete": [],
+  "_create": [],
+  "_update": [
+    {
+      "classKind": "Participant",
+      "iid": "284334dd-e8e5-42d6-bc8a-715c507a7f02",
+      "domain": null,
+      "modifiedOn": "2020-04-14T17:42:59.264Z",
+      "selectedDomain": null
+    }
+  ],
+  "_copy": []
+}
