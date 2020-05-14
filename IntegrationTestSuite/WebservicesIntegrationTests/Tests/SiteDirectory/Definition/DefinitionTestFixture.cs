@@ -324,7 +324,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual("8ca48538-d39d-4b09-8944-77c34535ce7a", (string)secondExample["v"]);
 
             // Reorder Notes in Definition
-            var postBodyPath2 = this.GetPath("Tests/SiteDirectory/Definition/ReorderNoteExampleInDefinition.json");
+            var postBodyPath2 = this.GetPath("Tests/SiteDirectory/Definition/PostReorderNoteExampleInDefinition.json");
             var postBody2 = this.GetJsonFromFile(postBodyPath2);
             var jArray2 = this.WebClient.PostDto(uri, postBody2);
 
