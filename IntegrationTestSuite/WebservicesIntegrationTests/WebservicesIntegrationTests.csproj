@@ -390,6 +390,9 @@
     <None Include="Tests\SiteDirectory\EngineeringModelSetup\PostAddActiveDomain.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Tests\SiteDirectory\EngineeringModelSetup\PostDeleteActiveDomain.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Tests\SiteDirectory\EngineeringModelSetup\PostEngineeringModelSetup.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

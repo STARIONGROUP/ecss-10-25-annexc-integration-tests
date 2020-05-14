@@ -1,0 +1,11 @@
+{
+  "_delete": [
+    {
+      "activeDomain": [ "0e92edde-fdff-41db-9b1d-f2e484f12535" ],
+      "classKind": "EngineeringModelSetup",
+      "iid": "116f6253-89bb-47d4-aa24-d11d197e43c9"
+    }
+  ],
+  "_create": [],
+  "_update": []
+}
