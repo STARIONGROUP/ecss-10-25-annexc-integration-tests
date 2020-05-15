@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="FileTestFixture.cs" company="RHEA System">
 //
-//   Copyright 2017 RHEA System 
+//   Copyright 2017-2020 RHEA System 
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ namespace WebservicesIntegrationTests
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Net.Http;
     using System.Security.Cryptography;
 
     using Ionic.Zip;
@@ -31,6 +32,7 @@ namespace WebservicesIntegrationTests
     using Newtonsoft.Json;
 
     using NUnit.Framework;
+
     using Newtonsoft.Json.Linq;
 
     [TestFixture]
@@ -91,6 +93,20 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        public void VerifyThatFileAndSubsequentRevisionCannotBeUploadedWithWebApiWhenParticipantIsNotAnOwner()
+        {
+            SiteDirectoryTestFixture.AddDomainExpertUserJane(this, out var userName, out var passWord);
+            this.CreateNewWebClientForUser(userName, passWord);
+
+            var iterationUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var postJsonPath = this.GetPath("Tests/EngineeringModel/File/PostNewFile.json");
+            var postFilePath = this.GetPath("Tests/EngineeringModel/File/2990BA2444A937A28E7B1E2465FCDF949B8F5368");
+
+            // Jane is not allowed to upload
+            Assert.Throws<HttpRequestException>(() => this.WebClient.PostFile(iterationUri, postJsonPath, postFilePath));
+        }
+
+        [Test]
         public void VerifyThatFileAndSubsequentRevisionCanBeUploadedWithWebApi()
         {
             var iterationUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
@@ -106,10 +122,10 @@ namespace WebservicesIntegrationTests
             var engineeeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
             Assert.AreEqual(2, (int)engineeeringModel[PropertyNames.RevisionNumber]);
 
-            // get a specific CommonFileStore from the result by it's unique id
-            var commonFileStore =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "8e5ca9cc-3da8-4e66-9172-7c3b2464a59c");
-            Assert.AreEqual(2, (int)commonFileStore[PropertyNames.RevisionNumber]);
+            // get a specific domainFileStore from the result by it's unique id
+            var domainFileStore =
+                jArray.Single(x => (string)x[PropertyNames.Iid] == "da7dddaa-02aa-4897-9935-e8d66c811a96");
+            Assert.AreEqual(2, (int)domainFileStore[PropertyNames.RevisionNumber]);
 
             // get a specific File from the result by it's unique id
             var file =
@@ -168,12 +184,12 @@ namespace WebservicesIntegrationTests
 
             // get a specific File from the result by it's unique id
             file =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "8ac6db3e-9525-4f3e-93ea-707076c07fc1");
+                jArray.Single(x => (string)x[PropertyNames.Iid] == "95bf0f17-1273-4338-98ae-839016242775");
             Assert.AreEqual(3, (int)file[PropertyNames.RevisionNumber]);
 
             expectedFileRevisions = new string[]
                                             {
-                                                "76e9b7fc-edc4-4ca3-89ba-eac014e7d9f8",
+                                                "5544bb87-dc38-45d5-9d92-c580d3fe0442",
                                                 "1304d40a-cb2e-4608-a353-cb7f65000559"
                                             };
             fileRevisionsArray = (JArray)file[PropertyNames.FileRevision];
@@ -198,6 +214,21 @@ namespace WebservicesIntegrationTests
             fileTypesArray = JsonConvert.DeserializeObject<List<OrderedItem>>(
                 fileRevision[PropertyNames.FileType].ToString());
             CollectionAssert.AreEquivalent(expectedFileTypes, fileTypesArray);
+        }
+
+        [Test]
+        public void VerifyThatFileCannotBeUploadedWhenParticipantIsNotOwner()
+        {
+            SiteDirectoryTestFixture.AddDomainExpertUserJane(this, out var userName, out var passWord);
+            this.CreateNewWebClientForUser(userName, passWord);
+
+            // Subsequent revision
+            var fileUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/file/95bf0f17-1273-4338-98ae-839016242775"));
+            var postJsonPath = this.GetPath("Tests/EngineeringModel/File/PostNewFile.json");
+            var postFilePath = this.GetPath("Tests/EngineeringModel/File/2990BA2444A937A28E7B1E2465FCDF949B8F5368");
+
+            // Jane is not allowed to upload
+            Assert.Throws<HttpRequestException>(() => this.WebClient.PostFile(fileUri, postJsonPath, postFilePath));
         }
 
         [Test]
@@ -228,8 +259,8 @@ namespace WebservicesIntegrationTests
             var getFileUriForTxt = new Uri(
                 string.Format(
                     UriFormat, 
-                    this.Settings.Hostname, 
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/commonFileStore/8e5ca9cc-3da8-4e66-9172-7c3b2464a59c/file/8ac6db3e-9525-4f3e-93ea-707076c07fc1/fileRevision/76e9b7fc-edc4-4ca3-89ba-eac014e7d9f8?includeFileData=true"
+                    this.Settings.Hostname,
+                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/domainFileStore/da7dddaa-02aa-4897-9935-e8d66c811a96/file/8ac6db3e-9525-4f3e-93ea-707076c07fc1/fileRevision/76e9b7fc-edc4-4ca3-89ba-eac014e7d9f8?includeFileData=true"
                     ));
 
             var responseBodyForTxt = this.WebClient.GetFileResponseBody(getFileUriForTxt).GetAwaiter().GetResult();
@@ -238,8 +269,8 @@ namespace WebservicesIntegrationTests
             var getFileUriForPdf = new Uri(
                 string.Format(
                     UriFormat, 
-                    this.Settings.Hostname, 
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/commonFileStore/8e5ca9cc-3da8-4e66-9172-7c3b2464a59c/file/8ac6db3e-9525-4f3e-93ea-707076c07fc1/fileRevision/e5b46d1b-7d51-4433-b515-25d7d37a0b50?includeFileData=true"
+                    this.Settings.Hostname,
+                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/domainFileStore/da7dddaa-02aa-4897-9935-e8d66c811a96/file/8ac6db3e-9525-4f3e-93ea-707076c07fc1/fileRevision/e5b46d1b-7d51-4433-b515-25d7d37a0b50?includeFileData=true"
                     ));
 
             var responseBodyForPdf = this.WebClient.GetFileResponseBody(getFileUriForPdf).GetAwaiter().GetResult();
@@ -268,7 +299,7 @@ namespace WebservicesIntegrationTests
             this.WebClient.PostFile(iterationUri, postJsonPath, postFilePath);
 
             // Download a zip archive of the folder
-            var getFileUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/commonFileStore/8e5ca9cc-3da8-4e66-9172-7c3b2464a59c/folder/e80daca0-5c6e-4236-ae34-d23c36244059?includeFileData=true"));
+            var getFileUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/domainFileStore/da7dddaa-02aa-4897-9935-e8d66c811a96/folder/e80daca0-5c6e-4236-ae34-d23c36244059?includeFileData=true"));
             var responseBody = this.WebClient.GetFileResponseBody(getFileUri).GetAwaiter().GetResult();
 
             var path = Path.GetTempFileName();
@@ -301,7 +332,7 @@ namespace WebservicesIntegrationTests
             this.WebClient.PostFile(fileUri2, postJsonPath, postFilePath);
 
             // Download a zip archive of the folder
-            var getFileUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/commonFileStore/8e5ca9cc-3da8-4e66-9172-7c3b2464a59c?includeFileData=true"));
+            var getFileUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/domainFileStore/da7dddaa-02aa-4897-9935-e8d66c811a96?includeFileData=true"));
             var responseBody = this.WebClient.GetFileResponseBody(getFileUri).GetAwaiter().GetResult();
 
             var path = Path.GetTempFileName();
@@ -309,11 +340,13 @@ namespace WebservicesIntegrationTests
             var zip = new ZipFile(path);
             
             // It is assumed that if some information is retrieved from the archive than it is not corrupted
-            Assert.AreEqual(3, zip.Count);
+            Assert.AreEqual(5, zip.Count);
 
             var expectedZipEntries = new string[]
                                          {
-                                             "UserManual_3F64667F0F27A4C4FA1B4BF374033938A542FDD1.txt",
+                                             "FileRevision.tst",
+                                             "UserManual_3F64667F0F27A4C4FA1B4BF374033938A542FDD1.txt", 
+                                             "Test Folder/",
                                              "TestFolder/",
                                              "TestFolder/FileTest.txt"
                                          };

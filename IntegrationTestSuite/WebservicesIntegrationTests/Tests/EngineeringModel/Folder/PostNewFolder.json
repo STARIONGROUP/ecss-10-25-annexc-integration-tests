@@ -1,0 +1,26 @@
+﻿{
+	"_delete": [],
+	"_create": [
+		{
+			"category": [ ],
+			"classKind": "Folder",
+			"name": "TestFolder",
+			"excludedDomain": [ ],
+			"excludedPerson": [ ],
+			"iid": "e80daca0-5c6e-4236-ae34-d23c36244059",
+			"modifiedOn": "0001-01-01T00:00:00Z",
+			"owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+			"revisionNumber": 0,
+			"containingFolder":  null,
+			"creator": "284334dd-e8e5-42d6-bc8a-715c507a7f02"
+		}
+	],
+	"_update": [
+		{
+			"classKind": "DomainFileStore",
+			"iid": "da7dddaa-02aa-4897-9935-e8d66c811a96",
+			"folder": [ "e80daca0-5c6e-4236-ae34-d23c36244059" ]
+		}
+	],
+	"_copy": []
+}

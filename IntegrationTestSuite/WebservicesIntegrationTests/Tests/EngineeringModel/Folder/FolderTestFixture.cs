@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="FolderTestFixture.cs" company="RHEA System">
 //
-//   Copyright 2016 RHEA System 
+//   Copyright 2016-2020 RHEA System 
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -21,14 +21,15 @@
 namespace WebservicesIntegrationTests
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
+    using System.Net;
+
     using NUnit.Framework;
+
     using Newtonsoft.Json.Linq;
-    using Newtonsoft.Json;
 
     [TestFixture]
-    public class FolderTestFixture : WebClientTestFixtureBase
+    public class FolderTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
         /// <summary>
         /// Verification that the Folder objects are returned from the data-source and that the 
@@ -82,6 +83,46 @@ namespace WebservicesIntegrationTests
             var folder =
                 jArray.Single(x => (string)x[PropertyNames.Iid] == "67cdb7de-7721-40a0-9ca2-10a5cf7742fc");
             FolderTestFixture.VerifyProperties(folder);
+        }
+
+        [Test]
+        public void VerifyThatFolderCanBeAddedWithWebApi()
+        {
+            var iterationUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var postJsonPath = this.GetPath("Tests/EngineeringModel/Folder/PostNewFolder.json");
+            var postBody = base.GetJsonFromFile(postJsonPath);
+
+            var jArray =  this.WebClient.PostDto(iterationUri, postBody);
+
+            Assert.AreEqual(3, jArray.Count);
+
+            // get a specific EngineeeringModel from the result by it's unique id
+            var engineeeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            Assert.AreEqual(2, (int)engineeeringModel[PropertyNames.RevisionNumber]);
+
+            // get a specific CommonFileStore from the result by it's unique id
+            var domainFileStore = jArray.Single(x => (string)x[PropertyNames.Iid] == "da7dddaa-02aa-4897-9935-e8d66c811a96");
+
+            Assert.AreEqual(2, (int)domainFileStore[PropertyNames.RevisionNumber]);
+
+            // get a specific Folder from the result by it's unique id
+            var folder = jArray.Single(x => (string)x[PropertyNames.Iid] == "e80daca0-5c6e-4236-ae34-d23c36244059");
+            Assert.AreEqual(2, (int)folder[PropertyNames.RevisionNumber]);
+            Assert.AreEqual("Folder", (string)folder[PropertyNames.ClassKind]);
+        }
+
+        [Test]
+        public void VerifyThatFolderCannotBeAddedWithWebApiWhenParticipantIsNotAnOwner()
+        {
+            SiteDirectoryTestFixture.AddDomainExpertUserJane(this, out var userName, out var passWord);
+            this.CreateNewWebClientForUser(userName, passWord);
+
+            var iterationUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var postJsonPath = this.GetPath("Tests/EngineeringModel/Folder/PostNewFolder.json");
+            var postBody = base.GetJsonFromFile(postJsonPath);
+
+            // Jane is not allowed to upload
+            Assert.Throws<WebException>(() => this.WebClient.PostDto(iterationUri, postBody));
         }
 
         /// <summary>
