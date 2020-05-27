@@ -1,0 +1,17 @@
+{
+  "_delete": [],
+  "_create": [],
+  "_update": [
+    {
+      "iid": "af1615f0-b9c8-4654-94aa-11587d1faa59",
+      "classKind": "EnumerationParameterType",
+      "valueDefinition": [
+        {
+          "k": 211917123,
+          "m": 211917125,
+          "v": "896eb954-25ba-4221-b994-763d8d866674"
+        }
+      ]
+    }
+  ]
+}

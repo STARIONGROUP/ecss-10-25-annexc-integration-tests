@@ -1,0 +1,22 @@
+{
+  "_update": [],
+  "_create": [],
+  "_delete": [
+    {
+      "classKind": "Definition",
+      "iid": "28c9798f-df28-48c8-b5b2-2f190b575dd1",
+      "note": [
+        {
+          "k": 125842400,
+          "v": "a6f9789d-26a7-45e6-a528-3cbd1fce3880"
+        }
+      ],
+      "example": [
+        {
+          "k": 125842400,
+          "v": "a6f9789d-26a7-45e6-a528-3cbd1fce3881"
+        }
+      ]
+    }
+  ]
+}

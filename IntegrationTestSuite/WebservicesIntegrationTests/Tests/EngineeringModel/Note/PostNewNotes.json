@@ -1,0 +1,44 @@
+﻿{
+  "_delete": [],
+  "_create": [
+    {
+      "iid": "ab5ddcfb-6302-400b-bd71-17d64a43c747",
+      "revisionNumber": 0,
+      "classKind": "TextualNote",
+      "name": "test note 1",
+      "shortName": "testnote1",
+      "owner": "eb759723-14b9-49f4-8611-544d037bb764",
+      "languageCode": "nl",
+      "content":  "mooi stukje"
+    },
+    {
+      "iid": "85ab7b55-6af5-48fb-a14a-86d16dfe1b57",
+      "revisionNumber": 0,
+      "classKind": "BinaryNote",
+      "name": "test note 2",
+      "shortName": "testnote2",
+      "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+      "fileType": "b16894e4-acb5-4e81-a118-16c00eb86d8f",
+      "caption": "Some file"
+    }
+  ],
+  "_update": [
+    {
+      "classKind": "Page",
+      "iid": "663114f6-9bb1-4751-a3ed-60bad354913e",
+      "note": [
+        {
+          "k": 0,
+          "m": 1,
+          "v": "ab5ddcfb-6302-400b-bd71-17d64a43c747"
+        },
+        {
+          "k": 0,
+          "m": 2,
+          "v": "85ab7b55-6af5-48fb-a14a-86d16dfe1b57"
+        }
+      ]
+    }
+  ]
+}
+

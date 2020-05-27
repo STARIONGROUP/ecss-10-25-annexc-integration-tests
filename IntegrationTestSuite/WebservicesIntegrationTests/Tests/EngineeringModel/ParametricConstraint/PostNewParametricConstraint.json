@@ -1,0 +1,37 @@
+﻿{
+  "_delete": [],
+  "_create": [
+    {
+      "iid": "d8a88095-a51f-4b3a-8746-97659f313143",
+      "revisionNumber": 0,
+      "classKind": "RelationalExpression",
+      "name": "create constraint",
+      "shortName": "createconstraint",
+      "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+      "value": "[\"val\"]",
+      "relationalOperator": "EQ",
+      "parameterType": "35a9cf05-4eba-4cda-b60c-7cfeaac8f892"
+    },
+    {
+      "iid": "5e1ad29c-ac18-474d-832c-5f2d0d203176",
+      "revisionNumber": 0,
+      "classKind": "ParametricConstraint",
+      "name": "create constraint",
+      "shortName": "createconstraint",
+      "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+      "expression": [ "d8a88095-a51f-4b3a-8746-97659f313143" ] 
+    }
+  ],
+  "_update": [
+    {
+      "classKind": "Requirement",
+      "iid": "614e2a69-d602-46be-9311-2fb4d3273e87",
+      "parametricConstraint": [
+        {
+          "k": 2,
+          "v": "5e1ad29c-ac18-474d-832c-5f2d0d203176"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "_create": [],
+  "_delete": [
+    {
+      "classKind": "TelephoneNumber",
+      "iid": "2e6559d6-2ccb-4627-a5f4-5906fb59e969",
+      "vcardType": ["HOME"] 
+    }
+  ],
+  "_update": []
+}

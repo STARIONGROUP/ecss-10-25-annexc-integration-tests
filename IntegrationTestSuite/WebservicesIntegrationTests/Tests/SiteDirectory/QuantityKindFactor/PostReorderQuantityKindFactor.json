@@ -1,0 +1,22 @@
+﻿{
+  "_delete": [],
+  "_create": [],
+  "_update": [
+    {
+      "classKind": "DerivedQuantityKind",
+      "iid": "74d9c38f-5ace-4f90-8841-d0f9942e9d09",
+      "quantityKindFactor": [
+        {
+          "k": 2948121,
+          "m": 1,
+          "v": "ab7e80da-6bc9-427f-b1fb-b97faeeca4c6"
+        },
+        {
+          "k": 2,
+          "m": 3,
+          "v": "6b1b9a7b-8a57-412e-a823-bcc4fd8b67e9"
+        }
+      ]
+    }
+  ]
+}

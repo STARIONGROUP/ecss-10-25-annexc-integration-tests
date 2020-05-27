@@ -1,5 +1,7 @@
 # ecss-10-25-annexc-integration-tests
 This repository contains ECSS-E-TM-10-25 Annex C integration tests. The purpose of the software is to achieve 100% code coverage of all REST API queries that can be performed to determine wheter an ECSS-E-TM-10-25 Annex C implementation is compliant with the ECSS-E-TM-10-25 Annex C.
+In May 2020 a few tests were added for a specific CDP4 extension. These tests are decorated with an Nunit Category attribute so they can be filtered out by the Nunit runner. The Category used here name is 'CdpVersion_1_1_0'.
+See [this website](https://github.com/nunit/docs/wiki/Console-Command-Line) for more info on Nunit test filtering.
 
 ## ECSS-E-TM-10-25
 

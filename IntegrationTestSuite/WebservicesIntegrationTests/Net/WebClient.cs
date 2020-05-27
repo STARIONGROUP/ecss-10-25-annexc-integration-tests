@@ -21,9 +21,12 @@
 namespace WebservicesIntegrationTests.Net
 {
     using System;
+    using System.Diagnostics;
     using System.IO;
+    using System.Linq;
     using System.Net;
     using System.Net.Http;
+    using System.Reflection;
     using System.Text;
     using System.Threading.Tasks;
     using Newtonsoft.Json;
@@ -88,8 +91,10 @@ namespace WebservicesIntegrationTests.Net
         /// </param>
         public void Restore(string hostname)
         {
-            var uriBuilder = new UriBuilder(hostname);
-            uriBuilder.Path = "/Data/Restore";
+            var uriBuilder = new UriBuilder(hostname)
+            {
+                Path = "/Data/Restore"
+            };
 
             var uri = uriBuilder.Uri;
 
@@ -102,7 +107,7 @@ namespace WebservicesIntegrationTests.Net
                 streamWriter.Close();
             }
 
-            var webResponse = (HttpWebResponse)request.GetResponse();            
+            request.GetResponse();
         }
         
         /// <summary>
@@ -119,7 +124,7 @@ namespace WebservicesIntegrationTests.Net
             var webResponse = this.RetrieveHttpGetResponse(uri);
             return this.ExtractJarrayFromResponse(webResponse);
         }
-        
+
         /// <summary>
         /// Performs a POST request on the provided <see cref="Uri"/> and returns a pretty printed JSON string
         /// </summary>
@@ -133,7 +138,18 @@ namespace WebservicesIntegrationTests.Net
         /// </returns>
         public JArray PostDto(Uri uri, string postBody)
         {
-            var webResponse = this.RetrieveHttpPostResponse(uri, postBody);
+            var stackTrace = new StackTrace();
+            var frame = stackTrace.GetFrames()?[1];
+            var method = frame?.GetMethod();
+
+            //Only one or zero version attributes allowed
+            var version = method?.GetCustomAttributes<CdpVersionAttribute>().SingleOrDefault()?.Version;
+
+            var webResponse = 
+                version != null 
+                    ? this.RetrieveHttpPostResponseForVersion(uri, postBody, version) 
+                    : this.RetrieveHttpPostResponse(uri, postBody);
+
             return this.ExtractJarrayFromResponse(webResponse);
         }
 
@@ -271,6 +287,37 @@ namespace WebservicesIntegrationTests.Net
         private HttpWebResponse RetrieveHttpPostResponse(Uri uri, string postBody)
         {
             var request = this.CreateWebRequest(uri, HttpPostMethod);
+
+            using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+            {
+                streamWriter.Write(postBody);
+                streamWriter.Flush();
+                streamWriter.Close();
+            }
+
+            var webResponse = (HttpWebResponse)request.GetResponse();
+            return webResponse;
+        }
+
+        /// <summary>
+        /// Performs a POST request on the provided <see cref="Uri"/> and return a  <see cref="HttpWebResponse"/>
+        /// </summary>
+        /// <param name="uri">
+        /// The <see cref="Uri"/> that the POST request is performed on
+        /// </param>
+        /// <param name="postBody">
+        /// The content that is to be posted to the <see cref="Uri"/>
+        /// </param>
+        /// <param name="version">
+        ///A specific CDP version number is needed
+        /// </param>
+        /// <returns>
+        /// The <see cref="HttpWebResponse"/>.
+        /// </returns>
+        private HttpWebResponse RetrieveHttpPostResponseForVersion(Uri uri, string postBody, string version)
+        {
+            var request = this.CreateWebRequest(uri, HttpPostMethod);
+            request.Headers.Add("Accept-CDP", version);
 
             using (var streamWriter = new StreamWriter(request.GetRequestStream()))
             {

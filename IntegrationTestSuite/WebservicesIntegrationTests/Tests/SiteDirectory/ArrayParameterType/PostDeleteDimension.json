@@ -1,0 +1,16 @@
+﻿{
+  "_update": [],
+  "_create": [],
+  "_delete": [
+    {
+      "classKind": "ArrayParameterType",
+      "dimension": [
+        {
+          "k": 87757890,
+          "v": 2
+        }
+      ],
+      "iid": "267b0d27-0421-453d-951a-4fcacc309a27"
+    }
+  ]
+}

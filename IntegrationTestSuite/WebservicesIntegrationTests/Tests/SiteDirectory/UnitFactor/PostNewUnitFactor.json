@@ -1,0 +1,27 @@
+﻿{
+  "_delete": [],
+  "_create": [
+    {
+      "iid": "7d48eebe-c4e1-4081-ab63-7e4584563708",
+      "revisionNumber": 0,
+      "classKind": "UnitFactor",
+      "name": "create uf",
+      "shortName": "createuf",
+      "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+      "exponent": "[\"1\"]",
+      "unit": "56842970-3915-4369-8712-61cfd8273ef9"
+    }
+  ],
+  "_update": [
+    {
+      "classKind": "DerivedUnit",
+      "iid": "c394eaa9-4832-4b2d-8d88-5e1b2c43732c",
+      "unitFactor": [
+        {
+          "k": 2,
+          "v": "7d48eebe-c4e1-4081-ab63-7e4584563708"
+        }
+      ]
+    }
+  ]
+}

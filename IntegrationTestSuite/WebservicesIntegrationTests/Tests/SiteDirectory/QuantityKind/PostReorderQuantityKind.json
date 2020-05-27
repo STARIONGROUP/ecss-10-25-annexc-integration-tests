@@ -1,0 +1,32 @@
+﻿{
+  "_delete": [],
+  "_create": [],
+  "_update": [
+    {
+      "classKind": "SiteReferenceDataLibrary",
+      "iid": "c454c687-ba3e-44c4-86bc-44544b2c7880",
+      "baseQuantityKind": [
+        {
+          "k": 2948451,
+          "m": 4,
+          "v": "c36e050a-b4f9-4567-b29d-67af9216878e"
+        },
+        {
+          "k": 2948452,
+          "m": 3,
+          "v": "199bec0a-661d-408c-8ca7-718c636c5681"
+        },
+        {
+          "k": 2948453,
+          "m": 2,
+          "v": "8b8a44cd-0071-4acf-b33e-b8c3052821c5"
+        },
+        {
+          "k": 16544539,
+          "m": 1,
+          "v": "4f9f3d9b-f3de-4ef5-b6cb-2e22199fab0d"
+        }
+      ]
+    }
+  ]
+}

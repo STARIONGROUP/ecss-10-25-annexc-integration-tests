@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="QuantityKindTestFixture.cs" company="RHEA System">
 //
-//   Copyright 2018 RHEA System 
+//   Copyright 2018-2020 RHEA System 
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -23,63 +23,65 @@ namespace WebservicesIntegrationTests
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using NUnit.Framework;
-    using Newtonsoft.Json.Linq;
+
     using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
+
+    using NUnit.Framework;
 
     [TestFixture]
     public class QuantityKindTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
         [Test]
-        public void VerifyThatQuantityKindCanBeCreatedWithWebApi()
+        public void VerifyThatQuantityKindCanBeCreatedAndReorderedWithWebApi()
         {
             var siteDirectoryUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
             var postBodyPath = this.GetPath("Tests/SiteDirectory/QuantityKind/PostNewQuantityKind.json");
 
-            var postBody = base.GetJsonFromFile(postBodyPath);
+            var postBody = this.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
 
-            var siteDirectory = jArray.Single(x => (string)x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
+            var siteDirectory = jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
 
             // verify that the amount of returned properties 
             Assert.AreEqual(19, siteDirectory.Children().Count());
 
-            Assert.AreEqual("f13de6f8-b03a-46e7-a492-53b2f260f294", (string)siteDirectory[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int)siteDirectory[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("SiteDirectory", (string)siteDirectory[PropertyNames.ClassKind]);
-            Assert.AreEqual("Test Site Directory", (string)siteDirectory[PropertyNames.Name]);
-            Assert.AreEqual("TEST-SiteDir", (string)siteDirectory[PropertyNames.ShortName]);
-            Assert.AreEqual("ee3ae5ff-ac5e-4957-bab1-7698fba2a267", (string)siteDirectory[PropertyNames.DefaultParticipantRole]);
-            Assert.AreEqual("2428f4d9-f26d-4112-9d56-1c940748df69", (string)siteDirectory[PropertyNames.DefaultPersonRole]);
+            Assert.AreEqual("f13de6f8-b03a-46e7-a492-53b2f260f294", (string) siteDirectory[PropertyNames.Iid]);
+            Assert.AreEqual(2, (int) siteDirectory[PropertyNames.RevisionNumber]);
+            Assert.AreEqual("SiteDirectory", (string) siteDirectory[PropertyNames.ClassKind]);
+            Assert.AreEqual("Test Site Directory", (string) siteDirectory[PropertyNames.Name]);
+            Assert.AreEqual("TEST-SiteDir", (string) siteDirectory[PropertyNames.ShortName]);
+            Assert.AreEqual("ee3ae5ff-ac5e-4957-bab1-7698fba2a267", (string) siteDirectory[PropertyNames.DefaultParticipantRole]);
+            Assert.AreEqual("2428f4d9-f26d-4112-9d56-1c940748df69", (string) siteDirectory[PropertyNames.DefaultPersonRole]);
 
             var expectedOrganizations = new string[] { "cd22fc45-d898-4fac-85fc-fbcb7d7b12a7" };
-            var organizationArray = (JArray)siteDirectory[PropertyNames.Organization];
-            IList<string> organizations = organizationArray.Select(x => (string)x).ToList();
+            var organizationArray = (JArray) siteDirectory[PropertyNames.Organization];
+            var organizations = organizationArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedOrganizations, organizations);
 
             var expectedPersons = new string[] { "77791b12-4c2c-4499-93fa-869df3692d22" };
-            var personArray = (JArray)siteDirectory[PropertyNames.Person];
-            IList<string> persons = personArray.Select(x => (string)x).ToList();
+            var personArray = (JArray) siteDirectory[PropertyNames.Person];
+            var persons = personArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedPersons, persons);
 
             var expectedparticipantRole = new string[] { "ee3ae5ff-ac5e-4957-bab1-7698fba2a267" };
-            var participantRoleArray = (JArray)siteDirectory[PropertyNames.ParticipantRole];
-            IList<string> participantRoles = participantRoleArray.Select(x => (string)x).ToList();
+            var participantRoleArray = (JArray) siteDirectory[PropertyNames.ParticipantRole];
+            var participantRoles = participantRoleArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedparticipantRole, participantRoles);
 
             var expectedsiteReferenceDataLibraries = new string[] { "c454c687-ba3e-44c4-86bc-44544b2c7880" };
-            var siteReferenceDataLibraryArray = (JArray)siteDirectory[PropertyNames.SiteReferenceDataLibrary];
-            IList<string> siteReferenceDataLibraries = siteReferenceDataLibraryArray.Select(x => (string)x).ToList();
+            var siteReferenceDataLibraryArray = (JArray) siteDirectory[PropertyNames.SiteReferenceDataLibrary];
+            var siteReferenceDataLibraries = siteReferenceDataLibraryArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedsiteReferenceDataLibraries, siteReferenceDataLibraries);
 
             var expectedModels = new string[] { "116f6253-89bb-47d4-aa24-d11d197e43c9" };
-            var modelArray = (JArray)siteDirectory[PropertyNames.Model];
-            IList<string> models = modelArray.Select(x => (string)x).ToList();
+            var modelArray = (JArray) siteDirectory[PropertyNames.Model];
+            var models = modelArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedModels, models);
 
             var expectedPersonRoles = new string[] { "2428f4d9-f26d-4112-9d56-1c940748df69" };
-            var personRoleArray = (JArray)siteDirectory[PropertyNames.PersonRole];
-            IList<string> personRoles = personRoleArray.Select(x => (string)x).ToList();
+            var personRoleArray = (JArray) siteDirectory[PropertyNames.PersonRole];
+            var personRoles = personRoleArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedPersonRoles, personRoles);
 
             var expectedlogEntries = new string[]
@@ -87,13 +89,14 @@ namespace WebservicesIntegrationTests
                 "98ba7b8a-1a1b-4569-a17c-b1ff620246a5",
                 "66220289-e6ee-43cb-8fcd-d8e59a3dbf97"
             };
-            var logEntryArray = (JArray)siteDirectory[PropertyNames.LogEntry];
-            IList<string> logEntries = logEntryArray.Select(x => (string)x).ToList();
+
+            var logEntryArray = (JArray) siteDirectory[PropertyNames.LogEntry];
+            var logEntries = logEntryArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedlogEntries, logEntries);
 
             var expecteddomainGroups = new string[] { "86992db5-8ce2-4431-8ff5-6fe794d14687" };
-            var domainGroupArray = (JArray)siteDirectory[PropertyNames.DomainGroup];
-            IList<string> domainGroups = domainGroupArray.Select(x => (string)x).ToList();
+            var domainGroupArray = (JArray) siteDirectory[PropertyNames.DomainGroup];
+            var domainGroups = domainGroupArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expecteddomainGroups, domainGroups);
 
             var expectedDomains = new string[]
@@ -101,43 +104,44 @@ namespace WebservicesIntegrationTests
                 "0e92edde-fdff-41db-9b1d-f2e484f12535",
                 "eb759723-14b9-49f4-8611-544d037bb764"
             };
-            var domainArray = (JArray)siteDirectory[PropertyNames.Domain];
-            IList<string> domains = domainArray.Select(x => (string)x).ToList();
+
+            var domainArray = (JArray) siteDirectory[PropertyNames.Domain];
+            var domains = domainArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedDomains, domains);
 
             var expectedNaturalLanguages = new string[] { "73bf30cc-3573-488f-8746-6c03ba47973e" };
-            var naturalLanguageArray = (JArray)siteDirectory[PropertyNames.NaturalLanguage];
-            IList<string> naturalLanguages = naturalLanguageArray.Select(x => (string)x).ToList();
+            var naturalLanguageArray = (JArray) siteDirectory[PropertyNames.NaturalLanguage];
+            var naturalLanguages = naturalLanguageArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedNaturalLanguages, naturalLanguages);
 
             // SiteReferenceDataLibrary
-            var siteReferenceDataLibrary = jArray.Single(x => (string)x[PropertyNames.Iid] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
+            var siteReferenceDataLibrary = jArray.Single(x => (string) x[PropertyNames.Iid] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
 
             // verify the amount of returned properties 
             Assert.AreEqual(22, siteReferenceDataLibrary.Children().Count());
 
             // assert that the properties are what is expected
-            Assert.AreEqual("c454c687-ba3e-44c4-86bc-44544b2c7880", (string)siteReferenceDataLibrary[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int)siteReferenceDataLibrary[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("SiteReferenceDataLibrary", (string)siteReferenceDataLibrary[PropertyNames.ClassKind]);
+            Assert.AreEqual("c454c687-ba3e-44c4-86bc-44544b2c7880", (string) siteReferenceDataLibrary[PropertyNames.Iid]);
+            Assert.AreEqual(2, (int) siteReferenceDataLibrary[PropertyNames.RevisionNumber]);
+            Assert.AreEqual("SiteReferenceDataLibrary", (string) siteReferenceDataLibrary[PropertyNames.ClassKind]);
 
-            Assert.IsFalse((bool)siteReferenceDataLibrary[PropertyNames.IsDeprecated]);
-            Assert.AreEqual("Test Reference Data Library", (string)siteReferenceDataLibrary[PropertyNames.Name]);
-            Assert.AreEqual("TestRDL", (string)siteReferenceDataLibrary[PropertyNames.ShortName]);
+            Assert.IsFalse((bool) siteReferenceDataLibrary[PropertyNames.IsDeprecated]);
+            Assert.AreEqual("Test Reference Data Library", (string) siteReferenceDataLibrary[PropertyNames.Name]);
+            Assert.AreEqual("TestRDL", (string) siteReferenceDataLibrary[PropertyNames.ShortName]);
 
             var expectedAliases = new string[] { };
-            var aliasesArray = (JArray)siteReferenceDataLibrary[PropertyNames.Alias];
-            IList<string> aliases = aliasesArray.Select(x => (string)x).ToList();
+            var aliasesArray = (JArray) siteReferenceDataLibrary[PropertyNames.Alias];
+            var aliases = aliasesArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedAliases, aliases);
 
             var expectedDefinitions = new string[] { };
-            var definitionsArray = (JArray)siteReferenceDataLibrary[PropertyNames.Definition];
-            IList<string> definitions = definitionsArray.Select(x => (string)x).ToList();
+            var definitionsArray = (JArray) siteReferenceDataLibrary[PropertyNames.Definition];
+            var definitions = definitionsArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedDefinitions, definitions);
 
             var expectedHyperlinks = new string[] { };
-            var hyperlinksArray = (JArray)siteReferenceDataLibrary[PropertyNames.HyperLink];
-            IList<string> h = hyperlinksArray.Select(x => (string)x).ToList();
+            var hyperlinksArray = (JArray) siteReferenceDataLibrary[PropertyNames.HyperLink];
+            var h = hyperlinksArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedHyperlinks, h);
 
             var expectedDefinedCategories = new string[]
@@ -146,8 +150,9 @@ namespace WebservicesIntegrationTests
                 "107fc408-7e6d-4f1a-895a-1b6a6025ac20",
                 "167b5cb0-766e-4ab2-b728-a9c9a662b017"
             };
-            var definedCategoriesArray = (JArray)siteReferenceDataLibrary[PropertyNames.DefinedCategory];
-            IList<string> definedCategoriesList = definedCategoriesArray.Select(x => (string)x).ToList();
+
+            var definedCategoriesArray = (JArray) siteReferenceDataLibrary[PropertyNames.DefinedCategory];
+            var definedCategoriesList = definedCategoriesArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedDefinedCategories, definedCategoriesList);
 
             var expectedParameterTypes = new string[]
@@ -167,20 +172,23 @@ namespace WebservicesIntegrationTests
                 "199bec0a-661d-408c-8ca7-718c636c5681",
                 "8b8a44cd-0071-4acf-b33e-b8c3052821c5"
             };
-            var parameterTypesArray = (JArray)siteReferenceDataLibrary[PropertyNames.ParameterType];
-            IList<string> parameterTypesList = parameterTypesArray.Select(x => (string)x).ToList();
+
+            var parameterTypesArray = (JArray) siteReferenceDataLibrary[PropertyNames.ParameterType];
+            var parameterTypesList = parameterTypesArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedParameterTypes, parameterTypesList);
 
             var expectedBaseQuantityKinds = new List<OrderedItem>
             {
-                new OrderedItem(16544539, "4f9f3d9b-f3de-4ef5-b6cb-2e22199fab0d"),
                 new OrderedItem(2948451, "c36e050a-b4f9-4567-b29d-67af9216878e"),
                 new OrderedItem(2948452, "199bec0a-661d-408c-8ca7-718c636c5681"),
-                new OrderedItem(2948453, "8b8a44cd-0071-4acf-b33e-b8c3052821c5")
+                new OrderedItem(2948453, "8b8a44cd-0071-4acf-b33e-b8c3052821c5"),
+                new OrderedItem(16544539, "4f9f3d9b-f3de-4ef5-b6cb-2e22199fab0d")
             };
+
             var baseQuantityKindsArray = JsonConvert.DeserializeObject<List<OrderedItem>>(
                 siteReferenceDataLibrary[PropertyNames.BaseQuantityKind].ToString());
-            CollectionAssert.AreEquivalent(expectedBaseQuantityKinds, baseQuantityKindsArray);
+
+            CollectionAssert.AreEqual(expectedBaseQuantityKinds, baseQuantityKindsArray);
 
             var expectedScales = new string[]
             {
@@ -190,16 +198,18 @@ namespace WebservicesIntegrationTests
                 "53e82aeb-c42c-475c-b6bf-a102af883471",
                 "f9d4b3c6-91a2-4f38-bb86-f504d6ac706f"
             };
-            var scalesArray = (JArray)siteReferenceDataLibrary[PropertyNames.Scale];
-            IList<string> scalesList = scalesArray.Select(x => (string)x).ToList();
+
+            var scalesArray = (JArray) siteReferenceDataLibrary[PropertyNames.Scale];
+            var scalesList = scalesArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedScales, scalesList);
 
             var expectedUnitPrefixes = new string[]
             {
                 "efa6380d-9508-4f3d-9b43-6ed33125b780"
             };
-            var unitPrefixesArray = (JArray)siteReferenceDataLibrary[PropertyNames.UnitPrefix];
-            IList<string> unitPrefixesList = unitPrefixesArray.Select(x => (string)x).ToList();
+
+            var unitPrefixesArray = (JArray) siteReferenceDataLibrary[PropertyNames.UnitPrefix];
+            var unitPrefixesList = unitPrefixesArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedUnitPrefixes, unitPrefixesList);
 
             var expectedUnits = new string[]
@@ -209,16 +219,18 @@ namespace WebservicesIntegrationTests
                 "0f69c1f9-7896-45fc-830c-1e336d22a64a",
                 "c394eaa9-4832-4b2d-8d88-5e1b2c43732c"
             };
-            var unitsArray = (JArray)siteReferenceDataLibrary[PropertyNames.Unit];
-            IList<string> unitsList = unitsArray.Select(x => (string)x).ToList();
+
+            var unitsArray = (JArray) siteReferenceDataLibrary[PropertyNames.Unit];
+            var unitsList = unitsArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedUnits, unitsList);
 
             var expectedBaseUnits = new string[]
             {
                 "56842970-3915-4369-8712-61cfd8273ef9"
             };
-            var baseUnitsArray = (JArray)siteReferenceDataLibrary[PropertyNames.BaseUnit];
-            IList<string> baseUnitsList = baseUnitsArray.Select(x => (string)x).ToList();
+
+            var baseUnitsArray = (JArray) siteReferenceDataLibrary[PropertyNames.BaseUnit];
+            var baseUnitsList = baseUnitsArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedBaseUnits, baseUnitsList);
 
             var expectedFileTypes = new string[]
@@ -227,24 +239,27 @@ namespace WebservicesIntegrationTests
                 "b16894e4-acb5-4e81-a118-16c00eb86d8f",
                 "f340df66-d65b-4814-a063-01d4dea1941c"
             };
-            var fileTypesArray = (JArray)siteReferenceDataLibrary[PropertyNames.FileType];
-            IList<string> fileTypesList = fileTypesArray.Select(x => (string)x).ToList();
+
+            var fileTypesArray = (JArray) siteReferenceDataLibrary[PropertyNames.FileType];
+            var fileTypesList = fileTypesArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedFileTypes, fileTypesList);
 
             var expectedGlossaries = new string[]
             {
                 "bb08686b-ae03-49eb-9f48-c196b5ad6bda"
             };
-            var glossariesArray = (JArray)siteReferenceDataLibrary[PropertyNames.Glossary];
-            IList<string> glossariesList = glossariesArray.Select(x => (string)x).ToList();
+
+            var glossariesArray = (JArray) siteReferenceDataLibrary[PropertyNames.Glossary];
+            var glossariesList = glossariesArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedGlossaries, glossariesList);
 
             var expectedReferenceSources = new string[]
             {
                 "ffd6c100-6c72-4d2a-8565-ff24bd576a89"
             };
-            var referenceSourcesArray = (JArray)siteReferenceDataLibrary[PropertyNames.ReferenceSource];
-            IList<string> referenceSourcesList = referenceSourcesArray.Select(x => (string)x).ToList();
+
+            var referenceSourcesArray = (JArray) siteReferenceDataLibrary[PropertyNames.ReferenceSource];
+            var referenceSourcesList = referenceSourcesArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedReferenceSources, referenceSourcesList);
 
             var expectedRules = new string[]
@@ -255,8 +270,9 @@ namespace WebservicesIntegrationTests
                 "7a6186ca-10c1-4074-bec1-4a92ce6ae59d",
                 "e7e4eec5-ad39-40a0-9548-9c40d8e6df1b"
             };
-            var rulesArray = (JArray)siteReferenceDataLibrary[PropertyNames.Rule];
-            IList<string> rulesList = rulesArray.Select(x => (string)x).ToList();
+
+            var rulesArray = (JArray) siteReferenceDataLibrary[PropertyNames.Rule];
+            var rulesList = rulesArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedRules, rulesList);
 
             Assert.IsEmpty(siteReferenceDataLibrary[PropertyNames.RequiredRdl]);
@@ -265,147 +281,170 @@ namespace WebservicesIntegrationTests
             {
                 "239754fe-834f-4394-9c3a-26cac7f866d3"
             };
-            var constantsArray = (JArray)siteReferenceDataLibrary[PropertyNames.Constant];
-            IList<string> constantsList = constantsArray.Select(x => (string)x).ToList();
+
+            var constantsArray = (JArray) siteReferenceDataLibrary[PropertyNames.Constant];
+            var constantsList = constantsArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedConstants, constantsList);
 
             // DerivedQuantityKind
             var derivedQuantityKind =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "c36e050a-b4f9-4567-b29d-67af9216878e");
+                jArray.Single(x => (string) x[PropertyNames.Iid] == "c36e050a-b4f9-4567-b29d-67af9216878e");
 
             // verify the amount of returned properties 
             Assert.AreEqual(15, derivedQuantityKind.Children().Count());
 
             // assert that the properties are what is expected
-            Assert.AreEqual("c36e050a-b4f9-4567-b29d-67af9216878e", (string)derivedQuantityKind[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int)derivedQuantityKind[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("DerivedQuantityKind", (string)derivedQuantityKind[PropertyNames.ClassKind]);
-            Assert.AreEqual("Test Derived QuantityKind", (string)derivedQuantityKind[PropertyNames.Name]);
-            Assert.AreEqual("TestDerivedQuantityKind", (string)derivedQuantityKind[PropertyNames.ShortName]);
-            Assert.AreEqual("testSymbol", (string)derivedQuantityKind[PropertyNames.Symbol]);
-            Assert.AreEqual("testQuantityDimensionSymbol", (string)derivedQuantityKind[PropertyNames.QuantityDimensionSymbol]);
-            Assert.AreEqual("53e82aeb-c42c-475c-b6bf-a102af883471", (string)derivedQuantityKind[PropertyNames.DefaultScale]);
-            Assert.IsFalse((bool)derivedQuantityKind[PropertyNames.IsDeprecated]);
+            Assert.AreEqual("c36e050a-b4f9-4567-b29d-67af9216878e", (string) derivedQuantityKind[PropertyNames.Iid]);
+            Assert.AreEqual(2, (int) derivedQuantityKind[PropertyNames.RevisionNumber]);
+            Assert.AreEqual("DerivedQuantityKind", (string) derivedQuantityKind[PropertyNames.ClassKind]);
+            Assert.AreEqual("Test Derived QuantityKind", (string) derivedQuantityKind[PropertyNames.Name]);
+            Assert.AreEqual("TestDerivedQuantityKind", (string) derivedQuantityKind[PropertyNames.ShortName]);
+            Assert.AreEqual("testSymbol", (string) derivedQuantityKind[PropertyNames.Symbol]);
+            Assert.AreEqual("testQuantityDimensionSymbol", (string) derivedQuantityKind[PropertyNames.QuantityDimensionSymbol]);
+            Assert.AreEqual("53e82aeb-c42c-475c-b6bf-a102af883471", (string) derivedQuantityKind[PropertyNames.DefaultScale]);
+            Assert.IsFalse((bool) derivedQuantityKind[PropertyNames.IsDeprecated]);
 
             var expectedQuantityKindFactors = new List<OrderedItem>
             {
                 new OrderedItem(2948456, "3cec3570-df25-4b73-9283-2c6461dc8c36")
             };
+
             var quantityKindsArray = JsonConvert.DeserializeObject<List<OrderedItem>>(
                 derivedQuantityKind[PropertyNames.QuantityKindFactor].ToString());
+
             CollectionAssert.AreEquivalent(expectedQuantityKindFactors, quantityKindsArray);
 
             var expectedDerivedCategories = new string[] { };
-            var derivedCategoriesArray = (JArray)derivedQuantityKind[PropertyNames.Category];
-            IList<string> derivedCategories = derivedCategoriesArray.Select(x => (string)x).ToList();
+            var derivedCategoriesArray = (JArray) derivedQuantityKind[PropertyNames.Category];
+            var derivedCategories = derivedCategoriesArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedDerivedCategories, derivedCategories);
 
-            var expectedDerivedPossibleScales = new [] { "53e82aeb-c42c-475c-b6bf-a102af883471" };
-            var derivedPossibleScalesArray = (JArray)derivedQuantityKind[PropertyNames.PossibleScale];
-            IList<string> derivedPossibleScales = derivedPossibleScalesArray.Select(x => (string)x).ToList();
+            var expectedDerivedPossibleScales = new[] { "53e82aeb-c42c-475c-b6bf-a102af883471" };
+            var derivedPossibleScalesArray = (JArray) derivedQuantityKind[PropertyNames.PossibleScale];
+            var derivedPossibleScales = derivedPossibleScalesArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedDerivedPossibleScales, derivedPossibleScales);
 
             var expectedDerivedAliases = new string[] { };
-            var derivedAliasesArray = (JArray)derivedQuantityKind[PropertyNames.Alias];
-            IList<string> derivedAliases = derivedAliasesArray.Select(x => (string)x).ToList();
+            var derivedAliasesArray = (JArray) derivedQuantityKind[PropertyNames.Alias];
+            var derivedAliases = derivedAliasesArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedDerivedAliases, derivedAliases);
 
             var expectedDerivedDefinitions = new string[] { };
-            var derivedDefinitionsArray = (JArray)derivedQuantityKind[PropertyNames.Definition];
-            IList<string> derivedDefinitions = derivedDefinitionsArray.Select(x => (string)x).ToList();
+            var derivedDefinitionsArray = (JArray) derivedQuantityKind[PropertyNames.Definition];
+            var derivedDefinitions = derivedDefinitionsArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedDerivedDefinitions, derivedDefinitions);
 
             var expectedDerivedHyperlinks = new string[] { };
-            var derivedHyperlinksArray = (JArray)derivedQuantityKind[PropertyNames.HyperLink];
-            IList<string> derivedHyperLinks = derivedHyperlinksArray.Select(x => (string)x).ToList();
+            var derivedHyperlinksArray = (JArray) derivedQuantityKind[PropertyNames.HyperLink];
+            var derivedHyperLinks = derivedHyperlinksArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedDerivedHyperlinks, derivedHyperLinks);
 
             // SimpleQuantityKind
             var simpleQuantityKind =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "199bec0a-661d-408c-8ca7-718c636c5681");
+                jArray.Single(x => (string) x[PropertyNames.Iid] == "199bec0a-661d-408c-8ca7-718c636c5681");
 
             // verify the amount of returned properties 
             Assert.AreEqual(14, simpleQuantityKind.Children().Count());
 
             // assert that the properties are what is expected
-            Assert.AreEqual("199bec0a-661d-408c-8ca7-718c636c5681", (string)simpleQuantityKind[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int)simpleQuantityKind[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("SimpleQuantityKind", (string)simpleQuantityKind[PropertyNames.ClassKind]);
-            Assert.AreEqual("Test Simple QuantityKind", (string)simpleQuantityKind[PropertyNames.Name]);
-            Assert.AreEqual("TestSimpleQuantityKind", (string)simpleQuantityKind[PropertyNames.ShortName]);
-            Assert.AreEqual("testSymbol", (string)simpleQuantityKind[PropertyNames.Symbol]);
-            Assert.AreEqual("testQuantityDimensionSymbol", (string)simpleQuantityKind[PropertyNames.QuantityDimensionSymbol]);
-            Assert.AreEqual("53e82aeb-c42c-475c-b6bf-a102af883471", (string)simpleQuantityKind[PropertyNames.DefaultScale]);
-            Assert.IsFalse((bool)simpleQuantityKind[PropertyNames.IsDeprecated]);
+            Assert.AreEqual("199bec0a-661d-408c-8ca7-718c636c5681", (string) simpleQuantityKind[PropertyNames.Iid]);
+            Assert.AreEqual(2, (int) simpleQuantityKind[PropertyNames.RevisionNumber]);
+            Assert.AreEqual("SimpleQuantityKind", (string) simpleQuantityKind[PropertyNames.ClassKind]);
+            Assert.AreEqual("Test Simple QuantityKind", (string) simpleQuantityKind[PropertyNames.Name]);
+            Assert.AreEqual("TestSimpleQuantityKind", (string) simpleQuantityKind[PropertyNames.ShortName]);
+            Assert.AreEqual("testSymbol", (string) simpleQuantityKind[PropertyNames.Symbol]);
+            Assert.AreEqual("testQuantityDimensionSymbol", (string) simpleQuantityKind[PropertyNames.QuantityDimensionSymbol]);
+            Assert.AreEqual("53e82aeb-c42c-475c-b6bf-a102af883471", (string) simpleQuantityKind[PropertyNames.DefaultScale]);
+            Assert.IsFalse((bool) simpleQuantityKind[PropertyNames.IsDeprecated]);
 
             var expectedSimpleCategories = new string[] { };
-            var simpleCategoriesArray = (JArray)simpleQuantityKind[PropertyNames.Category];
-            IList<string> simpleCategories = simpleCategoriesArray.Select(x => (string)x).ToList();
+            var simpleCategoriesArray = (JArray) simpleQuantityKind[PropertyNames.Category];
+            var simpleCategories = simpleCategoriesArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedSimpleCategories, simpleCategories);
 
-            var expectedSimplePossibleScales = new [] { "53e82aeb-c42c-475c-b6bf-a102af883471" };
-            var simplePossibleScalesArray = (JArray)simpleQuantityKind[PropertyNames.PossibleScale];
-            IList<string> simplePossibleScales = simplePossibleScalesArray.Select(x => (string)x).ToList();
+            var expectedSimplePossibleScales = new[] { "53e82aeb-c42c-475c-b6bf-a102af883471" };
+            var simplePossibleScalesArray = (JArray) simpleQuantityKind[PropertyNames.PossibleScale];
+            var simplePossibleScales = simplePossibleScalesArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedSimplePossibleScales, simplePossibleScales);
 
             var expectedSimpleAliases = new string[] { };
-            var simpleAliasesArray = (JArray)simpleQuantityKind[PropertyNames.Alias];
-            IList<string> simpleAliases = simpleAliasesArray.Select(x => (string)x).ToList();
+            var simpleAliasesArray = (JArray) simpleQuantityKind[PropertyNames.Alias];
+            var simpleAliases = simpleAliasesArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedSimpleAliases, simpleAliases);
 
             var expectedSimpleDefinitions = new string[] { };
-            var simpleDefinitionsArray = (JArray)simpleQuantityKind[PropertyNames.Definition];
-            IList<string> simpleDefinitions = simpleDefinitionsArray.Select(x => (string)x).ToList();
+            var simpleDefinitionsArray = (JArray) simpleQuantityKind[PropertyNames.Definition];
+            var simpleDefinitions = simpleDefinitionsArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedSimpleDefinitions, simpleDefinitions);
 
             var expectedSimpleHyperlinks = new string[] { };
-            var simpleHyperlinksArray = (JArray)simpleQuantityKind[PropertyNames.HyperLink];
-            IList<string> simpleHyperLinks = simpleHyperlinksArray.Select(x => (string)x).ToList();
+            var simpleHyperlinksArray = (JArray) simpleQuantityKind[PropertyNames.HyperLink];
+            var simpleHyperLinks = simpleHyperlinksArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedSimpleHyperlinks, simpleHyperLinks);
 
             // SpecializedQuantityKind
             var specializedQuantityKind =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "8b8a44cd-0071-4acf-b33e-b8c3052821c5");
+                jArray.Single(x => (string) x[PropertyNames.Iid] == "8b8a44cd-0071-4acf-b33e-b8c3052821c5");
 
             // verify the amount of returned properties 
             Assert.AreEqual(15, specializedQuantityKind.Children().Count());
 
             // assert that the properties are what is expected
-            Assert.AreEqual("8b8a44cd-0071-4acf-b33e-b8c3052821c5", (string)specializedQuantityKind[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int)specializedQuantityKind[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("SpecializedQuantityKind", (string)specializedQuantityKind[PropertyNames.ClassKind]);
-            Assert.AreEqual("Test Specialized QuantityKind", (string)specializedQuantityKind[PropertyNames.Name]);
-            Assert.AreEqual("TestSpecializedQuantityKind", (string)specializedQuantityKind[PropertyNames.ShortName]);
-            Assert.AreEqual("testSymbol", (string)specializedQuantityKind[PropertyNames.Symbol]);
-            Assert.AreEqual("testQuantityDimensionSymbol", (string)specializedQuantityKind[PropertyNames.QuantityDimensionSymbol]);
-            Assert.AreEqual("199bec0a-661d-408c-8ca7-718c636c5681", (string)specializedQuantityKind[PropertyNames.General]);
-            Assert.AreEqual("53e82aeb-c42c-475c-b6bf-a102af883471", (string)specializedQuantityKind[PropertyNames.DefaultScale]);
-            Assert.IsFalse((bool)specializedQuantityKind[PropertyNames.IsDeprecated]);
+            Assert.AreEqual("8b8a44cd-0071-4acf-b33e-b8c3052821c5", (string) specializedQuantityKind[PropertyNames.Iid]);
+            Assert.AreEqual(2, (int) specializedQuantityKind[PropertyNames.RevisionNumber]);
+            Assert.AreEqual("SpecializedQuantityKind", (string) specializedQuantityKind[PropertyNames.ClassKind]);
+            Assert.AreEqual("Test Specialized QuantityKind", (string) specializedQuantityKind[PropertyNames.Name]);
+            Assert.AreEqual("TestSpecializedQuantityKind", (string) specializedQuantityKind[PropertyNames.ShortName]);
+            Assert.AreEqual("testSymbol", (string) specializedQuantityKind[PropertyNames.Symbol]);
+            Assert.AreEqual("testQuantityDimensionSymbol", (string) specializedQuantityKind[PropertyNames.QuantityDimensionSymbol]);
+            Assert.AreEqual("199bec0a-661d-408c-8ca7-718c636c5681", (string) specializedQuantityKind[PropertyNames.General]);
+            Assert.AreEqual("53e82aeb-c42c-475c-b6bf-a102af883471", (string) specializedQuantityKind[PropertyNames.DefaultScale]);
+            Assert.IsFalse((bool) specializedQuantityKind[PropertyNames.IsDeprecated]);
 
             var expectedSpecializedCategories = new string[] { };
-            var specializedCategoriesArray = (JArray)specializedQuantityKind[PropertyNames.Category];
-            IList<string> specializedCategories = specializedCategoriesArray.Select(x => (string)x).ToList();
+            var specializedCategoriesArray = (JArray) specializedQuantityKind[PropertyNames.Category];
+            var specializedCategories = specializedCategoriesArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedSpecializedCategories, specializedCategories);
 
-            var expectedSpecializedPossibleScales = new [] { "53e82aeb-c42c-475c-b6bf-a102af883471" };
-            var specializedPossibleScalesArray = (JArray)specializedQuantityKind[PropertyNames.PossibleScale];
-            IList<string> specializedPossibleScales = specializedPossibleScalesArray.Select(x => (string)x).ToList();
+            var expectedSpecializedPossibleScales = new[] { "53e82aeb-c42c-475c-b6bf-a102af883471" };
+            var specializedPossibleScalesArray = (JArray) specializedQuantityKind[PropertyNames.PossibleScale];
+            var specializedPossibleScales = specializedPossibleScalesArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedSpecializedPossibleScales, specializedPossibleScales);
 
             var expectedSpecializedAliases = new string[] { };
-            var specializedAliasesArray = (JArray)specializedQuantityKind[PropertyNames.Alias];
-            IList<string> specializedAliases = specializedAliasesArray.Select(x => (string)x).ToList();
+            var specializedAliasesArray = (JArray) specializedQuantityKind[PropertyNames.Alias];
+            var specializedAliases = specializedAliasesArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedSpecializedAliases, specializedAliases);
 
             var expectedSpecializedDefinitions = new string[] { };
-            var specializedDefinitionsArray = (JArray)specializedQuantityKind[PropertyNames.Definition];
-            IList<string> specializedDefinitions = specializedDefinitionsArray.Select(x => (string)x).ToList();
+            var specializedDefinitionsArray = (JArray) specializedQuantityKind[PropertyNames.Definition];
+            var specializedDefinitions = specializedDefinitionsArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedSpecializedDefinitions, specializedDefinitions);
 
             var expectedSpecializedHyperlinks = new string[] { };
-            var specializedHyperlinksArray = (JArray)specializedQuantityKind[PropertyNames.HyperLink];
-            IList<string> specializedHyperLinks = specializedHyperlinksArray.Select(x => (string)x).ToList();
+            var specializedHyperlinksArray = (JArray) specializedQuantityKind[PropertyNames.HyperLink];
+            var specializedHyperLinks = specializedHyperlinksArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedSpecializedHyperlinks, specializedHyperLinks);
+
+            postBodyPath = this.GetPath("Tests/SiteDirectory/QuantityKind/PostReorderQuantityKind.json");
+
+            postBody = this.GetJsonFromFile(postBodyPath);
+            jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
+
+            siteReferenceDataLibrary = jArray.Single(x => (string) x[PropertyNames.Iid] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
+
+            expectedBaseQuantityKinds = new List<OrderedItem>
+            {
+                new OrderedItem(1, "4f9f3d9b-f3de-4ef5-b6cb-2e22199fab0d"),
+                new OrderedItem(2, "8b8a44cd-0071-4acf-b33e-b8c3052821c5"),
+                new OrderedItem(3, "199bec0a-661d-408c-8ca7-718c636c5681"),
+                new OrderedItem(4, "c36e050a-b4f9-4567-b29d-67af9216878e")
+            };
+
+            baseQuantityKindsArray = JsonConvert.DeserializeObject<List<OrderedItem>>(
+                siteReferenceDataLibrary[PropertyNames.BaseQuantityKind].ToString());
+
+            CollectionAssert.AreEqual(expectedBaseQuantityKinds, baseQuantityKindsArray);
         }
     }
 }

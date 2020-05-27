@@ -1,0 +1,27 @@
+﻿{
+  "_delete": [],
+  "_create": [
+    {
+      "iid": "6b1b9a7b-8a57-412e-a823-bcc4fd8b67e9",
+      "revisionNumber": 0,
+      "classKind": "QuantityKindFactor",
+      "name": "create qkf",
+      "shortName": "createqkf",
+      "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+      "exponent": "[\"1\"]",
+      "quantityKind": "4f9f3d9b-f3de-4ef5-b6cb-2e22199fab0d"
+    }
+  ],
+  "_update": [
+    {
+      "classKind": "DerivedQuantityKind",
+      "iid": "74d9c38f-5ace-4f90-8841-d0f9942e9d09",
+      "quantityKindFactor": [
+        {
+          "k": 2,
+          "v": "6b1b9a7b-8a57-412e-a823-bcc4fd8b67e9"
+        }
+      ]
+    }
+  ]
+}

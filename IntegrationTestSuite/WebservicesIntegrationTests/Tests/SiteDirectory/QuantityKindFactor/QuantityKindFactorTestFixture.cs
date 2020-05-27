@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="QuantityKindFactorTestFixture.cs" company="RHEA System">
 //
-//   Copyright 2016 RHEA System 
+//   Copyright 2016-2020 RHEA System 
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -23,12 +23,14 @@ namespace WebservicesIntegrationTests
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using NUnit.Framework;
-    using Newtonsoft.Json.Linq;
+
     using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
+
+    using NUnit.Framework;
 
     [TestFixture]
-    public class QuantityKindFactorTestFixture : WebClientTestFixtureBase
+    public class QuantityKindFactorTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
         /// <summary>
         /// Verification that the QuantityKindFactor objects are returned from the data-source and that the 
@@ -52,7 +54,7 @@ namespace WebservicesIntegrationTests
             var quantityKindFactor =
                 jArray.Single(x => (string) x[PropertyNames.Iid] == "ab7e80da-6bc9-427f-b1fb-b97faeeca4c6");
 
-            QuantityKindFactorTestFixture.VerifyProperties(quantityKindFactor);
+            VerifyProperties(quantityKindFactor);
         }
 
         [Test]
@@ -72,22 +74,74 @@ namespace WebservicesIntegrationTests
             // get a specific SiteDirectory from the result by it's unique id
             var siteDirectory =
                 jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
+
             SiteDirectoryTestFixture.VerifyProperties(siteDirectory);
 
             // get a specific SiteReferenceDataLibrary from the result by it's unique id
             var siteReferenceDataLibrary =
                 jArray.Single(x => (string) x[PropertyNames.Iid] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
+
             SiteReferenceDataLibraryTestFixture.VerifyProperties(siteReferenceDataLibrary);
 
             // get a specific DerivedQuantityKind from the result by it's unique id
             var derivedQuantityKind =
                 jArray.Single(x => (string) x[PropertyNames.Iid] == "74d9c38f-5ace-4f90-8841-d0f9942e9d09");
+
             DerivedQuantityKindTestFixture.VerifyProperties(derivedQuantityKind);
 
             // get a specific QuantityKindFactor from the result by it's unique id
             var quantityKindFactor =
                 jArray.Single(x => (string) x[PropertyNames.Iid] == "ab7e80da-6bc9-427f-b1fb-b97faeeca4c6");
-            QuantityKindFactorTestFixture.VerifyProperties(quantityKindFactor);
+
+            VerifyProperties(quantityKindFactor);
+        }
+
+        [Test]
+        public void VerifyThatDerivedQuantityKindCanBeAddedAndReordered()
+        {
+            var siteDirectoryUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            var postBodyPath = this.GetPath("Tests/SiteDirectory/QuantityKindFactor/PostNewQuantityKindFactor.json");
+
+            var postBody = this.GetJsonFromFile(postBodyPath);
+            var jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
+
+            Assert.AreEqual(3, jArray.Count);
+
+            var siteDirectory = jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
+            Assert.AreEqual(2, (int) siteDirectory[PropertyNames.RevisionNumber]);
+
+            var quantityKindFactor = jArray.Single(x => (string) x[PropertyNames.Iid] == "6b1b9a7b-8a57-412e-a823-bcc4fd8b67e9");
+            Assert.AreEqual(2, (int) quantityKindFactor[PropertyNames.RevisionNumber]);
+
+            var derivedQuantityKind = jArray.Single(x => (string) x[PropertyNames.Iid] == "74d9c38f-5ace-4f90-8841-d0f9942e9d09");
+            Assert.AreEqual(2, (int) derivedQuantityKind[PropertyNames.RevisionNumber]);
+
+            var expectedQuantityKindFactorArray = new List<OrderedItem> { new OrderedItem(2, "6b1b9a7b-8a57-412e-a823-bcc4fd8b67e9"), new OrderedItem(2948121, "ab7e80da-6bc9-427f-b1fb-b97faeeca4c6") };
+            var quantityKindFactorArray = JsonConvert.DeserializeObject<List<OrderedItem>>(derivedQuantityKind[PropertyNames.QuantityKindFactor].ToString());
+            CollectionAssert.AreEquivalent(expectedQuantityKindFactorArray, quantityKindFactorArray);
+
+            postBodyPath = this.GetPath("Tests/SiteDirectory/QuantityKindFactor/PostReorderQuantityKindFactor.json");
+
+            postBody = this.GetJsonFromFile(postBodyPath);
+            jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
+
+            Assert.AreEqual(4, jArray.Count);
+
+            siteDirectory = jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
+            Assert.AreEqual(3, (int) siteDirectory[PropertyNames.RevisionNumber]);
+
+            quantityKindFactor = jArray.Single(x => (string) x[PropertyNames.Iid] == "6b1b9a7b-8a57-412e-a823-bcc4fd8b67e9");
+            Assert.AreEqual(3, (int) quantityKindFactor[PropertyNames.RevisionNumber]);
+
+            var quantityKindFactor2 = jArray.Single(x => (string) x[PropertyNames.Iid] == "ab7e80da-6bc9-427f-b1fb-b97faeeca4c6");
+            Assert.AreEqual(3, (int) quantityKindFactor2[PropertyNames.RevisionNumber]);
+
+            derivedQuantityKind = jArray.Single(x => (string) x[PropertyNames.Iid] == "74d9c38f-5ace-4f90-8841-d0f9942e9d09");
+            Assert.AreEqual(3, (int) derivedQuantityKind[PropertyNames.RevisionNumber]);
+
+            expectedQuantityKindFactorArray = new List<OrderedItem> { new OrderedItem(1, "ab7e80da-6bc9-427f-b1fb-b97faeeca4c6"), new OrderedItem(3, "6b1b9a7b-8a57-412e-a823-bcc4fd8b67e9") };
+            quantityKindFactorArray = JsonConvert.DeserializeObject<List<OrderedItem>>(derivedQuantityKind[PropertyNames.QuantityKindFactor].ToString());
+            CollectionAssert.AreEquivalent(expectedQuantityKindFactorArray, quantityKindFactorArray);
         }
 
         /// <summary>

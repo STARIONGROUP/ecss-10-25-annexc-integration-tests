@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="OrderedItem.cs" company="RHEA System">
 //
-//   Copyright 2016 RHEA System 
+//   Copyright 2016-2020 RHEA System 
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -33,26 +33,38 @@ namespace WebservicesIntegrationTests
         /// <summary>
         /// Gets the value
         /// </summary>
-        public string V { get; private set; }
+        public object V { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OrderedItem"/> class
         /// </summary>
-        /// <param name="k"></param>
-        /// <param name="v"></param>
-        public OrderedItem(int k, string v)
+        /// <param name="k">The key</param>
+        /// <param name="v">The value</param>
+        public OrderedItem(int k, object v)
         {
             this.K = k;
             this.V = v;
         }
 
+        /// <summary>
+        /// Equalty comparer
+        /// </summary>
+        /// <param name="obj">The object to calculate equalty for</param>
+        /// <returns></returns>
         public override bool Equals(object obj)
         {
-            var other = obj as OrderedItem;
-            if (other == null) return false;
-            return this.K == other.K && this.V == other.V;
+            if (!(obj is OrderedItem other))
+            {
+                return false;
+            }
+
+            return this.K == other.K && (this.V?.Equals(other.V) ?? this.V == other.V);
         }
 
+        /// <summary>
+        /// Gets the object's HashCode
+        /// </summary>
+        /// <returns>The calculated hash (<see cref="int"/>)</returns>
         public override int GetHashCode()
         {
             var hash = 27;
