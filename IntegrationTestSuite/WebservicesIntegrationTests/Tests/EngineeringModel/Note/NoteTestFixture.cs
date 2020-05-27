@@ -36,7 +36,7 @@ namespace WebservicesIntegrationTests
     [TestFixture]
     public class NoteTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
-        [Ignore("Doen't work because Note ordered implementation is not OK")]
+        [Ignore("Doen't work because Note ordered implementation is not OK. See https://github.com/RHEAGROUP/CDP4-WebServices-Community-Edition/issues/126")]
         [CdpVersion_1_1_0]
         public void VerifyThatNotesCanBeAddedAndDeleted()
         {

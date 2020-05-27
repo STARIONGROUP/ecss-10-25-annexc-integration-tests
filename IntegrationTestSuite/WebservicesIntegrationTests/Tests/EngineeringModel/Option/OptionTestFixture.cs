@@ -56,7 +56,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual("testoption", (string) option[PropertyNames.ShortName]);
         }
 
-        [Ignore("Reordering options is not possible in Webservice")]
+        [Ignore("Reordering options is not possible in Webservice. See https://github.com/RHEAGROUP/CDP4-WebServices-Community-Edition/issues/127")]
         public void VerifyThatOptionsCanBeReorderedWithWebApi()
         {
             var iterationUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));

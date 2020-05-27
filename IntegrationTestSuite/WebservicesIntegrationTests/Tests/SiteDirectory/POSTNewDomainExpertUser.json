@@ -529,28 +529,6 @@
       "objectClass": "ContractChangeNotice",
       "revisionNumber": 1
     },
-    //{
-    //  "accessRight": "MODIFY",
-    //  "classKind": "ParticipantPermission",
-    //  "excludedDomain": [],
-    //  "excludedPerson": [],
-    //  "iid": "c4da7542-d2da-46ed-9b7f-4d0968abfaf4",
-    //  "isDeprecated": false,
-    //  "modifiedOn": "0001-01-01T00:00:00.000Z",
-    //  "objectClass": "TextualNote",
-    //  "revisionNumber": 1
-    //},
-    //{
-    //  "accessRight": "MODIFY",
-    //  "classKind": "ParticipantPermission",
-    //  "excludedDomain": [],
-    //  "excludedPerson": [],
-    //  "iid": "0805dead-23f5-4bbc-a334-a43151e0ad9e",
-    //  "isDeprecated": false,
-    //  "modifiedOn": "0001-01-01T00:00:00.000Z",
-    //  "objectClass": "BinaryNote",
-    //  "revisionNumber": 1
-    //},
     {
       "alias": [],
       "classKind": "ParticipantRole",

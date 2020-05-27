@@ -141,7 +141,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual("8a5cd66e-7313-4843-813f-37081ca81bb8", (string) userRuleVerification[PropertyNames.Rule]);
         }
 
-        [Ignore("Doen't work because RuleVerification ordered implementation is not OK")]
+        [Ignore("Doen't work because RuleVerification ordered implementation is not OK. See https://github.com/RHEAGROUP/CDP4-WebServices-Community-Edition/issues/126")]
         public void VerifyThatARuleVerificationCanBeReorderedWithWebApi()
         {
             var iterationUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
