@@ -1,0 +1,39 @@
+﻿{
+  "_delete": [],
+  "_create": [
+    {
+      "iid": "c2eccf19-a040-4756-8298-8678d7149c8f",
+      "revisionNumber": 0,
+      "classKind": "Section",
+      "name": "test section 1",
+      "shortName": "testsection1",
+      "owner": "eb759723-14b9-49f4-8611-544d037bb764"
+    },
+    {
+      "iid": "b47ccf37-caa8-4015-b0da-8620894aabce",
+      "revisionNumber": 0,
+      "classKind": "Section",
+      "name": "test section 2",
+      "shortName": "testsection2",
+      "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535"
+    }
+  ],
+  "_update": [
+    {
+      "classKind": "Book",
+      "iid": "f84b5d72-be4d-418c-90db-19e311e75be3",
+      "section": [
+        {
+          "k": 0,
+          "m": 1,
+          "v": "c2eccf19-a040-4756-8298-8678d7149c8f"
+        },
+        {
+          "k": 0,
+          "m": 2,
+          "v": "b47ccf37-caa8-4015-b0da-8620894aabce"
+        }
+      ]
+    }
+  ]
+}

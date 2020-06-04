@@ -1,0 +1,66 @@
+﻿{
+  "_delete": [],
+  "_create": [
+    {
+      "alias": [],
+      "category": [],
+      "classKind": "ArrayParameterType",
+      "component": [
+        {
+          "k": -19305534,
+          "v": "f51de2a2-279e-4b5e-8f07-bbc7e9993a6b"
+        },
+        {
+          "k": 63099353,
+          "v": "0715f517-1f8b-462d-9189-b4ff20548266"
+        }
+      ],
+      "definition": [],
+      "dimension": [
+        {
+          "k": -2497869,
+          "v": 2
+        },
+        {
+          "k": 87757889,
+          "v": 1
+        }
+      ],
+      "hyperLink": [],
+      "iid": "267b0d27-0421-453d-951a-4fcacc309a27",
+      "isDeprecated": false,
+      "isFinalized": false,
+      "isTensor": false,
+      "modifiedOn": "2018-08-13T05:26:30.689Z",
+      "name": "createTestArray",
+      "revisionNumber": 0,
+      "shortName": "cta",
+      "symbol": "cta_s"
+    },
+    {
+      "classKind": "ParameterTypeComponent",
+      "iid": "f51de2a2-279e-4b5e-8f07-bbc7e9993a6b",
+      "modifiedOn": "0001-01-01T00:00:00.000Z",
+      "parameterType": "4f9f3d9b-f3de-4ef5-b6cb-2e22199fab0d",
+      "revisionNumber": 0,
+      "scale": "53e82aeb-c42c-475c-b6bf-a102af883471",
+      "shortName": "{1;1}"
+    },
+    {
+      "classKind": "ParameterTypeComponent",
+      "iid": "0715f517-1f8b-462d-9189-b4ff20548266",
+      "modifiedOn": "0001-01-01T00:00:00.000Z",
+      "parameterType": "35a9cf05-4eba-4cda-b60c-7cfeaac8f892",
+      "revisionNumber": 0,
+      "scale": null,
+      "shortName": "{2;1}"
+    }
+  ],
+  "_update": [
+    {
+      "classKind": "SiteReferenceDataLibrary",
+      "iid": "c454c687-ba3e-44c4-86bc-44544b2c7880",
+      "parameterType": [ "267b0d27-0421-453d-951a-4fcacc309a27" ]
+    }
+  ]
+}

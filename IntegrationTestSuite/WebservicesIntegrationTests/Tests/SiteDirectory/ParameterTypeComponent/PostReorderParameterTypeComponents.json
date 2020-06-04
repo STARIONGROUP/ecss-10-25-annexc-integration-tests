@@ -1,0 +1,22 @@
+﻿{
+  "_delete": [],
+  "_create": [],
+  "_update": [
+    {
+      "classKind": "CompoundParameterType",
+      "iid": "0d3178f9-68d0-4b1a-afe8-d5df0b66f1d4",
+      "component": [
+        {
+          "k": 212499462,
+          "m": 1,
+          "v": "8019277f-8bc7-463b-b3bb-46a404493e31"
+        },
+        {
+          "k": 17256407,
+          "m": 2,
+          "v": "b607fdc1-7578-48f9-8597-caba56df3177"
+        }
+      ]
+    }
+  ]
+}

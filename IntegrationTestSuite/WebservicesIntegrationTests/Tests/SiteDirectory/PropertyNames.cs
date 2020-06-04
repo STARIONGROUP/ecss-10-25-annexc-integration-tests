@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="PropertyNames.cs" company="RHEA System">
 //
-//   Copyright 2016 RHEA System 
+//   Copyright 2016-2020 RHEA System 
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -25,866 +25,360 @@ namespace WebservicesIntegrationTests
     /// </summary>
     public static class PropertyNames
     {
-        public static string Iid
-        {
-            get { return "iid"; }
-        }
-
-        public static string RevisionNumber
-        {
-            get { return "revisionNumber"; }
-        }
-
-        public static string ClassKind
-        {
-            get { return "classKind"; }
-        }
-
-        public static string IsDeprecated
-        {
-            get { return "isDeprecated"; }
-        }
-
-        public static string Name
-        {
-            get { return "name"; }
-        }
-
-        public static string ShortName
-        {
-            get { return "shortName"; }
-        }
-
-        public static string Symbol
-        {
-            get { return "symbol"; }
-        }
-
-        public static string Category
-        {
-            get { return "category"; }
-        }
-
-        public static string Alias
-        {
-            get { return "alias"; }
-        }
-
-        public static string Definition
-        {
-            get { return "definition"; }
-        }
-
-        public static string HyperLink
-        {
-            get { return "hyperLink"; }
-        }
-
-        public static string DefaultScale
-        {
-            get { return "defaultScale"; }
-        }
-
-        public static string QuantityDimensionSymbol
-        {
-            get { return "quantityDimensionSymbol"; }
-        }
-
-        public static string PossibleScale
-        {
-            get { return "possibleScale"; }
-        }
-
-        public static string QuantityKindFactor
-        {
-            get { return "quantityKindFactor"; }
-        }
-
-        public static string IsFinalized
-        {
-            get { return "isFinalized"; }
-        }
-
-        public static string Component
-        {
-            get { return "component"; }
-        }
-
-        public static string IsTensor
-        {
-            get { return "isTensor"; }
-        }
-
-        public static string Dimension
-        {
-            get { return "dimension"; }
-        }
-
-        public static string General
-        {
-            get { return "general"; }
-        }
-
-        public static string IterationSetup
-        {
-            get { return "iterationSetup"; }
-        }
-
-        public static string SourceIterationIid
-        {
-            get { return "sourceIterationIid"; }
-        }
-
-        public static string Option
-        {
-            get { return "option"; }
-        }
-
-        public static string Publication
-        {
-            get { return "publication"; }
-        }
-
-        public static string PossibleFiniteStateList
-        {
-            get { return "possibleFiniteStateList"; }
-        }
-
-        public static string TopElement
-        {
-            get { return "topElement"; }
-        }
-
-        public static string Relationship
-        {
-            get { return "relationship"; }
-        }
-
-        public static string ExternalIdentifierMap
-        {
-            get { return "externalIdentifierMap"; }
-        }
-
-        public static string RequirementsSpecification
-        {
-            get { return "requirementsSpecification"; }
-        }
-
-        public static string Requirement
-        {
-            get { return "requirement"; }
-        }
-
-        public static string ParameterValue
-        {
-            get { return "parameterValue"; }
-        }
-
-        public static string ParametricConstraint
-        {
-            get { return "parametricConstraint"; }
-        }
-
-        public static string DomainFileStore
-        {
-            get { return "domainFileStore"; }
-        }
-
-        public static string ActualFiniteStateList
-        {
-            get { return "actualFiniteStateList"; }
-        }
-
-        public static string DefaultOption
-        {
-            get { return "defaultOption"; }
-        }
-
-        public static string RuleVerificationList
-        {
-            get { return "ruleVerificationList"; }
-        }
-
-        public static string Element
-        {
-            get { return "element"; }
-        }
-
-        public static string Unit
-        {
-            get { return "unit"; }
-        }
-
-        public static string Exponent
-        {
-            get { return "exponent"; }
-        }
-
-        public static string QuantityKind
-        {
-            get { return "quantityKind"; }
-        }
-
-        public static string ParameterType
-        {
-            get { return "parameterType"; }
-        }
-
-        public static string Scale
-        {
-            get { return "scale"; }
-        }
-
-        public static string Value
-        {
-            get { return "value"; }
-        }
-
-        public static string RequestedBy
-        {
-            get { return "requestedBy"; }
-        }
-
-        public static string NestedElement
-        {
-            get { return "nestedElement"; }
-        }
-
-        public static string AllowDifferentOwnerOfOverride
-        {
-            get { return "allowDifferentOwnerOfOverride"; }
-        }
-
-        public static string ContainedElement
-        {
-            get { return "containedElement"; }
-        }
-
-        public static string ExpectsOverride
-        {
-            get { return "expectsOverride"; }
-        }
-
-        public static string VcardType
-        {
-            get { return "vcardType"; }
-        }
-
-        public static string GivenName
-        {
-            get { return "givenName"; }
-        }
-
-        public static string Surname
-        {
-            get { return "surname"; }
-        }
-
-        public static string OrganizationalUnit
-        {
-            get { return "organizationalUnit"; }
-        }
-
-        public static string Organization
-        {
-            get { return "organization"; }
-        }
-
-        public static string Parameter
-        {
-            get { return "parameter"; }
-        }
-
-        public static string ParameterGroup
-        {
-            get { return "parameterGroup"; }
-        }
-
-        public static string ValueSwitch
-        {
-            get { return "valueSwitch"; }
-        }
-
-        public static string Published
-        {
-            get { return "published"; }
-        }
-
-        public static string Formula
-        {
-            get { return "formula"; }
-        }
-
-        public static string Computed
-        {
-            get { return "computed"; }
-        }
-
-        public static string Manual
-        {
-            get { return "manual"; }
-        }
-
-        public static string Reference
-        {
-            get { return "reference"; }
-        }
-
-
-        public static string DefaultDomain
-        {
-            get { return "defaultDomain"; }
-        }
-
-        public static string IsActive
-        {
-            get { return "isActive"; }
-        }
-
-        public static string Role
-        {
-            get { return "role"; }
-        }
-
-        public static string DefaultEmailAddress
-        {
-            get { return "defaultEmailAddress"; }
-        }
-
-        public static string DefaultTelephoneNumber
-        {
-            get { return "defaultTelephoneNumber"; }
-        }
-
-        public static string EmailAddress
-        {
-            get { return "emailAddress"; }
-        }
-
-        public static string TelephoneNumber
-        {
-            get { return "telephoneNumber"; }
-        }
-
-        public static string UserPreference
-        {
-            get { return "userPreference"; }
-        }
-
-        public static string ActualState
-        {
-            get { return "actualState"; }
-        }
-
-        public static string ActualOption
-        {
-            get { return "actualOption"; }
-        }
-
-        public static string ReferencedElement
-        {
-            get { return "referencedElement"; }
-        }
-
-        public static string StateDependence
-        {
-            get { return "stateDependence"; }
-        }
-
-        public static string Group
-        {
-            get { return "group"; }
-        }
-
-        public static string IsOptionDependent
-        {
-            get { return "isOptionDependent"; }
-        }
-
-        public static string Owner
-        {
-            get { return "owner"; }
-        }
-
-        public static string ValueSet
-        {
-            get { return "valueSet"; }
-        }
-
-        public static string ParameterSubscription
-        {
-            get { return "parameterSubscription"; }
-        }
-
-        public static string Level
-        {
-            get { return "level"; }
-        }
-
-        public static string AffectedItemIid
-        {
-            get { return "affectedItemIid"; }
-        }
-
-        public static string Author
-        {
-            get { return "author"; }
-        }
-
-        public static string Content
-        {
-            get { return "content"; }
-        }
-
-        public static string LanguageCode
-        {
-            get { return "languageCode"; }
-        }
-
-        public static string CreatedOn
-        {
-            get { return "createdOn"; }
-        }
-
-        public static string RequiredRdl
-        {
-            get { return "requiredRdl"; }
-        }
-
-        public static string DefinedCategory
-        {
-            get { return "definedCategory"; }
-        }
-
-        public static string BaseQuantityKind
-        {
-            get { return "baseQuantityKind"; }
-        }
-
-        public static string UnitPrefix
-        {
-            get { return "unitPrefix"; }
-        }
-
-        public static string BaseUnit
-        {
-            get { return "baseUnit"; }
-        }
-
-        public static string FileType
-        {
-            get { return "fileType"; }
-        }
-
-        public static string Glossary
-        {
-            get { return "glossary"; }
-        }
-
-        public static string ReferenceSource
-        {
-            get { return "referenceSource"; }
-        }
-
-        public static string Rule
-        {
-            get { return "rule"; }
-        }
-
-        public static string Constant
-        {
-            get { return "constant"; }
-        }
-
-        public static string ExternalFormat
-        {
-            get { return "externalFormat"; }
-        }
-
-        public static string ExternalToolVersion
-        {
-            get { return "externalToolVersion"; }
-        }
-
-        public static string ExternalToolName
-        {
-            get { return "externalToolName"; }
-        }
-
-        public static string ExternalModelName
-        {
-            get { return "externalModelName"; }
-        }
-
-        public static string Correspondence
-        {
-            get { return "correspondence"; }
-        }
-
-        public static string ContainingGroup
-        {
-            get { return "containingGroup"; }
-        }
-
-        public static string Model
-        {
-            get { return "model"; }
-        }
-
-        public static string Participant
-        {
-            get { return "participant"; }
-        }
-
-        public static string EngineeringModelIid
-        {
-            get { return "engineeringModelIid"; }
-        }
-
-        public static string Kind
-        {
-            get { return "kind"; }
-        }
-
-        public static string StudyPhase
-        {
-            get { return "studyPhase"; }
-        }
-
-        public static string Person
-        {
-            get { return "person"; }
-        }
-
-        public static string Domain
-        {
-            get { return "domain"; }
-        }
-
-        public static string SelectedDomain
-        {
-            get { return "selectedDomain"; }
-        }
-
-        public static string InterfaceEnd
-        {
-            get { return "interfaceEnd"; }
-        }
-
-        public static string ElementDefinition
-        {
-            get { return "elementDefinition"; }
-        }
-
-        public static string ExternalId
-        {
-            get { return "externalId"; }
-        }
-
-        public static string InternalThing
-        {
-            get { return "internalThing"; }
-        }
-
-        public static string ParameterOverride
-        {
-            get { return "parameterOverride"; }
-        }
-
-        public static string ExcludeOption
-        {
-            get { return "excludeOption"; }
-        }
-
-        public static string DefaultState
-        {
-            get { return "defaultState"; }
-        }
-
-        public static string PossibleState
-        {
-            get { return "possibleState"; }
-        }
-
-        public static string ParameterValueSet
-        {
-            get { return "parameterValueSet"; }
-        }
-
-        public static string SubscribedValueSet
-        {
-            get { return "subscribedValueSet"; }
-        }
-
-        public static string PublishedParameter
-        {
-            get { return "publishedParameter"; }
-        }
-
-        public static string RuleVerification
-        {
-            get { return "ruleVerification"; }
-        }
-
-        public static string Status
-        {
-            get { return "status"; }
-        }
-
-        public static string ExecutedOn
-        {
-            get { return "executedOn"; }
-        }
-
-        public static string Violation
-        {
-            get { return "violation"; }
-        }
-
-        public static string Description
-        {
-            get { return "description"; }
-        }
-
-        public static string ViolatingThing
-        {
-            get { return "violatingThing"; }
-        }
-
-        public static string Source
-        {
-            get { return "source"; }
-        }
-
-        public static string Target
-        {
-            get { return "target"; }
-        }
-
-        public static string IsHidden
-        {
-            get { return "isHidden"; }
-        }
-
-        public static string File
-        {
-            get { return "file"; }
-        }
-
-        public static string Folder
-        {
-            get { return "folder"; }
-        }
-
-        public static string Creator
-        {
-            get { return "creator"; }
-        }
-
-        public static string ContainingFolder
-        {
-            get { return "containingFolder"; }
-        }
-
-        public static string LockedBy
-        {
-            get { return "lockedBy"; }
-        }
-
-        public static string FileRevision
-        {
-            get { return "fileRevision"; }
-        }
-
-        public static string ContentHash
-        {
-            get { return "contentHash"; }
-        }
-
-        public static string TopExpression
-        {
-            get { return "topExpression"; }
-        }
-
-        public static string Expression
-        {
-            get { return "expression"; }
-        }
-
-        public static string Term
-        {
-            get { return "term"; }
-        }
-        
-        public static string RelationalOperator
-        {
-            get { return "relationalOperator"; }
-        }
-
-        public static string NaturalLanguage
-        {
-            get { return "naturalLanguage"; }
-        }
-
-        public static string DomainGroup
-        {
-            get { return "domainGroup"; }
-        }
-
-        public static string LogEntry
-        {
-            get { return "logEntry"; }
-        }
-
-        public static string PersonRole
-        {
-            get { return "personRole"; }
-        }
-
-        public static string SiteReferenceDataLibrary
-        {
-            get { return "siteReferenceDataLibrary"; }
-        }
-
-        public static string ParticipantRole
-        {
-            get { return "participantRole"; }
-        }
-
-        public static string DefaultPersonRole
-        {
-            get { return "defaultPersonRole"; }
-        }
-
-        public static string DefaultParticipantRole
-        {
-            get { return "defaultParticipantRole"; }
-        }
-
-        public static string LastModifiedOn
-        {
-            get { return "lastModifiedOn"; }
-        }
-
-        public static string SourceEngineeringModelSetupIid
-        {
-            get { return "sourceEngineeringModelSetupIid"; }
-        }
-
-        public static string ActiveDomain
-        {
-            get { return "activeDomain"; }
-        }
-
-        public static string IterationNumber
-        {
-            get { return "iterationNumber"; }
-        }
-
-        public static string IsDeleted
-        {
-            get { return "isDeleted"; }
-        }
-
-        public static string SourceIterationSetup
-        {
-            get { return "sourceIterationSetup"; }
-        }
-
-        public static string FrozenOn
-        {
-            get { return "frozenOn"; }
-        }
-
-        public static string EngineeringModelSetup
-        {
-            get { return "engineeringModelSetup"; }
-        }
-
-        public static string Iteration
-        {
-            get { return "iteration"; }
-        }
-
-        public static string CommonFileStore
-        {
-            get { return "commonFileStore"; }
-        }
-
-        public static string IterationIid
-        {
-            get { return "iterationIid"; }
-        }
-
-        public static string Extension
-        {
-            get { return "extension"; }
-        }
-
-        public static string IsSynonym
-        {
-            get { return "isSynonym"; }
-        }
-
-        public static string Example
-        {
-            get { return "example"; }
-        }
-
-        public static string Note
-        {
-            get { return "note"; }
-        }
-
-        public static string Citation
-        {
-            get { return "citation"; }
-        }
-
-        public static string IsAdaptation
-        {
-            get { return "isAdaptation"; }
-        }
-
-        public static string Location
-        {
-            get { return "location"; }
-        }
-        public static string Remark
-        {
-            get { return "remark"; }
-        }
-        public static string VersionIdentifier
-        {
-            get { return "versionIdentifier"; }
-        }
-        public static string VersionDate
-        {
-            get { return "versionDate"; }
-        }
-        public static string PublicationYear
-        {
-            get { return "publicationYear"; }
-        }
-        public static string Publisher
-        {
-            get { return "publisher"; }
-        }
-        public static string PublishedIn
-        {
-            get { return "publishedIn"; }
-        }
-        public static string Language
-        {
-            get { return "language"; }
-        }
-        public static string Prefix
-        {
-            get { return "prefix"; }
-        }
-        public static string ReferenceUnit
-        {
-            get { return "referenceUnit"; }
-        }
+        public static string Iid => "iid";
+
+        public static string RevisionNumber => "revisionNumber";
+
+        public static string ClassKind => "classKind";
+
+        public static string IsDeprecated => "isDeprecated";
+
+        public static string Name => "name";
+
+        public static string ShortName => "shortName";
+
+        public static string Symbol => "symbol";
+
+        public static string Category => "category";
+
+        public static string Alias => "alias";
+
+        public static string Definition => "definition";
+
+        public static string HyperLink => "hyperLink";
+
+        public static string DefaultScale => "defaultScale";
+
+        public static string QuantityDimensionSymbol => "quantityDimensionSymbol";
+
+        public static string PossibleScale => "possibleScale";
+
+        public static string QuantityKindFactor => "quantityKindFactor";
+
+        public static string IsFinalized => "isFinalized";
+
+        public static string Component => "component";
+
+        public static string IsTensor => "isTensor";
+
+        public static string Dimension => "dimension";
+
+        public static string General => "general";
+
+        public static string IterationSetup => "iterationSetup";
+
+        public static string SourceIterationIid => "sourceIterationIid";
+
+        public static string Option => "option";
+
+        public static string Publication => "publication";
+
+        public static string PossibleFiniteStateList => "possibleFiniteStateList";
+
+        public static string TopElement => "topElement";
+
+        public static string Relationship => "relationship";
+
+        public static string ExternalIdentifierMap => "externalIdentifierMap";
+
+        public static string RequirementsSpecification => "requirementsSpecification";
+
+        public static string Requirement => "requirement";
+
+        public static string ParameterValue => "parameterValue";
+
+        public static string ParametricConstraint => "parametricConstraint";
+
+        public static string DomainFileStore => "domainFileStore";
+
+        public static string ActualFiniteStateList => "actualFiniteStateList";
+
+        public static string DefaultOption => "defaultOption";
+
+        public static string RuleVerificationList => "ruleVerificationList";
+
+        public static string Element => "element";
+
+        public static string Unit => "unit";
+
+        public static string Exponent => "exponent";
+
+        public static string QuantityKind => "quantityKind";
+
+        public static string ParameterType => "parameterType";
+
+        public static string Scale => "scale";
+
+        public static string Value => "value";
+
+        public static string RequestedBy => "requestedBy";
+
+        public static string NestedElement => "nestedElement";
+
+        public static string AllowDifferentOwnerOfOverride => "allowDifferentOwnerOfOverride";
+
+        public static string ContainedElement => "containedElement";
+
+        public static string ExpectsOverride => "expectsOverride";
+
+        public static string VcardType => "vcardType";
+
+        public static string GivenName => "givenName";
+
+        public static string Surname => "surname";
+
+        public static string OrganizationalUnit => "organizationalUnit";
+
+        public static string Organization => "organization";
+
+        public static string Parameter => "parameter";
+
+        public static string ParameterGroup => "parameterGroup";
+
+        public static string ValueSwitch => "valueSwitch";
+
+        public static string Published => "published";
+
+        public static string Formula => "formula";
+
+        public static string Computed => "computed";
+
+        public static string Manual => "manual";
+
+        public static string Reference => "reference";
+
+        public static string DefaultDomain => "defaultDomain";
+
+        public static string IsActive => "isActive";
+
+        public static string Role => "role";
+
+        public static string DefaultEmailAddress => "defaultEmailAddress";
+
+        public static string DefaultTelephoneNumber => "defaultTelephoneNumber";
+
+        public static string EmailAddress => "emailAddress";
+
+        public static string TelephoneNumber => "telephoneNumber";
+
+        public static string UserPreference => "userPreference";
+
+        public static string ActualState => "actualState";
+
+        public static string ActualOption => "actualOption";
+
+        public static string ReferencedElement => "referencedElement";
+
+        public static string StateDependence => "stateDependence";
+
+        public static string Group => "group";
+
+        public static string IsOptionDependent => "isOptionDependent";
+
+        public static string Owner => "owner";
+
+        public static string ValueSet => "valueSet";
+
+        public static string ParameterSubscription => "parameterSubscription";
+
+        public static string Level => "level";
+
+        public static string AffectedItemIid => "affectedItemIid";
+
+        public static string Author => "author";
+
+        public static string Content => "content";
+
+        public static string LanguageCode => "languageCode";
+
+        public static string CreatedOn => "createdOn";
+
+        public static string RequiredRdl => "requiredRdl";
+
+        public static string DefinedCategory => "definedCategory";
+
+        public static string BaseQuantityKind => "baseQuantityKind";
+
+        public static string UnitPrefix => "unitPrefix";
+
+        public static string BaseUnit => "baseUnit";
+
+        public static string FileType => "fileType";
+
+        public static string Glossary => "glossary";
+
+        public static string ReferenceSource => "referenceSource";
+
+        public static string Rule => "rule";
+
+        public static string Constant => "constant";
+
+        public static string ExternalFormat => "externalFormat";
+
+        public static string ExternalToolVersion => "externalToolVersion";
+
+        public static string ExternalToolName => "externalToolName";
+
+        public static string ExternalModelName => "externalModelName";
+
+        public static string Correspondence => "correspondence";
+
+        public static string ContainingGroup => "containingGroup";
+
+        public static string Model => "model";
+
+        public static string Participant => "participant";
+
+        public static string EngineeringModelIid => "engineeringModelIid";
+
+        public static string Kind => "kind";
+
+        public static string StudyPhase => "studyPhase";
+
+        public static string Person => "person";
+
+        public static string Domain => "domain";
+
+        public static string SelectedDomain => "selectedDomain";
+
+        public static string InterfaceEnd => "interfaceEnd";
+
+        public static string ElementDefinition => "elementDefinition";
+
+        public static string ExternalId => "externalId";
+
+        public static string InternalThing => "internalThing";
+
+        public static string ParameterOverride => "parameterOverride";
+
+        public static string ExcludeOption => "excludeOption";
+
+        public static string DefaultState => "defaultState";
+
+        public static string PossibleState => "possibleState";
+
+        public static string ParameterValueSet => "parameterValueSet";
+
+        public static string SubscribedValueSet => "subscribedValueSet";
+
+        public static string PublishedParameter => "publishedParameter";
+
+        public static string RuleVerification => "ruleVerification";
+
+        public static string Status => "status";
+
+        public static string ExecutedOn => "executedOn";
+
+        public static string Violation => "violation";
+
+        public static string Description => "description";
+
+        public static string ViolatingThing => "violatingThing";
+
+        public static string Source => "source";
+
+        public static string Target => "target";
+
+        public static string IsHidden => "isHidden";
+
+        public static string File => "file";
+
+        public static string Folder => "folder";
+
+        public static string Creator => "creator";
+
+        public static string ContainingFolder => "containingFolder";
+
+        public static string LockedBy => "lockedBy";
+
+        public static string FileRevision => "fileRevision";
+
+        public static string ContentHash => "contentHash";
+
+        public static string TopExpression => "topExpression";
+
+        public static string Expression => "expression";
+
+        public static string Term => "term";
+
+        public static string RelationalOperator => "relationalOperator";
+
+        public static string NaturalLanguage => "naturalLanguage";
+
+        public static string DomainGroup => "domainGroup";
+
+        public static string LogEntry => "logEntry";
+
+        public static string PersonRole => "personRole";
+
+        public static string SiteReferenceDataLibrary => "siteReferenceDataLibrary";
+
+        public static string ParticipantRole => "participantRole";
+
+        public static string DefaultPersonRole => "defaultPersonRole";
+
+        public static string DefaultParticipantRole => "defaultParticipantRole";
+
+        public static string LastModifiedOn => "lastModifiedOn";
+
+        public static string SourceEngineeringModelSetupIid => "sourceEngineeringModelSetupIid";
+
+        public static string ActiveDomain => "activeDomain";
+
+        public static string IterationNumber => "iterationNumber";
+
+        public static string IsDeleted => "isDeleted";
+
+        public static string SourceIterationSetup => "sourceIterationSetup";
+
+        public static string FrozenOn => "frozenOn";
+
+        public static string EngineeringModelSetup => "engineeringModelSetup";
+
+        public static string Iteration => "iteration";
+
+        public static string CommonFileStore => "commonFileStore";
+
+        public static string IterationIid => "iterationIid";
+
+        public static string Extension => "extension";
+
+        public static string IsSynonym => "isSynonym";
+
+        public static string Example => "example";
+
+        public static string Note => "note";
+
+        public static string Citation => "citation";
+
+        public static string IsAdaptation => "isAdaptation";
+
+        public static string Location => "location";
+
+        public static string Remark => "remark";
+
+        public static string VersionIdentifier => "versionIdentifier";
+
+        public static string VersionDate => "versionDate";
+
+        public static string PublicationYear => "publicationYear";
+
+        public static string Publisher => "publisher";
+
+        public static string PublishedIn => "publishedIn";
+
+        public static string Language => "language";
+
+        public static string Prefix => "prefix";
+
+        public static string ReferenceUnit => "referenceUnit";
+
+        public static string Book => "book";
+
+        public static string Section => "section";
+
+        public static string Page => "page";
+
+        public static string UnitFactor => "unitFactor";
     }
 }

@@ -1,0 +1,27 @@
+{
+  "_delete": [],
+  "_create": [
+    {
+      "iid": "896eb954-25ba-4221-b994-763d8d866675",
+      "classKind": "EnumerationValueDefinition",
+      "revisionNumber": 0,
+      "shortName": "TestEnumerationValueDefinitionD",
+      "name": "Test Enumeration Value Definition D",
+      "hyperLink": [],
+      "definition": [],
+      "alias": []
+    }
+  ],
+  "_update": [
+    {
+      "iid": "af1615f0-b9c8-4654-94aa-11587d1faa59",
+      "classKind": "EnumerationParameterType",
+      "valueDefinition": [
+        {
+          "k": 211917124,
+          "v": "896eb954-25ba-4221-b994-763d8d866675"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+﻿{
+  "_delete": [],
+  "_create": [],
+  "_update": [
+    {
+      "classKind": "RuleVerificationList",
+      "iid": "dc482120-2a11-439b-913d-6a924de9ee5f",
+      "ruleVerification": [
+        {
+          "k": 1,
+          "m": 4,
+          "v": "c953263c-fc25-4048-9bb6-343a10200a0c"
+        },
+        {
+          "k": 2,
+          "m": 3,
+          "v": "ccb44a8e-2460-4892-ab75-02d8828db233"
+        },
+        {
+          "k": 3,
+          "m": 2,
+          "v": "4efbc475-37f3-4219-8571-e896a78545d5"
+        },
+        {
+          "k": 4,
+          "m": 1,
+          "v": "486f4b97-fcb1-409e-b5c0-057c240f41b6"
+        }
+      ]
+    }
+  ]
+}

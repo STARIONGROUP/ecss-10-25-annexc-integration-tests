@@ -1,0 +1,10 @@
+{
+  "_create": [],
+  "_delete": [
+    {
+      "iid": "896eb954-25ba-4221-b994-763d8d866675",
+      "classKind": "EnumerationValueDefinition",
+    }
+  ],
+  "_update": []
+}

@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="ParametricConstraintTestFixture.cs" company="RHEA System">
 //
-//   Copyright 2016 RHEA System 
+//   Copyright 2016-2020 RHEA System 
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -23,11 +23,14 @@ namespace WebservicesIntegrationTests
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using NUnit.Framework;
+
+    using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
 
+    using NUnit.Framework;
+
     [TestFixture]
-    public class ParametricConstraintTestFixture : WebClientTestFixtureBase
+    public class ParametricConstraintTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
         /// <summary>
         /// Verification that the ParametricConstraint objects are returned from the data-source and that the 
@@ -50,7 +53,8 @@ namespace WebservicesIntegrationTests
             // get a specific ParametricConstraint from the result by it's unique id
             var parametricConstraint =
                 jArray.Single(x => (string) x[PropertyNames.Iid] == "88200dbc-711a-47e0-a54a-dac4baca6e83");
-            ParametricConstraintTestFixture.VerifyProperties(parametricConstraint);
+
+            VerifyProperties(parametricConstraint);
         }
 
         [Test]
@@ -74,6 +78,7 @@ namespace WebservicesIntegrationTests
             // get a specific RequirementsSpecification from the result by it's unique id
             var requirementsSpecification =
                 jArray.Single(x => (string) x[PropertyNames.Iid] == "bf0cde90-9086-43d5-bcff-32a2f8331800");
+
             RequirementsSpecificationTestFixture.VerifyProperties(requirementsSpecification);
 
             // get a specific Requirement from the result by it's unique id
@@ -82,7 +87,58 @@ namespace WebservicesIntegrationTests
             // get a specific ParametricConstraint from the result by it's unique id
             var parametricConstraint =
                 jArray.Single(x => (string) x[PropertyNames.Iid] == "88200dbc-711a-47e0-a54a-dac4baca6e83");
-            ParametricConstraintTestFixture.VerifyProperties(parametricConstraint);
+
+            VerifyProperties(parametricConstraint);
+        }
+
+        [Test]
+        public void VerifyThatNewParametricConstraintCanBeAddedAndReordered()
+        {
+            var iterationUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration"));
+            var postBodyPath = this.GetPath("Tests/EngineeringModel/ParametricConstraint/PostNewParametricConstraint.json");
+            var postBody = this.GetJsonFromFile(postBodyPath);
+
+            var jArray = this.WebClient.PostDto(iterationUri, postBody);
+            Assert.AreEqual(4, jArray.Count);
+
+            var engineeringModel = jArray.Single(x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            Assert.AreEqual(2, (int) engineeringModel[PropertyNames.RevisionNumber]);
+
+            var relationalExpression = jArray.Single(x => (string) x[PropertyNames.Iid] == "d8a88095-a51f-4b3a-8746-97659f313143");
+            Assert.AreEqual(2, (int) relationalExpression[PropertyNames.RevisionNumber]);
+
+            var requirement = jArray.Single(x => (string) x[PropertyNames.Iid] == "614e2a69-d602-46be-9311-2fb4d3273e87");
+            Assert.AreEqual(2, (int) requirement[PropertyNames.RevisionNumber]);
+
+            var parametricConstraint = jArray.Single(x => (string) x[PropertyNames.Iid] == "5e1ad29c-ac18-474d-832c-5f2d0d203176");
+            Assert.AreEqual(5, parametricConstraint.Children().Count());
+            Assert.AreEqual(2, (int) parametricConstraint[PropertyNames.RevisionNumber]);
+
+            var expectedConstraints = new List<OrderedItem> { new OrderedItem(1, "88200dbc-711a-47e0-a54a-dac4baca6e83"), new OrderedItem(2, "5e1ad29c-ac18-474d-832c-5f2d0d203176") };
+            var constraintArray = JsonConvert.DeserializeObject<List<OrderedItem>>(requirement[PropertyNames.ParametricConstraint].ToString());
+            CollectionAssert.AreEquivalent(expectedConstraints, constraintArray);
+
+            postBodyPath = this.GetPath("Tests/EngineeringModel/ParametricConstraint/PostReorderParametricConstraints.json");
+            postBody = this.GetJsonFromFile(postBodyPath);
+
+            jArray = this.WebClient.PostDto(iterationUri, postBody);
+            Assert.AreEqual(4, jArray.Count);
+
+            engineeringModel = jArray.Single(x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            Assert.AreEqual(3, (int) engineeringModel[PropertyNames.RevisionNumber]);
+
+            var constraint1 = jArray.Single(x => (string) x[PropertyNames.Iid] == "5e1ad29c-ac18-474d-832c-5f2d0d203176");
+            Assert.AreEqual(3, (int) constraint1[PropertyNames.RevisionNumber]);
+
+            var constraint2 = jArray.Single(x => (string) x[PropertyNames.Iid] == "88200dbc-711a-47e0-a54a-dac4baca6e83");
+            Assert.AreEqual(3, (int) constraint2[PropertyNames.RevisionNumber]);
+
+            requirement = jArray.Single(x => (string) x[PropertyNames.Iid] == "614e2a69-d602-46be-9311-2fb4d3273e87");
+            Assert.AreEqual(3, (int) requirement[PropertyNames.RevisionNumber]);
+
+            expectedConstraints = new List<OrderedItem> { new OrderedItem(3, "5e1ad29c-ac18-474d-832c-5f2d0d203176"), new OrderedItem(4, "88200dbc-711a-47e0-a54a-dac4baca6e83") };
+            constraintArray = JsonConvert.DeserializeObject<List<OrderedItem>>(requirement[PropertyNames.ParametricConstraint].ToString());
+            CollectionAssert.AreEquivalent(expectedConstraints, constraintArray);
         }
 
         /// <summary>
@@ -114,6 +170,7 @@ namespace WebservicesIntegrationTests
                 "deaa2560-b704-4b2c-950b-aad02ff84052",
                 "a6e44651-7c4a-4a57-bdf9-c0290497f392"
             };
+
             var expressionsArray = (JArray) parametricConstraint[PropertyNames.Expression];
             IList<string> expressions = expressionsArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedExpressions, expressions);

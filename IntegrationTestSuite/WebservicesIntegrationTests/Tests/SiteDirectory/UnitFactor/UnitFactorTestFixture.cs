@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="UnitFactorTestFixture.cs" company="RHEA System">
 //
-//   Copyright 2016 RHEA System 
+//   Copyright 2016-2020 RHEA System 
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -23,11 +23,14 @@ namespace WebservicesIntegrationTests
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using NUnit.Framework;
+
+    using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
 
+    using NUnit.Framework;
+
     [TestFixture]
-    public class UnitFactorTestFixture : WebClientTestFixtureBase
+    public class UnitFactorTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
         /// <summary>
         /// Verification that the UnitFactor objects are returned from the data-source and that the 
@@ -49,9 +52,9 @@ namespace WebservicesIntegrationTests
 
             // get a specific UnitFactor from the result by it's unique id
             var unitFactor =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "56c30a85-f648-4b31-87d2-153e8a74048b");
+                jArray.Single(x => (string) x[PropertyNames.Iid] == "56c30a85-f648-4b31-87d2-153e8a74048b");
 
-            UnitFactorTestFixture.VerifyProperties(unitFactor);
+            VerifyProperties(unitFactor);
         }
 
         [Test]
@@ -69,23 +72,74 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(4, jArray.Count);
 
             // get a specific SiteDirectory from the result by it's unique id
-            var siteDirectory = jArray.Single(x => (string)x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
+            var siteDirectory = jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
             SiteDirectoryTestFixture.VerifyProperties(siteDirectory);
 
             // get a SiteReferenceDataLibrary SiteReferenceDataLibrary from the result by it's unique id
             var siteReferenceDataLibrary =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
+                jArray.Single(x => (string) x[PropertyNames.Iid] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
+
             SiteReferenceDataLibraryTestFixture.VerifyProperties(siteReferenceDataLibrary);
 
             // get a specific DerivedUnit from the result by it's unique id
             var derivedUnit =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "c394eaa9-4832-4b2d-8d88-5e1b2c43732c");
+                jArray.Single(x => (string) x[PropertyNames.Iid] == "c394eaa9-4832-4b2d-8d88-5e1b2c43732c");
+
             DerivedUnitTestFixture.VerifyProperties(derivedUnit);
 
             // get a specific UnitFactor from the result by it's unique id
             var unitFactor =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "56c30a85-f648-4b31-87d2-153e8a74048b");
-            UnitFactorTestFixture.VerifyProperties(unitFactor);
+                jArray.Single(x => (string) x[PropertyNames.Iid] == "56c30a85-f648-4b31-87d2-153e8a74048b");
+
+            VerifyProperties(unitFactor);
+        }
+
+        [Test]
+        public void VerifyThatUnitFactorCanBeAddedAndReorderedFromWebApi()
+        {
+            var siteDirectoryUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            var postBodyPath = this.GetPath("Tests/SiteDirectory/UnitFactor/PostNewUnitFactor.json");
+
+            var postBody = this.GetJsonFromFile(postBodyPath);
+            var jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
+
+            Assert.AreEqual(3, jArray.Count);
+
+            var siteDirectory = jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
+            Assert.AreEqual(2, (int) siteDirectory[PropertyNames.RevisionNumber]);
+
+            var unitFactor = jArray.Single(x => (string) x[PropertyNames.Iid] == "7d48eebe-c4e1-4081-ab63-7e4584563708");
+            Assert.AreEqual(2, (int) unitFactor[PropertyNames.RevisionNumber]);
+
+            var derivedUnit = jArray.Single(x => (string) x[PropertyNames.Iid] == "c394eaa9-4832-4b2d-8d88-5e1b2c43732c");
+            Assert.AreEqual(2, (int) derivedUnit[PropertyNames.RevisionNumber]);
+
+            var expectedUnitFactorArray = new List<OrderedItem> { new OrderedItem(2, "7d48eebe-c4e1-4081-ab63-7e4584563708"), new OrderedItem(23307173, "56c30a85-f648-4b31-87d2-153e8a74048b") };
+            var unitFactorArray = JsonConvert.DeserializeObject<List<OrderedItem>>(derivedUnit[PropertyNames.UnitFactor].ToString());
+            CollectionAssert.AreEquivalent(expectedUnitFactorArray, unitFactorArray);
+
+            postBodyPath = this.GetPath("Tests/SiteDirectory/UnitFactor/PostReorderUnitFactor.json");
+
+            postBody = this.GetJsonFromFile(postBodyPath);
+            jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
+
+            Assert.AreEqual(4, jArray.Count);
+
+            siteDirectory = jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
+            Assert.AreEqual(3, (int) siteDirectory[PropertyNames.RevisionNumber]);
+
+            unitFactor = jArray.Single(x => (string) x[PropertyNames.Iid] == "7d48eebe-c4e1-4081-ab63-7e4584563708");
+            Assert.AreEqual(3, (int) unitFactor[PropertyNames.RevisionNumber]);
+
+            var unitFactor2 = jArray.Single(x => (string) x[PropertyNames.Iid] == "56c30a85-f648-4b31-87d2-153e8a74048b");
+            Assert.AreEqual(3, (int) unitFactor2[PropertyNames.RevisionNumber]);
+
+            derivedUnit = jArray.Single(x => (string) x[PropertyNames.Iid] == "c394eaa9-4832-4b2d-8d88-5e1b2c43732c");
+            Assert.AreEqual(3, (int) derivedUnit[PropertyNames.RevisionNumber]);
+
+            expectedUnitFactorArray = new List<OrderedItem> { new OrderedItem(1, "56c30a85-f648-4b31-87d2-153e8a74048b"), new OrderedItem(3, "7d48eebe-c4e1-4081-ab63-7e4584563708") };
+            unitFactorArray = JsonConvert.DeserializeObject<List<OrderedItem>>(derivedUnit[PropertyNames.UnitFactor].ToString());
+            CollectionAssert.AreEquivalent(expectedUnitFactorArray, unitFactorArray);
         }
 
         /// <summary>
@@ -101,11 +155,11 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(5, unitFactor.Children().Count());
 
             // assert that the properties are what is expected
-            Assert.AreEqual("56c30a85-f648-4b31-87d2-153e8a74048b", (string)unitFactor[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int)unitFactor[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("UnitFactor", (string)unitFactor[PropertyNames.ClassKind]);
-            Assert.AreEqual("56842970-3915-4369-8712-61cfd8273ef9", (string)unitFactor[PropertyNames.Unit]);
-            Assert.AreEqual("2", (string)unitFactor[PropertyNames.Exponent]);
+            Assert.AreEqual("56c30a85-f648-4b31-87d2-153e8a74048b", (string) unitFactor[PropertyNames.Iid]);
+            Assert.AreEqual(1, (int) unitFactor[PropertyNames.RevisionNumber]);
+            Assert.AreEqual("UnitFactor", (string) unitFactor[PropertyNames.ClassKind]);
+            Assert.AreEqual("56842970-3915-4369-8712-61cfd8273ef9", (string) unitFactor[PropertyNames.Unit]);
+            Assert.AreEqual("2", (string) unitFactor[PropertyNames.Exponent]);
         }
     }
 }

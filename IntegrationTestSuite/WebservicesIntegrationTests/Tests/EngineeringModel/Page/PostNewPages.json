@@ -1,0 +1,39 @@
+﻿{
+  "_delete": [],
+  "_create": [
+    {
+      "iid": "663114f6-9bb1-4751-a3ed-60bad354913e",
+      "revisionNumber": 0,
+      "classKind": "Page",
+      "name": "test page 1",
+      "shortName": "testpage1",
+      "owner": "eb759723-14b9-49f4-8611-544d037bb764"
+    },
+    {
+      "iid": "ad20d5de-54ae-40de-98fb-bb8d2cd7a4b8",
+      "revisionNumber": 0,
+      "classKind": "Page",
+      "name": "test page 2",
+      "shortName": "testpage2",
+      "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535"
+    }
+  ],
+  "_update": [
+    {
+      "classKind": "Section",
+      "iid": "c2eccf19-a040-4756-8298-8678d7149c8f",
+      "page": [
+        {
+          "k": 0,
+          "m": 1,
+          "v": "663114f6-9bb1-4751-a3ed-60bad354913e"
+        },
+        {
+          "k": 0,
+          "m": 2,
+          "v": "ad20d5de-54ae-40de-98fb-bb8d2cd7a4b8"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+﻿{
+  "_create": [],
+  "_delete": [
+    {
+      "iid": "f84b5d72-be4d-418c-90db-19e311e75be3",
+      "classKind": "Book"
+    }
+  ],
+  "_update": []
+}
+

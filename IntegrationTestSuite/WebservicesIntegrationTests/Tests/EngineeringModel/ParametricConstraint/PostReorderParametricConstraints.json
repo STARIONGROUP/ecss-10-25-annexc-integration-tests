@@ -1,0 +1,22 @@
+﻿{
+  "_delete": [],
+  "_create": [],
+  "_update": [
+    {
+      "classKind": "Requirement",
+      "iid": "614e2a69-d602-46be-9311-2fb4d3273e87",
+      "parametricConstraint": [
+        {
+          "k": 1,
+          "m": 4,
+          "v": "88200dbc-711a-47e0-a54a-dac4baca6e83"
+        },
+        {
+          "k": 2,
+          "m": 3,
+          "v": "5e1ad29c-ac18-474d-832c-5f2d0d203176"
+        }
+      ]
+    }
+  ]
+}

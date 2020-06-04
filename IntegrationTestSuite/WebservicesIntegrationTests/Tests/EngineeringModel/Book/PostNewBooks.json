@@ -1,0 +1,40 @@
+﻿{
+  "_delete": [],
+  "_create": [
+    {
+      "iid": "f84b5d72-be4d-418c-90db-19e311e75be3",
+      "revisionNumber": 0,
+      "classKind": "Book",
+      "name": "test book 1",
+      "shortName": "testbook1",
+      "owner": "eb759723-14b9-49f4-8611-544d037bb764"
+    },
+    {
+      "iid": "20a8f908-94c8-4093-8f74-7b6f25433826",
+      "revisionNumber": 0,
+      "classKind": "Book",
+      "name": "test book 2",
+      "shortName": "testbook2",
+      "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535"
+    }
+  ],
+  "_update": [
+    {
+      "classKind": "EngineeringModel",
+      "iid": "9ec982e4-ef72-4953-aa85-b158a95d8d56",
+      "book": [
+        {
+          "k": 0, 
+          "m": 1,
+          "v": "f84b5d72-be4d-418c-90db-19e311e75be3"
+        },
+        {
+          "k": 0,
+          "m": 2,
+          "v": "20a8f908-94c8-4093-8f74-7b6f25433826"
+        }
+      ]
+    }
+  ]
+}
+
