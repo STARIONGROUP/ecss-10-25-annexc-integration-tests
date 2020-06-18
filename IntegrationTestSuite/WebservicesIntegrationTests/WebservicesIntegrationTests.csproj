@@ -243,6 +243,9 @@
     <None Include="Tests\EngineeringModel\File\3F64667F0F27A4C4FA1B4BF374033938A542FDD1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Tests\EngineeringModel\File\PostDeleteFile.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Tests\EngineeringModel\File\PostNewFile.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
