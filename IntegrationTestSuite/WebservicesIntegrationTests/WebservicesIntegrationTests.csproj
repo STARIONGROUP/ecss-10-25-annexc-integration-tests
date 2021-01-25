@@ -306,6 +306,9 @@
     <None Include="Tests\SiteDirectory\Definition\PostDeleteExampleAndNote.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Tests\SiteDirectory\DerivedQuantityKind\PostNewCyclicFactor.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Tests\SiteDirectory\EnumerationParameterType\PostReorderEnumerationValueDefinition.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
