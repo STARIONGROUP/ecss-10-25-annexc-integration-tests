@@ -1,0 +1,19 @@
+{
+	"_delete": [],
+	"_create": [
+		{
+			"iid": "bf4ce301-402a-4eef-98b7-45faf37a1ea5",
+			"revisionNumber": 1,
+			"classKind": "MappingToReferenceScale",
+			"referenceScaleValue": "bf4ce301-402a-4eef-98b7-45faf37a1ea4",
+			"dependentScaleValue": "bf4ce301-402a-4eef-98b7-45faf37a1ea4"
+		}
+	],
+	"_update": [
+		{
+			"iid": "541037e2-9f6a-466c-b56f-a09f81f36576",
+			"classKind": "OrdinalScale",
+			"mappingToReferenceScale": [ "bf4ce301-402a-4eef-98b7-45faf37a1ea5" ]
+		}
+	]
+}

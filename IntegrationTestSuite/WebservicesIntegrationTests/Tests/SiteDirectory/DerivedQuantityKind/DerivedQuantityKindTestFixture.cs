@@ -23,6 +23,8 @@ namespace WebservicesIntegrationTests
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Net;
+
     using NUnit.Framework;
     using Newtonsoft.Json.Linq;
     using Newtonsoft.Json;
@@ -82,6 +84,19 @@ namespace WebservicesIntegrationTests
             var derivedQuantityKind =
                 jArray.Single(x => (string) x[PropertyNames.Iid] == "74d9c38f-5ace-4f90-8841-d0f9942e9d09");
             DerivedQuantityKindTestFixture.VerifyProperties(derivedQuantityKind);
+        }
+
+        [Test]
+        public void VerifyCyclicSelf()
+        {
+            var uri = new Uri(string.Format(UriFormat, this.Settings.Hostname,
+                "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            var postBodyPath = this.GetPath("Tests/SiteDirectory/DerivedQuantityKind/PostNewCyclicFactor.json");
+
+            var postBody = base.GetJsonFromFile(postBodyPath);
+            
+            // no additional error details are available here
+            Assert.Throws<WebException>(() => this.WebClient.PostDto(uri, postBody));
         }
 
         /// <summary>
