@@ -83,7 +83,7 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken modelLogEntry)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(10, modelLogEntry.Children().Count());
+            Assert.AreEqual(11, modelLogEntry.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("4e2375eb-8e37-4df2-9c7b-dd896683a891", (string) modelLogEntry[PropertyNames.Iid]);
