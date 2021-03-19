@@ -121,7 +121,7 @@
     <Compile Include="Tests\SiteDirectory\EmailAddress\EmailAddressTestFixture.cs" />
     <Compile Include="Tests\SiteDirectory\EnumerationParameterType\EnumerationParameterTypeTestFixture.cs" />
     <Compile Include="Tests\SiteDirectory\IterationSetup\IterationSetupTestFixture.cs" />
-	<Compile Include="Tests\SiteDirectory\MeasurementScale\MeasurementScaleTestFixture.cs" />
+    <Compile Include="Tests\SiteDirectory\MeasurementScale\MeasurementScaleTestFixture.cs" />
     <Compile Include="Tests\SiteDirectory\ModelReferenceDataLibrary\ModelReferenceDataLibraryTestFixture.cs" />
     <Compile Include="Tests\SiteDirectory\Participant\ParticipantTestFixture.cs" />
     <Compile Include="Tests\SiteDirectory\PropertyNames.cs" />
@@ -284,6 +284,9 @@
     <None Include="Tests\EngineeringModel\Page\PostNewPages.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Tests\EngineeringModel\Parameter\PostUpdateStateDependentParameterToAnotherState.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Tests\EngineeringModel\ParametricConstraint\PostNewParametricConstraint.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -323,7 +326,7 @@
     <None Include="Tests\SiteDirectory\IterationSetup\PostUpdateCyclicIterationSetup.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-	<None Include="Tests\SiteDirectory\MeasurementScale\PostNewCyclicMappingToReferenceScale.json">
+    <None Include="Tests\SiteDirectory\MeasurementScale\PostNewCyclicMappingToReferenceScale.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Tests\SiteDirectory\ParameterTypeComponent\PostReorderParameterTypeComponents.json">

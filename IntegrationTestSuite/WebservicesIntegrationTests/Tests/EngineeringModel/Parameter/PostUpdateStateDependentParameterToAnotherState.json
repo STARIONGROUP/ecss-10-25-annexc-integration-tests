@@ -1,0 +1,13 @@
+﻿{
+	"_delete": [],
+	"_create": [],
+	"_update": [
+		{
+			"classKind": "Parameter",
+			"iid": "6c5aff74-f983-4aa8-a9d6-293b3429307c",
+			"modifiedOn": "2017-04-15T14:59:59.802Z",
+			"stateDependence": "f4640b3f-7840-4cfc-9a15-80127f91c8db"
+		}
+	],
+	"_copy": []
+}
