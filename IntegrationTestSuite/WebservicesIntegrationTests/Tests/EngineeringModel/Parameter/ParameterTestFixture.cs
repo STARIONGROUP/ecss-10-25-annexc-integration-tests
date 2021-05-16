@@ -1,15 +1,20 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ParameterTestFixture.cs" company="RHEA System">
-//   Copyright 2016-2021 RHEA System 
+// <copyright file="ParameterTestFixture.cs" company="RHEA System S.A.">
+//
+//   Copyright 2016-2021 RHEA System S.A.
+//
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
 //   You may obtain a copy of the License at
+//
 //      http://www.apache.org/licenses/LICENSE-2.0
+//
 //   Unless required by applicable law or agreed to in writing, software
 //   distributed under the License is distributed on an "AS IS" BASIS,
 //   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
+//
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -26,11 +31,8 @@ namespace WebservicesIntegrationTests
     [TestFixture]
     public class ParameterTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
-        /// <summary>
-        /// Verification that the Parameter objects are returned from the data-source and that the 
-        /// values of the Parameter properties are equal to the expected value
-        /// </summary>
         [Test]
+        [Category("GET")]
         public void VerifyThatExpectedParameterIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
@@ -53,6 +55,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("GET")]
         public void VerifyThatExpectedParameterWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
@@ -81,6 +84,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("POST")]
         public void VerifyThatAParameterCanBeCreatedWithWebApi()
         {
             var iterationUri = new Uri(
@@ -171,6 +175,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("POST")]
         public void VerifyThatAParameterCanBeDeletedAndCreatedInOnRequestWithWebApi()
         {
             var iterationUri = new Uri(
@@ -260,6 +265,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("POST")]
         public void VerifyThatAParameterOfCompoundParameterTypeCanBeCreatedWithWebApi()
         {
             var iterationUri = new Uri(
@@ -351,6 +357,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("POST")]
         public void VerifyThatAnOptionDependentParameterCanBeCreatedWithWebApi()
         {
             var iterationUri = new Uri(
@@ -444,6 +451,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("POST")]
         public void VerifyThatAParameterCanBeUpdatedToOptionDependentWithWebApi()
         {
             var iterationUri = new Uri(
@@ -511,6 +519,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("POST")]
         public void VerifyThatAParameterCanBeUpdatedToStateDependentWithWebApi()
         {
             var iterationUri = new Uri(
@@ -613,6 +622,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("POST")]
         public void VerifyThatAStateDependentParameterCanBeUpdatedToAnotherStateDependentWithWebApi()
         {
             var iterationUri = new Uri(

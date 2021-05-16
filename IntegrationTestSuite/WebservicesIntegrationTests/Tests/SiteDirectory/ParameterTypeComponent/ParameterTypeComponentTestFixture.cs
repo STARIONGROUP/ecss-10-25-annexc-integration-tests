@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ParameterTypeComponentTestFixture.cs" company="RHEA System">
+// <copyright file="ParameterTypeComponentTestFixture.cs" company="RHEA System S.A.">
 //
-//   Copyright 2016-2020 RHEA System 
+//   Copyright 2016-2021 RHEA System S.A.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -23,18 +23,17 @@ namespace WebservicesIntegrationTests
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using NUnit.Framework;
+
     using Newtonsoft.Json.Linq;
     using Newtonsoft.Json;
+
+    using NUnit.Framework;
 
     [TestFixture]
     public class ParameterTypeComponentTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
-        /// <summary>
-        /// Verification that the ParameterTypeComponent objects are returned from the data-source and that the 
-        /// values of the ParameterTypeComponent properties are equal to the expected value
-        /// </summary>
         [Test]
+        [Category("GET")]
         public void VerifyThatExpectedParameterTypeComponentIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
@@ -66,6 +65,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("POST")]
         public void VerifyThatReorderParameterTypeComponentWorks()
         {
             var siteDirectoryUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
@@ -82,6 +82,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("GET")]
         public void VerifyThatExpectedParameterTypeComponentWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request

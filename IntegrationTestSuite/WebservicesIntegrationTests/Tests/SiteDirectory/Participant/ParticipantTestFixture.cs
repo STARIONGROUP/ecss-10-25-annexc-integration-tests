@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ParticipantTestFixture.cs" company="RHEA System">
+// <copyright file="ParticipantTestFixture.cs" company="RHEA System S.A.">
 //
-//   Copyright 2020 RHEA System 
+//   Copyright 2016-2021 RHEA System S.A.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -21,16 +21,15 @@
 namespace WebservicesIntegrationTests
 {
     using System;
-    using NUnit.Framework;
     using System.Net;
+
+    using NUnit.Framework;
 
     [TestFixture]
     public class ParticipantTestFixture: WebClientTestFixtureBase
     {
-        /// <summary>
-        /// Verification that the Participant must have a domain of expertise upon update
-        /// </summary>
         [Test]
+        [Category("POST")]
         public void VerifyThatParticipantHasValidDomainOfExpertise()
         {
             // define the URI on which to perform a GET request

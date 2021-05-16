@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="PersonRoleTestFixture.cs" company="RHEA System">
+// <copyright file="PersonRoleTestFixture.cs" company="RHEA System S.A.">
 //
-//   Copyright 2016 RHEA System 
+//   Copyright 2016-2021 RHEA System S.A.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -23,8 +23,10 @@ namespace WebservicesIntegrationTests
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using NUnit.Framework;
+    
     using Newtonsoft.Json.Linq;
+
+    using NUnit.Framework;
 
     [TestFixture]
     public class PersonRoleTestFixture : WebClientTestFixtureBase
@@ -34,6 +36,7 @@ namespace WebservicesIntegrationTests
         /// values of the PersonRole properties are equal to the expected value
         /// </summary>
         [Test]
+        [Category("GET")]
         public void VerifyThatExpectedPersonRoleIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
@@ -54,6 +57,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("GET")]
         public void VerifyThatExpectedPersonRoleWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request

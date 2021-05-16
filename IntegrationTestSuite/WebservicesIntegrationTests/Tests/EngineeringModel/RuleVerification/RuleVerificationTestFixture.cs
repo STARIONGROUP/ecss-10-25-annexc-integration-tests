@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="RuleVerificationTestFixture.cs" company="RHEA System">
+// <copyright file="RuleVerificationTestFixture.cs" company="RHEA System S.A.">
 //
-//   Copyright 2018-2020 RHEA System S.A.
+//   Copyright 2016-2021 RHEA System S.A.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -33,6 +33,7 @@ namespace WebservicesIntegrationTests
     public class RuleVerificationTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
         [Test]
+        [Category("POST")]
         public void VerifyThatARuleVerificationCanBeCreatedWithWebApi()
         {
             var iterationUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
@@ -141,7 +142,9 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual("8a5cd66e-7313-4843-813f-37081ca81bb8", (string) userRuleVerification[PropertyNames.Rule]);
         }
 
+        [Test]
         [Ignore("Doen't work because RuleVerification ordered implementation is not OK. See https://github.com/RHEAGROUP/CDP4-WebServices-Community-Edition/issues/126")]
+        [Category("POST")]
         public void VerifyThatARuleVerificationCanBeReorderedWithWebApi()
         {
             var iterationUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));

@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="PageTestFixture.cs" company="RHEA System">
+// <copyright file="PageTestFixture.cs" company="RHEA System S.A.">
 //
-//   Copyright 2016-2020 RHEA System 
+//   Copyright 2016-2021 RHEA System S.A.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -30,14 +30,12 @@ namespace WebservicesIntegrationTests
 
     using WebservicesIntegrationTests.Net;
 
-    /// <summary>
-    /// Suite of tests for the Page ClassKind
-    /// </summary>
     [TestFixture]
     public class PageTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
         [Test]
         [CdpVersion_1_1_0]
+        [Category("POST")]
         public void VerifyThatPagesCanBeAddedAndDeleted()
         {
             SiteDirectoryTestFixture.AddDomainExpertUserJane(this, out var userName, out var passWord);

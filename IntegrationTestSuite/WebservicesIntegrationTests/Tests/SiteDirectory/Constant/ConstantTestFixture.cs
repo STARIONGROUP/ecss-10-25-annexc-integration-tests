@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ConstantTestFixture.cs" company="RHEA System">
+// <copyright file="ConstantTestFixture.cs" company="RHEA System S.A.">
 //
-//   Copyright 2016 RHEA System 
+//   Copyright 2016-2021 RHEA System S.A.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -23,18 +23,17 @@ namespace WebservicesIntegrationTests
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using NUnit.Framework;
+
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
+
+    using NUnit.Framework;
 
     [TestFixture]
     public class ConstantTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
-        /// <summary>
-        /// Verification that the Constant objects are returned from the data-source and that the 
-        /// values of the Constant properties are equal to the expected value
-        /// </summary>
         [Test]
+        [Category("GET")]
         public void VerifyThatExpectedConstantIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
@@ -56,6 +55,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("GET")]
         public void VerifyThatExpectedConstantWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
@@ -86,6 +86,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("POST")]
         public void VerifyThatAConstantCanBeCreatedWithWebApi()
         {
             var iterationUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));

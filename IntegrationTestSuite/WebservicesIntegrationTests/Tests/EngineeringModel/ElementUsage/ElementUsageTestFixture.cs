@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ElementUsageTestFixture.cs" company="RHEA System">
+// <copyright file="ElementUsageTestFixture.cs" company="RHEA System S.A.">
 //
-//   Copyright 2016 RHEA System 
+//   Copyright 2016-2021 RHEA System S.A.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -31,11 +31,8 @@ namespace WebservicesIntegrationTests
     [TestFixture]
     public class ElementUsageTestFixture : WebClientTestFixtureBase
     {
-        /// <summary>
-        /// Verification that the ElementUsage objects are returned from the data-source and that the 
-        /// values of the ElementUsage properties are equal to the expected value
-        /// </summary>
         [Test]
+        [Category("GET")]
         public void VerifyThatExpectedElementUsageIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
@@ -55,6 +52,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("GET")]
         public void VerifyThatExpectedElementUsageWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request

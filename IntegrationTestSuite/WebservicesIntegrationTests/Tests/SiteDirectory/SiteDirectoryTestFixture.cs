@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SiteDirectoryTestFixture.cs" company="RHEA System">
+// <copyright file="SiteDirectoryTestFixture.cs" company="RHEA System S.A.">
 //
-//   Copyright 2016 RHEA System 
+//   Copyright 2016-2021 RHEA System S.A.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -27,23 +27,16 @@ namespace WebservicesIntegrationTests
 
     using Ionic.Zip;
 
-    using NUnit.Framework;
-
     using Newtonsoft.Json.Linq;
 
+    using NUnit.Framework;
+    
     using WebservicesIntegrationTests.Net;
 
-    /// <summary>
-    /// The purpose of the <see cref="SiteDirectoryTestFixture"/> is to execute integration tests using the GET and POST
-    /// verbs on SiteDirectory objects
-    /// </summary>
     public class SiteDirectoryTestFixture : WebClientTestFixtureBase
     {
-        /// <summary>
-        /// Verification that the SiteDirectory object is returned from the data-source and that the 
-        /// values of the SiteDirectory properties are equal to to expected value.
-        /// </summary>
         [Test]
+        [Category("GET")]
         public void VerifyThatExpectedSiteDirectoryIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request.
@@ -67,6 +60,7 @@ namespace WebservicesIntegrationTests
         /// values of the SiteDirectory properties are equal to to expected value.
         /// </summary>
         [Test]
+        [Category("GET")]
         public void VerifyThatExpectedSiteDirectoryIsReturnedFromWebApiWhenUniqueIdIsNotSpecified()
         {
             // define the URI on which to perform a GET request
@@ -85,6 +79,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("GET")]
         public void VerifyThatExpectedSiteDirectoryIsReturnedFromWebApiWhenUniqueIdIsSpecifiedAndExtentEqualsDeep()
         {
             // define the URI on which to perform a GET request
@@ -103,6 +98,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("GET")]
         public void VerifyThatGetWithWildCardReturnsExpectedResult()
         {
             // define the URI on which to perform a GET request
@@ -124,7 +120,8 @@ namespace WebservicesIntegrationTests
         /// Verification that the SiteDirectory object is returned from the data-source and that the 
         /// values of the SiteDirectory properties are equal to to expected value
         /// </summary>
-        [Test]        
+        [Test]
+        [Category("GET")]
         public void VerifyThatExpectedSiteDirectoryWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
@@ -143,6 +140,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("EXPORT")]
         public void VerifyThatAModelCanBeExportedWithWebApi()
         {
             string[] engineeringodelSetupIds = { "116f6253-89bb-47d4-aa24-d11d197e43c9" };

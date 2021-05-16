@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="PersonTestFixture.cs" company="RHEA System">
+// <copyright file="PersonTestFixture.cs" company="RHEA System S.A.">
 //
-//   Copyright 2016 RHEA System 
+//   Copyright 2016-2021 RHEA System S.A.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -25,20 +25,14 @@ namespace WebservicesIntegrationTests
     using System.Linq;
     using System.Net;
 
-    using NUnit.Framework;
     using Newtonsoft.Json.Linq;
 
-    /// <summary>
-    /// The purpose of the <see cref="PersonTestFixture"/> is to execute integration tests using the GET and POST
-    /// verbs on Person objects.
-    /// </summary>    
+    using NUnit.Framework;
+
     public class PersonTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
-        /// <summary>
-        /// Verification that the Person objects are returned from the data-source and that the 
-        /// values of the person properties are equal to to expected value.
-        /// </summary>
         [Test]
+        [Category("GET")]
         public void VerifyThatExpectedPersonIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
@@ -59,6 +53,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("GET")]
         public void VerifyThatExpectedPersonWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
@@ -83,6 +78,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("POST")]
         public void VerifyThatTelephoneDeletionAsPropertyFromPersonCanBeDoneFromWebApi()
         {
             var uri = new Uri(
@@ -125,6 +121,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("POST")]
         public void Verify_That_person_with_null_role_and_null_password_can_be_posted()
         {
             var uri = new Uri(
@@ -249,6 +246,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("POST")]
         public void Verify_That_password_policies_are_implemented_correctly()
         {
             var uri = new Uri(

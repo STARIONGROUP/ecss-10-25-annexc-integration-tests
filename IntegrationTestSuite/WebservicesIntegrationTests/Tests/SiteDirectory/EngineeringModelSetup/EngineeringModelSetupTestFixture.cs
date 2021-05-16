@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="EngineeringModelSetupTestFixture.cs" company="RHEA System">
+// <copyright file="EngineeringModelSetupTestFixture.cs" company="RHEA System S.A.">
 //
-//   Copyright 2016-2020 RHEA System 
+//   Copyright 2016-2021 RHEA System S.A.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -24,18 +24,15 @@ namespace WebservicesIntegrationTests
     using System.Collections.Generic;
     using System.Linq;
 
-    using Newtonsoft.Json;
-
-    using NUnit.Framework;
     using Newtonsoft.Json.Linq;
 
-    /// <summary>
-    /// The purpose of the <see cref="EngineeringModelSetupTestFixture"/> is to GET and POST model objects
-    /// </summary>
+    using NUnit.Framework;
+    
     [TestFixture]
     public class EngineeringModelSetupTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
         [Test]
+        [Category("POST")]
         public void VerifyThatNewEngineeringModelCanBeCreatedWithWebApi()
         {
             var siteDirectoryUri =
@@ -323,6 +320,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("POST")]
         public void VerifyThatActiveDomainCanBeAddedToEngineeringModelSetupWithWebApi()
         {
             var siteDirectoryUri =
@@ -362,6 +360,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("POST")]
         public void VerifyThatNewEngineeringModelCanBeCreatedBasedOnExistingModelWithWebApi()
         {
             var siteDirectoryUri =
@@ -413,11 +412,8 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string)participant[PropertyNames.SelectedDomain]);
         }
 
-        /// <summary>
-        /// Verification that the EngineeringModelSetup objects are returned from the data-source and that the 
-        /// values of the EngineeringModelSetup properties are equal to the expected values
-        /// </summary>
         [Test]
+        [Category("GET")]
         public void VerifyThatExpectedEngineeringModelSetupIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
@@ -438,6 +434,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("GET")]
         public void VerifyThatExpectedEngineeringModelSetupWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
@@ -528,6 +525,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("POST")]
         public void VerifyThatDomainFileStoreWillNotBeCreateWhenDomainOfExpertiseWillBeAddedToExistingEngineeringModelSetup()
         {
             var siteDirectoryUri =
@@ -606,6 +604,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("POST")]
         public void VerifyThatDomainFileStoreWillNotBeDeletedWhenDomainOfExpertiseWillBeRemovedFromExistingEngineeringModelSetup()
         {
             var engineeringModelSetupsUri =

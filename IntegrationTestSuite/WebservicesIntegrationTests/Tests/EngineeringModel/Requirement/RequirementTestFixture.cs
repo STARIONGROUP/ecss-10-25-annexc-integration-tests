@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="RequirementTestFixture.cs" company="RHEA System">
+// <copyright file="RequirementTestFixture.cs" company="RHEA System S.A.">
 //
-//   Copyright 2017 RHEA System S.A.
+//   Copyright 2016-2021 RHEA System S.A.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -29,18 +29,11 @@ namespace WebservicesIntegrationTests
 
     using NUnit.Framework;
 
-    /// <summary>
-    /// Verification that the Requirement objects are returned from the data-source and that the 
-    /// values of the Requirement properties are equal to the expected value
-    /// </summary>
     [TestFixture]
     public class RequirementTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
-        /// <summary>
-        /// Verification that the Requirement objects are returned from the data-source and that the 
-        /// values of the Requirement properties are equal to the expected value
-        /// </summary>
         [Test]
+        [Category("GET")]
         public void VerifyThatExpectedRequirementIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
@@ -60,6 +53,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("GET")]
         public void VerifyThatExpectedRequirementWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
@@ -88,6 +82,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("POST")]
         public void VerifyThatARequirementCanBeCreatedWithWebApi()
         {
             var iterationUri = new Uri(
@@ -128,6 +123,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("POST")]
         public void VerifyThatWhenARequirementIsMovedTheResponseIsComplete()
         {
             var iterationUri = new Uri(
@@ -171,6 +167,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("POST")]
         public void VerifyThatParametricConstraintDeletionAsPropertyFromRequirementCanBeDoneFromWebApi()
         {
             var iterationUri = new Uri(

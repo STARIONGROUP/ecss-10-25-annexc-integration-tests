@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="QuantityKindFactorTestFixture.cs" company="RHEA System">
+// <copyright file="QuantityKindFactorTestFixture.cs" company="RHEA System S.A.">
 //
-//   Copyright 2016-2020 RHEA System 
+//   Copyright 2016-2021 RHEA System S.A.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -32,11 +32,8 @@ namespace WebservicesIntegrationTests
     [TestFixture]
     public class QuantityKindFactorTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
-        /// <summary>
-        /// Verification that the QuantityKindFactor objects are returned from the data-source and that the 
-        /// values of the QuantityKindFactor properties are equal to the expected value
-        /// </summary>
         [Test]
+        [Category("GET")]
         public void VerifyThatExpectedKindFactorIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
@@ -58,6 +55,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("GET")]
         public void VerifyThatExpectedKindFactorWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
@@ -97,6 +95,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("POST")]
         public void VerifyThatDerivedQuantityKindCanBeAddedAndReordered()
         {
             var siteDirectoryUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));

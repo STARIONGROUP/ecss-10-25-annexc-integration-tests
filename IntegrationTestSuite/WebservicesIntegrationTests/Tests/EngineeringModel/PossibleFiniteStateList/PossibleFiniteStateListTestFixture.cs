@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="PossibleFiniteStateListTestFixture.cs" company="RHEA System">
+// <copyright file="PossibleFiniteStateListTestFixture.cs" company="RHEA System S.A.">
 //
-//   Copyright 2016 RHEA System 
+//   Copyright 2016-2021 RHEA System S.A.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -23,18 +23,17 @@ namespace WebservicesIntegrationTests
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using NUnit.Framework;
-    using Newtonsoft.Json.Linq;
+
     using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
+
+    using NUnit.Framework;
 
     [TestFixture]
     public class PossibleFiniteStateListTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
-        /// <summary>
-        /// Verification that the PossibleFiniteStateList objects are returned from the data-source and that the 
-        /// values of the PossibleFiniteStateList properties are equal to the expected value
-        /// </summary>
         [Test]
+        [Category("GET")]
         public void VerifyThatExpectedPossibleFiniteStateListIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
@@ -56,6 +55,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("GET")]
         public void VerifyThatExpectedPossibleFiniteStateListWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
@@ -134,6 +134,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("POST")]
         public void VerifyThatRelationshipAsPropertyDeletionFromIterationCanBeDoneFromWebApi1()
         {
             var uri = new Uri(
@@ -156,6 +157,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("POST")]
         public void VerifyThatRelationshipAsPropertyDeletionFromIterationCanBeDoneFromWebApi2()
         {
             var uri = new Uri(
@@ -190,6 +192,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("POST")]
         public void Verify_that_Possible_states_in_PossibleFiniteStateList_can_be_reordered()
         {
             var uri = new Uri(

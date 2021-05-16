@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="AndExpressionTestFixture.cs" company="RHEA System">
+// <copyright file="AndExpressionTestFixture.cs" company="RHEA System S.A.">
 //
-//   Copyright 2016 RHEA System 
+//   Copyright 2016-2021 RHEA System S.A.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -23,17 +23,16 @@ namespace WebservicesIntegrationTests
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using NUnit.Framework;
+    
     using Newtonsoft.Json.Linq;
+
+    using NUnit.Framework;
 
     [TestFixture]
     public class AndExpressionTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
-        /// <summary>
-        /// Verification that the AndExpression objects are returned from the data-source and that the 
-        /// values of the AndExpression properties are equal to the expected value
-        /// </summary>
         [Test]
+        [Category("GET")]
         public void VerifyThatExpectedAndExpressionIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
@@ -50,10 +49,12 @@ namespace WebservicesIntegrationTests
             // get a specific AndExpression from the result by it's unique id
             var andExpression =
                 jArray.Single(x => (string) x[PropertyNames.Iid] == "000484d0-cefd-47be-9317-a9eae72c94ce");
+
             AndExpressionTestFixture.VerifyProperties(andExpression);
         }
 
         [Test]
+        [Category("GET")]
         public void VerifyThatExpectedAndExpressionWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
@@ -91,6 +92,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("POST")]
         public void VerifyThatAnAndExpressionCanBeCreatedWithWebApi()
         {
             var iterationUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));

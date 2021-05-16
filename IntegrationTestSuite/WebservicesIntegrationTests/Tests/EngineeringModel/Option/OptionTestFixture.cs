@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="OptionTestFixture.cs" company="RHEA System">
+// <copyright file="OptionTestFixture.cs" company="RHEA System S.A.">
 //
-//   Copyright 2016-2020 RHEA System 
+//   Copyright 2016-2021 RHEA System S.A.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -33,6 +33,7 @@ namespace WebservicesIntegrationTests
     public class OptionTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
         [Test]
+        [Category("POST")]
         public void VerifyThatNewOptionCanBeCreatedWithWebApi()
         {
             var iterationUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
@@ -56,7 +57,9 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual("testoption", (string) option[PropertyNames.ShortName]);
         }
 
+        [Test]
         [Ignore("Reordering options is not possible in Webservice. See https://github.com/RHEAGROUP/CDP4-WebServices-Community-Edition/issues/127")]
+        [Category("POST")]
         public void VerifyThatOptionsCanBeReorderedWithWebApi()
         {
             var iterationUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
@@ -77,11 +80,8 @@ namespace WebservicesIntegrationTests
             CollectionAssert.AreEquivalent(expectedOptions, optionsArray);
         }
 
-        /// <summary>
-        /// Verification that the Option objects are returned from the data-source and that the 
-        /// values of the Option properties are equal to the expected value
-        /// </summary>
         [Test]
+        [Category("GET")]
         public void VerifyThatExpectedOptionIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
@@ -103,6 +103,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("GET")]
         public void VerifyThatExpectedOptionWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request

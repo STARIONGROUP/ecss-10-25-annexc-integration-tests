@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MultirelationshipRuleTestFixture.cs" company="RHEA System">
+// <copyright file="MultirelationshipRuleTestFixture.cs" company="RHEA System S.A.">
 //
-//   Copyright 2016 RHEA System 
+//   Copyright 2016-2021 RHEA System S.A.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -23,17 +23,16 @@ namespace WebservicesIntegrationTests
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using NUnit.Framework;
+
     using Newtonsoft.Json.Linq;
+
+    using NUnit.Framework;
 
     [TestFixture]
     public class MultirelationshipRuleTestFixture : WebClientTestFixtureBase
     {
-        /// <summary>
-        /// Verification that the MultirelationshipRule objects are returned from the data-source and that the 
-        /// values of the MultirelationshipRule properties are equal to the expected value
-        /// </summary>
         [Test]
+        [Category("GET")]
         public void VerifyThatExpectedRuleIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
@@ -55,6 +54,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("GET")]
         public void VerifyThatExpectedRuleWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request

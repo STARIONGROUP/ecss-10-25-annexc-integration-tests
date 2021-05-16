@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="AliasTestFixture.cs" company="RHEA System">
+// <copyright file="AliasTestFixture.cs" company="RHEA System S.A.">
 //
-//   Copyright 2018 RHEA System S.A.
+//   Copyright 2016-2021 RHEA System S.A.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -18,24 +18,21 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-
 namespace WebservicesIntegrationTests
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     
     using Newtonsoft.Json.Linq;
+
     using NUnit.Framework;
 
     [TestFixture]
     public class AliasTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
-        /// <summary>
-        /// Verification that an Alias can be created for a specific Option in an Iteration
-        /// </summary>
         [Test]
+        [Category("POST")]
         public void VerifyThatAnOptionAliasCanBeCreatedWithWebApi()
         {
             var iterationUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));

@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="AssemblyInfo.cs" company="RHEA System">
+// <copyright file="AssemblyInfo.cs" company="RHEA System S.A.">
 //
 //   Copyright 2016 RHEA System 
 //

@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ElementDefinitionTestFixture.cs" company="RHEA System">
+// <copyright file="ElementDefinitionTestFixture.cs" company="RHEA System S.A.">
 //
-//   Copyright 2017-2020 RHEA System S.A.
+//   Copyright 2016-2021 RHEA System S.A.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -28,12 +28,11 @@ namespace WebservicesIntegrationTests
 
     using NUnit.Framework;
 
-    using WebservicesIntegrationTests.Tests.SiteDirectory;
-
     [TestFixture]
     public class ElementDefinitionTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
         [Test]
+        [Category("POST")]
         public void VerifyThatADomainExpertUserCanCreateAnElementDefinition()
         {
             SiteDirectoryTestFixture.AddDomainExpertUserJane(this, out var userName, out var passWord);
@@ -59,12 +58,9 @@ namespace WebservicesIntegrationTests
                 x => (string)x[PropertyNames.Iid] == "f959dc33-58ff-4b6f-a3b0-d265690b4085");
             Assert.AreEqual(2, (int)elementDefinition[PropertyNames.RevisionNumber]);
         }
-
-        /// <summary>
-        /// Verification that the ElementDefinition objects are returned from the data-source and that the 
-        /// values of the ElementDefinition properties are equal to the expected value
-        /// </summary>
+        
         [Test]
+        [Category("GET")]
         public void VerifyThatExpectedElementDefinitionIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
@@ -84,6 +80,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("GET")]
         public void VerifyThatExpectedElementDefinitionWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
@@ -109,6 +106,7 @@ namespace WebservicesIntegrationTests
         // The given test is prepared for a development server 
         // and is not eligible for the current data
         [Test]
+        [Category("POST")]
         public void VerifyThatCategoryDeletionFromElementDefinitionCanBeDoneFromWebApi()
         {
             var iterationUri = new Uri(
@@ -140,6 +138,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("POST")]
         public void VerifyThatParameterDeletionAsInstanceFromElementDefinitionCanBeDoneFromWebApi()
         {
             var iterationUri = new Uri(
@@ -183,6 +182,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("POST")]
         public void VerifyThatParameterDeletionAsPropertyFromElementDefinitionCanBeDoneFromWebApi()
         {
             var iterationUri = new Uri(
@@ -226,6 +226,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("POST")]
         public void VerifyThatAnElementDefinitionCanBeCreatedWithWebApi()
         {
             var iterationUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));

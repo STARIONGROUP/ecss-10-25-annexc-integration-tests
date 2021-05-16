@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="DomainOfExpertiseGroupTestFixture.cs" company="RHEA System">
+// <copyright file="DomainOfExpertiseGroupTestFixture.cs" company="RHEA System S.A.">
 //
-//   Copyright 2016 RHEA System S.A.
+//   Copyright 2016-2021 RHEA System S.A.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -23,20 +23,16 @@ namespace WebservicesIntegrationTests
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using NUnit.Framework;
+
     using Newtonsoft.Json.Linq;
 
-    /// <summary>
-    /// Suite of tests to verify that the DomainOfExpertiseGroup objects can be retrieved and updated on a ECSS-E-TM-10-25 Annex C.2 data source
-    /// </summary>
+    using NUnit.Framework;
+
     [TestFixture]
     public class DomainOfExpertiseGroupTestFixture : WebClientTestFixtureBase
     {
-        /// <summary>
-        /// Verification that the DomainOfExpertiseGroup objects are returned from the data-source and that the 
-        /// values of the DomainOfExpertiseGroup properties are equal to to expected value
-        /// </summary>
         [Test]
+        [Category("GET")]
         public void VerifyThatExpectedDomainOfExpertiseGroupIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
@@ -54,6 +50,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("GET")]
         public void VerifyThatExpectedDomainOfExpertiseGroupWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request

@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="DefinitionTestFixture.cs" company="RHEA System">
+// <copyright file="DefinitionTestFixture.cs" company="RHEA System S.A.">
 //
-//   Copyright 2016 RHEA System 
+//   Copyright 2016-2021 RHEA System S.A.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -33,6 +33,7 @@ namespace WebservicesIntegrationTests
     public class DefinitionTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
         [Test]
+        [Category("POST")]
         public void VerifyThatASiteReferenceDataLibraryDefinitionCanBeCreatedWithWebApi()
         {
             var iterationUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
@@ -316,6 +317,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("POST")]
         public void VerifyDefinitionThatNotesAndExamplesCanBeReordered()
         {
             var uri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
@@ -372,6 +374,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("POST")]
         public void VerifyDefinitionThatNotesAndExamplesCanBeRemoved()
         {
             var uri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));

@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="TelephoneNumberTestFixture.cs" company="RHEA System">
+// <copyright file="TelephoneNumberTestFixture.cs" company="RHEA System S.A.">
 //
-//   Copyright 2016-2020 RHEA System 
+//   Copyright 2016-2021 RHEA System S.A.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -31,11 +31,8 @@ namespace WebservicesIntegrationTests
     [TestFixture]
     public class TelephoneNumberTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
-        /// <summary>
-        /// Verification that the TelephoneNumber objects are returned from the data-source and that the 
-        /// values of the TelephoneNumber properties are equal to to expected value.
-        /// </summary>
         [Test]
+        [Category("GET")]
         public void VerifyThatExpectedTelephoneNumbersIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
@@ -53,6 +50,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("GET")]
         public void VerifyThatExpectedTelephoneNumbersWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
@@ -80,6 +78,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("POST")]
         public void VerifyThatVcardTypeCanBeRemoved()
         {
             var uri = new Uri(
@@ -119,6 +118,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
+        [Category("POST")]
         public void VerifyThatVerifyThatATelephoneNumberCanBeCreatedWithWebApi()
         {
             var uri = new Uri(
