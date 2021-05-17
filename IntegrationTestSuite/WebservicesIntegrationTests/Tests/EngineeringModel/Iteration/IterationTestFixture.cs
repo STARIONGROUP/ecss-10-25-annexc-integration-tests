@@ -321,7 +321,7 @@ namespace WebservicesIntegrationTests
             postBodyPath = this.GetPath("Tests/EngineeringModel/Iteration/PostDeleteIterationSetup.json");
 
             postBody = this.GetJsonFromFile(postBodyPath);
-            jArray = this.WebClient.PostDto(iterationSetupUri, postBody);
+            jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
 
             //Check deleted iterationSetup
             iterationSetup =
