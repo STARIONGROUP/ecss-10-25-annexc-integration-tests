@@ -121,7 +121,7 @@ namespace WebservicesIntegrationTests
             // check if there is a correct amount of objects
             Assert.AreEqual(4, jArray.Count);
 
-            var fileUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/file/8ac6db3e-9525-4f3e-93ea-707076c07fc17"));
+            var fileUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
             postJsonPath = this.GetPath("Tests/EngineeringModel/File/PostDeleteFile.json");
             var postBody = this.GetJsonFromFile(postJsonPath);
             jArray = this.WebClient.PostDto(fileUri, postBody);
