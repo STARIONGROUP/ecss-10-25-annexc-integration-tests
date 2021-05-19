@@ -36,10 +36,8 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedSiteLogEntriesIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var siteLogEntryUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/logEntry"));
-
+            var siteLogEntryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/logEntry");
+            
             // Get the response from the data-source as a JArray (JSON Array).
             var jArray = this.WebClient.GetDto(siteLogEntryUri);
 
@@ -54,9 +52,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedSiteLogEntryWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var siteLogEntryUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/logEntry?includeAllContainers=true"));
+            var siteLogEntryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/logEntry?includeAllContainers=true");
 
             // Get the response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(siteLogEntryUri);
@@ -65,8 +61,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(3, jArray.Count);
 
             // get a specific SiteDirectory from the result by it's unique id
-            var siteDirectory =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
+            var siteDirectory = jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
             SiteDirectoryTestFixture.VerifyProperties(siteDirectory);
 
             SiteLogEntryTestFixture.VerifyProperties(jArray);
@@ -81,8 +76,7 @@ namespace WebservicesIntegrationTests
         /// </param>
         public static void VerifyProperties(JToken siteLogEntry)
         {
-            var siteLogEntryObject =
-                siteLogEntry.Single(x => (string) x[PropertyNames.Iid] == "98ba7b8a-1a1b-4569-a17c-b1ff620246a5");
+            var siteLogEntryObject = siteLogEntry.Single(x => (string) x[PropertyNames.Iid] == "98ba7b8a-1a1b-4569-a17c-b1ff620246a5");
             Assert.AreEqual("98ba7b8a-1a1b-4569-a17c-b1ff620246a5", (string) siteLogEntryObject[PropertyNames.Iid]);
             Assert.AreEqual(1, (int) siteLogEntryObject[PropertyNames.RevisionNumber]);
             Assert.AreEqual("SiteLogEntry", (string) siteLogEntryObject[PropertyNames.ClassKind]);
@@ -105,8 +99,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual("2016-10-19T11:15:32.186Z", (string) siteLogEntryObject[PropertyNames.CreatedOn]);
 
             //Second logEntry
-            siteLogEntryObject =
-                siteLogEntry.Single(x => (string) x[PropertyNames.Iid] == "66220289-e6ee-43cb-8fcd-d8e59a3dbf97");
+            siteLogEntryObject = siteLogEntry.Single(x => (string) x[PropertyNames.Iid] == "66220289-e6ee-43cb-8fcd-d8e59a3dbf97");
             Assert.AreEqual("66220289-e6ee-43cb-8fcd-d8e59a3dbf97", (string) siteLogEntryObject[PropertyNames.Iid]);
             Assert.AreEqual(1, (int) siteLogEntryObject[PropertyNames.RevisionNumber]);
             Assert.AreEqual("SiteLogEntry", (string) siteLogEntryObject[PropertyNames.ClassKind]);

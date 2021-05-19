@@ -35,10 +35,8 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedParticipantPermissionIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var participantPermissionUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/participantRole/ee3ae5ff-ac5e-4957-bab1-7698fba2a267/participantPermission"));
-
+            var participantPermissionUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/participantRole/ee3ae5ff-ac5e-4957-bab1-7698fba2a267/participantPermission");
+            
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(participantPermissionUri);
 
@@ -53,9 +51,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedParticipantPermissionWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var participantPermissionUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/participantRole/ee3ae5ff-ac5e-4957-bab1-7698fba2a267/participantPermission?includeAllContainers=true"));
+            var participantPermissionUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/participantRole/ee3ae5ff-ac5e-4957-bab1-7698fba2a267/participantPermission?includeAllContainers=true");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(participantPermissionUri);

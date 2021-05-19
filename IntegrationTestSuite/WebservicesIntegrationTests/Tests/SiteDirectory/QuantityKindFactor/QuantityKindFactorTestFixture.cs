@@ -37,10 +37,8 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedKindFactorIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var quantityKindFactorUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/parameterType/74d9c38f-5ace-4f90-8841-d0f9942e9d09/quantityKindFactor"));
-
+            var quantityKindFactorUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/parameterType/74d9c38f-5ace-4f90-8841-d0f9942e9d09/quantityKindFactor");
+            
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(quantityKindFactorUri);
 
@@ -48,8 +46,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(1, jArray.Count);
 
             // get a specific QuantityKindFactor from the result by it's unique id
-            var quantityKindFactor =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "ab7e80da-6bc9-427f-b1fb-b97faeeca4c6");
+            var quantityKindFactor = jArray.Single(x => (string) x[PropertyNames.Iid] == "ab7e80da-6bc9-427f-b1fb-b97faeeca4c6");
 
             VerifyProperties(quantityKindFactor);
         }
@@ -59,9 +56,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedKindFactorWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var quantityKindFactorUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/parameterType/74d9c38f-5ace-4f90-8841-d0f9942e9d09/quantityKindFactor?includeAllContainers=true"));
+            var quantityKindFactorUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/parameterType/74d9c38f-5ace-4f90-8841-d0f9942e9d09/quantityKindFactor?includeAllContainers=true");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(quantityKindFactorUri);
@@ -70,26 +65,22 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(4, jArray.Count);
 
             // get a specific SiteDirectory from the result by it's unique id
-            var siteDirectory =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
+            var siteDirectory = jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
 
             SiteDirectoryTestFixture.VerifyProperties(siteDirectory);
 
             // get a specific SiteReferenceDataLibrary from the result by it's unique id
-            var siteReferenceDataLibrary =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
+            var siteReferenceDataLibrary = jArray.Single(x => (string) x[PropertyNames.Iid] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
 
             SiteReferenceDataLibraryTestFixture.VerifyProperties(siteReferenceDataLibrary);
 
             // get a specific DerivedQuantityKind from the result by it's unique id
-            var derivedQuantityKind =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "74d9c38f-5ace-4f90-8841-d0f9942e9d09");
+            var derivedQuantityKind = jArray.Single(x => (string) x[PropertyNames.Iid] == "74d9c38f-5ace-4f90-8841-d0f9942e9d09");
 
             DerivedQuantityKindTestFixture.VerifyProperties(derivedQuantityKind);
 
             // get a specific QuantityKindFactor from the result by it's unique id
-            var quantityKindFactor =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "ab7e80da-6bc9-427f-b1fb-b97faeeca4c6");
+            var quantityKindFactor = jArray.Single(x => (string) x[PropertyNames.Iid] == "ab7e80da-6bc9-427f-b1fb-b97faeeca4c6");
 
             VerifyProperties(quantityKindFactor);
         }
@@ -98,7 +89,7 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatDerivedQuantityKindCanBeAddedAndReordered()
         {
-            var siteDirectoryUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
             var postBodyPath = this.GetPath("Tests/SiteDirectory/QuantityKindFactor/PostNewQuantityKindFactor.json");
 
             var postBody = this.GetJsonFromFile(postBodyPath);

@@ -36,10 +36,8 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedModelLogEntryIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var modelLogEntryUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/logEntry"));
-
+            var modelLogEntryUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/logEntry");
+            
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(modelLogEntryUri);
 
@@ -47,8 +45,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(1, jArray.Count);
 
             // get a specific ModelLogEntry from the result by it's unique id
-            var modelLogEntry =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "4e2375eb-8e37-4df2-9c7b-dd896683a891");
+            var modelLogEntry = jArray.Single(x => (string) x[PropertyNames.Iid] == "4e2375eb-8e37-4df2-9c7b-dd896683a891");
             ModelLogEntryTestFixture.VerifyProperties(modelLogEntry);
         }
 
@@ -57,10 +54,8 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedModelLogEntryWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var modelLogEntryUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/logEntry?includeAllContainers=true"));
-
+            var modelLogEntryUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/logEntry?includeAllContainers=true");
+            
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(modelLogEntryUri);
 
@@ -68,8 +63,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(2, jArray.Count);
 
             // get a specific ModelLogEntry from the result by it's unique id
-            var modelLogEntry =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "4e2375eb-8e37-4df2-9c7b-dd896683a891");
+            var modelLogEntry = jArray.Single(x => (string) x[PropertyNames.Iid] == "4e2375eb-8e37-4df2-9c7b-dd896683a891");
             ModelLogEntryTestFixture.VerifyProperties(modelLogEntry);
         }
 

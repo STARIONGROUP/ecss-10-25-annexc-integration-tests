@@ -40,7 +40,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedSiteDirectoryIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request.
-            var siteDirectoryUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
 
             // Get the response from the data-source as a JArray (JSON Array).
             var jArray = this.WebClient.GetDto(siteDirectoryUri);
@@ -64,7 +64,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedSiteDirectoryIsReturnedFromWebApiWhenUniqueIdIsNotSpecified()
         {
             // define the URI on which to perform a GET request
-            var siteDirectoryUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/SiteDirectory"));
+            var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory");
 
             // Get the response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(siteDirectoryUri);
@@ -83,7 +83,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedSiteDirectoryIsReturnedFromWebApiWhenUniqueIdIsSpecifiedAndExtentEqualsDeep()
         {
             // define the URI on which to perform a GET request
-            var siteDirectoryUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294?extent=deep&includeReferenceData=false"));
+            var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294?extent=deep&includeReferenceData=false");
 
             // Get the response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(siteDirectoryUri);
@@ -102,7 +102,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatGetWithWildCardReturnsExpectedResult()
         {
             // define the URI on which to perform a GET request
-            var siteDirectoryUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/SiteDirectory/*?extent=deep&includeReferenceData=false"));
+            var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/*?extent=deep&includeReferenceData=false");
             
             // Get the response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(siteDirectoryUri);
@@ -125,7 +125,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedSiteDirectoryWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var siteDirectoryUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/SiteDirectory?includeAllContainers=true"));
+            var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory?includeAllContainers=true");
 
             // Get the response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(siteDirectoryUri);
@@ -146,7 +146,7 @@ namespace WebservicesIntegrationTests
             string[] engineeringodelSetupIds = { "116f6253-89bb-47d4-aa24-d11d197e43c9" };
 
             // define the URI on which to perform a POST request
-            var siteDirectoryUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294?export=true"));
+            var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294?export=true");
 
             // Download a model export zip file
             var responseBody = this.WebClient.GetModelExportFile(siteDirectoryUri, engineeringodelSetupIds);
@@ -257,9 +257,7 @@ namespace WebservicesIntegrationTests
         public static void AddDomainExpertUserJane(WebClientTestFixtureBase testFixture, out string userName, out string passWord)
         {
             // define the URI on which to perform a GET request
-            var uri =
-                new Uri(string.Format(UriFormat, testFixture.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            var uri = new Uri($"{testFixture.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
 
             var postBodyPath = testFixture.GetPath("Tests/SiteDirectory/POSTNewDomainExpertUser.json");
 

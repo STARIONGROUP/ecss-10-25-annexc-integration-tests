@@ -37,10 +37,8 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedSiteReferenceDataLibraryIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var siteReferenceDataLibrariesUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary"));
-
+            var siteReferenceDataLibrariesUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary");
+            
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(siteReferenceDataLibrariesUri);
 
@@ -48,8 +46,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(1, jArray.Count);
 
             // get a specific SiteReferenceDataLibrary from the result by it's unique id
-            var siteReferenceDataLibrary =
-                jArray.Single(x => (string) x["iid"] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
+            var siteReferenceDataLibrary = jArray.Single(x => (string) x["iid"] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
 
             SiteReferenceDataLibraryTestFixture.VerifyProperties(siteReferenceDataLibrary);
         }
@@ -59,10 +56,8 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedSiteReferenceDataLibraryWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var siteReferenceDataLibraryUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary?includeAllContainers=true"));
-
+            var siteReferenceDataLibraryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary?includeAllContainers=true");
+            
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(siteReferenceDataLibraryUri);
 
@@ -73,8 +68,7 @@ namespace WebservicesIntegrationTests
             SiteDirectoryTestFixture.VerifyProperties(siteDirectory);
 
             // get a specific SiteReferenceDataLibrary from the result by it's unique id
-            var siteReferenceDataLibrary =
-                jArray.Single(x => (string) x["iid"] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
+            var siteReferenceDataLibrary = jArray.Single(x => (string) x["iid"] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
             SiteReferenceDataLibraryTestFixture.VerifyProperties(siteReferenceDataLibrary);
         }
 
@@ -83,9 +77,7 @@ namespace WebservicesIntegrationTests
         public void VerifyLibraryInReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var siteReferenceDataLibrariesUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary?includeReferenceData=true&includeAllContainers=true&extent=deep"));
+            var siteReferenceDataLibrariesUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary?includeReferenceData=true&includeAllContainers=true&extent=deep");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(siteReferenceDataLibrariesUri);
@@ -111,11 +103,8 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatUnitDeletionAsPropertyFromRDLIsDoneAsDeprecationFromWebApi()
         {
-            var uri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            var uri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
+
             var postBodyPath = this.GetPath("Tests/SiteDirectory/SiteReferenceDataLibrary/PostDeleteUnitAsProperty.json");
 
             var postBody = this.GetJsonFromFile(postBodyPath);
@@ -128,8 +117,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(2, (int)siteDirectory[PropertyNames.RevisionNumber]);
 
             // get a specific SimpleUnit from the result by it's unique id
-            var simpleUnit =
-                jArray.Single(x => (string)x["iid"] == "56842970-3915-4369-8712-61cfd8273ef9");
+            var simpleUnit = jArray.Single(x => (string)x["iid"] == "56842970-3915-4369-8712-61cfd8273ef9");
             Assert.IsTrue((bool)simpleUnit["isDeprecated"]);
         }
 

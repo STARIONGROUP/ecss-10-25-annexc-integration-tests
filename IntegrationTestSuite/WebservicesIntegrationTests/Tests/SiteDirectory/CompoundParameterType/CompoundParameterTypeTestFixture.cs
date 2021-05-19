@@ -37,9 +37,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedParameterTypeIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var compoundParameterTypeUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/parameterType/0d3178f9-68d0-4b1a-afe8-d5df0b66f1d4"));
+            var compoundParameterTypeUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/parameterType/0d3178f9-68d0-4b1a-afe8-d5df0b66f1d4");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(compoundParameterTypeUri);
@@ -48,8 +46,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(1, jArray.Count);
 
             // get a specific CompoundParameterType from the result by it's unique id
-            var compoundParameterType =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "0d3178f9-68d0-4b1a-afe8-d5df0b66f1d4");
+            var compoundParameterType = jArray.Single(x => (string) x[PropertyNames.Iid] == "0d3178f9-68d0-4b1a-afe8-d5df0b66f1d4");
 
             CompoundParameterTypeTestFixture.VerifyProperties(compoundParameterType);
         }
@@ -59,9 +56,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedParameterTypeWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var compoundParameterTypeUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/parameterType/0d3178f9-68d0-4b1a-afe8-d5df0b66f1d4?includeAllContainers=true"));
+            var compoundParameterTypeUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/parameterType/0d3178f9-68d0-4b1a-afe8-d5df0b66f1d4?includeAllContainers=true");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(compoundParameterTypeUri);
@@ -74,13 +69,11 @@ namespace WebservicesIntegrationTests
             SiteDirectoryTestFixture.VerifyProperties(siteDirectory);
 
             // get a specific SiteReferenceDataLibrary from the result by it's unique id
-            var siteReferenceDataLibrary =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
+            var siteReferenceDataLibrary = jArray.Single(x => (string) x[PropertyNames.Iid] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
             SiteReferenceDataLibraryTestFixture.VerifyProperties(siteReferenceDataLibrary);
 
             // get a specific CompoundParameter from the result by it's unique id
-            var compoundParameterType =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "0d3178f9-68d0-4b1a-afe8-d5df0b66f1d4");
+            var compoundParameterType = jArray.Single(x => (string) x[PropertyNames.Iid] == "0d3178f9-68d0-4b1a-afe8-d5df0b66f1d4");
             CompoundParameterTypeTestFixture.VerifyProperties(compoundParameterType);
         }
 
@@ -142,9 +135,7 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void Verify_that_CompoundParameterType_can_be_posted()
         {
-            var siteDirectoryUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
 
             var postBodyPath = this.GetPath("Tests/SiteDirectory/CompoundParameterType/PostCompoundParameterType.json");
             var postBody = base.GetJsonFromFile(postBodyPath);

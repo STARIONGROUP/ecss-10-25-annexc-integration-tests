@@ -36,9 +36,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedPersonIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var personsUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/person"));
+            var personsUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/person");
 
             // Get the response from the data-source as a JArray (JSON Array).
             var jArray = this.WebClient.GetDto(personsUri);
@@ -57,9 +55,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedPersonWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var personsUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/person?includeAllContainers=true"));
+            var personsUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/person?includeAllContainers=true");
 
             // Get the response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(personsUri);
@@ -68,8 +64,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(2, jArray.Count);
 
             // get a specific SiteDirectory from the result by it's unique id
-            var siteDirectory =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
+            var siteDirectory = jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
             SiteDirectoryTestFixture.VerifyProperties(siteDirectory);
 
             // get a specific Person from the result by it's unique id
@@ -81,11 +76,7 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatTelephoneDeletionAsPropertyFromPersonCanBeDoneFromWebApi()
         {
-            var uri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            var uri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
             var postBodyPath = this.GetPath("Tests/SiteDirectory/Person/PostDeleteTelephoneAsProperty.json");
 
             var postBody = this.GetJsonFromFile(postBodyPath);
@@ -95,8 +86,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(2, jArray.Count);
 
             // get a specific SiteDirectory from the result by it's unique id
-            var siteDirectory =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
+            var siteDirectory = jArray.Single(x => (string)x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
             Assert.AreEqual(2, (int)siteDirectory[PropertyNames.RevisionNumber]);
 
             // get a specific Person from the result by it's unique id
@@ -111,11 +101,7 @@ namespace WebservicesIntegrationTests
             CollectionAssert.AreEquivalent(expectedTelephoneNumbers, t);
 
             // define the URI on which to perform a GET request 
-            var phoneUri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/person/77791b12-4c2c-4499-93fa-869df3692d22/telephoneNumber/7f85a641-1844-4064-b19d-c6a447543ab3"));
+            var phoneUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/person/77791b12-4c2c-4499-93fa-869df3692d22/telephoneNumber/7f85a641-1844-4064-b19d-c6a447543ab3");
 
             Assert.That(() => this.WebClient.GetDto(phoneUri), Throws.Exception.TypeOf<System.Net.WebException>());
         }
@@ -124,11 +110,7 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void Verify_That_person_with_null_role_and_null_password_can_be_posted()
         {
-            var uri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            var uri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
             var postBodyPath = this.GetPath("Tests/SiteDirectory/Person/Post_Person_With_Role_Null.json");
 
             var postBody = this.GetJsonFromFile(postBodyPath);
@@ -138,8 +120,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(2, jArray.Count);
 
             // get a specific SiteDirectory from the result by it's unique id
-            var siteDirectory =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
+            var siteDirectory = jArray.Single(x => (string)x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
             
             // verify that the amount of returned properties 
             Assert.AreEqual(19, siteDirectory.Children().Count());
@@ -249,11 +230,7 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void Verify_That_password_policies_are_implemented_correctly()
         {
-            var uri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            var uri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
 
             var postBodyPath = this.GetPath("Tests/SiteDirectory/Person/Post_Persons_With_Passwords.json");
 
@@ -264,8 +241,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(4, jArray.Count);
 
             // get a specific SiteDirectory from the result by it's unique id
-            var siteDirectory =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
+            var siteDirectory = jArray.Single(x => (string)x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
 
             var expectedPersons = new []
             {
@@ -284,27 +260,21 @@ namespace WebservicesIntegrationTests
             var personWithEmptyPassword = jArray.Single(x => (string)x[PropertyNames.Iid] == "01a6d208-7bb5-4855-a6fb-eb3d03f1337c");
             var personWithPassword = jArray.Single(x => (string)x[PropertyNames.Iid] == "01a6d208-7bb5-4855-a6fb-eb3d03f1337d");
 
-            var personWithNullPasswordUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/person/01a6d208-7bb5-4855-a6fb-eb3d03f1337b"));
+            var personWithNullPasswordUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/person/01a6d208-7bb5-4855-a6fb-eb3d03f1337b");
 
             this.CreateNewWebClientForUser(personWithNullPassword[PropertyNames.ShortName].ToString(), null);
             var exception = Assert.Catch<WebException>(() => this.WebClient.GetDto(personWithNullPasswordUri));
             Assert.AreEqual(HttpStatusCode.Unauthorized, ((HttpWebResponse)exception.Response).StatusCode);
 
-            var personWithEmptyPasswordUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/person/01a6d208-7bb5-4855-a6fb-eb3d03f1337c"));
-
+            var personWithEmptyPasswordUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/person/01a6d208-7bb5-4855-a6fb-eb3d03f1337c");
+            
             this.CreateNewWebClientForUser(personWithEmptyPassword[PropertyNames.ShortName].ToString(), "");
             exception = Assert.Catch<WebException>(() => this.WebClient.GetDto(personWithEmptyPasswordUri));
             var errorMessage = this.WebClient.ExtractExceptionStringFromResponse(exception.Response);
             Assert.AreEqual(HttpStatusCode.InternalServerError, ((HttpWebResponse)exception.Response).StatusCode);
             Assert.IsTrue(errorMessage.Contains("Sequence contains no elements"));
 
-            var personWithPasswordUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/person/01a6d208-7bb5-4855-a6fb-eb3d03f1337d"));
+            var personWithPasswordUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/person/01a6d208-7bb5-4855-a6fb-eb3d03f1337d");
 
             this.CreateNewWebClientForUser(personWithPassword[PropertyNames.ShortName].ToString(), "pass");
             exception = Assert.Catch<WebException>(() => this.WebClient.GetDto(personWithPasswordUri));

@@ -37,9 +37,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedRuleIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var decompositionRuleUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/rule/8a5cd66e-7313-4843-813f-37081ca81bb8"));
+            var decompositionRuleUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/rule/8a5cd66e-7313-4843-813f-37081ca81bb8");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(decompositionRuleUri);
@@ -48,8 +46,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(1, jArray.Count);
 
             // get a specific DecompositionRule from the result by it's unique id
-            var decompositionRule =
-                jArray.Single(x => (string) x["iid"] == "8a5cd66e-7313-4843-813f-37081ca81bb8");
+            var decompositionRule = jArray.Single(x => (string) x["iid"] == "8a5cd66e-7313-4843-813f-37081ca81bb8");
 
             DecompositionRuleTestFixture.VerifyProperties(decompositionRule);
         }
@@ -59,9 +56,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedRuleWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var decompositionRuleUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/rule/8a5cd66e-7313-4843-813f-37081ca81bb8?includeAllContainers=true"));
+            var decompositionRuleUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/rule/8a5cd66e-7313-4843-813f-37081ca81bb8?includeAllContainers=true");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(decompositionRuleUri);
@@ -74,13 +69,11 @@ namespace WebservicesIntegrationTests
             SiteDirectoryTestFixture.VerifyProperties(siteDirectory);
 
             // get a specific SiteReferenceDataLibrary from the result by it's unique id
-            var siteReferenceDataLibrary =
-                jArray.Single(x => (string) x["iid"] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
+            var siteReferenceDataLibrary = jArray.Single(x => (string) x["iid"] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
             SiteReferenceDataLibraryTestFixture.VerifyProperties(siteReferenceDataLibrary);
 
             // get a specific DecompositionRule from the result by it's unique id
-            var decompositionRule =
-                jArray.Single(x => (string) x["iid"] == "8a5cd66e-7313-4843-813f-37081ca81bb8");
+            var decompositionRule = jArray.Single(x => (string) x["iid"] == "8a5cd66e-7313-4843-813f-37081ca81bb8");
             DecompositionRuleTestFixture.VerifyProperties(decompositionRule);
         }
 
@@ -88,11 +81,11 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatADecompositionRuleCanBeCreatedWithWebApi()
         {
-            var iterationUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
             var postBodyPath = this.GetPath("Tests/SiteDirectory/DecompositionRule/PostNewDecompositionRule.json");
 
             var postBody = base.GetJsonFromFile(postBodyPath);
-            var jArray = this.WebClient.PostDto(iterationUri, postBody);
+            var jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
 
             var siteDirectory = jArray.Single(x => (string)x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
 

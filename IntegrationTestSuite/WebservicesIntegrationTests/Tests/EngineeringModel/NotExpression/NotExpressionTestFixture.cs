@@ -35,9 +35,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedNotExpressionIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var notExpressionUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/requirementsSpecification/bf0cde90-9086-43d5-bcff-32a2f8331800/requirement/614e2a69-d602-46be-9311-2fb4d3273e87/parametricConstraint/88200dbc-711a-47e0-a54a-dac4baca6e83/expression/30cb785a-9e72-477f-ad1a-8df6ab623e3d"));
+            var notExpressionUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/requirementsSpecification/bf0cde90-9086-43d5-bcff-32a2f8331800/requirement/614e2a69-d602-46be-9311-2fb4d3273e87/parametricConstraint/88200dbc-711a-47e0-a54a-dac4baca6e83/expression/30cb785a-9e72-477f-ad1a-8df6ab623e3d");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(notExpressionUri);
@@ -56,10 +54,8 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedNotExpressionWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var notExpressionUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/requirementsSpecification/bf0cde90-9086-43d5-bcff-32a2f8331800/requirement/614e2a69-d602-46be-9311-2fb4d3273e87/parametricConstraint/88200dbc-711a-47e0-a54a-dac4baca6e83/expression/30cb785a-9e72-477f-ad1a-8df6ab623e3d?includeAllContainers=true"));
-
+            var notExpressionUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/requirementsSpecification/bf0cde90-9086-43d5-bcff-32a2f8331800/requirement/614e2a69-d602-46be-9311-2fb4d3273e87/parametricConstraint/88200dbc-711a-47e0-a54a-dac4baca6e83/expression/30cb785a-9e72-477f-ad1a-8df6ab623e3d?includeAllContainers=true");
+            
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(notExpressionUri);
 

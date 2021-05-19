@@ -37,11 +37,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedActualFiniteStateListIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var actualFiniteStateListUri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/actualFiniteStateList"));
+            var actualFiniteStateListUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/actualFiniteStateList");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(actualFiniteStateListUri);
@@ -61,12 +57,8 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedActualFiniteStateListWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var actualFiniteStateListUri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/actualFiniteStateList?includeAllContainers=true"));
-
+            var actualFiniteStateListUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/actualFiniteStateList?includeAllContainers=true");
+            
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(actualFiniteStateListUri);
 
@@ -88,14 +80,9 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatActualStateCanBeCreatedWhenActualFiniteStateListIsCreatedWithWebApi()
         {
-            var iterationUri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
 
-            var postBodyPath = this.GetPath(
-                "Tests/EngineeringModel/ActualFiniteStateList/PostNewActualFiniteStateList.json");
+            var postBodyPath = this.GetPath("Tests/EngineeringModel/ActualFiniteStateList/PostNewActualFiniteStateList.json");
 
             var postBody = this.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
@@ -171,14 +158,9 @@ namespace WebservicesIntegrationTests
         public void VerifyThatActualStateCanBeCreatedWhenPossibleFiniteStateListIsAddedWithWebApi()
         {
             // POST a new PossibleFiniteStateList
-            var iterationUri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
 
-            var postBodyPath = this.GetPath(
-                "Tests/EngineeringModel/ActualFiniteStateList/PostPossibleFiniteStateList.json");
+            var postBodyPath = this.GetPath("Tests/EngineeringModel/ActualFiniteStateList/PostPossibleFiniteStateList.json");
 
             var postBody = this.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
@@ -314,8 +296,7 @@ namespace WebservicesIntegrationTests
             CollectionAssert.AreEquivalent(expectedHyperlinks, h);
 
             // Add a new PossibleFiniteStateList to ActualFiniteStateList
-            postBodyPath = this.GetPath(
-                "Tests/EngineeringModel/ActualFiniteStateList/PostActualFiniteStateListAddPossibleFiniteStateList.json");
+            postBodyPath = this.GetPath("Tests/EngineeringModel/ActualFiniteStateList/PostActualFiniteStateListAddPossibleFiniteStateList.json");
 
             postBody = this.GetJsonFromFile(postBodyPath);
             jArray = this.WebClient.PostDto(iterationUri, postBody);
@@ -397,8 +378,7 @@ namespace WebservicesIntegrationTests
             CollectionAssert.AreEqual(expectedPossibleStates, possibleStates);
 
             // Reorder containment
-            postBodyPath = this.GetPath(
-                "Tests/EngineeringModel/ActualFiniteStateList/PostActualFiniteStateListRearrangePossibleFiniteStateList.json");
+            postBodyPath = this.GetPath("Tests/EngineeringModel/ActualFiniteStateList/PostActualFiniteStateListRearrangePossibleFiniteStateList.json");
 
             postBody = this.GetJsonFromFile(postBodyPath);
             jArray = this.WebClient.PostDto(iterationUri, postBody);
@@ -428,14 +408,9 @@ namespace WebservicesIntegrationTests
         public void VerifyThatActualStateCanBeCreatedWhenPossibleFiniteStateIsAddedWithWebApi()
         {
             // POST a new PossibleFiniteState
-            var iterationUri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
 
-            var postBodyPath = this.GetPath(
-                "Tests/EngineeringModel/ActualFiniteStateList/PostNewPossibleFiniteState.json");
+            var postBodyPath = this.GetPath("Tests/EngineeringModel/ActualFiniteStateList/PostNewPossibleFiniteState.json");
 
             var postBody = this.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
@@ -556,14 +531,9 @@ namespace WebservicesIntegrationTests
         public void VerifyThatActualFiniteStateCanBeUpdatedWithWebApi()
         {
             // POST a new PossibleFiniteState
-            var iterationUri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
 
-            var postBodyPath = this.GetPath(
-                "Tests/EngineeringModel/ActualFiniteStateList/PostActualFiniteStateListUpdateActualFiniteState.json");
+            var postBodyPath = this.GetPath("Tests/EngineeringModel/ActualFiniteStateList/PostActualFiniteStateListUpdateActualFiniteState.json");
 
             var postBody = this.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(iterationUri, postBody);

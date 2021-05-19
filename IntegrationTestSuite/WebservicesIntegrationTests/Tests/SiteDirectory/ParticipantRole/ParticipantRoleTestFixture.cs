@@ -36,10 +36,8 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedParticipantRoleIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var participantRolesUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/participantRole"));
-
+            var participantRolesUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/participantRole");
+            
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(participantRolesUri);
 
@@ -57,9 +55,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedParticipantRoleWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var participantRolesUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/participantRole?includeAllContainers=true"));
+            var participantRolesUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/participantRole?includeAllContainers=true");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(participantRolesUri);
@@ -91,8 +87,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual("ee3ae5ff-ac5e-4957-bab1-7698fba2a267", (string) participantRole["iid"]);
             Assert.AreEqual(1, (int) participantRole["revisionNumber"]);
             Assert.AreEqual("ParticipantRole", (string) participantRole["classKind"]);
-
-
+            
             Assert.AreEqual("Test Participant Role", (string) participantRole["name"]);
             Assert.AreEqual("TestParticipantRole", (string) participantRole["shortName"]);
             Assert.IsFalse((bool) participantRole["isDeprecated"]);

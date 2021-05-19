@@ -35,10 +35,8 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedEmailAddressIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var emailAddressUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/person/77791b12-4c2c-4499-93fa-869df3692d22/emailAddress"));
-
+            var emailAddressUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/person/77791b12-4c2c-4499-93fa-869df3692d22/emailAddress");
+            
             // Get the response from the data-source as a JArray (JSON Array).
             var jArray = this.WebClient.GetDto(emailAddressUri);
 
@@ -53,10 +51,8 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedEmailAddressWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var emailAddressUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/person/77791b12-4c2c-4499-93fa-869df3692d22/emailAddress?includeAllContainers=true"));
-
+            var emailAddressUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/person/77791b12-4c2c-4499-93fa-869df3692d22/emailAddress?includeAllContainers=true");
+            
             // Get the response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(emailAddressUri);
 
@@ -64,8 +60,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(4, jArray.Count);
 
             // get a specific SiteDirectory from the result by it's unique id
-            var siteDirectory =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
+            var siteDirectory = jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
             SiteDirectoryTestFixture.VerifyProperties(siteDirectory);
 
             // get a specific Person from the result by it's unique id
@@ -84,16 +79,14 @@ namespace WebservicesIntegrationTests
         /// </param>
         public static void VerifyProperties(JToken emailAddress)
         {
-            var emailAddressObject =
-                emailAddress.Single(x => (string) x[PropertyNames.Iid] == "c855d849-62c6-447b-b4e4-db20ba836a91");
+            var emailAddressObject = emailAddress.Single(x => (string) x[PropertyNames.Iid] == "c855d849-62c6-447b-b4e4-db20ba836a91");
             Assert.AreEqual("c855d849-62c6-447b-b4e4-db20ba836a91", (string) emailAddressObject[PropertyNames.Iid]);
             Assert.AreEqual(1, (int) emailAddressObject[PropertyNames.RevisionNumber]);
             Assert.AreEqual("EmailAddress", (string) emailAddressObject[PropertyNames.ClassKind]);
             Assert.AreEqual("john.doe@gmail.com", (string) emailAddressObject[PropertyNames.Value]);
             Assert.AreEqual("HOME", (string) emailAddressObject[PropertyNames.VcardType]);
 
-            emailAddressObject =
-                emailAddress.Single(x => (string) x[PropertyNames.Iid] == "325620cd-4354-4ddb-9c66-e75550da643a");
+            emailAddressObject = emailAddress.Single(x => (string) x[PropertyNames.Iid] == "325620cd-4354-4ddb-9c66-e75550da643a");
             Assert.AreEqual("325620cd-4354-4ddb-9c66-e75550da643a", (string) emailAddressObject[PropertyNames.Iid]);
             Assert.AreEqual(1, (int) emailAddressObject[PropertyNames.RevisionNumber]);
             Assert.AreEqual("EmailAddress", (string) emailAddressObject[PropertyNames.ClassKind]);

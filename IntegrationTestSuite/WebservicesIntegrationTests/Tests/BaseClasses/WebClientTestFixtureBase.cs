@@ -35,11 +35,6 @@ namespace WebservicesIntegrationTests
     [TestFixture]
     public abstract class WebClientTestFixtureBase
     {
-        /// <summary>
-        /// The uri format.
-        /// </summary>
-        protected const string UriFormat = "{0}{1}";
-        
         [SetUp]
         public virtual void SetUp()
         {

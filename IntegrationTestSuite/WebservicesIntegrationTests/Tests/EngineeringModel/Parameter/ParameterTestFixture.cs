@@ -36,11 +36,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedParameterIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var parameterUri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/f73860b2-12f0-43e4-b8b2-c81862c0a159/parameter"));
+            var parameterUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/f73860b2-12f0-43e4-b8b2-c81862c0a159/parameter");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(parameterUri);
@@ -59,11 +55,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedParameterWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var parameterUri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/f73860b2-12f0-43e4-b8b2-c81862c0a159/parameter?includeAllContainers=true"));
+            var parameterUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/f73860b2-12f0-43e4-b8b2-c81862c0a159/parameter?includeAllContainers=true");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(parameterUri);
@@ -87,25 +79,19 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatAParameterCanBeCreatedWithWebApi()
         {
-            var iterationUri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
 
             var postBodyPath = this.GetPath("Tests/EngineeringModel/Parameter/PostNewParameter.json");
 
             var postBody = this.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
-            var engineeeringModel = jArray.Single(
-                x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            var engineeeringModel = jArray.Single(x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
 
             Assert.AreEqual(2, (int) engineeeringModel[PropertyNames.RevisionNumber]);
 
             // get a specific ElementDefinition from the result by it's unique id
-            var elementDefinition = jArray.Single(
-                x => (string) x[PropertyNames.Iid] == "f73860b2-12f0-43e4-b8b2-c81862c0a159");
+            var elementDefinition = jArray.Single(x => (string) x[PropertyNames.Iid] == "f73860b2-12f0-43e4-b8b2-c81862c0a159");
 
             Assert.AreEqual(2, (int) elementDefinition[PropertyNames.RevisionNumber]);
 
@@ -178,25 +164,19 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatAParameterCanBeDeletedAndCreatedInOnRequestWithWebApi()
         {
-            var iterationUri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
 
             var postBodyPath = this.GetPath("Tests/EngineeringModel/Parameter/PostDeleteCreateParameter.json");
 
             var postBody = this.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
-            var engineeeringModel = jArray.Single(
-                x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            var engineeeringModel = jArray.Single(x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
 
             Assert.AreEqual(2, (int) engineeeringModel[PropertyNames.RevisionNumber]);
 
             // get a specific ElementDefinition from the result by it's unique id
-            var elementDefinition = jArray.Single(
-                x => (string) x[PropertyNames.Iid] == "f73860b2-12f0-43e4-b8b2-c81862c0a159");
+            var elementDefinition = jArray.Single(x => (string) x[PropertyNames.Iid] == "f73860b2-12f0-43e4-b8b2-c81862c0a159");
 
             Assert.AreEqual(2, (int) elementDefinition[PropertyNames.RevisionNumber]);
 
@@ -268,26 +248,19 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatAParameterOfCompoundParameterTypeCanBeCreatedWithWebApi()
         {
-            var iterationUri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
 
-            var postBodyPath = this.GetPath(
-                "Tests/EngineeringModel/Parameter/PostNewParameterOfCompoundParameterType.json");
+            var postBodyPath = this.GetPath("Tests/EngineeringModel/Parameter/PostNewParameterOfCompoundParameterType.json");
 
             var postBody = this.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
-            var engineeeringModel = jArray.Single(
-                x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            var engineeeringModel = jArray.Single(x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
 
             Assert.AreEqual(2, (int) engineeeringModel[PropertyNames.RevisionNumber]);
 
             // get a specific ElementDefinition from the result by it's unique id
-            var elementDefinition = jArray.Single(
-                x => (string) x[PropertyNames.Iid] == "f73860b2-12f0-43e4-b8b2-c81862c0a159");
+            var elementDefinition = jArray.Single(x => (string) x[PropertyNames.Iid] == "f73860b2-12f0-43e4-b8b2-c81862c0a159");
 
             Assert.AreEqual(2, (int) elementDefinition[PropertyNames.RevisionNumber]);
 
@@ -360,25 +333,18 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatAnOptionDependentParameterCanBeCreatedWithWebApi()
         {
-            var iterationUri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
-
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
             var postBodyPath = this.GetPath("Tests/EngineeringModel/Parameter/PostNewOptionDependentParameter.json");
 
             var postBody = this.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
-            var engineeeringModel = jArray.Single(
-                x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            var engineeeringModel = jArray.Single(x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
 
             Assert.AreEqual(2, (int) engineeeringModel[PropertyNames.RevisionNumber]);
 
             // get a specific ElementDefinition from the result by it's unique id
-            var elementDefinition = jArray.Single(
-                x => (string) x[PropertyNames.Iid] == "f73860b2-12f0-43e4-b8b2-c81862c0a159");
+            var elementDefinition = jArray.Single(x => (string) x[PropertyNames.Iid] == "f73860b2-12f0-43e4-b8b2-c81862c0a159");
 
             Assert.AreEqual(2, (int) elementDefinition[PropertyNames.RevisionNumber]);
 
@@ -454,28 +420,20 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatAParameterCanBeUpdatedToOptionDependentWithWebApi()
         {
-            var iterationUri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
-
-            var postBodyPath = this.GetPath(
-                "Tests/EngineeringModel/Parameter/PostUpdateParameterToOptionDependent.json");
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
+            var postBodyPath = this.GetPath("Tests/EngineeringModel/Parameter/PostUpdateParameterToOptionDependent.json");
 
             var postBody = this.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
-            var engineeeringModel = jArray.Single(
-                x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            var engineeeringModel = jArray.Single(x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
 
             Assert.AreEqual(2, (int) engineeeringModel[PropertyNames.RevisionNumber]);
 
             var parameterValueSet = jArray.Single(x => (string) x[PropertyNames.ClassKind] == "ParameterValueSet");
             Assert.AreEqual(2, (int) parameterValueSet[PropertyNames.RevisionNumber]);
 
-            var parameterOverrideValueSet = jArray.Single(
-                x => (string) x[PropertyNames.ClassKind] == "ParameterOverrideValueSet");
+            var parameterOverrideValueSet = jArray.Single(x => (string) x[PropertyNames.ClassKind] == "ParameterOverrideValueSet");
 
             Assert.AreEqual(2, (int) parameterOverrideValueSet[PropertyNames.RevisionNumber]);
 
@@ -522,14 +480,8 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatAParameterCanBeUpdatedToStateDependentWithWebApi()
         {
-            var iterationUri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
-
-            var postBodyPath = this.GetPath(
-                "Tests/EngineeringModel/Parameter/PostUpdateParameterToStateDependent.json");
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
+            var postBodyPath = this.GetPath("Tests/EngineeringModel/Parameter/PostUpdateParameterToStateDependent.json");
 
             var postBody = this.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
@@ -625,28 +577,20 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatAStateDependentParameterCanBeUpdatedToAnotherStateDependentWithWebApi()
         {
-            var iterationUri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
-
-            var postBodyPath = this.GetPath(
-                "Tests/EngineeringModel/Parameter/PostUpdateParameterToStateDependent.json");
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
+            var postBodyPath = this.GetPath("Tests/EngineeringModel/Parameter/PostUpdateParameterToStateDependent.json");
 
             var postBody = this.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
-            var engineeeringModel = jArray.Single(
-                x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            var engineeeringModel = jArray.Single(x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
 
             Assert.AreEqual(2, (int) engineeeringModel[PropertyNames.RevisionNumber]);
 
             var parameterValueSet = jArray.Single(x => (string) x[PropertyNames.ClassKind] == "ParameterValueSet");
             Assert.AreEqual(2, (int) parameterValueSet[PropertyNames.RevisionNumber]);
 
-            postBodyPath = this.GetPath(
-                "Tests/EngineeringModel/ActualFiniteStateList/PostNewActualFiniteStateList.json");
+            postBodyPath = this.GetPath("Tests/EngineeringModel/ActualFiniteStateList/PostNewActualFiniteStateList.json");
 
             postBody = this.GetJsonFromFile(postBodyPath);
             jArray = this.WebClient.PostDto(iterationUri, postBody);
@@ -659,8 +603,7 @@ namespace WebservicesIntegrationTests
             var iteration = jArray.Single(x => (string) x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
             Assert.AreEqual(3, (int) iteration[PropertyNames.RevisionNumber]);
 
-            postBodyPath = this.GetPath(
-                "Tests/EngineeringModel/Parameter/PostUpdateStateDependentParameterToAnotherState.json");
+            postBodyPath = this.GetPath("Tests/EngineeringModel/Parameter/PostUpdateStateDependentParameterToAnotherState.json");
 
             postBody = this.GetJsonFromFile(postBodyPath);
             jArray = this.WebClient.PostDto(iterationUri, postBody);

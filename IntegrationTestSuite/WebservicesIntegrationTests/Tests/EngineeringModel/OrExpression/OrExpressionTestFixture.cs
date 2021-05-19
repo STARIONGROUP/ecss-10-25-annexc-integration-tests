@@ -36,9 +36,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedOrExpressionIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var orExpressionUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/requirementsSpecification/bf0cde90-9086-43d5-bcff-32a2f8331800/requirement/614e2a69-d602-46be-9311-2fb4d3273e87/parametricConstraint/88200dbc-711a-47e0-a54a-dac4baca6e83/expression/5f90327f-95a2-4c5a-9efe-581f8daf08ed"));
+            var orExpressionUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/requirementsSpecification/bf0cde90-9086-43d5-bcff-32a2f8331800/requirement/614e2a69-d602-46be-9311-2fb4d3273e87/parametricConstraint/88200dbc-711a-47e0-a54a-dac4baca6e83/expression/5f90327f-95a2-4c5a-9efe-581f8daf08ed");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(orExpressionUri);
@@ -47,8 +45,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(1, jArray.Count);
 
             // get a specific OrExpression from the result by it's unique id
-            var orExpression =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "5f90327f-95a2-4c5a-9efe-581f8daf08ed");
+            var orExpression = jArray.Single(x => (string)x[PropertyNames.Iid] == "5f90327f-95a2-4c5a-9efe-581f8daf08ed");
             OrExpressionTestFixture.VerifyProperties(orExpression);
         }
 
@@ -57,10 +54,8 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedOrExpressionWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var orExpressionUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/requirementsSpecification/bf0cde90-9086-43d5-bcff-32a2f8331800/requirement/614e2a69-d602-46be-9311-2fb4d3273e87/parametricConstraint/88200dbc-711a-47e0-a54a-dac4baca6e83/expression/5f90327f-95a2-4c5a-9efe-581f8daf08ed?includeAllContainers=true"));
-
+            var orExpressionUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/requirementsSpecification/bf0cde90-9086-43d5-bcff-32a2f8331800/requirement/614e2a69-d602-46be-9311-2fb4d3273e87/parametricConstraint/88200dbc-711a-47e0-a54a-dac4baca6e83/expression/5f90327f-95a2-4c5a-9efe-581f8daf08ed?includeAllContainers=true");
+            
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(orExpressionUri);
 
@@ -72,21 +67,18 @@ namespace WebservicesIntegrationTests
             IterationTestFixture.VerifyProperties(iteration);
 
             // get a specific RequirementsSpecification from the result by it's unique id
-            var requirementsSpecification =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "bf0cde90-9086-43d5-bcff-32a2f8331800");
+            var requirementsSpecification = jArray.Single(x => (string)x[PropertyNames.Iid] == "bf0cde90-9086-43d5-bcff-32a2f8331800");
             RequirementsSpecificationTestFixture.VerifyProperties(requirementsSpecification);
 
             // get a specific Requirement from the result by it's unique id
             RequirementTestFixture.VerifyProperties(jArray);
 
             // get a specific ParametricConstraint from the result by it's unique id
-            var parametricConstraint =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "88200dbc-711a-47e0-a54a-dac4baca6e83");
+            var parametricConstraint = jArray.Single(x => (string)x[PropertyNames.Iid] == "88200dbc-711a-47e0-a54a-dac4baca6e83");
             ParametricConstraintTestFixture.VerifyProperties(parametricConstraint);
 
             // get a specific OrExpression from the result by it's unique id
-            var orExpression =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "5f90327f-95a2-4c5a-9efe-581f8daf08ed");
+            var orExpression = jArray.Single(x => (string)x[PropertyNames.Iid] == "5f90327f-95a2-4c5a-9efe-581f8daf08ed");
             OrExpressionTestFixture.VerifyProperties(orExpression);
         }
 
@@ -110,8 +102,9 @@ namespace WebservicesIntegrationTests
             var expectedTerms = new string[]
             {
                 "8c6df21f-07ae-4d0b-ab9b-866dd1f90158",
-      "a6e44651-7c4a-4a57-bdf9-c0290497f392"
+                "a6e44651-7c4a-4a57-bdf9-c0290497f392"
             };
+
             var termsArray = (JArray)orExpression[PropertyNames.Term];
             IList<string> terms = termsArray.Select(x => (string)x).ToList();
             CollectionAssert.AreEquivalent(expectedTerms, terms);

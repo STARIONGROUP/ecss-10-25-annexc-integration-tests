@@ -36,7 +36,7 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatNewOptionCanBeCreatedWithWebApi()
         {
-            var iterationUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
             var postBodyPath = this.GetPath("Tests/EngineeringModel/Option/PostNewOption.json");
 
             var postBody = this.GetJsonFromFile(postBodyPath);
@@ -62,7 +62,7 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatOptionsCanBeReorderedWithWebApi()
         {
-            var iterationUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
             var postBodyPath = this.GetPath("Tests/EngineeringModel/Option/PostNewOption.json");
 
             var postBody = this.GetJsonFromFile(postBodyPath);
@@ -85,9 +85,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedOptionIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var optionUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/option"));
+            var optionUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/option");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(optionUri);
@@ -96,8 +94,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(1, jArray.Count);
 
             // get a specific Option from the result by it's unique id
-            var option =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "bebcc9f4-ff20-4569-bbf6-d1acf27a8107");
+            var option = jArray.Single(x => (string) x[PropertyNames.Iid] == "bebcc9f4-ff20-4569-bbf6-d1acf27a8107");
 
             VerifyProperties(option);
         }
@@ -107,9 +104,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedOptionWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var optionUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/option?includeAllContainers=true"));
+            var optionUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/option?includeAllContainers=true");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(optionUri);

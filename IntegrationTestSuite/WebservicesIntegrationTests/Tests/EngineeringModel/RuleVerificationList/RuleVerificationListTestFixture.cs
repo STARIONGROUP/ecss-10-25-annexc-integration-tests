@@ -37,10 +37,8 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedRuleVerificationListIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var ruleVerificationListUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/ruleVerificationList"));
-
+            var ruleVerificationListUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/ruleVerificationList");
+            
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(ruleVerificationListUri);
 
@@ -48,8 +46,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(1, jArray.Count);
 
             // get a specific RuleVerificationList from the result by it's unique id
-            var ruleVerificationList =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "dc482120-2a11-439b-913d-6a924de9ee5f");
+            var ruleVerificationList = jArray.Single(x => (string) x[PropertyNames.Iid] == "dc482120-2a11-439b-913d-6a924de9ee5f");
             RuleVerificationListTestFixture.VerifyProperties(ruleVerificationList);
         }
 
@@ -58,9 +55,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedRuleVerificationListWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var ruleVerificationListUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/ruleVerificationList?includeAllContainers=true"));
+            var ruleVerificationListUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/ruleVerificationList?includeAllContainers=true");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(ruleVerificationListUri);
@@ -69,13 +64,11 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(3, jArray.Count);
 
             // get a specific Iteration from the result by it's unique id
-            var iteration =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
+            var iteration = jArray.Single(x => (string) x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
             IterationTestFixture.VerifyProperties(iteration);
 
             // get a specific RuleVerificationList from the result by it's unique id
-            var ruleVerificationList =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "dc482120-2a11-439b-913d-6a924de9ee5f");
+            var ruleVerificationList = jArray.Single(x => (string) x[PropertyNames.Iid] == "dc482120-2a11-439b-913d-6a924de9ee5f");
             RuleVerificationListTestFixture.VerifyProperties(ruleVerificationList);
         }
 

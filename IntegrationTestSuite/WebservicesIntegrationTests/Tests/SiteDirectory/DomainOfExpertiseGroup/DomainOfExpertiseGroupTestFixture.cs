@@ -36,7 +36,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedDomainOfExpertiseGroupIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var domainOfExpertiseGroupUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/domainGroup"));
+            var domainOfExpertiseGroupUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/domainGroup");
 
             // Get the response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(domainOfExpertiseGroupUri);
@@ -54,7 +54,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedDomainOfExpertiseGroupWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var domainOfExpertiseGroupUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/domainGroup?includeAllContainers=true"));
+            var domainOfExpertiseGroupUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/domainGroup?includeAllContainers=true");
 
             // Get the response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(domainOfExpertiseGroupUri);

@@ -36,9 +36,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedExternalIdentifierMapIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var externalIdentifierMapUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/externalIdentifierMap"));
+            var externalIdentifierMapUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/externalIdentifierMap");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(externalIdentifierMapUri);
@@ -58,10 +56,8 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedExternalIdentifierMapWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var externalIdentifierMapUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/externalIdentifierMap?includeAllContainers=true"));
-
+            var externalIdentifierMapUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/externalIdentifierMap?includeAllContainers=true");
+            
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(externalIdentifierMapUri);
 

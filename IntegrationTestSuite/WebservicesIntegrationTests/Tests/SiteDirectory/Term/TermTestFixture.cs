@@ -35,20 +35,13 @@ namespace WebservicesIntegrationTests
         [Category("GET")]
         public void VerifyThatExpectedTermIsReturnedFromWebApi()
         {
-            // define the URI on which to perform a GET request 
-            var termUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/glossary/bb08686b-ae03-49eb-9f48-c196b5ad6bda/term"));
+            var termUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/glossary/bb08686b-ae03-49eb-9f48-c196b5ad6bda/term");
 
-            // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(termUri);
-
-            //check if there is the only one Term object 
+            
             Assert.AreEqual(1, jArray.Count);
-
-            // get a specific Term from the result by it's unique id
-            var term =
-                jArray.Single(x => (string) x["iid"] == "18533006-1b9b-46c1-acc9-ae438ed4ebb2");
+            
+            var term = jArray.Single(x => (string) x["iid"] == "18533006-1b9b-46c1-acc9-ae438ed4ebb2");
 
             TermTestFixture.VerifyProperties(term);
         }
@@ -58,11 +51,8 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedTermWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var termUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880" +
-                    "/glossary/bb08686b-ae03-49eb-9f48-c196b5ad6bda/term/18533006-1b9b-46c1-acc9-ae438ed4ebb2?includeAllContainers=true"));
-
+            var termUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/glossary/bb08686b-ae03-49eb-9f48-c196b5ad6bda/term/18533006-1b9b-46c1-acc9-ae438ed4ebb2?includeAllContainers=true");
+            
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(termUri);
 
@@ -74,18 +64,15 @@ namespace WebservicesIntegrationTests
             SiteDirectoryTestFixture.VerifyProperties(siteDirectory);
 
             // get a specific SiteReferenceDataLibrary from the result by it's unique id
-            var siteReferenceDataLibrary =
-                jArray.Single(x => (string) x["iid"] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
+            var siteReferenceDataLibrary = jArray.Single(x => (string) x["iid"] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
             SiteReferenceDataLibraryTestFixture.VerifyProperties(siteReferenceDataLibrary);
 
             // get a specific Glossary from the result by it's unique id
-            var glossary =
-                jArray.Single(x => (string) x["iid"] == "bb08686b-ae03-49eb-9f48-c196b5ad6bda");
+            var glossary = jArray.Single(x => (string) x["iid"] == "bb08686b-ae03-49eb-9f48-c196b5ad6bda");
             GlossaryTestFixture.VerifyProperties(glossary);
 
             // get a specific Term from the result by it's unique id
-            var term =
-                jArray.Single(x => (string) x["iid"] == "18533006-1b9b-46c1-acc9-ae438ed4ebb2");
+            var term = jArray.Single(x => (string) x["iid"] == "18533006-1b9b-46c1-acc9-ae438ed4ebb2");
             TermTestFixture.VerifyProperties(term);
         }
 

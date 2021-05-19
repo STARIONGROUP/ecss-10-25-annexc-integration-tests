@@ -35,9 +35,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedParameterSubscriptionValueSetIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var parameterSubscriptionValueSetUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/f73860b2-12f0-43e4-b8b2-c81862c0a159/parameter/6c5aff74-f983-4aa8-a9d6-293b3429307c/parameterSubscription/f1f076c4-5307-42b8-a171-3263a9e7bb21/valueSet"));
+            var parameterSubscriptionValueSetUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/f73860b2-12f0-43e4-b8b2-c81862c0a159/parameter/6c5aff74-f983-4aa8-a9d6-293b3429307c/parameterSubscription/f1f076c4-5307-42b8-a171-3263a9e7bb21/valueSet");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(parameterSubscriptionValueSetUri);
@@ -46,8 +44,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(1, jArray.Count);
 
             // get a specific ParameterSubscriptionValueSet from the result by it's unique id
-            var parameterSubscriptionValueSet =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "a179af79-fd09-44c8-a8a6-3c4c602c7dbf");
+            var parameterSubscriptionValueSet = jArray.Single(x => (string) x[PropertyNames.Iid] == "a179af79-fd09-44c8-a8a6-3c4c602c7dbf");
 
             ParameterSubscriptionValueSetTestFixture.VerifyProperties(parameterSubscriptionValueSet);
         }
@@ -57,9 +54,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedParameterSubscriptionValueSetWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var parameterSubscriptionValueSetUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/f73860b2-12f0-43e4-b8b2-c81862c0a159/parameter/6c5aff74-f983-4aa8-a9d6-293b3429307c/parameterSubscription/f1f076c4-5307-42b8-a171-3263a9e7bb21/valueSet?includeAllContainers=true"));
+            var parameterSubscriptionValueSetUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/f73860b2-12f0-43e4-b8b2-c81862c0a159/parameter/6c5aff74-f983-4aa8-a9d6-293b3429307c/parameterSubscription/f1f076c4-5307-42b8-a171-3263a9e7bb21/valueSet?includeAllContainers=true");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(parameterSubscriptionValueSetUri);
@@ -68,26 +63,22 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(6, jArray.Count);
 
             // get a specific Iteration from the result by it's unique id
-            var iteration =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
+            var iteration = jArray.Single(x => (string) x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
             IterationTestFixture.VerifyProperties(iteration);
 
             // get a specific ElementDefinition from the result by it's unique id
             ElementDefinitionTestFixture.VerifyProperties(jArray);
 
             // get a specific Parameter from the result by it's unique id
-            var parameter =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "6c5aff74-f983-4aa8-a9d6-293b3429307c");
+            var parameter = jArray.Single(x => (string) x[PropertyNames.Iid] == "6c5aff74-f983-4aa8-a9d6-293b3429307c");
             ParameterTestFixture.VerifyProperties(parameter);
 
             // get a specific ParameterSubscription from the result by it's unique id
-            var parameterSubscription =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "f1f076c4-5307-42b8-a171-3263a9e7bb21");
+            var parameterSubscription = jArray.Single(x => (string) x[PropertyNames.Iid] == "f1f076c4-5307-42b8-a171-3263a9e7bb21");
             ParameterSubscriptionTestFixture.VerifyProperties(parameterSubscription);
 
             // get a specific ParameterSubscriptionValueSet from the result by it's unique id
-            var parameterSubscriptionValueSet =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "a179af79-fd09-44c8-a8a6-3c4c602c7dbf");
+            var parameterSubscriptionValueSet = jArray.Single(x => (string) x[PropertyNames.Iid] == "a179af79-fd09-44c8-a8a6-3c4c602c7dbf");
             ParameterSubscriptionValueSetTestFixture.VerifyProperties(parameterSubscriptionValueSet);
         }
 

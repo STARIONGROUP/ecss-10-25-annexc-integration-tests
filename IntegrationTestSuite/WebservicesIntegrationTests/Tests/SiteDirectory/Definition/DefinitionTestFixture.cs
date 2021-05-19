@@ -36,11 +36,11 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatASiteReferenceDataLibraryDefinitionCanBeCreatedWithWebApi()
         {
-            var iterationUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
             var postBodyPath = this.GetPath("Tests/SiteDirectory/Definition/PostNewDefinition.json");
 
             var postBody = base.GetJsonFromFile(postBodyPath);
-            var jArray = this.WebClient.PostDto(iterationUri, postBody);
+            var jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
 
             var siteDirectory = jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
 
@@ -320,7 +320,7 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyDefinitionThatNotesAndExamplesCanBeReordered()
         {
-            var uri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            var uri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
             var postBodyPath = this.GetPath("Tests/SiteDirectory/Definition/PostNoteExampleNewDefinition.json");
             var postBody = base.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(uri, postBody);
@@ -377,7 +377,7 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyDefinitionThatNotesAndExamplesCanBeRemoved()
         {
-            var uri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            var uri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
             var postBodyPath = this.GetPath("Tests/SiteDirectory/Definition/PostNoteExampleNewDefinition.json");
             var postBody = base.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(uri, postBody);
@@ -403,7 +403,6 @@ namespace WebservicesIntegrationTests
 
             var firstExample = definition[PropertyNames.Example].ToList()[0];
             Assert.AreEqual("8ca48538-d39d-4b09-8944-77c34535ce7b", (string) firstExample["v"]);
-
         }
     }
 }

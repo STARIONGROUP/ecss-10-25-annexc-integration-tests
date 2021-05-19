@@ -35,9 +35,7 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatNewEngineeringModelCanBeCreatedWithWebApi()
         {
-            var siteDirectoryUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
             var postBodyPath = this.GetPath("Tests/SiteDirectory/EngineeringModelSetup/PostEngineeringModelSetup.json");
 
             var postBody = base.GetJsonFromFile(postBodyPath);
@@ -218,9 +216,7 @@ namespace WebservicesIntegrationTests
 
             //GET EngineeringModel
             // define the URI on which to perform a GET request
-            var engineeringModelUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/1f3c2199-2ddf-4a52-a53a-97436a695d35"));
+            var engineeringModelUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/1f3c2199-2ddf-4a52-a53a-97436a695d35");
 
             // get a response from the data-source as a JArray (JSON Array)
             jArray = this.WebClient.GetDto(engineeringModelUri);
@@ -247,11 +243,8 @@ namespace WebservicesIntegrationTests
             IList<string> logEntries = logEntriesArray.Select(x => (string)x).ToList();
             CollectionAssert.AreEquivalent(expectedLogEntries, logEntries);
 
-            //GET Iteration
             // define the URI on which to perform a GET request
-            var iterationUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/1f3c2199-2ddf-4a52-a53a-97436a695d35/iteration/" + iterationsArray[0].ToString()));
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/1f3c2199-2ddf-4a52-a53a-97436a695d35/iteration/{iterationsArray[0].ToString()}");
 
             // get a response from the data-source as a JArray (JSON Array)
             jArray = this.WebClient.GetDto(iterationUri);
@@ -323,9 +316,7 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatActiveDomainCanBeAddedToEngineeringModelSetupWithWebApi()
         {
-            var siteDirectoryUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
             var postBodyPath = this.GetPath("Tests/SiteDirectory/EngineeringModelSetup/PostEngineeringModelSetup.json");
 
             var postBody = base.GetJsonFromFile(postBodyPath);
@@ -363,17 +354,12 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatNewEngineeringModelCanBeCreatedBasedOnExistingModelWithWebApi()
         {
-            var siteDirectoryUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
-            var postBodyPath =
-                this.GetPath(
-                    "Tests/SiteDirectory/EngineeringModelSetup/PostEngineeringModelSetupBasedOnExistingModel.json");
+            var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
+            var postBodyPath = this.GetPath("Tests/SiteDirectory/EngineeringModelSetup/PostEngineeringModelSetupBasedOnExistingModel.json");
 
             var postBody = base.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
-
-            //Check the amount of objects 
+            
             Assert.AreEqual(9, jArray.Count);
 
             var siteDirectory = jArray.Single(x => (string)x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
@@ -402,10 +388,12 @@ namespace WebservicesIntegrationTests
             var participant = jArray.Single(x => (string)x[PropertyNames.ClassKind] == "Participant");
             Assert.IsTrue((bool)participant[PropertyNames.IsActive]);
             Assert.AreEqual("77791b12-4c2c-4499-93fa-869df3692d22", (string)participant[PropertyNames.Person]);
+
             var expectedDomains = new string[] {
                 "0e92edde-fdff-41db-9b1d-f2e484f12535",
                 "eb759723-14b9-49f4-8611-544d037bb764"
             };
+
             var domainsArray = (JArray)participant[PropertyNames.Domain];
             IList<string> domains = domainsArray.Select(x => (string)x).ToList();
             CollectionAssert.AreEquivalent(expectedDomains, domains);
@@ -417,9 +405,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedEngineeringModelSetupIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var engineeringModelSetupUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/model"));
+            var engineeringModelSetupUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/model");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(engineeringModelSetupUri);
@@ -438,9 +424,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedEngineeringModelSetupWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var engineeringModelSetupsUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/model?includeAllContainers=true"));
+            var engineeringModelSetupsUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/model?includeAllContainers=true");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(engineeringModelSetupsUri);
@@ -528,17 +512,13 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatDomainFileStoreWillNotBeCreateWhenDomainOfExpertiseWillBeAddedToExistingEngineeringModelSetup()
         {
-            var siteDirectoryUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
 
             var postBodyPath = this.GetPath("Tests/SiteDirectory/EngineeringModelSetup/PostEngineeringModelSetup.json");
             var postBody = base.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
 
-            var engineeringModelSetupsUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/model"));
+            var engineeringModelSetupsUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/model");
 
             jArray = this.WebClient.GetDto(engineeringModelSetupsUri);
             Assert.AreEqual(2, jArray.Count);
@@ -558,17 +538,13 @@ namespace WebservicesIntegrationTests
             CollectionAssert.AreEquivalent(expectedActiveDomains, activeDomainsList);
 
             // Check DomainFileStore in EngineeringModel correlated to EngineeringModelSetup
-            var engineeringModelUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/" + model));
+            var engineeringModelUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/{model}");
 
             jArray = this.WebClient.GetDto(engineeringModelUri);
             var engineeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == model.ToString());
             var iterationsArray = (JArray)engineeringModel[PropertyNames.Iteration];
 
-            var iterationUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/1f3c2199-2ddf-4a52-a53a-97436a695d35/iteration/" + iterationsArray[0].ToString()));
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/1f3c2199-2ddf-4a52-a53a-97436a695d35/iteration/{iterationsArray[0].ToString()}");
 
             jArray = this.WebClient.GetDto(iterationUri);
             var iteration = jArray.Single(x => (string)x[PropertyNames.Iid] == iterationsArray[0].ToString());
@@ -580,9 +556,7 @@ namespace WebservicesIntegrationTests
             postBody = base.GetJsonFromFile(postBodyPath);
             jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
 
-            engineeringModelSetupsUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/model/ba097bf8-c916-4134-8471-4a1eb4efb2f7"));
+            engineeringModelSetupsUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/model/ba097bf8-c916-4134-8471-4a1eb4efb2f7");
 
             jArray = this.WebClient.GetDto(engineeringModelSetupsUri);
             engineeringModelSetup = jArray.Single(x => (string)x[PropertyNames.Iid] == "ba097bf8-c916-4134-8471-4a1eb4efb2f7");
@@ -607,9 +581,7 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatDomainFileStoreWillNotBeDeletedWhenDomainOfExpertiseWillBeRemovedFromExistingEngineeringModelSetup()
         {
-            var engineeringModelSetupsUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/model"));
+            var engineeringModelSetupsUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/model");
 
             var jArray = this.WebClient.GetDto(engineeringModelSetupsUri);
             Assert.AreEqual(1, jArray.Count);
@@ -630,17 +602,13 @@ namespace WebservicesIntegrationTests
             CollectionAssert.AreEquivalent(expectedActiveDomains, activeDomainsList);
 
             // Check DomainFileStore in EngineeringModel correlated to EngineeringModelSetup
-            var engineeringModelUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/" + model));
+            var engineeringModelUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/{model}");
 
             jArray = this.WebClient.GetDto(engineeringModelUri);
             var engineeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == model.ToString());
             var iterationsArray = (JArray)engineeringModel[PropertyNames.Iteration];
 
-            var iterationUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/" + iterationsArray[0].ToString()));
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/{iterationsArray[0].ToString()}");
 
             jArray = this.WebClient.GetDto(iterationUri);
             var iteration = jArray.Single(x => (string)x[PropertyNames.Iid] == iterationsArray[0].ToString());
@@ -648,17 +616,13 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(1, domainFileStoresArray.Count);
 
             // Check DomainFileStore after postDelete DomainOfExpertise in EngineeringModelSetup
-            var siteDirectoryUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
 
             var postBodyPath = this.GetPath("Tests/SiteDirectory/EngineeringModelSetup/PostDeleteActiveDomain.json");
             var postBody = base.GetJsonFromFile(postBodyPath);
             jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
 
-            engineeringModelSetupsUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/model/116f6253-89bb-47d4-aa24-d11d197e43c9"));
+            engineeringModelSetupsUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/model/116f6253-89bb-47d4-aa24-d11d197e43c9");
 
             jArray = this.WebClient.GetDto(engineeringModelSetupsUri);
             engineeringModelSetup = jArray.Single(x => (string)x[PropertyNames.Iid] == "116f6253-89bb-47d4-aa24-d11d197e43c9");

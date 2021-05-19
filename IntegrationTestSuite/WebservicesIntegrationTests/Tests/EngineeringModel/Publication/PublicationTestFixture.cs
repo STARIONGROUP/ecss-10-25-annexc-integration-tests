@@ -36,9 +36,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedPublicationTestIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var publicationUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/publication"));
+            var publicationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/publication");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(publicationUri);
@@ -47,8 +45,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(1, jArray.Count);
 
             // get a specific Publication from the result by it's unique id
-            var publication =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "790b9e60-476b-4b6d-8aba-0af15178535e");
+            var publication = jArray.Single(x => (string) x[PropertyNames.Iid] == "790b9e60-476b-4b6d-8aba-0af15178535e");
 
             PublicationTestFixture.VerifyProperties(publication);
         }
@@ -58,9 +55,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedPublicationWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var publicationUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/publication?includeAllContainers=true"));
+            var publicationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/publication?includeAllContainers=true");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(publicationUri);
@@ -69,13 +64,11 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(3, jArray.Count);
 
             // get a specific Iteration from the result by it's unique id
-            var iteration =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
+            var iteration = jArray.Single(x => (string) x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
             IterationTestFixture.VerifyProperties(iteration);
 
             // get a specific Publication from the result by it's unique id
-            var publication =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "790b9e60-476b-4b6d-8aba-0af15178535e");
+            var publication = jArray.Single(x => (string) x[PropertyNames.Iid] == "790b9e60-476b-4b6d-8aba-0af15178535e");
             PublicationTestFixture.VerifyProperties(publication);
         }
 
@@ -83,25 +76,19 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatPublicationCanBePostedAndAppropriateObjectsAreReturnedFromWebApi()
         {
-            // Update ParameterValueSet
-            var iterationUri =
-                new Uri(
-                    string.Format(
-                        UriFormat,
-                        this.Settings.Hostname,
-                        "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
+
             var postBodyPath = this.GetPath("Tests/EngineeringModel/Publication/PostUpdateParameterValueSet.json");
 
             var postBody = this.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
-            var engineeeringModel = jArray.Single(
-                x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            var engineeeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
             Assert.AreEqual(2, (int)engineeeringModel[PropertyNames.RevisionNumber]);
 
             // get a specific ParameterValueSet from the result by it's unique id
-            var parameterValueSet =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "72ec3701-bcb5-4bf6-bd78-30fd1b65e3be");
+            var parameterValueSet = jArray.Single(x => (string)x[PropertyNames.Iid] == "72ec3701-bcb5-4bf6-bd78-30fd1b65e3be");
+
             Assert.AreEqual(2, (int)parameterValueSet[PropertyNames.RevisionNumber]);
             Assert.AreEqual("[\"test\"]", (string)parameterValueSet[PropertyNames.Manual]);
 
@@ -110,13 +97,11 @@ namespace WebservicesIntegrationTests
             postBody = this.GetJsonFromFile(postBodyPath);
             jArray = this.WebClient.PostDto(iterationUri, postBody);
 
-            engineeeringModel = jArray.Single(
-                x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            engineeeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
             Assert.AreEqual(3, (int)engineeeringModel[PropertyNames.RevisionNumber]);
 
             // get a specific Iteration from the result by it's unique id
-            var iteration =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
+            var iteration = jArray.Single(x => (string)x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
             Assert.AreEqual(3, (int)iteration[PropertyNames.RevisionNumber]);
 
             var expectedPublications = new string[]
@@ -128,14 +113,12 @@ namespace WebservicesIntegrationTests
             IList<string> publications = publicationsArray.Select(x => (string)x).ToList();
             CollectionAssert.AreEquivalent(expectedPublications, publications);
 
-            parameterValueSet =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "72ec3701-bcb5-4bf6-bd78-30fd1b65e3be");
+            parameterValueSet = jArray.Single(x => (string)x[PropertyNames.Iid] == "72ec3701-bcb5-4bf6-bd78-30fd1b65e3be");
             Assert.AreEqual(3, (int)parameterValueSet[PropertyNames.RevisionNumber]);
             Assert.AreEqual("[\"test\"]", (string)parameterValueSet[PropertyNames.Published]);
 
             // get a specific Publication from the result by it's unique id
-            var publication =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "aec92178-186c-40d5-b23a-78f0423906f6");
+            var publication = jArray.Single(x => (string)x[PropertyNames.Iid] == "aec92178-186c-40d5-b23a-78f0423906f6");
 
             Assert.AreEqual(3, (int)publication[PropertyNames.RevisionNumber]);
             Assert.AreEqual("Publication", (string)publication[PropertyNames.ClassKind]);

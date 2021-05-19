@@ -36,7 +36,7 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatQuantityKindCanBeCreatedAndReorderedWithWebApi()
         {
-            var siteDirectoryUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
             var postBodyPath = this.GetPath("Tests/SiteDirectory/QuantityKind/PostNewQuantityKind.json");
 
             var postBody = this.GetJsonFromFile(postBodyPath);
@@ -288,8 +288,7 @@ namespace WebservicesIntegrationTests
             CollectionAssert.AreEquivalent(expectedConstants, constantsList);
 
             // DerivedQuantityKind
-            var derivedQuantityKind =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "c36e050a-b4f9-4567-b29d-67af9216878e");
+            var derivedQuantityKind = jArray.Single(x => (string) x[PropertyNames.Iid] == "c36e050a-b4f9-4567-b29d-67af9216878e");
 
             // verify the amount of returned properties 
             Assert.AreEqual(15, derivedQuantityKind.Children().Count());

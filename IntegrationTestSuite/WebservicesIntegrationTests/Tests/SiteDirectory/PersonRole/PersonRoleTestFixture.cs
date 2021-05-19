@@ -40,10 +40,8 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedPersonRoleIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var personRolesUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/personRole"));
-
+            var personRolesUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/personRole");
+            
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(personRolesUri);
 
@@ -61,7 +59,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedPersonRoleWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var personRolesUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/personRole?includeAllContainers=true"));
+            var personRolesUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/personRole?includeAllContainers=true");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(personRolesUri);

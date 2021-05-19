@@ -32,8 +32,7 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyCyclicSelf()
         {
-            var uri = new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            var uri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
             var postBodyPath = this.GetPath("Tests/SiteDirectory/IterationSetup/PostUpdateCyclicIterationSetup.json");
 
             var postBody = base.GetJsonFromFile(postBodyPath);

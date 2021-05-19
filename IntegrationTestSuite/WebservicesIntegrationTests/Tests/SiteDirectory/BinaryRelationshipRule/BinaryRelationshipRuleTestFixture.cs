@@ -36,9 +36,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedRuleIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var binaryRelationshipRuleUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/rule/8569bd5c-de3c-4d92-855f-b2c0ca94de0e"));
+            var binaryRelationshipRuleUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/rule/8569bd5c-de3c-4d92-855f-b2c0ca94de0e");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(binaryRelationshipRuleUri);
@@ -47,8 +45,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(1, jArray.Count);
 
             // get a specific BinaryRelationshipRule from the result by it's unique id
-            var binaryRelationshipRule =
-                jArray.Single(x => (string) x["iid"] == "8569bd5c-de3c-4d92-855f-b2c0ca94de0e");
+            var binaryRelationshipRule = jArray.Single(x => (string) x["iid"] == "8569bd5c-de3c-4d92-855f-b2c0ca94de0e");
 
             BinaryRelationshipRuleTestFixture.VerifyProperties(binaryRelationshipRule);
         }
@@ -58,9 +55,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedRuleWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var binaryRelationshipRuleUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/rule/8569bd5c-de3c-4d92-855f-b2c0ca94de0e?includeAllContainers=true"));
+            var binaryRelationshipRuleUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/rule/8569bd5c-de3c-4d92-855f-b2c0ca94de0e?includeAllContainers=true");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(binaryRelationshipRuleUri);
@@ -73,13 +68,11 @@ namespace WebservicesIntegrationTests
             SiteDirectoryTestFixture.VerifyProperties(siteDirectory);
 
             // get a specific SiteReferenceDataLibrary from the result by it's unique id
-            var siteReferenceDataLibrary =
-                jArray.Single(x => (string) x["iid"] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
+            var siteReferenceDataLibrary = jArray.Single(x => (string) x["iid"] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
             SiteReferenceDataLibraryTestFixture.VerifyProperties(siteReferenceDataLibrary);
 
             // get a specific BinaryRelationshipRule from the result by it's unique id
-            var binaryRelationshipRule =
-                jArray.Single(x => (string) x["iid"] == "8569bd5c-de3c-4d92-855f-b2c0ca94de0e");
+            var binaryRelationshipRule = jArray.Single(x => (string) x["iid"] == "8569bd5c-de3c-4d92-855f-b2c0ca94de0e");
             BinaryRelationshipRuleTestFixture.VerifyProperties(binaryRelationshipRule);
         }
 

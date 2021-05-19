@@ -36,10 +36,8 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedFileTypeIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var fileTypeUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/fileType"));
-
+            var fileTypeUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/fileType");
+            
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(fileTypeUri);
 
@@ -54,9 +52,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedFileTypeWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var fileTypeUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/fileType?includeAllContainers=true"));
+            var fileTypeUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/fileType?includeAllContainers=true");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(fileTypeUri);
@@ -69,8 +65,7 @@ namespace WebservicesIntegrationTests
             SiteDirectoryTestFixture.VerifyProperties(siteDirectory);
 
             // get a specific SiteReferenceDataLibrary from the result by it's unique id
-            var siteReferenceDataLibrary =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
+            var siteReferenceDataLibrary = jArray.Single(x => (string)x[PropertyNames.Iid] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
             SiteReferenceDataLibraryTestFixture.VerifyProperties(siteReferenceDataLibrary);
 
             FileTypeTestFixture.VerifyProperties(jArray);
@@ -86,8 +81,7 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken jArray)
         {
             // get a specific FileType from the result by it's unique id
-            var fileType =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "db04ac55-dd60-4607-a4e1-a9f91c9704e6");
+            var fileType = jArray.Single(x => (string)x[PropertyNames.Iid] == "db04ac55-dd60-4607-a4e1-a9f91c9704e6");
             // verify the amount of returned properties 
             Assert.AreEqual(11, fileType.Children().Count());
 
@@ -123,8 +117,7 @@ namespace WebservicesIntegrationTests
             CollectionAssert.AreEquivalent(expectedHyperlinks, h);
 
             // get a specific FileType from the result by it's unique id
-            fileType =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "b16894e4-acb5-4e81-a118-16c00eb86d8f");
+            fileType = jArray.Single(x => (string)x[PropertyNames.Iid] == "b16894e4-acb5-4e81-a118-16c00eb86d8f");
             // verify the amount of returned properties 
             Assert.AreEqual(11, fileType.Children().Count());
 

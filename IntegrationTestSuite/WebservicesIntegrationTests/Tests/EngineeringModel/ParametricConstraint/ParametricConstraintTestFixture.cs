@@ -37,9 +37,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedParametricConstraintIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var parametricConstraintUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/requirementsSpecification/bf0cde90-9086-43d5-bcff-32a2f8331800/requirement/614e2a69-d602-46be-9311-2fb4d3273e87/parametricConstraint"));
+            var parametricConstraintUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/requirementsSpecification/bf0cde90-9086-43d5-bcff-32a2f8331800/requirement/614e2a69-d602-46be-9311-2fb4d3273e87/parametricConstraint");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(parametricConstraintUri);
@@ -48,8 +46,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(1, jArray.Count);
 
             // get a specific ParametricConstraint from the result by it's unique id
-            var parametricConstraint =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "88200dbc-711a-47e0-a54a-dac4baca6e83");
+            var parametricConstraint = jArray.Single(x => (string) x[PropertyNames.Iid] == "88200dbc-711a-47e0-a54a-dac4baca6e83");
 
             VerifyProperties(parametricConstraint);
         }
@@ -59,9 +56,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedParametricConstraintWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var parametricConstraintUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/requirementsSpecification/bf0cde90-9086-43d5-bcff-32a2f8331800/requirement/614e2a69-d602-46be-9311-2fb4d3273e87/parametricConstraint?includeAllContainers=true"));
+            var parametricConstraintUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/requirementsSpecification/bf0cde90-9086-43d5-bcff-32a2f8331800/requirement/614e2a69-d602-46be-9311-2fb4d3273e87/parametricConstraint?includeAllContainers=true");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(parametricConstraintUri);
@@ -74,8 +69,7 @@ namespace WebservicesIntegrationTests
             IterationTestFixture.VerifyProperties(iteration);
 
             // get a specific RequirementsSpecification from the result by it's unique id
-            var requirementsSpecification =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "bf0cde90-9086-43d5-bcff-32a2f8331800");
+            var requirementsSpecification = jArray.Single(x => (string) x[PropertyNames.Iid] == "bf0cde90-9086-43d5-bcff-32a2f8331800");
 
             RequirementsSpecificationTestFixture.VerifyProperties(requirementsSpecification);
 
@@ -83,8 +77,7 @@ namespace WebservicesIntegrationTests
             RequirementTestFixture.VerifyProperties(jArray);
 
             // get a specific ParametricConstraint from the result by it's unique id
-            var parametricConstraint =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "88200dbc-711a-47e0-a54a-dac4baca6e83");
+            var parametricConstraint = jArray.Single(x => (string) x[PropertyNames.Iid] == "88200dbc-711a-47e0-a54a-dac4baca6e83");
 
             VerifyProperties(parametricConstraint);
         }
@@ -93,7 +86,7 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatNewParametricConstraintCanBeAddedAndReordered()
         {
-            var iterationUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
             var postBodyPath = this.GetPath("Tests/EngineeringModel/ParametricConstraint/PostNewParametricConstraint.json");
             var postBody = this.GetJsonFromFile(postBodyPath);
 

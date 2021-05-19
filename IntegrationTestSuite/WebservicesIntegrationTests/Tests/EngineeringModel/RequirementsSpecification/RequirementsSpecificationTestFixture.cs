@@ -36,11 +36,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedRequirementsSpecificationIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var requirementsSpecificationUri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/requirementsSpecification"));
+            var requirementsSpecificationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/requirementsSpecification");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(requirementsSpecificationUri);
@@ -49,8 +45,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(2, jArray.Count);
 
             // get a specific RequirementsSpecification from the result by it's unique id
-            var requirementsSpecification = jArray.Single(
-                x => (string)x[PropertyNames.Iid] == "bf0cde90-9086-43d5-bcff-32a2f8331800");
+            var requirementsSpecification = jArray.Single(x => (string)x[PropertyNames.Iid] == "bf0cde90-9086-43d5-bcff-32a2f8331800");
 
             RequirementsSpecificationTestFixture.VerifyProperties(requirementsSpecification);
         }
@@ -60,11 +55,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedRequirementsSpecificationWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var requirementsSpecificationUri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/requirementsSpecification?includeAllContainers=true"));
+            var requirementsSpecificationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/requirementsSpecification?includeAllContainers=true");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(requirementsSpecificationUri);
@@ -77,8 +68,7 @@ namespace WebservicesIntegrationTests
             IterationTestFixture.VerifyProperties(iteration);
 
             // get a specific RequirementsSpecification from the result by it's unique id
-            var requirementsSpecification = jArray.Single(
-                x => (string)x[PropertyNames.Iid] == "bf0cde90-9086-43d5-bcff-32a2f8331800");
+            var requirementsSpecification = jArray.Single(x => (string)x[PropertyNames.Iid] == "bf0cde90-9086-43d5-bcff-32a2f8331800");
             RequirementsSpecificationTestFixture.VerifyProperties(requirementsSpecification);
         }
 
@@ -86,19 +76,14 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatARequirementsSpecificationCanBeCreatedWithWebApi()
         {
-            var iterationUri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
-            var postBodyPath = this.GetPath(
-                "Tests/EngineeringModel/RequirementsSpecification/PostNewRequirementsSpecification.json");
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
+
+            var postBodyPath = this.GetPath("Tests/EngineeringModel/RequirementsSpecification/PostNewRequirementsSpecification.json");
 
             var postBody = this.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
-            var engineeeringModel = jArray.Single(
-                x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            var engineeeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
             Assert.AreEqual(2, (int)engineeeringModel[PropertyNames.RevisionNumber]);
 
             var iteration = jArray.Single(x => (string)x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
@@ -114,27 +99,20 @@ namespace WebservicesIntegrationTests
             IList<string> requirementsSpecifications = requirementsSpecificationsArray.Select(x => (string)x).ToList();
             CollectionAssert.AreEquivalent(expectedRequirementsSpecifications, requirementsSpecifications);
 
-            var requirementsSpecification = jArray.Single(
-                x => (string)x[PropertyNames.Iid] == "272e59f8-267a-4e5f-84eb-6d1b495bf4c7");
+            var requirementsSpecification = jArray.Single(x => (string)x[PropertyNames.Iid] == "272e59f8-267a-4e5f-84eb-6d1b495bf4c7");
 
             // verify the amount of returned properties 
             Assert.AreEqual(12, requirementsSpecification.Children().Count());
 
             // assert that the properties are what is expected
-            Assert.AreEqual(
-                "272e59f8-267a-4e5f-84eb-6d1b495bf4c7",
-                (string)requirementsSpecification[PropertyNames.Iid]);
+            Assert.AreEqual("272e59f8-267a-4e5f-84eb-6d1b495bf4c7", (string)requirementsSpecification[PropertyNames.Iid]);
             Assert.AreEqual(2, (int)requirementsSpecification[PropertyNames.RevisionNumber]);
             Assert.AreEqual("RequirementsSpecification", (string)requirementsSpecification[PropertyNames.ClassKind]);
 
             Assert.AreEqual("Test Requirements Specification 3", (string)requirementsSpecification[PropertyNames.Name]);
-            Assert.AreEqual(
-                "TestRequirementsSpecification3",
-                (string)requirementsSpecification[PropertyNames.ShortName]);
+            Assert.AreEqual("TestRequirementsSpecification3", (string)requirementsSpecification[PropertyNames.ShortName]);
 
-            Assert.AreEqual(
-                "0e92edde-fdff-41db-9b1d-f2e484f12535",
-                (string)requirementsSpecification[PropertyNames.Owner]);
+            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string)requirementsSpecification[PropertyNames.Owner]);
 
             Assert.IsFalse((bool)requirementsSpecification[PropertyNames.IsDeprecated]);
 

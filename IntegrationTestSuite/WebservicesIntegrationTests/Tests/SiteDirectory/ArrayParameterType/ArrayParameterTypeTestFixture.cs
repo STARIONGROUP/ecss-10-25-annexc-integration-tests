@@ -37,9 +37,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedParameterTypeIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var arrayParameterTypeUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/parameterType/4a783624-b2bc-4e6d-95b3-11d036f6e917"));
+            var arrayParameterTypeUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/parameterType/4a783624-b2bc-4e6d-95b3-11d036f6e917");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(arrayParameterTypeUri);
@@ -48,8 +46,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(1, jArray.Count);
 
             // get a specific ArrayParameterType from the result by it's unique id
-            var arrayParameterType =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "4a783624-b2bc-4e6d-95b3-11d036f6e917");
+            var arrayParameterType = jArray.Single(x => (string) x[PropertyNames.Iid] == "4a783624-b2bc-4e6d-95b3-11d036f6e917");
 
             VerifyProperties(arrayParameterType);
         }
@@ -58,10 +55,8 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatArrayParameterTypeCanBePosted()
         {
-            var siteDirectoryUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
-
+            var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
+            
             var postBodyPath = this.GetPath("Tests/SiteDirectory/ArrayParameterType/PostArrayParameterType.json");
             var postBody = this.GetJsonFromFile(postBodyPath);
 
@@ -142,10 +137,8 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedParameterTypeWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var arrayParameterTypeUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/parameterType/4a783624-b2bc-4e6d-95b3-11d036f6e917?includeAllContainers=true"));
-
+            var arrayParameterTypeUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/parameterType/4a783624-b2bc-4e6d-95b3-11d036f6e917?includeAllContainers=true");
+            
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(arrayParameterTypeUri);
 
@@ -157,14 +150,12 @@ namespace WebservicesIntegrationTests
             SiteDirectoryTestFixture.VerifyProperties(siteDirectory);
 
             // get a specific SiteReferenceDataLibrary from the result by it's unique id
-            var siteReferenceDataLibrary =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
+            var siteReferenceDataLibrary = jArray.Single(x => (string) x[PropertyNames.Iid] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
 
             SiteReferenceDataLibraryTestFixture.VerifyProperties(siteReferenceDataLibrary);
 
             // get a specific ArrayParameterType from the result by it's unique id
-            var arrayParameterType =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "4a783624-b2bc-4e6d-95b3-11d036f6e917");
+            var arrayParameterType = jArray.Single(x => (string) x[PropertyNames.Iid] == "4a783624-b2bc-4e6d-95b3-11d036f6e917");
 
             VerifyProperties(arrayParameterType);
         }

@@ -36,9 +36,8 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedPossibleFiniteStateIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var possibleFiniteStateUri = new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/possibleFiniteStateList/449a5bca-34fd-454a-93f8-a56ac8383fee/possibleState"));
-            
+            var possibleFiniteStateUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/possibleFiniteStateList/449a5bca-34fd-454a-93f8-a56ac8383fee/possibleState");
+           
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(possibleFiniteStateUri);
 
@@ -56,8 +55,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedPossibleFiniteStateWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var possibleFiniteStateUri = new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/possibleFiniteStateList/449a5bca-34fd-454a-93f8-a56ac8383fee/possibleState?includeAllContainers=true"));
+            var possibleFiniteStateUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/possibleFiniteStateList/449a5bca-34fd-454a-93f8-a56ac8383fee/possibleState?includeAllContainers=true");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(possibleFiniteStateUri);
@@ -84,8 +82,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatTheLastPossibleFiniteStateCannotBeDeletedWithWebApi()
         {
             // define the URI on which to perform a GET request
-            var iterationUri = new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
             var postBodyPath = this.GetPath("Tests/EngineeringModel/PossibleFiniteState/PostDeletePossibleFiniteState.json");
             var postBody = base.GetJsonFromFile(postBodyPath);
 

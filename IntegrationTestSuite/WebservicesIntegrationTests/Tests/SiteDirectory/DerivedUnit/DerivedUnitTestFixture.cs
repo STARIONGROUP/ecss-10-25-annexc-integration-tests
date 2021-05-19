@@ -37,9 +37,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedUnitIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var derivedUnitUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/unit/c394eaa9-4832-4b2d-8d88-5e1b2c43732c"));
+            var derivedUnitUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/unit/c394eaa9-4832-4b2d-8d88-5e1b2c43732c");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(derivedUnitUri);
@@ -48,8 +46,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(1, jArray.Count);
 
             // get a specific DerivedUnit from the result by it's unique id
-            var derivedUnit =
-                jArray.Single(x => (string) x["iid"] == "c394eaa9-4832-4b2d-8d88-5e1b2c43732c");
+            var derivedUnit = jArray.Single(x => (string) x["iid"] == "c394eaa9-4832-4b2d-8d88-5e1b2c43732c");
             DerivedUnitTestFixture.VerifyProperties(derivedUnit);
         }
 
@@ -58,9 +55,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedUnitWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var derivedUnitUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/unit/c394eaa9-4832-4b2d-8d88-5e1b2c43732c?includeAllContainers=true"));
+            var derivedUnitUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/unit/c394eaa9-4832-4b2d-8d88-5e1b2c43732c?includeAllContainers=true");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(derivedUnitUri);
@@ -73,13 +68,11 @@ namespace WebservicesIntegrationTests
             SiteDirectoryTestFixture.VerifyProperties(siteDirectory);
 
             // get a specific SiteReferenceDataLibrary from the result by it's unique id
-            var siteReferenceDataLibrary =
-                jArray.Single(x => (string) x["iid"] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
+            var siteReferenceDataLibrary = jArray.Single(x => (string) x["iid"] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
             SiteReferenceDataLibraryTestFixture.VerifyProperties(siteReferenceDataLibrary);
 
             // get a specific DerivedUnit from the result by it's unique id
-            var derivedUnit =
-                jArray.Single(x => (string) x["iid"] == "c394eaa9-4832-4b2d-8d88-5e1b2c43732c");
+            var derivedUnit = jArray.Single(x => (string) x["iid"] == "c394eaa9-4832-4b2d-8d88-5e1b2c43732c");
             DerivedUnitTestFixture.VerifyProperties(derivedUnit);
         }
 

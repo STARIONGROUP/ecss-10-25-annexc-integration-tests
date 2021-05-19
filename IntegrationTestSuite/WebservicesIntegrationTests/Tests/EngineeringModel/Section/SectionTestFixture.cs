@@ -41,7 +41,8 @@ namespace WebservicesIntegrationTests
             SiteDirectoryTestFixture.AddDomainExpertUserJane(this, out var userName, out var passWord);
             this.CreateNewWebClientForUser(userName, passWord);
 
-            var sectionUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56"));
+            Assert.Fail("Here we are posting to EngineeringModel instead of Iteration, this needs to be a POST to EngineeringModel/iid/iteration/iid as per 10-25");
+            var sectionUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56");
             var postBodyPath = this.GetPath("Tests/EngineeringModel/Book/PostNewBooks.json");
             var postBody = this.GetJsonFromFile(postBodyPath);
 
@@ -72,9 +73,7 @@ namespace WebservicesIntegrationTests
                     new OrderedItem(2, "b47ccf37-caa8-4015-b0da-8620894aabce")
                 };
 
-            CollectionAssert.AreEquivalent(
-                expectedSectionList,
-                sectionList);
+            CollectionAssert.AreEquivalent(expectedSectionList, sectionList);
 
             var section1 = jArray.Single(x => (string) x[PropertyNames.Iid] == "c2eccf19-a040-4756-8298-8678d7149c8f");
             var section2 = jArray.Single(x => (string) x[PropertyNames.Iid] == "b47ccf37-caa8-4015-b0da-8620894aabce");
@@ -90,8 +89,7 @@ namespace WebservicesIntegrationTests
 
             Assert.AreEqual(12, book.Children().Count());
 
-            sectionList = JsonConvert.DeserializeObject<List<OrderedItem>>(
-                book[PropertyNames.Section].ToString());
+            sectionList = JsonConvert.DeserializeObject<List<OrderedItem>>(book[PropertyNames.Section].ToString());
 
             expectedSectionList =
                 new List<OrderedItem>

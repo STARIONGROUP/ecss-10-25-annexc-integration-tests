@@ -35,7 +35,7 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatAnOptionAliasCanBeCreatedWithWebApi()
         {
-            var iterationUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
             var postBodyPath = this.GetPath("Tests/EngineeringModel/Alias/PostNewAlias.json");
 
             var postBody = base.GetJsonFromFile(postBodyPath);

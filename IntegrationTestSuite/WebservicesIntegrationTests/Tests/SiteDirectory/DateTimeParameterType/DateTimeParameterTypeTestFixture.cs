@@ -36,9 +36,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedParameterTypeIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var dateTimeParameterTypeUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/parameterType/9c1d3e39-0754-4388-8e1e-070ca9a0e7b6"));
+            var dateTimeParameterTypeUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/parameterType/9c1d3e39-0754-4388-8e1e-070ca9a0e7b6");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(dateTimeParameterTypeUri);
@@ -47,8 +45,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(1, jArray.Count);
 
             // get a specific DateTimeParameterType from the result by it's unique id
-            var dateTimeParameterType =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "9c1d3e39-0754-4388-8e1e-070ca9a0e7b6");
+            var dateTimeParameterType = jArray.Single(x => (string) x[PropertyNames.Iid] == "9c1d3e39-0754-4388-8e1e-070ca9a0e7b6");
 
             DateTimeParameterTypeTestFixture.VerifyProperties(dateTimeParameterType);
         }
@@ -58,9 +55,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedParameterTypeWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var dateTimeParameterTypeUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/parameterType/9c1d3e39-0754-4388-8e1e-070ca9a0e7b6?includeAllContainers=true"));
+            var dateTimeParameterTypeUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/parameterType/9c1d3e39-0754-4388-8e1e-070ca9a0e7b6?includeAllContainers=true");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(dateTimeParameterTypeUri);
@@ -73,13 +68,11 @@ namespace WebservicesIntegrationTests
             SiteDirectoryTestFixture.VerifyProperties(siteDirectory);
 
             // get a specific SiteReferenceDataLibrary from the result by it's unique id
-            var siteReferenceDataLibrary =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
+            var siteReferenceDataLibrary = jArray.Single(x => (string) x[PropertyNames.Iid] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
             SiteReferenceDataLibraryTestFixture.VerifyProperties(siteReferenceDataLibrary);
 
             // get a specific DateTimeParameterType from the result by it's unique id
-            var dateTimeParameterType =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "9c1d3e39-0754-4388-8e1e-070ca9a0e7b6");
+            var dateTimeParameterType = jArray.Single(x => (string) x[PropertyNames.Iid] == "9c1d3e39-0754-4388-8e1e-070ca9a0e7b6");
             DateTimeParameterTypeTestFixture.VerifyProperties(dateTimeParameterType);
         }
 

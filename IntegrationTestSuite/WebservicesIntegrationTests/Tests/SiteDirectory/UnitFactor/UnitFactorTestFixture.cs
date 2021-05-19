@@ -37,10 +37,8 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedUnitFactorIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var unitFactorUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/unit/c394eaa9-4832-4b2d-8d88-5e1b2c43732c/unitFactor"));
-
+            var unitFactorUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/unit/c394eaa9-4832-4b2d-8d88-5e1b2c43732c/unitFactor");
+            
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(unitFactorUri);
 
@@ -48,8 +46,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(1, jArray.Count);
 
             // get a specific UnitFactor from the result by it's unique id
-            var unitFactor =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "56c30a85-f648-4b31-87d2-153e8a74048b");
+            var unitFactor = jArray.Single(x => (string) x[PropertyNames.Iid] == "56c30a85-f648-4b31-87d2-153e8a74048b");
 
             VerifyProperties(unitFactor);
         }
@@ -59,10 +56,8 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedUnitFactorWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var unitFactorUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/unit/c394eaa9-4832-4b2d-8d88-5e1b2c43732c/unitFactor?includeAllContainers=true"));
-
+            var unitFactorUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/unit/c394eaa9-4832-4b2d-8d88-5e1b2c43732c/unitFactor?includeAllContainers=true");
+            
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(unitFactorUri);
 
@@ -74,20 +69,17 @@ namespace WebservicesIntegrationTests
             SiteDirectoryTestFixture.VerifyProperties(siteDirectory);
 
             // get a SiteReferenceDataLibrary SiteReferenceDataLibrary from the result by it's unique id
-            var siteReferenceDataLibrary =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
+            var siteReferenceDataLibrary = jArray.Single(x => (string) x[PropertyNames.Iid] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
 
             SiteReferenceDataLibraryTestFixture.VerifyProperties(siteReferenceDataLibrary);
 
             // get a specific DerivedUnit from the result by it's unique id
-            var derivedUnit =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "c394eaa9-4832-4b2d-8d88-5e1b2c43732c");
+            var derivedUnit = jArray.Single(x => (string) x[PropertyNames.Iid] == "c394eaa9-4832-4b2d-8d88-5e1b2c43732c");
 
             DerivedUnitTestFixture.VerifyProperties(derivedUnit);
 
             // get a specific UnitFactor from the result by it's unique id
-            var unitFactor =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "56c30a85-f648-4b31-87d2-153e8a74048b");
+            var unitFactor = jArray.Single(x => (string) x[PropertyNames.Iid] == "56c30a85-f648-4b31-87d2-153e8a74048b");
 
             VerifyProperties(unitFactor);
         }
@@ -96,7 +88,7 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatUnitFactorCanBeAddedAndReorderedFromWebApi()
         {
-            var siteDirectoryUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
             var postBodyPath = this.GetPath("Tests/SiteDirectory/UnitFactor/PostNewUnitFactor.json");
 
             var postBody = this.GetJsonFromFile(postBodyPath);

@@ -36,11 +36,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedParameterGroupIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var parameterGroupUri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/f73860b2-12f0-43e4-b8b2-c81862c0a159/parameterGroup"));
+            var parameterGroupUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/f73860b2-12f0-43e4-b8b2-c81862c0a159/parameterGroup");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(parameterGroupUri);
@@ -49,8 +45,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(1, jArray.Count);
 
             // get a specific ParameterGroup from the result by it's unique id
-            var parameterGroup = jArray.Single(
-                x => (string)x[PropertyNames.Iid] == "b739b3c6-9cc0-4e64-9cc4-ef7463edf559");
+            var parameterGroup = jArray.Single(x => (string)x[PropertyNames.Iid] == "b739b3c6-9cc0-4e64-9cc4-ef7463edf559");
 
             ParameterGroupTestFixture.VerifyProperties(parameterGroup);
         }
@@ -60,11 +55,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedParameterGroupWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var parameterGroupUri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/f73860b2-12f0-43e4-b8b2-c81862c0a159/parameterGroup?includeAllContainers=true"));
+            var parameterGroupUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/f73860b2-12f0-43e4-b8b2-c81862c0a159/parameterGroup?includeAllContainers=true");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(parameterGroupUri);
@@ -80,8 +71,7 @@ namespace WebservicesIntegrationTests
             ElementDefinitionTestFixture.VerifyProperties(jArray);
 
             // get a specific ParameterGroup from the result by it's unique id
-            var parameterGroup = jArray.Single(
-                x => (string)x[PropertyNames.Iid] == "b739b3c6-9cc0-4e64-9cc4-ef7463edf559");
+            var parameterGroup = jArray.Single(x => (string)x[PropertyNames.Iid] == "b739b3c6-9cc0-4e64-9cc4-ef7463edf559");
             ParameterGroupTestFixture.VerifyProperties(parameterGroup);
         }
 
@@ -89,11 +79,7 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatParameterGroupCanBeDeletedAndContainedParametersReturnedFromWebApi()
         {
-            var iterationUri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
             var postBodyPath = this.GetPath("Tests/EngineeringModel/ParameterGroup/PostDeleteParameterGroup.json");
 
             var postBody = this.GetJsonFromFile(postBodyPath);
@@ -102,13 +88,11 @@ namespace WebservicesIntegrationTests
             // check if there are appropriate amount of objects
             Assert.AreEqual(3, jArray.Count);
 
-            var engineeeringModel = jArray.Single(
-                x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            var engineeeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
             Assert.AreEqual(2, (int)engineeeringModel[PropertyNames.RevisionNumber]);
 
             // get a specific ElementDefinition from the result by it's unique id
-            var elementDefinition = jArray.Single(
-                x => (string)x[PropertyNames.Iid] == "f73860b2-12f0-43e4-b8b2-c81862c0a159");
+            var elementDefinition = jArray.Single(x => (string)x[PropertyNames.Iid] == "f73860b2-12f0-43e4-b8b2-c81862c0a159");
             Assert.AreEqual(2, (int)elementDefinition[PropertyNames.RevisionNumber]);
             var expectedParameterGroups = new string[] { };
             var parameterGroupsArray = (JArray)elementDefinition[PropertyNames.ParameterGroup];

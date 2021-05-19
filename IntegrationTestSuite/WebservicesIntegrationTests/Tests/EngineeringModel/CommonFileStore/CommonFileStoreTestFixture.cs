@@ -36,9 +36,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedCommonFileStoreIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var commonFileStoreUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/commonFileStore"));
+            var commonFileStoreUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/commonFileStore");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(commonFileStoreUri);
@@ -58,10 +56,8 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedCommonFileStoreWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var commonFileStoreUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/commonFileStore?includeAllContainers=true"));
-
+            var commonFileStoreUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/commonFileStore?includeAllContainers=true");
+            
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(commonFileStoreUri);
 

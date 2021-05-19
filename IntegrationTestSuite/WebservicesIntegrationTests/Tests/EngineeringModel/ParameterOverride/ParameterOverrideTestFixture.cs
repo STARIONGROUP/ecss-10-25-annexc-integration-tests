@@ -37,8 +37,7 @@ namespace WebservicesIntegrationTests
         {
             // define the URI on which to perform a GET request 
             var parameterOverrideUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/fe9295c5-af99-494e-86ff-e715837806ae/containedElement/75399754-ee45-4bca-b033-63e2019870d1/parameterOverride"));
+                new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/fe9295c5-af99-494e-86ff-e715837806ae/containedElement/75399754-ee45-4bca-b033-63e2019870d1/parameterOverride");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(parameterOverrideUri);
@@ -47,8 +46,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(1, jArray.Count);
 
             // get a specific ParameterOverride from the result by it's unique id
-            var parameterOverride =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "93f767ed-4d22-45f6-ae97-d1dab0d36e1c");
+            var parameterOverride = jArray.Single(x => (string) x[PropertyNames.Iid] == "93f767ed-4d22-45f6-ae97-d1dab0d36e1c");
 
             ParameterOverrideTestFixture.VerifyProperties(parameterOverride);
         }
@@ -58,9 +56,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedParameterOverrideWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var parameterOverrideUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/fe9295c5-af99-494e-86ff-e715837806ae/containedElement/75399754-ee45-4bca-b033-63e2019870d1/parameterOverride?includeAllContainers=true"));
+            var parameterOverrideUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/fe9295c5-af99-494e-86ff-e715837806ae/containedElement/75399754-ee45-4bca-b033-63e2019870d1/parameterOverride?includeAllContainers=true");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(parameterOverrideUri);
@@ -69,8 +65,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(5, jArray.Count);
 
             // get a specific Iteration from the result by it's unique id
-            var iteration =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
+            var iteration = jArray.Single(x => (string) x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
             IterationTestFixture.VerifyProperties(iteration);
 
             // get a specific ElementDefinition from the result by it's unique id
@@ -80,8 +75,7 @@ namespace WebservicesIntegrationTests
             ElementUsageTestFixture.VerifyProperties(jArray);
 
             // get a specific ParameterOverride from the result by it's unique id
-            var parameterOverride =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "93f767ed-4d22-45f6-ae97-d1dab0d36e1c");
+            var parameterOverride = jArray.Single(x => (string) x[PropertyNames.Iid] == "93f767ed-4d22-45f6-ae97-d1dab0d36e1c");
             ParameterOverrideTestFixture.VerifyProperties(parameterOverride);
         }
 
@@ -89,9 +83,7 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatAParameterOverrideCanBeCreatedWithWebApi()
         {
-            var iterationUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
             var postBodyPath = this.GetPath("Tests/EngineeringModel/ParameterOverride/PostNewParameterOverride.json");
 
             var postBody = base.GetJsonFromFile(postBodyPath);

@@ -38,7 +38,7 @@ namespace WebservicesIntegrationTests
             SiteDirectoryTestFixture.AddDomainExpertUserJane(this, out var userName, out var passWord);
             this.CreateNewWebClientForUser(userName, passWord);
 
-            var iterationUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
             var postBodyPath = this.GetPath("Tests/EngineeringModel/ElementDefinition/PostNewElementDefinitionForDomainExpertUser.json");
 
             var postBody = base.GetJsonFromFile(postBodyPath);
@@ -46,16 +46,13 @@ namespace WebservicesIntegrationTests
 
             Assert.AreEqual(4, jArray.Count);
 
-            var engineeringModel = jArray.Single(
-                x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            var engineeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
             Assert.AreEqual(2, (int)engineeringModel[PropertyNames.RevisionNumber]);
 
-            var iteration = jArray.Single(
-                x => (string)x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
+            var iteration = jArray.Single(x => (string)x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
             Assert.AreEqual(2, (int)iteration[PropertyNames.RevisionNumber]);
 
-            var elementDefinition = jArray.Single(
-                x => (string)x[PropertyNames.Iid] == "f959dc33-58ff-4b6f-a3b0-d265690b4085");
+            var elementDefinition = jArray.Single(x => (string)x[PropertyNames.Iid] == "f959dc33-58ff-4b6f-a3b0-d265690b4085");
             Assert.AreEqual(2, (int)elementDefinition[PropertyNames.RevisionNumber]);
         }
         
@@ -64,11 +61,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedElementDefinitionIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var elementDefinitionUri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element"));
+            var elementDefinitionUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(elementDefinitionUri);
@@ -84,11 +77,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedElementDefinitionWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var elementDefinitionUri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element?includeAllContainers=true"));
+            var elementDefinitionUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element?includeAllContainers=true");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(elementDefinitionUri);
@@ -109,11 +98,7 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatCategoryDeletionFromElementDefinitionCanBeDoneFromWebApi()
         {
-            var iterationUri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
             var postBodyPath = this.GetPath("Tests/EngineeringModel/ElementDefinition/POSTDeleteCategory.json");
 
             var postBody = this.GetJsonFromFile(postBodyPath);
@@ -141,11 +126,7 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatParameterDeletionAsInstanceFromElementDefinitionCanBeDoneFromWebApi()
         {
-            var iterationUri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
             var postBodyPath = this.GetPath("Tests/EngineeringModel/ElementDefinition/PostDeleteParameterAsInstance.json");
 
             var postBody = this.GetJsonFromFile(postBodyPath);
@@ -172,12 +153,7 @@ namespace WebservicesIntegrationTests
             CollectionAssert.AreEquivalent(expectedParameters, parameters);
 
             // define the URI on which to perform a GET request 
-            var parameterUri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/f73860b2-12f0-43e4-b8b2-c81862c0a159/parameter/3f05483f-66ff-4f21-bc76-45956779f66e"));
-
+            var parameterUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/f73860b2-12f0-43e4-b8b2-c81862c0a159/parameter/3f05483f-66ff-4f21-bc76-45956779f66e");
             Assert.That(() => this.WebClient.GetDto(parameterUri), Throws.Exception.TypeOf<System.Net.WebException>());
         }
 
@@ -185,11 +161,7 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatParameterDeletionAsPropertyFromElementDefinitionCanBeDoneFromWebApi()
         {
-            var iterationUri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
             var postBodyPath = this.GetPath("Tests/EngineeringModel/ElementDefinition/PostDeleteParameterAsProperty.json");
 
             var postBody = this.GetJsonFromFile(postBodyPath);
@@ -216,12 +188,7 @@ namespace WebservicesIntegrationTests
             CollectionAssert.AreEquivalent(expectedParameters, parameters);
 
             // define the URI on which to perform a GET request 
-            var parameterUri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/f73860b2-12f0-43e4-b8b2-c81862c0a159/parameter/3f05483f-66ff-4f21-bc76-45956779f66e"));
-
+            var parameterUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/f73860b2-12f0-43e4-b8b2-c81862c0a159/parameter/3f05483f-66ff-4f21-bc76-45956779f66e");
             Assert.That(() => this.WebClient.GetDto(parameterUri), Throws.Exception.TypeOf<System.Net.WebException>());
         }
 
@@ -229,7 +196,7 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatAnElementDefinitionCanBeCreatedWithWebApi()
         {
-            var iterationUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
             var postBodyPath = this.GetPath("Tests/EngineeringModel/ElementDefinition/PostNewElementDefinition.json");
 
             var postBody = base.GetJsonFromFile(postBodyPath);

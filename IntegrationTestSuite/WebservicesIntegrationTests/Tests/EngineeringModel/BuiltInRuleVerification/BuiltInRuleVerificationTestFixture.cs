@@ -35,9 +35,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedBuiltInRuleVerificationIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var builtInRuleVerificationUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/ruleVerificationList/dc482120-2a11-439b-913d-6a924de9ee5f/ruleVerification"));
+            var builtInRuleVerificationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/ruleVerificationList/dc482120-2a11-439b-913d-6a924de9ee5f/ruleVerification");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(builtInRuleVerificationUri);
@@ -57,8 +55,7 @@ namespace WebservicesIntegrationTests
         {
             // define the URI on which to perform a GET request
             var builtInRuleVerificationUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/ruleVerificationList/dc482120-2a11-439b-913d-6a924de9ee5f/ruleVerification?includeAllContainers=true"));
+                new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/ruleVerificationList/dc482120-2a11-439b-913d-6a924de9ee5f/ruleVerification?includeAllContainers=true");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(builtInRuleVerificationUri);

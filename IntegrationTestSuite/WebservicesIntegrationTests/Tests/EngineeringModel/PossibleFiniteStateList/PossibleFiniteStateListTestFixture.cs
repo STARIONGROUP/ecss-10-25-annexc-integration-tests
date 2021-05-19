@@ -37,9 +37,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedPossibleFiniteStateListIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var possibleFiniteStateListUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/possibleFiniteStateList"));
+            var possibleFiniteStateListUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/possibleFiniteStateList");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(possibleFiniteStateListUri);
@@ -48,8 +46,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(1, jArray.Count);
 
             // get a specific PossibleFiniteStateList from the result by it's unique id
-            var possibleFiniteStateList =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "449a5bca-34fd-454a-93f8-a56ac8383fee");
+            var possibleFiniteStateList = jArray.Single(x => (string)x[PropertyNames.Iid] == "449a5bca-34fd-454a-93f8-a56ac8383fee");
 
             PossibleFiniteStateListTestFixture.VerifyProperties(possibleFiniteStateList);
         }
@@ -59,9 +56,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedPossibleFiniteStateListWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var possibleFiniteStateListUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/possibleFiniteStateList?includeAllContainers=true"));
+            var possibleFiniteStateListUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/possibleFiniteStateList?includeAllContainers=true");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(possibleFiniteStateListUri);
@@ -70,13 +65,11 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(3, jArray.Count);
 
             // get a specific Iteration from the result by it's unique id
-            var iteration =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
+            var iteration = jArray.Single(x => (string)x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
             IterationTestFixture.VerifyProperties(iteration);
 
             // get a specific PossibleFiniteStateList from the result by it's unique id
-            var possibleFiniteStateList =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "449a5bca-34fd-454a-93f8-a56ac8383fee");
+            var possibleFiniteStateList = jArray.Single(x => (string)x[PropertyNames.Iid] == "449a5bca-34fd-454a-93f8-a56ac8383fee");
             PossibleFiniteStateListTestFixture.VerifyProperties(possibleFiniteStateList);
         }
 
@@ -137,15 +130,10 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatRelationshipAsPropertyDeletionFromIterationCanBeDoneFromWebApi1()
         {
-            var uri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/possibleFiniteStateList/449a5bca-34fd-454a-93f8-a56ac8383fee"));
-
-
+            var uri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
             var postBodyPath1 = this.GetPath("Tests/EngineeringModel/PossibleFiniteStateList/PostCreatePossibleFiniteState.json");
             var postBody1 = this.GetJsonFromFile(postBodyPath1);
+
             var jArray1 = this.WebClient.PostDto(uri, postBody1);
             Assert.AreEqual(6, jArray1.Count);
 
@@ -160,15 +148,13 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatRelationshipAsPropertyDeletionFromIterationCanBeDoneFromWebApi2()
         {
-            var uri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/possibleFiniteStateList/449a5bca-34fd-454a-93f8-a56ac8383fee"));
+            var uri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
 
             var postBodyPath1 = this.GetPath("Tests/EngineeringModel/PossibleFiniteStateList/PostCreatePossibleFiniteState.json");
             var postBody1 = this.GetJsonFromFile(postBodyPath1);
+
             var jArray1 = this.WebClient.PostDto(uri, postBody1);
+            
             Assert.AreEqual(6, jArray1.Count);
 
             var postBodyPath2 = this.GetPath("Tests/EngineeringModel/PossibleFiniteStateList/PostDeletePossibleFiniteState.json");
@@ -195,11 +181,7 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void Verify_that_Possible_states_in_PossibleFiniteStateList_can_be_reordered()
         {
-            var uri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var uri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
 
             var postBodyPath1 = this.GetPath("Tests/EngineeringModel/PossibleFiniteStateList/PostCreatePossibleFiniteStateListContainingTwoStates.json");
             var postBody1 = this.GetJsonFromFile(postBodyPath1);

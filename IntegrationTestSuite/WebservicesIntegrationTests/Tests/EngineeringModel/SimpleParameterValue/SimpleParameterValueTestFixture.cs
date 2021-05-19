@@ -35,10 +35,8 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedSimpleParameterValuesIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var simpleParameterValueUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/requirementsSpecification/bf0cde90-9086-43d5-bcff-32a2f8331800/requirement/614e2a69-d602-46be-9311-2fb4d3273e87/parameterValue"));
-
+            var simpleParameterValueUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/requirementsSpecification/bf0cde90-9086-43d5-bcff-32a2f8331800/requirement/614e2a69-d602-46be-9311-2fb4d3273e87/parameterValue");
+            
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(simpleParameterValueUri);
 
@@ -53,9 +51,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedSimpleParameterValuesWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var simpleParameterValueUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/requirementsSpecification/bf0cde90-9086-43d5-bcff-32a2f8331800/requirement/614e2a69-d602-46be-9311-2fb4d3273e87/parameterValue?includeAllContainers=true"));
+            var simpleParameterValueUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/requirementsSpecification/bf0cde90-9086-43d5-bcff-32a2f8331800/requirement/614e2a69-d602-46be-9311-2fb4d3273e87/parameterValue?includeAllContainers=true");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(simpleParameterValueUri);
@@ -68,8 +64,7 @@ namespace WebservicesIntegrationTests
             IterationTestFixture.VerifyProperties(iteration);
 
             // get a specific RequirementsSpecification from the result by it's unique id
-            var requirementsSpecification =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "bf0cde90-9086-43d5-bcff-32a2f8331800");
+            var requirementsSpecification = jArray.Single(x => (string) x[PropertyNames.Iid] == "bf0cde90-9086-43d5-bcff-32a2f8331800");
             RequirementsSpecificationTestFixture.VerifyProperties(requirementsSpecification);
 
             // get a specific Requirement from the result by it's unique id
@@ -88,32 +83,26 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken simpleParameterValue)
         {
             // assert that all objects are what is expected
-            var simpleParameterValueObject =
-                simpleParameterValue.Single(x => (string) x[PropertyNames.Iid] == "ef3b5740-6e0e-463c-99df-f255e38a32b6");
+            var simpleParameterValueObject = simpleParameterValue.Single(x => (string) x[PropertyNames.Iid] == "ef3b5740-6e0e-463c-99df-f255e38a32b6");
 
             // assert that the properties are what is expected
-            Assert.AreEqual("ef3b5740-6e0e-463c-99df-f255e38a32b6",
-                (string) simpleParameterValueObject[PropertyNames.Iid]);
+            Assert.AreEqual("ef3b5740-6e0e-463c-99df-f255e38a32b6", (string) simpleParameterValueObject[PropertyNames.Iid]);
             Assert.AreEqual(1, (int) simpleParameterValueObject[PropertyNames.RevisionNumber]);
             Assert.AreEqual("SimpleParameterValue", (string) simpleParameterValueObject[PropertyNames.ClassKind]);
 
             Assert.IsNull((string) simpleParameterValueObject[PropertyNames.Scale]);
-            Assert.AreEqual("35a9cf05-4eba-4cda-b60c-7cfeaac8f892",
-                (string) simpleParameterValueObject[PropertyNames.ParameterType]);
+            Assert.AreEqual("35a9cf05-4eba-4cda-b60c-7cfeaac8f892", (string) simpleParameterValueObject[PropertyNames.ParameterType]);
             Assert.AreEqual("[\"true\"]", (string) simpleParameterValueObject[PropertyNames.Value]);
 
-            simpleParameterValueObject =
-                simpleParameterValue.Single(x => (string) x[PropertyNames.Iid] == "bcedefb0-b3ee-4a0b-8137-6561fa23b37f");
+            simpleParameterValueObject = simpleParameterValue.Single(x => (string) x[PropertyNames.Iid] == "bcedefb0-b3ee-4a0b-8137-6561fa23b37f");
 
             // assert that the properties are what is expected
-            Assert.AreEqual("bcedefb0-b3ee-4a0b-8137-6561fa23b37f",
-                (string) simpleParameterValueObject[PropertyNames.Iid]);
+            Assert.AreEqual("bcedefb0-b3ee-4a0b-8137-6561fa23b37f", (string) simpleParameterValueObject[PropertyNames.Iid]);
             Assert.AreEqual(1, (int) simpleParameterValueObject[PropertyNames.RevisionNumber]);
             Assert.AreEqual("SimpleParameterValue", (string) simpleParameterValueObject[PropertyNames.ClassKind]);
 
             Assert.IsNull((string) simpleParameterValueObject[PropertyNames.Scale]);
-            Assert.AreEqual("a21c15c4-3e1e-46b5-b109-5063dec1e254",
-                (string) simpleParameterValueObject[PropertyNames.ParameterType]);
+            Assert.AreEqual("a21c15c4-3e1e-46b5-b109-5063dec1e254", (string) simpleParameterValueObject[PropertyNames.ParameterType]);
             Assert.AreEqual("[\"test\"]", (string) simpleParameterValueObject[PropertyNames.Value]);
         }
     }

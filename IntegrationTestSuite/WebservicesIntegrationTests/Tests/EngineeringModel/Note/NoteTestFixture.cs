@@ -41,7 +41,8 @@ namespace WebservicesIntegrationTests
             SiteDirectoryTestFixture.AddDomainExpertUserJane(this, out var userName, out var passWord);
             this.CreateNewWebClientForUser(userName, passWord);
 
-            var pageUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56"));
+            Assert.Fail("Here we are posting to EngineeringModel instead of Iteration, this needs to be a POST to EngineeringModel/iid/iteration/iid as per 10-25");
+            var pageUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56"); 
             var postBodyPath = this.GetPath("Tests/EngineeringModel/Book/PostNewBooks.json");
             var postBody = this.GetJsonFromFile(postBodyPath);
 

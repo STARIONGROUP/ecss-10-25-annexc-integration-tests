@@ -36,8 +36,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedActualFiniteStateIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var actualFiniteStateUri = new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/actualFiniteStateList/db690d7d-761c-47fd-96d3-840d698a89dc/actualState"));
+            var actualFiniteStateUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/actualFiniteStateList/db690d7d-761c-47fd-96d3-840d698a89dc/actualState");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(actualFiniteStateUri);
@@ -56,8 +55,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedActualFiniteStateWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var actualFiniteStateUri = new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/actualFiniteStateList/db690d7d-761c-47fd-96d3-840d698a89dc/actualState?includeAllContainers=true"));
+            var actualFiniteStateUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/actualFiniteStateList/db690d7d-761c-47fd-96d3-840d698a89dc/actualState?includeAllContainers=true");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(actualFiniteStateUri);

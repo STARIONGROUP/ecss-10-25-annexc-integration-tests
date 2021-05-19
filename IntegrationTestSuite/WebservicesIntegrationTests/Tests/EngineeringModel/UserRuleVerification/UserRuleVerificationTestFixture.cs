@@ -35,9 +35,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedUserRuleVerificationIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var userRuleVerificationUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/ruleVerificationList/dc482120-2a11-439b-913d-6a924de9ee5f/ruleVerification"));
+            var userRuleVerificationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/ruleVerificationList/dc482120-2a11-439b-913d-6a924de9ee5f/ruleVerification");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(userRuleVerificationUri);
@@ -46,8 +44,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(2, jArray.Count);
 
             // get a specific UserRuleVerification from the result by it's unique id
-            var userRuleVerification =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "c953263c-fc25-4048-9bb6-343a10200a0c");
+            var userRuleVerification = jArray.Single(x => (string) x[PropertyNames.Iid] == "c953263c-fc25-4048-9bb6-343a10200a0c");
             UserRuleVerificationTestFixture.VerifyProperties(userRuleVerification);
         }
 
@@ -56,9 +53,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedUserRuleVerificationWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var userRuleVerificationUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/ruleVerificationList/dc482120-2a11-439b-913d-6a924de9ee5f/ruleVerification?includeAllContainers=true"));
+            var userRuleVerificationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/ruleVerificationList/dc482120-2a11-439b-913d-6a924de9ee5f/ruleVerification?includeAllContainers=true");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(userRuleVerificationUri);
@@ -67,18 +62,15 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(5, jArray.Count);
 
             // get a specific Iteration from the result by it's unique id
-            var iteration =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
+            var iteration = jArray.Single(x => (string) x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
             IterationTestFixture.VerifyProperties(iteration);
 
             // get a specific RuleVerificationList from the result by it's unique id
-            var ruleVerificationList =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "dc482120-2a11-439b-913d-6a924de9ee5f");
+            var ruleVerificationList = jArray.Single(x => (string) x[PropertyNames.Iid] == "dc482120-2a11-439b-913d-6a924de9ee5f");
             RuleVerificationListTestFixture.VerifyProperties(ruleVerificationList);
 
             // get a specific UserRuleVerification from the result by it's unique id
-            var userRuleVerification =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "c953263c-fc25-4048-9bb6-343a10200a0c");
+            var userRuleVerification = jArray.Single(x => (string) x[PropertyNames.Iid] == "c953263c-fc25-4048-9bb6-343a10200a0c");
             UserRuleVerificationTestFixture.VerifyProperties(userRuleVerification);
         }
 
@@ -91,14 +83,11 @@ namespace WebservicesIntegrationTests
         /// </param>
         public static void VerifyProperties(JToken userRuleVerification)
         {
-            // verify the amount of returned properties 
             Assert.AreEqual(7, userRuleVerification.Children().Count());
 
-            // assert that the properties are what is expected
             Assert.AreEqual("c953263c-fc25-4048-9bb6-343a10200a0c", (string) userRuleVerification[PropertyNames.Iid]);
             Assert.AreEqual(1, (int) userRuleVerification[PropertyNames.RevisionNumber]);
             Assert.AreEqual("UserRuleVerification", (string) userRuleVerification[PropertyNames.ClassKind]);
-
             Assert.AreEqual("PASSED", (string) userRuleVerification[PropertyNames.Status]);
             Assert.IsNull((string) userRuleVerification[PropertyNames.ExecutedOn]);
             Assert.IsTrue((bool) userRuleVerification[PropertyNames.IsActive]);

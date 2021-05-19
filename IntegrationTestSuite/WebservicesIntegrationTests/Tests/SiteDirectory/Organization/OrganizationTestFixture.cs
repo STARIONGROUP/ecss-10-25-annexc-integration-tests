@@ -35,7 +35,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedPersonIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var organizationUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/organization"));
+            var organizationUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/organization");
 
             // Get the response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(organizationUri);
@@ -53,7 +53,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedPersonWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var personsUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/organization?includeAllContainers=true"));
+            var personsUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/organization?includeAllContainers=true");
 
             // Get the response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(personsUri);

@@ -36,9 +36,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedQuantityKindIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var simpleQuantityKindUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/parameterType/4f9f3d9b-f3de-4ef5-b6cb-2e22199fab0d"));
+            var simpleQuantityKindUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/parameterType/4f9f3d9b-f3de-4ef5-b6cb-2e22199fab0d");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(simpleQuantityKindUri);
@@ -47,8 +45,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(1, jArray.Count);
 
             // get a specific SimpleQuantityKind from the result by it's unique id
-            var simpleQuantityKind =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "4f9f3d9b-f3de-4ef5-b6cb-2e22199fab0d");
+            var simpleQuantityKind = jArray.Single(x => (string) x[PropertyNames.Iid] == "4f9f3d9b-f3de-4ef5-b6cb-2e22199fab0d");
 
             SimpleQuantityKindTestFixture.VerifyProperties(simpleQuantityKind);
         }
@@ -58,10 +55,8 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedQuantityKindWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var simpleQuantityKindUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/parameterType/4f9f3d9b-f3de-4ef5-b6cb-2e22199fab0d?includeAllContainers=true"));
-
+            var simpleQuantityKindUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/parameterType/4f9f3d9b-f3de-4ef5-b6cb-2e22199fab0d?includeAllContainers=true");
+            
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(simpleQuantityKindUri);
 
@@ -73,13 +68,11 @@ namespace WebservicesIntegrationTests
             SiteDirectoryTestFixture.VerifyProperties(siteDirectory);
 
             // get a specific SiteReferenceDataLibrary from the result by it's unique id
-            var siteReferenceDataLibrary =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
+            var siteReferenceDataLibrary = jArray.Single(x => (string) x[PropertyNames.Iid] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
             SiteReferenceDataLibraryTestFixture.VerifyProperties(siteReferenceDataLibrary);
 
             // get a specific SimpleQuantityKind from the result by it's unique id
-            var simpleQuantityKind =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "4f9f3d9b-f3de-4ef5-b6cb-2e22199fab0d");
+            var simpleQuantityKind = jArray.Single(x => (string) x[PropertyNames.Iid] == "4f9f3d9b-f3de-4ef5-b6cb-2e22199fab0d");
             SimpleQuantityKindTestFixture.VerifyProperties(simpleQuantityKind);
         }
 

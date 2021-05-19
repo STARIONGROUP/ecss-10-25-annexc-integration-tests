@@ -35,9 +35,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedRelationalExpressionsIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var relationalExpressionUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/requirementsSpecification/bf0cde90-9086-43d5-bcff-32a2f8331800/requirement/614e2a69-d602-46be-9311-2fb4d3273e87/parametricConstraint/88200dbc-711a-47e0-a54a-dac4baca6e83/expression"));
+            var relationalExpressionUri = new Uri(string.Format($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/requirementsSpecification/bf0cde90-9086-43d5-bcff-32a2f8331800/requirement/614e2a69-d602-46be-9311-2fb4d3273e87/parametricConstraint/88200dbc-711a-47e0-a54a-dac4baca6e83/expression"));
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(relationalExpressionUri);
@@ -53,9 +51,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedRelationalExpressionsWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var relationalExpressionUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/requirementsSpecification/bf0cde90-9086-43d5-bcff-32a2f8331800/requirement/614e2a69-d602-46be-9311-2fb4d3273e87/parametricConstraint/88200dbc-711a-47e0-a54a-dac4baca6e83/expression?includeAllContainers=true"));
+            var relationalExpressionUri = new Uri(string.Format($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/requirementsSpecification/bf0cde90-9086-43d5-bcff-32a2f8331800/requirement/614e2a69-d602-46be-9311-2fb4d3273e87/parametricConstraint/88200dbc-711a-47e0-a54a-dac4baca6e83/expression?includeAllContainers=true"));
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(relationalExpressionUri);
@@ -68,16 +64,14 @@ namespace WebservicesIntegrationTests
             IterationTestFixture.VerifyProperties(iteration);
 
             // get a specific RequirementsSpecification from the result by it's unique id
-            var requirementsSpecification =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "bf0cde90-9086-43d5-bcff-32a2f8331800");
+            var requirementsSpecification = jArray.Single(x => (string) x[PropertyNames.Iid] == "bf0cde90-9086-43d5-bcff-32a2f8331800");
             RequirementsSpecificationTestFixture.VerifyProperties(requirementsSpecification);
 
             // get a specific Requirement from the result by it's unique id
             RequirementTestFixture.VerifyProperties(jArray);
 
             // get a specific ParametricConstraint from the result by it's unique id
-            var parametricConstraint =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "88200dbc-711a-47e0-a54a-dac4baca6e83");
+            var parametricConstraint = jArray.Single(x => (string) x[PropertyNames.Iid] == "88200dbc-711a-47e0-a54a-dac4baca6e83");
             ParametricConstraintTestFixture.VerifyProperties(parametricConstraint);
 
             RelationalExpressionTestFixture.VerifyProperties(jArray);
@@ -93,8 +87,7 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken relationalExpression)
         {
             // assert that all objects are what is expected
-            var relationalExpressionObject =
-                relationalExpression.Single(x => (string) x[PropertyNames.Iid] == "deaa2560-b704-4b2c-950b-aad02ff84052");
+            var relationalExpressionObject = relationalExpression.Single(x => (string) x[PropertyNames.Iid] == "deaa2560-b704-4b2c-950b-aad02ff84052");
 
             // assert that the properties are what is expected
             Assert.AreEqual("deaa2560-b704-4b2c-950b-aad02ff84052",
@@ -108,8 +101,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual("35a9cf05-4eba-4cda-b60c-7cfeaac8f892",
                 (string) relationalExpressionObject[PropertyNames.ParameterType]);
 
-            relationalExpressionObject =
-                relationalExpression.Single(x => (string) x[PropertyNames.Iid] == "a6e44651-7c4a-4a57-bdf9-c0290497f392");
+            relationalExpressionObject = relationalExpression.Single(x => (string) x[PropertyNames.Iid] == "a6e44651-7c4a-4a57-bdf9-c0290497f392");
 
             // assert that the properties are what is expected
             Assert.AreEqual("a6e44651-7c4a-4a57-bdf9-c0290497f392",

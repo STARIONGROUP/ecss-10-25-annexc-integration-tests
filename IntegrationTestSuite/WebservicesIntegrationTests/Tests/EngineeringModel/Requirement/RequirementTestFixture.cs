@@ -37,11 +37,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedRequirementIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var requirementUri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/requirementsSpecification/bf0cde90-9086-43d5-bcff-32a2f8331800/requirement"));
+            var requirementUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/requirementsSpecification/bf0cde90-9086-43d5-bcff-32a2f8331800/requirement");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(requirementUri);
@@ -57,11 +53,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedRequirementWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var requirementUri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/requirementsSpecification/bf0cde90-9086-43d5-bcff-32a2f8331800/requirement?includeAllContainers=true"));
+            var requirementUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/requirementsSpecification/bf0cde90-9086-43d5-bcff-32a2f8331800/requirement?includeAllContainers=true");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(requirementUri);
@@ -74,8 +66,7 @@ namespace WebservicesIntegrationTests
             IterationTestFixture.VerifyProperties(iteration);
 
             // get a specific RequirementsSpecification from the result by it's unique id
-            var requirementsSpecification = jArray.Single(
-                x => (string)x[PropertyNames.Iid] == "bf0cde90-9086-43d5-bcff-32a2f8331800");
+            var requirementsSpecification = jArray.Single(x => (string)x[PropertyNames.Iid] == "bf0cde90-9086-43d5-bcff-32a2f8331800");
             RequirementsSpecificationTestFixture.VerifyProperties(requirementsSpecification);
 
             RequirementTestFixture.VerifyProperties(jArray);
@@ -85,23 +76,17 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatARequirementCanBeCreatedWithWebApi()
         {
-            var iterationUri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
             var postBodyPath = this.GetPath("Tests/EngineeringModel/Requirement/PostNewRequirement.json");
 
             var postBody = this.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
-            var engineeeringModel = jArray.Single(
-                x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            var engineeeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
             Assert.AreEqual(2, (int)engineeeringModel[PropertyNames.RevisionNumber]);
 
             // get a specific RequirementsSpecification from the result by it's unique id
-            var requirementsSpecification = jArray.Single(
-                x => (string)x[PropertyNames.Iid] == "bf0cde90-9086-43d5-bcff-32a2f8331800");
+            var requirementsSpecification = jArray.Single(x => (string)x[PropertyNames.Iid] == "bf0cde90-9086-43d5-bcff-32a2f8331800");
             Assert.AreEqual(2, (int)requirementsSpecification[PropertyNames.RevisionNumber]);
 
             var expectedRequirements = new[]
@@ -126,11 +111,7 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatWhenARequirementIsMovedTheResponseIsComplete()
         {
-            var iterationUri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
             var postBodyPath = this.GetPath("Tests/EngineeringModel/Requirement/PostMoveRequirement.json");
 
             var postBody = this.GetJsonFromFile(postBodyPath);
@@ -139,12 +120,10 @@ namespace WebservicesIntegrationTests
             // verify that the correct amount of objects is returned
             Assert.AreEqual(4, jArray.Count);
 
-            var engineeeringModel = jArray.Single(
-                x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            var engineeeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
             Assert.AreEqual(2, (int)engineeeringModel[PropertyNames.RevisionNumber]);
 
-            var requirementsSpecificationWithMovedRequirement =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "8d0734f4-ca4b-4611-9187-f6970e2b02bc");
+            var requirementsSpecificationWithMovedRequirement = jArray.Single(x => (string)x[PropertyNames.Iid] == "8d0734f4-ca4b-4611-9187-f6970e2b02bc");
             Assert.AreEqual(2, (int)requirementsSpecificationWithMovedRequirement[PropertyNames.RevisionNumber]);
 
             var expectedRequirements = new[] { "614e2a69-d602-46be-9311-2fb4d3273e87" };
@@ -152,8 +131,7 @@ namespace WebservicesIntegrationTests
             IList<string> requirements = requirementsArray.Select(x => (string)x).ToList();
             CollectionAssert.AreEquivalent(expectedRequirements, requirements);
 
-            var requirementsSpecificationWithoutMovedRequirement =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "bf0cde90-9086-43d5-bcff-32a2f8331800");
+            var requirementsSpecificationWithoutMovedRequirement = jArray.Single(x => (string)x[PropertyNames.Iid] == "bf0cde90-9086-43d5-bcff-32a2f8331800");
             Assert.AreEqual(2, (int)requirementsSpecificationWithoutMovedRequirement[PropertyNames.RevisionNumber]);
 
             expectedRequirements = new string[] { "614e2a69-d602-46be-9311-2fb4d3273e88" };
@@ -161,8 +139,7 @@ namespace WebservicesIntegrationTests
             requirements = requirementsArray.Select(x => (string)x).ToList();
             CollectionAssert.AreEquivalent(expectedRequirements, requirements);
 
-            var requirement = jArray.Single(
-                x => (string)x[PropertyNames.Iid] == "614e2a69-d602-46be-9311-2fb4d3273e87");
+            var requirement = jArray.Single(x => (string)x[PropertyNames.Iid] == "614e2a69-d602-46be-9311-2fb4d3273e87");
             Assert.AreEqual(2, (int)requirement[PropertyNames.RevisionNumber]);
         }
 
@@ -170,11 +147,7 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatParametricConstraintDeletionAsPropertyFromRequirementCanBeDoneFromWebApi()
         {
-            var iterationUri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
             var postBodyPath = this.GetPath("Tests/EngineeringModel/Requirement/PostDeleteConstraintAsProperty.json");
 
             var postBody = this.GetJsonFromFile(postBodyPath);
@@ -183,13 +156,11 @@ namespace WebservicesIntegrationTests
             // check if there are 2 objects
             Assert.AreEqual(2, jArray.Count);
 
-            var engineeeringModel = jArray.Single(
-                x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            var engineeeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
             Assert.AreEqual(2, (int)engineeeringModel[PropertyNames.RevisionNumber]);
 
             // get a specific Requirement from the result by it's unique id
-            var requirement = jArray.Single(
-                x => (string)x[PropertyNames.Iid] == "614e2a69-d602-46be-9311-2fb4d3273e87");
+            var requirement = jArray.Single(x => (string)x[PropertyNames.Iid] == "614e2a69-d602-46be-9311-2fb4d3273e87");
             Assert.AreEqual(2, (int)requirement[PropertyNames.RevisionNumber]);
 
             var expectedParametricConstraints = new List<OrderedItem> ();
@@ -199,12 +170,7 @@ namespace WebservicesIntegrationTests
             CollectionAssert.AreEquivalent(expectedParametricConstraints, parametricConstraints);
 
             // define the URI on which to perform a GET request 
-            var constraintUri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/requirementsSpecification/bf0cde90-9086-43d5-bcff-32a2f8331800/requirement/614e2a69-d602-46be-9311-2fb4d3273e87/parametricConstraint/88200dbc-711a-47e0-a54a-dac4baca6e83"));
-
+            var constraintUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/requirementsSpecification/bf0cde90-9086-43d5-bcff-32a2f8331800/requirement/614e2a69-d602-46be-9311-2fb4d3273e87/parametricConstraint/88200dbc-711a-47e0-a54a-dac4baca6e83");
             Assert.That(() => this.WebClient.GetDto(constraintUri), Throws.Exception.TypeOf<System.Net.WebException>());
         }
 

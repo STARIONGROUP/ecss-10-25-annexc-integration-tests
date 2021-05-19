@@ -36,7 +36,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedRequirementsGroupIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var requirementsGroupUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/requirementsSpecification/bf0cde90-9086-43d5-bcff-32a2f8331800/group"));
+            var requirementsGroupUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/requirementsSpecification/bf0cde90-9086-43d5-bcff-32a2f8331800/group");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(requirementsGroupUri);
@@ -55,7 +55,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedRequirementsGroupWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var requirementsGroupUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/requirementsSpecification/bf0cde90-9086-43d5-bcff-32a2f8331800/group?includeAllContainers=true"));
+            var requirementsGroupUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/requirementsSpecification/bf0cde90-9086-43d5-bcff-32a2f8331800/group?includeAllContainers=true");
             
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(requirementsGroupUri);
@@ -80,21 +80,17 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatARequirementsGroupCanBeCreatedWithWebApi()
         {
-            var iterationUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var iterationUri = new Uri(string.Format($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
             var postBodyPath = this.GetPath("Tests/EngineeringModel/RequirementsGroup/PostNewRequirementsGroup.json");
 
             var postBody = base.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
             
-            var engineeeringModel =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            var engineeeringModel = jArray.Single(x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
             Assert.AreEqual(2, (int) engineeeringModel[PropertyNames.RevisionNumber]);
 
             // get a specific RequirementsSpecification from the result by it's unique id
-            var requirementsSpecification =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "8d0734f4-ca4b-4611-9187-f6970e2b02bc");
+            var requirementsSpecification = jArray.Single(x => (string)x[PropertyNames.Iid] == "8d0734f4-ca4b-4611-9187-f6970e2b02bc");
             Assert.AreEqual(2, (int)requirementsSpecification[PropertyNames.RevisionNumber]);
 
             var expectedRequirementsGroups = new string[] { "cffa1f05-41b8-4b89-922b-9a9505809601" };
@@ -143,11 +139,7 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatRequirementsGroupCanBeDeletedAndContainedRequirementsReturnedFromWebApi()
         {
-            var iterationUri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
             var postBodyPath = this.GetPath("Tests/EngineeringModel/RequirementsGroup/PostDeleteRequirementsGroup.json");
 
             var postBody = this.GetJsonFromFile(postBodyPath);
@@ -156,13 +148,11 @@ namespace WebservicesIntegrationTests
             // check if there are appropriate amount of objects
             Assert.AreEqual(3, jArray.Count);
 
-            var engineeeringModel = jArray.Single(
-                x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            var engineeeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
             Assert.AreEqual(2, (int)engineeeringModel[PropertyNames.RevisionNumber]);
 
             // get a specific RequirementsSpecification from the result by it's unique id
-            var requirementsSpecification = jArray.Single(
-                x => (string)x[PropertyNames.Iid] == "bf0cde90-9086-43d5-bcff-32a2f8331800");
+            var requirementsSpecification = jArray.Single(x => (string)x[PropertyNames.Iid] == "bf0cde90-9086-43d5-bcff-32a2f8331800");
             Assert.AreEqual(2, (int)requirementsSpecification[PropertyNames.RevisionNumber]);
             var expectedRequirementsGroups = new string[] { };
             var requirementsGroupsArray = (JArray)requirementsSpecification[PropertyNames.Group];

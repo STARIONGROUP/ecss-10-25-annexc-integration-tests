@@ -37,12 +37,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedParameterValueSetIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var parameterValueSetUri =
-                new Uri(
-                    string.Format(
-                        UriFormat,
-                        this.Settings.Hostname,
-                        "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/f73860b2-12f0-43e4-b8b2-c81862c0a159/parameter/6c5aff74-f983-4aa8-a9d6-293b3429307c/valueSet"));
+            var parameterValueSetUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/f73860b2-12f0-43e4-b8b2-c81862c0a159/parameter/6c5aff74-f983-4aa8-a9d6-293b3429307c/valueSet");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(parameterValueSetUri);
@@ -51,8 +46,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(1, jArray.Count);
 
             // get a specific ParameterValueSet from the result by it's unique id
-            var parameterValueSet =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "af5c88c6-301f-497b-81f7-53748c3900ed");
+            var parameterValueSet = jArray.Single(x => (string)x[PropertyNames.Iid] == "af5c88c6-301f-497b-81f7-53748c3900ed");
 
             ParameterValueSetTestFixture.VerifyProperties(parameterValueSet);
         }
@@ -62,12 +56,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedParameterValueSetWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var parameterValueSetUri =
-                new Uri(
-                    string.Format(
-                        UriFormat,
-                        this.Settings.Hostname,
-                        "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/f73860b2-12f0-43e4-b8b2-c81862c0a159/parameter/6C5AFF74-F983-4AA8-A9D6-293B3429307C/valueSet?includeAllContainers=true"));
+            var parameterValueSetUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/f73860b2-12f0-43e4-b8b2-c81862c0a159/parameter/6C5AFF74-F983-4AA8-A9D6-293B3429307C/valueSet?includeAllContainers=true");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(parameterValueSetUri);
@@ -87,8 +76,7 @@ namespace WebservicesIntegrationTests
             ParameterTestFixture.VerifyProperties(parameter);
 
             // get a specific ParameterValueSet from the result by it's unique id
-            var parameterValueSet =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "af5c88c6-301f-497b-81f7-53748c3900ed");
+            var parameterValueSet = jArray.Single(x => (string)x[PropertyNames.Iid] == "af5c88c6-301f-497b-81f7-53748c3900ed");
             ParameterValueSetTestFixture.VerifyProperties(parameterValueSet);
         }
 
@@ -96,14 +84,8 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatAParameterValueSetCannotBeDeletedAndCreatedWithWebApi()
         { 
-            var iterationUri =
-                new Uri(
-                    string.Format(
-                        UriFormat,
-                        this.Settings.Hostname,
-                        "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
-            var postBodyPath =
-                this.GetPath("Tests/EngineeringModel/ParameterValueSet/PostNewParameterValueSetAndDeleteOne.json");
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
+            var postBodyPath = this.GetPath("Tests/EngineeringModel/ParameterValueSet/PostNewParameterValueSetAndDeleteOne.json");
 
             var postBody = this.GetJsonFromFile(postBodyPath);
             Assert.Throws<WebException>(() => this.WebClient.PostDto(iterationUri, postBody));
@@ -114,25 +96,17 @@ namespace WebservicesIntegrationTests
         public void VerifyThatAParameterValueSetIsCreatedWhenPossibleStateIsAddedWithWebApi()
         {
             // POST state dependent Parameter and check what is returned
-            var iterationUri =
-                new Uri(
-                    string.Format(
-                        UriFormat,
-                        this.Settings.Hostname,
-                        "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
-            var postBodyPath =
-                this.GetPath("Tests/EngineeringModel/ParameterValueSet/PostNewStateDependentParameter.json");
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
+            var postBodyPath = this.GetPath("Tests/EngineeringModel/ParameterValueSet/PostNewStateDependentParameter.json");
 
             var postBody = this.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
-            var engineeringModel =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            var engineeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
             Assert.AreEqual(2, (int)engineeringModel[PropertyNames.RevisionNumber]);
 
             // get a specific ElementDefinition from the result by it's unique id
-            var elementDefinition =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "f73860b2-12f0-43e4-b8b2-c81862c0a159");
+            var elementDefinition = jArray.Single(x => (string)x[PropertyNames.Iid] == "f73860b2-12f0-43e4-b8b2-c81862c0a159");
             Assert.AreEqual(2, (int)elementDefinition[PropertyNames.RevisionNumber]);
 
             var expectedParameters = new[]
@@ -452,20 +426,13 @@ namespace WebservicesIntegrationTests
         public void Verify_that_the_computed_and_formula_property_of_a_ParameterValueSet_can_updated()
         {
             // POST state dependent Parameter and check what is returned
-            var iterationUri =
-                new Uri(
-                    string.Format(
-                        UriFormat,
-                        this.Settings.Hostname,
-                        "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
-            var postBodyPath =
-                this.GetPath("Tests/EngineeringModel/ParameterValueSet/PostUpdateComputedValueOfParameterValueSet.json");
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
+            var postBodyPath = this.GetPath("Tests/EngineeringModel/ParameterValueSet/PostUpdateComputedValueOfParameterValueSet.json");
 
             var postBody = this.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
-            var engineeeringModel =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            var engineeeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
             Assert.AreEqual(2, (int)engineeeringModel[PropertyNames.RevisionNumber]);
 
             var parameterValueSet = jArray.Single(x => (string)x[PropertyNames.Iid] == "72ec3701-bcb5-4bf6-bd78-30fd1b65e3be");
@@ -477,14 +444,8 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatParameterValueSetValuesAreSerializedAndDeserializedCorrectly([ValueSource(nameof(TestStrings))] string inputValue)
         {
-            var iterationUri =
-                new Uri(
-                    string.Format(
-                        UriFormat,
-                        this.Settings.Hostname,
-                        "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
-            var postBodyPath =
-                this.GetPath("Tests/EngineeringModel/ParameterValueSet/PostUpdateParameterValueSetTemplate.json.txt");
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
+            var postBodyPath = this.GetPath("Tests/EngineeringModel/ParameterValueSet/PostUpdateParameterValueSetTemplate.json.txt");
 
             var postBody = this.GetJsonFromFile(postBodyPath);
             var inputAsInnerJson = JsonConvert.ToString(inputValue); 
@@ -499,28 +460,14 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(inputValue, JsonConvert.DeserializeObject<List<string>>((string)parameterValueSet[PropertyNames.Computed])[0]);
             Assert.AreEqual(inputValue, JsonConvert.DeserializeObject<List<string>>((string)parameterValueSet[PropertyNames.Manual])[0]);
             Assert.AreEqual(new List<string> {inputValue, inputValue}, JsonConvert.DeserializeObject<List<string>>((string)parameterValueSet[PropertyNames.Reference]));
-
-            var parameterValueSetUri1 =
-                new Uri(
-                    string.Format(
-                        UriFormat,
-                        this.Settings.Hostname,
-                        "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/f73860b2-12f0-43e4-b8b2-c81862c0a159/parameter/3f05483f-66ff-4f21-bc76-45956779f66e/valueSet/72ec3701-bcb5-4bf6-bd78-30fd1b65e3be?revisionFrom=1&revisionTo=2"));
         }
 
         [Test]
         [Category("POST")]
         public void VerifyThatGettingRevisionsWorks()
         {
-            var iterationUri =
-                new Uri(
-                    string.Format(
-                        UriFormat,
-                        this.Settings.Hostname,
-                        "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"));
-
-            var postBodyPath =
-                this.GetPath("Tests/EngineeringModel/ParameterValueSet/PostUpdateParameterValueSetTemplate.json.txt");
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
+            var postBodyPath = this.GetPath("Tests/EngineeringModel/ParameterValueSet/PostUpdateParameterValueSetTemplate.json.txt");
 
             var postBody = this.GetJsonFromFile(postBodyPath);
             var inputAsInnerJson = JsonConvert.ToString("Test Revisions");
@@ -529,22 +476,12 @@ namespace WebservicesIntegrationTests
             var jArray1 = this.WebClient.PostDto(iterationUri, postBody);
             Assert.AreEqual(3, jArray1.Count);
 
-            var parameterValueSetUri1 =
-                new Uri(
-                    string.Format(
-                        UriFormat,
-                        this.Settings.Hostname,
-                        "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/f73860b2-12f0-43e4-b8b2-c81862c0a159/parameter/3f05483f-66ff-4f21-bc76-45956779f66e/valueSet/72ec3701-bcb5-4bf6-bd78-30fd1b65e3be?revisionFrom=1&revisionTo=2"));
+            var parameterValueSetUri1 = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/f73860b2-12f0-43e4-b8b2-c81862c0a159/parameter/3f05483f-66ff-4f21-bc76-45956779f66e/valueSet/72ec3701-bcb5-4bf6-bd78-30fd1b65e3be?revisionFrom=1&revisionTo=2");
 
             var jArray2 = this.WebClient.GetDto(parameterValueSetUri1);
             Assert.AreEqual(2, jArray2.Count);
 
-            var parameterValueSetUri2 =
-                new Uri(
-                    string.Format(
-                        UriFormat,
-                        this.Settings.Hostname,
-                        "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/f73860b2-12f0-43e4-b8b2-c81862c0a159/parameter/3f05483f-66ff-4f21-bc76-45956779f66e/valueSet/72ec3701-bcb5-4bf6-bd78-30fd1b65e3be?revisionFrom=2000-01-01T12:00:00&revisionTo=2120-12-31T12:00:00"));
+            var parameterValueSetUri2 = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/f73860b2-12f0-43e4-b8b2-c81862c0a159/parameter/3f05483f-66ff-4f21-bc76-45956779f66e/valueSet/72ec3701-bcb5-4bf6-bd78-30fd1b65e3be?revisionFrom=2000-01-01T12:00:00&revisionTo=2120-12-31T12:00:00");
 
             var jArray3 = this.WebClient.GetDto(parameterValueSetUri2);
             Assert.AreEqual(2, jArray3.Count);

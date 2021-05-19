@@ -34,7 +34,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedNaturalLanguageIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var naturalLanguageUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/naturalLanguage"));
+            var naturalLanguageUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/naturalLanguage");
 
             // Get the response from the data-source as a JArray (JSON Array).
             var jArray = this.WebClient.GetDto(naturalLanguageUri);
@@ -53,7 +53,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedNaturalLanguageWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var naturalLanguageUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/naturalLanguage?includeAllContainers=true"));
+            var naturalLanguageUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/naturalLanguage?includeAllContainers=true");
 
             // Get the response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(naturalLanguageUri);

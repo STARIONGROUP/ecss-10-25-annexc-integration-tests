@@ -37,9 +37,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedUnitIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var prefixedUnitUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/unit/0f69c1f9-7896-45fc-830c-1e336d22a64a"));
+            var prefixedUnitUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/unit/0f69c1f9-7896-45fc-830c-1e336d22a64a");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(prefixedUnitUri);
@@ -48,8 +46,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(1, jArray.Count);
 
             // get a specific PrefixedUnit from the result by it's unique id
-            var prefixedUnit =
-                jArray.Single(x => (string) x["iid"] == "0f69c1f9-7896-45fc-830c-1e336d22a64a");
+            var prefixedUnit = jArray.Single(x => (string) x["iid"] == "0f69c1f9-7896-45fc-830c-1e336d22a64a");
 
             PrefixedUnitTestFixture.VerifyProperties(prefixedUnit);
         }
@@ -59,10 +56,8 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedUnitWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var prefixedUnitUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/unit/0f69c1f9-7896-45fc-830c-1e336d22a64a?includeAllContainers=true"));
-
+            var prefixedUnitUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/unit/0f69c1f9-7896-45fc-830c-1e336d22a64a?includeAllContainers=true");
+            
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(prefixedUnitUri);
 
@@ -74,13 +69,11 @@ namespace WebservicesIntegrationTests
             SiteDirectoryTestFixture.VerifyProperties(siteDirectory);
 
             // get a specific SiteReferenceDataLibrary from the result by it's unique id
-            var siteReferenceDataLibrary =
-                jArray.Single(x => (string) x["iid"] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
+            var siteReferenceDataLibrary = jArray.Single(x => (string) x["iid"] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
             SiteReferenceDataLibraryTestFixture.VerifyProperties(siteReferenceDataLibrary);
 
             // get a specific PrefixedUnit from the result by it's unique id
-            var prefixedUnit =
-                jArray.Single(x => (string) x["iid"] == "0f69c1f9-7896-45fc-830c-1e336d22a64a");
+            var prefixedUnit = jArray.Single(x => (string) x["iid"] == "0f69c1f9-7896-45fc-830c-1e336d22a64a");
             PrefixedUnitTestFixture.VerifyProperties(prefixedUnit);
         }
 
@@ -88,7 +81,7 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatAPrefixedUnitCanBeCreatedWithWebApi()
         {
-            var siteDirectoryUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
             var postBodyPath = this.GetPath("Tests/SiteDirectory/PrefixedUnit/PostNewPrefixedUnit.json");
 
             var postBody = base.GetJsonFromFile(postBodyPath);

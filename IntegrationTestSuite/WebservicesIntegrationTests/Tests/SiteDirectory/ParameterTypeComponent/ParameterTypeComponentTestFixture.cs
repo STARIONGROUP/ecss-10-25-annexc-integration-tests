@@ -37,10 +37,8 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedParameterTypeComponentIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var arrayParameterTypeComponentUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/parameterType/4a783624-b2bc-4e6d-95b3-11d036f6e917/component"));
-
+            var arrayParameterTypeComponentUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/parameterType/4a783624-b2bc-4e6d-95b3-11d036f6e917/component");
+            
             // get a response from the data-source as a JArray (JSON Array)
             var jArrayParameterType = this.WebClient.GetDto(arrayParameterTypeComponentUri);
 
@@ -48,9 +46,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(2, jArrayParameterType.Count);
 
             // define the URI on which to perform a GET request 
-            var compoundParameterTypeUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/parameterType/0d3178f9-68d0-4b1a-afe8-d5df0b66f1d4/component"));
+            var compoundParameterTypeUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/parameterType/0d3178f9-68d0-4b1a-afe8-d5df0b66f1d4/component");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArrayCompoundParameterType = this.WebClient.GetDto(compoundParameterTypeUri);
@@ -68,7 +64,7 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatReorderParameterTypeComponentWorks()
         {
-            var siteDirectoryUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
             var postBodyPath = this.GetPath("Tests/SiteDirectory/ParameterTypeComponent/PostReorderParameterTypeComponents.json");
 
             var postBody = base.GetJsonFromFile(postBodyPath);
@@ -86,10 +82,8 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedParameterTypeComponentWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var arrayParameterTypeComponentUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/parameterType/4a783624-b2bc-4e6d-95b3-11d036f6e917/component?includeAllContainers=true"));
-
+            var arrayParameterTypeComponentUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/parameterType/4a783624-b2bc-4e6d-95b3-11d036f6e917/component?includeAllContainers=true");
+            
             // get a response from the data-source as a JArray (JSON Array)
             var jArrayParameterType = this.WebClient.GetDto(arrayParameterTypeComponentUri);
 
@@ -97,25 +91,20 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(5, jArrayParameterType.Count);
 
             // get a specific SiteDirectory from the result by it's unique id
-            var siteDirectory =
-                jArrayParameterType.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
+            var siteDirectory = jArrayParameterType.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
 
             SiteDirectoryTestFixture.VerifyProperties(siteDirectory);
 
             // get a specific SiteReferenceDataLibrary from the result by it's unique id
-            var siteReferenceDataLibrary =
-                jArrayParameterType.Single(x => (string) x[PropertyNames.Iid] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
+            var siteReferenceDataLibrary = jArrayParameterType.Single(x => (string) x[PropertyNames.Iid] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
             
             SiteReferenceDataLibraryTestFixture.VerifyProperties(siteReferenceDataLibrary);
 
             // get a specific ArrayParameterType from the result by it's unique id
-            var arrayParameterType =
-                jArrayParameterType.Single(x => (string) x[PropertyNames.Iid] == "4a783624-b2bc-4e6d-95b3-11d036f6e917");
+            var arrayParameterType = jArrayParameterType.Single(x => (string) x[PropertyNames.Iid] == "4a783624-b2bc-4e6d-95b3-11d036f6e917");
 
             // define the URI on which to perform a GET request 
-            var compoundParameterTypeUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/parameterType/0d3178f9-68d0-4b1a-afe8-d5df0b66f1d4/component?includeAllContainers=true"));
+            var compoundParameterTypeUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/parameterType/0d3178f9-68d0-4b1a-afe8-d5df0b66f1d4/component?includeAllContainers=true");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArrayCompoundParameterType = this.WebClient.GetDto(compoundParameterTypeUri);
@@ -124,23 +113,17 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(5, jArrayParameterType.Count);
 
             // get a specific SiteDirectory from the result by it's unique id
-            siteDirectory =
-                jArrayCompoundParameterType.Single(
-                    x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
+            siteDirectory = jArrayCompoundParameterType.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
             
             SiteDirectoryTestFixture.VerifyProperties(siteDirectory);
 
             // get a specific SiteReferenceDataLibrary from the result by it's unique id
-            siteReferenceDataLibrary =
-                jArrayCompoundParameterType.Single(
-                    x => (string) x[PropertyNames.Iid] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
+            siteReferenceDataLibrary = jArrayCompoundParameterType.Single(x => (string) x[PropertyNames.Iid] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
             
             SiteReferenceDataLibraryTestFixture.VerifyProperties(siteReferenceDataLibrary);
 
             // get a specific CompoundParameterType from the result by it's unique id
-            var compoundParameterType =
-                jArrayCompoundParameterType.Single(
-                    x => (string) x[PropertyNames.Iid] == "0d3178f9-68d0-4b1a-afe8-d5df0b66f1d4");
+            var compoundParameterType = jArrayCompoundParameterType.Single(x => (string) x[PropertyNames.Iid] == "0d3178f9-68d0-4b1a-afe8-d5df0b66f1d4");
             
             CompoundParameterTypeTestFixture.VerifyProperties(compoundParameterType);
 

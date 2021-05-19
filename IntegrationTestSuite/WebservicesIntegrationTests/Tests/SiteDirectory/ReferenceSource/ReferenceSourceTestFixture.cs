@@ -37,10 +37,8 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedReferenceSourceIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var referenceSourceUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/referenceSource"));
-
+            var referenceSourceUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/referenceSource");
+            
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(referenceSourceUri);
 
@@ -48,8 +46,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(1, jArray.Count);
 
             // get a specific ReferenceSource from the result by it's unique id
-            var referenceSource =
-                jArray.Single(x => (string) x["iid"] == "ffd6c100-6c72-4d2a-8565-ff24bd576a89");
+            var referenceSource = jArray.Single(x => (string) x["iid"] == "ffd6c100-6c72-4d2a-8565-ff24bd576a89");
 
             ReferenceSourceTestFixture.VerifyProperties(referenceSource);
         }
@@ -59,9 +56,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedReferenceSourceWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var referenceSourceUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/referenceSource/ffd6c100-6c72-4d2a-8565-ff24bd576a89?includeAllContainers=true"));
+            var referenceSourceUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/referenceSource/ffd6c100-6c72-4d2a-8565-ff24bd576a89?includeAllContainers=true");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(referenceSourceUri);
@@ -74,13 +69,11 @@ namespace WebservicesIntegrationTests
             SiteDirectoryTestFixture.VerifyProperties(siteDirectory);
 
             // get a specific SiteReferenceDataLibrary from the result by it's unique id
-            var siteReferenceDataLibrary =
-                jArray.Single(x => (string) x["iid"] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
+            var siteReferenceDataLibrary = jArray.Single(x => (string) x["iid"] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
             SiteReferenceDataLibraryTestFixture.VerifyProperties(siteReferenceDataLibrary);
 
             // get a specific ReferenceSource from the result by it's unique id
-            var referenceSource =
-                jArray.Single(x => (string) x["iid"] == "ffd6c100-6c72-4d2a-8565-ff24bd576a89");
+            var referenceSource = jArray.Single(x => (string) x["iid"] == "ffd6c100-6c72-4d2a-8565-ff24bd576a89");
             ReferenceSourceTestFixture.VerifyProperties(referenceSource);
         }
 
@@ -88,7 +81,7 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatAReferenceSourceCanBeCreatedWithWebApi()
         {
-            var siteDirectoryUri = new Uri(string.Format(UriFormat, this.Settings.Hostname, "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
             var postBodyPath = this.GetPath("Tests/SiteDirectory/ReferenceSource/PostNewReferenceSource.json");
 
             var postBody = base.GetJsonFromFile(postBodyPath);

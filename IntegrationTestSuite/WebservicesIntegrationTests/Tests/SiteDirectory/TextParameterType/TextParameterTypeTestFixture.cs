@@ -35,20 +35,13 @@ namespace WebservicesIntegrationTests
         [Category("GET")]
         public void VerifyThatExpectedParameterTypeIsReturnedFromWebApi()
         {
-            // define the URI on which to perform a GET request 
-            var textParameterTypeUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/parameterType/a21c15c4-3e1e-46b5-b109-5063dec1e254"));
+            var textParameterTypeUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/parameterType/a21c15c4-3e1e-46b5-b109-5063dec1e254");
 
-            // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(textParameterTypeUri);
 
-            //check if there is the only one TextParameterType object 
             Assert.AreEqual(1, jArray.Count);
 
-            // get a specific TextParameterType from the result by it's unique id
-            var textParameterType =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "a21c15c4-3e1e-46b5-b109-5063dec1e254");
+            var textParameterType = jArray.Single(x => (string) x[PropertyNames.Iid] == "a21c15c4-3e1e-46b5-b109-5063dec1e254");
 
             TextParameterTypeTestFixture.VerifyProperties(textParameterType);
         }
@@ -58,10 +51,8 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedParameterTypeWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var textParameterTypeUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/parameterType/a21c15c4-3e1e-46b5-b109-5063dec1e254?includeAllContainers=true"));
-
+            var textParameterTypeUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/parameterType/a21c15c4-3e1e-46b5-b109-5063dec1e254?includeAllContainers=true");
+            
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(textParameterTypeUri);
 
@@ -73,13 +64,11 @@ namespace WebservicesIntegrationTests
             SiteDirectoryTestFixture.VerifyProperties(siteDirectory);
 
             // get a specific SiteReferenceDataLibrary from the result by it's unique id
-            var siteReferenceDataLibrary =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
+            var siteReferenceDataLibrary = jArray.Single(x => (string) x[PropertyNames.Iid] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
             SiteReferenceDataLibraryTestFixture.VerifyProperties(siteReferenceDataLibrary);
 
             // get a specific TextParameterType from the result by it's unique id
-            var textParameterType =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "a21c15c4-3e1e-46b5-b109-5063dec1e254");
+            var textParameterType = jArray.Single(x => (string) x[PropertyNames.Iid] == "a21c15c4-3e1e-46b5-b109-5063dec1e254");
             TextParameterTypeTestFixture.VerifyProperties(textParameterType);
         }
 

@@ -33,10 +33,8 @@ namespace WebservicesIntegrationTests
         public void VerifyThatParticipantHasValidDomainOfExpertise()
         {
             // define the URI on which to perform a GET request
-            var participantUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
-
+            var participantUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
+            
             var postBodyPath = this.GetPath("Tests/SiteDirectory/Participant/Post_Participant_With_Null_Domain.json");
 
             var postBody = this.GetJsonFromFile(postBodyPath);

@@ -36,10 +36,8 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedRuleIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var referencerRuleUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/rule/e7e4eec5-ad39-40a0-9548-9c40d8e6df1b"));
-
+            var referencerRuleUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/rule/e7e4eec5-ad39-40a0-9548-9c40d8e6df1b");
+            
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(referencerRuleUri);
 
@@ -47,8 +45,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(1, jArray.Count);
 
             // get a specific ReferencerRule from the result by it's unique id
-            var referencerRule =
-                jArray.Single(x => (string) x["iid"] == "e7e4eec5-ad39-40a0-9548-9c40d8e6df1b");
+            var referencerRule = jArray.Single(x => (string) x["iid"] == "e7e4eec5-ad39-40a0-9548-9c40d8e6df1b");
 
             ReferencerRuleTestFixture.VerifyProperties(referencerRule);
         }
@@ -58,9 +55,7 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedRuleWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var referencerRuleUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/rule/e7e4eec5-ad39-40a0-9548-9c40d8e6df1b?includeAllContainers=true"));
+            var referencerRuleUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/rule/e7e4eec5-ad39-40a0-9548-9c40d8e6df1b?includeAllContainers=true");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(referencerRuleUri);
@@ -73,13 +68,11 @@ namespace WebservicesIntegrationTests
             SiteDirectoryTestFixture.VerifyProperties(siteDirectory);
 
             // get a specific SiteReferenceDataLibrary from the result by it's unique id
-            var siteReferenceDataLibrary =
-                jArray.Single(x => (string) x["iid"] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
+            var siteReferenceDataLibrary = jArray.Single(x => (string) x["iid"] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
             SiteReferenceDataLibraryTestFixture.VerifyProperties(siteReferenceDataLibrary);
 
             // get a specific ReferencerRule from the result by it's unique id
-            var referencerRule =
-                jArray.Single(x => (string) x["iid"] == "e7e4eec5-ad39-40a0-9548-9c40d8e6df1b");
+            var referencerRule = jArray.Single(x => (string) x["iid"] == "e7e4eec5-ad39-40a0-9548-9c40d8e6df1b");
             ReferencerRuleTestFixture.VerifyProperties(referencerRule);
         }
 

@@ -36,10 +36,8 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedTelephoneNumbersIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var telephoneNumbersUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/person/77791b12-4c2c-4499-93fa-869df3692d22/telephoneNumber"));
-
+            var telephoneNumbersUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/person/77791b12-4c2c-4499-93fa-869df3692d22/telephoneNumber");
+            
             // Get the response from the data-source as a JArray (JSON Array).
             var jArray = this.WebClient.GetDto(telephoneNumbersUri);
 
@@ -54,10 +52,8 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedTelephoneNumbersWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var telephoneNumbersUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/person/77791b12-4c2c-4499-93fa-869df3692d22/telephoneNumber?includeAllContainers=true"));
-
+            var telephoneNumbersUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/person/77791b12-4c2c-4499-93fa-869df3692d22/telephoneNumber?includeAllContainers=true");
+            
             // Get the response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(telephoneNumbersUri);
 
@@ -65,8 +61,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(4, jArray.Count);
 
             // get a specific SiteDirectory from the result by it's unique id
-            var siteDirectory =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
+            var siteDirectory = jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
 
             SiteDirectoryTestFixture.VerifyProperties(siteDirectory);
 
@@ -81,11 +76,7 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatVcardTypeCanBeRemoved()
         {
-            var uri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            var uri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
 
             var postBodyPath = this.GetPath("Tests/SiteDirectory/TelephoneNumber/PostNewTelephoneNumber.json");
             var postBody = this.GetJsonFromFile(postBodyPath);
@@ -107,8 +98,7 @@ namespace WebservicesIntegrationTests
             postBody = this.GetJsonFromFile(postBodyPath);
             jArray = this.WebClient.PostDto(uri, postBody);
 
-            telephoneNumber =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "2e6559d6-2ccb-4627-a5f4-5906fb59e969");
+            telephoneNumber = jArray.Single(x => (string) x[PropertyNames.Iid] == "2e6559d6-2ccb-4627-a5f4-5906fb59e969");
 
             expectedVcardTypes = new string[] { };
 
@@ -121,11 +111,7 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatVerifyThatATelephoneNumberCanBeCreatedWithWebApi()
         {
-            var uri = new Uri(
-                string.Format(
-                    UriFormat,
-                    this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            var uri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
 
             var postBodyPath = this.GetPath("Tests/SiteDirectory/TelephoneNumber/PostNewTelephoneNumber.json");
 
@@ -133,8 +119,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.PostDto(uri, postBody);
 
             // get a specific SiteDirectory from the result by it's unique id
-            var siteDirectory =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
+            var siteDirectory = jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
 
             // verify that the amount of returned properties 
             Assert.AreEqual(19, siteDirectory.Children().Count());
@@ -145,11 +130,9 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual("Test Site Directory", (string) siteDirectory[PropertyNames.Name]);
             Assert.AreEqual("TEST-SiteDir", (string) siteDirectory[PropertyNames.ShortName]);
 
-            Assert.AreEqual("ee3ae5ff-ac5e-4957-bab1-7698fba2a267",
-                (string) siteDirectory[PropertyNames.DefaultParticipantRole]);
+            Assert.AreEqual("ee3ae5ff-ac5e-4957-bab1-7698fba2a267", (string) siteDirectory[PropertyNames.DefaultParticipantRole]);
 
-            Assert.AreEqual("2428f4d9-f26d-4112-9d56-1c940748df69",
-                (string) siteDirectory[PropertyNames.DefaultPersonRole]);
+            Assert.AreEqual("2428f4d9-f26d-4112-9d56-1c940748df69", (string) siteDirectory[PropertyNames.DefaultPersonRole]);
 
             var expectedOrganizations = new string[] { "cd22fc45-d898-4fac-85fc-fbcb7d7b12a7" };
             var organizationArray = (JArray) siteDirectory[PropertyNames.Organization];
@@ -293,8 +276,7 @@ namespace WebservicesIntegrationTests
         /// </param>
         public static void VerifyProperties(JToken telephoneNumber)
         {
-            var telephoneNumberObject =
-                telephoneNumber.Single(x => (string) x[PropertyNames.Iid] == "7f85a641-1844-4064-b19d-c6a447543ab3");
+            var telephoneNumberObject = telephoneNumber.Single(x => (string) x[PropertyNames.Iid] == "7f85a641-1844-4064-b19d-c6a447543ab3");
 
             Assert.AreEqual("7f85a641-1844-4064-b19d-c6a447543ab3", (string) telephoneNumberObject[PropertyNames.Iid]);
             Assert.AreEqual(1, (int) telephoneNumberObject[PropertyNames.RevisionNumber]);

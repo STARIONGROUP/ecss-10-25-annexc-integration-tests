@@ -36,10 +36,8 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedUnitPrefixIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var unitPrefixUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/unitPrefix"));
-
+            var unitPrefixUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/unitPrefix");
+            
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(unitPrefixUri);
 
@@ -47,8 +45,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(1, jArray.Count);
 
             // get a specific UnitPrefix from the result by it's unique id
-            var unitPrefix =
-                jArray.Single(x => (string) x["iid"] == "efa6380d-9508-4f3d-9b43-6ed33125b780");
+            var unitPrefix = jArray.Single(x => (string) x["iid"] == "efa6380d-9508-4f3d-9b43-6ed33125b780");
 
             UnitPrefixTestFixture.VerifyProperties(unitPrefix);
         }
@@ -58,10 +55,8 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedUnitPrefixWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var unitPrefixUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/unitPrefix/efa6380d-9508-4f3d-9b43-6ed33125b780?includeAllContainers=true"));
-
+            var unitPrefixUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/unitPrefix/efa6380d-9508-4f3d-9b43-6ed33125b780?includeAllContainers=true");
+            
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(unitPrefixUri);
 
@@ -73,13 +68,11 @@ namespace WebservicesIntegrationTests
             SiteDirectoryTestFixture.VerifyProperties(siteDirectory);
 
             // get a specific SiteReferenceDataLibrary from the result by it's unique id
-            var siteReferenceDataLibrary =
-                jArray.Single(x => (string) x["iid"] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
+            var siteReferenceDataLibrary = jArray.Single(x => (string) x["iid"] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
             SiteReferenceDataLibraryTestFixture.VerifyProperties(siteReferenceDataLibrary);
 
             // get a specific UnitPrefix from the result by it's unique id
-            var unitPrefix =
-                jArray.Single(x => (string) x["iid"] == "efa6380d-9508-4f3d-9b43-6ed33125b780");
+            var unitPrefix = jArray.Single(x => (string) x["iid"] == "efa6380d-9508-4f3d-9b43-6ed33125b780");
             UnitPrefixTestFixture.VerifyProperties(unitPrefix);
         }
 

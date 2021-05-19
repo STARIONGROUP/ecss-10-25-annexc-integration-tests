@@ -36,10 +36,8 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedModelReferenceDataLibraryeIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var modelReferenceDataLibraryUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/model/116f6253-89bb-47d4-aa24-d11d197e43c9/requiredRdl"));
-
+            var modelReferenceDataLibraryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/model/116f6253-89bb-47d4-aa24-d11d197e43c9/requiredRdl");
+            
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(modelReferenceDataLibraryUri);
 
@@ -47,8 +45,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(1, jArray.Count);
 
             // get a specific ModelReferenceDataLibrary from the result by it's unique id
-            var modelReferenceDataLibrary =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "3483f2b5-ea29-45cc-8a46-f5f598558fc3");
+            var modelReferenceDataLibrary = jArray.Single(x => (string) x[PropertyNames.Iid] == "3483f2b5-ea29-45cc-8a46-f5f598558fc3");
 
             ModelReferenceDataLibraryTestFixture.VerifyProperties(modelReferenceDataLibrary);
         }
@@ -58,10 +55,8 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedModelReferenceDataLibraryWithContainerIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request
-            var modelReferenceDataLibraryUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/model/116f6253-89bb-47d4-aa24-d11d197e43c9/requiredRdl?includeAllContainers=true"));
-
+            var modelReferenceDataLibraryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/model/116f6253-89bb-47d4-aa24-d11d197e43c9/requiredRdl?includeAllContainers=true");
+            
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(modelReferenceDataLibraryUri);
 
@@ -69,18 +64,15 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(3, jArray.Count);
 
             // get a specific SiteDirectory from the result by it's unique id
-            var siteDirectory =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
+            var siteDirectory = jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
             SiteDirectoryTestFixture.VerifyProperties(siteDirectory);
 
             // get a specific EngineeringModelSetup from the result by it's unique id
-            var engineeringModelSetup =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "116f6253-89bb-47d4-aa24-d11d197e43c9");
+            var engineeringModelSetup = jArray.Single(x => (string) x[PropertyNames.Iid] == "116f6253-89bb-47d4-aa24-d11d197e43c9");
             EngineeringModelSetupTestFixture.VerifyProperties(engineeringModelSetup);
 
             // get a specific ModelReferenceDataLibrary from the result by it's unique id
-            var modelReferenceDataLibrary =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "3483f2b5-ea29-45cc-8a46-f5f598558fc3");
+            var modelReferenceDataLibrary = jArray.Single(x => (string) x[PropertyNames.Iid] == "3483f2b5-ea29-45cc-8a46-f5f598558fc3");
             ModelReferenceDataLibraryTestFixture.VerifyProperties(modelReferenceDataLibrary);
         }
 
@@ -88,17 +80,14 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatARuleCannotBeMovedFromModelRdlToSiteRdlWithoutCategoriesFromWebApi()
         {
-            var siteDirectoryUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
-            var postBodyPath =
-                this.GetPath(
-                    "Tests/SiteDirectory/ModelReferenceDataLibrary/POSTIncMoveBinaryRelShipRuleFromModelRDLToSiteRDL.json");
+            var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
+
+            var postBodyPath = this.GetPath("Tests/SiteDirectory/ModelReferenceDataLibrary/POSTIncMoveBinaryRelShipRuleFromModelRDLToSiteRDL.json");
 
             var postBody = base.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
-       
-            // TODO it needs explanation what we test and what we expect
+
+            // TODO it needs explanation what we test and what we expect - see https://github.com/RHEAGROUP/ecss-10-25-annexc-integration-tests/issues/35
             Assert.Inconclusive();
         }
 
@@ -106,12 +95,9 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatARuleWithoutSpecificCategoriesForItCanBeMovedFromModelRdlToSiteRdlFromWebApi()
         {
-            var siteDirectoryUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
-            var postBodyPath =
-                this.GetPath(
-                    "Tests/SiteDirectory/ModelReferenceDataLibrary/POSTMoveIndBinaryRelShipRuleFromModelRDLToSiteRDL.json");
+            var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
+
+            var postBodyPath = this.GetPath("Tests/SiteDirectory/ModelReferenceDataLibrary/POSTMoveIndBinaryRelShipRuleFromModelRDLToSiteRDL.json");
 
             var postBody = base.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
@@ -120,8 +106,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(4, jArray.Count);
 
             //SiteDirectory properties
-            var siteDirectory =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
+            var siteDirectory = jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
             Assert.AreEqual(2, (int) siteDirectory[PropertyNames.RevisionNumber]);
 
             //SiteReferenceDataLibrary properties
@@ -158,12 +143,9 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatARuleCanBeMovedFromModelRdlToSiteRdlFromWebApi()
         {
-            var siteDirectoryUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294"));
-            var postBodyPath =
-                this.GetPath(
-                    "Tests/SiteDirectory/ModelReferenceDataLibrary/POSTMoveBinaryRelShipRuleFromModelRDLToSiteRDL.json");
+            var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
+
+            var postBodyPath = this.GetPath("Tests/SiteDirectory/ModelReferenceDataLibrary/POSTMoveBinaryRelShipRuleFromModelRDLToSiteRDL.json");
 
             var postBody = base.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
@@ -172,8 +154,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(6, jArray.Count);
 
             //SiteDirectory properties
-            var siteDirectory =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
+            var siteDirectory = jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
             Assert.AreEqual(2, (int) siteDirectory[PropertyNames.RevisionNumber]);
 
             //SiteReferenceDataLibrary properties

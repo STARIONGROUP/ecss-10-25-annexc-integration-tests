@@ -35,10 +35,8 @@ namespace WebservicesIntegrationTests
         public void VerifyThatExpectedIdCorrespondenceIsReturnedFromWebApi()
         {
             // define the URI on which to perform a GET request 
-            var idCorrespondenceUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/externalIdentifierMap/a0cadcd1-b14f-4552-8f97-bec386a715d0/correspondence"));
-
+            var idCorrespondenceUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/externalIdentifierMap/a0cadcd1-b14f-4552-8f97-bec386a715d0/correspondence");
+            
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(idCorrespondenceUri);
 
@@ -46,8 +44,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(1, jArray.Count);
 
             // get a specific IdCorrespondence from the result by it's unique id
-            var idCorrespondence =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "ff6956dc-1882-4d61-8840-dedb3fba7b43");
+            var idCorrespondence = jArray.Single(x => (string) x[PropertyNames.Iid] == "ff6956dc-1882-4d61-8840-dedb3fba7b43");
 
             IdCorrespondenceTestFixture.VerifyProperties(idCorrespondence);
         }
@@ -58,8 +55,7 @@ namespace WebservicesIntegrationTests
         {
             // define the URI on which to perform a GET request
             var idCorrespondenceUri =
-                new Uri(string.Format(UriFormat, this.Settings.Hostname,
-                    "/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/externalIdentifierMap/a0cadcd1-b14f-4552-8f97-bec386a715d0/correspondence?includeAllContainers=true"));
+                new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/externalIdentifierMap/a0cadcd1-b14f-4552-8f97-bec386a715d0/correspondence?includeAllContainers=true");
 
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(idCorrespondenceUri);
