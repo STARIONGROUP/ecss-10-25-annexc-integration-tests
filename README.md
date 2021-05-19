@@ -42,22 +42,21 @@ The URL of the restore service takes the following form: "http(s)://hostname:por
 
 Read more about setting up your development environnment [here](https://github.com/RHEAGROUP/ecss-10-25-annexc-integration-tests/wiki)
 
-# CDP4
+# COMET
 
-The RHEA Concurrent Design Platform (CDP&reg;) is the RHEA implementation of ECSS-E-TM-10-25. The CDP4&reg; is a typical 3-tier application that contains the following application layers:
+COMET is the RHEA implementation of ECSS-E-TM-10-25 and is a so-called Concurrent Design Platform or collaborative MBSE application. COMET is a typical 3-tier application that contains the following application layers:
 * Layer-1: Persistent Data Store (data layer)
   * implemented using [PostgreSQL](http://www.postgresql.org)
 * Layer-2: REST Web Services (application layer)
-  * CDP4&reg; WebServices
+  * COMET WebServices
   * compliant with ECSS-E-TM-10-25 Annex C.2
 * Layer-3: Client tools (presentation layer), the following applications are available:
-  * CDP4-IME&reg;: A desktop application
-  * CDP4-ADDIN&reg;: A Microsoft Excel ADDIN
-  * CDP4-WEBAPP&reg;: A Web Application hosted by the CDP4 WebServices
+  * COMET-IME: A desktop application
+  * COMET-ADDIN: A Microsoft Excel ADDIN
 
-More information about the CDP&reg; can be found on the RHEA GROUP [Website](http://www.rheagroup.com/products/cdp/). A demo installer of the CDP4-IME&reg; application can be downloaded after registration here: http://products.rheagroup.com/CDP.  
+More information about COMET can be found on the RHEA GROUP [Website](https://www.rheagroup.com/services-solutions/system-engineering/concurrent-design/). A demo installer of COMET-IME can be downloaded here: http://products.rheagroup.com/cdp4.
 
-A Public instance of the CDP4&reg; WebServices that is used to verify CDP4&reg; WebServices compliance is available at http://cdp4services-test.rheagroup.com. The content that is serviced by this instance is loaded by the contents of the [Data folder](./Data/) . The username and password to access this CDP4&reg; WebServices are: admin/pass.   
+A Public instance of COMET WebServices that is used to verify COMET WebServices compliance is available at http://cdp4services-test.rheagroup.com. The content that is serviced by this instance is loaded by the contents of the [Data folder](./Data/) . The username and password to access this COMET WebServices instances are: admin/pass.   
 
 # OCDT
 
@@ -65,4 +64,4 @@ The ESA Community open source implementation of ECSS-E-TM-10-25. More informatio
 
 # Sponsors
 
-The ecss-10-25-annexc-integration-tests project is sponsored by the [RHEA GROUP](http://www.rheagroup.com)
+The ecss-10-25-annexc-integration-tests project is sponsored by the [RHEA GROUP](https://www.rheagroup.com)

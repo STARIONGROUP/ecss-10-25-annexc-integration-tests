@@ -1,576 +1,401 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\NUnit3TestAdapter.3.16.1\build\net35\NUnit3TestAdapter.props" Condition="Exists('..\packages\NUnit3TestAdapter.3.16.1\build\net35\NUnit3TestAdapter.props')" />
-  <Import Project="..\packages\NUnit.3.12.0\build\NUnit.props" Condition="Exists('..\packages\NUnit.3.12.0\build\NUnit.props')" />
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E27B3A89-A1A0-4B5E-BF28-43041DF951EC}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WebservicesIntegrationTests</RootNamespace>
-    <AssemblyName>WebservicesIntegrationTests</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <TargetFramework>net5.0</TargetFramework>
+    <Company>RHEA System S.A.</Company>
+    <Title>CometServer-CE.Tests</Title>
+    <Description>Unit tests Library for the Comet Server</Description>
+    <Copyright>Copyright © RHEA System S.A.</Copyright>
+    <Authors>Sam, Alex, Alexander</Authors>
+    <Configurations>Debug;Release;Test</Configurations>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="DotNetZip, Version=1.13.7.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
-      <HintPath>..\packages\DotNetZip.1.13.7\lib\net40\DotNetZip.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.4.7.0\lib\net45\NLog.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework, Version=3.12.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.3.12.0\lib\net45\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.IO.Compression" />
-    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Transactions" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
+	<PackageReference Include="DotNetZip" Version="1.15.0" />
+	<PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
+	<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+	
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.1" />
+	
+    <PackageReference Include="NLog" Version="4.7.0" />
+    <PackageReference Include="nunit" Version="3.13.1" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.17.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="Net\CdpVersion_1_1_0Attribute.cs" />
-    <Compile Include="Net\CdpVersionAttribute.cs" />
-    <Compile Include="Net\Settings.cs" />
-    <Compile Include="Tests\BaseClasses\WebClientTestFixtureBaseWithDatabaseRestore.cs" />
-    <Compile Include="Tests\EngineeringModel\ActualFiniteStateList\ActualFiniteStateListTestFixture.cs" />
-    <Compile Include="Tests\EngineeringModel\ActualFiniteState\ActualFiniteStateTestFixture.cs" />
-    <Compile Include="Tests\EngineeringModel\Alias\AliasTestFixture.cs" />
-    <Compile Include="Tests\EngineeringModel\AndExpression\AndExpressionTestFixture.cs" />
-    <Compile Include="Tests\EngineeringModel\Book\BookTestFixture.cs" />
-    <Compile Include="Tests\EngineeringModel\CommonFileStore\CommonFileStoreTestFixture.cs" />
-    <Compile Include="Tests\EngineeringModel\BuiltInRuleVerification\BuiltInRuleVerificationTestFixture.cs" />
-    <Compile Include="Tests\EngineeringModel\DomainFileStore\DomainFileStoreTestFixture.cs" />
-    <Compile Include="Tests\EngineeringModel\ElementDefinition\ElementDefinitionTestFixture.cs" />
-    <Compile Include="Tests\EngineeringModel\ElementUsage\ElementUsageTestFixture.cs" />
-    <Compile Include="Tests\EngineeringModel\ExclusiveOrExpression\ExclusiveOrExpressionTestFixture.cs" />
-    <Compile Include="Tests\EngineeringModel\ExternalIdentifierMap\ExternalIdentifierMapTestFixture.cs" />
-    <Compile Include="Tests\EngineeringModel\FileRevision\FileRevisionTestFixture.cs" />
-    <Compile Include="Tests\EngineeringModel\File\FileTestFixture.cs" />
-    <Compile Include="Tests\EngineeringModel\Folder\FolderTestFixture.cs" />
-    <Compile Include="Tests\EngineeringModel\IdCorrespondence\IdCorrespondenceTestFixture.cs" />
-    <Compile Include="Tests\EngineeringModel\ModelLogEntry\ModelLogEntryTestFixture.cs" />
-    <Compile Include="Tests\EngineeringModel\NotExpression\NotExpressionTestFixture.cs" />
-    <Compile Include="Tests\EngineeringModel\Note\NoteTestFixture.cs" />
-    <Compile Include="Tests\EngineeringModel\OrExpression\OrExpressionTestFixture.cs" />
-    <Compile Include="Tests\EngineeringModel\Page\PageTestFixture.cs" />
-    <Compile Include="Tests\EngineeringModel\ParameterGroup\ParameterGroupTestFixture.cs" />
-    <Compile Include="Tests\EngineeringModel\ParameterSubscriptionValueSet\ParameterSubscriptionValueSetTestFixture.cs" />
-    <Compile Include="Tests\EngineeringModel\ParameterOverrideValueSet\ParameterOverrideValueSetTestFixture.cs" />
-    <Compile Include="Tests\EngineeringModel\ParameterOverride\ParameterOverrideTestFixture.cs" />
-    <Compile Include="Tests\EngineeringModel\ParameterSubscription\ParameterSubscriptionTestFixture.cs" />
-    <Compile Include="Tests\EngineeringModel\ParameterValueSet\ParameterValueSetTestFixture.cs" />
-    <Compile Include="Tests\EngineeringModel\Parameter\ParameterTestFixture.cs" />
-    <Compile Include="Tests\EngineeringModel\Option\OptionTestFixture.cs" />
-    <Compile Include="Tests\EngineeringModel\ParametricConstraint\ParametricConstraintTestFixture.cs" />
-    <Compile Include="Tests\EngineeringModel\Publication\PublicationTestFixture.cs" />
-    <Compile Include="Tests\EngineeringModel\PossibleFiniteStateList\PossibleFiniteStateListTestFixture.cs" />
-    <Compile Include="Tests\EngineeringModel\RelationalExpression\RelationalExpressionTestFixture.cs" />
-    <Compile Include="Tests\EngineeringModel\RequirementsGroup\RequirementsGroupTestFixture.cs" />
-    <Compile Include="Tests\EngineeringModel\PossibleFiniteState\PossibleFiniteStateTestFixture.cs" />
-    <Compile Include="Tests\EngineeringModel\RequirementsSpecification\RequirementsSpecificationTestFixture.cs" />
-    <Compile Include="Tests\EngineeringModel\RuleVerification\RuleVerificationTestFixture.cs" />
-    <Compile Include="Tests\EngineeringModel\Section\SectionTestFixture.cs" />
-    <Compile Include="Tests\EngineeringModel\SimpleParameterValue\SimpleParameterValueTestFixture.cs" />
-    <Compile Include="Tests\EngineeringModel\UserRuleVerification\UserRuleVerificationTestFixture.cs" />
-    <Compile Include="Tests\EngineeringModel\Requirement\RequirementTestFixture.cs" />
-    <Compile Include="Tests\EngineeringModel\BinaryRelationship\BinaryRelationShipTestFixture.cs" />
-    <Compile Include="Tests\EngineeringModel\RuleVerificationList\RuleVerificationListTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\Citation\CitationTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\CompoundParameterType\CompoundParameterTypeTestFixture.cs" />
-    <Compile Include="Tests\EngineeringModel\Iteration\IterationTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\Constant\ConstantTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\Definition\DefinitionTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\EmailAddress\EmailAddressTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\EnumerationParameterType\EnumerationParameterTypeTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\IterationSetup\IterationSetupTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\MeasurementScale\MeasurementScaleTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\ModelReferenceDataLibrary\ModelReferenceDataLibraryTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\Participant\ParticipantTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\PropertyNames.cs" />
-    <Compile Include="Tests\SiteDirectory\ArrayParameterType\ArrayParameterTypeTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\ParameterTypeComponent\ParameterTypeComponentTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\BooleanParameterType\BooleanParameterTypeTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\CyclicRatioScale\CyclicRatioScaleTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\Category\CategoryTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\DateParameterType\DateParameterTypeTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\DateTimeParameterType\DateTimeParameterTypeTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\DecompositionRule\DecompositionRuleTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\BinaryRelationshipRule\BinaryRelationshipRuleTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\DerivedQuantityKind\DerivedQuantityKindTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\DerivedUnit\DerivedUnitTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\DomainOfExpertiseGroup\DomainOfExpertiseGroupTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\DomainOfExpertise\DomainOfExpertiseTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\EngineeringModelSetup\EngineeringModelSetupTestFixture.cs" />
-    <Compile Include="Tests\BaseClasses\WebClientTestFixtureBase.cs" />
-    <Compile Include="Net\WebClient.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tests\SiteDirectory\LinearConversionUnit\LinearConversionUnitTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\LogarithmicScale\LogarithmicScaleTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\Glossary\GlossaryTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\IntervalScale\IntervalScaleTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\NaturalLanguage\NaturalLanguageTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\MultirelationshipRule\MultirelationshipRuleTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\FileType\FileTypeTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\OrderedItem.cs" />
-    <Compile Include="Tests\SiteDirectory\OrdinalScale\OrdinalScaleTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\Organization\OrganizationTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\ParameterizedCategoryRule\ParameterizedCategoryRuleTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\ParticipantPermission\ParticipantPermissionTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\ParticipantRole\ParticipantRoleTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\PersonPermission\PersonPermissionTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\PersonRole\PersonRoleTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\Person\PersonTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\QuantityKindFactor\QuantityKindFactorTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\QuantityKind\QuantityKindTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\RatioScale\RatioScaleTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\ReferenceSource\ReferenceSourceTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\ReferencerRule\ReferencerRuleTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\SimpleQuantityKind\SimpleQuantityKindTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\SimpleUnit\SimpleUnitTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\PrefixedUnit\PrefixedUnitTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\SiteDirectoryTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\SiteLogEntry\SiteLogEntryTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\SiteReferenceDataLibrary\SiteReferenceDataLibraryTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\TelephoneNumber\TelephoneNumberTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\TextParameterType\TextParameterTypeTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\TimeOfDayParameterType\TimeOfDayParameterTypeTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\SpecializedQuantityKind\SpecializedQuantityKindTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\UnitFactor\UnitFactorTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\UnitPrefix\UnitPrefixTestFixture.cs" />
-    <Compile Include="Tests\SiteDirectory\Term\TermTestFixture.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="settings.json">
+    <None Update="config.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\ActualFiniteStateList\PostActualFiniteStateListRearrangePossibleFiniteStateList.json">
+    <None Update="settings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\ActualFiniteStateList\PostActualFiniteStateListAddPossibleFiniteStateList.json">
+    <None Update="Tests\EngineeringModel\ActualFiniteStateList\PostActualFiniteStateListAddPossibleFiniteStateList.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\ActualFiniteStateList\PostActualFiniteStateListUpdateActualFiniteState.json">
+    <None Update="Tests\EngineeringModel\ActualFiniteStateList\PostActualFiniteStateListRearrangePossibleFiniteStateList.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\ActualFiniteStateList\PostNewPossibleFiniteState.json">
+    <None Update="Tests\EngineeringModel\ActualFiniteStateList\PostActualFiniteStateListUpdateActualFiniteState.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\ActualFiniteStateList\PostPossibleFiniteStateList.json">
+    <None Update="Tests\EngineeringModel\ActualFiniteStateList\PostNewActualFiniteStateList.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\ActualFiniteStateList\PostNewActualFiniteStateList.json">
+    <None Update="Tests\EngineeringModel\ActualFiniteStateList\PostNewPossibleFiniteState.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\Alias\PostNewAlias.json">
+    <None Update="Tests\EngineeringModel\ActualFiniteStateList\PostPossibleFiniteStateList.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\AndExpression\PostNewAndExpression.json">
+    <None Update="Tests\EngineeringModel\Alias\PostNewAlias.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\Book\PostDeleteBooks.json">
+    <None Update="Tests\EngineeringModel\AndExpression\PostNewAndExpression.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\Book\PostNewBooks.json">
+    <None Update="Tests\EngineeringModel\Book\PostDeleteBooks.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\DomainFileStore\PostUpdateDomainFileStoreIsHidden.json">
+    <None Update="Tests\EngineeringModel\Book\PostNewBooks.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\ElementDefinition\POSTDeleteCategory.json">
+    <None Update="Tests\EngineeringModel\DomainFileStore\PostUpdateDomainFileStoreIsHidden.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\ElementDefinition\PostDeleteParameterAsInstance.json">
+    <None Update="Tests\EngineeringModel\ElementDefinition\POSTDeleteCategory.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\ElementDefinition\PostDeleteParameterAsProperty.json">
+    <None Update="Tests\EngineeringModel\ElementDefinition\PostDeleteParameterAsInstance.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\ElementDefinition\PostNewElementDefinitionForDomainExpertUser.json">
+    <None Update="Tests\EngineeringModel\ElementDefinition\PostDeleteParameterAsProperty.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\ElementDefinition\PostNewElementDefinition.json">
+    <None Update="Tests\EngineeringModel\ElementDefinition\PostNewElementDefinition.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\ExclusiveOrExpression\PostNewExclusiveOrExpression.json">
+    <None Update="Tests\EngineeringModel\ElementDefinition\PostNewElementDefinitionForDomainExpertUser.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\File\1525ED651E5B609DAE099DEEDA8DBDB49CFF956F">
+    <None Update="Tests\EngineeringModel\ExclusiveOrExpression\PostNewExclusiveOrExpression.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\File\2990BA2444A937A28E7B1E2465FCDF949B8F5368">
+    <None Update="Tests\EngineeringModel\File\1525ED651E5B609DAE099DEEDA8DBDB49CFF956F">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\File\3F64667F0F27A4C4FA1B4BF374033938A542FDD1">
+    <None Update="Tests\EngineeringModel\File\2990BA2444A937A28E7B1E2465FCDF949B8F5368">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\File\PostDeleteFile.json">
+    <None Update="Tests\EngineeringModel\File\3F64667F0F27A4C4FA1B4BF374033938A542FDD1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\File\PostNewFile.json">
+    <None Update="Tests\EngineeringModel\File\PostDeleteFile.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\File\PostNewFileBinaryRevision.json">
+    <None Update="Tests\EngineeringModel\File\PostNewFile.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\File\PostNewFileRevision.json">
+    <None Update="Tests\EngineeringModel\File\PostNewFileBinaryRevision.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\File\PostNewFolderWithFile.json">
+    <None Update="Tests\EngineeringModel\File\PostNewFileRevision.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\Folder\PostNewFolder.json">
+    <None Update="Tests\EngineeringModel\File\PostNewFolderWithFile.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\Iteration\PostDeleteRelationship.json">
+    <None Update="Tests\EngineeringModel\Folder\PostNewFolder.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\Iteration\PostDeleteRelationshipAsProperty.json">
+    <None Update="Tests\EngineeringModel\Iteration\PostDeleteIterationSetup.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\Note\PostDeleteNote.json">
+    <None Update="Tests\EngineeringModel\Iteration\PostDeleteRelationship.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\Note\PostNewNotes.json">
+    <None Update="Tests\EngineeringModel\Iteration\PostDeleteRelationshipAsProperty.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\Option\PostReorderOptions.json">
+    <None Update="Tests\EngineeringModel\Iteration\POSTNewIterationSetup.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\Page\PostDeletePage.json">
+    <None Update="Tests\EngineeringModel\Note\PostDeleteNote.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\Page\PostNewPages.json">
+    <None Update="Tests\EngineeringModel\Note\PostNewNotes.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\Parameter\PostUpdateStateDependentParameterToAnotherState.json">
+    <None Update="Tests\EngineeringModel\Option\PostNewOption.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\ParametricConstraint\PostNewParametricConstraint.json">
+    <None Update="Tests\EngineeringModel\Option\PostReorderOptions.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\ParametricConstraint\PostReorderParametricConstraints.json">
+    <None Update="Tests\EngineeringModel\Page\PostDeletePage.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\RuleVerification\PostReorderRuleVerification.json">
+    <None Update="Tests\EngineeringModel\Page\PostNewPages.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\Section\PostDeleteSection.json">
+    <None Update="Tests\EngineeringModel\ParameterGroup\PostDeleteParameterGroup.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\Section\PostNewSections.json">
+    <None Update="Tests\EngineeringModel\ParameterOverride\PostNewParameterOverride.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\ArrayParameterType\PostDeleteDimension.json">
+    <None Update="Tests\EngineeringModel\ParameterSubscription\PostNewParameterSubscription.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\ArrayParameterType\PostUpdateArrayParameterType.json">
+    <None Update="Tests\EngineeringModel\ParameterValueSet\PostNewParameterValueSetAndDeleteOne.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\Definition\PostDeleteExampleAndNote.json">
+    <None Update="Tests\EngineeringModel\ParameterValueSet\PostNewPossibleFiniteState.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\DerivedQuantityKind\PostNewCyclicFactor.json">
+    <None Update="Tests\EngineeringModel\ParameterValueSet\PostNewPossibleFiniteStateList.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\EnumerationParameterType\PostReorderEnumerationValueDefinition.json">
+    <None Update="Tests\EngineeringModel\ParameterValueSet\PostNewStateDependentParameter.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\EnumerationParameterType\PostDeleteEnumerationValueDefinition.json">
+    <None Update="Tests\EngineeringModel\ParameterValueSet\PostUpdateComputedValueOfParameterValueSet.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\EnumerationParameterType\PostAddNewEnumerationValueDefinition.json">
+    <None Update="Tests\EngineeringModel\ParameterValueSet\PostUpdateParameterValueSetTemplate.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\IterationSetup\PostUpdateCyclicIterationSetup.json">
+    <None Update="Tests\EngineeringModel\Parameter\PostDeleteCreateParameter.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\MeasurementScale\PostNewCyclicMappingToReferenceScale.json">
+    <None Update="Tests\EngineeringModel\Parameter\PostNewOptionDependentParameter.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\ParameterTypeComponent\PostReorderParameterTypeComponents.json">
+    <None Update="Tests\EngineeringModel\Parameter\PostNewParameter.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\POSTNewDomainExpertUser.json">
+    <None Update="Tests\EngineeringModel\Parameter\PostNewParameterOfCompoundParameterType.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\Iteration\POSTNewIterationSetup.json">
+    <None Update="Tests\EngineeringModel\Parameter\PostUpdateParameterToOptionDependent.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\Iteration\PostDeleteIterationSetup.json">
+    <None Update="Tests\EngineeringModel\Parameter\PostUpdateParameterToStateDependent.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\Option\PostNewOption.json">
+    <None Update="Tests\EngineeringModel\Parameter\PostUpdateStateDependentParameterToAnotherState.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\ParameterGroup\PostDeleteParameterGroup.json">
+    <None Update="Tests\EngineeringModel\ParametricConstraint\PostNewParametricConstraint.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\ParameterOverride\PostNewParameterOverride.json">
+    <None Update="Tests\EngineeringModel\ParametricConstraint\PostReorderParametricConstraints.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\ParameterSubscription\PostNewParameterSubscription.json">
+    <None Update="Tests\EngineeringModel\PossibleFiniteStateList\PostCreatePossibleFiniteState.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <Content Include="Tests\EngineeringModel\ParameterValueSet\PostUpdateParameterValueSetTemplate.json.txt">
+    <None Update="Tests\EngineeringModel\PossibleFiniteStateList\PostCreatePossibleFiniteStateListContainingTwoStates.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <None Include="Tests\EngineeringModel\ParameterValueSet\PostNewPossibleFiniteState.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\ParameterValueSet\PostNewPossibleFiniteStateList.json">
+    <None Update="Tests\EngineeringModel\PossibleFiniteStateList\PostDeletePossibleFiniteState.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\ParameterValueSet\PostNewStateDependentParameter.json">
+    <None Update="Tests\EngineeringModel\PossibleFiniteStateList\PostDeletePossibleFiniteStateAsProperty.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\ParameterValueSet\PostUpdateComputedValueOfParameterValueSet.json">
+    <None Update="Tests\EngineeringModel\PossibleFiniteStateList\PostReorderStatesOfPossibleFiniteStateList.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\Parameter\PostDeleteCreateParameter.json">
+    <None Update="Tests\EngineeringModel\PossibleFiniteState\PostDeletePossibleFiniteState.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\Parameter\PostNewOptionDependentParameter.json">
+    <None Update="Tests\EngineeringModel\Publication\PostNewPublication.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\Parameter\PostNewParameter.json">
+    <None Update="Tests\EngineeringModel\Publication\PostUpdateParameterValueSet.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\Parameter\PostNewParameterOfCompoundParameterType.json">
+    <None Update="Tests\EngineeringModel\RequirementsGroup\PostDeleteRequirementsGroup.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\ParameterValueSet\PostNewParameterValueSetAndDeleteOne.json">
+    <None Update="Tests\EngineeringModel\RequirementsGroup\PostNewRequirementsGroup.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\Parameter\PostUpdateParameterToOptionDependent.json">
+    <None Update="Tests\EngineeringModel\RequirementsSpecification\PostNewRequirementsSpecification.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\Parameter\PostUpdateParameterToStateDependent.json">
+    <None Update="Tests\EngineeringModel\Requirement\PostDeleteConstraintAsProperty.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\PossibleFiniteStateList\PostCreatePossibleFiniteStateListContainingTwoStates.json">
+    <None Update="Tests\EngineeringModel\Requirement\PostMoveRequirement.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\PossibleFiniteStateList\PostReorderStatesOfPossibleFiniteStateList.json">
+    <None Update="Tests\EngineeringModel\Requirement\PostNewRequirement.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\PossibleFiniteStateList\PostCreatePossibleFiniteState.json">
+    <None Update="Tests\EngineeringModel\RuleVerification\PostNewRuleVerification.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\PossibleFiniteStateList\PostDeletePossibleFiniteState.json">
+    <None Update="Tests\EngineeringModel\RuleVerification\PostReorderRuleVerification.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\PossibleFiniteStateList\PostDeletePossibleFiniteStateAsProperty.json">
+    <None Update="Tests\EngineeringModel\Section\PostDeleteSection.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\PossibleFiniteState\PostDeletePossibleFiniteState.json">
+    <None Update="Tests\EngineeringModel\Section\PostNewSections.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\RequirementsGroup\PostDeleteRequirementsGroup.json">
+    <None Update="Tests\SiteDirectory\ArrayParameterType\PostArrayParameterType.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\Publication\PostNewPublication.json">
+    <None Update="Tests\SiteDirectory\ArrayParameterType\PostDeleteDimension.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\Publication\PostUpdateParameterValueSet.json">
+    <None Update="Tests\SiteDirectory\ArrayParameterType\PostUpdateArrayParameterType.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\RequirementsGroup\PostNewRequirementsGroup.json">
+    <None Update="Tests\SiteDirectory\Category\PostAddPermissibleClass.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\RequirementsSpecification\PostNewRequirementsSpecification.json">
+    <None Update="Tests\SiteDirectory\Category\PostAddSuperCategory.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\Requirement\PostDeleteConstraintAsProperty.json">
+    <None Update="Tests\SiteDirectory\Category\PostDeletePermissibleClass.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\Requirement\PostMoveRequirement.json">
+    <None Update="Tests\SiteDirectory\Category\PostDeleteSuperCategory.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\Requirement\PostNewRequirement.json">
+    <None Update="Tests\SiteDirectory\Category\PostNewCategory.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\EngineeringModel\RuleVerification\PostNewRuleVerification.json">
+    <None Update="Tests\SiteDirectory\Citation\PostNewCitation.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\ArrayParameterType\PostArrayParameterType.json">
+    <None Update="Tests\SiteDirectory\CompoundParameterType\PostCompoundParameterType.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\Category\PostAddPermissibleClass.json">
+    <None Update="Tests\SiteDirectory\Constant\PostNewConstant.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\Category\PostAddSuperCategory.json">
+    <None Update="Tests\SiteDirectory\CyclicRatioScale\PostNewCyclicRatioScale.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\Category\PostDeletePermissibleClass.json">
+    <None Update="Tests\SiteDirectory\DecompositionRule\PostNewDecompositionRule.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\Category\PostDeleteSuperCategory.json">
+    <None Update="Tests\SiteDirectory\Definition\PostDeleteExampleAndNote.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\Category\PostNewCategory.json">
+    <None Update="Tests\SiteDirectory\Definition\PostNewDefinition.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\Citation\PostNewCitation.json">
+    <None Update="Tests\SiteDirectory\Definition\PostNoteExampleNewDefinition.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\CompoundParameterType\PostCompoundParameterType.json">
+    <None Update="Tests\SiteDirectory\Definition\PostReorderNoteExampleInDefinition.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\Constant\PostNewConstant.json">
+    <None Update="Tests\SiteDirectory\DerivedQuantityKind\PostNewCyclicFactor.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\CyclicRatioScale\PostNewCyclicRatioScale.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Update="Tests\SiteDirectory\EngineeringModelSetup\PostAddActiveDomain.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\DecompositionRule\PostNewDecompositionRule.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Update="Tests\SiteDirectory\EngineeringModelSetup\PostDeleteActiveDomain.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Tests\SiteDirectory\EngineeringModelSetup\PostEngineeringModelSetup.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Tests\SiteDirectory\EngineeringModelSetup\PostEngineeringModelSetupBasedOnExistingModel.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\Definition\PostNewDefinition.json">
+    <None Update="Tests\SiteDirectory\EnumerationParameterType\PostAddNewEnumerationValueDefinition.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\Definition\PostNoteExampleNewDefinition.json">
+    <None Update="Tests\SiteDirectory\EnumerationParameterType\PostDeleteEnumerationValueDefinition.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\Definition\PostReorderNoteExampleInDefinition.json">
+    <None Update="Tests\SiteDirectory\EnumerationParameterType\PostNewEnumerationParameterType.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\EngineeringModelSetup\PostAddActiveDomain.json">
+    <None Update="Tests\SiteDirectory\EnumerationParameterType\PostReorderEnumerationValueDefinition.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\EngineeringModelSetup\PostDeleteActiveDomain.json">
+    <None Update="Tests\SiteDirectory\Glossary\PostGlossaryUpdate.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\EngineeringModelSetup\PostEngineeringModelSetup.json">
+    <None Update="Tests\SiteDirectory\IterationSetup\PostUpdateCyclicIterationSetup.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\EnumerationParameterType\PostNewEnumerationParameterType.json">
+    <None Update="Tests\SiteDirectory\MeasurementScale\PostNewCyclicMappingToReferenceScale.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\Glossary\PostGlossaryUpdate.json">
+    <None Update="Tests\SiteDirectory\ModelReferenceDataLibrary\POSTIncMoveBinaryRelShipRuleFromModelRDLToSiteRDL.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\ModelReferenceDataLibrary\POSTIncMoveBinaryRelShipRuleFromModelRDLToSiteRDL.json">
+    <None Update="Tests\SiteDirectory\ModelReferenceDataLibrary\POSTMoveBinaryRelShipRuleFromModelRDLToSiteRDL.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\ModelReferenceDataLibrary\POSTMoveBinaryRelShipRuleFromModelRDLToSiteRDL.json">
+    <None Update="Tests\SiteDirectory\ModelReferenceDataLibrary\POSTMoveIndBinaryRelShipRuleFromModelRDLToSiteRDL.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\ModelReferenceDataLibrary\POSTMoveIndBinaryRelShipRuleFromModelRDLToSiteRDL.json">
+    <None Update="Tests\SiteDirectory\ParameterTypeComponent\PostReorderParameterTypeComponents.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\Participant\Post_Participant_With_Null_Domain.json">
+    <None Update="Tests\SiteDirectory\Participant\Post_Participant_With_Null_Domain.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\Person\PostDeleteTelephoneAsProperty.json">
+    <None Update="Tests\SiteDirectory\Person\PostDeleteTelephoneAsProperty.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\Person\Post_Persons_With_Passwords.json">
+    <None Update="Tests\SiteDirectory\Person\Post_Persons_With_Passwords.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\Person\Post_Person_With_Role_Null.json">
+    <None Update="Tests\SiteDirectory\Person\Post_Person_With_Role_Null.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\PrefixedUnit\PostNewPrefixedUnit.json">
+    <None Update="Tests\SiteDirectory\POSTNewDomainExpertUser.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\QuantityKindFactor\PostNewQuantityKindFactor.json">
+    <None Update="Tests\SiteDirectory\PrefixedUnit\PostNewPrefixedUnit.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\QuantityKindFactor\PostReorderQuantityKindFactor.json">
+    <None Update="Tests\SiteDirectory\QuantityKindFactor\PostNewQuantityKindFactor.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\ReferenceSource\PostNewReferenceSource.json">
+    <None Update="Tests\SiteDirectory\QuantityKindFactor\PostReorderQuantityKindFactor.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\QuantityKind\PostNewQuantityKind.json">
+    <None Update="Tests\SiteDirectory\QuantityKind\PostNewQuantityKind.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\QuantityKind\PostNewQuantityKind.json">
+    <None Update="Tests\SiteDirectory\QuantityKind\PostReorderQuantityKind.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\SiteReferenceDataLibrary\PostDeleteUnitAsProperty.json">
+    <None Update="Tests\SiteDirectory\ReferenceSource\PostNewReferenceSource.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\QuantityKind\PostReorderQuantityKind.json">
+    <None Update="Tests\SiteDirectory\SiteReferenceDataLibrary\PostDeleteUnitAsProperty.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\TelephoneNumber\PostDeleteTelephoneNumberVcardType.json">
+    <None Update="Tests\SiteDirectory\TelephoneNumber\PostDeleteTelephoneNumberVcardType.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\TelephoneNumber\PostNewTelephoneNumber.json">
+    <None Update="Tests\SiteDirectory\TelephoneNumber\PostNewTelephoneNumber.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\UnitFactor\PostNewUnitFactor.json">
+    <None Update="Tests\SiteDirectory\UnitFactor\PostNewUnitFactor.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\SiteDirectory\UnitFactor\PostReorderUnitFactor.json">
+    <None Update="Tests\SiteDirectory\UnitFactor\PostReorderUnitFactor.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Tests\SiteDirectory\EngineeringModelSetup\PostEngineeringModelSetupBasedOnExistingModel.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
-  </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\NUnit.3.12.0\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit.3.12.0\build\NUnit.props'))" />
-    <Error Condition="!Exists('..\packages\NUnit3TestAdapter.3.16.1\build\net35\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit3TestAdapter.3.16.1\build\net35\NUnit3TestAdapter.props'))" />
-  </Target>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>

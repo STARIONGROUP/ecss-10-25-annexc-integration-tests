@@ -3,10 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebservicesIntegrationTests", "WebservicesIntegrationTests\WebservicesIntegrationTests.csproj", "{E27B3A89-A1A0-4B5E-BF28-43041DF951EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebservicesIntegrationTests", "WebservicesIntegrationTests\WebservicesIntegrationTests.csproj", "{E27B3A89-A1A0-4B5E-BF28-43041DF951EC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{990D9450-1F45-4B8C-BE68-0232CD800023}"
 	ProjectSection(SolutionItems) = preProject
+		..\.gitignore = ..\.gitignore
+		..\LICENSE = ..\LICENSE
+		..\Nuget.Config = ..\Nuget.Config
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
