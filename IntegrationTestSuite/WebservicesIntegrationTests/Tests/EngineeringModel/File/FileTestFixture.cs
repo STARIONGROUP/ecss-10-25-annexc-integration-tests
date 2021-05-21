@@ -231,7 +231,7 @@ namespace WebservicesIntegrationTests
             CollectionAssert.AreEquivalent(expectedFileTypes, fileTypesArray);
 
             // Subsequent revision
-            var fileUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/file/86e1d711-9e12-406c-8017-555fefa94757");
+            var fileUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
             postJsonPath = this.GetPath("Tests/EngineeringModel/File/PostNewFileRevision.json");
             postFilePath = this.GetPath("Tests/EngineeringModel/File/1525ED651E5B609DAE099DEEDA8DBDB49CFF956F");
 
