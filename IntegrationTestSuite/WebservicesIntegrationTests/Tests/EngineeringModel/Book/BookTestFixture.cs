@@ -43,13 +43,12 @@ namespace WebservicesIntegrationTests
         {
             SiteDirectoryTestFixture.AddDomainExpertUserJane(this, out var userName, out var passWord);
             this.CreateNewWebClientForUser(userName, passWord);
-
-            Assert.Fail("Here we are posting to EngineeringModel instead of Iteration, this needs to be a POST to EngineeringModel/iid/iteration/iid as per 10-25");
-            var bookUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
             var postBodyPath = this.GetPath("Tests/EngineeringModel/Book/PostNewBooks.json");
 
             var postBody = this.GetJsonFromFile(postBodyPath);
-            var jArray = this.WebClient.PostDto(bookUri, postBody);
+            var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
             //check if there are 3 classes returned
             Assert.AreEqual(3, jArray.Count);
@@ -59,8 +58,7 @@ namespace WebservicesIntegrationTests
             // Verify the amount of returned properties of the EngineeringModel
             Assert.AreEqual(14, engineeringModel.Children().Count());
 
-            var bookList = JsonConvert.DeserializeObject<List<OrderedItem>>(
-                engineeringModel[PropertyNames.Book].ToString());
+            var bookList = JsonConvert.DeserializeObject<List<OrderedItem>>(engineeringModel[PropertyNames.Book].ToString());
 
             var expectedBookList =
                 new List<OrderedItem>
@@ -69,9 +67,7 @@ namespace WebservicesIntegrationTests
                     new OrderedItem(2, "20a8f908-94c8-4093-8f74-7b6f25433826")
                 };
 
-            CollectionAssert.AreEquivalent(
-                expectedBookList,
-                bookList);
+            CollectionAssert.AreEquivalent(expectedBookList, bookList);
 
             var book1 = jArray.Single(x => (string) x[PropertyNames.Iid] == "f84b5d72-be4d-418c-90db-19e311e75be3");
             var book2 = jArray.Single(x => (string) x[PropertyNames.Iid] == "20a8f908-94c8-4093-8f74-7b6f25433826");
@@ -82,15 +78,14 @@ namespace WebservicesIntegrationTests
             postBodyPath = this.GetPath("Tests/EngineeringModel/Book/PostDeleteBooks.json");
 
             postBody = this.GetJsonFromFile(postBodyPath);
-            jArray = this.WebClient.PostDto(bookUri, postBody);
+            jArray = this.WebClient.PostDto(iterationUri, postBody);
 
             engineeringModel = jArray.Single(x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
 
             // Verify the amount of returned properties of the EngineeringModel
             Assert.AreEqual(14, engineeringModel.Children().Count());
 
-            bookList = JsonConvert.DeserializeObject<List<OrderedItem>>(
-                engineeringModel[PropertyNames.Book].ToString());
+            bookList = JsonConvert.DeserializeObject<List<OrderedItem>>(engineeringModel[PropertyNames.Book].ToString());
 
             expectedBookList =
                 new List<OrderedItem>
