@@ -169,9 +169,9 @@ namespace WebservicesIntegrationTests.Net
         /// <returns>
         /// A <see cref="JArray"/> with the response or null if the response was empty.
         /// </returns>
-        public JArray PostFile(Uri uri, string postJsonPath, string postFilePath)
+        public async Task<JArray>  PostFile(Uri uri, string postJsonPath, string postFilePath)
         {
-            var response = this.RetrieveHttpPostResponse(uri, postJsonPath, postFilePath);
+            var response = await this.RetrieveHttpPostResponse(uri, postJsonPath, postFilePath);
             return this.ExtractJarrayFromResponse(response);
         }
 
@@ -201,9 +201,9 @@ namespace WebservicesIntegrationTests.Net
         /// <returns>
         /// The <see cref="byte[]"/> of the file.
         /// </returns>
-        public byte[] GetModelExportFile(Uri uri, string[] engineeringModelSetupIds)
+        public async Task<byte[]> GetModelExportFile(Uri uri, string[] engineeringModelSetupIds)
         {
-            return this.RetrieveHttpModelExportResponse(uri, engineeringModelSetupIds);
+            return await this.RetrieveHttpModelExportResponse(uri, engineeringModelSetupIds);
         }
 
         /// <summary>
@@ -346,7 +346,7 @@ namespace WebservicesIntegrationTests.Net
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        private string RetrieveHttpPostResponse(Uri uri, string postJsonPath, string postFilePath)
+        private async Task<string> RetrieveHttpPostResponse(Uri uri, string postJsonPath, string postFilePath)
         {
             var httpClient = new HttpClient();
             var encoded = Convert.ToBase64String(Encoding.GetEncoding(Utf8).GetBytes(this.UserName + ":" + this.Password));
@@ -364,11 +364,11 @@ namespace WebservicesIntegrationTests.Net
 
             var form = new MultipartFormDataContent { jsonContent, fileContent };
 
-            var httpResponse = httpClient.PostAsync(uri, form).Result;
+            var httpResponse = await httpClient.PostAsync(uri, form);
 
             httpResponse.EnsureSuccessStatusCode();
             httpClient.Dispose();
-            var response = httpResponse.Content.ReadAsStringAsync().Result;
+            var response = await httpResponse.Content.ReadAsStringAsync();
 
             return response;
         }
@@ -410,7 +410,7 @@ namespace WebservicesIntegrationTests.Net
         /// <returns>
         /// The <see cref="string"/> that contain the response body.
         /// </returns>
-        private byte[] RetrieveHttpModelExportResponse(Uri uri, string[] engineeringModelSetupIds)
+        private async Task<byte[]> RetrieveHttpModelExportResponse(Uri uri, string[] engineeringModelSetupIds)
         {
             var request = this.CreateWebRequest(uri, HttpPostMethod);
 
@@ -421,7 +421,7 @@ namespace WebservicesIntegrationTests.Net
 
             var httpResponse = (HttpWebResponse)request.GetResponse();
             var content = new StreamContent(httpResponse.GetResponseStream());
-            var body = content.ReadAsByteArrayAsync().Result;
+            var body = await content.ReadAsByteArrayAsync();
 
             return body;
         }

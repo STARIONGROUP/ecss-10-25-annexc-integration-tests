@@ -24,6 +24,7 @@ namespace WebservicesIntegrationTests
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Threading.Tasks;
 
     using Ionic.Zip;
 
@@ -141,7 +142,7 @@ namespace WebservicesIntegrationTests
 
         [Test]
         [Category("EXPORT")]
-        public void VerifyThatAModelCanBeExportedWithWebApi()
+        public async Task VerifyThatAModelCanBeExportedWithWebApi()
         {
             string[] engineeringodelSetupIds = { "116f6253-89bb-47d4-aa24-d11d197e43c9" };
 
@@ -149,7 +150,7 @@ namespace WebservicesIntegrationTests
             var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294?export=true");
 
             // Download a model export zip file
-            var responseBody = this.WebClient.GetModelExportFile(siteDirectoryUri, engineeringodelSetupIds);
+            var responseBody = await this.WebClient.GetModelExportFile(siteDirectoryUri, engineeringodelSetupIds);
 
             var path = Path.GetTempFileName();
             File.WriteAllBytes(path, responseBody);
