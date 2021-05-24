@@ -128,6 +128,8 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatARuleCanBeMovedFromModelRdlToSiteRdlFromWebApi()
         {
+            this.WebClient.Restore(this.Settings.Hostname);
+
             var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
 
             var postBodyPath = this.GetPath("Tests/SiteDirectory/ModelReferenceDataLibrary/POSTMoveBinaryRelShipRuleFromModelRDLToSiteRDL.json");
