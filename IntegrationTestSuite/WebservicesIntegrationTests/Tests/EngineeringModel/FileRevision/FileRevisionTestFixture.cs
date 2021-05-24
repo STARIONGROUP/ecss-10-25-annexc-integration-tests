@@ -23,7 +23,9 @@ namespace WebservicesIntegrationTests
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Net;
     using System.Net.Http;
+    using System.Threading.Tasks;
 
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
@@ -31,7 +33,7 @@ namespace WebservicesIntegrationTests
     using NUnit.Framework;
 
     [TestFixture]
-    public class FileRevisionTestFixture : WebClientTestFixtureBase
+    public class FileRevisionTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
         [Test]
         [Category("GET")]
@@ -88,18 +90,19 @@ namespace WebservicesIntegrationTests
 
         [Test]
         [Category("POST")]
-        public void VerifyThatFileRevisionCannotBeUploadedWhenParticipantIsNotOwner()
+        public async Task VerifyThatFileRevisionCannotBeUploadedWhenParticipantIsNotOwner()
         {
             SiteDirectoryTestFixture.AddDomainExpertUserJane(this, out var userName, out var passWord);
             this.CreateNewWebClientForUser(userName, passWord);
 
             // Subsequent revision
-            var fileUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/file/95bf0f17-1273-4338-98ae-839016242775");
+            var fileUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
             var postJsonPath = this.GetPath("Tests/EngineeringModel/File/PostNewFileRevision.json");
             var postFilePath = this.GetPath("Tests/EngineeringModel/File/1525ED651E5B609DAE099DEEDA8DBDB49CFF956F");
 
-            // Jane is not allowed to upload
-            Assert.Throws<HttpRequestException>(() => this.WebClient.PostFile(fileUri, postJsonPath, postFilePath));
+            var exception = Assert.CatchAsync<HttpRequestException>(async () => await this.WebClient.PostFile(fileUri, postJsonPath, postFilePath));
+
+            Assert.That(exception.StatusCode, Is.EqualTo(HttpStatusCode.Unauthorized));
         }
 
         /// <summary>

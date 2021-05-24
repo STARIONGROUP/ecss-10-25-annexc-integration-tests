@@ -78,21 +78,6 @@ namespace WebservicesIntegrationTests
 
         [Test]
         [Category("POST")]
-        public void VerifyThatARuleCannotBeMovedFromModelRdlToSiteRdlWithoutCategoriesFromWebApi()
-        {
-            var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
-
-            var postBodyPath = this.GetPath("Tests/SiteDirectory/ModelReferenceDataLibrary/POSTIncMoveBinaryRelShipRuleFromModelRDLToSiteRDL.json");
-
-            var postBody = base.GetJsonFromFile(postBodyPath);
-            var jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
-
-            // TODO it needs explanation what we test and what we expect - see https://github.com/RHEAGROUP/ecss-10-25-annexc-integration-tests/issues/35
-            Assert.Inconclusive();
-        }
-
-        [Test]
-        [Category("POST")]
         public void VerifyThatARuleWithoutSpecificCategoriesForItCanBeMovedFromModelRdlToSiteRdlFromWebApi()
         {
             var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
@@ -138,7 +123,7 @@ namespace WebservicesIntegrationTests
             IList<string> rules = rulesArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedRules, rules);
         }
-        
+
         [Test]
         [Category("POST")]
         public void VerifyThatARuleCanBeMovedFromModelRdlToSiteRdlFromWebApi()

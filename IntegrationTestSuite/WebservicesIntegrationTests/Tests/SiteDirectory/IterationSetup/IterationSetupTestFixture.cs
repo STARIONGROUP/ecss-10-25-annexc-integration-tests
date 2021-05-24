@@ -26,7 +26,7 @@ namespace WebservicesIntegrationTests
     using NUnit.Framework;
 
     [TestFixture]
-    public class IterationSetupTestFixture : WebClientTestFixtureBase
+    public class IterationSetupTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
         [Test]
         [Category("POST")]

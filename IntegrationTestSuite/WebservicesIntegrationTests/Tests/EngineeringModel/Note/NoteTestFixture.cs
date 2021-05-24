@@ -36,17 +36,17 @@ namespace WebservicesIntegrationTests
         [Ignore("Doen't work because Note ordered implementation is not OK. See https://github.com/RHEAGROUP/CDP4-WebServices-Community-Edition/issues/126")]
         [CdpVersion_1_1_0]
         [Category("POST")]
+        [Test]
         public void VerifyThatNotesCanBeAddedAndDeleted()
         {
             SiteDirectoryTestFixture.AddDomainExpertUserJane(this, out var userName, out var passWord);
             this.CreateNewWebClientForUser(userName, passWord);
 
-            Assert.Fail("Here we are posting to EngineeringModel instead of Iteration, this needs to be a POST to EngineeringModel/iid/iteration/iid as per 10-25");
-            var pageUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56"); 
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c"); 
             var postBodyPath = this.GetPath("Tests/EngineeringModel/Book/PostNewBooks.json");
             var postBody = this.GetJsonFromFile(postBodyPath);
 
-            var jArray = this.WebClient.PostDto(pageUri, postBody);
+            var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
             //check if there are 3 classes returned
             Assert.AreEqual(3, jArray.Count);
@@ -54,7 +54,7 @@ namespace WebservicesIntegrationTests
             postBodyPath = this.GetPath("Tests/EngineeringModel/Section/PostNewSections.json");
             postBody = this.GetJsonFromFile(postBodyPath);
 
-            jArray = this.WebClient.PostDto(pageUri, postBody);
+            jArray = this.WebClient.PostDto(iterationUri, postBody);
 
             //check if there are 4 classes returned
             Assert.AreEqual(4, jArray.Count);
@@ -62,7 +62,7 @@ namespace WebservicesIntegrationTests
             postBodyPath = this.GetPath("Tests/EngineeringModel/Page/PostNewPages.json");
             postBody = this.GetJsonFromFile(postBodyPath);
 
-            jArray = this.WebClient.PostDto(pageUri, postBody);
+            jArray = this.WebClient.PostDto(iterationUri, postBody);
 
             //check if there are 4 classes returned
             Assert.AreEqual(4, jArray.Count);
@@ -70,7 +70,7 @@ namespace WebservicesIntegrationTests
             postBodyPath = this.GetPath("Tests/EngineeringModel/Note/PostNewNotes.json");
             postBody = this.GetJsonFromFile(postBodyPath);
 
-            jArray = this.WebClient.PostDto(pageUri, postBody);
+            jArray = this.WebClient.PostDto(iterationUri, postBody);
 
             //check if there are 4 classes returned
             Assert.AreEqual(4, jArray.Count);
@@ -101,7 +101,7 @@ namespace WebservicesIntegrationTests
 
             postBodyPath = this.GetPath("Tests/EngineeringModel/Note/PostDeleteNote.json");
             postBody = this.GetJsonFromFile(postBodyPath);
-            jArray = this.WebClient.PostDto(pageUri, postBody);
+            jArray = this.WebClient.PostDto(iterationUri, postBody);
 
             page = jArray.Single(x => (string) x[PropertyNames.Iid] == "663114f6-9bb1-4751-a3ed-60bad354913e");
 
