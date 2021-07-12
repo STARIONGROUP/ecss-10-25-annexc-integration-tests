@@ -62,7 +62,7 @@ namespace WebservicesIntegrationTests
                 "EngineeringModels/9ec982e4-ef72-4953-aa85-b158a95d8d56/FileRevisions/B95EC201AE3EE89D407449D692E69BB97C228A7E"
             };
 
-            CollectionAssert.AreEquivalent(expectedZipEntries, zip.EntryFileNames.ToArray());
+            CollectionAssert.AreEquivalent(expectedZipEntries, zip.EntryFileNames.ToArray(), "This fails on a Nancy COMET Webservice");
         }
 
         [Test]
@@ -95,7 +95,7 @@ namespace WebservicesIntegrationTests
                 "EngineeringModels/9ec982e4-ef72-4953-aa85-b158a95d8d56/FileRevisions/"
             };
 
-            CollectionAssert.AreEquivalent(expectedZipEntries, zip.EntryFileNames.ToArray());
+            CollectionAssert.AreEquivalent(expectedZipEntries, zip.EntryFileNames.ToArray(), "This fails on a Nancy COMET Webservice");
         }
     }
 }

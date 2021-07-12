@@ -233,11 +233,52 @@ namespace WebservicesIntegrationTests
             var postBody = testFixture.GetJsonFromFile(postBodyPath);
             var jArray = testFixture.WebClient.PostDto(uri, postBody);
 
+            // check if there are 30 objects
+            Assert.AreEqual(30, jArray.Count);
+
+            userName = "Jane";
+            passWord = "Jane";
+        }
+
+        /// <summary>
+        /// An isolated method that can add a specific user to the datastore using a <see cref="WebClientTestFixtureBase"/>'s <see cref="WebClient"/>
+        /// </summary>
+        public static void AddInActiveUserJane(WebClientTestFixtureBase testFixture, out string userName, out string passWord)
+        {
+            // define the URI on which to perform a GET request
+            var uri = new Uri($"{testFixture.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
+
+            var postBodyPath = testFixture.GetPath("Tests/SiteDirectory/POSTNewInActiveUser.json");
+
+            var postBody = testFixture.GetJsonFromFile(postBodyPath);
+            var jArray = testFixture.WebClient.PostDto(uri, postBody);
+
             // check if there are 29 objects
             Assert.AreEqual(29, jArray.Count);
 
             userName = "Jane";
             passWord = "Jane";
         }
+
+        /// <summary>
+        /// An isolated method that can add a specific user to the datastore using a <see cref="WebClientTestFixtureBase"/>'s <see cref="WebClient"/>
+        /// </summary>
+        public static void AddDeprecatedUserJane(WebClientTestFixtureBase testFixture, out string userName, out string passWord)
+        {
+            // define the URI on which to perform a GET request
+            var uri = new Uri($"{testFixture.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
+
+            var postBodyPath = testFixture.GetPath("Tests/SiteDirectory/POSTNewDeprecatedUser.json");
+
+            var postBody = testFixture.GetJsonFromFile(postBodyPath);
+            var jArray = testFixture.WebClient.PostDto(uri, postBody);
+
+            // check if there are 29 objects
+            Assert.AreEqual(29, jArray.Count);
+
+            userName = "Jane";
+            passWord = "Jane";
+        }
+
     }
 }

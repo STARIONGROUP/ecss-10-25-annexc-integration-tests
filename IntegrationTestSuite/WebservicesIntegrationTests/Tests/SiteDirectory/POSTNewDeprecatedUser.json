@@ -332,17 +332,6 @@
       "revisionNumber": 1
     },
     {
-      "accessRight": "SAME_AS_CONTAINER",
-      "classKind": "ParticipantPermission",
-      "excludedDomain": [],
-      "excludedPerson": [],
-      "iid": "b7054c81-c1fd-4b6c-8d40-fcbb3f264673",
-      "isDeprecated": false,
-      "modifiedOn": "0001-01-01T00:00:00.000Z",
-      "objectClass": "Definition",
-      "revisionNumber": 1
-    },
-    {
       "accessRight": "NONE",
       "classKind": "ParticipantPermission",
       "excludedDomain": [],
@@ -551,7 +540,7 @@
       "isDeprecated": false,
       "modifiedOn": "2019-12-05T13:54:53.284Z",
       "name": "Janes Participant Role",
-      "participantPermission": [ "017efb99-9398-437b-a084-0e88517374d7", "034ff311-e213-48f1-a9c2-361a1db29d39", "15b20906-7ac9-445d-8a22-63a835a6aa9a", "1807bc24-b391-459b-97ac-146aedc7d907", "27833ea5-a741-4c63-af56-e57470c70659", "2eb581fa-1eed-49d5-a9cf-ab7a30b6333f", "30791662-5e1d-4b8a-b32b-365d2f7dae77", "37a855fb-a168-42ad-abe4-cf9c3257119e", "394ac066-4d6c-43b0-afff-9c3ff337c4ca", "438acc43-b4f0-4c69-8a68-eb8c18fbf3c0", "4be0adf6-215f-4c65-894e-9a9c60597e50", "4fb49d82-4815-4904-979f-91608f5fb497", "56d31381-ed75-476c-980d-f5159c9a4922", "5eb18731-bf5e-4198-894c-0ef736956bb2", "62523523-9c9d-470f-b29b-620475749b76", "637a71ad-495b-4834-9cb6-b6329fd02e09", "64be5c3f-42a9-45da-9978-bcb08fea2b03", "6863d1da-bb6b-4cf7-a46e-37e255ce713a", "6b5517ee-6e0e-4c89-ab79-8c1a04983c8b", "71014036-3493-40f1-8375-4036021a2b2b", "751a322d-2415-4f23-86e1-675985ab6e65", "76136ce8-8918-45d8-a1ae-4e66645440dc", "7720ce1c-4f95-4c11-b1cc-96d9f1cddd4e", "7bcf5a4f-1d2f-4c32-bdd2-9fbe651e2c25", "7c3d7cb6-2cd9-4c88-8891-1ed097b5a64c", "7f3f2abd-81f5-4028-97a5-328c122e5df7", "816ae1d4-4b25-463f-86c2-fbac8a2eb846", "8bb80a42-4988-457d-89c3-6a0083a906a5", "8d66c3c5-696e-44af-af2f-97a6419431bc", "98ecf9f8-cdc8-4cdf-ad4c-af1ab86be92d", "b7054c81-c1fd-4b6c-8d40-fcbb3f264673", "a0d9b688-dbf5-4678-aaf4-84eb4053d527", "a2b7d976-248d-4fdb-b8f0-533fde8fadf4", "a5c2d5a3-e0af-4969-a64e-1bb5a8f81850", "a6997e44-1bdb-458a-b69d-0ec72547af6d", "af9a44ec-dd06-4bcf-b2b2-8f222bac5962", "b4d829ac-d521-4993-8ca1-0f9bdd28e65c", "bf58bbee-0c92-4a1c-88bc-f531060057c0", "bfc04e0e-b826-4c34-b11f-5f18510c3cc4", "c546f4ab-f74e-48df-99f8-4a0e32420ab5", "c613b065-efbe-4cda-8396-e3e1de12b29a", "ca066642-0e28-4371-827a-5135d12e3f4a", "cb179c65-69a6-427d-a12c-f484815792e2", "d04a8a52-b0fe-4fe8-83d4-f6814a0d6b1a", "d2adc3eb-6020-4123-816d-c0c584af6ac3", "eb0154de-db92-4aaf-8246-47c878dac0c0", "ec280485-13a9-42c6-b321-25fd70254e75", "f6a08bc6-6de2-44d9-a91f-e18cf057c3bb", "fb6acf07-72fd-4cbd-8a1e-20923e4964c0" ],
+      "participantPermission": [ "017efb99-9398-437b-a084-0e88517374d7", "034ff311-e213-48f1-a9c2-361a1db29d39", "15b20906-7ac9-445d-8a22-63a835a6aa9a", "1807bc24-b391-459b-97ac-146aedc7d907", "27833ea5-a741-4c63-af56-e57470c70659", "2eb581fa-1eed-49d5-a9cf-ab7a30b6333f", "30791662-5e1d-4b8a-b32b-365d2f7dae77", "37a855fb-a168-42ad-abe4-cf9c3257119e", "394ac066-4d6c-43b0-afff-9c3ff337c4ca", "438acc43-b4f0-4c69-8a68-eb8c18fbf3c0", "4be0adf6-215f-4c65-894e-9a9c60597e50", "4fb49d82-4815-4904-979f-91608f5fb497", "56d31381-ed75-476c-980d-f5159c9a4922", "5eb18731-bf5e-4198-894c-0ef736956bb2", "62523523-9c9d-470f-b29b-620475749b76", "637a71ad-495b-4834-9cb6-b6329fd02e09", "64be5c3f-42a9-45da-9978-bcb08fea2b03", "6863d1da-bb6b-4cf7-a46e-37e255ce713a", "6b5517ee-6e0e-4c89-ab79-8c1a04983c8b", "71014036-3493-40f1-8375-4036021a2b2b", "751a322d-2415-4f23-86e1-675985ab6e65", "76136ce8-8918-45d8-a1ae-4e66645440dc", "7720ce1c-4f95-4c11-b1cc-96d9f1cddd4e", "7bcf5a4f-1d2f-4c32-bdd2-9fbe651e2c25", "7c3d7cb6-2cd9-4c88-8891-1ed097b5a64c", "7f3f2abd-81f5-4028-97a5-328c122e5df7", "816ae1d4-4b25-463f-86c2-fbac8a2eb846", "8bb80a42-4988-457d-89c3-6a0083a906a5", "8d66c3c5-696e-44af-af2f-97a6419431bc", "98ecf9f8-cdc8-4cdf-ad4c-af1ab86be92d", "a0d9b688-dbf5-4678-aaf4-84eb4053d527", "a2b7d976-248d-4fdb-b8f0-533fde8fadf4", "a5c2d5a3-e0af-4969-a64e-1bb5a8f81850", "a6997e44-1bdb-458a-b69d-0ec72547af6d", "af9a44ec-dd06-4bcf-b2b2-8f222bac5962", "b4d829ac-d521-4993-8ca1-0f9bdd28e65c", "bf58bbee-0c92-4a1c-88bc-f531060057c0", "bfc04e0e-b826-4c34-b11f-5f18510c3cc4", "c546f4ab-f74e-48df-99f8-4a0e32420ab5", "c613b065-efbe-4cda-8396-e3e1de12b29a", "ca066642-0e28-4371-827a-5135d12e3f4a", "cb179c65-69a6-427d-a12c-f484815792e2", "d04a8a52-b0fe-4fe8-83d4-f6814a0d6b1a", "d2adc3eb-6020-4123-816d-c0c584af6ac3", "eb0154de-db92-4aaf-8246-47c878dac0c0", "ec280485-13a9-42c6-b321-25fd70254e75", "f6a08bc6-6de2-44d9-a91f-e18cf057c3bb", "fb6acf07-72fd-4cbd-8a1e-20923e4964c0"],
       "revisionNumber": 5,
       "shortName": "Jane"
     },
@@ -564,9 +553,9 @@
       "excludedDomain": [],
       "excludedPerson": [],
       "givenName": "Jane",
-      "iid": "d5e54a33-127a-45b6-957d-d062db69368a",
+      "iid": "3b44a79a-a0fb-44fc-a757-c203ea9e68fe",
       "isActive": true,
-      "isDeprecated": false,
+      "isDeprecated": true,
       "modifiedOn": "2019-12-05T13:55:40.581Z",
       "organization": "cd22fc45-d898-4fac-85fc-fbcb7d7b12a7",
       "organizationalUnit": null,
@@ -586,7 +575,7 @@
       "iid": "1371659c-9769-41a6-94c6-d2d3856d0fda",
       "isActive": true,
       "modifiedOn": "2019-12-05T13:56:04.078Z",
-      "person": "d5e54a33-127a-45b6-957d-d062db69368a",
+      "person": "3b44a79a-a0fb-44fc-a757-c203ea9e68fe",
       "revisionNumber": 8,
       "role": "dd3b91a8-91de-4a8f-96d6-f8435bb9d379",
       "selectedDomain": "eb759723-14b9-49f4-8611-544d037bb764"
@@ -597,7 +586,7 @@
       "classKind": "SiteDirectory",
       "iid": "f13de6f8-b03a-46e7-a492-53b2f260f294",
       "participantRole": [ "dd3b91a8-91de-4a8f-96d6-f8435bb9d379" ],
-      "person": [ "d5e54a33-127a-45b6-957d-d062db69368a" ]
+      "person": [ "3b44a79a-a0fb-44fc-a757-c203ea9e68fe" ]
     },
     {
       "classKind": "EngineeringModelSetup",

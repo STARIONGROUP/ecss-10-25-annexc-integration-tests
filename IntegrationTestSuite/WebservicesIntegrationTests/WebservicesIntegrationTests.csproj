@@ -180,6 +180,15 @@
     <None Update="Tests\EngineeringModel\Parameter\PostNewParameterOfCompoundParameterType.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Tests\SiteDirectory\POSTNewDeprecatedUser.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tests\SiteDirectory\POSTNewInActiveUser.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tests\SiteDirectory\POSTNewDomainExpertUser.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Tests\EngineeringModel\Parameter\PostUpdateParameterToOptionDependent.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -232,6 +241,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Tests\EngineeringModel\Requirement\PostMoveRequirement.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Tests\EngineeringModel\Requirement\PostUpdateDefinition.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Tests\EngineeringModel\Requirement\PostNewRequirement.json">
@@ -358,9 +370,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Tests\SiteDirectory\Person\Post_Person_With_Role_Null.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Tests\SiteDirectory\POSTNewDomainExpertUser.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Tests\SiteDirectory\PrefixedUnit\PostNewPrefixedUnit.json">

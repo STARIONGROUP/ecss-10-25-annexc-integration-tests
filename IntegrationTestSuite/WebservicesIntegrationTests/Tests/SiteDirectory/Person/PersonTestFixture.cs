@@ -336,5 +336,31 @@ namespace WebservicesIntegrationTests
             IList<string> up = userPreferences.Select(x => (string) x).ToList();
             Assert.IsEmpty(up);
         }
+
+        [Test]
+        public void VerifyThatInActivePersonReturnsUnauthorizedFromWebApi()
+        {
+            SiteDirectoryTestFixture.AddInActiveUserJane(this, out var userName, out var passWord);
+            this.CreateNewWebClientForUser(userName, passWord);
+
+            // define the URI on which to perform a GET request
+            var uri = new Uri($"{this.Settings.Hostname}/SiteDirectory");
+
+            var exception = Assert.Catch<WebException>(() => this.WebClient.GetDto(uri));
+            Assert.AreEqual(HttpStatusCode.Unauthorized, ((HttpWebResponse)exception.Response).StatusCode);
+        }
+
+        [Test]
+        public void VerifyThatDeprecatedPersonReturnsUnauthorizedFromWebApi()
+        {
+            SiteDirectoryTestFixture.AddDeprecatedUserJane(this, out var userName, out var passWord);
+            this.CreateNewWebClientForUser(userName, passWord);
+
+            // define the URI on which to perform a GET request
+            var uri = new Uri($"{this.Settings.Hostname}/SiteDirectory");
+
+            var exception = Assert.Catch<WebException>(() => this.WebClient.GetDto(uri));
+            Assert.AreEqual(HttpStatusCode.Unauthorized, ((HttpWebResponse)exception.Response).StatusCode);
+        }
     }
 }
