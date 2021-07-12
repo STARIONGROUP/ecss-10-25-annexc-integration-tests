@@ -41,6 +41,7 @@ namespace WebservicesIntegrationTests
             var exportUri = new Uri($"{this.Settings.Hostname}/export?includeFileData=true");
 
             // Download a model export zip file
+            // This fails on a Nancy COMET Webservice
             var responseBody = await this.WebClient.GetModelExportFile(exportUri, engineeringodelSetupIds);
 
             var path = Path.GetTempFileName();
@@ -62,7 +63,7 @@ namespace WebservicesIntegrationTests
                 "EngineeringModels/9ec982e4-ef72-4953-aa85-b158a95d8d56/FileRevisions/B95EC201AE3EE89D407449D692E69BB97C228A7E"
             };
 
-            CollectionAssert.AreEquivalent(expectedZipEntries, zip.EntryFileNames.ToArray(), "This fails on a Nancy COMET Webservice");
+            CollectionAssert.AreEquivalent(expectedZipEntries, zip.EntryFileNames.ToArray());
         }
 
         [Test]
@@ -75,6 +76,7 @@ namespace WebservicesIntegrationTests
             var exportUri = new Uri($"{this.Settings.Hostname}/export");
 
             // Download a model export zip file
+            // This fails on a Nancy COMET Webservice
             var responseBody = await this.WebClient.GetModelExportFile(exportUri, engineeringodelSetupIds);
 
             var path = Path.GetTempFileName();
@@ -95,7 +97,7 @@ namespace WebservicesIntegrationTests
                 "EngineeringModels/9ec982e4-ef72-4953-aa85-b158a95d8d56/FileRevisions/"
             };
 
-            CollectionAssert.AreEquivalent(expectedZipEntries, zip.EntryFileNames.ToArray(), "This fails on a Nancy COMET Webservice");
+            CollectionAssert.AreEquivalent(expectedZipEntries, zip.EntryFileNames.ToArray());
         }
     }
 }

@@ -211,7 +211,7 @@
       "revisionNumber": 1
     },
     {
-      "accessRight": "READ",
+      "accessRight": "SAME_AS_CONTAINER",
       "classKind": "ParticipantPermission",
       "excludedDomain": [],
       "excludedPerson": [],

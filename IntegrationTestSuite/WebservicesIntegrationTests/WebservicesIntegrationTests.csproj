@@ -123,6 +123,12 @@
     <None Update="Tests\EngineeringModel\Iteration\POSTNewIterationSetup.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Tests\EngineeringModel\Iteration\PostUpdateAccessRights.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Tests\EngineeringModel\Iteration\PostUpdateIteration.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Tests\EngineeringModel\Note\PostDeleteNote.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -313,6 +319,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Tests\SiteDirectory\DerivedQuantityKind\PostNewCyclicFactor.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Tests\SiteDirectory\DomainOfExpertise\PostUpdateDomainOfExpertise.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Tests\SiteDirectory\DomainOfExpertise\PostUpdatePersonPermission.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Tests\SiteDirectory\EngineeringModelSetup\PostAddActiveDomain.json">

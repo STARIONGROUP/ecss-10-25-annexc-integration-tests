@@ -1,0 +1,16 @@
+{
+  "_delete": [],
+  "_create": [],
+  "_update": [
+    {
+      "accessRight": "SAME_AS_CONTAINER",
+      "classKind": "PersonPermission",
+      "iid": "9108f724-fa36-49c2-a589-e5e3f1e98be1"
+    },
+    {
+      "accessRight": "READ",
+      "classKind": "PersonPermission",
+      "iid": "007e23c2-62c4-459d-8cb1-499d9d014bdc"
+    }
+  ]
+}
