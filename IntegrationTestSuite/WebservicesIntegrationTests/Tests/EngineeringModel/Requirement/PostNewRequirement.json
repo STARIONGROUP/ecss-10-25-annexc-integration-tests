@@ -2,20 +2,27 @@
   "_delete": [],
   "_create": [
     {
+      "iid": "3d8fa7f7-5235-4fe4-a026-207015e5822c",
+      "revisionNumber": 0,
+      "classKind": "Definition",
+      "languageCode": "en-GB",
+      "content": "this is a definition" 
+    },
+    {
       "iid": "09af5432-b7a5-4932-a983-b1065723efb7",
       "revisionNumber": 0,
       "classKind": "Requirement",
       "name": "create requirement",
       "shortName": "createrequirement",
       "alias": [],
-      "definition": [],
+      "definition": [ "3d8fa7f7-5235-4fe4-a026-207015e5822c" ],
       "hyperlink": [],
       "category": [],
       "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
       "parameterValue": [],
       "group": [],
       "parametricConstraint": [],
-      "isDeprecated": false 
+      "isDeprecated": false
     }
   ],
   "_update": [

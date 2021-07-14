@@ -102,7 +102,7 @@ namespace WebservicesIntegrationTests
 
             var exception = Assert.CatchAsync<HttpRequestException>(async () => await this.WebClient.PostFile(fileUri, postJsonPath, postFilePath));
 
-            Assert.That(exception.StatusCode, Is.EqualTo(HttpStatusCode.Unauthorized));
+            Assert.That(exception.StatusCode, Is.EqualTo(HttpStatusCode.Unauthorized), "This fails on a Nancy COMET Webservice");
         }
 
         /// <summary>

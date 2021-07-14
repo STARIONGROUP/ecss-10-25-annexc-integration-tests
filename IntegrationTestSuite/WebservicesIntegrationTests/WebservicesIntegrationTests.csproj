@@ -123,6 +123,12 @@
     <None Update="Tests\EngineeringModel\Iteration\POSTNewIterationSetup.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Tests\EngineeringModel\Iteration\PostUpdateAccessRights.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Tests\EngineeringModel\Iteration\PostUpdateIteration.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Tests\EngineeringModel\Note\PostDeleteNote.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -180,6 +186,15 @@
     <None Update="Tests\EngineeringModel\Parameter\PostNewParameterOfCompoundParameterType.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Tests\SiteDirectory\POSTNewDeprecatedUser.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tests\SiteDirectory\POSTNewInActiveUser.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tests\SiteDirectory\POSTNewDomainExpertUser.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Tests\EngineeringModel\Parameter\PostUpdateParameterToOptionDependent.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -232,6 +247,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Tests\EngineeringModel\Requirement\PostMoveRequirement.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Tests\EngineeringModel\Requirement\PostUpdateDefinition.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Tests\EngineeringModel\Requirement\PostNewRequirement.json">
@@ -303,6 +321,12 @@
     <None Update="Tests\SiteDirectory\DerivedQuantityKind\PostNewCyclicFactor.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Tests\SiteDirectory\DomainOfExpertise\PostUpdateDomainOfExpertise.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Tests\SiteDirectory\DomainOfExpertise\PostUpdatePersonPermission.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Tests\SiteDirectory\EngineeringModelSetup\PostAddActiveDomain.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -358,9 +382,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Tests\SiteDirectory\Person\Post_Person_With_Role_Null.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Tests\SiteDirectory\POSTNewDomainExpertUser.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Tests\SiteDirectory\PrefixedUnit\PostNewPrefixedUnit.json">

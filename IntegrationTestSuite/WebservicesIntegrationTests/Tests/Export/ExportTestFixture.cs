@@ -41,6 +41,7 @@ namespace WebservicesIntegrationTests
             var exportUri = new Uri($"{this.Settings.Hostname}/export?includeFileData=true");
 
             // Download a model export zip file
+            // This fails on a Nancy COMET Webservice
             var responseBody = await this.WebClient.GetModelExportFile(exportUri, engineeringodelSetupIds);
 
             var path = Path.GetTempFileName();
@@ -75,6 +76,7 @@ namespace WebservicesIntegrationTests
             var exportUri = new Uri($"{this.Settings.Hostname}/export");
 
             // Download a model export zip file
+            // This fails on a Nancy COMET Webservice
             var responseBody = await this.WebClient.GetModelExportFile(exportUri, engineeringodelSetupIds);
 
             var path = Path.GetTempFileName();

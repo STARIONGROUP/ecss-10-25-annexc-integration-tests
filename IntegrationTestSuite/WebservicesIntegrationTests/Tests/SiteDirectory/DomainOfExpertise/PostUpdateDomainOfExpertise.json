@@ -1,0 +1,11 @@
+{
+  "_delete": [],
+  "_create": [],
+  "_update": [
+    {
+      "classKind": "DomainOfExpertise",
+      "iid": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+      "name": "Changed Domain Name" 
+    }
+  ]
+}
