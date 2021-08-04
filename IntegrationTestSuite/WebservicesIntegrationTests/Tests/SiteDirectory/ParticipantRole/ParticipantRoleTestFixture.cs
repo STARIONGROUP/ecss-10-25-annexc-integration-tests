@@ -81,7 +81,7 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken participantRole)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(10, participantRole.Children().Count());
+            Assert.AreEqual(11, participantRole.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("ee3ae5ff-ac5e-4957-bab1-7698fba2a267", (string) participantRole["iid"]);

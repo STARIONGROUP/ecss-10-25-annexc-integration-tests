@@ -101,7 +101,7 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken derivedQuantityKind)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(15, derivedQuantityKind.Children().Count());
+            Assert.AreEqual(16, derivedQuantityKind.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("74d9c38f-5ace-4f90-8841-d0f9942e9d09", (string) derivedQuantityKind[PropertyNames.Iid]);

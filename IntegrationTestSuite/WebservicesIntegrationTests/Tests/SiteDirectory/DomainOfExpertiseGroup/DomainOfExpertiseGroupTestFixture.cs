@@ -79,7 +79,7 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken domainOfExpertiseGroup)
         {
             // verify that the amount of returned properties 
-            Assert.AreEqual(10, domainOfExpertiseGroup.Children().Count());
+            Assert.AreEqual(11, domainOfExpertiseGroup.Children().Count());
 
             Assert.AreEqual("86992db5-8ce2-4431-8ff5-6fe794d14687", (string)domainOfExpertiseGroup[PropertyNames.Iid]);
             Assert.AreEqual(1, (int)domainOfExpertiseGroup[PropertyNames.RevisionNumber]);

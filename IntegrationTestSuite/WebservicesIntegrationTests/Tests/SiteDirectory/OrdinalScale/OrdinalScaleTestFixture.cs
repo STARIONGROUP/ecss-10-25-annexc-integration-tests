@@ -86,7 +86,7 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken ordinalScale)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(20, ordinalScale.Children().Count());
+            Assert.AreEqual(21, ordinalScale.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("541037e2-9f6a-466c-b56f-a09f81f36576", (string) ordinalScale["iid"]);

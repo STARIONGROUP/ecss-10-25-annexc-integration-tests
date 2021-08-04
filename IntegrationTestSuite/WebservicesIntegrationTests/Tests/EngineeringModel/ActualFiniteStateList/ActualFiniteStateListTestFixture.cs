@@ -189,7 +189,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(2, (int) iteration[PropertyNames.RevisionNumber]);
 
             // verify the amount of returned properties 
-            Assert.AreEqual(12, possibleFiniteStateList.Children().Count());
+            Assert.AreEqual(13, possibleFiniteStateList.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("PossibleFiniteStateList", (string) possibleFiniteStateList[PropertyNames.ClassKind]);
@@ -245,7 +245,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(2, (int) iteration[PropertyNames.RevisionNumber]);
 
             // verify the amount of returned properties 
-            Assert.AreEqual(8, possibleFiniteState.Children().Count());
+            Assert.AreEqual(9, possibleFiniteState.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("PossibleFiniteState", (string) possibleFiniteState[PropertyNames.ClassKind]);
@@ -273,7 +273,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(2, (int) iteration[PropertyNames.RevisionNumber]);
 
             // verify the amount of returned properties 
-            Assert.AreEqual(8, possibleFiniteState.Children().Count());
+            Assert.AreEqual(9, possibleFiniteState.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("PossibleFiniteState", (string) possibleFiniteState[PropertyNames.ClassKind]);

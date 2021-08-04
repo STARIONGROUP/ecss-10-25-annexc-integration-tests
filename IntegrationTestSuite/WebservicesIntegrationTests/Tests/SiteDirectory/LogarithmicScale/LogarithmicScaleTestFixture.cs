@@ -86,7 +86,7 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken logarithmicScale)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(24, logarithmicScale.Children().Count());
+            Assert.AreEqual(25, logarithmicScale.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("007b0e60-e67c-4060-88d2-2531ef9e7d9e", (string) logarithmicScale["iid"]);

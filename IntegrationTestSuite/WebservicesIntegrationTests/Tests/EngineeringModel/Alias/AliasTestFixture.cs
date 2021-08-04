@@ -71,7 +71,7 @@ namespace WebservicesIntegrationTests
             var option = jArray.Single(x => (string)x[PropertyNames.Iid] == "bebcc9f4-ff20-4569-bbf6-d1acf27a8107");
 
             // verify the amount of returned properties of Option
-            Assert.AreEqual(10, option.Children().Count());
+            Assert.AreEqual(11, option.Children().Count());
 
             // assert that the properties of Option are what is expected
             Assert.AreEqual("bebcc9f4-ff20-4569-bbf6-d1acf27a8107", (string)option[PropertyNames.Iid]);

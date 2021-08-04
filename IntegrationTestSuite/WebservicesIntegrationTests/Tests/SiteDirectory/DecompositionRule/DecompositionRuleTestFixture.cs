@@ -162,7 +162,7 @@ namespace WebservicesIntegrationTests
             var siteReferenceDataLibrary = jArray.Single(x => (string)x[PropertyNames.Iid] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(22, siteReferenceDataLibrary.Children().Count());
+            Assert.AreEqual(23, siteReferenceDataLibrary.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("c454c687-ba3e-44c4-86bc-44544b2c7880", (string)siteReferenceDataLibrary[PropertyNames.Iid]);
@@ -315,7 +315,7 @@ namespace WebservicesIntegrationTests
             // DecompositionRule
             var decompositionRule = jArray.Single(x => (string)x[PropertyNames.Iid] == "11a67246-c08d-43e2-9ef5-b7dd8f3ca687");
             // verify the amount of returned properties 
-            Assert.AreEqual(13, decompositionRule.Children().Count());
+            Assert.AreEqual(14, decompositionRule.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("11a67246-c08d-43e2-9ef5-b7dd8f3ca687", (string)decompositionRule["iid"]);
@@ -365,7 +365,7 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken decompositionRule)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(13, decompositionRule.Children().Count());
+            Assert.AreEqual(14, decompositionRule.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("8a5cd66e-7313-4843-813f-37081ca81bb8", (string) decompositionRule["iid"]);

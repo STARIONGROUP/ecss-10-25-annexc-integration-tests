@@ -86,7 +86,7 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken booleanParameterType)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(11, booleanParameterType.Children().Count());
+            Assert.AreEqual(12, booleanParameterType.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("35a9cf05-4eba-4cda-b60c-7cfeaac8f892", (string) booleanParameterType[PropertyNames.Iid]);

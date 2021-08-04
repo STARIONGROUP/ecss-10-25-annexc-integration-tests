@@ -231,7 +231,7 @@ namespace WebservicesIntegrationTests
             var elementDefinition = jArray.Single(x => (string)x[PropertyNames.Iid] == "f959dc33-58ff-4b6f-a3b0-d265690b4084");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(14, elementDefinition.Children().Count());
+            Assert.AreEqual(15, elementDefinition.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("f959dc33-58ff-4b6f-a3b0-d265690b4084", (string)elementDefinition[PropertyNames.Iid]);
@@ -297,7 +297,7 @@ namespace WebservicesIntegrationTests
             if (elementDefinition != null)
             {
                 // verify the amount of returned properties 
-                Assert.AreEqual(14, elementDefinition.Children().Count());
+                Assert.AreEqual(15, elementDefinition.Children().Count());
 
                 // assert that the properties are what is expected
                 Assert.AreEqual("f73860b2-12f0-43e4-b8b2-c81862c0a159", (string)elementDefinition[PropertyNames.Iid]);
@@ -361,7 +361,7 @@ namespace WebservicesIntegrationTests
             if (elementDefinition != null)
             {
                 // verify the amount of returned properties 
-                Assert.AreEqual(14, elementDefinition.Children().Count());
+                Assert.AreEqual(15, elementDefinition.Children().Count());
 
                 // assert that the properties are what is expected
                 Assert.AreEqual("fe9295c5-af99-494e-86ff-e715837806ae", (string)elementDefinition[PropertyNames.Iid]);

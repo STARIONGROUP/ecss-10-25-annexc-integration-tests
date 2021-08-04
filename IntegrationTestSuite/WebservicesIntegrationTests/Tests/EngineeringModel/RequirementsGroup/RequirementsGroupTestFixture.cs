@@ -102,7 +102,7 @@ namespace WebservicesIntegrationTests
             var requirementsGroup = jArray.Single(x => (string)x[PropertyNames.Iid] == "cffa1f05-41b8-4b89-922b-9a9505809601");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(10, requirementsGroup.Children().Count());
+            Assert.AreEqual(11, requirementsGroup.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("cffa1f05-41b8-4b89-922b-9a9505809601", (string)requirementsGroup[PropertyNames.Iid]);
@@ -168,7 +168,7 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken requirementsGroup)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(10, requirementsGroup.Children().Count());
+            Assert.AreEqual(11, requirementsGroup.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("d3474e6a-f9ac-4d1a-91d9-6f8be06a03b5", (string)requirementsGroup[PropertyNames.Iid]);

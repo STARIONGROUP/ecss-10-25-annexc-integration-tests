@@ -86,7 +86,7 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken multirelationshipRule)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(13, multirelationshipRule.Children().Count());
+            Assert.AreEqual(14, multirelationshipRule.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("2615f9ec-30a4-4c0e-a9d3-1d067959c248", (string) multirelationshipRule["iid"]);

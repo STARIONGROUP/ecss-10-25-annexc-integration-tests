@@ -86,7 +86,7 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken parameterizedCategoryRule)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(11, parameterizedCategoryRule.Children().Count());
+            Assert.AreEqual(12, parameterizedCategoryRule.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("7a6186ca-10c1-4074-bec1-4a92ce6ae59d", (string) parameterizedCategoryRule["iid"]);

@@ -86,7 +86,7 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken derivedUnit)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(10, derivedUnit.Children().Count());
+            Assert.AreEqual(11, derivedUnit.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("c394eaa9-4832-4b2d-8d88-5e1b2c43732c", (string) derivedUnit["iid"]);

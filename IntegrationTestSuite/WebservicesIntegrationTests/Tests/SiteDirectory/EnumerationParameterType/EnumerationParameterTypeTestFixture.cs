@@ -166,7 +166,7 @@ namespace WebservicesIntegrationTests
             var siteReferenceDataLibrary = jArray.Single(x => (string) x[PropertyNames.Iid] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(22, siteReferenceDataLibrary.Children().Count());
+            Assert.AreEqual(23, siteReferenceDataLibrary.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("c454c687-ba3e-44c4-86bc-44544b2c7880", (string) siteReferenceDataLibrary[PropertyNames.Iid]);
@@ -334,7 +334,7 @@ namespace WebservicesIntegrationTests
                 jArray.Single(x => (string) x["iid"] == "af1615f0-b9c8-4654-94aa-11587d1faa59");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(13, enumerationParameterType.Children().Count());
+            Assert.AreEqual(14, enumerationParameterType.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("af1615f0-b9c8-4654-94aa-11587d1faa59", (string) enumerationParameterType["iid"]);
@@ -389,7 +389,7 @@ namespace WebservicesIntegrationTests
                 jArray.Single(x => (string) x["iid"] == "af1615f0-b9c8-4654-94aa-11587d1faa59");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(13, enumerationParameterType.Children().Count());
+            Assert.AreEqual(14, enumerationParameterType.Children().Count());
 
             expectedValueDefinitions = new List<OrderedItem>
             {
@@ -411,7 +411,7 @@ namespace WebservicesIntegrationTests
                 jArray.Single(x => (string) x["iid"] == "af1615f0-b9c8-4654-94aa-11587d1faa59");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(13, enumerationParameterType.Children().Count());
+            Assert.AreEqual(14, enumerationParameterType.Children().Count());
 
             expectedValueDefinitions = new List<OrderedItem>
             {
@@ -433,7 +433,7 @@ namespace WebservicesIntegrationTests
                 jArray.Single(x => (string) x["iid"] == "af1615f0-b9c8-4654-94aa-11587d1faa59");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(13, enumerationParameterType.Children().Count());
+            Assert.AreEqual(14, enumerationParameterType.Children().Count());
 
             expectedValueDefinitions = new List<OrderedItem>
             {
@@ -456,7 +456,7 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken enumerationParameterType)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(13, enumerationParameterType.Children().Count());
+            Assert.AreEqual(14, enumerationParameterType.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("664d5611-c564-4eba-8f2e-e23b99385daf", (string) enumerationParameterType["iid"]);

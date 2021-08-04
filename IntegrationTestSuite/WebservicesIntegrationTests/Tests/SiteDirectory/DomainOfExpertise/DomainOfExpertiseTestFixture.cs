@@ -109,7 +109,7 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken domainOfExpertise)
         {
             // verify that the amount of returned properties 
-            Assert.AreEqual(10, domainOfExpertise.Children().Count());
+            Assert.AreEqual(11, domainOfExpertise.Children().Count());
 
             if ((string)domainOfExpertise["iid"] == "0e92edde-fdff-41db-9b1d-f2e484f12535")
             {

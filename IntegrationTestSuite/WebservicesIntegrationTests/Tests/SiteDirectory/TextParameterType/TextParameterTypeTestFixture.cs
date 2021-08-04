@@ -82,7 +82,7 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken textParameterType)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(11, textParameterType.Children().Count());
+            Assert.AreEqual(12, textParameterType.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("a21c15c4-3e1e-46b5-b109-5063dec1e254", (string) textParameterType[PropertyNames.Iid]);
