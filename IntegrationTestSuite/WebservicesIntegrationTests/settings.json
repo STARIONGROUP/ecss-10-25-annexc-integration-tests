@@ -1,5 +1,5 @@
 ﻿{
   "Username": "admin",
   "Password": "pass",
-  "Hostname": "https://cdp4services-test.cdp4.org"
+  "Hostname": "http://localhost:5000/"
 }

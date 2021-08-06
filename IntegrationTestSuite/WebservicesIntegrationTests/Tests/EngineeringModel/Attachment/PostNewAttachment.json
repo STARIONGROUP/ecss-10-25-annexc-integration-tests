@@ -1,0 +1,24 @@
+{
+  "_delete": [],
+  "_create": [
+    {
+      "classKind": "Attachment",
+      "contentHash": "2990BA2444A937A28E7B1E2465FCDF949B8F5368",
+      "creator": "284334dd-e8e5-42d6-bc8a-715c507a7f02",
+      "excludedDomain": [],
+      "excludedPerson": [],
+      "fileType": [ "b16894e4-acb5-4e81-a118-16c00eb86d8f" ],
+      "fileName": "FileTest",
+      "iid": "76e9b7fc-edc4-4ca3-89ba-eac014e7d9f9",
+      "revisionNumber": 0
+    }
+  ],
+  "_update": [
+    {
+      "classKind": "ElementDefinition",
+      "iid": "f73860b2-12f0-43e4-b8b2-c81862c0a159",
+      "attachment": [ "76e9b7fc-edc4-4ca3-89ba-eac014e7d9f9" ]
+    }
+  ],
+  "_copy": []
+}

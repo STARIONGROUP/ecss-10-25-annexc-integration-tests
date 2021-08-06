@@ -57,6 +57,12 @@
     <None Update="Tests\EngineeringModel\AndExpression\PostNewAndExpression.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Tests\EngineeringModel\Attachment\2990BA2444A937A28E7B1E2465FCDF949B8F5368">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Tests\EngineeringModel\Attachment\PostNewAttachment.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Tests\EngineeringModel\Book\PostDeleteBooks.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
