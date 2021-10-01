@@ -448,7 +448,7 @@ namespace WebservicesIntegrationTests
             var postBodyPath = this.GetPath("Tests/EngineeringModel/ParameterValueSet/PostUpdateParameterValueSetTemplate.json");
 
             var postBody = this.GetJsonFromFile(postBodyPath);
-            var inputAsInnerJson = JsonConvert.ToString(inputValue); 
+            var inputAsInnerJson = JsonConvert.SerializeObject(inputValue); 
             postBody = postBody.Replace("<INNERJSON>", inputAsInnerJson);
 
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
@@ -550,6 +550,7 @@ namespace WebservicesIntegrationTests
             "value with trailing space ",
             " value with leading spaces",
             "  value with leading space",
+            @"a\tb\nc\rd",
             "\t\t\tvalue with leading and trailing tabs \t",
             "\nvalue with leading and trailing linebreaks \r",
             "=2*(2+2)",
