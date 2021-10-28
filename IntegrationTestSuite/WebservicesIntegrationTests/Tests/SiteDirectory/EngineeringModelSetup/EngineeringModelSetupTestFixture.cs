@@ -381,8 +381,8 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual("IterationSetup Description", (string)iterationSetup["description"]);
 
             var modelReferenceDataLibrary = jArray.Single(x => (string)x[PropertyNames.ClassKind] == "ModelReferenceDataLibrary");
-            Assert.AreEqual("TestModelReferenceDataLibrary", (string)modelReferenceDataLibrary[PropertyNames.ShortName]);
-            Assert.AreEqual("Test Model Reference Data Library", (string)modelReferenceDataLibrary[PropertyNames.Name]);
+            Assert.AreEqual("testderivefromexistingmodelMRDL", (string)modelReferenceDataLibrary[PropertyNames.ShortName]);
+            Assert.AreEqual("testderivefromexistingmodel Model RDL", (string)modelReferenceDataLibrary[PropertyNames.Name]);
             Assert.AreEqual("c454c687-ba3e-44c4-86bc-44544b2c7880", (string)modelReferenceDataLibrary[PropertyNames.RequiredRdl]);
 
             var participant = jArray.Single(x => (string)x[PropertyNames.ClassKind] == "Participant");
