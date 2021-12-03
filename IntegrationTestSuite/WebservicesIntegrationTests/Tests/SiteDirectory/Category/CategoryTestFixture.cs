@@ -147,7 +147,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(2, (int)category[PropertyNames.RevisionNumber]);
             var expectedPermissibleClasses = new string[]
                                                {
-                                                   "Book",
+                                                   "BinaryRelationship",
                                                    "ElementDefinition",
                                                    "ElementUsage"
                                                };
