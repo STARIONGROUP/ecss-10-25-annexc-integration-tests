@@ -370,11 +370,11 @@ namespace WebservicesIntegrationTests
             
             var postJsonPath = this.GetPath("Tests/EngineeringModel/File/PostNewFolderWithFile.json");
             var postFilePath = this.GetPath("Tests/EngineeringModel/File/2990BA2444A937A28E7B1E2465FCDF949B8F5368");
-            await this.WebClient.PostFile(iterationUri, postJsonPath, postFilePath);
+            var result = await this.WebClient.PostFile(iterationUri, postJsonPath, postFilePath);
             
             postJsonPath = this.GetPath("Tests/EngineeringModel/File/PostNewFileBinaryRevision.json");
             postFilePath = this.GetPath("Tests/EngineeringModel/File/3F64667F0F27A4C4FA1B4BF374033938A542FDD1");
-            await this.WebClient.PostFile(iterationUri, postJsonPath, postFilePath);
+            result = await this.WebClient.PostFile(iterationUri, postJsonPath, postFilePath);
 
             // Download a zip archive of the folder
             var getFileUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/domainFileStore/da7dddaa-02aa-4897-9935-e8d66c811a96?includeFileData=true");

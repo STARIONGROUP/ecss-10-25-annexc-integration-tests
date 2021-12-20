@@ -92,10 +92,9 @@ namespace WebservicesIntegrationTests.Net
         /// </param>
         public void Restore(string hostname)
         {
-            var uriBuilder = new UriBuilder(hostname)
-            {
-                Path = "/Data/Restore"
-            };
+            var uriBuilder = new UriBuilder(hostname);
+
+            uriBuilder.Path = Path.Combine(uriBuilder.Path, "Data/Restore");
 
             var uri = uriBuilder.Uri;
 
@@ -104,7 +103,6 @@ namespace WebservicesIntegrationTests.Net
             using (var streamWriter = new StreamWriter(request.GetRequestStream()))
             {
                 streamWriter.Write(string.Empty);
-                streamWriter.Flush();
                 streamWriter.Close();
             }
 
