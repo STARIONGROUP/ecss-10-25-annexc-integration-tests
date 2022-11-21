@@ -1,0 +1,29 @@
+﻿{
+    "_delete": [
+    ],
+    "_create": [
+        {
+            "classKind": "PossibleFiniteState",
+            "iid": "77d0c76e-505a-453b-a968-ef3f6f1553e0",
+            "name": "new-state",
+            "shortName": "short-new-state",
+            "revisionNumber": 0,
+            "alias": [],
+            "definition": [],
+            "hyperLink": [] 
+        }
+    ],
+    "_update": [
+      {
+        "classKind": "PossibleFiniteStateList",
+        "iid": "b5f08cf6-a7eb-4174-b6a8-88bf23d4aa75",
+        "possibleState": [
+          {
+            "k": 0,
+            "v": "77d0c76e-505a-453b-a968-ef3f6f1553e0"
+          }
+        ]
+      }
+    ],
+    "_copy": []
+}

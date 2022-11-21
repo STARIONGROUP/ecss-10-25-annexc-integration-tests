@@ -210,6 +210,9 @@
     <None Update="Tests\EngineeringModel\ParametricConstraint\PostReorderParametricConstraints.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Tests\EngineeringModel\PossibleFiniteStateList\PostCreatePossibleFiniteStateForWrongReorder.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Tests\EngineeringModel\PossibleFiniteStateList\PostCreatePossibleFiniteState.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -220,6 +223,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Tests\EngineeringModel\PossibleFiniteStateList\PostDeletePossibleFiniteStateAsProperty.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Tests\EngineeringModel\PossibleFiniteStateList\PostReorderStatesOfPossibleFiniteStateListWrong.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Tests\EngineeringModel\PossibleFiniteStateList\PostReorderStatesOfPossibleFiniteStateList.json">

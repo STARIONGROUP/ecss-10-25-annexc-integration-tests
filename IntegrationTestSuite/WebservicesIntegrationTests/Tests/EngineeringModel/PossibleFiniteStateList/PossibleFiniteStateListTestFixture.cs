@@ -23,6 +23,7 @@ namespace WebservicesIntegrationTests
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Net;
 
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
@@ -142,6 +143,35 @@ namespace WebservicesIntegrationTests
             var postBody2 = this.GetJsonFromFile(postBodyPath2);
             var jArray = this.WebClient.PostDto(uri, postBody2);
             this.VerifyDeleteResponse(jArray);
+        }
+
+        [Test]
+        [Category("POST")]
+        public void VerifyThatWrongPartialReorderFails()
+        {
+            var uri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
+
+            var postBodyPath1 = this.GetPath("Tests/EngineeringModel/PossibleFiniteStateList/PostCreatePossibleFiniteStateListContainingTwoStates.json");
+            var postBody1 = this.GetJsonFromFile(postBodyPath1);
+            var jArray1 = this.WebClient.PostDto(uri, postBody1);
+            Assert.AreEqual(5, jArray1.Count);
+
+            uri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
+            postBodyPath1 = this.GetPath("Tests/EngineeringModel/PossibleFiniteStateList/PostCreatePossibleFiniteStateForWrongReorder.json");
+            postBody1 = this.GetJsonFromFile(postBodyPath1);
+
+            jArray1 = this.WebClient.PostDto(uri, postBody1);
+            Assert.AreEqual(3, jArray1.Count);
+
+            var postBodyPath2 = this.GetPath("Tests/EngineeringModel/PossibleFiniteStateList/PostReorderStatesOfPossibleFiniteStateListWrong.json");
+
+            var postBody2 = this.GetJsonFromFile(postBodyPath2);
+
+            var exception = Assert.Throws<System.Net.WebException>(() => this.WebClient.PostDto(uri, postBody2));
+            var response = exception?.Response as HttpWebResponse;
+
+            Assert.That(response, Is.Not.Null);
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
         }
 
         [Test]
