@@ -33,6 +33,9 @@
     <None Update="settings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Tests\CherryPick\PostNewThingsSRDL.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Tests\EngineeringModel\ActualFiniteStateList\PostActualFiniteStateListAddPossibleFiniteStateList.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -106,6 +109,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Tests\EngineeringModel\File\PostNewFolderWithFile.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Tests\CherryPick\PostNewThingsCherryPick.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Tests\EngineeringModel\Folder\PostNewFolder.json">

@@ -1,0 +1,47 @@
+{
+  "_delete": [],
+  "_create": [
+    {
+      "revisionNumber": 0,
+      "classKind": "Category",
+      "name": "New Category For Text Parameter Type",
+      "shortName": "NewCatForTextParameterType",
+      "alias": [],
+      "definition": [],
+      "hyperLink": [],
+      "permissibleClass": [ "TextParameterType" ],
+      "superCategory": [],
+      "isDeprecated": false,
+      "isAbstract": false,
+      "iid": "6b7805dd-b520-434e-9b90-27524a676fa3"
+    },
+    {
+      "classKind": "TextParameterType",
+      "symbol": "text2",
+      "revisionNumber": 0,
+      "isDeprecated": false,
+      "category": [
+        "6b7805dd-b520-434e-9b90-27524a676fa3"
+      ],
+      "alias": [],
+      "definition": [],
+      "hyperLink": [],
+      "name": "Test Text ParameterType With Category",
+      "shortName": "TestTextParameterTypeWithCategory",
+      "iid": "924917e3-ad26-4bc5-bb03-1865d1a5095d"
+    }
+  ],
+  "_update": [
+    {
+      "classKind": "SiteReferenceDataLibrary",
+      "iid": "c454c687-ba3e-44c4-86bc-44544b2c7880",
+      "definedCategory": [
+        "6b7805dd-b520-434e-9b90-27524a676fa3"
+      ],
+      "parameterType": [
+        "924917e3-ad26-4bc5-bb03-1865d1a5095d"
+      ]
+    }
+  ],
+  "_copy": []
+}
