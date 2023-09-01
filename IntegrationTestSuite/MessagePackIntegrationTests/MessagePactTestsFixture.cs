@@ -25,6 +25,7 @@ namespace MessagePackIntegrationTests
     using System.Net.Http;
     using System.Net.Http.Headers;
     using System.Text;
+    using System.Text.Json;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -121,7 +122,17 @@ namespace MessagePackIntegrationTests
             stream = await httpResponseMessage.Content.ReadAsStreamAsync(cts.Token);
             var jsonThings = jsonserialer.Deserialize(stream).OrderBy(x => x.Iid);
 
-            Assert.That(messagePackThings, Is.EquivalentTo(jsonThings));
+            Assert.That(jsonThings.Count(), Is.EqualTo(messagePackThings.Count()));
+
+            foreach (var jsonThing in jsonThings)
+            {
+                Assert.That(messagePackThings.SingleOrDefault(x => x.Iid == jsonThing.Iid), Is.Not.Null);
+            }
+
+            var jsonSerialized = JsonSerializer.Serialize(jsonThings);
+            var messagePackSerialized = JsonSerializer.Serialize(messagePackThings);
+
+            Assert.That(messagePackSerialized, Is.EqualTo(jsonSerialized));
         }
     }
 }

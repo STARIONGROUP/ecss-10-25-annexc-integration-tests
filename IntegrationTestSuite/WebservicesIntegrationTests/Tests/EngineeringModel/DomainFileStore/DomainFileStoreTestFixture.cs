@@ -109,6 +109,15 @@ namespace WebservicesIntegrationTests
             var domainFileStore =
                 jArray.Single(x => (string)x[PropertyNames.Iid] == "da7dddaa-02aa-4897-9935-e8d66c811a96");
 
+            var file =
+                jArray.Single(x => (string)x[PropertyNames.Iid] == "95bf0f17-1273-4338-98ae-839016242775");
+
+            var folder =
+                jArray.Single(x => (string)x[PropertyNames.Iid] == "67cdb7de-7721-40a0-9ca2-10a5cf7742fc");
+
+            var fileRevision =
+                jArray.Single(x => (string)x[PropertyNames.Iid] == "5544bb87-dc38-45d5-9d92-c580d3fe0442");
+
             Assert.AreEqual("True", (string)domainFileStore[PropertyNames.IsHidden]);
 
             jArray = this.WebClient.GetDto(fileUri);
@@ -134,6 +143,26 @@ namespace WebservicesIntegrationTests
 
             // Jane is not allowed to read it
             Assert.Throws<WebException>(() => this.WebClient.GetDto(fileRevisionUri));
+
+            jArray = this.WebClient.GetDto(iterationUri);
+
+            domainFileStore =
+                jArray.SingleOrDefault(x => (string)x[PropertyNames.Iid] == "da7dddaa-02aa-4897-9935-e8d66c811a96");
+
+            file =
+                jArray.SingleOrDefault(x => (string)x[PropertyNames.Iid] == "95bf0f17-1273-4338-98ae-839016242775");
+
+            folder =
+                jArray.SingleOrDefault(x => (string)x[PropertyNames.Iid] == "67cdb7de-7721-40a0-9ca2-10a5cf7742fc");
+
+            fileRevision =
+                jArray.SingleOrDefault(x => (string)x[PropertyNames.Iid] == "5544bb87-dc38-45d5-9d92-c580d3fe0442");
+
+            Assert.That(domainFileStore, Is.Null);
+            Assert.That(file, Is.Null);
+            Assert.That(folder, Is.Null);
+            Assert.That(fileRevision, Is.Null);
+
         }
 
         /// <summary>
