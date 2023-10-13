@@ -89,7 +89,7 @@ namespace WebservicesIntegrationTests
 
         [Test]
         [Category("POST")]
-        public async Task VerifyThatFileAndSubsequentRevisionCannotBeUploadedWithWebApiWhenParticipantIsNotAnOwner()
+        public void VerifyThatFileAndSubsequentRevisionCannotBeUploadedWithWebApiWhenParticipantIsNotAnOwner()
         {
             SiteDirectoryTestFixture.AddDomainExpertUserJane(this, out var userName, out var passWord);
             this.CreateNewWebClientForUser(userName, passWord);
@@ -280,7 +280,7 @@ namespace WebservicesIntegrationTests
 
         [Test]
         [Category("POST")]
-        public async Task VerifyThatFileCannotBeUploadedWhenParticipantIsNotOwner()
+        public void VerifyThatFileCannotBeUploadedWhenParticipantIsNotOwner()
         {
             SiteDirectoryTestFixture.AddDomainExpertUserJane(this, out var userName, out var passWord);
             this.CreateNewWebClientForUser(userName, passWord);
