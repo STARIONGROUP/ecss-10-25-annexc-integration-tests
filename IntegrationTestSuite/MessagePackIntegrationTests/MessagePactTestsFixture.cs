@@ -92,7 +92,7 @@ namespace MessagePackIntegrationTests
 
         [Test]
         [Category("GET")]
-        public async Task Test()
+        public async Task Verify_that_MessagePack_and_Json_content_are_the_same_when_returned_from_the_server()
         {
             var cts = new CancellationTokenSource();
 
