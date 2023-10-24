@@ -87,13 +87,12 @@ namespace WebservicesIntegrationTests
 
             this.CreateNewWebClientForUser(userName, passWord);
 
-            var iterationUri = new Uri($"{this.Settings.Hostname}/SiteDirectory");
             postBodyPath = this.GetPath("Tests/SiteDirectory/DomainOfExpertise/PostUpdateDomainOfExpertise.json");
 
             postBody = this.GetJsonFromFile(postBodyPath);
 
             // Jane is not allowed to update
-            var exception = Assert.Catch<WebException>(() => this.WebClient.PostDto(iterationUri, postBody));
+            var exception = Assert.Catch<WebException>(() => this.WebClient.PostDto(siteDirectoryUri, postBody));
             var errorMessage = this.WebClient.ExtractExceptionStringFromResponse(exception.Response);
             Assert.AreEqual(HttpStatusCode.InternalServerError, ((HttpWebResponse) exception.Response).StatusCode);
             Assert.IsTrue(errorMessage.Contains("The person Jane does not have an appropriate update permission for DomainOfExpertise."));
