@@ -66,6 +66,30 @@
     <None Update="Tests\EngineeringModel\Book\PostNewBooks.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Tests\EngineeringModel\CommonFileStoreFile\1525ED651E5B609DAE099DEEDA8DBDB49CFF956F">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Tests\EngineeringModel\CommonFileStoreFile\2990BA2444A937A28E7B1E2465FCDF949B8F5368">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Tests\EngineeringModel\CommonFileStoreFile\3F64667F0F27A4C4FA1B4BF374033938A542FDD1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Tests\EngineeringModel\CommonFileStoreFile\PostDeleteFile.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Tests\EngineeringModel\CommonFileStoreFile\PostNewFile.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Tests\EngineeringModel\CommonFileStoreFile\PostNewFileBinaryRevision.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Tests\EngineeringModel\CommonFileStoreFile\PostNewFileRevision.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Tests\EngineeringModel\CommonFileStoreFile\PostNewFolderWithFile.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Tests\EngineeringModel\DomainFileStore\PostUpdateDomainFileStoreIsHidden.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -87,28 +111,28 @@
     <None Update="Tests\EngineeringModel\ExclusiveOrExpression\PostNewExclusiveOrExpression.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Tests\EngineeringModel\File\1525ED651E5B609DAE099DEEDA8DBDB49CFF956F">
+    <None Update="Tests\EngineeringModel\DomainFileStoreFile\1525ED651E5B609DAE099DEEDA8DBDB49CFF956F">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Tests\EngineeringModel\File\2990BA2444A937A28E7B1E2465FCDF949B8F5368">
+    <None Update="Tests\EngineeringModel\DomainFileStoreFile\2990BA2444A937A28E7B1E2465FCDF949B8F5368">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Tests\EngineeringModel\File\3F64667F0F27A4C4FA1B4BF374033938A542FDD1">
+    <None Update="Tests\EngineeringModel\DomainFileStoreFile\3F64667F0F27A4C4FA1B4BF374033938A542FDD1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Tests\EngineeringModel\File\PostDeleteFile.json">
+    <None Update="Tests\EngineeringModel\DomainFileStoreFile\PostDeleteFile.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Tests\EngineeringModel\File\PostNewFile.json">
+    <None Update="Tests\EngineeringModel\DomainFileStoreFile\PostNewFile.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Tests\EngineeringModel\File\PostNewFileBinaryRevision.json">
+    <None Update="Tests\EngineeringModel\DomainFileStoreFile\PostNewFileBinaryRevision.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Tests\EngineeringModel\File\PostNewFileRevision.json">
+    <None Update="Tests\EngineeringModel\DomainFileStoreFile\PostNewFileRevision.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Tests\EngineeringModel\File\PostNewFolderWithFile.json">
+    <None Update="Tests\EngineeringModel\DomainFileStoreFile\PostNewFolderWithFile.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Tests\CherryPick\PostNewThingsCherryPick.json">

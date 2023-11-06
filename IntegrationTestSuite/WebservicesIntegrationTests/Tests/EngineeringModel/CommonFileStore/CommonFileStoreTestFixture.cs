@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="CommonFileStoreTestFixture.cs" company="RHEA System S.A.">
 //
-//   Copyright 2016-2021 RHEA System S.A.
+//   Copyright 2016-2023 RHEA System S.A.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -91,12 +91,20 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual("2016-10-19T09:30:36.186Z", (string) commonFileStore[PropertyNames.CreatedOn]);
             Assert.AreEqual("TestFileStore", (string) commonFileStore[PropertyNames.Name]);
 
-            var expectedFiles = new string[] {};
+            var expectedFiles = new string[]
+            {
+                "95bf0f17-1273-4338-98ae-839016242776"
+            };
+
             var filesArray = (JArray) commonFileStore[PropertyNames.File];
             IList<string> files = filesArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedFiles, files);
 
-            var expectedFolders = new string[] {};
+            var expectedFolders = new string[]
+            {
+                "67cdb7de-7721-40a0-9ca2-10a5cf7742fd"
+            };
+
             var foldersArray = (JArray) commonFileStore[PropertyNames.Folder];
             IList<string> folders = foldersArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedFolders, folders);
