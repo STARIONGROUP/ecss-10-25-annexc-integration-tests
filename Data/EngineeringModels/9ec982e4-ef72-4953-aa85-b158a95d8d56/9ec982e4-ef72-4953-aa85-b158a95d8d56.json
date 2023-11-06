@@ -21,10 +21,51 @@
     "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
     "createdOn": "2016-10-19T09:30:36.186Z",
     "name": "TestFileStore",
-    "file": [ ],
-    "folder": [ ],
+		"file": [
+			"95bf0f17-1273-4338-98ae-839016242776"
+		],
+		"folder": [
+			"67cdb7de-7721-40a0-9ca2-10a5cf7742fd"
+		],
     "iid": "8e5ca9cc-3da8-4e66-9172-7c3b2464a59c"
   },
+	{
+		"category": [],
+		"owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+		"classKind": "File",
+		"revisionNumber": 1,
+		"lockedBy": null,
+		"fileRevision": [
+			"5544bb87-dc38-45d5-9d92-c580d3fe0443"
+		],
+		"iid": "95bf0f17-1273-4338-98ae-839016242776"
+	},
+	{
+		"name": "FileRevision",
+		"createdOn": "2016-11-02T13:58:35.936Z",
+		"classKind": "FileRevision",
+		"revisionNumber": 1,
+		"fileType": [
+			{
+				"k": 2,
+				"v": "db04ac55-dd60-4607-a4e1-a9f91c9704e6"
+			}
+		],
+		"containingFolder": null,
+		"creator": "284334dd-e8e5-42d6-bc8a-715c507a7f02",
+		"contentHash": "B95EC201AE3EE89D407449D692E69BB97C228A7E",
+		"iid": "5544bb87-dc38-45d5-9d92-c580d3fe0443"
+	},
+	{
+		"createdOn": "2016-11-02T13:58:35.936Z",
+		"name": "Test Folder",
+		"owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+		"revisionNumber": 1,
+		"classKind": "Folder",
+		"containingFolder": null,
+		"creator": "284334dd-e8e5-42d6-bc8a-715c507a7f02",
+		"iid": "67cdb7de-7721-40a0-9ca2-10a5cf7742fd"
+	},
   {
     "revisionNumber": 1,
     "classKind": "ModelLogEntry",

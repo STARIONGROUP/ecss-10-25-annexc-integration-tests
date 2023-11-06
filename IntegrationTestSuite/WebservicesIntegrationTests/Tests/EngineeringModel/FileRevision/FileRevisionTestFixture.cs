@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="FileRevisionTestFixture.cs" company="RHEA System S.A.">
 //
-//   Copyright 2016-2021 RHEA System S.A.
+//   Copyright 2016-2023 RHEA System S.A.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -80,7 +80,7 @@ namespace WebservicesIntegrationTests
             // get a specific File from the result by it's unique id
             var file =
                 jArray.Single(x => (string) x[PropertyNames.Iid] == "95bf0f17-1273-4338-98ae-839016242775");
-            FileTestFixture.VerifyProperties(file);
+            DomainFileStoreFileTestFixture.VerifyProperties(file);
 
             // get a specific FileRevision from the result by it's unique id
             var fileRevision =
@@ -97,8 +97,8 @@ namespace WebservicesIntegrationTests
 
             // Subsequent revision
             var fileUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
-            var postJsonPath = this.GetPath("Tests/EngineeringModel/File/PostNewFileRevision.json");
-            var postFilePath = this.GetPath("Tests/EngineeringModel/File/1525ED651E5B609DAE099DEEDA8DBDB49CFF956F");
+            var postJsonPath = this.GetPath("Tests/EngineeringModel/DomainFileStoreFile/PostNewFileRevision.json");
+            var postFilePath = this.GetPath("Tests/EngineeringModel/DomainFileStoreFile/1525ED651E5B609DAE099DEEDA8DBDB49CFF956F");
 
             var exception = Assert.CatchAsync<HttpRequestException>(async () => await this.WebClient.PostFile(fileUri, postJsonPath, postFilePath));
 

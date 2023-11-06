@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="FileTestFixture.cs" company="RHEA System S.A.">
+// <copyright file="DomainFileStoreFileTestFixture.cs" company="RHEA System S.A.">
 //
-//   Copyright 2016-2021 RHEA System S.A.
+//   Copyright 2016-2023 RHEA System S.A.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ namespace WebservicesIntegrationTests
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Net;
     using System.Net.Http;
     using System.Security.Cryptography;
     using System.Threading.Tasks;
@@ -36,7 +37,7 @@ namespace WebservicesIntegrationTests
     using NUnit.Framework;
 
     [TestFixture]
-    public class FileTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
+    public class DomainFileStoreFileTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
         [Test]
         [Category("GET")]
@@ -95,8 +96,8 @@ namespace WebservicesIntegrationTests
             this.CreateNewWebClientForUser(userName, passWord);
 
             var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
-            var postJsonPath = this.GetPath("Tests/EngineeringModel/File/PostNewFile.json");
-            var postFilePath = this.GetPath("Tests/EngineeringModel/File/2990BA2444A937A28E7B1E2465FCDF949B8F5368");
+            var postJsonPath = this.GetPath("Tests/EngineeringModel/DomainFileStoreFile/PostNewFile.json");
+            var postFilePath = this.GetPath("Tests/EngineeringModel/DomainFileStoreFile/2990BA2444A937A28E7B1E2465FCDF949B8F5368");
 
             // Jane is not allowed to upload
             Assert.ThrowsAsync<HttpRequestException>(async () => await this.WebClient.PostFile(iterationUri, postJsonPath, postFilePath));
@@ -107,8 +108,8 @@ namespace WebservicesIntegrationTests
         public async Task VerifyThatFileAndSubsequentRevisionCanBeDeletedByOwner()
         {
             var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
-            var postJsonPath = this.GetPath("Tests/EngineeringModel/File/PostNewFile.json");
-            var postFilePath = this.GetPath("Tests/EngineeringModel/File/2990BA2444A937A28E7B1E2465FCDF949B8F5368");
+            var postJsonPath = this.GetPath("Tests/EngineeringModel/DomainFileStoreFile/PostNewFile.json");
+            var postFilePath = this.GetPath("Tests/EngineeringModel/DomainFileStoreFile/2990BA2444A937A28E7B1E2465FCDF949B8F5368");
 
             var jArray = await this.WebClient.PostFile(iterationUri, postJsonPath, postFilePath);
 
@@ -116,7 +117,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(4, jArray.Count);
 
             var fileUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
-            postJsonPath = this.GetPath("Tests/EngineeringModel/File/PostDeleteFile.json");
+            postJsonPath = this.GetPath("Tests/EngineeringModel/DomainFileStoreFile/PostDeleteFile.json");
             var postBody = this.GetJsonFromFile(postJsonPath);
             jArray = this.WebClient.PostDto(fileUri, postBody);
 
@@ -140,8 +141,8 @@ namespace WebservicesIntegrationTests
         public async Task VerifyThatFileAndSubsequentRevisionCannotBeDeletedWhenUserIsNotTheOwner()
         {
             var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
-            var postJsonPath = this.GetPath("Tests/EngineeringModel/File/PostNewFile.json");
-            var postFilePath = this.GetPath("Tests/EngineeringModel/File/2990BA2444A937A28E7B1E2465FCDF949B8F5368");
+            var postJsonPath = this.GetPath("Tests/EngineeringModel/DomainFileStoreFile/PostNewFile.json");
+            var postFilePath = this.GetPath("Tests/EngineeringModel/DomainFileStoreFile/2990BA2444A937A28E7B1E2465FCDF949B8F5368");
 
             //Add file as admin
             var jArray = await this.WebClient.PostFile(iterationUri, postJsonPath, postFilePath);
@@ -153,8 +154,12 @@ namespace WebservicesIntegrationTests
             SiteDirectoryTestFixture.AddDomainExpertUserJane(this, out var userName, out var passWord);
             this.CreateNewWebClientForUser(userName, passWord);
 
+            var fileUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
+            postJsonPath = this.GetPath("Tests/EngineeringModel/CommonFileStoreFile/PostDeleteFile.json");
+            var postBody = this.GetJsonFromFile(postJsonPath);
+
             // Jane is not allowed to delete
-            Assert.ThrowsAsync<HttpRequestException>(async () => await this.WebClient.PostFile(iterationUri, postJsonPath, postFilePath));
+            Assert.Throws<WebException>(() => this.WebClient.PostDto(fileUri, postBody));
         }
 
         [Test]
@@ -162,8 +167,8 @@ namespace WebservicesIntegrationTests
         public async Task VerifyThatFileAndSubsequentRevisionCanBeUploadedWithWebApi()
         {
             var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
-            var postJsonPath = this.GetPath("Tests/EngineeringModel/File/PostNewFile.json");
-            var postFilePath = this.GetPath("Tests/EngineeringModel/File/2990BA2444A937A28E7B1E2465FCDF949B8F5368");
+            var postJsonPath = this.GetPath("Tests/EngineeringModel/DomainFileStoreFile/PostNewFile.json");
+            var postFilePath = this.GetPath("Tests/EngineeringModel/DomainFileStoreFile/2990BA2444A937A28E7B1E2465FCDF949B8F5368");
 
             var jArray = await this.WebClient.PostFile(iterationUri, postJsonPath, postFilePath);
 
@@ -228,8 +233,8 @@ namespace WebservicesIntegrationTests
 
             // Subsequent revision
             var fileUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
-            postJsonPath = this.GetPath("Tests/EngineeringModel/File/PostNewFileRevision.json");
-            postFilePath = this.GetPath("Tests/EngineeringModel/File/1525ED651E5B609DAE099DEEDA8DBDB49CFF956F");
+            postJsonPath = this.GetPath("Tests/EngineeringModel/DomainFileStoreFile/PostNewFileRevision.json");
+            postFilePath = this.GetPath("Tests/EngineeringModel/DomainFileStoreFile/1525ED651E5B609DAE099DEEDA8DBDB49CFF956F");
 
             jArray = await this.WebClient.PostFile(fileUri, postJsonPath, postFilePath);
 
@@ -287,8 +292,8 @@ namespace WebservicesIntegrationTests
 
             // Subsequent revision
             var fileUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/file/95bf0f17-1273-4338-98ae-839016242775");
-            var postJsonPath = this.GetPath("Tests/EngineeringModel/File/PostNewFile.json");
-            var postFilePath = this.GetPath("Tests/EngineeringModel/File/2990BA2444A937A28E7B1E2465FCDF949B8F5368");
+            var postJsonPath = this.GetPath("Tests/EngineeringModel/DomainFileStoreFile/PostNewFile.json");
+            var postFilePath = this.GetPath("Tests/EngineeringModel/DomainFileStoreFile/2990BA2444A937A28E7B1E2465FCDF949B8F5368");
 
             // Jane is not allowed to upload
             Assert.ThrowsAsync<HttpRequestException>(async () => await this.WebClient.PostFile(fileUri, postJsonPath, postFilePath));
@@ -300,14 +305,14 @@ namespace WebservicesIntegrationTests
         {
             var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
 
-            var postJsonPath = this.GetPath("Tests/EngineeringModel/File/PostNewFile.json");
-            var postFilePath = this.GetPath("Tests/EngineeringModel/File/2990BA2444A937A28E7B1E2465FCDF949B8F5368");
+            var postJsonPath = this.GetPath("Tests/EngineeringModel/DomainFileStoreFile/PostNewFile.json");
+            var postFilePath = this.GetPath("Tests/EngineeringModel/DomainFileStoreFile/2990BA2444A937A28E7B1E2465FCDF949B8F5368");
             await this.WebClient.PostFile(iterationUri, postJsonPath, postFilePath);
 
             var fileUri2 = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
 
-            postJsonPath = this.GetPath("Tests/EngineeringModel/File/PostNewFileBinaryRevision.json");
-            postFilePath = this.GetPath("Tests/EngineeringModel/File/3F64667F0F27A4C4FA1B4BF374033938A542FDD1");
+            postJsonPath = this.GetPath("Tests/EngineeringModel/DomainFileStoreFile/PostNewFileBinaryRevision.json");
+            postFilePath = this.GetPath("Tests/EngineeringModel/DomainFileStoreFile/3F64667F0F27A4C4FA1B4BF374033938A542FDD1");
             await this.WebClient.PostFile(fileUri2, postJsonPath, postFilePath);
 
             // Download a revision of the plain text file
@@ -338,8 +343,8 @@ namespace WebservicesIntegrationTests
         public async Task VerifyThatAFolderCanBeDownloadedWithWebApi()
         {
             var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
-            var postJsonPath = this.GetPath("Tests/EngineeringModel/File/PostNewFolderWithFile.json");
-            var postFilePath = this.GetPath("Tests/EngineeringModel/File/2990BA2444A937A28E7B1E2465FCDF949B8F5368");
+            var postJsonPath = this.GetPath("Tests/EngineeringModel/DomainFileStoreFile/PostNewFolderWithFile.json");
+            var postFilePath = this.GetPath("Tests/EngineeringModel/DomainFileStoreFile/2990BA2444A937A28E7B1E2465FCDF949B8F5368");
             await this.WebClient.PostFile(iterationUri, postJsonPath, postFilePath);
 
             // Download a zip archive of the folder
@@ -368,12 +373,12 @@ namespace WebservicesIntegrationTests
         {
             var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
             
-            var postJsonPath = this.GetPath("Tests/EngineeringModel/File/PostNewFolderWithFile.json");
-            var postFilePath = this.GetPath("Tests/EngineeringModel/File/2990BA2444A937A28E7B1E2465FCDF949B8F5368");
+            var postJsonPath = this.GetPath("Tests/EngineeringModel/DomainFileStoreFile/PostNewFolderWithFile.json");
+            var postFilePath = this.GetPath("Tests/EngineeringModel/DomainFileStoreFile/2990BA2444A937A28E7B1E2465FCDF949B8F5368");
             var result = await this.WebClient.PostFile(iterationUri, postJsonPath, postFilePath);
             
-            postJsonPath = this.GetPath("Tests/EngineeringModel/File/PostNewFileBinaryRevision.json");
-            postFilePath = this.GetPath("Tests/EngineeringModel/File/3F64667F0F27A4C4FA1B4BF374033938A542FDD1");
+            postJsonPath = this.GetPath("Tests/EngineeringModel/DomainFileStoreFile/PostNewFileBinaryRevision.json");
+            postFilePath = this.GetPath("Tests/EngineeringModel/DomainFileStoreFile/3F64667F0F27A4C4FA1B4BF374033938A542FDD1");
             result = await this.WebClient.PostFile(iterationUri, postJsonPath, postFilePath);
 
             // Download a zip archive of the folder

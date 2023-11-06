@@ -1,0 +1,36 @@
+{
+  "_delete": [],
+  "_create": [
+    {
+      "category": [ ],
+      "classKind": "File",
+      "excludedDomain": [ ],
+      "excludedPerson": [ ],
+      "fileRevision": [ "76e9b7fc-edc4-4ca3-89ba-eac014e7d9f8" ],
+      "iid": "8ac6db3e-9525-4f3e-93ea-707076c07fc1",
+      "modifiedOn": "0001-01-01T00:00:00Z",
+      "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+      "revisionNumber": 0
+    }, 
+    {
+    "classKind": "FileRevision",
+    "containingFolder": null,
+    "contentHash": "2990BA2444A937A28E7B1E2465FCDF949B8F5368",
+    "creator": "284334dd-e8e5-42d6-bc8a-715c507a7f02",
+    "excludedDomain": [],
+    "excludedPerson": [],
+    "fileType": [{ "k": 3177, "v": "b16894e4-acb5-4e81-a118-16c00eb86d8f" }],
+    "iid": "76e9b7fc-edc4-4ca3-89ba-eac014e7d9f8",
+    "name": "FileTest",
+    "revisionNumber": 0
+  }
+  ],
+  "_update": [
+    {
+      "classKind": "CommonFileStore",
+      "iid": "8e5ca9cc-3da8-4e66-9172-7c3b2464a59c",
+      "file": [ "8ac6db3e-9525-4f3e-93ea-707076c07fc1" ]
+    }
+  ],
+  "_copy": []
+}
