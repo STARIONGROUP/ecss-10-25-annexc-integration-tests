@@ -1,0 +1,11 @@
+{
+  "_delete": [],
+  "_create": [],
+  "_update": [
+    {
+      "classKind": "ParticipantPermission",
+      "accessRight": "MODIFY_IF_OWNER",
+      "iid": "0145d47c-2971-4f89-9dc8-2c5e0453805e"
+    }
+  ]
+}

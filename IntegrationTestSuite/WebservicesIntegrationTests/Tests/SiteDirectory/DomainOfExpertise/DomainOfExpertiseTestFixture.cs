@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="DomainOfExpertiseTestFixture.cs" company="RHEA System S.A.">
 //
-//   Copyright 2016-2021 RHEA System S.A.
+//   Copyright 2016-2023 RHEA System S.A.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ namespace WebservicesIntegrationTests
     using System.Collections.Generic;
     using System.Linq;
     using System.Net;
+    using System.Net.Http;
 
     using Newtonsoft.Json.Linq;
 
@@ -96,6 +97,133 @@ namespace WebservicesIntegrationTests
             var errorMessage = this.WebClient.ExtractExceptionStringFromResponse(exception.Response);
             Assert.AreEqual(HttpStatusCode.InternalServerError, ((HttpWebResponse) exception.Response).StatusCode);
             Assert.IsTrue(errorMessage.Contains("The person Jane does not have an appropriate update permission for DomainOfExpertise."));
+        }
+
+        [Test]
+        [Category("POST")]
+        public void VerifyThatCreateDomainOfExpertiseWorks()
+        {
+            var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
+
+            var postBodyPath = this.GetPath("Tests/SiteDirectory/DomainOfExpertise/PostCreateDomainOfExpertise.json");
+
+            var postBody = this.GetJsonFromFile(postBodyPath);
+
+            var jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
+
+            // define the URI on which to perform a GET request
+            var domainOfExpertiseUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/domain?includeAllContainers=true");
+
+            // Get the response from the data-source as a JArray (JSON Array)
+            jArray = this.WebClient.GetDto(domainOfExpertiseUri);
+            
+            Assert.AreEqual(4, jArray.Count);
+
+            // get a specific DomainOfExpertise from the result by it's unique id
+            var domainOfExpertise = jArray.Single(x => (string)x["iid"] == "509b87d6-4262-476a-a12e-ee337df0d618");
+            DomainOfExpertiseTestFixture.VerifyProperties(domainOfExpertise);
+        }
+
+        [Test]
+        [Category("POST")]
+        public void VerifyThatReadWorksForParticipantNotBeingPartOfADomainOfExpertise()
+        {
+            var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
+
+            var postBodyPath = this.GetPath("Tests/SiteDirectory/DomainOfExpertise/PostCreateDomainOfExpertise.json");
+
+            var postBody = this.GetJsonFromFile(postBodyPath);
+
+            var jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
+
+            postBodyPath = this.GetPath("Tests/SiteDirectory/DomainOfExpertise/PostUpdatePersonPermission.json");
+
+            postBody = this.GetJsonFromFile(postBodyPath);
+            Assert.DoesNotThrow(() => this.WebClient.PostDto(siteDirectoryUri, postBody));
+
+            // define the URI on which to perform a GET request
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/?extent=deep");
+
+            jArray = this.WebClient.GetDto(iterationUri);
+
+            Assert.That(jArray.Count, Is.GreaterThan(0));
+        }
+
+        [Test]
+        [Category("POST")]
+        public void VerifyThatWriteIsAllowedForParticipantNotBeingPartOfADomainOfExpertiseWhenAccessRightIsMODIFY()
+        {
+            var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
+
+            var postBodyPath = this.GetPath("Tests/SiteDirectory/DomainOfExpertise/PostCreateDomainOfExpertise.json");
+
+            var postBody = this.GetJsonFromFile(postBodyPath);
+
+            var jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
+
+            postBodyPath = this.GetPath("Tests/SiteDirectory/DomainOfExpertise/PostUpdatePersonPermission.json");
+
+            postBody = this.GetJsonFromFile(postBodyPath);
+            Assert.DoesNotThrow(() => this.WebClient.PostDto(siteDirectoryUri, postBody));
+
+            // define the URI on which to perform a GET request
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/?extent=deep");
+
+            jArray = this.WebClient.GetDto(iterationUri);
+
+            Assert.That(jArray.Count, Is.GreaterThan(0));
+
+            iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
+
+            postBodyPath = this.GetPath("Tests/SiteDirectory/DomainOfExpertise/PostNewElementDefinition.json");
+
+            postBody = this.GetJsonFromFile(postBodyPath);
+            jArray = this.WebClient.PostDto(iterationUri, postBody);
+
+            Assert.That(jArray.Count, Is.GreaterThan(0));
+        }
+
+        [Test]
+        [Category("POST")]
+        public void VerifyThatWriteIsNOTAllowedForParticipantNotBeingPartOfADomainOfExpertiseWhenAccessRightIsMODIFY_IF_PARTICIPANT()
+        {
+            var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
+
+            var postBodyPath = this.GetPath("Tests/SiteDirectory/DomainOfExpertise/PostCreateDomainOfExpertise.json");
+
+            var postBody = this.GetJsonFromFile(postBodyPath);
+
+            var jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
+
+            postBodyPath = this.GetPath("Tests/SiteDirectory/DomainOfExpertise/PostUpdatePersonPermission.json");
+
+            postBody = this.GetJsonFromFile(postBodyPath);
+            Assert.DoesNotThrow(() => this.WebClient.PostDto(siteDirectoryUri, postBody));
+
+            // define the URI on which to perform a GET request
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/?extent=deep");
+
+            jArray = this.WebClient.GetDto(iterationUri);
+
+            Assert.That(jArray.Count, Is.GreaterThan(0));
+
+            postBodyPath = this.GetPath("Tests/SiteDirectory/DomainOfExpertise/PostUpdateParticipantPermission.json");
+
+            postBody = this.GetJsonFromFile(postBodyPath);
+
+            jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
+
+            Assert.That(jArray.Count, Is.GreaterThan(0));
+
+            iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
+
+            postBodyPath = this.GetPath("Tests/SiteDirectory/DomainOfExpertise/PostNewElementDefinition.json");
+
+            postBody = this.GetJsonFromFile(postBodyPath);
+
+            var exception = Assert.Catch<WebException>(() => this.WebClient.PostDto(iterationUri, postBody));
+            
+            Assert.AreEqual(HttpStatusCode.Unauthorized, ((HttpWebResponse) exception.Response).StatusCode);
         }
 
         /// <summary>

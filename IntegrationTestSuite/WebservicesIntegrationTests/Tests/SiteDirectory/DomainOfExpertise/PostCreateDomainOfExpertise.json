@@ -1,0 +1,20 @@
+{
+  "_delete": [],
+  "_create": [
+    {
+      "classKind": "DomainOfExpertise",
+      "iid": "509b87d6-4262-476a-a12e-ee337df0d618",
+      "name": "Added Domain of Expertise",
+      "shortName": "ADOE"
+    }
+  ],
+  "_update": [
+    {
+      "classKind": "SiteDirectory",
+      "iid": "f13de6f8-b03a-46e7-a492-53b2f260f294",
+      "domain": [
+        "509b87d6-4262-476a-a12e-ee337df0d618"
+      ]
+    }
+  ]
+}
