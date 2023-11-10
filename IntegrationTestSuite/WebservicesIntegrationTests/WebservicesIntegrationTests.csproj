@@ -357,7 +357,16 @@
     <None Update="Tests\SiteDirectory\DerivedQuantityKind\PostNewCyclicFactor.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Tests\SiteDirectory\DomainOfExpertise\PostCreateDomainOfExpertise.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Tests\SiteDirectory\DomainOfExpertise\PostNewElementDefinition.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Tests\SiteDirectory\DomainOfExpertise\PostUpdateDomainOfExpertise.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Tests\SiteDirectory\DomainOfExpertise\PostUpdateParticipantPermission.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Tests\SiteDirectory\DomainOfExpertise\PostUpdatePersonPermission.json">
