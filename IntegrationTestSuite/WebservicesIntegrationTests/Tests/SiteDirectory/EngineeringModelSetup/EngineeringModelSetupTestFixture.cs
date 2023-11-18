@@ -398,6 +398,18 @@ namespace WebservicesIntegrationTests
             IList<string> domains = domainsArray.Select(x => (string)x).ToList();
             CollectionAssert.AreEquivalent(expectedDomains, domains);
             Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string)participant[PropertyNames.SelectedDomain]);
+
+            //Check if model can be read
+
+            //GET Iteration
+            // define the URI on which to perform a GET request
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/{engineeringModelSetup[PropertyNames.EngineeringModelIid]}/iteration/{iterationSetup[PropertyNames.IterationIid]}");
+
+            // get a response from the data-source as a JArray (JSON Array)
+            jArray = this.WebClient.GetDto(iterationUri);
+
+            //check if there is only one Iteration object
+            Assert.AreEqual(1, jArray.Count);
         }
 
         [Test]
