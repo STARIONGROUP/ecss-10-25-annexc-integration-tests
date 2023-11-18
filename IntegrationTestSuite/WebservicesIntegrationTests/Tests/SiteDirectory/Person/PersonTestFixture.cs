@@ -338,7 +338,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
-        public void VerifyThatInActivePersonReturnsUnauthorizedFromWebApi()
+        public void VerifyThatInActivePersonReturns_Forbidden_FromWebApi()
         {
             SiteDirectoryTestFixture.AddInActiveUserJane(this, out var userName, out var passWord);
             this.CreateNewWebClientForUser(userName, passWord);
@@ -347,11 +347,11 @@ namespace WebservicesIntegrationTests
             var uri = new Uri($"{this.Settings.Hostname}/SiteDirectory");
 
             var exception = Assert.Catch<WebException>(() => this.WebClient.GetDto(uri));
-            Assert.AreEqual(HttpStatusCode.Unauthorized, ((HttpWebResponse)exception.Response).StatusCode);
+            Assert.AreEqual(HttpStatusCode.Forbidden, ((HttpWebResponse)exception.Response).StatusCode);
         }
 
         [Test]
-        public void VerifyThatDeprecatedPersonReturnsUnauthorizedFromWebApi()
+        public void VerifyThatDeprecatedPersonReturns_Forbidden_FromWebApi()
         {
             SiteDirectoryTestFixture.AddDeprecatedUserJane(this, out var userName, out var passWord);
             this.CreateNewWebClientForUser(userName, passWord);
@@ -360,7 +360,7 @@ namespace WebservicesIntegrationTests
             var uri = new Uri($"{this.Settings.Hostname}/SiteDirectory");
 
             var exception = Assert.Catch<WebException>(() => this.WebClient.GetDto(uri));
-            Assert.AreEqual(HttpStatusCode.Unauthorized, ((HttpWebResponse)exception.Response).StatusCode);
+            Assert.AreEqual(HttpStatusCode.Forbidden, ((HttpWebResponse)exception.Response).StatusCode);
         }
     }
 }

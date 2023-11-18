@@ -326,7 +326,7 @@ namespace WebservicesIntegrationTests
             // Jane is not allowed to update
             var exception = Assert.Catch<WebException>(() => this.WebClient.PostDto(iterationUri, postBody));
             var errorMessage = this.WebClient.ExtractExceptionStringFromResponse(exception.Response);
-            Assert.AreEqual(HttpStatusCode.InternalServerError, ((HttpWebResponse) exception.Response).StatusCode);
+            Assert.AreEqual(HttpStatusCode.Unauthorized, ((HttpWebResponse) exception.Response).StatusCode);
             Assert.IsTrue(errorMessage.Contains("The person Jane does not have an appropriate update permission for Definition."));
         }
     }
