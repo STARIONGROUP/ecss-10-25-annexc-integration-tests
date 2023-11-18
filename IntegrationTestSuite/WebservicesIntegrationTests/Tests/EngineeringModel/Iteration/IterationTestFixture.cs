@@ -356,7 +356,7 @@ namespace WebservicesIntegrationTests
             var deletedIterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
 
             var exception = Assert.Catch<WebException>(() => this.WebClient.GetDto(deletedIterationUri));
-            Assert.AreEqual(HttpStatusCode.InternalServerError, ((HttpWebResponse) exception.Response).StatusCode);
+            Assert.AreEqual(HttpStatusCode.NotFound, ((HttpWebResponse) exception.Response).StatusCode);
         }
 
         [Test]

@@ -271,16 +271,16 @@ namespace WebservicesIntegrationTests
             this.CreateNewWebClientForUser(personWithEmptyPassword[PropertyNames.ShortName].ToString(), "");
             exception = Assert.Catch<WebException>(() => this.WebClient.GetDto(personWithEmptyPasswordUri));
             var errorMessage = this.WebClient.ExtractExceptionStringFromResponse(exception.Response);
-            Assert.AreEqual(HttpStatusCode.InternalServerError, ((HttpWebResponse)exception.Response).StatusCode);
-            Assert.IsTrue(errorMessage.Contains("Sequence contains no elements"));
+            Assert.AreEqual(HttpStatusCode.NotFound, ((HttpWebResponse)exception.Response).StatusCode);
+            Assert.IsTrue(errorMessage.Contains("SiteDirectory f13de6f8-b03a-46e7-a492-53b2f260f294 not found"));
 
             var personWithPasswordUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/person/01a6d208-7bb5-4855-a6fb-eb3d03f1337d");
 
             this.CreateNewWebClientForUser(personWithPassword[PropertyNames.ShortName].ToString(), "pass");
             exception = Assert.Catch<WebException>(() => this.WebClient.GetDto(personWithPasswordUri));
             errorMessage = this.WebClient.ExtractExceptionStringFromResponse(exception.Response);
-            Assert.AreEqual(HttpStatusCode.InternalServerError, ((HttpWebResponse) exception.Response).StatusCode);
-            Assert.IsTrue(errorMessage.Contains("Sequence contains no elements"));
+            Assert.AreEqual(HttpStatusCode.NotFound, ((HttpWebResponse) exception.Response).StatusCode);
+            Assert.IsTrue(errorMessage.Contains("SiteDirectory f13de6f8-b03a-46e7-a492-53b2f260f294 not found"));
         }
 
         /// <summary>
