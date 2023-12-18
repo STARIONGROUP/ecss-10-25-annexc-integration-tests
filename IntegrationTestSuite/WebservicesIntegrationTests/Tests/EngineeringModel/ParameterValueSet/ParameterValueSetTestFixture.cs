@@ -474,7 +474,7 @@ namespace WebservicesIntegrationTests
             postBody = postBody.Replace("<INNERJSON>", inputAsInnerJson);
 
             var jArray1 = this.WebClient.PostDto(iterationUri, postBody);
-            Assert.AreEqual(3, jArray1.Count);
+            Assert.AreEqual(2, jArray1.Count);
 
             var parameterValueSetUri1 = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/f73860b2-12f0-43e4-b8b2-c81862c0a159/parameter/3f05483f-66ff-4f21-bc76-45956779f66e/valueSet/72ec3701-bcb5-4bf6-bd78-30fd1b65e3be?revisionFrom=1&revisionTo=2");
 

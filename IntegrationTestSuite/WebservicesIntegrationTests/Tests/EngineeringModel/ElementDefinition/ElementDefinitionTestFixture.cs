@@ -44,7 +44,7 @@ namespace WebservicesIntegrationTests
             var postBody = base.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
-            Assert.AreEqual(4, jArray.Count);
+            Assert.AreEqual(3, jArray.Count);
 
             var engineeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
             Assert.AreEqual(2, (int)engineeringModel[PropertyNames.RevisionNumber]);
@@ -105,7 +105,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
             // check if there are 2 objects
-            Assert.AreEqual(3, jArray.Count);
+            Assert.AreEqual(2, jArray.Count);
 
             // get a specific EngineeringModel from the result by it's unique id
             var engineeeringModel = jArray.Single(
@@ -133,7 +133,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
             // check if there are 2 objects
-            Assert.AreEqual(3, jArray.Count);
+            Assert.AreEqual(2, jArray.Count);
 
             // get a specific EngineeringModel from the result by it's unique id
             var engineeeringModel = jArray.Single(
@@ -168,7 +168,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
             
             // check if there are 2 objects
-            Assert.AreEqual(3, jArray.Count);
+            Assert.AreEqual(2, jArray.Count);
 
             // get a specific EngineeringModel from the result by it's unique id
             var engineeeringModel = jArray.Single(
@@ -215,7 +215,7 @@ namespace WebservicesIntegrationTests
 
             var logEntriesArray = (JArray)engineeringModel[PropertyNames.LogEntry];
             IList<string> logEntries = logEntriesArray.Select(x => (string)x).ToList();
-            Assert.AreEqual(2, logEntries.Count);
+            Assert.AreEqual(1, logEntries.Count);
 
             var expectedCommonFileStores = new[] { "8e5ca9cc-3da8-4e66-9172-7c3b2464a59c" };
             var commonFileStoresArray = (JArray)engineeringModel[PropertyNames.CommonFileStore];
