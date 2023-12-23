@@ -108,6 +108,34 @@ namespace WebservicesIntegrationTests
 
         [Test]
         [Category("POST")]
+        public void Verify_that_update_own_person_to_isActive_is_false_is_not_allowed()
+        {
+            var uri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
+            var postBodyPath = this.GetPath("Tests/SiteDirectory/Person/Post_Update_Own_Person_Set_Inactive.json");
+
+            var postBody = this.GetJsonFromFile(postBodyPath);
+            
+            var exception = Assert.Catch<WebException>(() => this.WebClient.PostDto(uri, postBody));
+
+            Assert.That(((HttpWebResponse)exception.Response).StatusCode, Is.EqualTo(HttpStatusCode.Forbidden));
+        }
+
+        [Test]
+        [Category("POST")]
+        public void Verify_that_update_own_person_to_isDeprecated_is_true_is_not_allowed()
+        {
+            var uri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
+            var postBodyPath = this.GetPath("Tests/SiteDirectory/Person/Post_Update_Own_Person_Set_IsDeprecated.json");
+
+            var postBody = this.GetJsonFromFile(postBodyPath);
+
+            var exception = Assert.Catch<WebException>(() => this.WebClient.PostDto(uri, postBody));
+
+            Assert.That(((HttpWebResponse)exception.Response).StatusCode, Is.EqualTo(HttpStatusCode.Forbidden));
+        }
+
+        [Test]
+        [Category("POST")]
         public void Verify_That_person_with_null_role_and_null_password_can_be_posted()
         {
             var uri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
@@ -293,10 +321,11 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken person)
         {
             // verify that the amount of returned properties 
-            Assert.AreEqual(18, person.Children().Count());
+            Assert.That(person.Children().Count(), Is.EqualTo(18));
 
-            Assert.AreEqual("77791b12-4c2c-4499-93fa-869df3692d22", (string) person[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) person[PropertyNames.RevisionNumber]);
+            Assert.That((string)person[PropertyNames.Iid], Is.EqualTo("77791b12-4c2c-4499-93fa-869df3692d22"));
+
+            Assert.That((int)person[PropertyNames.RevisionNumber], Is.EqualTo(1));
 
             // assert that the properties are what is expected
             Assert.AreEqual("John", (string) person[PropertyNames.GivenName]);

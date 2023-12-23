@@ -429,6 +429,12 @@
     <None Update="Tests\SiteDirectory\Person\Post_Person_With_Role_Null.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Tests\SiteDirectory\Person\Post_Update_Own_Person_Set_Inactive.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Tests\SiteDirectory\Person\Post_Update_Own_Person_Set_IsDeprecated.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Tests\SiteDirectory\PrefixedUnit\PostNewPrefixedUnit.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

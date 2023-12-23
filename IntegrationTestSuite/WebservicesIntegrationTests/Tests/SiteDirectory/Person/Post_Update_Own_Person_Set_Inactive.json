@@ -1,0 +1,11 @@
+{
+    "_delete": [],
+    "_create": [],
+    "_update": [
+        {
+            "classKind": "Person",
+            "iid": "77791b12-4c2c-4499-93fa-869df3692d22",
+            "isActive": false
+        }
+    ]
+}
