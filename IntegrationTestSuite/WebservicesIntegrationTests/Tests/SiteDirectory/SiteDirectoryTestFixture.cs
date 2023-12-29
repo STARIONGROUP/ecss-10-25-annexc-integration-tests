@@ -22,12 +22,8 @@ namespace WebservicesIntegrationTests
 {
     using System;
     using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
-    using System.Threading.Tasks;
-
-    using Ionic.Zip;
-
+    
     using Newtonsoft.Json.Linq;
 
     using NUnit.Framework;

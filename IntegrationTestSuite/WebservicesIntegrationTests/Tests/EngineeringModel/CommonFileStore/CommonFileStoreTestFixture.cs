@@ -42,7 +42,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(commonFileStoreUri);
 
             //check if there is the only one CommonFileStore object 
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific CommonFileStore from the result by it's unique id
             var commonFileStore =
@@ -62,7 +62,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(commonFileStoreUri);
 
             //check if there are 2 objects
-            Assert.AreEqual(2, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(2));
 
             // get a specific CommonFileStore from the result by it's unique id
             var commonFileStore =
@@ -80,16 +80,16 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken commonFileStore)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(8, commonFileStore.Children().Count());
+            Assert.That(commonFileStore.Children().Count(), Is.EqualTo(8));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("8e5ca9cc-3da8-4e66-9172-7c3b2464a59c", (string) commonFileStore[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) commonFileStore[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("CommonFileStore", (string) commonFileStore[PropertyNames.ClassKind]);
+            Assert.That((string)commonFileStore[PropertyNames.Iid], Is.EqualTo("8e5ca9cc-3da8-4e66-9172-7c3b2464a59c"));
+            Assert.That((int)commonFileStore[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string)commonFileStore[PropertyNames.ClassKind], Is.EqualTo("CommonFileStore"));
 
-            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string) commonFileStore[PropertyNames.Owner]);
-            Assert.AreEqual("2016-10-19T09:30:36.186Z", (string) commonFileStore[PropertyNames.CreatedOn]);
-            Assert.AreEqual("TestFileStore", (string) commonFileStore[PropertyNames.Name]);
+            Assert.That((string)commonFileStore[PropertyNames.Owner], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
+            Assert.That((string)commonFileStore[PropertyNames.CreatedOn], Is.EqualTo("2016-10-19T09:30:36.186Z"));
+            Assert.That((string)commonFileStore[PropertyNames.Name], Is.EqualTo("TestFileStore"));
 
             var expectedFiles = new string[]
             {

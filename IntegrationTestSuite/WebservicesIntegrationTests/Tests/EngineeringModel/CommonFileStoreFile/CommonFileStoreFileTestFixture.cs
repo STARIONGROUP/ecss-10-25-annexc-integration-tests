@@ -29,13 +29,13 @@ namespace WebservicesIntegrationTests
     using System.Security.Cryptography;
     using System.Threading.Tasks;
 
-    using Ionic.Zip;
+    using ICSharpCode.SharpZipLib.Zip;
 
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
 
     using NUnit.Framework;
-
+    
     [TestFixture]
     public class CommonFileStoreFileTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
@@ -50,7 +50,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(fileUri);
 
             //check if there is the only one File object 
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific File from the result by it's unique id
             var file =
@@ -70,7 +70,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(fileUri);
 
             //check if there are 4 objects
-            Assert.AreEqual(3, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(3));
 
             // get a specific DomainFileStore from the result by it's unique id
             var commonFileStore = jArray.Single(x => (string) x[PropertyNames.Iid] == "8e5ca9cc-3da8-4e66-9172-7c3b2464a59c");
@@ -109,7 +109,7 @@ namespace WebservicesIntegrationTests
             var jArray = await this.WebClient.PostFile(iterationUri, postJsonPath, postFilePath);
 
             // check if there is a correct amount of objects
-            Assert.AreEqual(4, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(4));
 
             var fileUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
             postJsonPath = this.GetPath("Tests/EngineeringModel/CommonFileStoreFile/PostDeleteFile.json");
@@ -117,7 +117,7 @@ namespace WebservicesIntegrationTests
             jArray = this.WebClient.PostDto(fileUri, postBody);
 
             // check if there is a correct amount of objects
-            Assert.AreEqual(2, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(2));
 
             // get a specific DomainFileStore from the result by it's unique id
             var commonFileStore = jArray.Single(x => (string)x[PropertyNames.Iid] == "8e5ca9cc-3da8-4e66-9172-7c3b2464a59c");
@@ -125,7 +125,7 @@ namespace WebservicesIntegrationTests
             var possibleFiles = commonFileStore[PropertyNames.File].Select(x => (string)x).ToList();
             var expectedFiles = new[] { "95bf0f17-1273-4338-98ae-839016242776" };
 
-            CollectionAssert.AreEqual(expectedFiles, possibleFiles);
+            Assert.That(possibleFiles, Is.EquivalentTo(expectedFiles));
         }
 
         [Test]
@@ -140,7 +140,7 @@ namespace WebservicesIntegrationTests
             var jArray = await this.WebClient.PostFile(iterationUri, postJsonPath, postFilePath);
 
             // check if there is a correct amount of objects
-            Assert.AreEqual(4, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(4));
 
             //Change user to Jane
             SiteDirectoryTestFixture.AddDomainExpertUserJane(this, out var userName, out var passWord);
@@ -151,7 +151,7 @@ namespace WebservicesIntegrationTests
             var postBody = this.GetJsonFromFile(postJsonPath);
 
             // Jane is not allowed to delete
-            Assert.Throws<WebException>(() => this.WebClient.PostDto(fileUri, postBody));
+            Assert.That(() => this.WebClient.PostDto(fileUri, postBody), Throws.TypeOf<WebException>());
         }
 
         [Test]
@@ -165,33 +165,34 @@ namespace WebservicesIntegrationTests
             var jArray = await this.WebClient.PostFile(iterationUri, postJsonPath, postFilePath);
 
             // check if there is a correct amount of objects
-            Assert.AreEqual(4, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(4));
 
             // get a specific EngineeeringModel from the result by it's unique id
             var engineeeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
-            Assert.AreEqual(2, (int)engineeeringModel[PropertyNames.RevisionNumber]);
+            Assert.That((int)engineeeringModel[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             // get a specific commonFileStore from the result by it's unique id
             var commonFileStore =
                 jArray.Single(x => (string)x[PropertyNames.Iid] == "8e5ca9cc-3da8-4e66-9172-7c3b2464a59c");
 
-            Assert.AreEqual(2, (int)commonFileStore[PropertyNames.RevisionNumber]);
+            Assert.That((int)commonFileStore[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             // get a specific File from the result by it's unique id
             var file =
                 jArray.Single(x => (string)x[PropertyNames.Iid] == "8ac6db3e-9525-4f3e-93ea-707076c07fc1");
 
-            Assert.AreEqual(2, (int)file[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("File", (string)file[PropertyNames.ClassKind]);
-
-            Assert.IsNull((string)file[PropertyNames.LockedBy]);
-            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string)file[PropertyNames.Owner]);
+            Assert.That((int)file[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)file[PropertyNames.ClassKind], Is.EqualTo("File"));
+            
+            Assert.That((string)file[PropertyNames.LockedBy], Is.Null);
+            Assert.That((string)file[PropertyNames.Owner], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
 
             var expectedCategories = new string[] { };
             var categoriesArray = (JArray)file[PropertyNames.Category];
             IList<string> categories = categoriesArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedCategories, categories);
 
+            Assert.That(categories, Is.EquivalentTo(expectedCategories));
+            
             var expectedFileRevisions = new string[]
             {
                 "76e9b7fc-edc4-4ca3-89ba-eac014e7d9f8"
@@ -199,29 +200,27 @@ namespace WebservicesIntegrationTests
 
             var fileRevisionsArray = (JArray)file[PropertyNames.FileRevision];
             IList<string> fileRevisions = fileRevisionsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedFileRevisions, fileRevisions);
+            
+            Assert.That(fileRevisions, Is.EquivalentTo(expectedFileRevisions));
 
             // get a specific FileRevision from the result by it's unique id
-            var fileRevision =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "76e9b7fc-edc4-4ca3-89ba-eac014e7d9f8");
+            var fileRevision = jArray.Single(x => (string)x[PropertyNames.Iid] == "76e9b7fc-edc4-4ca3-89ba-eac014e7d9f8");
 
-            Assert.AreEqual(2, (int)fileRevision[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("FileRevision", (string)fileRevision[PropertyNames.ClassKind]);
-            Assert.AreEqual("FileTest", (string)fileRevision[PropertyNames.Name]);
-
-            Assert.IsNull((string)fileRevision[PropertyNames.ContainingFolder]);
-            Assert.AreEqual("284334dd-e8e5-42d6-bc8a-715c507a7f02", (string)fileRevision[PropertyNames.Creator]);
-            Assert.AreEqual("2990BA2444A937A28E7B1E2465FCDF949B8F5368", (string)fileRevision[PropertyNames.ContentHash]);
+            Assert.That((int)fileRevision[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)fileRevision[PropertyNames.ClassKind], Is.EqualTo("FileRevision"));
+            Assert.That((string)fileRevision[PropertyNames.Name], Is.EqualTo("FileTest"));
+            Assert.That((string)fileRevision[PropertyNames.ContainingFolder], Is.Null);
+            Assert.That((string)fileRevision[PropertyNames.Creator], Is.EqualTo("284334dd-e8e5-42d6-bc8a-715c507a7f02"));
+            Assert.That((string)fileRevision[PropertyNames.ContentHash], Is.EqualTo("2990BA2444A937A28E7B1E2465FCDF949B8F5368"));
 
             var expectedFileTypes = new List<OrderedItem>
             {
                 new OrderedItem(3177, "b16894e4-acb5-4e81-a118-16c00eb86d8f")
             };
 
-            var fileTypesArray = JsonConvert.DeserializeObject<List<OrderedItem>>(
-                fileRevision[PropertyNames.FileType].ToString());
+            var fileTypesArray = JsonConvert.DeserializeObject<List<OrderedItem>>(fileRevision[PropertyNames.FileType].ToString());
 
-            CollectionAssert.AreEquivalent(expectedFileTypes, fileTypesArray);
+            Assert.That(fileTypesArray, Is.EquivalentTo(expectedFileTypes));
 
             // Subsequent revision
             var fileUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
@@ -232,15 +231,15 @@ namespace WebservicesIntegrationTests
 
             // get a specific EngineeeringModel from the result by it's unique id
             engineeeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
-            Assert.AreEqual(3, (int)engineeeringModel[PropertyNames.RevisionNumber]);
+            Assert.That((int)engineeeringModel[PropertyNames.RevisionNumber], Is.EqualTo(3));
 
             // check if there is a correct amount of objects
-            Assert.AreEqual(3, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(3));
 
             // get a specific File from the result by it's unique id
             file = jArray.Single(x => (string)x[PropertyNames.Iid] == "95bf0f17-1273-4338-98ae-839016242775");
 
-            Assert.AreEqual(3, (int)file[PropertyNames.RevisionNumber]);
+            Assert.That((int)file[PropertyNames.RevisionNumber], Is.EqualTo(3));
 
             expectedFileRevisions = new string[]
             {
@@ -250,29 +249,28 @@ namespace WebservicesIntegrationTests
 
             fileRevisionsArray = (JArray)file[PropertyNames.FileRevision];
             fileRevisions = fileRevisionsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedFileRevisions, fileRevisions);
+
+            Assert.That(fileRevisions, Is.EquivalentTo(expectedFileRevisions));
 
             // get a specific FileRevision from the result by it's unique id
-            fileRevision =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "1304d40a-cb2e-4608-a353-cb7f65000559");
+            fileRevision = jArray.Single(x => (string)x[PropertyNames.Iid] == "1304d40a-cb2e-4608-a353-cb7f65000559");
 
-            Assert.AreEqual(3, (int)fileRevision[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("FileRevision", (string)fileRevision[PropertyNames.ClassKind]);
-            Assert.AreEqual("Revision 2_1525ED651E5B609DAE099DEEDA8DBDB49CFF956F", (string)fileRevision[PropertyNames.Name]);
+            Assert.That((int)fileRevision[PropertyNames.RevisionNumber], Is.EqualTo(3));
+            Assert.That((string)fileRevision[PropertyNames.ClassKind], Is.EqualTo("FileRevision"));
+            Assert.That((string)fileRevision[PropertyNames.Name], Is.EqualTo("Revision 2_1525ED651E5B609DAE099DEEDA8DBDB49CFF956F"));
 
             Assert.IsNull((string)fileRevision[PropertyNames.ContainingFolder]);
-            Assert.AreEqual("284334dd-e8e5-42d6-bc8a-715c507a7f02", (string)fileRevision[PropertyNames.Creator]);
-            Assert.AreEqual("1525ED651E5B609DAE099DEEDA8DBDB49CFF956F", (string)fileRevision[PropertyNames.ContentHash]);
+            Assert.That((string)fileRevision[PropertyNames.Creator], Is.EqualTo("284334dd-e8e5-42d6-bc8a-715c507a7f02"));
+            Assert.That((string)fileRevision[PropertyNames.ContentHash], Is.EqualTo("1525ED651E5B609DAE099DEEDA8DBDB49CFF956F"));
 
             expectedFileTypes = new List<OrderedItem>
             {
                 new OrderedItem(6608, "b16894e4-acb5-4e81-a118-16c00eb86d8f")
             };
 
-            fileTypesArray = JsonConvert.DeserializeObject<List<OrderedItem>>(
-                fileRevision[PropertyNames.FileType].ToString());
+            fileTypesArray = JsonConvert.DeserializeObject<List<OrderedItem>>(fileRevision[PropertyNames.FileType].ToString());
 
-            CollectionAssert.AreEquivalent(expectedFileTypes, fileTypesArray);
+            Assert.That(fileTypesArray, Is.EquivalentTo(expectedFileTypes));
         }
 
         [Test]
@@ -319,14 +317,14 @@ namespace WebservicesIntegrationTests
             {
                 var hash = BitConverter.ToString(sha1.ComputeHash(responseBodyForTxt)).Replace("-", string.Empty);
 
-                Assert.AreEqual("2990BA2444A937A28E7B1E2465FCDF949B8F5368", hash);
+                Assert.That(hash, Is.EqualTo("2990BA2444A937A28E7B1E2465FCDF949B8F5368"));
             }
 
             using (var sha1 = new SHA1Managed())
             {
                 var hash = BitConverter.ToString(sha1.ComputeHash(responseBodyForPdf)).Replace("-", string.Empty);
 
-                Assert.AreEqual("3F64667F0F27A4C4FA1B4BF374033938A542FDD1", hash);
+                Assert.That(hash, Is.EqualTo("3F64667F0F27A4C4FA1B4BF374033938A542FDD1"));
             }
         }
 
@@ -344,19 +342,25 @@ namespace WebservicesIntegrationTests
             var responseBody = await this.WebClient.GetFileResponseBody(getFileUri);
 
             var path = Path.GetTempFileName();
-            File.WriteAllBytes(path, responseBody);
-            var zip = new ZipFile(path);
+            await File.WriteAllBytesAsync(path, responseBody);
+            var zipFile = new ZipFile(path);
 
-            // It is assumed that if some information is retrieved from the archive than it is not corrupted
-            Assert.AreEqual(2, zip.Count);
+            // folder items are not included as entries nor are empty folders
+            Assert.That(zipFile.Count, Is.EqualTo(1));
 
             var expectedZipEntries = new string[]
             {
-                "TestFolder/",
                 "TestFolder/FileTest.txt"
             };
 
-            CollectionAssert.AreEquivalent(expectedZipEntries, zip.EntryFileNames.ToArray());
+            var entries = new List<string>();
+
+            foreach (ZipEntry entry in zipFile)
+            {
+                entries.Add(entry.Name);
+            }
+
+            Assert.That(entries, Is.EquivalentTo(expectedZipEntries));
         }
 
         [Test]
@@ -378,22 +382,27 @@ namespace WebservicesIntegrationTests
             var responseBody = await this.WebClient.GetFileResponseBody(getFileUri);
 
             var path = Path.GetTempFileName();
-            File.WriteAllBytes(path, responseBody);
-            var zip = new ZipFile(path);
+            await File.WriteAllBytesAsync(path, responseBody);
+            var zipFile = new ZipFile(path);
 
-            // It is assumed that if some information is retrieved from the archive that it is not corrupted
-            //Assert.AreEqual(5, zip.Count);
+            // folder items are not included as entries nor are empty folders
+            Assert.That(zipFile.Count, Is.EqualTo(3));
 
             var expectedZipEntries = new string[]
             {
                 "FileRevision.tst",
                 "UserManual_3F64667F0F27A4C4FA1B4BF374033938A542FDD1.txt",
-                "Test Folder/",
-                "TestFolder/",
                 "TestFolder/FileTest.txt"
             };
 
-            CollectionAssert.AreEquivalent(expectedZipEntries, zip.EntryFileNames.ToArray());
+            var entries = new List<string>();
+
+            foreach (ZipEntry entry in zipFile)
+            {
+                entries.Add(entry.Name);
+            }
+
+            Assert.That(entries, Is.EquivalentTo(expectedZipEntries));
         }
 
         /// <summary>
@@ -406,20 +415,20 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken file)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(7, file.Children().Count());
+            Assert.That(file.Children().Count(), Is.EqualTo(7));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("95bf0f17-1273-4338-98ae-839016242776", (string) file[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) file[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("File", (string) file[PropertyNames.ClassKind]);
+            Assert.That((string)file[PropertyNames.Iid], Is.EqualTo("95bf0f17-1273-4338-98ae-839016242776"));
+            Assert.That((int)file[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string)file[PropertyNames.ClassKind], Is.EqualTo("File"));
 
-            Assert.IsNull((string) file[PropertyNames.LockedBy]);
-            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string) file[PropertyNames.Owner]);
+            Assert.That((string) file[PropertyNames.LockedBy], Is.Null);
+            Assert.That((string)file[PropertyNames.Owner], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
 
             var expectedCategories = new string[] { };
             var categoriesArray = (JArray) file[PropertyNames.Category];
             IList<string> categories = categoriesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedCategories, categories);
+            Assert.That(categories, Is.EquivalentTo(expectedCategories));
 
             var expectedFileRevisions = new string[]
             {
@@ -428,7 +437,7 @@ namespace WebservicesIntegrationTests
 
             var fileRevisionsArray = (JArray) file[PropertyNames.FileRevision];
             IList<string> fileRevisions = fileRevisionsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedFileRevisions, fileRevisions);
+            Assert.That(fileRevisions, Is.EquivalentTo(expectedFileRevisions));
         }
     }
 }

@@ -21,14 +21,15 @@
 namespace WebservicesIntegrationTests
 {
     using System;
+    using System.Collections.Generic;
     using System.IO;
-    using System.Linq;
     using System.Threading.Tasks;
 
-    using Ionic.Zip;
-    
+    using ICSharpCode.SharpZipLib.Zip;
+
     using NUnit.Framework;
-    
+
+    [TestFixture]
     public class ExportTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
         [Test]
@@ -45,12 +46,12 @@ namespace WebservicesIntegrationTests
             var responseBody = await this.WebClient.GetModelExportFile(exportUri, engineeringodelSetupIds);
 
             var path = Path.GetTempFileName();
-            File.WriteAllBytes(path, responseBody);
-            ZipFile zip = new ZipFile(path);
+            await File.WriteAllBytesAsync(path, responseBody);
+            var zipFile = new ZipFile(path);
 
             // It is assumed that if some information is retrieved from the archive than it is not corrupted
-            Assert.That(zip.Count, Is.EqualTo(8));
-            
+            Assert.That(zipFile.Count, Is.EqualTo(8));
+
             var expectedZipEntries = new string[]
             {
                 "Header.json",
@@ -63,7 +64,14 @@ namespace WebservicesIntegrationTests
                 "EngineeringModels/9ec982e4-ef72-4953-aa85-b158a95d8d56/FileRevisions/B95EC201AE3EE89D407449D692E69BB97C228A7E"
             };
 
-            CollectionAssert.AreEquivalent(expectedZipEntries, zip.EntryFileNames.ToArray());
+            var entries = new List<string>();
+
+            foreach (ZipEntry entry in zipFile)
+            {
+                entries.Add(entry.Name);
+            }
+
+            Assert.That(entries, Is.EquivalentTo(expectedZipEntries));
         }
 
         [Test]
@@ -80,11 +88,11 @@ namespace WebservicesIntegrationTests
             var responseBody = await this.WebClient.GetModelExportFile(exportUri, engineeringodelSetupIds);
 
             var path = Path.GetTempFileName();
-            File.WriteAllBytes(path, responseBody);
-            ZipFile zip = new ZipFile(path);
+            await File.WriteAllBytesAsync(path, responseBody);
+            var zipFile = new ZipFile(path);
 
             // It is assumed that if some information is retrieved from the archive than it is not corrupted
-            Assert.AreEqual(7, zip.Count);
+            Assert.That(zipFile.Count, Is.EqualTo(7));
 
             var expectedZipEntries = new string[]
             {
@@ -97,7 +105,14 @@ namespace WebservicesIntegrationTests
                 "EngineeringModels/9ec982e4-ef72-4953-aa85-b158a95d8d56/FileRevisions/"
             };
 
-            CollectionAssert.AreEquivalent(expectedZipEntries, zip.EntryFileNames.ToArray());
+            var entries = new List<string>();
+
+            foreach (ZipEntry entry in zipFile)
+            {
+                entries.Add(entry.Name);
+            }
+
+            Assert.That(entries, Is.EquivalentTo(expectedZipEntries));
         }
     }
 }

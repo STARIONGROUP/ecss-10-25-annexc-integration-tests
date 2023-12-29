@@ -6,13 +6,13 @@
     <Title>CometServer-CE.Tests</Title>
     <Description>Unit tests Library for the Comet Server</Description>
     <Copyright>Copyright © RHEA System S.A.</Copyright>
-    <Authors>Sam, Alex, Alexander</Authors>
+    <Authors>Sam, Alex, Alexander, Antoine</Authors>
     <Configurations>Debug;Release;Test;Local</Configurations>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
-	<PackageReference Include="DotNetZip" Version="1.16.0" />
+    <PackageReference Include="SharpZipLib" Version="1.4.2" />
 	<PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="6.0.0" />
 	<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	

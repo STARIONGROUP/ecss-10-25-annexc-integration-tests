@@ -43,11 +43,10 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(domainFileStoreUri);
 
             //check if there is the only one DomainFileStore object 
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific DomainFileStore from the result by it's unique id
-            var domainFileStore =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "da7dddaa-02aa-4897-9935-e8d66c811a96");
+            var domainFileStore = jArray.Single(x => (string) x[PropertyNames.Iid] == "da7dddaa-02aa-4897-9935-e8d66c811a96");
             DomainFileStoreTestFixture.VerifyProperties(domainFileStore);
         }
 
@@ -65,13 +64,11 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(3, jArray.Count);
 
             // get a specific Iteration from the result by it's unique id
-            var iteration =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
+            var iteration = jArray.Single(x => (string) x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
             IterationTestFixture.VerifyProperties(iteration);
 
             // get a specific DomainFileStore from the result by it's unique id
-            var domainFileStore =
-                jArray.Single(x => (string) x[PropertyNames.Iid] == "da7dddaa-02aa-4897-9935-e8d66c811a96");
+            var domainFileStore = jArray.Single(x => (string) x[PropertyNames.Iid] == "da7dddaa-02aa-4897-9935-e8d66c811a96");
             DomainFileStoreTestFixture.VerifyProperties(domainFileStore);
         }
 
@@ -90,44 +87,37 @@ namespace WebservicesIntegrationTests
                 new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/domainFileStore?extent=deep");
 
             // define the URI on which to perform a file GET request
-            var fileUri =
-                new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/domainFileStore/da7dddaa-02aa-4897-9935-e8d66c811a96/file?extent=deep");
+            var fileUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/domainFileStore/da7dddaa-02aa-4897-9935-e8d66c811a96/file?extent=deep");
 
             // define the URI on which to perform a folder GET request
-            var folderUri =
-                new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/domainFileStore/da7dddaa-02aa-4897-9935-e8d66c811a96/folder?extent=deep");
+            var folderUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/domainFileStore/da7dddaa-02aa-4897-9935-e8d66c811a96/folder?extent=deep");
 
             // define the URI on which to perform a fileRevision GET request
-            var fileRevisionUri =
-                new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/domainFileStore/da7dddaa-02aa-4897-9935-e8d66c811a96/file/95bf0f17-1273-4338-98ae-839016242775/fileRevision");
+            var fileRevisionUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/domainFileStore/da7dddaa-02aa-4897-9935-e8d66c811a96/file/95bf0f17-1273-4338-98ae-839016242775/fileRevision");
 
             // get a response from the data-source as a JArray (JSON Array)
             jArray = this.WebClient.GetDto(domainFileStoreUri);
-            Assert.AreEqual(4, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(4));
 
             // get a specific DomainFileStore from the result by it's unique id
-            var domainFileStore =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "da7dddaa-02aa-4897-9935-e8d66c811a96");
+            var domainFileStore = jArray.Single(x => (string)x[PropertyNames.Iid] == "da7dddaa-02aa-4897-9935-e8d66c811a96");
 
-            var file =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "95bf0f17-1273-4338-98ae-839016242775");
+            var file = jArray.Single(x => (string)x[PropertyNames.Iid] == "95bf0f17-1273-4338-98ae-839016242775");
 
-            var folder =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "67cdb7de-7721-40a0-9ca2-10a5cf7742fc");
+            var folder = jArray.Single(x => (string)x[PropertyNames.Iid] == "67cdb7de-7721-40a0-9ca2-10a5cf7742fc");
 
-            var fileRevision =
-                jArray.Single(x => (string)x[PropertyNames.Iid] == "5544bb87-dc38-45d5-9d92-c580d3fe0442");
+            var fileRevision = jArray.Single(x => (string)x[PropertyNames.Iid] == "5544bb87-dc38-45d5-9d92-c580d3fe0442");
 
-            Assert.AreEqual("True", (string)domainFileStore[PropertyNames.IsHidden]);
+            Assert.That((string)domainFileStore[PropertyNames.IsHidden], Is.EqualTo("True"));
 
             jArray = this.WebClient.GetDto(fileUri);
-            Assert.AreEqual(2, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(2));
 
             jArray = this.WebClient.GetDto(folderUri);
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             jArray = this.WebClient.GetDto(fileRevisionUri);
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             SiteDirectoryTestFixture.AddDomainExpertUserJane(this, out var userName, out var passWord);
             this.CreateNewWebClientForUser(userName, passWord);
@@ -146,23 +136,18 @@ namespace WebservicesIntegrationTests
 
             jArray = this.WebClient.GetDto(iterationUri);
 
-            domainFileStore =
-                jArray.SingleOrDefault(x => (string)x[PropertyNames.Iid] == "da7dddaa-02aa-4897-9935-e8d66c811a96");
+            domainFileStore = jArray.SingleOrDefault(x => (string)x[PropertyNames.Iid] == "da7dddaa-02aa-4897-9935-e8d66c811a96");
 
-            file =
-                jArray.SingleOrDefault(x => (string)x[PropertyNames.Iid] == "95bf0f17-1273-4338-98ae-839016242775");
+            file = jArray.SingleOrDefault(x => (string)x[PropertyNames.Iid] == "95bf0f17-1273-4338-98ae-839016242775");
 
-            folder =
-                jArray.SingleOrDefault(x => (string)x[PropertyNames.Iid] == "67cdb7de-7721-40a0-9ca2-10a5cf7742fc");
+            folder = jArray.SingleOrDefault(x => (string)x[PropertyNames.Iid] == "67cdb7de-7721-40a0-9ca2-10a5cf7742fc");
 
-            fileRevision =
-                jArray.SingleOrDefault(x => (string)x[PropertyNames.Iid] == "5544bb87-dc38-45d5-9d92-c580d3fe0442");
+            fileRevision = jArray.SingleOrDefault(x => (string)x[PropertyNames.Iid] == "5544bb87-dc38-45d5-9d92-c580d3fe0442");
 
             Assert.That(domainFileStore, Is.Null);
             Assert.That(file, Is.Null);
             Assert.That(folder, Is.Null);
             Assert.That(fileRevision, Is.Null);
-
         }
 
         /// <summary>
@@ -175,34 +160,37 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken domainFileStore)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(9, domainFileStore.Children().Count());
+            Assert.That(domainFileStore.Children().Count(), Is.EqualTo(9));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("da7dddaa-02aa-4897-9935-e8d66c811a96", (string) domainFileStore[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) domainFileStore[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("DomainFileStore", (string) domainFileStore[PropertyNames.ClassKind]);
+            Assert.That((string)domainFileStore[PropertyNames.Iid], Is.EqualTo("da7dddaa-02aa-4897-9935-e8d66c811a96"));
+            Assert.That((int)domainFileStore[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string)domainFileStore[PropertyNames.ClassKind], Is.EqualTo("DomainFileStore"));
 
-            Assert.AreEqual("Test DomainFileStore", (string) domainFileStore[PropertyNames.Name]);
-            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string) domainFileStore[PropertyNames.Owner]);
+            Assert.That((string)domainFileStore[PropertyNames.Name], Is.EqualTo("Test DomainFileStore"));
+            Assert.That((string)domainFileStore[PropertyNames.Owner], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
 
-            Assert.AreEqual("2016-11-02T13:58:35.936Z", (string) domainFileStore[PropertyNames.CreatedOn]);
-            Assert.IsFalse((bool) domainFileStore[PropertyNames.IsHidden]);
+            Assert.That((string)domainFileStore[PropertyNames.CreatedOn], Is.EqualTo("2016-11-02T13:58:35.936Z"));
+            Assert.That((bool) domainFileStore[PropertyNames.IsHidden], Is.False);
 
             var expectedFiles = new string[]
             {
                 "95bf0f17-1273-4338-98ae-839016242775"
             };
+
             var filesArray = (JArray) domainFileStore[PropertyNames.File];
             IList<string> files = filesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedFiles, files);
+            Assert.That(files, Is.EquivalentTo(expectedFiles));
 
             var expectedFolders = new string[]
             {
                 "67cdb7de-7721-40a0-9ca2-10a5cf7742fc"
             };
+
             var foldersArray = (JArray) domainFileStore[PropertyNames.Folder];
             IList<string> folders = foldersArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedFolders, folders);
+            
+            Assert.That(folders, Is.EquivalentTo(expectedFolders));
         }
     }
 }
