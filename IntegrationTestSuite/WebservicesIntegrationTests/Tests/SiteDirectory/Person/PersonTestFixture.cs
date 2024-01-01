@@ -391,5 +391,17 @@ namespace WebservicesIntegrationTests
             var exception = Assert.Catch<WebException>(() => this.WebClient.GetDto(uri));
             Assert.AreEqual(HttpStatusCode.Forbidden, ((HttpWebResponse)exception.Response).StatusCode);
         }
+
+        [Test]
+        public void Verify_that_when_incomplete_person_is_posted_server_responds_with_exception()
+        {
+            var uri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
+            var postBodyPath = this.GetPath("Tests/SiteDirectory/Person/Post_Person_With_Surname_Null.json");
+
+            var postBody = this.GetJsonFromFile(postBodyPath);
+
+            var exception = Assert.Catch<WebException>(() => this.WebClient.PostDto(uri, postBody));
+            Assert.That( ((HttpWebResponse)exception.Response).StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
+        }
     }
 }

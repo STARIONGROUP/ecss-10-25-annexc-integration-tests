@@ -426,6 +426,9 @@
     <None Update="Tests\SiteDirectory\Person\Post_Persons_With_Passwords.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Tests\SiteDirectory\Person\Post_Person_With_Surname_Null.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Tests\SiteDirectory\Person\Post_Person_With_Role_Null.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
