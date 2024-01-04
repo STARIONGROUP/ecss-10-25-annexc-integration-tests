@@ -58,7 +58,6 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
-        [Ignore("Reordering options is not possible in Webservice. See https://github.com/RHEAGROUP/CDP4-WebServices-Community-Edition/issues/127")]
         [Category("POST")]
         public void VerifyThatOptionsCanBeReorderedWithWebApi()
         {
