@@ -417,6 +417,9 @@
     <None Update="Tests\SiteDirectory\ParameterTypeComponent\PostReorderParameterTypeComponents.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Tests\SiteDirectory\Participant\Create_Existing_Participant.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Tests\SiteDirectory\Participant\Post_Participant_With_Null_Domain.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

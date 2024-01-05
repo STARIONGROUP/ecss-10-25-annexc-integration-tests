@@ -26,7 +26,7 @@ namespace WebservicesIntegrationTests
     using NUnit.Framework;
 
     [TestFixture]
-    public class ParticipantTestFixture: WebClientTestFixtureBase
+    public class ParticipantTestFixture: WebClientTestFixtureBaseWithDatabaseRestore
     {
         [Test]
         [Category("POST")]
@@ -43,6 +43,23 @@ namespace WebservicesIntegrationTests
             var errorMessage = this.WebClient.ExtractExceptionStringFromResponse(exception.Response);
             Assert.AreEqual(HttpStatusCode.Forbidden, ((HttpWebResponse)exception.Response).StatusCode);
             Assert.IsTrue(errorMessage.Contains("Participant selected domain must be contained in participant domain list."));
+        }
+
+        [Test]
+        [Category("POST")]
+        public void VerifyThatPersonThatIsAlreadyAParticipantInAnEngineeringModelCannotBeAdded()
+        {
+            // define the URI on which to perform a GET request
+            var participantUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
+
+            var postBodyPath = this.GetPath("Tests/SiteDirectory/Participant/Create_Existing_Participant.json");
+
+            var postBody = this.GetJsonFromFile(postBodyPath);
+
+            var exception = Assert.Catch<WebException>(() => this.WebClient.PostDto(participantUri, postBody));
+            var errorMessage = this.WebClient.ExtractExceptionStringFromResponse(exception.Response);
+            Assert.AreEqual(HttpStatusCode.BadRequest, ((HttpWebResponse)exception.Response).StatusCode);
+            Assert.IsTrue(errorMessage.Contains("is already a Participant in EngineeringModel"));
         }
     }
 }
