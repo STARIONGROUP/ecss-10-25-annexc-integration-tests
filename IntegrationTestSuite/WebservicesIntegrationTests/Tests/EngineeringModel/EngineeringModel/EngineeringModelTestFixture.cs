@@ -30,8 +30,37 @@ namespace WebservicesIntegrationTests
     using NUnit.Framework;
 
     [TestFixture]
-    public class EngineeringModelTestFixture : WebClientTestFixtureBase
+    public class EngineeringModelTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
+        [Test]
+        [NUnit.Framework.Category("GET")]
+        public void VerifyThatAllEngineeringModelsAreReturnedFromWebApiAfterCreate()
+        {
+            // define the URI on which to perform a GET request 
+            var engineeringModelUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/*");
+
+            // get a response from the data-source as a JArray (JSON Array)
+            var jArray = this.WebClient.GetDto(engineeringModelUri);
+
+            // check if there are the only one EngineeringModel object 
+            Assert.That(jArray.Count, Is.EqualTo(1));
+
+            EngineeringModelTestFixture.VerifyProperties(jArray);
+            
+            var postBodyPath = this.GetPath("Tests/SiteDirectory/EngineeringModelSetup/PostEngineeringModelSetup.json");
+            var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
+
+            var postBody = base.GetJsonFromFile(postBodyPath);
+            
+            _ = this.WebClient.PostDto(siteDirectoryUri, postBody);
+
+            // get a response from the data-source as a JArray (JSON Array)
+            jArray = this.WebClient.GetDto(engineeringModelUri);
+
+            // check if there are 2 object
+            Assert.That(jArray.Count, Is.EqualTo(2));
+        }
+
         [Test]
         [NUnit.Framework.Category("GET")]
         public void VerifyThatAllEngineeringModelsAreReturnedFromWebApi()
@@ -42,8 +71,7 @@ namespace WebservicesIntegrationTests
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(engineeringModelUri);
 
-            // check if there are the only one EngineeringModel object 
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             EngineeringModelTestFixture.VerifyProperties(jArray);
         }
@@ -52,16 +80,41 @@ namespace WebservicesIntegrationTests
         [NUnit.Framework.Category("GET")]
         public void VerifyThatExpectedEngineeringModelsAreReturnedFromWebApi()
         {
-            // define the URI on which to perform a GET request
-            var elementUsageUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/[5ILJnnLvU0mqhbFYqV2NVg]");
+            var postBodyPath = this.GetPath("Tests/SiteDirectory/EngineeringModelSetup/PostEngineeringModelSetup.json");
+            var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
+
+            var postBody = base.GetJsonFromFile(postBodyPath);
+
+            _ = this.WebClient.PostDto(siteDirectoryUri, postBody);
+
+            // define the URI on which to perform a GET request 
+            var engineeringModelUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/*");
 
             // get a response from the data-source as a JArray (JSON Array)
-            var jArray = this.WebClient.GetDto(elementUsageUri);
+            var jArray = this.WebClient.GetDto(engineeringModelUri);
+
+            // check if there are 2 object
+            Assert.That(jArray.Count, Is.EqualTo(2));
+
+            // re define the URI on which to perform a GET request
+            engineeringModelUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/[5ILJnnLvU0mqhbFYqV2NVg]");
+
+            // get a response from the data-source as a JArray (JSON Array)
+            jArray = this.WebClient.GetDto(engineeringModelUri);
 
             // check if there are 1 object
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
             
             EngineeringModelTestFixture.VerifyProperties(jArray);
+
+            // re define the URI on which to perform a GET request
+            engineeringModelUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/[5ILJnnLvU0mqhbFYqV2NVg;mSE8H98tUkqlOpdDamldNQ]");
+
+            // get a response from the data-source as a JArray (JSON Array)
+            jArray = this.WebClient.GetDto(engineeringModelUri);
+
+            // check if there are 1 object
+            Assert.That(jArray.Count, Is.EqualTo(2));
         }
 
         /// <summary>
