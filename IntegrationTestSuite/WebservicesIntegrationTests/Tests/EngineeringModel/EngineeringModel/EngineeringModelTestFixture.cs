@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="EngineeringModelTestFixture.cs" company="RHEA System S.A.">
 //
 //   Copyright 2016-2021 RHEA System S.A.
@@ -57,7 +57,7 @@ namespace WebservicesIntegrationTests
             // get a response from the data-source as a JArray (JSON Array)
             jArray = this.WebClient.GetDto(engineeringModelUri);
 
-            // check if there are 2 object
+            // check if there are 2 objects
             Assert.That(jArray.Count, Is.EqualTo(2));
         }
 
@@ -93,7 +93,7 @@ namespace WebservicesIntegrationTests
             // get a response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(engineeringModelUri);
 
-            // check if there are 2 object
+            // check if there are 2 objects
             Assert.That(jArray.Count, Is.EqualTo(2));
 
             // re define the URI on which to perform a GET request
@@ -113,12 +113,12 @@ namespace WebservicesIntegrationTests
             // get a response from the data-source as a JArray (JSON Array)
             jArray = this.WebClient.GetDto(engineeringModelUri);
 
-            // check if there are 1 object
+            // check if there are 2 objects
             Assert.That(jArray.Count, Is.EqualTo(2));
         }
 
         /// <summary>
-        /// Verifies all properties of the ElementUsage <see cref="JToken"/>
+        /// Verifies all properties of the EngineeringModel <see cref="JToken"/>
         /// </summary>
         /// <param name="jArray">
         /// The JSON array.
