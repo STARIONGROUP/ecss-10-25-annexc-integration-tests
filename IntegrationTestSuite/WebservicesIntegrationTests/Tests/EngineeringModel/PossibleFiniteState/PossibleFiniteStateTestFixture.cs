@@ -99,7 +99,7 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken possibleFiniteState)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(8, possibleFiniteState.Children().Count());
+            Assert.AreEqual(9, possibleFiniteState.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("b8fdfac4-1c40-475a-ac6c-968654b689b6", (string)possibleFiniteState[PropertyNames.Iid]);

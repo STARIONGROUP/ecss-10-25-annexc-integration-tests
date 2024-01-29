@@ -162,7 +162,7 @@ namespace WebservicesIntegrationTests
             var siteReferenceDataLibrary = jArray.Single(x => (string)x[PropertyNames.Iid] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(22, siteReferenceDataLibrary.Children().Count());
+            Assert.AreEqual(23, siteReferenceDataLibrary.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("c454c687-ba3e-44c4-86bc-44544b2c7880", (string)siteReferenceDataLibrary[PropertyNames.Iid]);
@@ -315,7 +315,7 @@ namespace WebservicesIntegrationTests
             // CyclicRatioScale
             var cyclicRatioScale = jArray.Single(x => (string)x[PropertyNames.Iid] == "738a8fa8-552d-40c0-a5cb-94c31ce78fa9");
             // verify the amount of returned properties 
-            Assert.AreEqual(20, cyclicRatioScale.Children().Count());
+            Assert.AreEqual(21, cyclicRatioScale.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("738a8fa8-552d-40c0-a5cb-94c31ce78fa9", (string)cyclicRatioScale["iid"]);
@@ -373,7 +373,7 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken cyclicRatioScale)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(20, cyclicRatioScale.Children().Count());
+            Assert.AreEqual(21, cyclicRatioScale.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("f9d4b3c6-91a2-4f38-bb86-f504d6ac706f", (string) cyclicRatioScale["iid"]);

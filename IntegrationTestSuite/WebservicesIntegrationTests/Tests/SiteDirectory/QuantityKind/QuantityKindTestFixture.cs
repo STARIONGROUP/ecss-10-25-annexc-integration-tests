@@ -119,7 +119,7 @@ namespace WebservicesIntegrationTests
             var siteReferenceDataLibrary = jArray.Single(x => (string) x[PropertyNames.Iid] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(22, siteReferenceDataLibrary.Children().Count());
+            Assert.AreEqual(23, siteReferenceDataLibrary.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("c454c687-ba3e-44c4-86bc-44544b2c7880", (string) siteReferenceDataLibrary[PropertyNames.Iid]);
@@ -291,7 +291,7 @@ namespace WebservicesIntegrationTests
             var derivedQuantityKind = jArray.Single(x => (string) x[PropertyNames.Iid] == "c36e050a-b4f9-4567-b29d-67af9216878e");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(15, derivedQuantityKind.Children().Count());
+            Assert.AreEqual(16, derivedQuantityKind.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("c36e050a-b4f9-4567-b29d-67af9216878e", (string) derivedQuantityKind[PropertyNames.Iid]);
@@ -344,7 +344,7 @@ namespace WebservicesIntegrationTests
                 jArray.Single(x => (string) x[PropertyNames.Iid] == "199bec0a-661d-408c-8ca7-718c636c5681");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(14, simpleQuantityKind.Children().Count());
+            Assert.AreEqual(15, simpleQuantityKind.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("199bec0a-661d-408c-8ca7-718c636c5681", (string) simpleQuantityKind[PropertyNames.Iid]);
@@ -387,7 +387,7 @@ namespace WebservicesIntegrationTests
                 jArray.Single(x => (string) x[PropertyNames.Iid] == "8b8a44cd-0071-4acf-b33e-b8c3052821c5");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(15, specializedQuantityKind.Children().Count());
+            Assert.AreEqual(16, specializedQuantityKind.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("8b8a44cd-0071-4acf-b33e-b8c3052821c5", (string) specializedQuantityKind[PropertyNames.Iid]);

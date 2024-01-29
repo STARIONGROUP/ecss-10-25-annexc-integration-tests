@@ -170,7 +170,7 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken arrayParameterType)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(15, arrayParameterType.Children().Count());
+            Assert.AreEqual(16, arrayParameterType.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("4a783624-b2bc-4e6d-95b3-11d036f6e917", (string) arrayParameterType[PropertyNames.Iid]);

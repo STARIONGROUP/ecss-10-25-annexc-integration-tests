@@ -83,7 +83,7 @@ namespace WebservicesIntegrationTests
             // get a specific FileType from the result by it's unique id
             var fileType = jArray.Single(x => (string)x[PropertyNames.Iid] == "db04ac55-dd60-4607-a4e1-a9f91c9704e6");
             // verify the amount of returned properties 
-            Assert.AreEqual(11, fileType.Children().Count());
+            Assert.AreEqual(12, fileType.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("db04ac55-dd60-4607-a4e1-a9f91c9704e6", (string)fileType[PropertyNames.Iid]);
@@ -119,7 +119,7 @@ namespace WebservicesIntegrationTests
             // get a specific FileType from the result by it's unique id
             fileType = jArray.Single(x => (string)x[PropertyNames.Iid] == "b16894e4-acb5-4e81-a118-16c00eb86d8f");
             // verify the amount of returned properties 
-            Assert.AreEqual(11, fileType.Children().Count());
+            Assert.AreEqual(12, fileType.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("b16894e4-acb5-4e81-a118-16c00eb86d8f", (string)fileType[PropertyNames.Iid]);
@@ -156,7 +156,7 @@ namespace WebservicesIntegrationTests
             fileType =
                 jArray.Single(x => (string)x[PropertyNames.Iid] == "f340df66-d65b-4814-a063-01d4dea1941c");
             // verify the amount of returned properties 
-            Assert.AreEqual(11, fileType.Children().Count());
+            Assert.AreEqual(12, fileType.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("f340df66-d65b-4814-a063-01d4dea1941c", (string)fileType[PropertyNames.Iid]);

@@ -86,7 +86,7 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken binaryRelationshipRule)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(14, binaryRelationshipRule.Children().Count());
+            Assert.AreEqual(15, binaryRelationshipRule.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("8569bd5c-de3c-4d92-855f-b2c0ca94de0e", (string) binaryRelationshipRule["iid"]);

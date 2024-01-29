@@ -87,7 +87,7 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken compoundParameterType)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(13, compoundParameterType.Children().Count());
+            Assert.AreEqual(14, compoundParameterType.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("0d3178f9-68d0-4b1a-afe8-d5df0b66f1d4", (string) compoundParameterType[PropertyNames.Iid]);

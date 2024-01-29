@@ -86,7 +86,7 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken glossary)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(11, glossary.Children().Count());
+            Assert.AreEqual(12, glossary.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("bb08686b-ae03-49eb-9f48-c196b5ad6bda", (string) glossary[PropertyNames.Iid]);

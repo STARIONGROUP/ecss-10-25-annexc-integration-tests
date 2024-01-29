@@ -161,7 +161,7 @@ namespace WebservicesIntegrationTests
             var siteReferenceDataLibrary = jArray.Single(x => (string)x[PropertyNames.Iid] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(22, siteReferenceDataLibrary.Children().Count());
+            Assert.AreEqual(23, siteReferenceDataLibrary.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("c454c687-ba3e-44c4-86bc-44544b2c7880", (string)siteReferenceDataLibrary[PropertyNames.Iid]);
@@ -315,7 +315,7 @@ namespace WebservicesIntegrationTests
             var constant = jArray.Single(x => (string)x[PropertyNames.Iid] == "8ef99572-3d39-44a4-9212-159bc82f2320");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(13, constant.Children().Count());
+            Assert.AreEqual(14, constant.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("8ef99572-3d39-44a4-9212-159bc82f2320", (string)constant[PropertyNames.Iid]);
@@ -363,7 +363,7 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken constant)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(13, constant.Children().Count());
+            Assert.AreEqual(14, constant.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("239754fe-834f-4394-9c3a-26cac7f866d3", (string) constant[PropertyNames.Iid]);

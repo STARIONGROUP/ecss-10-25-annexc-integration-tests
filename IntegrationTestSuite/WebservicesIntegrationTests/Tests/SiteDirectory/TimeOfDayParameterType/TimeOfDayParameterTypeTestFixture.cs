@@ -86,7 +86,7 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken timeOfDayParameterType)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(11, timeOfDayParameterType.Children().Count());
+            Assert.AreEqual(12, timeOfDayParameterType.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("e4cfdb60-ed3a-455c-9a33-a3edc921637f", (string) timeOfDayParameterType[PropertyNames.Iid]);

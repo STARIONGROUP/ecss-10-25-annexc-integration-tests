@@ -86,7 +86,7 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken dateTimeParameterType)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(11, dateTimeParameterType.Children().Count());
+            Assert.AreEqual(12, dateTimeParameterType.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("9c1d3e39-0754-4388-8e1e-070ca9a0e7b6", (string) dateTimeParameterType[PropertyNames.Iid]);

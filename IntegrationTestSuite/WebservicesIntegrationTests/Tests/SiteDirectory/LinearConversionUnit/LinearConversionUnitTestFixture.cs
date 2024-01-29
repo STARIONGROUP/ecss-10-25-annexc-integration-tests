@@ -86,7 +86,7 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken linearConversionUnit)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(11, linearConversionUnit.Children().Count());
+            Assert.AreEqual(12, linearConversionUnit.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("12f48e1a-2996-46cc-8dc1-faf4e69ae115", (string) linearConversionUnit["iid"]);

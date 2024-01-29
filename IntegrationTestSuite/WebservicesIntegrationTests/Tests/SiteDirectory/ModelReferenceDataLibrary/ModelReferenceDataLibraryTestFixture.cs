@@ -201,7 +201,7 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken modelReferenceDataLibrary)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(21, modelReferenceDataLibrary.Children().Count());
+            Assert.AreEqual(22, modelReferenceDataLibrary.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("3483f2b5-ea29-45cc-8a46-f5f598558fc3",

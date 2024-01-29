@@ -86,7 +86,7 @@ namespace WebservicesIntegrationTests.Tests.SiteDirectory.RatioScale
         public static void VerifyProperties(JToken ratioScale)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(19, ratioScale.Children().Count());
+            Assert.AreEqual(20, ratioScale.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("53e82aeb-c42c-475c-b6bf-a102af883471", (string) ratioScale["iid"]);

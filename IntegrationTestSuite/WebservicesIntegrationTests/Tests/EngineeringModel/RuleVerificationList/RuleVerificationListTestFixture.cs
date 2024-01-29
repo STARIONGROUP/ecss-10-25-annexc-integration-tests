@@ -82,7 +82,7 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken ruleVerificationList)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(10, ruleVerificationList.Children().Count());
+            Assert.AreEqual(11, ruleVerificationList.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("dc482120-2a11-439b-913d-6a924de9ee5f", (string) ruleVerificationList[PropertyNames.Iid]);

@@ -86,7 +86,7 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken intervalScale)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(19, intervalScale.Children().Count());
+            Assert.AreEqual(20, intervalScale.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("6326d1ea-c032-4a4b-8b10-608c59f1a923", (string) intervalScale["iid"]);

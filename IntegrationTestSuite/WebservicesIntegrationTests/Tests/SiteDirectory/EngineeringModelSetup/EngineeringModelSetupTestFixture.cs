@@ -463,7 +463,7 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken engineeringModelSetup)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(16, engineeringModelSetup.Children().Count());
+            Assert.AreEqual(17, engineeringModelSetup.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("116f6253-89bb-47d4-aa24-d11d197e43c9", (string)engineeringModelSetup[PropertyNames.Iid]);

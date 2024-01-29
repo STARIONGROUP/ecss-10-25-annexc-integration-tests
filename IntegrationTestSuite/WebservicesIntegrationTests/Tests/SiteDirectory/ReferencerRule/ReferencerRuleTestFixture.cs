@@ -86,7 +86,7 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken referencerRule)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(13, referencerRule.Children().Count());
+            Assert.AreEqual(14, referencerRule.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("e7e4eec5-ad39-40a0-9548-9c40d8e6df1b", (string) referencerRule["iid"]);

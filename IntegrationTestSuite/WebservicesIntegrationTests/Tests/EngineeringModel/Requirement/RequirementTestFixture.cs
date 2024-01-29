@@ -192,7 +192,7 @@ namespace WebservicesIntegrationTests
                 x => (string) x[PropertyNames.Iid] == "614e2a69-d602-46be-9311-2fb4d3273e87");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(14, requirement.Children().Count());
+            Assert.AreEqual(15, requirement.Children().Count());
 
             // assert that the properties are what is expected
             Assert.AreEqual("614e2a69-d602-46be-9311-2fb4d3273e87", (string) requirement[PropertyNames.Iid]);
@@ -252,7 +252,7 @@ namespace WebservicesIntegrationTests
             if (requirement != null)
             {
                 // verify the amount of returned properties 
-                Assert.AreEqual(14, requirement.Children().Count());
+                Assert.AreEqual(15, requirement.Children().Count());
 
                 // assert that the properties are what is expected
                 Assert.AreEqual("614e2a69-d602-46be-9311-2fb4d3273e88", (string) requirement[PropertyNames.Iid]);
