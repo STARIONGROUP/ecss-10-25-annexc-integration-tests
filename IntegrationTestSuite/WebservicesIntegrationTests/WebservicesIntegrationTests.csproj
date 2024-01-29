@@ -210,6 +210,15 @@
     <None Update="Tests\EngineeringModel\Parameter\PostNewOptionDependentParameter.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Tests\EngineeringModel\Parameter\PostUpdateParameterTypeToExisting.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Tests\EngineeringModel\Parameter\PostNewParametersHavingSameParameterType.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Tests\EngineeringModel\Parameter\PostNewParameterHavingExistingParameterType.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Tests\EngineeringModel\Parameter\PostNewParameter.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
