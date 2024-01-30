@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="ParameterTestFixture.cs" company="RHEA System S.A.">
 //
-//   Copyright 2016-2021 RHEA System S.A.
+//   Copyright 2016-2024 RHEA System S.A.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ namespace WebservicesIntegrationTests
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Net;
 
     using Newtonsoft.Json.Linq;
 
@@ -120,7 +121,7 @@ namespace WebservicesIntegrationTests
             Assert.IsNull((string) parameter[PropertyNames.RequestedBy]);
             Assert.IsFalse((bool) parameter[PropertyNames.AllowDifferentOwnerOfOverride]);
             Assert.IsFalse((bool) parameter[PropertyNames.ExpectsOverride]);
-            Assert.AreEqual("a21c15c4-3e1e-46b5-b109-5063dec1e254", (string) parameter[PropertyNames.ParameterType]);
+            Assert.AreEqual("35a9cf05-4eba-4cda-b60c-7cfeaac8f892", (string) parameter[PropertyNames.ParameterType]);
             Assert.IsNull((string) parameter[PropertyNames.Scale]);
             Assert.IsNull((string) parameter[PropertyNames.StateDependence]);
             Assert.IsNull((string) parameter[PropertyNames.Group]);
@@ -158,6 +159,75 @@ namespace WebservicesIntegrationTests
 
             Assert.IsNull((string) parameterValueSet[PropertyNames.ActualState]);
             Assert.IsNull((string) parameterValueSet[PropertyNames.ActualOption]);
+        }
+
+        [Test]
+        [Category("POST")]
+        public void VerifyThatParameterCannotBeUpdatesWithExistingParameterTypeWithWebApi()
+        {
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
+
+            //Step 1 : create new parameters
+            var postBodyPath = this.GetPath("Tests/EngineeringModel/Parameter/PostNewParameter.json");
+
+            var postBody = this.GetJsonFromFile(postBodyPath);
+            var jArray = this.WebClient.PostDto(iterationUri, postBody);
+
+            //Step 2: try update newly created parameter
+            postBodyPath = this.GetPath("Tests/EngineeringModel/Parameter/PostUpdateParameterTypeToExisting.json");
+
+            postBody = this.GetJsonFromFile(postBodyPath);
+
+            Assert.That(() =>
+                this.WebClient.PostDto(iterationUri, postBody), Throws.TypeOf<WebException>()
+                .With
+                .Property(nameof(WebException.Response))
+                .TypeOf<HttpWebResponse>()
+                .And.Property(nameof(WebException.Response))
+                .Property(nameof(HttpWebResponse.StatusCode))
+                .EqualTo(HttpStatusCode.BadRequest));
+        }
+
+        [Test]
+        [Category("POST")]
+        public void VerifyThatExistingParameterTypeCannotBeCreatedWithWebApi()
+        {
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
+
+            var postBodyPath = this.GetPath("Tests/EngineeringModel/Parameter/PostNewParameterHavingExistingParameterType.json");
+
+            var postBody = this.GetJsonFromFile(postBodyPath);
+
+            Assert.That(() => 
+                    this.WebClient.PostDto(iterationUri, postBody), Throws.TypeOf<WebException>()
+                    .With
+                    .Property(nameof(WebException.Response))
+                    .TypeOf<HttpWebResponse>()
+                    .And.Property(nameof(WebException.Response))
+                        .Property(nameof(HttpWebResponse.StatusCode))
+                        .EqualTo(HttpStatusCode.BadRequest)
+            );
+        }
+
+        [Test]
+        [Category("POST")]
+        public void VerifyThatSameParameterTypeCannotBeCreatedWithWebApi()
+        {
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
+
+            var postBodyPath = this.GetPath("Tests/EngineeringModel/Parameter/PostNewParametersHavingSameParameterType.json");
+
+            var postBody = this.GetJsonFromFile(postBodyPath);
+
+            Assert.That(() =>
+                    this.WebClient.PostDto(iterationUri, postBody), Throws.TypeOf<WebException>()
+                    .With
+                    .Property(nameof(WebException.Response))
+                    .TypeOf<HttpWebResponse>()
+                    .And.Property(nameof(WebException.Response))
+                    .Property(nameof(HttpWebResponse.StatusCode))
+                    .EqualTo(HttpStatusCode.BadRequest)
+            );
         }
 
         [Test]
@@ -204,7 +274,7 @@ namespace WebservicesIntegrationTests
             Assert.IsNull((string) parameter[PropertyNames.RequestedBy]);
             Assert.IsFalse((bool) parameter[PropertyNames.AllowDifferentOwnerOfOverride]);
             Assert.IsFalse((bool) parameter[PropertyNames.ExpectsOverride]);
-            Assert.AreEqual("a21c15c4-3e1e-46b5-b109-5063dec1e254", (string) parameter[PropertyNames.ParameterType]);
+            Assert.AreEqual("35a9cf05-4eba-4cda-b60c-7cfeaac8f892", (string) parameter[PropertyNames.ParameterType]);
             Assert.IsNull((string) parameter[PropertyNames.Scale]);
             Assert.IsNull((string) parameter[PropertyNames.StateDependence]);
             Assert.IsNull((string) parameter[PropertyNames.Group]);
@@ -373,7 +443,7 @@ namespace WebservicesIntegrationTests
             Assert.IsNull((string) parameter[PropertyNames.RequestedBy]);
             Assert.IsFalse((bool) parameter[PropertyNames.AllowDifferentOwnerOfOverride]);
             Assert.IsFalse((bool) parameter[PropertyNames.ExpectsOverride]);
-            Assert.AreEqual("a21c15c4-3e1e-46b5-b109-5063dec1e254", (string) parameter[PropertyNames.ParameterType]);
+            Assert.AreEqual("35a9cf05-4eba-4cda-b60c-7cfeaac8f892", (string) parameter[PropertyNames.ParameterType]);
             Assert.IsNull((string) parameter[PropertyNames.Scale]);
             Assert.IsNull((string) parameter[PropertyNames.StateDependence]);
             Assert.IsNull((string) parameter[PropertyNames.Group]);
