@@ -180,6 +180,12 @@
     <None Update="Tests\EngineeringModel\ParameterGroup\PostDeleteParameterGroup.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Tests\EngineeringModel\ParameterOverrideValueSet\PostNewParameterAndOverrideForEachParameterType.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Tests\EngineeringModel\ParameterOverrideValueSet\PostUpdateParameterOverrideValueSetTemplate.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Tests\EngineeringModel\ParameterOverride\PostNewParameterOverride.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

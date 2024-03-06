@@ -1,0 +1,17 @@
+﻿{
+  "_delete": [],
+  "_create": [],
+  "_update": [
+    {
+      "classKind": "ParameterOverrideValueSet",
+      "computed": [ <INNERJSON> ],
+      "formula": [ <INNERJSON> ],
+      "iid": "985db346-a297-4ce6-956b-e675d53d415e",
+      "manual": [ <INNERJSON> ],
+      "published": [ <INNERJSON> ],
+      "reference": [ <INNERJSON> ],
+      "revisionNumber": 0,
+      "valueSwitch": "MANUAL"
+    }
+  ]
+}
