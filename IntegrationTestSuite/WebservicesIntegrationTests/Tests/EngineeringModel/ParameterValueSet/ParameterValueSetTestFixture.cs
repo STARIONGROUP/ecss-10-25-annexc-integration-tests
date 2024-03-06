@@ -459,7 +459,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(inputValue, JsonConvert.DeserializeObject<List<string>>((string)parameterValueSet[PropertyNames.Published])[0]);
             Assert.AreEqual(inputValue, JsonConvert.DeserializeObject<List<string>>((string)parameterValueSet[PropertyNames.Computed])[0]);
             Assert.AreEqual(inputValue, JsonConvert.DeserializeObject<List<string>>((string)parameterValueSet[PropertyNames.Manual])[0]);
-            Assert.AreEqual(new List<string> {inputValue, inputValue}, JsonConvert.DeserializeObject<List<string>>((string)parameterValueSet[PropertyNames.Reference]));
+            Assert.AreEqual(inputValue, JsonConvert.DeserializeObject<List<string>>((string)parameterValueSet[PropertyNames.Reference])[0]);
         }
 
         [Test]
@@ -487,6 +487,57 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(2, jArray3.Count);
         }
 
+        [Test]
+        [Category("POST")]
+        [TestCase("ccd430e7-2200-4289-8eee-6b78838876a8", new[]{"1.5","2"}, new[]{"1.5","2"}, new[]{"2,5", "2"}, new []{"-"}, new []{"-","-","-"})] //ArrayParameterType
+        [TestCase("4b4d36db-21b3-4781-830e-4f56fafea401", new[]{"1"}, new[]{"true"}, new[]{"2"}, new []{"-","-"})] //BooleanParameterType
+        [TestCase("07877cdf-060a-4256-bb37-b791fbbe240d", new[]{"2024-01-05T00:00:00"}, new[]{"2024-01-05"}, new[]{"5th January 2024"}, new []{"-","-"})] //DateParameterType
+        [TestCase("87d42051-eaa8-4c03-8dd6-4a8caa6d6544", new[]{"2024-01-05T00:00:01"}, new[]{"2024-01-05T00:00:01.0000000Z"}, new[]{"5th January 2024"}, new []{"-","-"})] //DateTimeParameterType
+        [TestCase("3bd5bbdd-6cb5-434d-a7a5-c2c25d128114", new[]{"1.5"}, new[]{"1.5"}, new[]{"1,5"}, new []{"-","-"})] //DerivedParameterType with REAL_NUMBER
+        [TestCase("2bd23d9d-009a-4f03-9262-f983bc0d0a87", new[]{"TestEnumerationValueDefinitionA"}, new[]{"TestEnumerationValueDefinitionA"}, new[]{"TestEnumerationValueDefinitionA|TestEnumerationValueDefinitionB"}, new[]{"Test Enumeration Value Definition A"}, new []{"-","-"})] //EnumerationParameterType
+        [TestCase("d2ad2581-2157-4e0b-924e-150753f598b8", new[]{"00:00:01"}, new[]{"0001-01-01T00:00:01.0000000Z"}, new[]{"0002-01-01T00:00:01.0000000Z"}, new []{"-","-"})] //TimeOfDayParameterType
+        [TestCase("ebd334f7-34f2-47e2-8738-a77f4f36ae51", new[]{"1.5","2"}, new[]{"1.5","2"}, new[]{"2,5", "2"}, new []{"-"}, new []{"-","-","-"})] //CompoundParameterType
+        [TestCase("72ec3701-bcb5-4bf6-bd78-30fd1b65e3be", new[]{"Any text"}, new[]{"Any text"}, new[]{" "}, new []{""}, new []{"-","-"})] //TextParameterType
+        public void VerifyParameterTypeValidationWorks(string parameterId, string[] validValue, string[] expectedCleanedValue, params string[][] invalidValues)
+        {
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
+            var postBodyPath = this.GetPath("Tests/EngineeringModel/ParameterValueSet/PostNewParameterForEachParameterType.json");
+
+            var postBody = this.GetJsonFromFile(postBodyPath);
+
+            var jArray = this.WebClient.PostDto(iterationUri, postBody);
+
+            var parameterValueSetId = "72ec3701-bcb5-4bf6-bd78-30fd1b65e3be";
+
+            if (parameterId != parameterValueSetId)
+            {
+                var parameter = jArray.Single(x => (string)x[PropertyNames.Iid] == parameterId);
+                parameterValueSetId = (string)(parameter[PropertyNames.ValueSet]![0]);
+            }
+
+            var valueSetUpdatePath = this.GetPath("Tests/EngineeringModel/ParameterValueSet/PostUpdateParameterValueSetTemplate.json");
+
+            var initialValueSetContent = this.GetJsonFromFile(valueSetUpdatePath).Replace("72ec3701-bcb5-4bf6-bd78-30fd1b65e3be", parameterValueSetId);
+
+            foreach (var invalidValue in invalidValues)
+            {
+                postBody = initialValueSetContent.Replace("<INNERJSON>", JsonConvert.SerializeObject(invalidValue));
+                Assert.That(() => this.WebClient.PostDto(iterationUri, postBody), Throws.Exception.TypeOf<WebException>());
+            }
+
+            postBody = initialValueSetContent.Replace("<INNERJSON>", JsonConvert.SerializeObject(validValue));
+            jArray = this.WebClient.PostDto(iterationUri, postBody);
+            var newValueSet = jArray.Single(x => (string)x[PropertyNames.Iid] == parameterValueSetId);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(JsonConvert.DeserializeObject<List<string>>((string)newValueSet[PropertyNames.Reference]), Is.EquivalentTo(expectedCleanedValue));
+                Assert.That(JsonConvert.DeserializeObject<List<string>>((string)newValueSet[PropertyNames.Manual]), Is.EquivalentTo(expectedCleanedValue));
+                Assert.That(JsonConvert.DeserializeObject<List<string>>((string)newValueSet[PropertyNames.Computed]), Is.EquivalentTo(expectedCleanedValue));
+                Assert.That(JsonConvert.DeserializeObject<List<string>>((string)newValueSet[PropertyNames.Published]), Is.EquivalentTo(expectedCleanedValue));
+                Assert.That(JsonConvert.DeserializeObject<List<string>>((string)newValueSet[PropertyNames.Formula]), Is.EquivalentTo(expectedCleanedValue));
+            });
+        }
 
         private const string JsonString = @"{""widget"": {
                 ""debug"": ""on"",
@@ -586,5 +637,8 @@ namespace WebservicesIntegrationTests
             XmlString,
             JsonString
         };
+
+        private static readonly string[] invalidValueArrayForSingleValue = { "-", "-" };
+        private static readonly string[] invalidBooleanValues = { "2","TRUEE" };
     }
 }
