@@ -1,0 +1,13 @@
+﻿{
+  "_delete": [],
+  "_create": [],
+  "_update": [
+    {
+      "classKind": "ParameterSubscriptionValueSet",
+      "iid": "a179af79-fd09-44c8-a8a6-3c4c602c7dbf",
+      "manual": [ <INNERJSON> ],
+      "revisionNumber": 0,
+      "valueSwitch": "MANUAL"
+    }
+  ]
+}

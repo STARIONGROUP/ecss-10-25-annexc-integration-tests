@@ -189,6 +189,12 @@
     <None Update="Tests\EngineeringModel\ParameterOverride\PostNewParameterOverride.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Tests\EngineeringModel\ParameterSubscriptionValueSet\PostNewParameterAndSubscriptionForEachParameterType.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Tests\EngineeringModel\ParameterSubscriptionValueSet\PostUpdateParameterSubscriptionValueSetTemplate.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Tests\EngineeringModel\ParameterSubscription\PostNewParameterSubscription.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
