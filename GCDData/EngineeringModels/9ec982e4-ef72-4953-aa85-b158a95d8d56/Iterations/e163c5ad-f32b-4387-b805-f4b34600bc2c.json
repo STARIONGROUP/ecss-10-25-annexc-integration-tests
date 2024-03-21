@@ -1,1 +1,872 @@
-[{"classKind":"AndExpression","excludedDomain":[],"excludedPerson":[],"iid":"000484d0-cefd-47be-9317-a9eae72c94ce","modifiedOn":"2024-01-04T14:52:33.477Z","revisionNumber":1,"term":["a6e44651-7c4a-4a57-bdf9-c0290497f392","deaa2560-b704-4b2c-950b-aad02ff84052"],"thingPreference":null},{"category":["107fc408-7e6d-4f1a-895a-1b6a6025ac20"],"classKind":"BinaryRelationship","excludedDomain":[],"excludedPerson":[],"iid":"138f8a3e-69c6-4e21-b459-bc26b1319a2c","modifiedOn":"2024-01-04T14:52:33.477Z","name":null,"owner":"0e92edde-fdff-41db-9b1d-f2e484f12535","parameterValue":[],"revisionNumber":1,"source":"67cdb7de-7721-40a0-9ca2-10a5cf7742fc","target":"95bf0f17-1273-4338-98ae-839016242775","thingPreference":null},{"classKind":"NotExpression","excludedDomain":[],"excludedPerson":[],"iid":"30cb785a-9e72-477f-ad1a-8df6ab623e3d","modifiedOn":"2024-01-04T14:52:33.477Z","revisionNumber":1,"term":"5f90327f-95a2-4c5a-9efe-581f8daf08ed","thingPreference":null},{"category":[],"classKind":"BinaryRelationship","excludedDomain":[],"excludedPerson":[],"iid":"320869e4-f6d6-4dd2-a696-1b1604f4c4b7","modifiedOn":"2024-01-04T14:52:33.477Z","name":null,"owner":"0e92edde-fdff-41db-9b1d-f2e484f12535","parameterValue":[],"revisionNumber":1,"source":"790b9e60-476b-4b6d-8aba-0af15178535e","target":"ff6956dc-1882-4d61-8840-dedb3fba7b43","thingPreference":null},{"allowDifferentOwnerOfOverride":false,"classKind":"Parameter","excludedDomain":[],"excludedPerson":[],"expectsOverride":false,"group":null,"iid":"3f05483f-66ff-4f21-bc76-45956779f66e","isOptionDependent":false,"modifiedOn":"2024-01-04T14:52:33.477Z","owner":"eb759723-14b9-49f4-8611-544d037bb764","parameterSubscription":[],"parameterType":"a21c15c4-3e1e-46b5-b109-5063dec1e254","requestedBy":null,"revisionNumber":1,"scale":null,"stateDependence":null,"thingPreference":null,"valueSet":["72ec3701-bcb5-4bf6-bd78-30fd1b65e3be"]},{"alias":[],"attachment":[],"category":[],"classKind":"PossibleFiniteStateList","defaultState":"b8fdfac4-1c40-475a-ac6c-968654b689b6","definition":[],"excludedDomain":[],"excludedPerson":[],"hyperLink":[],"iid":"449a5bca-34fd-454a-93f8-a56ac8383fee","modifiedOn":"2024-01-04T14:52:33.477Z","name":"Test Possible FiniteState List","owner":"0e92edde-fdff-41db-9b1d-f2e484f12535","possibleState":[{"k":73203278,"v":"b8fdfac4-1c40-475a-ac6c-968654b689b6"}],"revisionNumber":1,"shortName":"TestPossibleFiniteStateList","thingPreference":null},{"classKind":"FileRevision","containingFolder":null,"contentHash":"B95EC201AE3EE89D407449D692E69BB97C228A7E","createdOn":"2016-11-02T13:58:35.936Z","creator":"284334dd-e8e5-42d6-bc8a-715c507a7f02","excludedDomain":[],"excludedPerson":[],"fileType":[{"k":2,"v":"db04ac55-dd60-4607-a4e1-a9f91c9704e6"}],"iid":"5544bb87-dc38-45d5-9d92-c580d3fe0442","modifiedOn":"2024-01-04T14:52:33.477Z","name":"FileRevision","revisionNumber":1,"thingPreference":null},{"classKind":"OrExpression","excludedDomain":[],"excludedPerson":[],"iid":"5f90327f-95a2-4c5a-9efe-581f8daf08ed","modifiedOn":"2024-01-04T14:52:33.477Z","revisionNumber":1,"term":["8c6df21f-07ae-4d0b-ab9b-866dd1f90158","a6e44651-7c4a-4a57-bdf9-c0290497f392"],"thingPreference":null},{"alias":[],"attachment":[],"category":["167b5cb0-766e-4ab2-b728-a9c9a662b017"],"classKind":"Requirement","definition":[],"excludedDomain":[],"excludedPerson":[],"group":null,"hyperLink":[],"iid":"614e2a69-d602-46be-9311-2fb4d3273e87","isDeprecated":false,"modifiedOn":"2024-01-04T14:52:33.477Z","name":"Test Requirement","owner":"0e92edde-fdff-41db-9b1d-f2e484f12535","parameterValue":["bcedefb0-b3ee-4a0b-8137-6561fa23b37f","ef3b5740-6e0e-463c-99df-f255e38a32b6"],"parametricConstraint":[{"k":1,"v":"88200dbc-711a-47e0-a54a-dac4baca6e83"}],"revisionNumber":1,"shortName":"TestRequirement","thingPreference":null},{"alias":[],"attachment":[],"category":[],"classKind":"Requirement","definition":[],"excludedDomain":[],"excludedPerson":[],"group":"d3474e6a-f9ac-4d1a-91d9-6f8be06a03b5","hyperLink":[],"iid":"614e2a69-d602-46be-9311-2fb4d3273e88","isDeprecated":false,"modifiedOn":"2024-01-04T14:52:33.477Z","name":"Test Requirement 2","owner":"0e92edde-fdff-41db-9b1d-f2e484f12535","parameterValue":[],"parametricConstraint":[],"revisionNumber":1,"shortName":"TestRequirementTwo","thingPreference":null},{"classKind":"Folder","containingFolder":null,"createdOn":"2016-11-02T13:58:35.936Z","creator":"284334dd-e8e5-42d6-bc8a-715c507a7f02","excludedDomain":[],"excludedPerson":[],"iid":"67cdb7de-7721-40a0-9ca2-10a5cf7742fc","modifiedOn":"2024-01-04T14:52:33.477Z","name":"Test Folder","owner":"0e92edde-fdff-41db-9b1d-f2e484f12535","revisionNumber":1,"thingPreference":null},{"allowDifferentOwnerOfOverride":false,"classKind":"Parameter","excludedDomain":[],"excludedPerson":[],"expectsOverride":false,"group":"b739b3c6-9cc0-4e64-9cc4-ef7463edf559","iid":"6c5aff74-f983-4aa8-a9d6-293b3429307c","isOptionDependent":false,"modifiedOn":"2024-01-04T14:52:33.477Z","owner":"0e92edde-fdff-41db-9b1d-f2e484f12535","parameterSubscription":["f1f076c4-5307-42b8-a171-3263a9e7bb21"],"parameterType":"a21c15c4-3e1e-46b5-b109-5063dec1e254","requestedBy":null,"revisionNumber":1,"scale":null,"stateDependence":null,"thingPreference":null,"valueSet":["af5c88c6-301f-497b-81f7-53748c3900ed"]},{"actualOption":null,"actualState":null,"classKind":"ParameterValueSet","computed":"[\"-\"]","excludedDomain":[],"excludedPerson":[],"formula":"[\"-\"]","iid":"72ec3701-bcb5-4bf6-bd78-30fd1b65e3be","manual":"[\"-\"]","modifiedOn":"2024-01-04T14:52:33.477Z","published":"[\"-\"]","reference":"[\"-\"]","revisionNumber":1,"thingPreference":null,"valueSwitch":"MANUAL"},{"alias":[],"attachment":[],"category":[],"classKind":"ElementUsage","definition":[],"elementDefinition":"f73860b2-12f0-43e4-b8b2-c81862c0a159","excludedDomain":[],"excludedPerson":[],"excludeOption":[],"hyperLink":[],"iid":"75399754-ee45-4bca-b033-63e2019870d1","interfaceEnd":"UNDIRECTED","modifiedOn":"2024-01-04T14:52:33.477Z","name":"Test ElementUsage","owner":"0e92edde-fdff-41db-9b1d-f2e484f12535","parameterOverride":["93f767ed-4d22-45f6-ae97-d1dab0d36e1c"],"revisionNumber":1,"shortName":"TestElementUsage","thingPreference":null},{"classKind":"Publication","createdOn":"2016-10-25T09:00:35.936Z","domain":[],"excludedDomain":[],"excludedPerson":[],"iid":"790b9e60-476b-4b6d-8aba-0af15178535e","modifiedOn":"2024-01-04T14:52:33.477Z","publishedParameter":[],"revisionNumber":1,"thingPreference":null},{"classKind":"ParametricConstraint","excludedDomain":[],"excludedPerson":[],"expression":["000484d0-cefd-47be-9317-a9eae72c94ce","30cb785a-9e72-477f-ad1a-8df6ab623e3d","5f90327f-95a2-4c5a-9efe-581f8daf08ed","8c6df21f-07ae-4d0b-ab9b-866dd1f90158","a6e44651-7c4a-4a57-bdf9-c0290497f392","deaa2560-b704-4b2c-950b-aad02ff84052"],"iid":"88200dbc-711a-47e0-a54a-dac4baca6e83","modifiedOn":"2024-01-04T14:52:33.477Z","revisionNumber":1,"thingPreference":null,"topExpression":"30cb785a-9e72-477f-ad1a-8df6ab623e3d"},{"classKind":"ExclusiveOrExpression","excludedDomain":[],"excludedPerson":[],"iid":"8c6df21f-07ae-4d0b-ab9b-866dd1f90158","modifiedOn":"2024-01-04T14:52:33.477Z","revisionNumber":1,"term":["000484d0-cefd-47be-9317-a9eae72c94ce","deaa2560-b704-4b2c-950b-aad02ff84052"],"thingPreference":null},{"alias":[],"attachment":[],"category":[],"classKind":"RequirementsSpecification","definition":[],"excludedDomain":[],"excludedPerson":[],"group":[],"hyperLink":[],"iid":"8d0734f4-ca4b-4611-9187-f6970e2b02bc","isDeprecated":false,"modifiedOn":"2024-01-04T14:52:33.477Z","name":"Test Requirements Specification 2","owner":"0e92edde-fdff-41db-9b1d-f2e484f12535","parameterValue":[],"requirement":[],"revisionNumber":1,"shortName":"TestRequirementsSpecification2","thingPreference":null},{"classKind":"ParameterOverride","excludedDomain":[],"excludedPerson":[],"iid":"93f767ed-4d22-45f6-ae97-d1dab0d36e1c","modifiedOn":"2024-01-04T14:52:33.477Z","owner":"0e92edde-fdff-41db-9b1d-f2e484f12535","parameter":"6c5aff74-f983-4aa8-a9d6-293b3429307c","parameterSubscription":[],"revisionNumber":1,"thingPreference":null,"valueSet":["985db346-a297-4ce6-956b-e675d53d415e"]},{"category":[],"classKind":"File","excludedDomain":[],"excludedPerson":[],"fileRevision":["5544bb87-dc38-45d5-9d92-c580d3fe0442"],"iid":"95bf0f17-1273-4338-98ae-839016242775","lockedBy":null,"modifiedOn":"2024-01-04T14:52:33.477Z","owner":"0e92edde-fdff-41db-9b1d-f2e484f12535","revisionNumber":1,"thingPreference":null},{"classKind":"ParameterOverrideValueSet","computed":"[\"-\"]","excludedDomain":[],"excludedPerson":[],"formula":"[\"-\"]","iid":"985db346-a297-4ce6-956b-e675d53d415e","manual":"[\"-\"]","modifiedOn":"2024-01-04T14:52:33.477Z","parameterValueSet":"af5c88c6-301f-497b-81f7-53748c3900ed","published":"[\"-\"]","reference":"[\"-\"]","revisionNumber":1,"thingPreference":null,"valueSwitch":"MANUAL"},{"classKind":"ExternalIdentifierMap","correspondence":["ff6956dc-1882-4d61-8840-dedb3fba7b43"],"excludedDomain":[],"excludedPerson":[],"externalFormat":null,"externalModelName":"externalModel","externalToolName":"externalTool","externalToolVersion":"1.0","iid":"a0cadcd1-b14f-4552-8f97-bec386a715d0","modifiedOn":"2024-01-04T14:52:33.477Z","name":"TestExternalIdentifierMap","owner":"0e92edde-fdff-41db-9b1d-f2e484f12535","revisionNumber":1,"thingPreference":null},{"classKind":"ParameterSubscriptionValueSet","excludedDomain":[],"excludedPerson":[],"iid":"a179af79-fd09-44c8-a8a6-3c4c602c7dbf","manual":"[\"-\"]","modifiedOn":"2024-01-04T14:52:33.477Z","revisionNumber":1,"subscribedValueSet":"af5c88c6-301f-497b-81f7-53748c3900ed","thingPreference":null,"valueSwitch":"MANUAL"},{"classKind":"RelationalExpression","excludedDomain":[],"excludedPerson":[],"iid":"a6e44651-7c4a-4a57-bdf9-c0290497f392","modifiedOn":"2024-01-04T14:52:33.477Z","parameterType":"a21c15c4-3e1e-46b5-b109-5063dec1e254","relationalOperator":"EQ","revisionNumber":1,"scale":null,"thingPreference":null,"value":"[\"test\"]"},{"actualOption":null,"actualState":null,"classKind":"ParameterValueSet","computed":"[\"-\"]","excludedDomain":[],"excludedPerson":[],"formula":"[\"-\"]","iid":"af5c88c6-301f-497b-81f7-53748c3900ed","manual":"[\"-\"]","modifiedOn":"2024-01-04T14:52:33.477Z","published":"[\"-\"]","reference":"[\"-\"]","revisionNumber":1,"thingPreference":null,"valueSwitch":"MANUAL"},{"classKind":"ParameterGroup","containingGroup":null,"excludedDomain":[],"excludedPerson":[],"iid":"b739b3c6-9cc0-4e64-9cc4-ef7463edf559","modifiedOn":"2024-01-04T14:52:33.477Z","name":"Test ParameterGroup","revisionNumber":1,"thingPreference":null},{"alias":[],"attachment":[],"classKind":"PossibleFiniteState","definition":[],"excludedDomain":[],"excludedPerson":[],"hyperLink":[],"iid":"b8fdfac4-1c40-475a-ac6c-968654b689b6","modifiedOn":"2024-01-04T14:52:33.477Z","name":"Test Possible Finite State","revisionNumber":1,"shortName":"TestPossibleFiniteState","thingPreference":null},{"classKind":"ActualFiniteState","excludedDomain":[],"excludedPerson":[],"iid":"b91bfdbb-4277-4a03-b519-e4db839ef5d4","kind":"MANDATORY","modifiedOn":"2024-01-04T14:52:33.477Z","possibleState":["b8fdfac4-1c40-475a-ac6c-968654b689b6"],"revisionNumber":1,"thingPreference":null},{"classKind":"SimpleParameterValue","excludedDomain":[],"excludedPerson":[],"iid":"bcedefb0-b3ee-4a0b-8137-6561fa23b37f","modifiedOn":"2024-01-04T14:52:33.477Z","parameterType":"a21c15c4-3e1e-46b5-b109-5063dec1e254","revisionNumber":1,"scale":null,"thingPreference":null,"value":"[\"test\"]"},{"alias":[],"attachment":[],"category":[],"classKind":"Option","definition":[],"excludedDomain":[],"excludedPerson":[],"hyperLink":[],"iid":"bebcc9f4-ff20-4569-bbf6-d1acf27a8107","modifiedOn":"2024-01-04T14:52:33.477Z","name":"Test Option","nestedElement":[],"revisionNumber":1,"shortName":"TestOption","thingPreference":null},{"alias":[],"attachment":[],"category":[],"classKind":"RequirementsSpecification","definition":[],"excludedDomain":[],"excludedPerson":[],"group":["d3474e6a-f9ac-4d1a-91d9-6f8be06a03b5"],"hyperLink":[],"iid":"bf0cde90-9086-43d5-bcff-32a2f8331800","isDeprecated":false,"modifiedOn":"2024-01-04T14:52:33.477Z","name":"Test Requirements Specification","owner":"0e92edde-fdff-41db-9b1d-f2e484f12535","parameterValue":[],"requirement":["614e2a69-d602-46be-9311-2fb4d3273e87","614e2a69-d602-46be-9311-2fb4d3273e88"],"revisionNumber":1,"shortName":"TestRequirementsSpecification","thingPreference":null},{"classKind":"UserRuleVerification","excludedDomain":[],"excludedPerson":[],"executedOn":null,"iid":"c953263c-fc25-4048-9bb6-343a10200a0c","isActive":true,"modifiedOn":"2024-01-04T14:52:33.477Z","revisionNumber":1,"rule":"8a5cd66e-7313-4843-813f-37081ca81bb8","status":"PASSED","thingPreference":null},{"classKind":"BuiltInRuleVerification","excludedDomain":[],"excludedPerson":[],"executedOn":null,"iid":"ccb44a8e-2460-4892-ab75-02d8828db233","isActive":false,"modifiedOn":"2024-01-04T14:52:33.477Z","name":"Test BuiltInRuleVerification","revisionNumber":1,"status":"NONE","thingPreference":null},{"alias":[],"attachment":[],"category":[],"classKind":"RequirementsGroup","definition":[],"excludedDomain":[],"excludedPerson":[],"group":[],"hyperLink":[],"iid":"d3474e6a-f9ac-4d1a-91d9-6f8be06a03b5","modifiedOn":"2024-01-04T14:52:33.477Z","name":"Test Requirements Group","owner":"0e92edde-fdff-41db-9b1d-f2e484f12535","parameterValue":[],"revisionNumber":1,"shortName":"TestRequirementsGroup","thingPreference":null},{"classKind":"DomainFileStore","createdOn":"2016-11-02T13:58:35.936Z","excludedDomain":[],"excludedPerson":[],"file":["95bf0f17-1273-4338-98ae-839016242775"],"folder":["67cdb7de-7721-40a0-9ca2-10a5cf7742fc"],"iid":"da7dddaa-02aa-4897-9935-e8d66c811a96","isHidden":false,"modifiedOn":"2024-01-04T14:52:33.477Z","name":"Test DomainFileStore","owner":"0e92edde-fdff-41db-9b1d-f2e484f12535","revisionNumber":1,"thingPreference":null},{"actualState":["b91bfdbb-4277-4a03-b519-e4db839ef5d4"],"classKind":"ActualFiniteStateList","excludedDomain":[],"excludedPerson":[],"excludeOption":[],"iid":"db690d7d-761c-47fd-96d3-840d698a89dc","modifiedOn":"2024-01-04T14:52:33.477Z","owner":"0e92edde-fdff-41db-9b1d-f2e484f12535","possibleFiniteStateList":[{"k":4598335,"v":"449a5bca-34fd-454a-93f8-a56ac8383fee"}],"revisionNumber":1,"thingPreference":null},{"alias":[],"attachment":[],"classKind":"RuleVerificationList","definition":[],"excludedDomain":[],"excludedPerson":[],"hyperLink":[],"iid":"dc482120-2a11-439b-913d-6a924de9ee5f","modifiedOn":"2024-01-04T14:52:33.477Z","name":"Test RuleVerificationList","owner":"0e92edde-fdff-41db-9b1d-f2e484f12535","revisionNumber":1,"ruleVerification":[{"k":1,"v":"c953263c-fc25-4048-9bb6-343a10200a0c"},{"k":2,"v":"ccb44a8e-2460-4892-ab75-02d8828db233"}],"shortName":"TestRuleVerificationList","thingPreference":null},{"classKind":"RelationalExpression","excludedDomain":[],"excludedPerson":[],"iid":"deaa2560-b704-4b2c-950b-aad02ff84052","modifiedOn":"2024-01-04T14:52:33.477Z","parameterType":"35a9cf05-4eba-4cda-b60c-7cfeaac8f892","relationalOperator":"EQ","revisionNumber":1,"scale":null,"thingPreference":null,"value":"[\"true\"]"},{"actualFiniteStateList":["db690d7d-761c-47fd-96d3-840d698a89dc"],"classKind":"Iteration","defaultOption":"bebcc9f4-ff20-4569-bbf6-d1acf27a8107","diagramCanvas":[],"domainFileStore":["da7dddaa-02aa-4897-9935-e8d66c811a96"],"element":["f73860b2-12f0-43e4-b8b2-c81862c0a159","fe9295c5-af99-494e-86ff-e715837806ae"],"excludedDomain":[],"excludedPerson":[],"externalIdentifierMap":["a0cadcd1-b14f-4552-8f97-bec386a715d0"],"goal":[],"iid":"e163c5ad-f32b-4387-b805-f4b34600bc2c","iterationSetup":"86163b0e-8341-4316-94fc-93ed60ad0dcf","modifiedOn":"2024-01-04T14:52:33.477Z","option":[{"k":1,"v":"bebcc9f4-ff20-4569-bbf6-d1acf27a8107"}],"possibleFiniteStateList":["449a5bca-34fd-454a-93f8-a56ac8383fee"],"publication":["790b9e60-476b-4b6d-8aba-0af15178535e"],"relationship":["138f8a3e-69c6-4e21-b459-bc26b1319a2c","320869e4-f6d6-4dd2-a696-1b1604f4c4b7"],"requirementsSpecification":["8d0734f4-ca4b-4611-9187-f6970e2b02bc","bf0cde90-9086-43d5-bcff-32a2f8331800"],"revisionNumber":1,"ruleVerificationList":["dc482120-2a11-439b-913d-6a924de9ee5f"],"sharedDiagramStyle":[],"sourceIterationIid":null,"stakeholder":[],"stakeholderValue":[],"stakeholderValueMap":[],"thingPreference":null,"topElement":null,"valueGroup":[]},{"classKind":"SimpleParameterValue","excludedDomain":[],"excludedPerson":[],"iid":"ef3b5740-6e0e-463c-99df-f255e38a32b6","modifiedOn":"2024-01-04T14:52:33.477Z","parameterType":"35a9cf05-4eba-4cda-b60c-7cfeaac8f892","revisionNumber":1,"scale":null,"thingPreference":null,"value":"[\"true\"]"},{"classKind":"ParameterSubscription","excludedDomain":[],"excludedPerson":[],"iid":"f1f076c4-5307-42b8-a171-3263a9e7bb21","modifiedOn":"2024-01-04T14:52:33.477Z","owner":"0e92edde-fdff-41db-9b1d-f2e484f12535","revisionNumber":1,"thingPreference":null,"valueSet":["a179af79-fd09-44c8-a8a6-3c4c602c7dbf"]},{"alias":[],"attachment":[],"behavior":[],"category":["cf059b19-235c-48be-87a3-9a8942c8e3e0"],"classKind":"ElementDefinition","containedElement":[],"definition":[],"excludedDomain":[],"excludedPerson":[],"hyperLink":[],"iid":"f73860b2-12f0-43e4-b8b2-c81862c0a159","modifiedOn":"2024-01-04T14:52:33.477Z","name":"Test Element Definition","organizationalParticipant":[],"owner":"0e92edde-fdff-41db-9b1d-f2e484f12535","parameter":["3f05483f-66ff-4f21-bc76-45956779f66e","6c5aff74-f983-4aa8-a9d6-293b3429307c"],"parameterGroup":["b739b3c6-9cc0-4e64-9cc4-ef7463edf559"],"referencedElement":[],"revisionNumber":1,"shortName":"TestElementDefinition","thingPreference":null},{"alias":[],"attachment":[],"category":[],"classKind":"ElementUsage","definition":[],"elementDefinition":"f73860b2-12f0-43e4-b8b2-c81862c0a159","excludedDomain":[],"excludedPerson":[],"excludeOption":[],"hyperLink":[],"iid":"f95a1580-e533-4185-b520-208615780afe","interfaceEnd":"UNDIRECTED","modifiedOn":"2024-01-04T14:52:33.477Z","name":"Test ElementUsage 2","owner":"0e92edde-fdff-41db-9b1d-f2e484f12535","parameterOverride":[],"revisionNumber":1,"shortName":"TestElementUsage2","thingPreference":null},{"alias":[],"attachment":[],"behavior":[],"category":[],"classKind":"ElementDefinition","containedElement":["75399754-ee45-4bca-b033-63e2019870d1","f95a1580-e533-4185-b520-208615780afe"],"definition":[],"excludedDomain":[],"excludedPerson":[],"hyperLink":[],"iid":"fe9295c5-af99-494e-86ff-e715837806ae","modifiedOn":"2024-01-04T14:52:33.477Z","name":"Test 2 Element Definition","organizationalParticipant":[],"owner":"0e92edde-fdff-41db-9b1d-f2e484f12535","parameter":[],"parameterGroup":[],"referencedElement":[],"revisionNumber":1,"shortName":"TestTwoElementDefinition","thingPreference":null},{"classKind":"IdCorrespondence","excludedDomain":[],"excludedPerson":[],"externalId":"internalThing","iid":"ff6956dc-1882-4d61-8840-dedb3fba7b43","internalThing":"35a8ee03-6786-4c39-967d-3c5b438f0c64","modifiedOn":"2024-01-04T14:52:33.477Z","revisionNumber":1,"thingPreference":null}]
+[
+    {
+        "classKind": "AndExpression",
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "iid": "000484d0-cefd-47be-9317-a9eae72c94ce",
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "revisionNumber": 1,
+        "term": [
+            "a6e44651-7c4a-4a57-bdf9-c0290497f392",
+            "deaa2560-b704-4b2c-950b-aad02ff84052"
+        ],
+        "thingPreference": null
+    },
+    {
+        "category": [
+            "107fc408-7e6d-4f1a-895a-1b6a6025ac20"
+        ],
+        "classKind": "BinaryRelationship",
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "iid": "138f8a3e-69c6-4e21-b459-bc26b1319a2c",
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "name": null,
+        "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+        "parameterValue": [],
+        "revisionNumber": 1,
+        "source": "67cdb7de-7721-40a0-9ca2-10a5cf7742fc",
+        "target": "95bf0f17-1273-4338-98ae-839016242775",
+        "thingPreference": null
+    },
+    {
+        "classKind": "NotExpression",
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "iid": "30cb785a-9e72-477f-ad1a-8df6ab623e3d",
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "revisionNumber": 1,
+        "term": "5f90327f-95a2-4c5a-9efe-581f8daf08ed",
+        "thingPreference": null
+    },
+    {
+        "category": [],
+        "classKind": "BinaryRelationship",
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "iid": "320869e4-f6d6-4dd2-a696-1b1604f4c4b7",
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "name": null,
+        "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+        "parameterValue": [],
+        "revisionNumber": 1,
+        "source": "790b9e60-476b-4b6d-8aba-0af15178535e",
+        "target": "ff6956dc-1882-4d61-8840-dedb3fba7b43",
+        "thingPreference": null
+    },
+    {
+        "allowDifferentOwnerOfOverride": false,
+        "classKind": "Parameter",
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "expectsOverride": false,
+        "group": null,
+        "iid": "3f05483f-66ff-4f21-bc76-45956779f66e",
+        "isOptionDependent": false,
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "owner": "eb759723-14b9-49f4-8611-544d037bb764",
+        "parameterSubscription": [],
+        "parameterType": "a21c15c4-3e1e-46b5-b109-5063dec1e254",
+        "requestedBy": null,
+        "revisionNumber": 1,
+        "scale": null,
+        "stateDependence": null,
+        "thingPreference": null,
+        "valueSet": [
+            "72ec3701-bcb5-4bf6-bd78-30fd1b65e3be"
+        ]
+    },
+    {
+        "alias": [],
+        "attachment": [],
+        "category": [],
+        "classKind": "PossibleFiniteStateList",
+        "defaultState": "b8fdfac4-1c40-475a-ac6c-968654b689b6",
+        "definition": [],
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "hyperLink": [],
+        "iid": "449a5bca-34fd-454a-93f8-a56ac8383fee",
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "name": "Test Possible FiniteState List",
+        "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+        "possibleState": [
+            {
+                "k": 73203278,
+                "v": "b8fdfac4-1c40-475a-ac6c-968654b689b6"
+            }
+        ],
+        "revisionNumber": 1,
+        "shortName": "TestPossibleFiniteStateList",
+        "thingPreference": null
+    },
+    {
+        "classKind": "FileRevision",
+        "containingFolder": null,
+        "contentHash": "B95EC201AE3EE89D407449D692E69BB97C228A7E",
+        "createdOn": "2016-11-02T13:58:35.936Z",
+        "creator": "284334dd-e8e5-42d6-bc8a-715c507a7f02",
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "fileType": [
+            {
+                "k": 2,
+                "v": "db04ac55-dd60-4607-a4e1-a9f91c9704e6"
+            }
+        ],
+        "iid": "5544bb87-dc38-45d5-9d92-c580d3fe0442",
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "name": "FileRevision",
+        "revisionNumber": 1,
+        "thingPreference": null
+    },
+    {
+        "classKind": "OrExpression",
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "iid": "5f90327f-95a2-4c5a-9efe-581f8daf08ed",
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "revisionNumber": 1,
+        "term": [
+            "8c6df21f-07ae-4d0b-ab9b-866dd1f90158",
+            "a6e44651-7c4a-4a57-bdf9-c0290497f392"
+        ],
+        "thingPreference": null
+    },
+    {
+        "alias": [],
+        "attachment": [],
+        "category": [
+            "167b5cb0-766e-4ab2-b728-a9c9a662b017"
+        ],
+        "classKind": "Requirement",
+        "definition": [],
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "group": null,
+        "hyperLink": [],
+        "iid": "614e2a69-d602-46be-9311-2fb4d3273e87",
+        "isDeprecated": false,
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "name": "Test Requirement",
+        "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+        "parameterValue": [
+            "bcedefb0-b3ee-4a0b-8137-6561fa23b37f",
+            "ef3b5740-6e0e-463c-99df-f255e38a32b6"
+        ],
+        "parametricConstraint": [
+            {
+                "k": 1,
+                "v": "88200dbc-711a-47e0-a54a-dac4baca6e83"
+            }
+        ],
+        "revisionNumber": 1,
+        "shortName": "TestRequirement",
+        "thingPreference": null
+    },
+    {
+        "alias": [],
+        "attachment": [],
+        "category": [],
+        "classKind": "Requirement",
+        "definition": [],
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "group": "d3474e6a-f9ac-4d1a-91d9-6f8be06a03b5",
+        "hyperLink": [],
+        "iid": "614e2a69-d602-46be-9311-2fb4d3273e88",
+        "isDeprecated": false,
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "name": "Test Requirement 2",
+        "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+        "parameterValue": [],
+        "parametricConstraint": [],
+        "revisionNumber": 1,
+        "shortName": "TestRequirementTwo",
+        "thingPreference": null
+    },
+    {
+        "classKind": "Folder",
+        "containingFolder": null,
+        "createdOn": "2016-11-02T13:58:35.936Z",
+        "creator": "284334dd-e8e5-42d6-bc8a-715c507a7f02",
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "iid": "67cdb7de-7721-40a0-9ca2-10a5cf7742fc",
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "name": "Test Folder",
+        "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+        "revisionNumber": 1,
+        "thingPreference": null
+    },
+    {
+        "allowDifferentOwnerOfOverride": false,
+        "classKind": "Parameter",
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "expectsOverride": false,
+        "group": "b739b3c6-9cc0-4e64-9cc4-ef7463edf559",
+        "iid": "6c5aff74-f983-4aa8-a9d6-293b3429307c",
+        "isOptionDependent": false,
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+        "parameterSubscription": [
+            "f1f076c4-5307-42b8-a171-3263a9e7bb21"
+        ],
+        "parameterType": "a21c15c4-3e1e-46b5-b109-5063dec1e254",
+        "requestedBy": null,
+        "revisionNumber": 1,
+        "scale": null,
+        "stateDependence": null,
+        "thingPreference": null,
+        "valueSet": [
+            "af5c88c6-301f-497b-81f7-53748c3900ed"
+        ]
+    },
+    {
+        "actualOption": null,
+        "actualState": null,
+        "classKind": "ParameterValueSet",
+        "computed": "[\"-\"]",
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "formula": "[\"-\"]",
+        "iid": "72ec3701-bcb5-4bf6-bd78-30fd1b65e3be",
+        "manual": "[\"-\"]",
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "published": "[\"-\"]",
+        "reference": "[\"-\"]",
+        "revisionNumber": 1,
+        "thingPreference": null,
+        "valueSwitch": "MANUAL"
+    },
+    {
+        "alias": [],
+        "attachment": [],
+        "category": [],
+        "classKind": "ElementUsage",
+        "definition": [],
+        "elementDefinition": "f73860b2-12f0-43e4-b8b2-c81862c0a159",
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "excludeOption": [],
+        "hyperLink": [],
+        "iid": "75399754-ee45-4bca-b033-63e2019870d1",
+        "interfaceEnd": "UNDIRECTED",
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "name": "Test ElementUsage",
+        "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+        "parameterOverride": [
+            "93f767ed-4d22-45f6-ae97-d1dab0d36e1c"
+        ],
+        "revisionNumber": 1,
+        "shortName": "TestElementUsage",
+        "thingPreference": null
+    },
+    {
+        "classKind": "Publication",
+        "createdOn": "2016-10-25T09:00:35.936Z",
+        "domain": [],
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "iid": "790b9e60-476b-4b6d-8aba-0af15178535e",
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "publishedParameter": [],
+        "revisionNumber": 1,
+        "thingPreference": null
+    },
+    {
+        "classKind": "ParametricConstraint",
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "expression": [
+            "000484d0-cefd-47be-9317-a9eae72c94ce",
+            "30cb785a-9e72-477f-ad1a-8df6ab623e3d",
+            "5f90327f-95a2-4c5a-9efe-581f8daf08ed",
+            "8c6df21f-07ae-4d0b-ab9b-866dd1f90158",
+            "a6e44651-7c4a-4a57-bdf9-c0290497f392",
+            "deaa2560-b704-4b2c-950b-aad02ff84052"
+        ],
+        "iid": "88200dbc-711a-47e0-a54a-dac4baca6e83",
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "revisionNumber": 1,
+        "thingPreference": null,
+        "topExpression": "30cb785a-9e72-477f-ad1a-8df6ab623e3d"
+    },
+    {
+        "classKind": "ExclusiveOrExpression",
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "iid": "8c6df21f-07ae-4d0b-ab9b-866dd1f90158",
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "revisionNumber": 1,
+        "term": [
+            "000484d0-cefd-47be-9317-a9eae72c94ce",
+            "deaa2560-b704-4b2c-950b-aad02ff84052"
+        ],
+        "thingPreference": null
+    },
+    {
+        "alias": [],
+        "attachment": [],
+        "category": [],
+        "classKind": "RequirementsSpecification",
+        "definition": [],
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "group": [],
+        "hyperLink": [],
+        "iid": "8d0734f4-ca4b-4611-9187-f6970e2b02bc",
+        "isDeprecated": false,
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "name": "Test Requirements Specification 2",
+        "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+        "parameterValue": [],
+        "requirement": [],
+        "revisionNumber": 1,
+        "shortName": "TestRequirementsSpecification2",
+        "thingPreference": null
+    },
+    {
+        "classKind": "ParameterOverride",
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "iid": "93f767ed-4d22-45f6-ae97-d1dab0d36e1c",
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+        "parameter": "6c5aff74-f983-4aa8-a9d6-293b3429307c",
+        "parameterSubscription": [],
+        "revisionNumber": 1,
+        "thingPreference": null,
+        "valueSet": [
+            "985db346-a297-4ce6-956b-e675d53d415e"
+        ]
+    },
+    {
+        "category": [],
+        "classKind": "File",
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "fileRevision": [
+            "5544bb87-dc38-45d5-9d92-c580d3fe0442"
+        ],
+        "iid": "95bf0f17-1273-4338-98ae-839016242775",
+        "lockedBy": null,
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+        "revisionNumber": 1,
+        "thingPreference": null
+    },
+    {
+        "classKind": "ParameterOverrideValueSet",
+        "computed": "[\"-\"]",
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "formula": "[\"-\"]",
+        "iid": "985db346-a297-4ce6-956b-e675d53d415e",
+        "manual": "[\"-\"]",
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "parameterValueSet": "af5c88c6-301f-497b-81f7-53748c3900ed",
+        "published": "[\"-\"]",
+        "reference": "[\"-\"]",
+        "revisionNumber": 1,
+        "thingPreference": null,
+        "valueSwitch": "MANUAL"
+    },
+    {
+        "classKind": "ExternalIdentifierMap",
+        "correspondence": [
+            "ff6956dc-1882-4d61-8840-dedb3fba7b43"
+        ],
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "externalFormat": null,
+        "externalModelName": "externalModel",
+        "externalToolName": "externalTool",
+        "externalToolVersion": "1.0",
+        "iid": "a0cadcd1-b14f-4552-8f97-bec386a715d0",
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "name": "TestExternalIdentifierMap",
+        "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+        "revisionNumber": 1,
+        "thingPreference": null
+    },
+    {
+        "classKind": "ParameterSubscriptionValueSet",
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "iid": "a179af79-fd09-44c8-a8a6-3c4c602c7dbf",
+        "manual": "[\"-\"]",
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "revisionNumber": 1,
+        "subscribedValueSet": "af5c88c6-301f-497b-81f7-53748c3900ed",
+        "thingPreference": null,
+        "valueSwitch": "MANUAL"
+    },
+    {
+        "classKind": "RelationalExpression",
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "iid": "a6e44651-7c4a-4a57-bdf9-c0290497f392",
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "parameterType": "a21c15c4-3e1e-46b5-b109-5063dec1e254",
+        "relationalOperator": "EQ",
+        "revisionNumber": 1,
+        "scale": null,
+        "thingPreference": null,
+        "value": "[\"test\"]"
+    },
+    {
+        "actualOption": null,
+        "actualState": null,
+        "classKind": "ParameterValueSet",
+        "computed": "[\"-\"]",
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "formula": "[\"-\"]",
+        "iid": "af5c88c6-301f-497b-81f7-53748c3900ed",
+        "manual": "[\"-\"]",
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "published": "[\"-\"]",
+        "reference": "[\"-\"]",
+        "revisionNumber": 1,
+        "thingPreference": null,
+        "valueSwitch": "MANUAL"
+    },
+    {
+        "classKind": "ParameterGroup",
+        "containingGroup": null,
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "iid": "b739b3c6-9cc0-4e64-9cc4-ef7463edf559",
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "name": "Test ParameterGroup",
+        "revisionNumber": 1,
+        "thingPreference": null
+    },
+    {
+        "alias": [],
+        "attachment": [],
+        "classKind": "PossibleFiniteState",
+        "definition": [],
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "hyperLink": [],
+        "iid": "b8fdfac4-1c40-475a-ac6c-968654b689b6",
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "name": "Test Possible Finite State",
+        "revisionNumber": 1,
+        "shortName": "TestPossibleFiniteState",
+        "thingPreference": null
+    },
+    {
+        "classKind": "ActualFiniteState",
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "iid": "b91bfdbb-4277-4a03-b519-e4db839ef5d4",
+        "kind": "MANDATORY",
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "possibleState": [
+            "b8fdfac4-1c40-475a-ac6c-968654b689b6"
+        ],
+        "revisionNumber": 1,
+        "thingPreference": null
+    },
+    {
+        "classKind": "SimpleParameterValue",
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "iid": "bcedefb0-b3ee-4a0b-8137-6561fa23b37f",
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "parameterType": "a21c15c4-3e1e-46b5-b109-5063dec1e254",
+        "revisionNumber": 1,
+        "scale": null,
+        "thingPreference": null,
+        "value": "[\"test\"]"
+    },
+    {
+        "alias": [],
+        "attachment": [],
+        "category": [],
+        "classKind": "Option",
+        "definition": [],
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "hyperLink": [],
+        "iid": "bebcc9f4-ff20-4569-bbf6-d1acf27a8107",
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "name": "Test Option",
+        "nestedElement": [],
+        "revisionNumber": 1,
+        "shortName": "TestOption",
+        "thingPreference": null
+    },
+    {
+        "alias": [],
+        "attachment": [],
+        "category": [],
+        "classKind": "RequirementsSpecification",
+        "definition": [],
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "group": [
+            "d3474e6a-f9ac-4d1a-91d9-6f8be06a03b5"
+        ],
+        "hyperLink": [],
+        "iid": "bf0cde90-9086-43d5-bcff-32a2f8331800",
+        "isDeprecated": false,
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "name": "Test Requirements Specification",
+        "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+        "parameterValue": [],
+        "requirement": [
+            "614e2a69-d602-46be-9311-2fb4d3273e87",
+            "614e2a69-d602-46be-9311-2fb4d3273e88"
+        ],
+        "revisionNumber": 1,
+        "shortName": "TestRequirementsSpecification",
+        "thingPreference": null
+    },
+    {
+        "classKind": "UserRuleVerification",
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "executedOn": null,
+        "iid": "c953263c-fc25-4048-9bb6-343a10200a0c",
+        "isActive": true,
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "revisionNumber": 1,
+        "rule": "8a5cd66e-7313-4843-813f-37081ca81bb8",
+        "status": "PASSED",
+        "thingPreference": null
+    },
+    {
+        "classKind": "BuiltInRuleVerification",
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "executedOn": null,
+        "iid": "ccb44a8e-2460-4892-ab75-02d8828db233",
+        "isActive": false,
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "name": "Test BuiltInRuleVerification",
+        "revisionNumber": 1,
+        "status": "NONE",
+        "thingPreference": null
+    },
+    {
+        "alias": [],
+        "attachment": [],
+        "category": [],
+        "classKind": "RequirementsGroup",
+        "definition": [],
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "group": [],
+        "hyperLink": [],
+        "iid": "d3474e6a-f9ac-4d1a-91d9-6f8be06a03b5",
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "name": "Test Requirements Group",
+        "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+        "parameterValue": [],
+        "revisionNumber": 1,
+        "shortName": "TestRequirementsGroup",
+        "thingPreference": null
+    },
+    {
+        "classKind": "DomainFileStore",
+        "createdOn": "2016-11-02T13:58:35.936Z",
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "file": [
+            "95bf0f17-1273-4338-98ae-839016242775"
+        ],
+        "folder": [
+            "67cdb7de-7721-40a0-9ca2-10a5cf7742fc"
+        ],
+        "iid": "da7dddaa-02aa-4897-9935-e8d66c811a96",
+        "isHidden": false,
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "name": "Test DomainFileStore",
+        "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+        "revisionNumber": 1,
+        "thingPreference": null
+    },
+    {
+        "actualState": [
+            "b91bfdbb-4277-4a03-b519-e4db839ef5d4"
+        ],
+        "classKind": "ActualFiniteStateList",
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "excludeOption": [],
+        "iid": "db690d7d-761c-47fd-96d3-840d698a89dc",
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+        "possibleFiniteStateList": [
+            {
+                "k": 4598335,
+                "v": "449a5bca-34fd-454a-93f8-a56ac8383fee"
+            }
+        ],
+        "revisionNumber": 1,
+        "thingPreference": null
+    },
+    {
+        "alias": [],
+        "attachment": [],
+        "classKind": "RuleVerificationList",
+        "definition": [],
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "hyperLink": [],
+        "iid": "dc482120-2a11-439b-913d-6a924de9ee5f",
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "name": "Test RuleVerificationList",
+        "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+        "revisionNumber": 1,
+        "ruleVerification": [
+            {
+                "k": 1,
+                "v": "c953263c-fc25-4048-9bb6-343a10200a0c"
+            },
+            {
+                "k": 2,
+                "v": "ccb44a8e-2460-4892-ab75-02d8828db233"
+            }
+        ],
+        "shortName": "TestRuleVerificationList",
+        "thingPreference": null
+    },
+    {
+        "classKind": "RelationalExpression",
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "iid": "deaa2560-b704-4b2c-950b-aad02ff84052",
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "parameterType": "35a9cf05-4eba-4cda-b60c-7cfeaac8f892",
+        "relationalOperator": "EQ",
+        "revisionNumber": 1,
+        "scale": null,
+        "thingPreference": null,
+        "value": "[\"true\"]"
+    },
+    {
+        "actualFiniteStateList": [
+            "db690d7d-761c-47fd-96d3-840d698a89dc"
+        ],
+        "classKind": "Iteration",
+        "defaultOption": "bebcc9f4-ff20-4569-bbf6-d1acf27a8107",
+        "diagramCanvas": [
+            "131298db-5251-45f6-96fa-60a69d7c168a", 
+            "05a0668b-64a0-438f-bf81-c917b9345592"
+        ],
+        "domainFileStore": [
+            "da7dddaa-02aa-4897-9935-e8d66c811a96"
+        ],
+        "element": [
+            "f73860b2-12f0-43e4-b8b2-c81862c0a159",
+            "fe9295c5-af99-494e-86ff-e715837806ae"
+        ],
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "externalIdentifierMap": [
+            "a0cadcd1-b14f-4552-8f97-bec386a715d0"
+        ],
+        "goal": [],
+        "iid": "e163c5ad-f32b-4387-b805-f4b34600bc2c",
+        "iterationSetup": "86163b0e-8341-4316-94fc-93ed60ad0dcf",
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "option": [
+            {
+                "k": 1,
+                "v": "bebcc9f4-ff20-4569-bbf6-d1acf27a8107"
+            }
+        ],
+        "possibleFiniteStateList": [
+            "449a5bca-34fd-454a-93f8-a56ac8383fee"
+        ],
+        "publication": [
+            "790b9e60-476b-4b6d-8aba-0af15178535e"
+        ],
+        "relationship": [
+            "138f8a3e-69c6-4e21-b459-bc26b1319a2c",
+            "320869e4-f6d6-4dd2-a696-1b1604f4c4b7"
+        ],
+        "requirementsSpecification": [
+            "8d0734f4-ca4b-4611-9187-f6970e2b02bc",
+            "bf0cde90-9086-43d5-bcff-32a2f8331800"
+        ],
+        "revisionNumber": 1,
+        "ruleVerificationList": [
+            "dc482120-2a11-439b-913d-6a924de9ee5f"
+        ],
+        "sharedDiagramStyle": [],
+        "sourceIterationIid": null,
+        "stakeholder": [],
+        "stakeholderValue": [],
+        "stakeholderValueMap": [],
+        "thingPreference": null,
+        "topElement": null,
+        "valueGroup": []
+    },
+    {
+        "classKind": "SimpleParameterValue",
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "iid": "ef3b5740-6e0e-463c-99df-f255e38a32b6",
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "parameterType": "35a9cf05-4eba-4cda-b60c-7cfeaac8f892",
+        "revisionNumber": 1,
+        "scale": null,
+        "thingPreference": null,
+        "value": "[\"true\"]"
+    },
+    {
+        "classKind": "ParameterSubscription",
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "iid": "f1f076c4-5307-42b8-a171-3263a9e7bb21",
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+        "revisionNumber": 1,
+        "thingPreference": null,
+        "valueSet": [
+            "a179af79-fd09-44c8-a8a6-3c4c602c7dbf"
+        ]
+    },
+    {
+        "alias": [],
+        "attachment": [],
+        "behavior": [],
+        "category": [
+            "cf059b19-235c-48be-87a3-9a8942c8e3e0"
+        ],
+        "classKind": "ElementDefinition",
+        "containedElement": [],
+        "definition": [],
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "hyperLink": [],
+        "iid": "f73860b2-12f0-43e4-b8b2-c81862c0a159",
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "name": "Test Element Definition",
+        "organizationalParticipant": [],
+        "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+        "parameter": [
+            "3f05483f-66ff-4f21-bc76-45956779f66e",
+            "6c5aff74-f983-4aa8-a9d6-293b3429307c"
+        ],
+        "parameterGroup": [
+            "b739b3c6-9cc0-4e64-9cc4-ef7463edf559"
+        ],
+        "referencedElement": [],
+        "revisionNumber": 1,
+        "shortName": "TestElementDefinition",
+        "thingPreference": null
+    },
+    {
+        "alias": [],
+        "attachment": [],
+        "category": [],
+        "classKind": "ElementUsage",
+        "definition": [],
+        "elementDefinition": "f73860b2-12f0-43e4-b8b2-c81862c0a159",
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "excludeOption": [],
+        "hyperLink": [],
+        "iid": "f95a1580-e533-4185-b520-208615780afe",
+        "interfaceEnd": "UNDIRECTED",
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "name": "Test ElementUsage 2",
+        "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+        "parameterOverride": [],
+        "revisionNumber": 1,
+        "shortName": "TestElementUsage2",
+        "thingPreference": null
+    },
+    {
+        "alias": [],
+        "attachment": [],
+        "behavior": [],
+        "category": [],
+        "classKind": "ElementDefinition",
+        "containedElement": [
+            "75399754-ee45-4bca-b033-63e2019870d1",
+            "f95a1580-e533-4185-b520-208615780afe"
+        ],
+        "definition": [],
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "hyperLink": [],
+        "iid": "fe9295c5-af99-494e-86ff-e715837806ae",
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "name": "Test 2 Element Definition",
+        "organizationalParticipant": [],
+        "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+        "parameter": [],
+        "parameterGroup": [],
+        "referencedElement": [],
+        "revisionNumber": 1,
+        "shortName": "TestTwoElementDefinition",
+        "thingPreference": null
+    },
+    {
+        "classKind": "IdCorrespondence",
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "externalId": "internalThing",
+        "iid": "ff6956dc-1882-4d61-8840-dedb3fba7b43",
+        "internalThing": "35a8ee03-6786-4c39-967d-3c5b438f0c64",
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "revisionNumber": 1,
+        "thingPreference": null
+    },
+    {
+        "classKind": "DiagramCanvas",
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "iid": "131298db-5251-45f6-96fa-60a69d7c168a",
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "revisionNumber": 1,
+        "thingPreference": null,
+        "diagramElement": ["d5b99fa2-ab7d-423b-ac31-8a7d79a30243"],
+        "description": "DiagramCanvas 1",
+        "name": "Canvas 1"
+    },
+    {
+        "classKind": "DiagramObject",
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "iid": "d5b99fa2-ab7d-423b-ac31-8a7d79a30243",
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "revisionNumber": 1,
+        "thingPreference": null,
+        "name": "shape 1",
+        "depictedThing": "fe9295c5-af99-494e-86ff-e715837806ae"
+    },
+    {
+        "classKind": "ArchitectureDiagram",
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "iid": "05a0668b-64a0-438f-bf81-c917b9345592",
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+        "revisionNumber": 1,
+        "thingPreference": null,
+        "diagramElement": ["f4761bbf-6eb9-491e-9d21-a4ec1c24e33b"],
+        "description": "ArchitectureDiagram 1",
+        "name": "Architecture 1"
+    },
+    {
+        "classKind": "DiagramObject",
+        "excludedDomain": [],
+        "excludedPerson": [],
+        "iid": "f4761bbf-6eb9-491e-9d21-a4ec1c24e33b",
+        "modifiedOn": "2024-01-04T14:52:33.477Z",
+        "revisionNumber": 1,
+        "thingPreference": null,
+        "name": "shape 2",
+        "depictedThing": "fe9295c5-af99-494e-86ff-e715837806ae"
+    }
+]

@@ -120,7 +120,17 @@ namespace WebservicesIntegrationTests.Net
         /// </returns>
         public JArray GetDto(Uri uri)
         {
-            var webResponse = this.RetrieveHttpGetResponse(uri);
+            //Only one or zero version attributes allowed
+            var stackTrace = new StackTrace();
+            var frame = stackTrace.GetFrames()?[1];
+            var method = frame?.GetMethod();
+            var version = method?.GetCustomAttributes<CdpVersionAttribute>().SingleOrDefault()?.Version;
+
+            var webResponse =
+                version != null
+                    ? this.RetrieveHttpGetResponseForVersion(uri, version)
+                    : this.RetrieveHttpGetResponse(uri);
+
             return this.ExtractJarrayFromResponse(webResponse);
         }
 
@@ -436,6 +446,27 @@ namespace WebservicesIntegrationTests.Net
         private HttpWebResponse RetrieveHttpGetResponse(Uri uri)
         {
             var request = this.CreateWebRequest(uri, HttpGetMethod);
+
+            var webResponse = (HttpWebResponse)request.GetResponse();
+            return webResponse;
+        }
+
+        /// <summary>
+        /// Performs a GET request on the provided <see cref="Uri"/> and return a  <see cref="HttpWebResponse"/>
+        /// </summary>
+        /// <param name="uri">
+        /// The <see cref="Uri"/> that the POST request is performed on
+        /// </param>
+        /// <param name="version">
+        ///A specific CDP version number is needed
+        /// </param>
+        /// <returns>
+        /// The <see cref="HttpWebResponse"/>.
+        /// </returns>
+        private HttpWebResponse RetrieveHttpGetResponseForVersion(Uri uri, string version)
+        {
+            var request = this.CreateWebRequest(uri, HttpGetMethod);
+            request.Headers.Add("Accept-CDP", version);
 
             var webResponse = (HttpWebResponse)request.GetResponse();
             return webResponse;

@@ -63,6 +63,8 @@ namespace WebservicesIntegrationTests
 
         public static string Dimension => "dimension";
 
+        public static string DiagramElement => "diagramElement";
+
         public static string General => "general";
 
         public static string IterationSetup => "iterationSetup";
@@ -192,6 +194,8 @@ namespace WebservicesIntegrationTests
         public static string LanguageCode => "languageCode";
 
         public static string CreatedOn => "createdOn";
+
+        public static string ModifiedOn => "modifiedOn";
 
         public static string RequiredRdl => "requiredRdl";
 

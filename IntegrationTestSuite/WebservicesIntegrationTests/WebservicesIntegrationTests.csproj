@@ -60,6 +60,9 @@
     <None Update="Tests\EngineeringModel\AndExpression\PostNewAndExpression.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Tests\EngineeringModel\ArchitectureDiagram\PostAddDomainForJane.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Tests\EngineeringModel\Book\PostDeleteBooks.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -88,6 +91,30 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Tests\EngineeringModel\CommonFileStoreFile\PostNewFolderWithFile.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Tests\EngineeringModel\ArchitectureDiagram\PostDeleteDiagram.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Tests\EngineeringModel\ArchitectureDiagram\PostUpdateDiagramIsHidden.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Tests\EngineeringModel\ArchitectureDiagram\PostUpdateDiagramIsHiddenAndLockedBy.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Tests\EngineeringModel\ArchitectureDiagram\PostUpdateDiagramLockedBy.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Tests\EngineeringModel\DiagramCanvas\PostDeleteDiagram.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Tests\EngineeringModel\DiagramCanvas\PostUpdateDiagramIsHiddenAndLockedBy.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Tests\EngineeringModel\DiagramCanvas\PostUpdateDiagramLockedBy.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Tests\EngineeringModel\DiagramCanvas\PostUpdateDiagramIsHidden.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Tests\EngineeringModel\DomainFileStore\PostUpdateDomainFileStoreIsHidden.json">
