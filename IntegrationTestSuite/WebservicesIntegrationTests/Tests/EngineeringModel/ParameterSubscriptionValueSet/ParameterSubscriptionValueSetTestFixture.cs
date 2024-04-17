@@ -113,7 +113,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual("MANUAL", (string) parameterSubscriptionValueSet[PropertyNames.ValueSwitch]);
         }
 
-                [Test]
+        [Test]
         [Category("POST")]
         [TestCase("ccd430e7-2200-4289-8eee-6b78838876a8", new[]{"1.5","2"}, new[]{"1.5","2"}, new[]{"2,5", "2"}, new []{"-"}, new []{"-","-","-"})] //ArrayParameterType
         [TestCase("4b4d36db-21b3-4781-830e-4f56fafea401", new[]{"1"}, new[]{"true"}, new[]{"2"}, new []{"-","-"})] //BooleanParameterType
@@ -121,7 +121,11 @@ namespace WebservicesIntegrationTests
         [TestCase("87d42051-eaa8-4c03-8dd6-4a8caa6d6544", new[]{"2024-01-05T00:00:01"}, new[]{"2024-01-05T00:00:01.0000000Z"}, new[]{"5th January 2024"}, new []{"-","-"})] //DateTimeParameterType
         [TestCase("3bd5bbdd-6cb5-434d-a7a5-c2c25d128114", new[]{"1.5"}, new[]{"1.5"}, new[]{"1,5"}, new []{"-","-"})] //DerivedParameterType with REAL_NUMBER
         [TestCase("2bd23d9d-009a-4f03-9262-f983bc0d0a87", new[]{"TestEnumerationValueDefinitionA"}, new[]{"TestEnumerationValueDefinitionA"}, new[]{"TestEnumerationValueDefinitionA|TestEnumerationValueDefinitionB"}, new[]{"Test Enumeration Value Definition A"}, new []{"-","-"})] //EnumerationParameterType
-        [TestCase("d2ad2581-2157-4e0b-924e-150753f598b8", new[]{"00:00:01"}, new[]{"0001-01-01T00:00:01.0000000Z"}, new[]{"0002-01-01T00:00:01.0000000Z"}, new []{"-","-"})] //TimeOfDayParameterType
+        [TestCase("d2ad2581-2157-4e0b-924e-150753f598b8", new[]{"00:00:01"}, new[]{ "00:00:01" }, new[]{"0002-01-01T00:00:01.0000000Z"}, new []{"-","-"})] //TimeOfDayParameterType
+        [TestCase("d2ad2581-2157-4e0b-924e-150753f598b8", new[] { "00:00:01Z" }, new[] { "00:00:01Z" }, new[] { "0002-01-01T00:00:01.0000000Z" }, new[] { "-", "-" })] //TimeOfDayParameterType
+        [TestCase("d2ad2581-2157-4e0b-924e-150753f598b8", new[] { "00:00:01.001Z" }, new[] { "00:00:01.001Z" }, new[] { "0002-01-01T00:00:01.0000000Z" }, new[] { "-", "-" })] //TimeOfDayParameterType
+        [TestCase("d2ad2581-2157-4e0b-924e-150753f598b8", new[] { "0001-01-01T00:00:01" }, new[] { "0001-01-01T00:00:01" }, new[] { "0002-01-01T00:00:01.0000000Z" }, new[] { "-", "-" })] //TimeOfDayParameterType
+        [TestCase("d2ad2581-2157-4e0b-924e-150753f598b8", new[] { "0001-01-01T00:00:01.001Z" }, new[] { "0001-01-01T00:00:01.001Z" }, new[] { "0002-01-01T00:00:01.0000000Z" }, new[] { "-", "-" })] //TimeOfDayParameterType
         [TestCase("ebd334f7-34f2-47e2-8738-a77f4f36ae51", new[]{"1.5","2"}, new[]{"1.5","2"}, new[]{"2,5", "2"}, new []{"-"}, new []{"-","-","-"})] //CompoundParameterType
         [TestCase("a179af79-fd09-44c8-a8a6-3c4c602c7dbf", new[]{"Any text"}, new[]{"Any text"}, new[]{" "}, new []{""}, new []{"-","-"})] //TextParameterType
         public void VerifyParameterTypeValidationWorks(string parameterId, string[] validValue, string[] expectedCleanedValue, params string[][] invalidValues)
