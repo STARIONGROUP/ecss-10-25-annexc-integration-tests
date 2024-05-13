@@ -31,7 +31,7 @@ In order to support the integration testing. 2 routes have been added to Annex C
 The URL of the upload service is the following: "http(s)://hostname:port/Data/Exchange". The seed file shall be uploaded in a multi-part message. We use curl to upload an Annex C.3 file:
 
 ```
-curl --form file=@"Data.zip" http://cdp4services-test.rheagroup.com/Data/Exchange
+curl --form file=@"Data.zip" http://cdp4services-test.cdp4.org/Data/Exchange
 ```
 
 ### Restore
@@ -40,11 +40,11 @@ The URL of the restore service takes the following form: "http(s)://hostname:por
 
 ## Integration test suite how-to
 
-Read more about setting up your development environnment [here](https://github.com/RHEAGROUP/ecss-10-25-annexc-integration-tests/wiki)
+Read more about setting up your development environnment [here](https://github.com/STARIONGROUP/ecss-10-25-annexc-integration-tests/wiki)
 
 # COMET
 
-COMET is the RHEA implementation of ECSS-E-TM-10-25 and is a so-called Concurrent Design Platform or collaborative MBSE application. COMET is a typical 3-tier application that contains the following application layers:
+COMET is the Starion Group implementation of ECSS-E-TM-10-25 and is a so-called Concurrent Design Platform or collaborative MBSE application. COMET is a typical 3-tier application that contains the following application layers:
 * Layer-1: Persistent Data Store (data layer)
   * implemented using [PostgreSQL](http://www.postgresql.org)
 * Layer-2: REST Web Services (application layer)
@@ -54,9 +54,9 @@ COMET is the RHEA implementation of ECSS-E-TM-10-25 and is a so-called Concurren
   * COMET-IME: A desktop application
   * COMET-ADDIN: A Microsoft Excel ADDIN
 
-More information about COMET can be found on the RHEA GROUP [Website](https://www.rheagroup.com/services-solutions/system-engineering/concurrent-design/). A demo installer of COMET-IME can be downloaded here: http://products.rheagroup.com/cdp4.
+More information about COMET can be found on the Starion Group [Website](https://www.stariongroup.eu/services-solutions/system-engineering/concurrent-design/). A demo installer of COMET-IME can be downloaded here: https://www.stariongroup.eu/services-solutions/system-engineering/concurrent-design/cdp4-comet/.
 
-A Public instance of COMET WebServices that is used to verify COMET WebServices compliance is available at http://cdp4services-test.rheagroup.com. The content that is serviced by this instance is loaded by the contents of the [Data folder](./Data/) . The username and password to access this COMET WebServices instances are: admin/pass.   
+A Public instance of COMET WebServices that is used to verify COMET WebServices compliance is available at http://cdp4services-test.cdp4.org. The content that is serviced by this instance is loaded by the contents of the [Data folder](./Data/) . The username and password to access this COMET WebServices instances are: admin/pass.   
 
 # OCDT
 
@@ -64,4 +64,4 @@ The ESA Community open source implementation of ECSS-E-TM-10-25. More informatio
 
 # Sponsors
 
-The ecss-10-25-annexc-integration-tests project is sponsored by the [RHEA GROUP](https://www.rheagroup.com)
+The ecss-10-25-annexc-integration-tests project is sponsored by the [Starion Group](https://www.stariongroup.eu)

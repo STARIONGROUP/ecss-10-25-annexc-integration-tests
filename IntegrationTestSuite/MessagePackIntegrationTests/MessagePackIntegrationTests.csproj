@@ -2,10 +2,10 @@
 
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
-        <Company>RHEA System S.A.</Company>
+        <Company>Starion Group S.A.</Company>
         <Title>CometServer-CE.Tests</Title>
         <Description>Unit tests Library for the Comet Server</Description>
-        <Copyright>Copyright © RHEA System S.A.</Copyright>
+        <Copyright>Copyright © Starion Group S.A.</Copyright>
         <Authors>Sam, Alex, Alexander</Authors>
         <Configurations>Debug;Release;Test;Local</Configurations>
         <LangVersion>latest</LangVersion>

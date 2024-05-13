@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="RuleVerificationTestFixture.cs" company="RHEA System S.A.">
+// <copyright file="RuleVerificationTestFixture.cs" company="Starion Group S.A.">
 //
-//   Copyright 2016-2021 RHEA System S.A.
+//   Copyright 2016-2021 Starion Group S.A.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -143,7 +143,7 @@ namespace WebservicesIntegrationTests
         }
 
         [Test]
-        [Ignore("Doen't work because RuleVerification ordered implementation is not OK. See https://github.com/RHEAGROUP/CDP4-WebServices-Community-Edition/issues/126")]
+        [Ignore("Doen't work because RuleVerification ordered implementation is not OK. See https://github.com/STARIONGROUP/CDP4-WebServices-Community-Edition/issues/126")]
         [Category("POST")]
         public void VerifyThatARuleVerificationCanBeReorderedWithWebApi()
         {

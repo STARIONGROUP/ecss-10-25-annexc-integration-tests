@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="CherryPickTestFixture.cs" company="RHEA System S.A.">
+// <copyright file="CherryPickTestFixture.cs" company="Starion Group S.A.">
 // 
-//    Copyright (c) 2023 RHEA System S.A.
+//    Copyright (c) 2023 Starion Group S.A.
 // 
 //    Authors: Sam Gerené, Antoine Théate, Jaime Bernar, Omar Elebiary
 // 

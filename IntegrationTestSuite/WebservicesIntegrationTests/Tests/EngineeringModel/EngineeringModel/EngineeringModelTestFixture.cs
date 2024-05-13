@@ -1,7 +1,7 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="EngineeringModelTestFixture.cs" company="RHEA System S.A.">
+// <copyright file="EngineeringModelTestFixture.cs" company="Starion Group S.A.">
 //
-//   Copyright 2016-2021 RHEA System S.A.
+//   Copyright 2016-2021 Starion Group S.A.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.

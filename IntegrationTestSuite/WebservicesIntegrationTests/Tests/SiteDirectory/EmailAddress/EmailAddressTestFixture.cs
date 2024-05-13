@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="EmailAddressTestFixture.cs" company="RHEA System S.A.">
+// <copyright file="EmailAddressTestFixture.cs" company="Starion Group S.A.">
 //
-//   Copyright 2016-2021 RHEA System S.A.
+//   Copyright 2016-2021 Starion Group S.A.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -90,7 +90,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual("325620cd-4354-4ddb-9c66-e75550da643a", (string) emailAddressObject[PropertyNames.Iid]);
             Assert.AreEqual(1, (int) emailAddressObject[PropertyNames.RevisionNumber]);
             Assert.AreEqual("EmailAddress", (string) emailAddressObject[PropertyNames.ClassKind]);
-            Assert.AreEqual("john.doe@rhea.com", (string) emailAddressObject[PropertyNames.Value]);
+            Assert.AreEqual("john.doe@stariongrop.eu", (string) emailAddressObject[PropertyNames.Value]);
             Assert.AreEqual("WORK", (string) emailAddressObject[PropertyNames.VcardType]);
         }
     }
