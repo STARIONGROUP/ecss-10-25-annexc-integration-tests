@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="ParameterOverrideTestFixture.cs" company="Starion Group S.A.">
 //
-//   Copyright 2016-2021 Starion Group S.A.
+//   Copyright 2016-2024 Starion Group S.A.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -23,7 +23,9 @@ namespace WebservicesIntegrationTests
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Net;
 
+    using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
 
     using NUnit.Framework;
@@ -43,7 +45,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(parameterOverrideUri);
 
             //check if there is the only one ParameterOverride object 
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific ParameterOverride from the result by it's unique id
             var parameterOverride = jArray.Single(x => (string) x[PropertyNames.Iid] == "93f767ed-4d22-45f6-ae97-d1dab0d36e1c");
@@ -62,7 +64,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(parameterOverrideUri);
 
             //check if there are 5 objects
-            Assert.AreEqual(5, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(5));
 
             // get a specific Iteration from the result by it's unique id
             var iteration = jArray.Single(x => (string) x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
@@ -90,10 +92,10 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
             var engineeeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
-            Assert.AreEqual(2, (int)engineeeringModel[PropertyNames.RevisionNumber]);
+            Assert.That((int)engineeeringModel[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             var elementUsage = jArray.Single(x => (string) x[PropertyNames.Iid] == "75399754-ee45-4bca-b033-63e2019870d1");
-            Assert.AreEqual(2, (int)elementUsage[PropertyNames.RevisionNumber]);
+            Assert.That((int)elementUsage[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             var expectedParameterOverrides = new string[]
             {
@@ -111,10 +113,10 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(7, parameterOverride.Children().Count());
 
             // assert that the properties are what is expected
-            Assert.AreEqual("3587bb05-0db4-4741-b5e3-da43393e13ed", (string)parameterOverride[PropertyNames.Iid]);
-            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string)parameterOverride[PropertyNames.Owner]);
-            Assert.AreEqual("ParameterOverride", (string)parameterOverride[PropertyNames.ClassKind]);
-            Assert.AreEqual(2, (int)parameterOverride[PropertyNames.RevisionNumber]);
+            Assert.That((string)parameterOverride[PropertyNames.Iid], Is.EqualTo("3587bb05-0db4-4741-b5e3-da43393e13ed"));
+            Assert.That((string)parameterOverride[PropertyNames.Owner], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
+            Assert.That((string)parameterOverride[PropertyNames.ClassKind], Is.EqualTo("ParameterOverride"));
+            Assert.That((int)parameterOverride[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             var expectedParameterOverrideSubscriptions = new string[] { };
             var expectedParameterOverrideSubscriptionsArray = (JArray)parameterOverride[PropertyNames.ParameterSubscription];
@@ -123,24 +125,134 @@ namespace WebservicesIntegrationTests
             
             var valueSetsArray = (JArray)parameterOverride[PropertyNames.ValueSet];
             IList<string> valueSets = valueSetsArray.Select(x => (string)x).ToList();
-            Assert.AreEqual(1, valueSets.Count);
+            Assert.That(valueSets.Count, Is.EqualTo(1));
 
             var parameterOverrideValueSet = jArray.Single(x => (string)x[PropertyNames.Iid] == valueSets[0]);
-            Assert.AreEqual(10, parameterOverrideValueSet.Children().Count());
+            Assert.That(parameterOverrideValueSet.Children().Count(), Is.EqualTo(10));
 
-            Assert.AreEqual("af5c88c6-301f-497b-81f7-53748c3900ed", (string)parameterOverrideValueSet[PropertyNames.ParameterValueSet]);
+            Assert.That((string)parameterOverrideValueSet[PropertyNames.ParameterValueSet], Is.EqualTo("af5c88c6-301f-497b-81f7-53748c3900ed"));
             
-            Assert.AreEqual(2, (int)parameterOverrideValueSet[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("ParameterOverrideValueSet", (string)parameterOverrideValueSet[PropertyNames.ClassKind]);
+            Assert.That((int)parameterOverrideValueSet[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)parameterOverrideValueSet[PropertyNames.ClassKind], Is.EqualTo("ParameterOverrideValueSet"));
 
-            Assert.AreEqual("MANUAL", (string)parameterOverrideValueSet[PropertyNames.ValueSwitch]);
+            Assert.That((string)parameterOverrideValueSet[PropertyNames.ValueSwitch], Is.EqualTo("MANUAL"));
 
             const string emptyProperty = "[\"-\"]";
-            Assert.AreEqual(emptyProperty, (string)parameterOverrideValueSet[PropertyNames.Published]);
-            Assert.AreEqual(emptyProperty, (string)parameterOverrideValueSet[PropertyNames.Formula]);
-            Assert.AreEqual(emptyProperty, (string)parameterOverrideValueSet[PropertyNames.Computed]);
-            Assert.AreEqual(emptyProperty, (string)parameterOverrideValueSet[PropertyNames.Manual]);
-            Assert.AreEqual(emptyProperty, (string)parameterOverrideValueSet[PropertyNames.Reference]);
+            Assert.That((string)parameterOverrideValueSet[PropertyNames.Published], Is.EqualTo(emptyProperty));
+            Assert.That((string)parameterOverrideValueSet[PropertyNames.Formula], Is.EqualTo(emptyProperty));
+            Assert.That((string)parameterOverrideValueSet[PropertyNames.Computed], Is.EqualTo(emptyProperty));
+            Assert.That((string)parameterOverrideValueSet[PropertyNames.Manual], Is.EqualTo(emptyProperty));
+            Assert.That((string)parameterOverrideValueSet[PropertyNames.Reference], Is.EqualTo(emptyProperty));
+        }
+
+        [Test]
+        [Category("POST")]
+        public void VerifyThatChangeOwnershipOfOptionDependentParameterOverrideLeavesParameterValuesetValuesInTact()
+        {
+            //----------------------------------------------------------------------------------------------------
+            // Create ParameterOverride
+            //----------------------------------------------------------------------------------------------------
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
+            var postBodyPath = this.GetPath("Tests/EngineeringModel/ParameterOverride/PostNewParameterOverride.json");
+
+            var postBody = base.GetJsonFromFile(postBodyPath);
+            var jArray = this.WebClient.PostDto(iterationUri, postBody);
+
+            var engineeeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            Assert.That((int)engineeeringModel[PropertyNames.RevisionNumber], Is.EqualTo(2));
+
+            //----------------------------------------------------------------------------------------------------
+            // Post new option
+            //----------------------------------------------------------------------------------------------------
+            postBodyPath = this.GetPath("Tests/EngineeringModel/Option/PostNewOption.json");
+
+            postBody = this.GetJsonFromFile(postBodyPath);
+            jArray = this.WebClient.PostDto(iterationUri, postBody);
+
+            engineeeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            Assert.That((int)engineeeringModel[PropertyNames.RevisionNumber], Is.EqualTo(3));
+
+            //----------------------------------------------------------------------------------------------------
+            // Make Parameter and ParameterOverride Option Dependent
+            //----------------------------------------------------------------------------------------------------
+            postBodyPath = this.GetPath("Tests/EngineeringModel/ParameterOverride/PostUpdateParameterToOptionDependent.json");
+
+            postBody = this.GetJsonFromFile(postBodyPath);
+            jArray = this.WebClient.PostDto(iterationUri, postBody);
+
+            engineeeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            Assert.That((int)engineeeringModel[PropertyNames.RevisionNumber], Is.EqualTo(4));
+
+            var parameterOverrideValueSet1 = jArray.First(x => (string)x[PropertyNames.ClassKind] == "ParameterOverrideValueSet");
+            var parameterOverrideValueSet2 = jArray.Where(x => (string)x[PropertyNames.ClassKind] == "ParameterOverrideValueSet").Skip(1).First();
+
+            //----------------------------------------------------------------------------------------------------
+            // Create ValueSets for both Options on ParameterOverride
+            //----------------------------------------------------------------------------------------------------
+            var valueSetUpdatePath = this.GetPath("Tests/EngineeringModel/ParameterOverride/PostUpdateParameterOverrideValueSetTemplate.json");
+
+            //override valueset 1
+            var initialValueSetContent = this.GetJsonFromFile(valueSetUpdatePath).Replace("<INNERIID>", $"\"{(string)parameterOverrideValueSet1[PropertyNames.Iid]}\"");
+
+            postBody = initialValueSetContent.Replace("<INNERVALUE>", JsonConvert.SerializeObject("1"));
+            jArray = this.WebClient.PostDto(iterationUri, postBody);
+
+            var povs1 = jArray.Single(x => (string)x[PropertyNames.Iid] == (string)parameterOverrideValueSet1[PropertyNames.Iid]);
+
+            Assert.That((int)povs1[PropertyNames.RevisionNumber], Is.EqualTo(5));
+            Assert.That((string)povs1[PropertyNames.Manual], Is.EqualTo("[\"1\"]"));
+            
+            //override valueset 2
+            initialValueSetContent = this.GetJsonFromFile(valueSetUpdatePath).Replace("<INNERIID>", $"\"{(string)parameterOverrideValueSet2[PropertyNames.Iid]}\"");
+
+            postBody = initialValueSetContent.Replace("<INNERVALUE>", JsonConvert.SerializeObject("2"));
+            jArray = this.WebClient.PostDto(iterationUri, postBody);
+
+            var povs2 = jArray.Single(x => (string)x[PropertyNames.Iid] == (string)parameterOverrideValueSet2[PropertyNames.Iid]);
+
+            Assert.That((int)povs2[PropertyNames.RevisionNumber], Is.EqualTo(6));
+            Assert.That((string)povs2[PropertyNames.Manual], Is.EqualTo("[\"2\"]"));
+
+            //----------------------------------------------------------------------------------------------------
+            // Change ownership on ParameterOverride
+            //----------------------------------------------------------------------------------------------------
+            postBodyPath = this.GetPath("Tests/EngineeringModel/ParameterOverride/PostChangeOwnerOnParameterOverride.json");
+
+            postBody = this.GetJsonFromFile(postBodyPath);
+            jArray = this.WebClient.PostDto(iterationUri, postBody);
+
+            var parameterOverride = jArray.Single(x => (string)x[PropertyNames.Iid] == "3587bb05-0db4-4741-b5e3-da43393e13ed");
+            Assert.That((int)parameterOverride[PropertyNames.RevisionNumber], Is.EqualTo(7));
+            Assert.That((string)parameterOverride[PropertyNames.Owner], Is.EqualTo("eb759723-14b9-49f4-8611-544d037bb764"));
+
+            // No Subscriptions should be there
+            var expectedParameterOverrideSubscriptions = new string[] { };
+            var expectedParameterOverrideSubscriptionsArray = (JArray)parameterOverride[PropertyNames.ParameterSubscription];
+            IList<string> parameterSubscriptions = expectedParameterOverrideSubscriptionsArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedParameterOverrideSubscriptions, parameterSubscriptions);
+            Assert.That(parameterSubscriptions.Count, Is.EqualTo(0));
+
+            //----------------------------------------------------------------------------------------------------
+            // Get and check EU containing the ParameterOverride and all related objects
+            //----------------------------------------------------------------------------------------------------
+            var elementUsageUri =
+                new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/fe9295c5-af99-494e-86ff-e715837806ae/containedElement/75399754-ee45-4bca-b033-63e2019870d1?extent=deep");
+
+            // get a response from the data-source as a JArray (JSON Array)
+            jArray = this.WebClient.GetDto(elementUsageUri);
+
+            //check if there is the only one ParameterOverride object 
+            Assert.AreEqual(7, jArray.Count);
+
+            povs1 = jArray.Single(x => (string)x[PropertyNames.Iid] == (string)parameterOverrideValueSet1[PropertyNames.Iid]);
+
+            Assert.That((int)povs1[PropertyNames.RevisionNumber], Is.EqualTo(5));
+            Assert.That((string)povs1[PropertyNames.Manual], Is.EqualTo("[\"1\"]"));
+
+            povs2 = jArray.Single(x => (string)x[PropertyNames.Iid] == (string)parameterOverrideValueSet2[PropertyNames.Iid]);
+
+            Assert.That((int)povs2[PropertyNames.RevisionNumber], Is.EqualTo(6));
+            Assert.That((string)povs2[PropertyNames.Manual], Is.EqualTo("[\"2\"]"));
         }
 
         /// <summary>

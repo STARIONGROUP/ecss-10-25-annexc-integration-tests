@@ -1,0 +1,17 @@
+﻿{
+  "_delete": [],
+  "_create": [],
+  "_update": [
+    {
+      "classKind": "ParameterOverrideValueSet",
+      "computed": [ <INNERVALUE> ],
+      "formula": [ <INNERVALUE> ],
+      "iid": <INNERIID>,
+      "manual": [ <INNERVALUE> ],
+      "published": [ <INNERVALUE> ],
+      "reference": [ <INNERVALUE> ],
+      "revisionNumber": 0,
+      "valueSwitch": "MANUAL"
+    }
+  ]
+}

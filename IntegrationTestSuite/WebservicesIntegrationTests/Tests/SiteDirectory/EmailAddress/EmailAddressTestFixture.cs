@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="EmailAddressTestFixture.cs" company="Starion Group S.A.">
 //
-//   Copyright 2016-2021 Starion Group S.A.
+//   Copyright 2016-2024 Starion Group S.A.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -41,7 +41,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(emailAddressUri);
 
             // assert that there are 2 EmailAddress objects.
-            Assert.AreEqual(2, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(2));
 
             EmailAddressTestFixture.VerifyProperties(jArray);
         }
@@ -57,7 +57,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(emailAddressUri);
 
             // assert that there are 4 objects
-            Assert.AreEqual(4, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(4));
 
             // get a specific SiteDirectory from the result by it's unique id
             var siteDirectory = jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
@@ -80,18 +80,18 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken emailAddress)
         {
             var emailAddressObject = emailAddress.Single(x => (string) x[PropertyNames.Iid] == "c855d849-62c6-447b-b4e4-db20ba836a91");
-            Assert.AreEqual("c855d849-62c6-447b-b4e4-db20ba836a91", (string) emailAddressObject[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) emailAddressObject[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("EmailAddress", (string) emailAddressObject[PropertyNames.ClassKind]);
-            Assert.AreEqual("john.doe@gmail.com", (string) emailAddressObject[PropertyNames.Value]);
-            Assert.AreEqual("HOME", (string) emailAddressObject[PropertyNames.VcardType]);
+            Assert.That((string)emailAddressObject[PropertyNames.Iid], Is.EqualTo("c855d849-62c6-447b-b4e4-db20ba836a91"));
+            Assert.That((int)emailAddressObject[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string)emailAddressObject[PropertyNames.ClassKind], Is.EqualTo("EmailAddress"));
+            Assert.That((string)emailAddressObject[PropertyNames.Value], Is.EqualTo("john.doe@gmail.com"));
+            Assert.That((string)emailAddressObject[PropertyNames.VcardType], Is.EqualTo("HOME"));
 
             emailAddressObject = emailAddress.Single(x => (string) x[PropertyNames.Iid] == "325620cd-4354-4ddb-9c66-e75550da643a");
-            Assert.AreEqual("325620cd-4354-4ddb-9c66-e75550da643a", (string) emailAddressObject[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) emailAddressObject[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("EmailAddress", (string) emailAddressObject[PropertyNames.ClassKind]);
-            Assert.AreEqual("john.doe@stariongrop.eu", (string) emailAddressObject[PropertyNames.Value]);
-            Assert.AreEqual("WORK", (string) emailAddressObject[PropertyNames.VcardType]);
+            Assert.That((string)emailAddressObject[PropertyNames.Iid], Is.EqualTo("325620cd-4354-4ddb-9c66-e75550da643a"));
+            Assert.That((int)emailAddressObject[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string)emailAddressObject[PropertyNames.ClassKind], Is.EqualTo("EmailAddress"));
+            Assert.That((string)emailAddressObject[PropertyNames.Value], Is.EqualTo("john.doe@rhea.com"));
+            Assert.That((string)emailAddressObject[PropertyNames.VcardType], Is.EqualTo("WORK"));
         }
     }
 }

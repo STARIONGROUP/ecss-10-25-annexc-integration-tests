@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="ParameterSubscriptionTestFixture.cs" company="Starion Group S.A.">
 //
-//   Copyright 2016-2021 Starion Group S.A.
+//   Copyright 2016-2024 Starion Group S.A.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -42,7 +42,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(parameterSubscriptionUri);
 
             //check if there is the only one ParameterSubscription object 
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific ParameterSubscription from the result by it's unique id
             var parameterSubscription = jArray.Single(x => (string) x[PropertyNames.Iid] == "f1f076c4-5307-42b8-a171-3263a9e7bb21");
@@ -61,7 +61,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(parameterSubscriptionUri);
 
             //check if there are 5 objects
-            Assert.AreEqual(5, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(5));
 
             // get a specific Iteration from the result by it's unique id
             var iteration = jArray.Single(x => (string) x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
@@ -81,7 +81,7 @@ namespace WebservicesIntegrationTests
 
         [Test]
         [Category("POST")]
-        public void VerifyThatParameterSubscriptionCanBeCreatedFromWebApi()
+        public void VerifyThatParameterSubscriptionOnNormalParameterCanBeCreatedFromWebApi()
         {
             var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
             var postBodyPath = this.GetPath("Tests/EngineeringModel/ParameterSubscription/PostNewParameterSubscription.json");
@@ -90,13 +90,13 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
             var engineeeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
-            Assert.AreEqual(2, (int)engineeeringModel[PropertyNames.RevisionNumber]);
+            Assert.That((int)engineeeringModel[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             // get the updated Parameter from the result by it's unique id
             var parameter = jArray.Single(x => (string)x[PropertyNames.Iid] == "3f05483f-66ff-4f21-bc76-45956779f66e");
 
             // assert that the properties are what is expected
-            Assert.AreEqual(2, (int)parameter[PropertyNames.RevisionNumber]);
+            Assert.That((int)parameter[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             var expectedParameterSubscriptions = new string[]
                                                      {
@@ -110,36 +110,58 @@ namespace WebservicesIntegrationTests
             var parameterSubscription = jArray.Single(x => (string)x[PropertyNames.Iid] == "41aaa45f-090f-461c-8b0c-a4018e8edc9d");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(5, parameterSubscription.Children().Count());
+            Assert.That(parameterSubscription.Children().Count(), Is.EqualTo(5));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("41aaa45f-090f-461c-8b0c-a4018e8edc9d", (string)parameterSubscription[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int)parameterSubscription[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("ParameterSubscription", (string)parameterSubscription[PropertyNames.ClassKind]);
+            Assert.That((string)parameterSubscription[PropertyNames.Iid], Is.EqualTo("41aaa45f-090f-461c-8b0c-a4018e8edc9d"));
+            Assert.That((int)parameterSubscription[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)parameterSubscription[PropertyNames.ClassKind], Is.EqualTo("ParameterSubscription"));
 
-            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string)parameterSubscription[PropertyNames.Owner]);
+            Assert.That((string)parameterSubscription[PropertyNames.Owner], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
 
             var valueSetsArray = (JArray)parameterSubscription[PropertyNames.ValueSet];
-            Assert.AreEqual(1, valueSetsArray.Count);
+            Assert.That(valueSetsArray.Count, Is.EqualTo(1));
 
             // get a specific ParameterSubscriptionValueSet from the result by it's unique id
             var parameterSubscriptionValueSet = jArray.Single(x => (string)x[PropertyNames.Iid] == (string)valueSetsArray[0]);
 
             // verify the amount of returned properties 
-            Assert.AreEqual(6, parameterSubscriptionValueSet.Children().Count());
+            Assert.That(parameterSubscriptionValueSet.Children().Count(), Is.EqualTo(6));
 
             // assert that the properties are what is expected
-            Assert.AreEqual(2, (int)parameterSubscriptionValueSet[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("ParameterSubscriptionValueSet",
-                (string)parameterSubscriptionValueSet[PropertyNames.ClassKind]);
+            Assert.That((int)parameterSubscriptionValueSet[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)parameterSubscriptionValueSet[PropertyNames.ClassKind], Is.EqualTo("ParameterSubscriptionValueSet"));
 
-            Assert.AreEqual("72ec3701-bcb5-4bf6-bd78-30fd1b65e3be",
-                (string)parameterSubscriptionValueSet[PropertyNames.SubscribedValueSet]);
+            Assert.That((string)parameterSubscriptionValueSet[PropertyNames.SubscribedValueSet], Is.EqualTo("72ec3701-bcb5-4bf6-bd78-30fd1b65e3be"));
 
             const string emptyProperty = "[\"-\"]";
-            Assert.AreEqual(emptyProperty, (string)parameterSubscriptionValueSet[PropertyNames.Manual]);
+            Assert.That((string)parameterSubscriptionValueSet[PropertyNames.Manual], Is.EqualTo(emptyProperty));
 
-            Assert.AreEqual("COMPUTED", (string)parameterSubscriptionValueSet[PropertyNames.ValueSwitch]);
+            Assert.That((string)parameterSubscriptionValueSet[PropertyNames.ValueSwitch], Is.EqualTo("COMPUTED"));
+        }
+
+        [Test]
+        [Category("POST")]
+        public void VerifyThatParameterSubscriptionOnParameterOverrideCanBeCreatedFromWebApi()
+        {
+            //Create ParameterOverride
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
+            var postBodyPath = this.GetPath("Tests/EngineeringModel/ParameterOverride/PostNewParameterOverride.json");
+
+            var postBody = base.GetJsonFromFile(postBodyPath);
+            var jArray = this.WebClient.PostDto(iterationUri, postBody);
+
+            var engineeeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            Assert.That((int)engineeeringModel[PropertyNames.RevisionNumber], Is.EqualTo(2));
+
+            //CreateOverride
+            postBodyPath = this.GetPath("Tests/EngineeringModel/ParameterSubscription/PostNewParameterSubscriptionOnParameterOverride.json");
+
+            postBody = this.GetJsonFromFile(postBodyPath);
+            jArray = this.WebClient.PostDto(iterationUri, postBody);
+
+            engineeeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            Assert.That((int)engineeeringModel[PropertyNames.RevisionNumber], Is.EqualTo(3));
         }
 
         /// <summary>
@@ -152,14 +174,14 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken parameterSubscription)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(5, parameterSubscription.Children().Count());
+            Assert.That(parameterSubscription.Children().Count(), Is.EqualTo(5));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("f1f076c4-5307-42b8-a171-3263a9e7bb21", (string) parameterSubscription[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) parameterSubscription[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("ParameterSubscription", (string) parameterSubscription[PropertyNames.ClassKind]);
+            Assert.That((string)parameterSubscription[PropertyNames.Iid], Is.EqualTo("f1f076c4-5307-42b8-a171-3263a9e7bb21"));
+            Assert.That((int)parameterSubscription[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string)parameterSubscription[PropertyNames.ClassKind], Is.EqualTo("ParameterSubscription"));
 
-            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string) parameterSubscription[PropertyNames.Owner]);
+            Assert.That((string)parameterSubscription[PropertyNames.Owner], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
 
             var expectedValueSets = new string[]
             {
