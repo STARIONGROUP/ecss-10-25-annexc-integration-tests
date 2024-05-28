@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="OptionTestFixture.cs" company="Starion Group S.A.">
 //
-//   Copyright 2016-2021 Starion Group S.A.
+//   Copyright 2016-2024 Starion Group S.A.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -43,18 +43,18 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
             var engineeeringModel = jArray.Single(x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
-            Assert.AreEqual(2, (int) engineeeringModel[PropertyNames.RevisionNumber]);
+            Assert.That((int) engineeeringModel[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             var iteration = jArray.Single(x => (string) x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
-            Assert.AreEqual(2, (int) iteration[PropertyNames.RevisionNumber]);
+            Assert.That((int) iteration[PropertyNames.RevisionNumber], Is.EqualTo(2));
             var expectedOptions = new List<OrderedItem> { new OrderedItem(1, "bebcc9f4-ff20-4569-bbf6-d1acf27a8107"), new OrderedItem(2, "e90e4bcd-6e17-4b75-80fb-6cded78bed57") };
             var optionsArray = JsonConvert.DeserializeObject<List<OrderedItem>>(iteration[PropertyNames.Option].ToString());
             CollectionAssert.AreEquivalent(expectedOptions, optionsArray);
 
             var option = jArray.Single(x => (string) x[PropertyNames.Iid] == "e90e4bcd-6e17-4b75-80fb-6cded78bed57");
-            Assert.AreEqual(2, (int) option[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("test option", (string) option[PropertyNames.Name]);
-            Assert.AreEqual("testoption", (string) option[PropertyNames.ShortName]);
+            Assert.That((int) option[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string) option[PropertyNames.Name], Is.EqualTo("test option"));
+            Assert.That((string) option[PropertyNames.ShortName], Is.EqualTo("testoption"));
         }
 
         [Test]
@@ -70,7 +70,7 @@ namespace WebservicesIntegrationTests
 
             var engineeeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
 
-            Assert.AreEqual(2, (int)engineeeringModel[PropertyNames.RevisionNumber]);
+            Assert.That((int)engineeeringModel[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             //Post new option
             postBodyPath = this.GetPath("Tests/EngineeringModel/Option/PostNewOption.json");
@@ -79,18 +79,18 @@ namespace WebservicesIntegrationTests
             jArray = this.WebClient.PostDto(iterationUri, postBody);
 
             engineeeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
-            Assert.AreEqual(3, (int)engineeeringModel[PropertyNames.RevisionNumber]);
+            Assert.That((int)engineeeringModel[PropertyNames.RevisionNumber], Is.EqualTo(3));
 
             var iteration = jArray.Single(x => (string)x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
-            Assert.AreEqual(3, (int)iteration[PropertyNames.RevisionNumber]);
+            Assert.That((int)iteration[PropertyNames.RevisionNumber], Is.EqualTo(3));
             var expectedOptions = new List<OrderedItem> { new OrderedItem(1, "bebcc9f4-ff20-4569-bbf6-d1acf27a8107"), new OrderedItem(2, "e90e4bcd-6e17-4b75-80fb-6cded78bed57") };
             var optionsArray = JsonConvert.DeserializeObject<List<OrderedItem>>(iteration[PropertyNames.Option].ToString());
             CollectionAssert.AreEquivalent(expectedOptions, optionsArray);
 
             var option = jArray.Single(x => (string)x[PropertyNames.Iid] == "e90e4bcd-6e17-4b75-80fb-6cded78bed57");
-            Assert.AreEqual(3, (int)option[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("test option", (string)option[PropertyNames.Name]);
-            Assert.AreEqual("testoption", (string)option[PropertyNames.ShortName]);
+            Assert.That((int)option[PropertyNames.RevisionNumber], Is.EqualTo(3));
+            Assert.That((string)option[PropertyNames.Name], Is.EqualTo("test option"));
+            Assert.That((string)option[PropertyNames.ShortName], Is.EqualTo("testoption"));
         }
 
 
@@ -109,7 +109,7 @@ namespace WebservicesIntegrationTests
             jArray = this.WebClient.PostDto(iterationUri, postBody);
 
             var iteration = jArray.Single(x => (string) x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
-            Assert.AreEqual(3, (int) iteration[PropertyNames.RevisionNumber]);
+            Assert.That((int)iteration[PropertyNames.RevisionNumber], Is.EqualTo(3));
 
             var expectedOptions = new List<OrderedItem> { new OrderedItem(3, "e90e4bcd-6e17-4b75-80fb-6cded78bed57"), new OrderedItem(4, "bebcc9f4-ff20-4569-bbf6-d1acf27a8107") };
             var optionsArray = JsonConvert.DeserializeObject<List<OrderedItem>>(iteration[PropertyNames.Option].ToString());
@@ -174,12 +174,12 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(10, option.Children().Count());
 
             // assert that the properties are what is expected
-            Assert.AreEqual("bebcc9f4-ff20-4569-bbf6-d1acf27a8107", (string) option[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) option[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("Option", (string) option[PropertyNames.ClassKind]);
+            Assert.That((string)option[PropertyNames.Iid], Is.EqualTo("bebcc9f4-ff20-4569-bbf6-d1acf27a8107"));
+            Assert.That((int)option[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string)option[PropertyNames.ClassKind], Is.EqualTo("Option"));
 
-            Assert.AreEqual("Test Option", (string) option[PropertyNames.Name]);
-            Assert.AreEqual("TestOption", (string) option[PropertyNames.ShortName]);
+            Assert.That((string)option[PropertyNames.Name], Is.EqualTo("Test Option"));
+            Assert.That((string)option[PropertyNames.ShortName], Is.EqualTo("TestOption"));
 
             var expectedNestedElements = new string[] { };
             var nestedElementsArray = (JArray) option[PropertyNames.NestedElement];
