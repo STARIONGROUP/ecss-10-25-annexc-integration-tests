@@ -1,0 +1,23 @@
+﻿{
+	"_delete": [],
+	"_create": [
+		{
+			"classKind": "ParameterSubscription",
+			"excludedDomain": [],
+			"excludedPerson": [],
+			"iid": "41aaa45f-090f-461c-8b0c-a4018e8edc9e",
+			"modifiedOn": "0001-01-01T00:00:00.000Z",
+			"owner": "eb759723-14b9-49f4-8611-544d037bb764",
+			"revisionNumber": 0,
+			"valueSet": []
+		}
+	],
+	"_update": [
+		{
+			"classKind": "ParameterOverride",
+			"iid": "3587bb05-0db4-4741-b5e3-da43393e13ed",
+			"parameterSubscription": [ "41aaa45f-090f-461c-8b0c-a4018e8edc9e" ]
+		}
+	],
+	"_copy": []
+}

@@ -90,7 +90,7 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual("325620cd-4354-4ddb-9c66-e75550da643a", (string) emailAddressObject[PropertyNames.Iid]);
             Assert.AreEqual(1, (int) emailAddressObject[PropertyNames.RevisionNumber]);
             Assert.AreEqual("EmailAddress", (string) emailAddressObject[PropertyNames.ClassKind]);
-            Assert.AreEqual("john.doe@stariongrop.eu", (string) emailAddressObject[PropertyNames.Value]);
+            Assert.AreEqual("john.doe@rhea.com", (string) emailAddressObject[PropertyNames.Value]);
             Assert.AreEqual("WORK", (string) emailAddressObject[PropertyNames.VcardType]);
         }
     }

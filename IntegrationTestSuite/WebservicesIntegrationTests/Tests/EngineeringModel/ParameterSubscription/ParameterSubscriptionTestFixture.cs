@@ -81,7 +81,7 @@ namespace WebservicesIntegrationTests
 
         [Test]
         [Category("POST")]
-        public void VerifyThatParameterSubscriptionCanBeCreatedFromWebApi()
+        public void VerifyThatParameterSubscriptionOnNormalParameterCanBeCreatedFromWebApi()
         {
             var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
             var postBodyPath = this.GetPath("Tests/EngineeringModel/ParameterSubscription/PostNewParameterSubscription.json");
@@ -140,6 +140,30 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(emptyProperty, (string)parameterSubscriptionValueSet[PropertyNames.Manual]);
 
             Assert.AreEqual("COMPUTED", (string)parameterSubscriptionValueSet[PropertyNames.ValueSwitch]);
+        }
+
+        [Test]
+        [Category("POST")]
+        public void VerifyThatParameterSubscriptionOnParameterOverrideCanBeCreatedFromWebApi()
+        {
+            //Create ParameterOverride
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
+            var postBodyPath = this.GetPath("Tests/EngineeringModel/ParameterOverride/PostNewParameterOverride.json");
+
+            var postBody = base.GetJsonFromFile(postBodyPath);
+            var jArray = this.WebClient.PostDto(iterationUri, postBody);
+
+            var engineeeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            Assert.AreEqual(2, (int)engineeeringModel[PropertyNames.RevisionNumber]);
+
+            //CreateOverride
+            postBodyPath = this.GetPath("Tests/EngineeringModel/ParameterSubscription/PostNewParameterSubscriptionOnParameterOverride.json");
+
+            postBody = this.GetJsonFromFile(postBodyPath);
+            jArray = this.WebClient.PostDto(iterationUri, postBody);
+
+            engineeeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            Assert.AreEqual(3, (int)engineeeringModel[PropertyNames.RevisionNumber]);
         }
 
         /// <summary>

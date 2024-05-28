@@ -23,7 +23,9 @@ namespace WebservicesIntegrationTests
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Net;
 
+    using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
 
     using NUnit.Framework;
@@ -141,6 +143,116 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual(emptyProperty, (string)parameterOverrideValueSet[PropertyNames.Computed]);
             Assert.AreEqual(emptyProperty, (string)parameterOverrideValueSet[PropertyNames.Manual]);
             Assert.AreEqual(emptyProperty, (string)parameterOverrideValueSet[PropertyNames.Reference]);
+        }
+
+        [Test]
+        [Category("POST")]
+        public void VerifyThatChangeOwnershipOfOptionDependentParameterOverrideLeavesParameterValuesetValuesInTact()
+        {
+            //----------------------------------------------------------------------------------------------------
+            // Create ParameterOverride
+            //----------------------------------------------------------------------------------------------------
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
+            var postBodyPath = this.GetPath("Tests/EngineeringModel/ParameterOverride/PostNewParameterOverride.json");
+
+            var postBody = base.GetJsonFromFile(postBodyPath);
+            var jArray = this.WebClient.PostDto(iterationUri, postBody);
+
+            var engineeeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            Assert.AreEqual(2, (int)engineeeringModel[PropertyNames.RevisionNumber]);
+
+            //----------------------------------------------------------------------------------------------------
+            // Post new option
+            //----------------------------------------------------------------------------------------------------
+            postBodyPath = this.GetPath("Tests/EngineeringModel/Option/PostNewOption.json");
+
+            postBody = this.GetJsonFromFile(postBodyPath);
+            jArray = this.WebClient.PostDto(iterationUri, postBody);
+
+            engineeeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            Assert.AreEqual(3, (int)engineeeringModel[PropertyNames.RevisionNumber]);
+
+            //----------------------------------------------------------------------------------------------------
+            // Make Parameter and ParameterOverride Option Dependent
+            //----------------------------------------------------------------------------------------------------
+            postBodyPath = this.GetPath("Tests/EngineeringModel/ParameterOverride/PostUpdateParameterToOptionDependent.json");
+
+            postBody = this.GetJsonFromFile(postBodyPath);
+            jArray = this.WebClient.PostDto(iterationUri, postBody);
+
+            engineeeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            Assert.AreEqual(4, (int)engineeeringModel[PropertyNames.RevisionNumber]);
+
+            var parameterOverrideValueSet1 = jArray.First(x => (string)x[PropertyNames.ClassKind] == "ParameterOverrideValueSet");
+            var parameterOverrideValueSet2 = jArray.Where(x => (string)x[PropertyNames.ClassKind] == "ParameterOverrideValueSet").Skip(1).First();
+
+            //----------------------------------------------------------------------------------------------------
+            // Create ValueSets for both Options on ParameterOverride
+            //----------------------------------------------------------------------------------------------------
+            var valueSetUpdatePath = this.GetPath("Tests/EngineeringModel/ParameterOverride/PostUpdateParameterOverrideValueSetTemplate.json");
+
+            //override valueset 1
+            var initialValueSetContent = this.GetJsonFromFile(valueSetUpdatePath).Replace("<INNERIID>", $"\"{(string)parameterOverrideValueSet1[PropertyNames.Iid]}\"");
+
+            postBody = initialValueSetContent.Replace("<INNERVALUE>", JsonConvert.SerializeObject("1"));
+            jArray = this.WebClient.PostDto(iterationUri, postBody);
+
+            var povs1 = jArray.Single(x => (string)x[PropertyNames.Iid] == (string)parameterOverrideValueSet1[PropertyNames.Iid]);
+
+            Assert.AreEqual(5, (int)povs1[PropertyNames.RevisionNumber]);
+            Assert.AreEqual("[\"1\"]", (string)povs1[PropertyNames.Manual]);
+            
+            //override valueset 2
+            initialValueSetContent = this.GetJsonFromFile(valueSetUpdatePath).Replace("<INNERIID>", $"\"{(string)parameterOverrideValueSet2[PropertyNames.Iid]}\"");
+
+            postBody = initialValueSetContent.Replace("<INNERVALUE>", JsonConvert.SerializeObject("2"));
+            jArray = this.WebClient.PostDto(iterationUri, postBody);
+
+            var povs2 = jArray.Single(x => (string)x[PropertyNames.Iid] == (string)parameterOverrideValueSet2[PropertyNames.Iid]);
+
+            Assert.AreEqual(6, (int)povs2[PropertyNames.RevisionNumber]);
+            Assert.AreEqual("[\"2\"]", (string)povs2[PropertyNames.Manual]);
+
+            //----------------------------------------------------------------------------------------------------
+            // Change ownership on ParameterOverride
+            //----------------------------------------------------------------------------------------------------
+            postBodyPath = this.GetPath("Tests/EngineeringModel/ParameterOverride/PostChangeOwnerOnParameterOverride.json");
+
+            postBody = this.GetJsonFromFile(postBodyPath);
+            jArray = this.WebClient.PostDto(iterationUri, postBody);
+
+            var parameterOverride = jArray.Single(x => (string)x[PropertyNames.Iid] == "3587bb05-0db4-4741-b5e3-da43393e13ed");
+            Assert.AreEqual(7, (int)parameterOverride[PropertyNames.RevisionNumber]);
+            Assert.AreEqual("eb759723-14b9-49f4-8611-544d037bb764", (string)parameterOverride[PropertyNames.Owner]);
+
+            // No Subscriptions should be there
+            var expectedParameterOverrideSubscriptions = new string[] { };
+            var expectedParameterOverrideSubscriptionsArray = (JArray)parameterOverride[PropertyNames.ParameterSubscription];
+            IList<string> parameterSubscriptions = expectedParameterOverrideSubscriptionsArray.Select(x => (string)x).ToList();
+            CollectionAssert.AreEquivalent(expectedParameterOverrideSubscriptions, parameterSubscriptions);
+            Assert.That(parameterSubscriptions.Count, Is.EqualTo(0));
+
+            //----------------------------------------------------------------------------------------------------
+            // Get and check EU containing the ParameterOverride and all related objects
+            //----------------------------------------------------------------------------------------------------
+            var elementUsageUri =
+                new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/fe9295c5-af99-494e-86ff-e715837806ae/containedElement/75399754-ee45-4bca-b033-63e2019870d1?extent=deep");
+
+            // get a response from the data-source as a JArray (JSON Array)
+            jArray = this.WebClient.GetDto(elementUsageUri);
+
+            //check if there is the only one ParameterOverride object 
+            Assert.AreEqual(7, jArray.Count);
+
+            povs1 = jArray.Single(x => (string)x[PropertyNames.Iid] == (string)parameterOverrideValueSet1[PropertyNames.Iid]);
+
+            Assert.AreEqual(5, (int)povs1[PropertyNames.RevisionNumber]);
+            Assert.AreEqual("[\"1\"]", (string)povs1[PropertyNames.Manual]);
+
+            povs2 = jArray.Single(x => (string)x[PropertyNames.Iid] == (string)parameterOverrideValueSet2[PropertyNames.Iid]);
+
+            Assert.AreEqual(6, (int)povs2[PropertyNames.RevisionNumber]);
+            Assert.AreEqual("[\"2\"]", (string)povs2[PropertyNames.Manual]);
         }
 
         /// <summary>

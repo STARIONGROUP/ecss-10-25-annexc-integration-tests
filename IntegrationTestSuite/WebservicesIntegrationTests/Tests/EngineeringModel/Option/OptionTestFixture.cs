@@ -59,6 +59,43 @@ namespace WebservicesIntegrationTests
 
         [Test]
         [Category("POST")]
+        public void VerifyThatNewOptionCanBeCreatedWithWebApiWhenOptionDependentParameterAlreadyExists()
+        {
+            //Post new optiondependent parameter
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
+            var postBodyPath = this.GetPath("Tests/EngineeringModel/Parameter/PostNewOptionDependentParameter.json");
+
+            var postBody = this.GetJsonFromFile(postBodyPath);
+            var jArray = this.WebClient.PostDto(iterationUri, postBody);
+
+            var engineeeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+
+            Assert.AreEqual(2, (int)engineeeringModel[PropertyNames.RevisionNumber]);
+
+            //Post new option
+            postBodyPath = this.GetPath("Tests/EngineeringModel/Option/PostNewOption.json");
+
+            postBody = this.GetJsonFromFile(postBodyPath);
+            jArray = this.WebClient.PostDto(iterationUri, postBody);
+
+            engineeeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            Assert.AreEqual(3, (int)engineeeringModel[PropertyNames.RevisionNumber]);
+
+            var iteration = jArray.Single(x => (string)x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
+            Assert.AreEqual(3, (int)iteration[PropertyNames.RevisionNumber]);
+            var expectedOptions = new List<OrderedItem> { new OrderedItem(1, "bebcc9f4-ff20-4569-bbf6-d1acf27a8107"), new OrderedItem(2, "e90e4bcd-6e17-4b75-80fb-6cded78bed57") };
+            var optionsArray = JsonConvert.DeserializeObject<List<OrderedItem>>(iteration[PropertyNames.Option].ToString());
+            CollectionAssert.AreEquivalent(expectedOptions, optionsArray);
+
+            var option = jArray.Single(x => (string)x[PropertyNames.Iid] == "e90e4bcd-6e17-4b75-80fb-6cded78bed57");
+            Assert.AreEqual(3, (int)option[PropertyNames.RevisionNumber]);
+            Assert.AreEqual("test option", (string)option[PropertyNames.Name]);
+            Assert.AreEqual("testoption", (string)option[PropertyNames.ShortName]);
+        }
+
+
+        [Test]
+        [Category("POST")]
         public void VerifyThatOptionsCanBeReorderedWithWebApi()
         {
             var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
