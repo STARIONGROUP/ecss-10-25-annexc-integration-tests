@@ -108,9 +108,13 @@ namespace WebservicesIntegrationTests
             {
                 checkError = true;
                 var webException = ex as WebException;
-                Assert.That(webException, Is.Not.Null);
-                Assert.That(webException.Response.Headers.AllKeys.Contains("CDPErrorTag"));
-                Assert.That(webException.Response.Headers.GetValues("CDPErrorTag").Single(), Is.EqualTo("#FROZEN_ITERATION"));
+
+                Assert.Multiple(() =>
+                {
+                    Assert.That(webException, Is.Not.Null);
+                    Assert.That(webException.Response.Headers.AllKeys.Contains("CDPErrorTag"));
+                    Assert.That(webException.Response.Headers.GetValues("CDPErrorTag").Single(), Is.EqualTo("#FROZEN_ITERATION"));
+                });
             }
 
             Assert.That(checkError, Is.True, () => "Catch block was not accessed, while that was expected.");
