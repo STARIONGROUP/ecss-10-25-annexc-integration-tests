@@ -97,6 +97,23 @@ namespace WebservicesIntegrationTests
             postBody = base.GetJsonFromFile(postBodyPath);
 
             Assert.That(() => this.WebClient.PostDto(iterationUri, postBody), Throws.TypeOf<WebException>());
+
+            var checkError = false;
+
+            try
+            {
+                this.WebClient.PostDto(iterationUri, postBody);
+            }
+            catch (Exception ex)
+            {
+                checkError = true;
+                var webException = ex as WebException;
+                Assert.That(webException, Is.Not.Null);
+                Assert.That(webException.Response.Headers.AllKeys.Contains("CDPErrorTag"));
+                Assert.That(webException.Response.Headers.GetValues("CDPErrorTag").Single(), Is.EqualTo("#FROZEN_ITERATION"));
+            }
+
+            Assert.That(checkError, Is.True, () => "Catch block was not accessed, while that was expected.");
         }
 
         [Test]
