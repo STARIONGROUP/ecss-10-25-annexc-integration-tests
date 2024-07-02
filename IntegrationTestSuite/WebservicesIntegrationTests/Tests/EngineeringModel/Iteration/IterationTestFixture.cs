@@ -112,8 +112,8 @@ namespace WebservicesIntegrationTests
                 Assert.Multiple(() =>
                 {
                     Assert.That(webException, Is.Not.Null);
-                    Assert.That(webException.Response.Headers.AllKeys.Contains("CDPErrorTag"));
-                    Assert.That(webException.Response.Headers.GetValues("CDPErrorTag").Single(), Is.EqualTo("#FROZEN_ITERATION"));
+                    Assert.That(webException.Response.Headers.AllKeys.Contains("CDP-Error-Tag"));
+                    Assert.That(webException.Response.Headers.GetValues("CDP-Error-Tag").Single(), Is.EqualTo("#FROZEN_ITERATION"));
                 });
             }
 
