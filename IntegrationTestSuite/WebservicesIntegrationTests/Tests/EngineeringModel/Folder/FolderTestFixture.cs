@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="FolderTestFixture.cs" company="Starion Group S.A.">
 //
-//   Copyright 2016-2021 Starion Group S.A.
+//   Copyright 2016-2024 Starion Group S.A.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -44,12 +44,13 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(folderUri);
 
             //check if there is the only one Folder object 
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific Folder from the result by it's unique id
             var folder =
                 jArray.Single(x => (string)x[PropertyNames.Iid] == "67cdb7de-7721-40a0-9ca2-10a5cf7742fc");
-            FolderTestFixture.VerifyProperties(folder);
+
+            VerifyProperties(folder);
         }
 
         [Test]
@@ -63,22 +64,25 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(folderUri);
 
             //check if there are 4 objects
-            Assert.AreEqual(4, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(4));
 
             // get a specific Iteration from the result by it's unique id
             var iteration =
                 jArray.Single(x => (string)x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
+
             IterationTestFixture.VerifyProperties(iteration);
 
             // get a specific DomainFileStore from the result by it's unique id
             var domainFileStore =
                 jArray.Single(x => (string)x[PropertyNames.Iid] == "da7dddaa-02aa-4897-9935-e8d66c811a96");
+
             DomainFileStoreTestFixture.VerifyProperties(domainFileStore);
 
             // get a specific Folder from the result by it's unique id
             var folder =
                 jArray.Single(x => (string)x[PropertyNames.Iid] == "67cdb7de-7721-40a0-9ca2-10a5cf7742fc");
-            FolderTestFixture.VerifyProperties(folder);
+
+            VerifyProperties(folder);
         }
 
         [Test]
@@ -87,32 +91,39 @@ namespace WebservicesIntegrationTests
         {
             var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
             var postJsonPath = this.GetPath("Tests/EngineeringModel/Folder/PostNewFolder.json");
-            var postBody = base.GetJsonFromFile(postJsonPath);
+            var postBody = this.GetJsonFromFile(postJsonPath);
 
-            var jArray =  this.WebClient.PostDto(iterationUri, postBody);
+            var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
-            Assert.AreEqual(3, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(3));
 
             // get a specific EngineeeringModel from the result by it's unique id
             var engineeeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
-            Assert.AreEqual(2, (int)engineeeringModel[PropertyNames.RevisionNumber]);
+            Assert.That((int)engineeeringModel[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             // get a specific CommonFileStore from the result by it's unique id
             var domainFileStore = jArray.Single(x => (string)x[PropertyNames.Iid] == "da7dddaa-02aa-4897-9935-e8d66c811a96");
 
-            Assert.AreEqual(2, (int)domainFileStore[PropertyNames.RevisionNumber]);
+            Assert.That((int)domainFileStore[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             // get a specific Folder from the result by it's unique id
             var folder = jArray.Single(x => (string)x[PropertyNames.Iid] == "e80daca0-5c6e-4236-ae34-d23c36244059");
-            Assert.AreEqual(2, (int)folder[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("Folder", (string)folder[PropertyNames.ClassKind]);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That((int)folder[PropertyNames.RevisionNumber], Is.EqualTo(2));
+                Assert.That((string)folder[PropertyNames.ClassKind], Is.EqualTo("Folder"));
+            });
 
             //Check CreatedOn for raw 10-25 (non CDP extension) data
             var newCreatedOn = folder[PropertyNames.CreatedOn];
             var newModifiedOn = folder[PropertyNames.ModifiedOn];
 
-            Assert.That(newCreatedOn, Is.Not.Null);
-            Assert.That(newModifiedOn, Is.Null);
+            Assert.Multiple(() =>
+            {
+                Assert.That(newCreatedOn, Is.Not.Null);
+                Assert.That(newModifiedOn, Is.Null);
+            });
         }
 
         [Test]
@@ -122,43 +133,57 @@ namespace WebservicesIntegrationTests
         {
             var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
             var postJsonPath = this.GetPath("Tests/EngineeringModel/Folder/PostNewFolder.json");
-            var postBody = base.GetJsonFromFile(postJsonPath);
+            var postBody = this.GetJsonFromFile(postJsonPath);
 
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
-            Assert.AreEqual(3, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(3));
 
             // get a specific Folder from the result by it's unique id
             var folder = jArray.Single(x => (string)x[PropertyNames.Iid] == "e80daca0-5c6e-4236-ae34-d23c36244059");
-            Assert.AreEqual(2, (int)folder[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("Folder", (string)folder[PropertyNames.ClassKind]);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That((int)folder[PropertyNames.RevisionNumber], Is.EqualTo(2));
+                Assert.That((string)folder[PropertyNames.ClassKind], Is.EqualTo("Folder"));
+            });
 
             var newCreatedOn = folder[PropertyNames.CreatedOn];
             var newModifiedOn = folder[PropertyNames.ModifiedOn];
 
-            Assert.That(newCreatedOn, Is.Not.Null);
-            Assert.That(newModifiedOn, Is.Not.Null);
-            Assert.That(newCreatedOn, Is.EqualTo(newModifiedOn));
+            Assert.Multiple(() =>
+            {
+                Assert.That(newCreatedOn, Is.Not.Null);
+                Assert.That(newModifiedOn, Is.Not.Null);
+                Assert.That(newCreatedOn, Is.EqualTo(newModifiedOn));
+            });
 
             postJsonPath = this.GetPath("Tests/EngineeringModel/Folder/UpdateNewFolder.json");
-            postBody = base.GetJsonFromFile(postJsonPath);
+            postBody = this.GetJsonFromFile(postJsonPath);
 
             jArray = this.WebClient.PostDto(iterationUri, postBody);
 
             folder = jArray.Single(x => (string)x[PropertyNames.Iid] == "e80daca0-5c6e-4236-ae34-d23c36244059");
-            Assert.AreEqual(3, (int)folder[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("Folder", (string)folder[PropertyNames.ClassKind]);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That((int)folder[PropertyNames.RevisionNumber], Is.EqualTo(3));
+                Assert.That((string)folder[PropertyNames.ClassKind], Is.EqualTo("Folder"));
+            });
 
             var updateCreatedOn = folder[PropertyNames.CreatedOn];
             var updateModifiedOn = folder[PropertyNames.ModifiedOn];
 
-            Assert.That(updateCreatedOn, Is.Not.Null);
-            Assert.That(updateModifiedOn, Is.Not.Null);
-            Assert.That(updateCreatedOn, Is.Not.EqualTo(updateModifiedOn));
+            Assert.Multiple(() =>
+            {
+                Assert.That(updateCreatedOn, Is.Not.Null);
+                Assert.That(updateModifiedOn, Is.Not.Null);
+                Assert.That(updateCreatedOn, Is.Not.EqualTo(updateModifiedOn));
 
-            Assert.That(newCreatedOn, Is.Not.EqualTo(updateModifiedOn));
-            Assert.That(updateModifiedOn, Is.Not.EqualTo(newModifiedOn));
-            Assert.That(newCreatedOn, Is.EqualTo(updateCreatedOn));
+                Assert.That(newCreatedOn, Is.Not.EqualTo(updateModifiedOn));
+                Assert.That(updateModifiedOn, Is.Not.EqualTo(newModifiedOn));
+                Assert.That(newCreatedOn, Is.EqualTo(updateCreatedOn));
+            });
         }
 
         [Test]
@@ -170,10 +195,10 @@ namespace WebservicesIntegrationTests
 
             var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
             var postJsonPath = this.GetPath("Tests/EngineeringModel/Folder/PostNewFolder.json");
-            var postBody = base.GetJsonFromFile(postJsonPath);
+            var postBody = this.GetJsonFromFile(postJsonPath);
 
             // Jane is not allowed to upload
-            Assert.Throws<WebException>(() => this.WebClient.PostDto(iterationUri, postBody));
+            Assert.That(() => this.WebClient.PostDto(iterationUri, postBody), Throws.TypeOf<WebException>());
         }
 
         /// <summary>
@@ -185,20 +210,23 @@ namespace WebservicesIntegrationTests
         /// </param>
         public static void VerifyProperties(JToken folder)
         {
-            // verify the amount of returned properties 
-            Assert.AreEqual(8, folder.Children().Count());
+            Assert.Multiple(() =>
+            {
+                // verify the amount of returned properties 
+                Assert.That(folder.Children().Count(), Is.EqualTo(8));
 
-            // assert that the properties are what is expected
-            Assert.AreEqual("67cdb7de-7721-40a0-9ca2-10a5cf7742fc", (string)folder[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int)folder[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("Folder", (string)folder[PropertyNames.ClassKind]);
+                // assert that the properties are what is expected
+                Assert.That((string)folder[PropertyNames.Iid], Is.EqualTo("67cdb7de-7721-40a0-9ca2-10a5cf7742fc"));
+                Assert.That((int)folder[PropertyNames.RevisionNumber], Is.EqualTo(1));
+                Assert.That((string)folder[PropertyNames.ClassKind], Is.EqualTo("Folder"));
 
-            Assert.AreEqual("Test Folder", (string)folder[PropertyNames.Name]);
-            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string)folder[PropertyNames.Owner]);
+                Assert.That((string)folder[PropertyNames.Name], Is.EqualTo("Test Folder"));
+                Assert.That((string)folder[PropertyNames.Owner], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
 
-            Assert.AreEqual("2016-11-02T13:58:35.936Z", (string)folder[PropertyNames.CreatedOn]);
-            Assert.AreEqual("284334dd-e8e5-42d6-bc8a-715c507a7f02", (string)folder[PropertyNames.Creator]);
-            Assert.IsNull((string)folder[PropertyNames.ContainingFolder]);
+                Assert.That((string)folder[PropertyNames.CreatedOn], Is.EqualTo("2016-11-02T13:58:35.936Z"));
+                Assert.That((string)folder[PropertyNames.Creator], Is.EqualTo("284334dd-e8e5-42d6-bc8a-715c507a7f02"));
+                Assert.That((string)folder[PropertyNames.ContainingFolder], Is.Null);
+            });
         }
     }
 }
