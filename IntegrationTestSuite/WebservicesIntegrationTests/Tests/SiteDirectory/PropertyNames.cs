@@ -321,6 +321,8 @@ namespace WebservicesIntegrationTests
 
         public static string LastModifiedOn => "lastModifiedOn";
 
+        public static string ModifiedOn => "modifiedOn";
+
         public static string SourceEngineeringModelSetupIid => "sourceEngineeringModelSetupIid";
 
         public static string ActiveDomain => "activeDomain";

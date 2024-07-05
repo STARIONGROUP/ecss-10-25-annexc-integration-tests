@@ -1,0 +1,12 @@
+﻿{
+	"_delete": [],
+	"_create": [],
+	"_update": [
+		{
+			"classKind": "Folder",
+			"iid": "e80daca0-5c6e-4236-ae34-d23c36244059",
+			"name": "TestFolderUpdated"
+		}
+	],
+	"_copy": []
+}
