@@ -29,6 +29,7 @@ namespace WebservicesIntegrationTests
     using Newtonsoft.Json.Linq;
 
     using NUnit.Framework;
+    using WebservicesIntegrationTests.Net;
 
     [TestFixture]
     public class IterationTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
@@ -167,6 +168,9 @@ namespace WebservicesIntegrationTests
             Assert.IsEmpty(iterationSetup[PropertyNames.SourceIterationSetup]);
             Assert.IsEmpty(iterationSetup[PropertyNames.FrozenOn]);
 
+            Assert.That(iterationSetup[PropertyNames.ModifiedOn], Is.Null); //null means unchanged, which is th expected result
+            Assert.That(iterationSetup[PropertyNames.CreatedOn], Is.Empty); // empty means unchanged, which is the expected result
+
             // GET EngineeringModel
             var engineeringModelUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56");
 
@@ -300,6 +304,38 @@ namespace WebservicesIntegrationTests
             var ruleVerificationListsArray = (JArray) iteration[PropertyNames.RuleVerificationList];
             IList<string> ruleVerificationLists = ruleVerificationListsArray.Select(x => (string) x).ToList();
             CollectionAssert.AreEquivalent(expectedRuleVerificationLists, ruleVerificationLists);
+        }
+
+        [Test]
+        [Category("POST")]
+        [CdpVersion_1_1_0]
+        public void VerifyModifiedOnAndCreatedOnWorkAsExpected()
+        {
+            var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
+            var postBodyPath = this.GetPath("Tests/EngineeringModel/Iteration/POSTNewIterationSetup.json");
+
+            var postBody = this.GetJsonFromFile(postBodyPath);
+            var jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
+
+            //Check the amount of objects 
+            Assert.AreEqual(4, jArray.Count);
+
+            var iterationSetup = jArray.Single(x => (string)x[PropertyNames.Iid] == "86163b0e-8341-4316-94fc-93ed60ad0dcf");
+            Assert.AreEqual(2, (int)iterationSetup[PropertyNames.RevisionNumber]);
+
+            //New iterationSetup
+            iterationSetup = jArray.Single(x => (string)x[PropertyNames.Iid] == "836e6e3c-722f-49a7-b8fa-3fc7f4ac9531");
+            Assert.AreEqual(2, (int)iterationSetup[PropertyNames.RevisionNumber]);
+            Assert.AreEqual(2, (int)iterationSetup[PropertyNames.IterationNumber]);
+            Assert.AreEqual("IterationSetup", (string)iterationSetup[PropertyNames.ClassKind]);
+            Assert.AreEqual("IterationSetup Description", (string)iterationSetup[PropertyNames.Description]);
+            Assert.AreEqual("699da906-d22e-4969-b606-1fcb4bf5affd", (string)iterationSetup[PropertyNames.IterationIid]);
+            Assert.AreEqual(false, (bool)iterationSetup[PropertyNames.IsDeleted]);
+            Assert.IsEmpty(iterationSetup[PropertyNames.SourceIterationSetup]);
+            Assert.IsEmpty(iterationSetup[PropertyNames.FrozenOn]);
+
+            Assert.That(iterationSetup[PropertyNames.ModifiedOn], Is.Empty); //empty in this case means unchanged, which is the expected result
+            Assert.That(iterationSetup[PropertyNames.CreatedOn], Is.Empty); // empty in this case means unchanged, which is the expected result
         }
 
         [Test]

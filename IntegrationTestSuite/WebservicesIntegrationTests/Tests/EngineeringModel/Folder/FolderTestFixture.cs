@@ -27,7 +27,9 @@ namespace WebservicesIntegrationTests
     using Newtonsoft.Json.Linq;
 
     using NUnit.Framework;
-    
+
+    using WebservicesIntegrationTests.Net;
+
     [TestFixture]
     public class FolderTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
     {
@@ -104,6 +106,59 @@ namespace WebservicesIntegrationTests
             var folder = jArray.Single(x => (string)x[PropertyNames.Iid] == "e80daca0-5c6e-4236-ae34-d23c36244059");
             Assert.AreEqual(2, (int)folder[PropertyNames.RevisionNumber]);
             Assert.AreEqual("Folder", (string)folder[PropertyNames.ClassKind]);
+
+            //Check CreatedOn for raw 10-25 (non CDP extension) data
+            var newCreatedOn = folder[PropertyNames.CreatedOn];
+            var newModifiedOn = folder[PropertyNames.ModifiedOn];
+
+            Assert.That(newCreatedOn, Is.Not.Null);
+            Assert.That(newModifiedOn, Is.Null);
+        }
+
+        [Test]
+        [Category("POST")]
+        [CdpVersion_1_1_0]
+        public void VerifyModifiedOnAndCreatedOnForNewAndUpdatedFolder()
+        {
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
+            var postJsonPath = this.GetPath("Tests/EngineeringModel/Folder/PostNewFolder.json");
+            var postBody = base.GetJsonFromFile(postJsonPath);
+
+            var jArray = this.WebClient.PostDto(iterationUri, postBody);
+
+            Assert.AreEqual(3, jArray.Count);
+
+            // get a specific Folder from the result by it's unique id
+            var folder = jArray.Single(x => (string)x[PropertyNames.Iid] == "e80daca0-5c6e-4236-ae34-d23c36244059");
+            Assert.AreEqual(2, (int)folder[PropertyNames.RevisionNumber]);
+            Assert.AreEqual("Folder", (string)folder[PropertyNames.ClassKind]);
+
+            var newCreatedOn = folder[PropertyNames.CreatedOn];
+            var newModifiedOn = folder[PropertyNames.ModifiedOn];
+
+            Assert.That(newCreatedOn, Is.Not.Null);
+            Assert.That(newModifiedOn, Is.Not.Null);
+            Assert.That(newCreatedOn, Is.EqualTo(newModifiedOn));
+
+            postJsonPath = this.GetPath("Tests/EngineeringModel/Folder/UpdateNewFolder.json");
+            postBody = base.GetJsonFromFile(postJsonPath);
+
+            jArray = this.WebClient.PostDto(iterationUri, postBody);
+
+            folder = jArray.Single(x => (string)x[PropertyNames.Iid] == "e80daca0-5c6e-4236-ae34-d23c36244059");
+            Assert.AreEqual(3, (int)folder[PropertyNames.RevisionNumber]);
+            Assert.AreEqual("Folder", (string)folder[PropertyNames.ClassKind]);
+
+            var updateCreatedOn = folder[PropertyNames.CreatedOn];
+            var updateModifiedOn = folder[PropertyNames.ModifiedOn];
+
+            Assert.That(updateCreatedOn, Is.Not.Null);
+            Assert.That(updateModifiedOn, Is.Not.Null);
+            Assert.That(updateCreatedOn, Is.Not.EqualTo(updateModifiedOn));
+
+            Assert.That(newCreatedOn, Is.Not.EqualTo(updateModifiedOn));
+            Assert.That(updateModifiedOn, Is.Not.EqualTo(newModifiedOn));
+            Assert.That(newCreatedOn, Is.EqualTo(updateCreatedOn));
         }
 
         [Test]

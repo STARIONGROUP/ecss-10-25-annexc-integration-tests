@@ -354,11 +354,22 @@ namespace WebservicesIntegrationTests
         [Category("POST")]
         public void VerifyThatNewEngineeringModelCanBeCreatedBasedOnExistingModelWithWebApi()
         {
+            //GET old Iteration for checks later in this testfixture
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c?extent=deep");
+            var jArray = this.WebClient.GetDto(iterationUri);
+            Assert.AreEqual(50, jArray.Count);
+
+            var oldCommonFileStore = jArray.Single(x => (string)x[PropertyNames.Name] == "TestFileStore");
+            Assert.That(oldCommonFileStore[PropertyNames.CreatedOn], Is.Not.Null); // Important for validity of later checks!
+
+            var oldDomainFileStore = jArray.Single(x => (string)x[PropertyNames.Name] == "Test DomainFileStore");
+            Assert.That(oldDomainFileStore[PropertyNames.CreatedOn], Is.Not.Null); // Important for validity of later checks!
+
             var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
             var postBodyPath = this.GetPath("Tests/SiteDirectory/EngineeringModelSetup/PostEngineeringModelSetupBasedOnExistingModel.json");
 
             var postBody = base.GetJsonFromFile(postBodyPath);
-            var jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
+            jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
             
             Assert.AreEqual(9, jArray.Count);
 
@@ -379,6 +390,8 @@ namespace WebservicesIntegrationTests
 
             var iterationSetup = jArray.Single(x => (string)x[PropertyNames.ClassKind] == "IterationSetup");
             Assert.AreEqual("IterationSetup Description", (string)iterationSetup["description"]);
+            Assert.That((DateTime)iterationSetup["createdOn"], Is.Not.Null);
+            Assert.That(iterationSetup["modifiedOn"], Is.Null);
 
             var modelReferenceDataLibrary = jArray.Single(x => (string)x[PropertyNames.ClassKind] == "ModelReferenceDataLibrary");
             Assert.AreEqual("testderivefromexistingmodelMRDL", (string)modelReferenceDataLibrary[PropertyNames.ShortName]);
@@ -400,16 +413,21 @@ namespace WebservicesIntegrationTests
             Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string)participant[PropertyNames.SelectedDomain]);
 
             //Check if model can be read
-
-            //GET Iteration
+            //GET new Iteration
             // define the URI on which to perform a GET request
-            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/{engineeringModelSetup[PropertyNames.EngineeringModelIid]}/iteration/{iterationSetup[PropertyNames.IterationIid]}");
+            iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/{engineeringModelSetup[PropertyNames.EngineeringModelIid]}/iteration/{iterationSetup[PropertyNames.IterationIid]}?extent=deep");
 
             // get a response from the data-source as a JArray (JSON Array)
             jArray = this.WebClient.GetDto(iterationUri);
 
             //check if there is only one Iteration object
-            Assert.AreEqual(1, jArray.Count);
+            Assert.AreEqual(50, jArray.Count);
+
+            var newCommonFileStore = jArray.Single(x => (string)x[PropertyNames.Name] == "TestFileStore");
+            var newDomainFileStore = jArray.Single(x => (string)x[PropertyNames.Name] == "Test DomainFileStore");
+
+            Assert.That(newCommonFileStore[PropertyNames.CreatedOn], Is.Not.EqualTo(oldCommonFileStore[PropertyNames.CreatedOn]));
+            Assert.That(newDomainFileStore[PropertyNames.CreatedOn], Is.Not.EqualTo(oldDomainFileStore[PropertyNames.CreatedOn]));
         }
 
         [Test]

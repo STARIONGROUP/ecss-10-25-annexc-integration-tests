@@ -138,6 +138,9 @@
     <None Update="Tests\CherryPick\PostNewThingsCherryPick.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Tests\EngineeringModel\Folder\UpdateNewFolder.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Tests\EngineeringModel\Folder\PostNewFolder.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
