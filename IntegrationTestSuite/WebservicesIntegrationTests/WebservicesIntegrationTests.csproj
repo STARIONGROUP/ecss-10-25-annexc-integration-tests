@@ -216,6 +216,9 @@
     <None Update="Tests\EngineeringModel\ParameterValueSet\PostNewParameterForEachParameterType.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Tests\EngineeringModel\ParameterValueSet\PostUpdateParameterValueSetWithFormula.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Tests\EngineeringModel\ParameterValueSet\PostNewParameterValueSetAndDeleteOne.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
