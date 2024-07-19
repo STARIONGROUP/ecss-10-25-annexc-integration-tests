@@ -1,0 +1,12 @@
+﻿{
+  "_delete": [],
+  "_create": [],
+  "_update": [
+    {
+      "classKind": "ParameterValueSet",
+      "iid": "<PARAMETERVALUESET>",
+      "computed": "[\"4\"]",
+      "formula": "[\"=2*(1+1)\"]"
+    }
+  ]
+}

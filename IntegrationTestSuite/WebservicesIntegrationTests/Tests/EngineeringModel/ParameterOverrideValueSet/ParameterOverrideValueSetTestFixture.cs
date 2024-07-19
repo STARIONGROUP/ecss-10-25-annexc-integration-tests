@@ -167,7 +167,7 @@ namespace WebservicesIntegrationTests
                 Assert.That(JsonConvert.DeserializeObject<List<string>>((string)newValueSet[PropertyNames.Manual]), Is.EquivalentTo(expectedCleanedValue));
                 Assert.That(JsonConvert.DeserializeObject<List<string>>((string)newValueSet[PropertyNames.Computed]), Is.EquivalentTo(expectedCleanedValue));
                 Assert.That(JsonConvert.DeserializeObject<List<string>>((string)newValueSet[PropertyNames.Published]), Is.EquivalentTo(expectedCleanedValue));
-                Assert.That(JsonConvert.DeserializeObject<List<string>>((string)newValueSet[PropertyNames.Formula]), Is.EquivalentTo(expectedCleanedValue));
+                Assert.That(JsonConvert.DeserializeObject<List<string>>((string)newValueSet[PropertyNames.Formula]), Is.EquivalentTo(validValue));
             });
         }
     }
