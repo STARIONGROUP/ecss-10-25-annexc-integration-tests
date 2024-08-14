@@ -108,27 +108,27 @@ namespace WebservicesIntegrationTests
             };
             var possibleScalesArray = (JArray) simpleQuantityKind[PropertyNames.PossibleScale];
             IList<string> possibleScales = possibleScalesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedPossibleScales, possibleScales);
+            Assert.That(possibleScales, Is.EquivalentTo(expectedPossibleScales));
 
             var expectedCategories = new string[] {};
             var categoriesArray = (JArray) simpleQuantityKind[PropertyNames.Category];
             IList<string> categories = categoriesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedCategories, categories);
+            Assert.That(categories, Is.EquivalentTo(expectedCategories));
 
             var expectedAliases = new string[] {};
             var aliasesArray = (JArray) simpleQuantityKind[PropertyNames.Alias];
             IList<string> aliases = aliasesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedAliases, aliases);
+            Assert.That(aliases, Is.EquivalentTo(expectedAliases));
 
             var expectedDefinitions = new string[] {};
             var definitionsArray = (JArray) simpleQuantityKind[PropertyNames.Definition];
             IList<string> definitions = definitionsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedDefinitions, definitions);
+            Assert.That(definitions, Is.EquivalentTo(expectedDefinitions));
 
             var expectedHyperlinks = new string[] {};
             var hyperlinksArray = (JArray) simpleQuantityKind[PropertyNames.HyperLink];
             IList<string> h = hyperlinksArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedHyperlinks, h);
+            Assert.That(h, Is.EquivalentTo(expectedHyperlinks));
         }
     }
 }

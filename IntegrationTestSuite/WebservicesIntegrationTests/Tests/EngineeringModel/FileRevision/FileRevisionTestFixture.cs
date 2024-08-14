@@ -135,7 +135,7 @@ namespace WebservicesIntegrationTests
             };
             var fileTypesArray = JsonConvert.DeserializeObject<List<OrderedItem>>(
                 fileRevision[PropertyNames.FileType].ToString());
-            CollectionAssert.AreEquivalent(expectedFileTypes, fileTypesArray);
+            Assert.That(fileTypesArray, Is.EquivalentTo(expectedFileTypes));
         }
     }
 }

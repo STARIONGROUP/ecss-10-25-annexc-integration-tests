@@ -108,7 +108,7 @@ namespace WebservicesIntegrationTests
 
             var expectedConstraints = new List<OrderedItem> { new OrderedItem(1, "88200dbc-711a-47e0-a54a-dac4baca6e83"), new OrderedItem(2, "5e1ad29c-ac18-474d-832c-5f2d0d203176") };
             var constraintArray = JsonConvert.DeserializeObject<List<OrderedItem>>(requirement[PropertyNames.ParametricConstraint].ToString());
-            CollectionAssert.AreEquivalent(expectedConstraints, constraintArray);
+            Assert.That(constraintArray, Is.EquivalentTo(expectedConstraints));
 
             postBodyPath = this.GetPath("Tests/EngineeringModel/ParametricConstraint/PostReorderParametricConstraints.json");
             postBody = this.GetJsonFromFile(postBodyPath);
@@ -130,7 +130,7 @@ namespace WebservicesIntegrationTests
 
             expectedConstraints = new List<OrderedItem> { new OrderedItem(3, "5e1ad29c-ac18-474d-832c-5f2d0d203176"), new OrderedItem(4, "88200dbc-711a-47e0-a54a-dac4baca6e83") };
             constraintArray = JsonConvert.DeserializeObject<List<OrderedItem>>(requirement[PropertyNames.ParametricConstraint].ToString());
-            CollectionAssert.AreEquivalent(expectedConstraints, constraintArray);
+            Assert.That(constraintArray, Is.EquivalentTo(expectedConstraints));
         }
 
         /// <summary>
@@ -165,7 +165,7 @@ namespace WebservicesIntegrationTests
 
             var expressionsArray = (JArray) parametricConstraint[PropertyNames.Expression];
             IList<string> expressions = expressionsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedExpressions, expressions);
+            Assert.That(expressions, Is.EquivalentTo(expectedExpressions));
         }
     }
 }

@@ -108,17 +108,17 @@ namespace WebservicesIntegrationTests
             var expectedIterations = new[] {"e163c5ad-f32b-4387-b805-f4b34600bc2c"};
             var iterationsArray = (JArray) engineeringModel[PropertyNames.Iteration];
             IList<string> iterations = iterationsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedIterations, iterations);
+            Assert.That(iterations, Is.EquivalentTo(expectedIterations));
 
             var expectedLogEntries = new[] {"4e2375eb-8e37-4df2-9c7b-dd896683a891"};
             var logEntriesArray = (JArray) engineeringModel[PropertyNames.LogEntry];
             IList<string> logEntries = logEntriesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedLogEntries, logEntries);
+            Assert.That(logEntries, Is.EquivalentTo(expectedLogEntries));
 
             var expectedCommonFileStores = new[] {"8e5ca9cc-3da8-4e66-9172-7c3b2464a59c"};
             var commonFileStoresArray = (JArray) engineeringModel[PropertyNames.CommonFileStore];
             IList<string> commonFileStores = commonFileStoresArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedCommonFileStores, commonFileStores);
+            Assert.That(commonFileStores, Is.EquivalentTo(expectedCommonFileStores));
 
             Assert.AreEqual("EngineeringModel", (string) engineeringModel[PropertyNames.ClassKind]);
             Assert.AreEqual("116f6253-89bb-47d4-aa24-d11d197e43c9",
@@ -146,7 +146,7 @@ namespace WebservicesIntegrationTests
             };
             var expressionArray = (JArray) parametricConstraint[PropertyNames.Expression];
             IList<string> expressions = expressionArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedExpressions, expressions);
+            Assert.That(expressions, Is.EquivalentTo(expectedExpressions));
 
             Assert.AreEqual("ParametricConstraint", (string) parametricConstraint[PropertyNames.ClassKind]);
             Assert.AreEqual("88200dbc-711a-47e0-a54a-dac4baca6e83", (string) parametricConstraint[PropertyNames.Iid]);
@@ -173,7 +173,7 @@ namespace WebservicesIntegrationTests
             };
             var termsArray = (JArray) exclusiveOrExpression[PropertyNames.Term];
             IList<string> terms = termsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedTerms, terms);
+            Assert.That(terms, Is.EquivalentTo(expectedTerms));
         }
 
         /// <summary>
@@ -200,7 +200,7 @@ namespace WebservicesIntegrationTests
             };
             var termsArray = (JArray) exclusiveOrExpression[PropertyNames.Term];
             IList<string> terms = termsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedTerms, terms);
+            Assert.That(terms, Is.EquivalentTo(expectedTerms));
         }
     }
 }

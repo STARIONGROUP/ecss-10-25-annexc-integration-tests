@@ -103,17 +103,17 @@ namespace WebservicesIntegrationTests
             var expectedAliases = new string[] {};
             var aliasesArray = (JArray) linearConversionUnit["alias"];
             IList<string> aliases = aliasesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedAliases, aliases);
+            Assert.That(aliases, Is.EquivalentTo(expectedAliases));
 
             var expectedDefinitions = new string[] {};
             var definitionsArray = (JArray) linearConversionUnit["definition"];
             IList<string> definitions = definitionsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedDefinitions, definitions);
+            Assert.That(definitions, Is.EquivalentTo(expectedDefinitions));
 
             var expectedHyperlinks = new string[] {};
             var hyperlinksArray = (JArray) linearConversionUnit["hyperLink"];
             IList<string> h = hyperlinksArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedHyperlinks, h);
+            Assert.That(h, Is.EquivalentTo(expectedHyperlinks));
         }
     }
 }

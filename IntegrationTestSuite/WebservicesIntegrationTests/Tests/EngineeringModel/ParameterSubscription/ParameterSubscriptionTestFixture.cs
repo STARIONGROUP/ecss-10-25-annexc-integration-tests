@@ -104,7 +104,7 @@ namespace WebservicesIntegrationTests
                                                      };
             var parameterSubscriptionsArray = (JArray)parameter[PropertyNames.ParameterSubscription];
             IList<string> parameterSubscriptions = parameterSubscriptionsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedParameterSubscriptions, parameterSubscriptions);
+            Assert.That(parameterSubscriptions, Is.EquivalentTo(expectedParameterSubscriptions));
 
             // get a specific ParameterSubscription from the result by it's unique id
             var parameterSubscription = jArray.Single(x => (string)x[PropertyNames.Iid] == "41aaa45f-090f-461c-8b0c-a4018e8edc9d");
@@ -189,7 +189,7 @@ namespace WebservicesIntegrationTests
             };
             var valueSetsArray = (JArray) parameterSubscription[PropertyNames.ValueSet];
             IList<string> valueSets = valueSetsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedValueSets, valueSets);
+            Assert.That(valueSets, Is.EquivalentTo(expectedValueSets));
         }
     }
 }

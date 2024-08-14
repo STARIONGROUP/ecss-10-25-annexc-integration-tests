@@ -50,17 +50,17 @@ namespace WebservicesIntegrationTests
             var expectedIterations = new[] { "e163c5ad-f32b-4387-b805-f4b34600bc2c" };
             var iterationsArray = (JArray)engineeringModel[PropertyNames.Iteration];
             IList<string> iterations = iterationsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedIterations, iterations);
+            Assert.That(iterations, Is.EquivalentTo(expectedIterations));
 
             var expectedLogEntries = new[] { "4e2375eb-8e37-4df2-9c7b-dd896683a891" };
             var logEntriesArray = (JArray)engineeringModel[PropertyNames.LogEntry];
             IList<string> logEntries = logEntriesArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedLogEntries, logEntries);
+            Assert.That(logEntries, Is.EquivalentTo(expectedLogEntries));
 
             var expectedCommonFileStores = new[] { "8e5ca9cc-3da8-4e66-9172-7c3b2464a59c" };
             var commonFileStoresArray = (JArray)engineeringModel[PropertyNames.CommonFileStore];
             IList<string> commonFileStores = commonFileStoresArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedCommonFileStores, commonFileStores);
+            Assert.That(commonFileStores, Is.EquivalentTo(expectedCommonFileStores));
 
             Assert.AreEqual("EngineeringModel", (string)engineeringModel[PropertyNames.ClassKind]);
             Assert.AreEqual("116f6253-89bb-47d4-aa24-d11d197e43c9", (string)engineeringModel[PropertyNames.EngineeringModelSetup]);
@@ -84,27 +84,27 @@ namespace WebservicesIntegrationTests
             var expectedNestedElements = new string[] { };
             var nestedElementsArray = (JArray)option[PropertyNames.NestedElement];
             IList<string> nestedElements = nestedElementsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedNestedElements, nestedElements);
+            Assert.That(nestedElements, Is.EquivalentTo(expectedNestedElements));
 
             var expectedCategories = new string[] { };
             var categoriesArray = (JArray)option[PropertyNames.Category];
             IList<string> categories = categoriesArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedCategories, categories);
+            Assert.That(categories, Is.EquivalentTo(expectedCategories));
 
             var expectedAliases = new string[] { "4a506a69-5453-475a-b8d9-142331bd30ea" };
             var aliasesArray = (JArray)option[PropertyNames.Alias];
             IList<string> aliases = aliasesArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedAliases, aliases);
+            Assert.That(aliases, Is.EquivalentTo(expectedAliases));
 
             var expectedDefinitions = new string[] { };
             var definitionsArray = (JArray)option[PropertyNames.Definition];
             IList<string> definitions = definitionsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedDefinitions, definitions);
+            Assert.That(definitions, Is.EquivalentTo(expectedDefinitions));
 
             var expectedHyperLinks = new string[] { };
             var hyperLinksArray = (JArray)option[PropertyNames.HyperLink];
             IList<string> hyperLinks = hyperLinksArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedHyperLinks, hyperLinks);
+            Assert.That(hyperLinks, Is.EquivalentTo(expectedHyperLinks));
 
             // Get the added Alias from the result by it's unique id
             var alias = jArray.Single(x => (string)x[PropertyNames.Iid] == "4a506a69-5453-475a-b8d9-142331bd30ea");

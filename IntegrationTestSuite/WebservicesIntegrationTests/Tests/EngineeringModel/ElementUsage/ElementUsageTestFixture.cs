@@ -102,32 +102,32 @@ namespace WebservicesIntegrationTests
             var expectedExcludedOptions = new string[] { };
             var excludedOptionsArray = (JArray)elementUsage[PropertyNames.ExcludeOption];
             IList<string> excludedOptions = excludedOptionsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedExcludedOptions, excludedOptions);
+            Assert.That(excludedOptions, Is.EquivalentTo(expectedExcludedOptions));
 
             var expectedCategories = new string[] { };
             var categoriesArray = (JArray)elementUsage[PropertyNames.Category];
             IList<string> categories = categoriesArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedCategories, categories);
+            Assert.That(categories, Is.EquivalentTo(expectedCategories));
 
             var expectedAliases = new string[] { };
             var aliasesArray = (JArray)elementUsage[PropertyNames.Alias];
             IList<string> aliases = aliasesArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedAliases, aliases);
+            Assert.That(aliases, Is.EquivalentTo(expectedAliases));
 
             var expectedDefinitions = new string[] { };
             var definitionsArray = (JArray)elementUsage[PropertyNames.Definition];
             IList<string> definitions = definitionsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedDefinitions, definitions);
+            Assert.That(definitions, Is.EquivalentTo(expectedDefinitions));
 
             var expectedHyperlinks = new string[] { };
             var hyperlinksArray = (JArray)elementUsage[PropertyNames.HyperLink];
             IList<string> h = hyperlinksArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedHyperlinks, h);
+            Assert.That(h, Is.EquivalentTo(expectedHyperlinks));
 
             var expectedParameterOverride = new[] { "93f767ed-4d22-45f6-ae97-d1dab0d36e1c" };
             var parameterOverride = (JArray)elementUsage[PropertyNames.ParameterOverride];
             IList<string> p = parameterOverride.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedParameterOverride, p);
+            Assert.That(p, Is.EquivalentTo(expectedParameterOverride));
 
             // get a specific Requirement from the result by it's unique id
             elementUsage = jArray.SingleOrDefault(x => (string)x[PropertyNames.Iid] == "f95a1580-e533-4185-b520-208615780afe");
@@ -154,32 +154,32 @@ namespace WebservicesIntegrationTests
             expectedExcludedOptions = new string[] { };
             excludedOptionsArray = (JArray)elementUsage[PropertyNames.ExcludeOption];
             excludedOptions = excludedOptionsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedExcludedOptions, excludedOptions);
+            Assert.That(excludedOptions, Is.EquivalentTo(expectedExcludedOptions));
 
             expectedCategories = new string[] { };
             categoriesArray = (JArray)elementUsage[PropertyNames.Category];
             categories = categoriesArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedCategories, categories);
+            Assert.That(categories, Is.EquivalentTo(expectedCategories));
 
             expectedAliases = new string[] { };
             aliasesArray = (JArray)elementUsage[PropertyNames.Alias];
             aliases = aliasesArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedAliases, aliases);
+            Assert.That(aliases, Is.EquivalentTo(expectedAliases));
 
             expectedDefinitions = new string[] { };
             definitionsArray = (JArray)elementUsage[PropertyNames.Definition];
             definitions = definitionsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedDefinitions, definitions);
+            Assert.That(definitions, Is.EquivalentTo(expectedDefinitions));
 
             expectedHyperlinks = new string[] { };
             hyperlinksArray = (JArray)elementUsage[PropertyNames.HyperLink];
             h = hyperlinksArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedHyperlinks, h);
+            Assert.That(h, Is.EquivalentTo(expectedHyperlinks));
 
             expectedParameterOverride = new string[] { };
             parameterOverride = (JArray)elementUsage[PropertyNames.ParameterOverride];
             p = parameterOverride.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedParameterOverride, p);
+            Assert.That(p, Is.EquivalentTo(expectedParameterOverride));
             }            
         }
     }

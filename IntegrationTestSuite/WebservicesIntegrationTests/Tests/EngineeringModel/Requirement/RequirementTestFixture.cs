@@ -99,7 +99,7 @@ namespace WebservicesIntegrationTests
 
             var requirementsArray = (JArray) requirementsSpecification[PropertyNames.Requirement];
             IList<string> requirements = requirementsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedRequirements, requirements);
+            Assert.That(requirements, Is.EquivalentTo(expectedRequirements));
 
             var requirement = jArray.Single(
                 x => (string) x[PropertyNames.Iid] == "09af5432-b7a5-4932-a983-b1065723efb7");
@@ -132,7 +132,7 @@ namespace WebservicesIntegrationTests
             var expectedRequirements = new[] { "614e2a69-d602-46be-9311-2fb4d3273e87" };
             var requirementsArray = (JArray) requirementsSpecificationWithMovedRequirement[PropertyNames.Requirement];
             IList<string> requirements = requirementsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedRequirements, requirements);
+            Assert.That(requirements, Is.EquivalentTo(expectedRequirements));
 
             var requirementsSpecificationWithoutMovedRequirement = jArray.Single(x => (string) x[PropertyNames.Iid] == "bf0cde90-9086-43d5-bcff-32a2f8331800");
             Assert.AreEqual(2, (int) requirementsSpecificationWithoutMovedRequirement[PropertyNames.RevisionNumber]);
@@ -140,7 +140,7 @@ namespace WebservicesIntegrationTests
             expectedRequirements = new string[] { "614e2a69-d602-46be-9311-2fb4d3273e88" };
             requirementsArray = (JArray) requirementsSpecificationWithoutMovedRequirement[PropertyNames.Requirement];
             requirements = requirementsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedRequirements, requirements);
+            Assert.That(requirements, Is.EquivalentTo(expectedRequirements));
 
             var requirement = jArray.Single(x => (string) x[PropertyNames.Iid] == "614e2a69-d602-46be-9311-2fb4d3273e87");
             Assert.AreEqual(2, (int) requirement[PropertyNames.RevisionNumber]);
@@ -172,7 +172,7 @@ namespace WebservicesIntegrationTests
                 JsonConvert.DeserializeObject<List<OrderedItem>>(
                     requirement[PropertyNames.ParametricConstraint].ToString());
 
-            CollectionAssert.AreEquivalent(expectedParametricConstraints, parametricConstraints);
+            Assert.That(parametricConstraints, Is.EquivalentTo(expectedParametricConstraints));
 
             // define the URI on which to perform a GET request 
             var constraintUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/requirementsSpecification/bf0cde90-9086-43d5-bcff-32a2f8331800/requirement/614e2a69-d602-46be-9311-2fb4d3273e87/parametricConstraint/88200dbc-711a-47e0-a54a-dac4baca6e83");
@@ -210,7 +210,7 @@ namespace WebservicesIntegrationTests
             var expectedCategories = new[] { "167b5cb0-766e-4ab2-b728-a9c9a662b017" };
             var categoriesArray = (JArray) requirement[PropertyNames.Category];
             IList<string> categories = categoriesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedCategories, categories);
+            Assert.That(categories, Is.EquivalentTo(expectedCategories));
 
             var expectedParameterValues = new[]
             {
@@ -220,7 +220,7 @@ namespace WebservicesIntegrationTests
 
             var parameterValuesArray = (JArray) requirement[PropertyNames.ParameterValue];
             IList<string> parameterValues = parameterValuesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedParameterValues, parameterValues);
+            Assert.That(parameterValues, Is.EquivalentTo(expectedParameterValues));
 
             var expectedParametricConstraints =
                 new List<OrderedItem> { new OrderedItem(1, "88200dbc-711a-47e0-a54a-dac4baca6e83") };
@@ -229,22 +229,22 @@ namespace WebservicesIntegrationTests
                 JsonConvert.DeserializeObject<List<OrderedItem>>(
                     requirement[PropertyNames.ParametricConstraint].ToString());
 
-            CollectionAssert.AreEquivalent(expectedParametricConstraints, parametricConstraints);
+            Assert.That(parametricConstraints, Is.EquivalentTo(expectedParametricConstraints));
 
             var expectedAliases = new string[] { };
             var aliasesArray = (JArray) requirement[PropertyNames.Alias];
             IList<string> aliases = aliasesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedAliases, aliases);
+            Assert.That(aliases, Is.EquivalentTo(expectedAliases));
 
             var expectedDefinitions = new string[] { };
             var definitionsArray = (JArray) requirement[PropertyNames.Definition];
             IList<string> definitions = definitionsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedDefinitions, definitions);
+            Assert.That(definitions, Is.EquivalentTo(expectedDefinitions));
 
             var expectedHyperlinks = new string[] { };
             var hyperlinksArray = (JArray) requirement[PropertyNames.HyperLink];
             IList<string> hyperlinks = hyperlinksArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedHyperlinks, hyperlinks);
+            Assert.That(hyperlinks, Is.EquivalentTo(expectedHyperlinks));
 
             // get a specific Requirement from the result by it's unique id
             requirement = jArray.SingleOrDefault(x => (string) x[PropertyNames.Iid] == "614e2a69-d602-46be-9311-2fb4d3273e88");
@@ -270,12 +270,12 @@ namespace WebservicesIntegrationTests
                 expectedCategories = new string[] { };
                 categoriesArray = (JArray) requirement[PropertyNames.Category];
                 categories = categoriesArray.Select(x => (string) x).ToList();
-                CollectionAssert.AreEquivalent(expectedCategories, categories);
+                Assert.That(categories, Is.EquivalentTo(expectedCategories));
 
                 expectedParameterValues = new string[] { };
                 parameterValuesArray = (JArray) requirement[PropertyNames.ParameterValue];
                 parameterValues = parameterValuesArray.Select(x => (string) x).ToList();
-                CollectionAssert.AreEquivalent(expectedParameterValues, parameterValues);
+                Assert.That(parameterValues, Is.EquivalentTo(expectedParameterValues));
 
                 expectedParametricConstraints = new List<OrderedItem> { };
 
@@ -283,22 +283,22 @@ namespace WebservicesIntegrationTests
                     JsonConvert.DeserializeObject<List<OrderedItem>>(
                         requirement[PropertyNames.ParametricConstraint].ToString());
 
-                CollectionAssert.AreEquivalent(expectedParametricConstraints, parametricConstraints);
+                Assert.That(parametricConstraints, Is.EquivalentTo(expectedParametricConstraints));
 
                 expectedAliases = new string[] { };
                 aliasesArray = (JArray) requirement[PropertyNames.Alias];
                 aliases = aliasesArray.Select(x => (string) x).ToList();
-                CollectionAssert.AreEquivalent(expectedAliases, aliases);
+                Assert.That(aliases, Is.EquivalentTo(expectedAliases));
 
                 expectedDefinitions = new string[] { };
                 definitionsArray = (JArray) requirement[PropertyNames.Definition];
                 definitions = definitionsArray.Select(x => (string) x).ToList();
-                CollectionAssert.AreEquivalent(expectedDefinitions, definitions);
+                Assert.That(definitions, Is.EquivalentTo(expectedDefinitions));
 
                 expectedHyperlinks = new string[] { };
                 hyperlinksArray = (JArray) requirement[PropertyNames.HyperLink];
                 hyperlinks = hyperlinksArray.Select(x => (string) x).ToList();
-                CollectionAssert.AreEquivalent(expectedHyperlinks, hyperlinks);
+                Assert.That(hyperlinks, Is.EquivalentTo(expectedHyperlinks));
             }
         }
 

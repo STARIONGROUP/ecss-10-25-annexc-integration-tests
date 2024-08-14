@@ -74,7 +74,7 @@ namespace WebservicesIntegrationTests
 
             var expectedOptions = new List<OrderedItem> { new OrderedItem(1, "8019277f-8bc7-463b-b3bb-46a404493e31"), new OrderedItem(2, "b607fdc1-7578-48f9-8597-caba56df3177") };
             var optionsArray = JsonConvert.DeserializeObject<List<OrderedItem>>(parameterType[PropertyNames.Component].ToString());
-            CollectionAssert.AreEquivalent(expectedOptions, optionsArray);
+            Assert.That(optionsArray, Is.EquivalentTo(expectedOptions));
         }
 
         [Test]

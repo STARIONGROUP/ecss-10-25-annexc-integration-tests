@@ -100,7 +100,7 @@ namespace WebservicesIntegrationTests
                                               };
             var superCategoriesArray = (JArray)category["superCategory"];
             IList<string> superCategories = superCategoriesArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedSuperCategories, superCategories);
+            Assert.That(superCategories, Is.EquivalentTo(expectedSuperCategories));
 
             // Delete super category
             postBodyPath = this.GetPath("Tests/SiteDirectory/Category/PostDeleteSuperCategory.json");
@@ -121,7 +121,7 @@ namespace WebservicesIntegrationTests
             expectedSuperCategories = new string[]{};
             superCategoriesArray = (JArray)category["superCategory"];
             superCategories = superCategoriesArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedSuperCategories, superCategories);
+            Assert.That(superCategories, Is.EquivalentTo(expectedSuperCategories));
         }
 
         [Test]
@@ -153,7 +153,7 @@ namespace WebservicesIntegrationTests
                                                };
             var permissibleClassesArray = (JArray)category["permissibleClass"];
             IList<string> permissibleClasses = permissibleClassesArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedPermissibleClasses, permissibleClasses);
+            Assert.That(permissibleClasses, Is.EquivalentTo(expectedPermissibleClasses));
 
             // Delete Book class
             postBodyPath = this.GetPath("Tests/SiteDirectory/Category/PostDeletePermissibleClass.json");
@@ -178,7 +178,7 @@ namespace WebservicesIntegrationTests
                                                  };
             permissibleClassesArray = (JArray)category["permissibleClass"];
             permissibleClasses = permissibleClassesArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedPermissibleClasses, permissibleClasses);
+            Assert.That(permissibleClasses, Is.EquivalentTo(expectedPermissibleClasses));
         }
 
         [Test]
@@ -207,32 +207,32 @@ namespace WebservicesIntegrationTests
             var expectedOrganizations = new string[] { "cd22fc45-d898-4fac-85fc-fbcb7d7b12a7" };
             var organizationArray = (JArray)siteDirectory[PropertyNames.Organization];
             IList<string> organizations = organizationArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedOrganizations, organizations);
+            Assert.That(organizations, Is.EquivalentTo(expectedOrganizations));
 
             var expectedPersons = new string[] { "77791b12-4c2c-4499-93fa-869df3692d22" };
             var personArray = (JArray)siteDirectory[PropertyNames.Person];
             IList<string> persons = personArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedPersons, persons);
+            Assert.That(persons, Is.EquivalentTo(expectedPersons));
 
             var expectedparticipantRole = new string[] { "ee3ae5ff-ac5e-4957-bab1-7698fba2a267" };
             var participantRoleArray = (JArray)siteDirectory[PropertyNames.ParticipantRole];
             IList<string> participantRoles = participantRoleArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedparticipantRole, participantRoles);
+            Assert.That(participantRoles, Is.EquivalentTo(expectedparticipantRole));
 
             var expectedsiteReferenceDataLibraries = new string[] { "c454c687-ba3e-44c4-86bc-44544b2c7880" };
             var siteReferenceDataLibraryArray = (JArray)siteDirectory[PropertyNames.SiteReferenceDataLibrary];
             IList<string> siteReferenceDataLibraries = siteReferenceDataLibraryArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedsiteReferenceDataLibraries, siteReferenceDataLibraries);
+            Assert.That(siteReferenceDataLibraries, Is.EquivalentTo(expectedsiteReferenceDataLibraries));
 
             var expectedModels = new string[] { "116f6253-89bb-47d4-aa24-d11d197e43c9" };
             var modelArray = (JArray)siteDirectory[PropertyNames.Model];
             IList<string> models = modelArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedModels, models);
+            Assert.That(models, Is.EquivalentTo(expectedModels));
 
             var expectedPersonRoles = new string[] { "2428f4d9-f26d-4112-9d56-1c940748df69" };
             var personRoleArray = (JArray)siteDirectory[PropertyNames.PersonRole];
             IList<string> personRoles = personRoleArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedPersonRoles, personRoles);
+            Assert.That(personRoles, Is.EquivalentTo(expectedPersonRoles));
 
             var expectedlogEntries = new string[]
             {
@@ -241,12 +241,12 @@ namespace WebservicesIntegrationTests
             };
             var logEntryArray = (JArray)siteDirectory[PropertyNames.LogEntry];
             IList<string> logEntries = logEntryArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedlogEntries, logEntries);
+            Assert.That(logEntries, Is.EquivalentTo(expectedlogEntries));
 
             var expecteddomainGroups = new string[] { "86992db5-8ce2-4431-8ff5-6fe794d14687" };
             var domainGroupArray = (JArray)siteDirectory[PropertyNames.DomainGroup];
             IList<string> domainGroups = domainGroupArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expecteddomainGroups, domainGroups);
+            Assert.That(domainGroups, Is.EquivalentTo(expecteddomainGroups));
 
             var expectedDomains = new string[] 
             {
@@ -255,12 +255,12 @@ namespace WebservicesIntegrationTests
             };
             var domainArray = (JArray)siteDirectory[PropertyNames.Domain];
             IList<string> domains = domainArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedDomains, domains);
+            Assert.That(domains, Is.EquivalentTo(expectedDomains));
 
             var expectedNaturalLanguages = new string[] { "73bf30cc-3573-488f-8746-6c03ba47973e" };
             var naturalLanguageArray = (JArray)siteDirectory[PropertyNames.NaturalLanguage];
             IList<string> naturalLanguages = naturalLanguageArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedNaturalLanguages, naturalLanguages);
+            Assert.That(naturalLanguages, Is.EquivalentTo(expectedNaturalLanguages));
 
             var siteReferenceDataLibrary = jArray.Single(x => (string)x[PropertyNames.Iid] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
 
@@ -279,17 +279,17 @@ namespace WebservicesIntegrationTests
             var expectedAliases = new string[] { };
             var aliasesArray = (JArray)siteReferenceDataLibrary["alias"];
             IList<string> aliases = aliasesArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedAliases, aliases);
+            Assert.That(aliases, Is.EquivalentTo(expectedAliases));
 
             var expectedDefinitions = new string[] { };
             var definitionsArray = (JArray)siteReferenceDataLibrary["definition"];
             IList<string> definitions = definitionsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedDefinitions, definitions);
+            Assert.That(definitions, Is.EquivalentTo(expectedDefinitions));
 
             var expectedHyperlinks = new string[] { };
             var hyperlinksArray = (JArray)siteReferenceDataLibrary["hyperLink"];
             IList<string> h = hyperlinksArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedHyperlinks, h);
+            Assert.That(h, Is.EquivalentTo(expectedHyperlinks));
 
             var expectedDefinedCategories = new string[]
             {
@@ -300,7 +300,7 @@ namespace WebservicesIntegrationTests
             };
             var definedCategoriesArray = (JArray)siteReferenceDataLibrary["definedCategory"];
             IList<string> definedCategoriesList = definedCategoriesArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedDefinedCategories, definedCategoriesList);
+            Assert.That(definedCategoriesList, Is.EquivalentTo(expectedDefinedCategories));
 
             var expectedParameterTypes = new string[]
             {
@@ -318,7 +318,7 @@ namespace WebservicesIntegrationTests
             };
             var parameterTypesArray = (JArray)siteReferenceDataLibrary["parameterType"];
             IList<string> parameterTypesList = parameterTypesArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedParameterTypes, parameterTypesList);
+            Assert.That(parameterTypesList, Is.EquivalentTo(expectedParameterTypes));
 
             var expectedBaseQuantityKinds = new List<OrderedItem>
             {
@@ -326,7 +326,7 @@ namespace WebservicesIntegrationTests
             };
             var baseQuantityKindsArray = JsonConvert.DeserializeObject<List<OrderedItem>>(
                 siteReferenceDataLibrary["baseQuantityKind"].ToString());
-            CollectionAssert.AreEquivalent(expectedBaseQuantityKinds, baseQuantityKindsArray);
+            Assert.That(baseQuantityKindsArray, Is.EquivalentTo(expectedBaseQuantityKinds));
 
             var expectedScales = new string[]
             {
@@ -338,7 +338,7 @@ namespace WebservicesIntegrationTests
             };
             var scalesArray = (JArray)siteReferenceDataLibrary["scale"];
             IList<string> scalesList = scalesArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedScales, scalesList);
+            Assert.That(scalesList, Is.EquivalentTo(expectedScales));
 
             var expectedUnitPrefixes = new string[]
             {
@@ -346,7 +346,7 @@ namespace WebservicesIntegrationTests
             };
             var unitPrefixesArray = (JArray)siteReferenceDataLibrary["unitPrefix"];
             IList<string> unitPrefixesList = unitPrefixesArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedUnitPrefixes, unitPrefixesList);
+            Assert.That(unitPrefixesList, Is.EquivalentTo(expectedUnitPrefixes));
 
             var expectedUnits = new string[]
             {
@@ -357,7 +357,7 @@ namespace WebservicesIntegrationTests
             };
             var unitsArray = (JArray)siteReferenceDataLibrary["unit"];
             IList<string> unitsList = unitsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedUnits, unitsList);
+            Assert.That(unitsList, Is.EquivalentTo(expectedUnits));
 
             var expectedBaseUnits = new string[]
             {
@@ -365,7 +365,7 @@ namespace WebservicesIntegrationTests
             };
             var baseUnitsArray = (JArray)siteReferenceDataLibrary["baseUnit"];
             IList<string> baseUnitsList = baseUnitsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedBaseUnits, baseUnitsList);
+            Assert.That(baseUnitsList, Is.EquivalentTo(expectedBaseUnits));
 
             var expectedFileTypes = new string[]
             {
@@ -375,7 +375,7 @@ namespace WebservicesIntegrationTests
             };
             var fileTypesArray = (JArray)siteReferenceDataLibrary["fileType"];
             IList<string> fileTypesList = fileTypesArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedFileTypes, fileTypesList);
+            Assert.That(fileTypesList, Is.EquivalentTo(expectedFileTypes));
 
             var expectedGlossaries = new string[]
             {
@@ -383,7 +383,7 @@ namespace WebservicesIntegrationTests
             };
             var glossariesArray = (JArray)siteReferenceDataLibrary["glossary"];
             IList<string> glossariesList = glossariesArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedGlossaries, glossariesList);
+            Assert.That(glossariesList, Is.EquivalentTo(expectedGlossaries));
 
             var expectedReferenceSources = new string[]
             {
@@ -391,7 +391,7 @@ namespace WebservicesIntegrationTests
             };
             var referenceSourcesArray = (JArray)siteReferenceDataLibrary["referenceSource"];
             IList<string> referenceSourcesList = referenceSourcesArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedReferenceSources, referenceSourcesList);
+            Assert.That(referenceSourcesList, Is.EquivalentTo(expectedReferenceSources));
 
             var expectedRules = new string[]
             {
@@ -403,7 +403,7 @@ namespace WebservicesIntegrationTests
             };
             var rulesArray = (JArray)siteReferenceDataLibrary["rule"];
             IList<string> rulesList = rulesArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedRules, rulesList);
+            Assert.That(rulesList, Is.EquivalentTo(expectedRules));
 
             Assert.IsEmpty(siteReferenceDataLibrary["requiredRdl"]);
 
@@ -413,7 +413,7 @@ namespace WebservicesIntegrationTests
             };
             var constantsArray = (JArray)siteReferenceDataLibrary["constant"];
             IList<string> constantsList = constantsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedConstants, constantsList);
+            Assert.That(constantsList, Is.EquivalentTo(expectedConstants));
 
             // Category
             var category = jArray.Single(x => (string)x["iid"] == "0d3f0a61-49ca-40d5-9a92-9a650c837c72");
@@ -429,7 +429,7 @@ namespace WebservicesIntegrationTests
             var expectedSuperCategories = new string[] { };
             var superCategoriesArray = (JArray)category["superCategory"];
             IList<string> superCategories = superCategoriesArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedSuperCategories, superCategories);
+            Assert.That(superCategories, Is.EquivalentTo(expectedSuperCategories));
 
             var expectedPermissibleClasses = new string[]
             {
@@ -438,22 +438,22 @@ namespace WebservicesIntegrationTests
             };
             var permissibleClassesArray = (JArray)category["permissibleClass"];
             IList<string> permissibleClasses = permissibleClassesArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedPermissibleClasses, permissibleClasses);
+            Assert.That(permissibleClasses, Is.EquivalentTo(expectedPermissibleClasses));
 
             var expectedCategoryAliases = new string[] { };
             var categoryAliasesArray = (JArray)category["alias"];
             IList<string> categoryAliases = categoryAliasesArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedCategoryAliases, categoryAliases);
+            Assert.That(categoryAliases, Is.EquivalentTo(expectedCategoryAliases));
 
             var expectedCategoryDefinitions = new string[] { };
             var categoryDefinitionsArray = (JArray)category["definition"];
             IList<string> categoryDefinitions = categoryDefinitionsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedCategoryDefinitions, categoryDefinitions);
+            Assert.That(categoryDefinitions, Is.EquivalentTo(expectedCategoryDefinitions));
 
             var expectedCategoryHyperLinks = new string[] { };
             var categoryHyperLinksArray = (JArray)category["hyperLink"];
             IList<string> categoryHyperLinks = categoryHyperLinksArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedCategoryHyperLinks, categoryHyperLinks);
+            Assert.That(categoryHyperLinks, Is.EquivalentTo(expectedCategoryHyperLinks));
         }
 
         /// <summary>
@@ -480,7 +480,7 @@ namespace WebservicesIntegrationTests
             var expectedSuperCategories = new string[] {};
             var superCategoriesArray = (JArray) categoryObject["superCategory"];
             IList<string> superCategories = superCategoriesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedSuperCategories, superCategories);
+            Assert.That(superCategories, Is.EquivalentTo(expectedSuperCategories));
 
             var expectedPermissibleClasses = new string[]
             {
@@ -489,22 +489,22 @@ namespace WebservicesIntegrationTests
             };
             var permissibleClassesArray = (JArray) categoryObject["permissibleClass"];
             IList<string> permissibleClasses = permissibleClassesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedPermissibleClasses, permissibleClasses);
+            Assert.That(permissibleClasses, Is.EquivalentTo(expectedPermissibleClasses));
 
             var expectedAliases = new string[] {};
             var aliasesArray = (JArray) categoryObject["alias"];
             IList<string> aliases = aliasesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedAliases, aliases);
+            Assert.That(aliases, Is.EquivalentTo(expectedAliases));
 
             var expectedDefinitions = new string[] {};
             var definitionsArray = (JArray) categoryObject["definition"];
             IList<string> definitions = definitionsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedDefinitions, definitions);
+            Assert.That(definitions, Is.EquivalentTo(expectedDefinitions));
 
             var expectedHyperlinks = new string[] {};
             var hyperlinksArray = (JArray) categoryObject["hyperLink"];
             IList<string> h = hyperlinksArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedHyperlinks, h);
+            Assert.That(h, Is.EquivalentTo(expectedHyperlinks));
 
             //next object
             categoryObject =
@@ -521,7 +521,7 @@ namespace WebservicesIntegrationTests
             expectedSuperCategories = new string[] {};
             superCategoriesArray = (JArray) categoryObject["superCategory"];
             superCategories = superCategoriesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedSuperCategories, superCategories);
+            Assert.That(superCategories, Is.EquivalentTo(expectedSuperCategories));
 
             expectedPermissibleClasses = new string[]
             {
@@ -529,22 +529,22 @@ namespace WebservicesIntegrationTests
             };
             permissibleClassesArray = (JArray) categoryObject["permissibleClass"];
             permissibleClasses = permissibleClassesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedPermissibleClasses, permissibleClasses);
+            Assert.That(permissibleClasses, Is.EquivalentTo(expectedPermissibleClasses));
 
             expectedAliases = new string[] {};
             aliasesArray = (JArray) categoryObject["alias"];
             aliases = aliasesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedAliases, aliases);
+            Assert.That(aliases, Is.EquivalentTo(expectedAliases));
 
             expectedDefinitions = new string[] {};
             definitionsArray = (JArray) categoryObject["definition"];
             definitions = definitionsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedDefinitions, definitions);
+            Assert.That(definitions, Is.EquivalentTo(expectedDefinitions));
 
             expectedHyperlinks = new string[] {};
             hyperlinksArray = (JArray) categoryObject["hyperLink"];
             h = hyperlinksArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedHyperlinks, h);
+            Assert.That(h, Is.EquivalentTo(expectedHyperlinks));
         }
     }
 }

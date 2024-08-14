@@ -58,32 +58,32 @@ namespace WebservicesIntegrationTests
             var expectedOrganizations = new string[] { "cd22fc45-d898-4fac-85fc-fbcb7d7b12a7" };
             var organizationArray = (JArray)siteDirectory[PropertyNames.Organization];
             IList<string> organizations = organizationArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedOrganizations, organizations);
+            Assert.That(organizations, Is.EquivalentTo(expectedOrganizations));
 
             var expectedPersons = new string[] { "77791b12-4c2c-4499-93fa-869df3692d22" };
             var personArray = (JArray)siteDirectory[PropertyNames.Person];
             IList<string> persons = personArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedPersons, persons);
+            Assert.That(persons, Is.EquivalentTo(expectedPersons));
 
             var expectedparticipantRole = new string[] { "ee3ae5ff-ac5e-4957-bab1-7698fba2a267" };
             var participantRoleArray = (JArray)siteDirectory[PropertyNames.ParticipantRole];
             IList<string> participantRoles = participantRoleArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedparticipantRole, participantRoles);
+            Assert.That(participantRoles, Is.EquivalentTo(expectedparticipantRole));
 
             var expectedsiteReferenceDataLibraries = new string[] { "c454c687-ba3e-44c4-86bc-44544b2c7880" };
             var siteReferenceDataLibraryArray = (JArray)siteDirectory[PropertyNames.SiteReferenceDataLibrary];
             IList<string> siteReferenceDataLibraries = siteReferenceDataLibraryArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedsiteReferenceDataLibraries, siteReferenceDataLibraries);
+            Assert.That(siteReferenceDataLibraries, Is.EquivalentTo(expectedsiteReferenceDataLibraries));
 
             var expectedModels = new string[] { "116f6253-89bb-47d4-aa24-d11d197e43c9" };
             var modelArray = (JArray)siteDirectory[PropertyNames.Model];
             IList<string> models = modelArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedModels, models);
+            Assert.That(models, Is.EquivalentTo(expectedModels));
 
             var expectedPersonRoles = new string[] { "2428f4d9-f26d-4112-9d56-1c940748df69" };
             var personRoleArray = (JArray)siteDirectory[PropertyNames.PersonRole];
             IList<string> personRoles = personRoleArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedPersonRoles, personRoles);
+            Assert.That(personRoles, Is.EquivalentTo(expectedPersonRoles));
 
             var expectedlogEntries = new string[]
             {
@@ -92,12 +92,12 @@ namespace WebservicesIntegrationTests
             };
             var logEntryArray = (JArray)siteDirectory[PropertyNames.LogEntry];
             IList<string> logEntries = logEntryArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedlogEntries, logEntries);
+            Assert.That(logEntries, Is.EquivalentTo(expectedlogEntries));
 
             var expecteddomainGroups = new string[] { "86992db5-8ce2-4431-8ff5-6fe794d14687" };
             var domainGroupArray = (JArray)siteDirectory[PropertyNames.DomainGroup];
             IList<string> domainGroups = domainGroupArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expecteddomainGroups, domainGroups);
+            Assert.That(domainGroups, Is.EquivalentTo(expecteddomainGroups));
 
             var expectedDomains = new string[]
             {
@@ -106,12 +106,12 @@ namespace WebservicesIntegrationTests
             };
             var domainArray = (JArray)siteDirectory[PropertyNames.Domain];
             IList<string> domains = domainArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedDomains, domains);
+            Assert.That(domains, Is.EquivalentTo(expectedDomains));
 
             var expectedNaturalLanguages = new string[] { "73bf30cc-3573-488f-8746-6c03ba47973e" };
             var naturalLanguageArray = (JArray)siteDirectory[PropertyNames.NaturalLanguage];
             IList<string> naturalLanguages = naturalLanguageArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedNaturalLanguages, naturalLanguages);
+            Assert.That(naturalLanguages, Is.EquivalentTo(expectedNaturalLanguages));
 
             //Definition
             var definition = jArray.Single(x => (string)x[PropertyNames.Iid] == "23658615-a170-4c0f-ba71-da1a15c736ca");
@@ -129,17 +129,17 @@ namespace WebservicesIntegrationTests
             var expectedCitations = new string[] { "b80c270b-8c00-4ed1-979e-9b72611aa6a0" };
             var citationsArray = (JArray)definition[PropertyNames.Citation];
             IList<string> citations = citationsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedCitations, citations);
+            Assert.That(citations, Is.EquivalentTo(expectedCitations));
 
             var expectedExamples = new string[] { };
             var examplesArray = (JArray)definition[PropertyNames.Example];
             IList<string> examples = examplesArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedExamples, examples);
+            Assert.That(examples, Is.EquivalentTo(expectedExamples));
 
             var expectedNotes = new List<OrderedItem> { };
             var notesArray = (JArray)definition[PropertyNames.Note];
             IList<string> notes = notesArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedNotes, notes);
+            Assert.That(notes, Is.EquivalentTo(expectedNotes));
 
             //Citation
             var citation = jArray.Single(x => (string)x[PropertyNames.Iid] == "b80c270b-8c00-4ed1-979e-9b72611aa6a0");

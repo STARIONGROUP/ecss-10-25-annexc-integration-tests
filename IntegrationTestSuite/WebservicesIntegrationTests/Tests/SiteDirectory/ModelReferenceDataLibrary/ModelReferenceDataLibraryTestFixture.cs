@@ -109,7 +109,7 @@ namespace WebservicesIntegrationTests
             };
             var rulesArray = (JArray) siteRdl[PropertyNames.Rule];
             IList<string> rulesList = rulesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedRules, rulesList);
+            Assert.That(rulesList, Is.EquivalentTo(expectedRules));
 
             //ModelReferenceDataLibrary properties
             var modelRdl = jArray.Single(x => (string) x[PropertyNames.Iid] == "3483f2b5-ea29-45cc-8a46-f5f598558fc3");
@@ -121,7 +121,7 @@ namespace WebservicesIntegrationTests
             };
             rulesArray = (JArray) modelRdl[PropertyNames.Rule];
             IList<string> rules = rulesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedRules, rules);
+            Assert.That(rules, Is.EquivalentTo(expectedRules));
         }
 
         [Test]
@@ -159,7 +159,7 @@ namespace WebservicesIntegrationTests
             };
             var rulesArray = (JArray) siteRdl[PropertyNames.Rule];
             IList<string> rulesList = rulesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedRules, rulesList);
+            Assert.That(rulesList, Is.EquivalentTo(expectedRules));
 
             var expectedDefinedCategories = new string[]
             {
@@ -171,7 +171,7 @@ namespace WebservicesIntegrationTests
             };
             var definedCategoriesArray = (JArray) siteRdl["definedCategory"];
             IList<string> definedCategoriesList = definedCategoriesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedDefinedCategories, definedCategoriesList);
+            Assert.That(definedCategoriesList, Is.EquivalentTo(expectedDefinedCategories));
 
             //ModelReferenceDataLibrary properties
             var modelRdl = jArray.Single(x => (string) x[PropertyNames.Iid] == "3483f2b5-ea29-45cc-8a46-f5f598558fc3");
@@ -183,12 +183,12 @@ namespace WebservicesIntegrationTests
             };
             rulesArray = (JArray) modelRdl[PropertyNames.Rule];
             IList<string> rules = rulesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedRules, rules);
+            Assert.That(rules, Is.EquivalentTo(expectedRules));
 
             expectedDefinedCategories = new string[] {};
             definedCategoriesArray = (JArray) modelRdl[PropertyNames.DefinedCategory];
             IList<string> definedCategories = definedCategoriesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedDefinedCategories, definedCategories);
+            Assert.That(definedCategories, Is.EquivalentTo(expectedDefinedCategories));
         }
 
         /// <summary>
@@ -222,52 +222,52 @@ namespace WebservicesIntegrationTests
             };
             var definedCategoriesArray = (JArray) modelReferenceDataLibrary[PropertyNames.DefinedCategory];
             IList<string> definedCategories = definedCategoriesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedDefinedCategories, definedCategories);
+            Assert.That(definedCategories, Is.EquivalentTo(expectedDefinedCategories));
 
             var expectedParameterTypes = new string[] {};
             var parameterTypesArray = (JArray) modelReferenceDataLibrary[PropertyNames.ParameterType];
             IList<string> parameterTypes = parameterTypesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedParameterTypes, parameterTypes);
+            Assert.That(parameterTypes, Is.EquivalentTo(expectedParameterTypes));
 
             var expectedBaseQuantityKinds = new string[] {};
             var baseQuantityKindsArray = (JArray) modelReferenceDataLibrary[PropertyNames.BaseQuantityKind];
             IList<string> baseQuantityKinds = baseQuantityKindsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedBaseQuantityKinds, baseQuantityKinds);
+            Assert.That(baseQuantityKinds, Is.EquivalentTo(expectedBaseQuantityKinds));
 
             var expectedScales = new string[] {};
             var scalesArray = (JArray) modelReferenceDataLibrary[PropertyNames.Scale];
             IList<string> scales = scalesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedScales, scales);
+            Assert.That(scales, Is.EquivalentTo(expectedScales));
 
             var expectedUnitPrefixes = new string[] {};
             var unitPrefixesArray = (JArray) modelReferenceDataLibrary[PropertyNames.UnitPrefix];
             IList<string> unitPrefixes = unitPrefixesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedUnitPrefixes, unitPrefixes);
+            Assert.That(unitPrefixes, Is.EquivalentTo(expectedUnitPrefixes));
 
             var expectedUnits = new string[] {};
             var unitsArray = (JArray) modelReferenceDataLibrary[PropertyNames.Unit];
             IList<string> units = unitsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedUnits, units);
+            Assert.That(units, Is.EquivalentTo(expectedUnits));
 
             var expectedBaseUnits = new string[] {};
             var baseUnitsArray = (JArray) modelReferenceDataLibrary[PropertyNames.BaseUnit];
             IList<string> baseUnits = baseUnitsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedBaseUnits, baseUnits);
+            Assert.That(baseUnits, Is.EquivalentTo(expectedBaseUnits));
 
             var expectedFileTypes = new string[] {};
             var fileTypesArray = (JArray) modelReferenceDataLibrary[PropertyNames.FileType];
             IList<string> fileTypes = fileTypesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedFileTypes, fileTypes);
+            Assert.That(fileTypes, Is.EquivalentTo(expectedFileTypes));
 
             var expectedGlossaries = new string[] {};
             var glossariesArray = (JArray) modelReferenceDataLibrary[PropertyNames.Glossary];
             IList<string> glossaries = glossariesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedGlossaries, glossaries);
+            Assert.That(glossaries, Is.EquivalentTo(expectedGlossaries));
 
             var expectedReferenceSources = new string[] {};
             var referenceSourcesArray = (JArray) modelReferenceDataLibrary[PropertyNames.ReferenceSource];
             IList<string> referenceSources = referenceSourcesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedReferenceSources, referenceSources);
+            Assert.That(referenceSources, Is.EquivalentTo(expectedReferenceSources));
 
             var expectedRules = new string[]
             {
@@ -276,27 +276,27 @@ namespace WebservicesIntegrationTests
             };
             var rulesArray = (JArray) modelReferenceDataLibrary[PropertyNames.Rule];
             IList<string> rules = rulesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedRules, rules);
+            Assert.That(rules, Is.EquivalentTo(expectedRules));
 
             var expectedConstants = new string[] {};
             var constantsArray = (JArray) modelReferenceDataLibrary[PropertyNames.Constant];
             IList<string> constants = constantsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedConstants, constants);
+            Assert.That(constants, Is.EquivalentTo(expectedConstants));
 
             var expectedAliases = new string[] {};
             var aliasesArray = (JArray) modelReferenceDataLibrary[PropertyNames.Alias];
             IList<string> aliases = aliasesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedAliases, aliases);
+            Assert.That(aliases, Is.EquivalentTo(expectedAliases));
 
             var expectedDefinitions = new string[] {};
             var definitionsArray = (JArray) modelReferenceDataLibrary[PropertyNames.Definition];
             IList<string> definitions = definitionsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedDefinitions, definitions);
+            Assert.That(definitions, Is.EquivalentTo(expectedDefinitions));
 
             var expectedHyperlinks = new string[] {};
             var hyperlinksArray = (JArray) modelReferenceDataLibrary[PropertyNames.HyperLink];
             IList<string> h = hyperlinksArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedHyperlinks, h);
+            Assert.That(h, Is.EquivalentTo(expectedHyperlinks));
         }
     }
 }

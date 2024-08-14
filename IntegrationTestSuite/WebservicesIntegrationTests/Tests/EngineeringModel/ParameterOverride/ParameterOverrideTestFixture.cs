@@ -104,7 +104,7 @@ namespace WebservicesIntegrationTests
             };
             var parameterOverridesArray = (JArray) elementUsage[PropertyNames.ParameterOverride];
             IList<string> parameterOverrides = parameterOverridesArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedParameterOverrides, parameterOverrides);
+            Assert.That(parameterOverrides, Is.EquivalentTo(expectedParameterOverrides));
 
             // get the added ParameterOverride from the result by it's unique id
             var parameterOverride = jArray.Single(x => (string)x[PropertyNames.Iid] == "3587bb05-0db4-4741-b5e3-da43393e13ed");
@@ -121,7 +121,7 @@ namespace WebservicesIntegrationTests
             var expectedParameterOverrideSubscriptions = new string[] { };
             var expectedParameterOverrideSubscriptionsArray = (JArray)parameterOverride[PropertyNames.ParameterSubscription];
             IList<string> parameterSubscriptions = expectedParameterOverrideSubscriptionsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedParameterOverrideSubscriptions, parameterSubscriptions);
+            Assert.That(parameterSubscriptions, Is.EquivalentTo(expectedParameterOverrideSubscriptions));
             
             var valueSetsArray = (JArray)parameterOverride[PropertyNames.ValueSet];
             IList<string> valueSets = valueSetsArray.Select(x => (string)x).ToList();
@@ -229,7 +229,7 @@ namespace WebservicesIntegrationTests
             var expectedParameterOverrideSubscriptions = new string[] { };
             var expectedParameterOverrideSubscriptionsArray = (JArray)parameterOverride[PropertyNames.ParameterSubscription];
             IList<string> parameterSubscriptions = expectedParameterOverrideSubscriptionsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedParameterOverrideSubscriptions, parameterSubscriptions);
+            Assert.That(parameterSubscriptions, Is.EquivalentTo(expectedParameterOverrideSubscriptions));
             Assert.That(parameterSubscriptions.Count, Is.EqualTo(0));
 
             //----------------------------------------------------------------------------------------------------
@@ -280,7 +280,7 @@ namespace WebservicesIntegrationTests
             var expectedParameterSubscriptions = new string[] {};
             var parameterSubscriptionsArray = (JArray) parameterOverride[PropertyNames.ParameterSubscription];
             IList<string> parameterSubscriptions = parameterSubscriptionsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedParameterSubscriptions, parameterSubscriptions);
+            Assert.That(parameterSubscriptions, Is.EquivalentTo(expectedParameterSubscriptions));
 
             var expectedValueSets = new string[]
             {
@@ -288,7 +288,7 @@ namespace WebservicesIntegrationTests
             };
             var valueSetsArray = (JArray) parameterOverride[PropertyNames.ValueSet];
             IList<string> valueSets = valueSetsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedValueSets, valueSets);
+            Assert.That(valueSets, Is.EquivalentTo(expectedValueSets));
         }
     }
 }

@@ -105,9 +105,7 @@ namespace WebservicesIntegrationTests
             var reorderedDimensions = JsonConvert.DeserializeObject<List<OrderedItem>>(
                 arrayParameterType[PropertyNames.Dimension].ToString());
 
-            CollectionAssert.AreEquivalent(
-                expectedReorderedDimensions,
-                reorderedDimensions);
+            Assert.That(reorderedDimensions, Is.EquivalentTo(expectedReorderedDimensions));
 
             //Remove Dimension
             postBodyPath = this.GetPath("Tests/SiteDirectory/ArrayParameterType/PostDeleteDimension.json");
@@ -127,9 +125,7 @@ namespace WebservicesIntegrationTests
             var dimensions = JsonConvert.DeserializeObject<List<OrderedItem>>(
                 arrayParameterType[PropertyNames.Dimension].ToString());
 
-            CollectionAssert.AreEquivalent(
-                expectedDimensions,
-                dimensions);
+            Assert.That(dimensions, Is.EquivalentTo(expectedDimensions));
         }
 
         [Test]
@@ -193,7 +189,7 @@ namespace WebservicesIntegrationTests
             var componentsArray = JsonConvert.DeserializeObject<List<OrderedItem>>(
                 arrayParameterType[PropertyNames.Component].ToString());
 
-            CollectionAssert.AreEquivalent(expectedComponents, componentsArray);
+            Assert.That(componentsArray, Is.EquivalentTo(expectedComponents));
 
             Assert.IsFalse((bool) arrayParameterType[PropertyNames.IsTensor]);
 
@@ -205,27 +201,27 @@ namespace WebservicesIntegrationTests
             var dimensionsArray = JsonConvert.DeserializeObject<List<OrderedItem>>(
                 arrayParameterType[PropertyNames.Dimension].ToString());
 
-            CollectionAssert.AreEquivalent(expectedDimensions, dimensionsArray);
+            Assert.That(dimensionsArray, Is.EquivalentTo(expectedDimensions));
 
             var expectedCategories = new string[] { };
             var categoriesArray = (JArray) arrayParameterType[PropertyNames.Category];
             IList<string> categories = categoriesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedCategories, categories);
+            Assert.That(categories, Is.EquivalentTo(expectedCategories));
 
             var expectedAliases = new string[] { };
             var aliasesArray = (JArray) arrayParameterType[PropertyNames.Alias];
             IList<string> aliases = aliasesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedAliases, aliases);
+            Assert.That(aliases, Is.EquivalentTo(expectedAliases));
 
             var expectedDefinitions = new string[] { };
             var definitionsArray = (JArray) arrayParameterType[PropertyNames.Definition];
             IList<string> definitions = definitionsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedDefinitions, definitions);
+            Assert.That(definitions, Is.EquivalentTo(expectedDefinitions));
 
             var expectedHyperlinks = new string[] { };
             var hyperlinksArray = (JArray) arrayParameterType[PropertyNames.HyperLink];
             IList<string> h = hyperlinksArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedHyperlinks, h);
+            Assert.That(h, Is.EquivalentTo(expectedHyperlinks));
         }
     }
 }

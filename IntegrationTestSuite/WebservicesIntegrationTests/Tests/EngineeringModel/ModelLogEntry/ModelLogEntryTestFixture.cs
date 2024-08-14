@@ -93,12 +93,12 @@ namespace WebservicesIntegrationTests
             var expectedCategories = new string[] {};
             var categoriesArray = (JArray) modelLogEntry[PropertyNames.Category];
             IList<string> categories = categoriesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedCategories, categories);
+            Assert.That(categories, Is.EquivalentTo(expectedCategories));
 
             var expectedaffectedItemIids = new string[] {};
             var affectedItemIidsArray = (JArray) modelLogEntry[PropertyNames.AffectedItemIid];
             IList<string> affectedItemIids = affectedItemIidsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedaffectedItemIids, affectedItemIids);
+            Assert.That(affectedItemIids, Is.EquivalentTo(expectedaffectedItemIids));
         }
     }
 }

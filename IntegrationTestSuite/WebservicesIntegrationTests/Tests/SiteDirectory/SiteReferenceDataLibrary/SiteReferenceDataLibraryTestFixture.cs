@@ -145,17 +145,17 @@ namespace WebservicesIntegrationTests
             var expectedAliases = new string[] {};
             var aliasesArray = (JArray) siteReferenceDataLibrary["alias"];
             IList<string> aliases = aliasesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedAliases, aliases);
+            Assert.That(aliases, Is.EquivalentTo(expectedAliases));
 
             var expectedDefinitions = new string[] {};
             var definitionsArray = (JArray) siteReferenceDataLibrary["definition"];
             IList<string> definitions = definitionsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedDefinitions, definitions);
+            Assert.That(definitions, Is.EquivalentTo(expectedDefinitions));
 
             var expectedHyperlinks = new string[] {};
             var hyperlinksArray = (JArray) siteReferenceDataLibrary["hyperLink"];
             IList<string> h = hyperlinksArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedHyperlinks, h);
+            Assert.That(h, Is.EquivalentTo(expectedHyperlinks));
 
             var expectedDefinedCategories = new string[]
             {
@@ -165,7 +165,7 @@ namespace WebservicesIntegrationTests
             };
             var definedCategoriesArray = (JArray) siteReferenceDataLibrary["definedCategory"];
             IList<string> definedCategoriesList = definedCategoriesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedDefinedCategories, definedCategoriesList);
+            Assert.That(definedCategoriesList, Is.EquivalentTo(expectedDefinedCategories));
 
             var expectedParameterTypes = new string[]
             {

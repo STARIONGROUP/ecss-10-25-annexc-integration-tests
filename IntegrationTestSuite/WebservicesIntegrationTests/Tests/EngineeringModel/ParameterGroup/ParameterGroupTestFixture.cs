@@ -97,7 +97,7 @@ namespace WebservicesIntegrationTests
             var expectedParameterGroups = new string[] { };
             var parameterGroupsArray = (JArray)elementDefinition[PropertyNames.ParameterGroup];
             IList<string> parameterGroups = parameterGroupsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedParameterGroups, parameterGroups);
+            Assert.That(parameterGroups, Is.EquivalentTo(expectedParameterGroups));
 
             // get a specific Parameter from the result by it's unique id
             var parameter = jArray.Single(x => (string)x[PropertyNames.Iid] == "6c5aff74-f983-4aa8-a9d6-293b3429307c");

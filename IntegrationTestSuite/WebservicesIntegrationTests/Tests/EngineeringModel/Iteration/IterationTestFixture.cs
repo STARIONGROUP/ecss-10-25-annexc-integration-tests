@@ -151,7 +151,7 @@ namespace WebservicesIntegrationTests
 
             var iterationSetupsArray = (JArray)engineeringModelSetup[PropertyNames.IterationSetup];
             IList<string> iterationSetups = iterationSetupsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedIterationSetups, iterationSetups);
+            Assert.That(iterationSetups, Is.EquivalentTo(expectedIterationSetups));
 
             //IterationSetups properties
             //Existing iterationSetup
@@ -196,7 +196,7 @@ namespace WebservicesIntegrationTests
 
             var iterationsArray = (JArray)engineeringModel[PropertyNames.Iteration];
             IList<string> iterations = iterationsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedIterations, iterations);
+            Assert.That(iterations, Is.EquivalentTo(expectedIterations));
 
             // GET Iteration
             var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/699da906-d22e-4969-b606-1fcb4bf5affd");
@@ -227,7 +227,7 @@ namespace WebservicesIntegrationTests
             var optionsArray = JsonConvert.DeserializeObject<List<OrderedItem>>(
                 iteration[PropertyNames.Option].ToString());
 
-            CollectionAssert.AreEquivalent(expectedOptions, optionsArray);
+            Assert.That(optionsArray, Is.EquivalentTo(expectedOptions));
 
             var expectedPublications = new string[]
             {
@@ -245,7 +245,7 @@ namespace WebservicesIntegrationTests
 
             var possibleFiniteStateListsArray = (JArray)iteration[PropertyNames.PossibleFiniteStateList];
             IList<string> possibleFiniteStateLists = possibleFiniteStateListsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedPossibleFiniteStateLists, possibleFiniteStateLists);
+            Assert.That(possibleFiniteStateLists, Is.EquivalentTo(expectedPossibleFiniteStateLists));
 
             Assert.That((string)iteration[PropertyNames.TopElement], Is.Null);
 
@@ -257,7 +257,7 @@ namespace WebservicesIntegrationTests
 
             var elementsArray = (JArray)iteration[PropertyNames.Element];
             IList<string> elements = elementsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedElements, elements);
+            Assert.That(elements, Is.EquivalentTo(expectedElements));
 
             var expectedRelationships = new string[]
             {
@@ -266,7 +266,7 @@ namespace WebservicesIntegrationTests
 
             var relationshipsArray = (JArray)iteration[PropertyNames.Relationship];
             IList<string> relationships = relationshipsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedRelationships, relationships);
+            Assert.That(relationships, Is.EquivalentTo(expectedRelationships));
 
             var expectedExternalIdentifierMaps = new string[]
             {
@@ -275,7 +275,7 @@ namespace WebservicesIntegrationTests
 
             var externalIdentifierMapsArray = (JArray)iteration[PropertyNames.ExternalIdentifierMap];
             IList<string> externalIdentifierMaps = externalIdentifierMapsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedExternalIdentifierMaps, externalIdentifierMaps);
+            Assert.That(externalIdentifierMaps, Is.EquivalentTo(expectedExternalIdentifierMaps));
 
             var expectedRequirementsSpecifications = new string[]
             {
@@ -285,7 +285,7 @@ namespace WebservicesIntegrationTests
 
             var requirementsSpecificationsArray = (JArray)iteration[PropertyNames.RequirementsSpecification];
             IList<string> requirementsSpecifications = requirementsSpecificationsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedRequirementsSpecifications, requirementsSpecifications);
+            Assert.That(requirementsSpecifications, Is.EquivalentTo(expectedRequirementsSpecifications));
 
             var expectedDomainFileStores = new string[]
             {
@@ -294,12 +294,12 @@ namespace WebservicesIntegrationTests
 
             var domainFileStoresArray = (JArray)iteration[PropertyNames.DomainFileStore];
             IList<string> domainFileStores = domainFileStoresArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedDomainFileStores, domainFileStores);
+            Assert.That(domainFileStores, Is.EquivalentTo(expectedDomainFileStores));
 
             var expectedActualFiniteStateLists = new string[] { "db690d7d-761c-47fd-96d3-840d698a89dc" };
             var actualFiniteStateListsArray = (JArray)iteration[PropertyNames.ActualFiniteStateList];
             IList<string> actualFiniteStateLists = actualFiniteStateListsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedActualFiniteStateLists, actualFiniteStateLists);
+            Assert.That(actualFiniteStateLists, Is.EquivalentTo(expectedActualFiniteStateLists));
 
             Assert.That((string)iteration[PropertyNames.DefaultOption], Is.EqualTo("bebcc9f4-ff20-4569-bbf6-d1acf27a8107"));
 
@@ -310,7 +310,7 @@ namespace WebservicesIntegrationTests
 
             var ruleVerificationListsArray = (JArray)iteration[PropertyNames.RuleVerificationList];
             IList<string> ruleVerificationLists = ruleVerificationListsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedRuleVerificationLists, ruleVerificationLists);
+            Assert.That(ruleVerificationLists, Is.EquivalentTo(expectedRuleVerificationLists));
         }
 
         [Test]
@@ -403,7 +403,7 @@ namespace WebservicesIntegrationTests
 
             var iterationsArray = (JArray)engineeringModel[PropertyNames.Iteration];
             IList<string> iterations = iterationsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedIterations, iterations);
+            Assert.That(iterations, Is.EquivalentTo(expectedIterations));
 
             //PostDelete iterationSetup
             var iterationSetupUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/model/116f6253-89bb-47d4-aa24-d11d197e43c9");
@@ -463,7 +463,7 @@ namespace WebservicesIntegrationTests
 
             iterationsArray = (JArray)engineeringModel[PropertyNames.Iteration];
             iterations = iterationsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedIterations, iterations);
+            Assert.That(iterations, Is.EquivalentTo(expectedIterations));
 
             var deletedIterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
 
@@ -539,7 +539,7 @@ namespace WebservicesIntegrationTests
             var optionsArray = JsonConvert.DeserializeObject<List<OrderedItem>>(
                 iteration[PropertyNames.Option].ToString());
 
-            CollectionAssert.AreEquivalent(expectedOptions, optionsArray);
+            Assert.That(optionsArray, Is.EquivalentTo(expectedOptions));
 
             var expectedPublications = new string[]
             {
@@ -548,7 +548,7 @@ namespace WebservicesIntegrationTests
 
             var publicationsArray = (JArray)iteration[PropertyNames.Publication];
             IList<string> publications = publicationsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedPublications, publications);
+            Assert.That(publications, Is.EquivalentTo(expectedPublications));
 
             var expectedPossibleFiniteStateLists = new string[]
             {
@@ -557,7 +557,7 @@ namespace WebservicesIntegrationTests
 
             var possibleFiniteStateListsArray = (JArray)iteration[PropertyNames.PossibleFiniteStateList];
             IList<string> possibleFiniteStateLists = possibleFiniteStateListsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedPossibleFiniteStateLists, possibleFiniteStateLists);
+            Assert.That(possibleFiniteStateLists, Is.EquivalentTo(expectedPossibleFiniteStateLists));
 
             Assert.That((string)iteration[PropertyNames.TopElement], Is.Null);
 
@@ -569,7 +569,7 @@ namespace WebservicesIntegrationTests
 
             var elementsArray = (JArray)iteration[PropertyNames.Element];
             IList<string> elements = elementsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedElements, elements);
+            Assert.That(elements, Is.EquivalentTo(expectedElements));
 
             var expectedRelationships = new string[]
             {
@@ -579,7 +579,7 @@ namespace WebservicesIntegrationTests
 
             var relationshipsArray = (JArray)iteration[PropertyNames.Relationship];
             IList<string> relationships = relationshipsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedRelationships, relationships);
+            Assert.That(relationships, Is.EquivalentTo(expectedRelationships));
 
             var expectedExternalIdentifierMaps = new string[]
             {
@@ -588,14 +588,14 @@ namespace WebservicesIntegrationTests
 
             var externalIdentifierMapsArray = (JArray)iteration[PropertyNames.ExternalIdentifierMap];
             IList<string> externalIdentifierMaps = externalIdentifierMapsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedExternalIdentifierMaps, externalIdentifierMaps);
+            Assert.That(externalIdentifierMaps, Is.EquivalentTo(expectedExternalIdentifierMaps));
 
             var expectedRequirementsSpecifications = new string[]
                 { "bf0cde90-9086-43d5-bcff-32a2f8331800", "8d0734f4-ca4b-4611-9187-f6970e2b02bc" };
 
             var requirementsSpecificationsArray = (JArray)iteration[PropertyNames.RequirementsSpecification];
             IList<string> requirementsSpecifications = requirementsSpecificationsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedRequirementsSpecifications, requirementsSpecifications);
+            Assert.That(requirementsSpecifications, Is.EquivalentTo(expectedRequirementsSpecifications));
 
             var expectedDomainFileStores = new string[]
             {
@@ -604,12 +604,12 @@ namespace WebservicesIntegrationTests
 
             var domainFileStoresArray = (JArray)iteration[PropertyNames.DomainFileStore];
             IList<string> domainFileStores = domainFileStoresArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedDomainFileStores, domainFileStores);
+            Assert.That(domainFileStores, Is.EquivalentTo(expectedDomainFileStores));
 
             var expectedActualFiniteStateLists = new string[] { "db690d7d-761c-47fd-96d3-840d698a89dc" };
             var actualFiniteStateListsArray = (JArray)iteration[PropertyNames.ActualFiniteStateList];
             IList<string> actualFiniteStateLists = actualFiniteStateListsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedActualFiniteStateLists, actualFiniteStateLists);
+            Assert.That(actualFiniteStateLists, Is.EquivalentTo(expectedActualFiniteStateLists));
 
             Assert.That((string)iteration[PropertyNames.DefaultOption], Is.EqualTo("bebcc9f4-ff20-4569-bbf6-d1acf27a8107"));
 
@@ -620,7 +620,7 @@ namespace WebservicesIntegrationTests
 
             var ruleVerificationListsArray = (JArray)iteration[PropertyNames.RuleVerificationList];
             IList<string> ruleVerificationLists = ruleVerificationListsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedRuleVerificationLists, ruleVerificationLists);
+            Assert.That(ruleVerificationLists, Is.EquivalentTo(expectedRuleVerificationLists));
         }
 
         [Test]

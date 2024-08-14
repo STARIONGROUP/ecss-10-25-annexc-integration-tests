@@ -143,17 +143,17 @@ namespace WebservicesIntegrationTests
             var expectedCommonFileStores = new string[] { "8e5ca9cc-3da8-4e66-9172-7c3b2464a59c" };
             var commonFileStoreArray = (JArray)engineeringModel[PropertyNames.CommonFileStore];
             IList<string> commonFileStores = commonFileStoreArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedCommonFileStores, commonFileStores);
+            Assert.That(commonFileStores, Is.EquivalentTo(expectedCommonFileStores));
 
             var expectedIterations = new string[] { "e163c5ad-f32b-4387-b805-f4b34600bc2c" };
             var iterationArray = (JArray)engineeringModel[PropertyNames.Iteration];
             IList<string> iterations = iterationArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedIterations, iterations);
+            Assert.That(iterations, Is.EquivalentTo(expectedIterations));
 
             var expectedLogEntries = new string[] { "4e2375eb-8e37-4df2-9c7b-dd896683a891" };
             var logEntryArray = (JArray)engineeringModel[PropertyNames.LogEntry];
             IList<string> logEntries = logEntryArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedLogEntries, logEntries);
+            Assert.That(logEntries, Is.EquivalentTo(expectedLogEntries));
         }
     }
 }

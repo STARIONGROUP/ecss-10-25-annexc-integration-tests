@@ -106,7 +106,7 @@ namespace WebservicesIntegrationTests
             };
             var correspondenceArray = (JArray) externalIdentifierMap[PropertyNames.Correspondence];
             IList<string> correspondence = correspondenceArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedCorrespondence, correspondence);
+            Assert.That(correspondence, Is.EquivalentTo(expectedCorrespondence));
         }
     }
 }

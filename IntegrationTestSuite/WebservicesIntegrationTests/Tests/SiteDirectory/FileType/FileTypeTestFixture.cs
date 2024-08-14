@@ -99,22 +99,22 @@ namespace WebservicesIntegrationTests
             var expectedCategories = new string[] {};
             var categoriesArray = (JArray)fileType[PropertyNames.Category];
             IList<string> containedCategories = categoriesArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedCategories, containedCategories);
+            Assert.That(containedCategories, Is.EquivalentTo(expectedCategories));
 
             var expectedAliases = new string[] { };
             var aliasesArray = (JArray)fileType[PropertyNames.Alias];
             IList<string> aliases = aliasesArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedAliases, aliases);
+            Assert.That(aliases, Is.EquivalentTo(expectedAliases));
 
             var expectedDefinitions = new string[] { };
             var definitionsArray = (JArray)fileType[PropertyNames.Definition];
             IList<string> definitions = definitionsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedDefinitions, definitions);
+            Assert.That(definitions, Is.EquivalentTo(expectedDefinitions));
 
             var expectedHyperlinks = new string[] { };
             var hyperlinksArray = (JArray)fileType[PropertyNames.HyperLink];
             IList<string> h = hyperlinksArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedHyperlinks, h);
+            Assert.That(h, Is.EquivalentTo(expectedHyperlinks));
 
             // get a specific FileType from the result by it's unique id
             fileType = jArray.Single(x => (string)x[PropertyNames.Iid] == "b16894e4-acb5-4e81-a118-16c00eb86d8f");
@@ -135,22 +135,22 @@ namespace WebservicesIntegrationTests
             expectedCategories = new string[] { };
             categoriesArray = (JArray)fileType[PropertyNames.Category];
             containedCategories = categoriesArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedCategories, containedCategories);
+            Assert.That(containedCategories, Is.EquivalentTo(expectedCategories));
 
             expectedAliases = new string[] { };
             aliasesArray = (JArray)fileType[PropertyNames.Alias];
             aliases = aliasesArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedAliases, aliases);
+            Assert.That(aliases, Is.EquivalentTo(expectedAliases));
 
             expectedDefinitions = new string[] { };
             definitionsArray = (JArray)fileType[PropertyNames.Definition];
             definitions = definitionsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedDefinitions, definitions);
+            Assert.That(definitions, Is.EquivalentTo(expectedDefinitions));
 
             expectedHyperlinks = new string[] { };
             hyperlinksArray = (JArray)fileType[PropertyNames.HyperLink];
             h = hyperlinksArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedHyperlinks, h);
+            Assert.That(h, Is.EquivalentTo(expectedHyperlinks));
 
             // get a specific FileType from the result by it's unique id
             fileType =
@@ -172,22 +172,22 @@ namespace WebservicesIntegrationTests
             expectedCategories = new string[] { };
             categoriesArray = (JArray)fileType[PropertyNames.Category];
             containedCategories = categoriesArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedCategories, containedCategories);
+            Assert.That(containedCategories, Is.EquivalentTo(expectedCategories));
 
             expectedAliases = new string[] { };
             aliasesArray = (JArray)fileType[PropertyNames.Alias];
             aliases = aliasesArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedAliases, aliases);
+            Assert.That(aliases, Is.EquivalentTo(expectedAliases));
 
             expectedDefinitions = new string[] { };
             definitionsArray = (JArray)fileType[PropertyNames.Definition];
             definitions = definitionsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedDefinitions, definitions);
+            Assert.That(definitions, Is.EquivalentTo(expectedDefinitions));
 
             expectedHyperlinks = new string[] { };
             hyperlinksArray = (JArray)fileType[PropertyNames.HyperLink];
             h = hyperlinksArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedHyperlinks, h);
+            Assert.That(h, Is.EquivalentTo(expectedHyperlinks));
         }
     }
 }

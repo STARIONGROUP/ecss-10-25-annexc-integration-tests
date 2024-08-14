@@ -98,7 +98,7 @@ namespace WebservicesIntegrationTests
 
             var filesArray = (JArray) commonFileStore[PropertyNames.File];
             IList<string> files = filesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedFiles, files);
+            Assert.That(files, Is.EquivalentTo(expectedFiles));
 
             var expectedFolders = new string[]
             {
@@ -107,7 +107,7 @@ namespace WebservicesIntegrationTests
 
             var foldersArray = (JArray) commonFileStore[PropertyNames.Folder];
             IList<string> folders = foldersArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedFolders, folders);
+            Assert.That(folders, Is.EquivalentTo(expectedFolders));
         }
     }
 }

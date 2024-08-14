@@ -103,7 +103,7 @@ namespace WebservicesIntegrationTests
 
             var actualFiniteStateListsArray = (JArray) iteration[PropertyNames.ActualFiniteStateList];
             IList<string> actualFiniteStateLists = actualFiniteStateListsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedActualFiniteStateLists, actualFiniteStateLists);
+            Assert.That(actualFiniteStateLists, Is.EquivalentTo(expectedActualFiniteStateLists));
 
             var actualFiniteStateList = jArray.Single(
                 x => (string) x[PropertyNames.Iid] == "f4640b3f-7840-4cfc-9a15-80127f91c8db");
@@ -124,12 +124,12 @@ namespace WebservicesIntegrationTests
                 JsonConvert.DeserializeObject<List<OrderedItem>>(
                     actualFiniteStateList[PropertyNames.PossibleFiniteStateList].ToString());
 
-            CollectionAssert.AreEquivalent(expectedPossibleFiniteStateLists, possibleFiniteStateLists);
+            Assert.That(possibleFiniteStateLists, Is.EquivalentTo(expectedPossibleFiniteStateLists));
 
             var expectedExcludedOptions = new string[] { };
             var excludedOptionsArray = (JArray) actualFiniteStateList[PropertyNames.ExcludeOption];
             IList<string> excludedOptions = excludedOptionsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedExcludedOptions, excludedOptions);
+            Assert.That(excludedOptions, Is.EquivalentTo(expectedExcludedOptions));
 
             // get the created ActualState as a side effect of creating ActualFiniteStateList from the result 
             var actualStatesArray = (JArray) actualFiniteStateList[PropertyNames.ActualState];
@@ -150,7 +150,7 @@ namespace WebservicesIntegrationTests
             var expectedPossibleStates = new[] { "b8fdfac4-1c40-475a-ac6c-968654b689b6" };
             var possibleStateArray = (JArray) actualFiniteState[PropertyNames.PossibleState];
             IList<string> possibleStates = possibleStateArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedPossibleStates, possibleStates);
+            Assert.That(possibleStates, Is.EquivalentTo(expectedPossibleStates));
         }
 
         [Test]
@@ -181,7 +181,7 @@ namespace WebservicesIntegrationTests
 
             var possibleFiniteStateListsArray = (JArray) iteration[PropertyNames.PossibleFiniteStateList];
             IList<string> possibleFiniteStateLists = possibleFiniteStateListsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedPossibleFiniteStateLists, possibleFiniteStateLists);
+            Assert.That(possibleFiniteStateLists, Is.EquivalentTo(expectedPossibleFiniteStateLists));
 
             var possibleFiniteStateList = jArray.Single(
                 x => (string) x[PropertyNames.Iid] == "bf42cb66-f340-4764-ab48-a3938a7c59eb");
@@ -212,7 +212,7 @@ namespace WebservicesIntegrationTests
                 JsonConvert.DeserializeObject<List<OrderedItem>>(
                     possibleFiniteStateList[PropertyNames.PossibleState].ToString());
 
-            CollectionAssert.AreEquivalent(expectedPossibleFiniteStates, possibleFiniteStates);
+            Assert.That(possibleFiniteStates, Is.EquivalentTo(expectedPossibleFiniteStates));
 
             Assert.AreEqual(
                 "20f4d6aa-f9d3-4e91-aae9-bfbe77ae9b79",
@@ -221,22 +221,22 @@ namespace WebservicesIntegrationTests
             var expectedCategories = new string[] { };
             var categoriesArray = (JArray) possibleFiniteStateList[PropertyNames.Category];
             IList<string> categories = categoriesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedCategories, categories);
+            Assert.That(categories, Is.EquivalentTo(expectedCategories));
 
             var expectedAliases = new string[] { };
             var aliasesArray = (JArray) possibleFiniteStateList[PropertyNames.Alias];
             IList<string> aliases = aliasesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedAliases, aliases);
+            Assert.That(aliases, Is.EquivalentTo(expectedAliases));
 
             var expectedDefinitions = new string[] { };
             var definitionsArray = (JArray) possibleFiniteStateList[PropertyNames.Definition];
             IList<string> definitions = definitionsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedDefinitions, definitions);
+            Assert.That(definitions, Is.EquivalentTo(expectedDefinitions));
 
             var expectedHyperlinks = new string[] { };
             var hyperlinksArray = (JArray) possibleFiniteStateList[PropertyNames.HyperLink];
             IList<string> h = hyperlinksArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedHyperlinks, h);
+            Assert.That(h, Is.EquivalentTo(expectedHyperlinks));
 
             // Check PossibleFiniteStates
             var possibleFiniteState = jArray.Single(
@@ -255,17 +255,17 @@ namespace WebservicesIntegrationTests
             expectedAliases = new string[] { };
             aliasesArray = (JArray) possibleFiniteState[PropertyNames.Alias];
             aliases = aliasesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedAliases, aliases);
+            Assert.That(aliases, Is.EquivalentTo(expectedAliases));
 
             expectedDefinitions = new string[] { };
             definitionsArray = (JArray) possibleFiniteState[PropertyNames.Definition];
             definitions = definitionsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedDefinitions, definitions);
+            Assert.That(definitions, Is.EquivalentTo(expectedDefinitions));
 
             expectedHyperlinks = new string[] { };
             hyperlinksArray = (JArray) possibleFiniteState[PropertyNames.HyperLink];
             h = hyperlinksArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedHyperlinks, h);
+            Assert.That(h, Is.EquivalentTo(expectedHyperlinks));
 
             possibleFiniteState = jArray.Single(
                 x => (string) x[PropertyNames.Iid] == "e6eabd4f-6145-4788-8070-53bd031195bd");
@@ -283,17 +283,17 @@ namespace WebservicesIntegrationTests
             expectedAliases = new string[] { };
             aliasesArray = (JArray) possibleFiniteState[PropertyNames.Alias];
             aliases = aliasesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedAliases, aliases);
+            Assert.That(aliases, Is.EquivalentTo(expectedAliases));
 
             expectedDefinitions = new string[] { };
             definitionsArray = (JArray) possibleFiniteState[PropertyNames.Definition];
             definitions = definitionsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedDefinitions, definitions);
+            Assert.That(definitions, Is.EquivalentTo(expectedDefinitions));
 
             expectedHyperlinks = new string[] { };
             hyperlinksArray = (JArray) possibleFiniteState[PropertyNames.HyperLink];
             h = hyperlinksArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedHyperlinks, h);
+            Assert.That(h, Is.EquivalentTo(expectedHyperlinks));
 
             // Add a new PossibleFiniteStateList to ActualFiniteStateList
             postBodyPath = this.GetPath("Tests/EngineeringModel/ActualFiniteStateList/PostActualFiniteStateListAddPossibleFiniteStateList.json");

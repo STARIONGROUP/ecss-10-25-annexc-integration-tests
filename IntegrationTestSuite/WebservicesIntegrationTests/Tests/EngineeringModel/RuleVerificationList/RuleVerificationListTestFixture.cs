@@ -96,17 +96,17 @@ namespace WebservicesIntegrationTests
             var expectedAliases = new string[] {};
             var aliasesArray = (JArray) ruleVerificationList[PropertyNames.Alias];
             IList<string> aliases = aliasesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedAliases, aliases);
+            Assert.That(aliases, Is.EquivalentTo(expectedAliases));
 
             var expectedDefinitions = new string[] {};
             var definitionsArray = (JArray) ruleVerificationList[PropertyNames.Definition];
             IList<string> definitions = definitionsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedDefinitions, definitions);
+            Assert.That(definitions, Is.EquivalentTo(expectedDefinitions));
 
             var expectedHyperlinks = new string[] {};
             var hyperlinksArray = (JArray) ruleVerificationList[PropertyNames.HyperLink];
             IList<string> h = hyperlinksArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedHyperlinks, h);
+            Assert.That(h, Is.EquivalentTo(expectedHyperlinks));
 
             var expectedRuleVerifications = new List<OrderedItem>
             {
@@ -115,7 +115,7 @@ namespace WebservicesIntegrationTests
             };
             var ruleVerificationsArray = JsonConvert.DeserializeObject<List<OrderedItem>>(
                 ruleVerificationList[PropertyNames.RuleVerification].ToString());
-            CollectionAssert.AreEquivalent(expectedRuleVerifications, ruleVerificationsArray);
+            Assert.That(ruleVerificationsArray, Is.EquivalentTo(expectedRuleVerifications));
         }
     }
 }

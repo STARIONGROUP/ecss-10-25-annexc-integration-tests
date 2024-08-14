@@ -100,17 +100,17 @@ namespace WebservicesIntegrationTests
             var expectedAliases = new string[] {};
             var aliasesArray = (JArray) personRole["alias"];
             IList<string> aliases = aliasesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedAliases, aliases);
+            Assert.That(aliases, Is.EquivalentTo(expectedAliases));
 
             var expectedDefinitions = new string[] {};
             var definitionsArray = (JArray) personRole["definition"];
             IList<string> definitions = definitionsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedDefinitions, definitions);
+            Assert.That(definitions, Is.EquivalentTo(expectedDefinitions));
 
             var expectedHyperlinks = new string[] {};
             var hyperlinksArray = (JArray) personRole["hyperLink"];
             IList<string> h = hyperlinksArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedHyperlinks, h);
+            Assert.That(h, Is.EquivalentTo(expectedHyperlinks));
 
             var expectedPersonPermission = new string[]
             {
@@ -132,7 +132,7 @@ namespace WebservicesIntegrationTests
             };
             var personPermissionArray = (JArray) personRole["personPermission"];
             IList<string> permissions = personPermissionArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedPersonPermission, permissions);
+            Assert.That(permissions, Is.EquivalentTo(expectedPersonPermission));
         }
     }
 }

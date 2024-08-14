@@ -107,7 +107,7 @@ namespace WebservicesIntegrationTests
 
             var termsArray = (JArray)orExpression[PropertyNames.Term];
             IList<string> terms = termsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedTerms, terms);
+            Assert.That(terms, Is.EquivalentTo(expectedTerms));
         }
     }
 }

@@ -67,7 +67,8 @@ namespace WebservicesIntegrationTests
                     new OrderedItem(2, "20a8f908-94c8-4093-8f74-7b6f25433826")
                 };
 
-            CollectionAssert.AreEquivalent(expectedBookList, bookList);
+            Assert.That(bookList, Is.EquivalentTo(expectedBookList));
+
 
             var book1 = jArray.Single(x => (string) x[PropertyNames.Iid] == "f84b5d72-be4d-418c-90db-19e311e75be3");
             var book2 = jArray.Single(x => (string) x[PropertyNames.Iid] == "20a8f908-94c8-4093-8f74-7b6f25433826");
@@ -93,9 +94,7 @@ namespace WebservicesIntegrationTests
                     new OrderedItem(2, "20a8f908-94c8-4093-8f74-7b6f25433826")
                 };
 
-            CollectionAssert.AreEquivalent(
-                expectedBookList,
-                bookList);
+            Assert.That(bookList, Is.EquivalentTo(expectedBookList));
         }
     }
 }

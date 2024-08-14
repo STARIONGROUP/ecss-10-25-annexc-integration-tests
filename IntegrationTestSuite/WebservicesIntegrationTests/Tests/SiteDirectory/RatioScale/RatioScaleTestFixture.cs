@@ -102,7 +102,7 @@ namespace WebservicesIntegrationTests.Tests.SiteDirectory.RatioScale
             var expectedValueDefinitions = new string[] {};
             var valueDefinitionsArray = (JArray) ratioScale["valueDefinition"];
             IList<string> valueDefinitions = valueDefinitionsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedValueDefinitions, valueDefinitions);
+            Assert.That(valueDefinitions, Is.EquivalentTo(expectedValueDefinitions));
 
             Assert.AreEqual("REAL_NUMBER_SET", (string) ratioScale["numberSet"]);
             Assert.IsNull((string) ratioScale["minimumPermissibleValue"]);
@@ -115,22 +115,22 @@ namespace WebservicesIntegrationTests.Tests.SiteDirectory.RatioScale
             var expectedMappingToReferenceScales = new string[] {};
             var mappingToReferenceScalesArray = (JArray) ratioScale["mappingToReferenceScale"];
             IList<string> mappingToReferenceScales = mappingToReferenceScalesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedMappingToReferenceScales, mappingToReferenceScales);
+            Assert.That(mappingToReferenceScales, Is.EquivalentTo(expectedMappingToReferenceScales));
 
             var expectedAliases = new string[] {};
             var aliasesArray = (JArray) ratioScale["alias"];
             IList<string> aliases = aliasesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedAliases, aliases);
+            Assert.That(aliases, Is.EquivalentTo(expectedAliases));
 
             var expectedDefinitions = new string[] {};
             var definitionsArray = (JArray) ratioScale["definition"];
             IList<string> definitions = definitionsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedDefinitions, definitions);
+            Assert.That(definitions, Is.EquivalentTo(expectedDefinitions));
 
             var expectedHyperlinks = new string[] {};
             var hyperlinksArray = (JArray) ratioScale["hyperLink"];
             IList<string> h = hyperlinksArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedHyperlinks, h);
+            Assert.That(h, Is.EquivalentTo(expectedHyperlinks));
         }
     }
 }

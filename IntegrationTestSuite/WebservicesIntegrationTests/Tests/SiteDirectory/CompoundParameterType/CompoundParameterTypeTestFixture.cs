@@ -108,27 +108,27 @@ namespace WebservicesIntegrationTests
             };
             var componentsArray = JsonConvert.DeserializeObject<List<OrderedItem>>(
                 compoundParameterType[PropertyNames.Component].ToString());
-            CollectionAssert.AreEquivalent(expectedComponents, componentsArray);
+            Assert.That(componentsArray, Is.EquivalentTo(expectedComponents));
 
             var expectedCategories = new string[] {};
             var categoriesArray = (JArray) compoundParameterType[PropertyNames.Category];
             IList<string> categories = categoriesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedCategories, categories);
+            Assert.That(categories, Is.EquivalentTo(expectedCategories));
 
             var expectedAliases = new string[] {};
             var aliasesArray = (JArray) compoundParameterType[PropertyNames.Alias];
             IList<string> aliases = aliasesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedAliases, aliases);
+            Assert.That(aliases, Is.EquivalentTo(expectedAliases));
 
             var expectedDefinitions = new string[] {};
             var definitionsArray = (JArray) compoundParameterType[PropertyNames.Definition];
             IList<string> definitions = definitionsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedDefinitions, definitions);
+            Assert.That(definitions, Is.EquivalentTo(expectedDefinitions));
 
             var expectedHyperlinks = new string[] {};
             var hyperlinksArray = (JArray) compoundParameterType[PropertyNames.HyperLink];
             IList<string> h = hyperlinksArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedHyperlinks, h);
+            Assert.That(h, Is.EquivalentTo(expectedHyperlinks));
         }
 
         [Test]

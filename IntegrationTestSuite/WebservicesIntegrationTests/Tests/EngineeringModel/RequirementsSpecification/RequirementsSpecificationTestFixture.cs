@@ -97,7 +97,7 @@ namespace WebservicesIntegrationTests
                                                          };
             var requirementsSpecificationsArray = (JArray)iteration[PropertyNames.RequirementsSpecification];
             IList<string> requirementsSpecifications = requirementsSpecificationsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedRequirementsSpecifications, requirementsSpecifications);
+            Assert.That(requirementsSpecifications, Is.EquivalentTo(expectedRequirementsSpecifications));
 
             var requirementsSpecification = jArray.Single(x => (string)x[PropertyNames.Iid] == "272e59f8-267a-4e5f-84eb-6d1b495bf4c7");
 
@@ -119,27 +119,27 @@ namespace WebservicesIntegrationTests
             var expectedAliases = new string[] { };
             var aliasesArray = (JArray)requirementsSpecification[PropertyNames.Alias];
             IList<string> aliases = aliasesArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedAliases, aliases);
+            Assert.That(aliases, Is.EquivalentTo(expectedAliases));
 
             var expectedDefinitions = new string[] { };
             var definitionsArray = (JArray)requirementsSpecification[PropertyNames.Definition];
             IList<string> definitions = definitionsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedDefinitions, definitions);
+            Assert.That(definitions, Is.EquivalentTo(expectedDefinitions));
 
             var expectedHyperlinks = new string[] { };
             var hyperlinksArray = (JArray)requirementsSpecification[PropertyNames.HyperLink];
             IList<string> hyperlinks = hyperlinksArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedHyperlinks, hyperlinks);
+            Assert.That(hyperlinks, Is.EquivalentTo(expectedHyperlinks));
 
             var expectedRequirementsGroups = new string[] { };
             var requirementsGroupsArray = (JArray)requirementsSpecification[PropertyNames.Group];
             IList<string> groups = requirementsGroupsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedRequirementsGroups, groups);
+            Assert.That(groups, Is.EquivalentTo(expectedRequirementsGroups));
 
             var expectedRequirements = new string[] { };
             var requirementsArray = (JArray)requirementsSpecification[PropertyNames.Requirement];
             IList<string> requirements = requirementsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedRequirements, requirements);
+            Assert.That(requirements, Is.EquivalentTo(expectedRequirements));
         }
 
         public static void VerifyProperties(JToken requirementsSpecification)
@@ -168,22 +168,22 @@ namespace WebservicesIntegrationTests
             var expectedAliases = new string[] { };
             var aliasesArray = (JArray)requirementsSpecification[PropertyNames.Alias];
             IList<string> aliases = aliasesArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedAliases, aliases);
+            Assert.That(aliases, Is.EquivalentTo(expectedAliases));
 
             var expectedDefinitions = new string[] { };
             var definitionsArray = (JArray)requirementsSpecification[PropertyNames.Definition];
             IList<string> definitions = definitionsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedDefinitions, definitions);
+            Assert.That(definitions, Is.EquivalentTo(expectedDefinitions));
 
             var expectedHyperlinks = new string[] { };
             var hyperlinksArray = (JArray)requirementsSpecification[PropertyNames.HyperLink];
             IList<string> hyperlinks = hyperlinksArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedHyperlinks, hyperlinks);
+            Assert.That(hyperlinks, Is.EquivalentTo(expectedHyperlinks));
 
             var expectedRequirementsGroups = new[] { "d3474e6a-f9ac-4d1a-91d9-6f8be06a03b5" };
             var requirementsGroupsArray = (JArray)requirementsSpecification[PropertyNames.Group];
             IList<string> groups = requirementsGroupsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedRequirementsGroups, groups);
+            Assert.That(groups, Is.EquivalentTo(expectedRequirementsGroups));
 
             var expectedRequirements = new[]
                                            {
@@ -192,7 +192,7 @@ namespace WebservicesIntegrationTests
                                            };
             var requirementsArray = (JArray)requirementsSpecification[PropertyNames.Requirement];
             IList<string> requirements = requirementsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedRequirements, requirements);
+            Assert.That(requirements, Is.EquivalentTo(expectedRequirements));
         }
     }
 }

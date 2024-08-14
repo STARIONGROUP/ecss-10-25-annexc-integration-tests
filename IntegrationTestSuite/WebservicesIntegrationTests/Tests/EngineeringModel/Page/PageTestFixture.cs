@@ -79,9 +79,7 @@ namespace WebservicesIntegrationTests
                     new OrderedItem(2, "ad20d5de-54ae-40de-98fb-bb8d2cd7a4b8")
                 };
 
-            CollectionAssert.AreEquivalent(
-                expectedPageList,
-                pageList);
+            Assert.That(pageList, Is.EquivalentTo(expectedPageList));
 
             var section1 = jArray.Single(x => (string) x[PropertyNames.Iid] == "663114f6-9bb1-4751-a3ed-60bad354913e");
             var section2 = jArray.Single(x => (string) x[PropertyNames.Iid] == "ad20d5de-54ae-40de-98fb-bb8d2cd7a4b8");
@@ -106,9 +104,7 @@ namespace WebservicesIntegrationTests
                     new OrderedItem(2, "ad20d5de-54ae-40de-98fb-bb8d2cd7a4b8")
                 };
 
-            CollectionAssert.AreEquivalent(
-                expectedPageList,
-                pageList);
+            Assert.That(pageList, Is.EquivalentTo(expectedPageList));
         }
     }
 }

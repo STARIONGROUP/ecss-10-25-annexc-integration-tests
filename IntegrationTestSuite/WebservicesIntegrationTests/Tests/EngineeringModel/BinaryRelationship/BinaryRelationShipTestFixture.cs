@@ -108,7 +108,7 @@ namespace WebservicesIntegrationTests
             var expectedCategories = new string[] {};
             var categoriesArray = (JArray)binaryRelationship[PropertyNames.Category];
             IList<string> categories = categoriesArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedCategories, categories);
+            Assert.That(categories, Is.EquivalentTo(expectedCategories));
         }
 
         public static void VerifyPropertiesWithCategoryEntry(JToken binaryRelationship)
@@ -131,7 +131,7 @@ namespace WebservicesIntegrationTests
             };
             var categoriesArray = (JArray)binaryRelationship[PropertyNames.Category];
             IList<string> categories = categoriesArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedCategories, categories);
+            Assert.That(categories, Is.EquivalentTo(expectedCategories));
         }
     }
 }

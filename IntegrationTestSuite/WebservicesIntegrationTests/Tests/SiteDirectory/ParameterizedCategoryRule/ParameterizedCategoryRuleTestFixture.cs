@@ -107,22 +107,22 @@ namespace WebservicesIntegrationTests
             };
             var parameterTypesArray = (JArray) parameterizedCategoryRule["parameterType"];
             IList<string> containedCategories = parameterTypesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedParameterTypes, containedCategories);
+            Assert.That(containedCategories, Is.EquivalentTo(expectedParameterTypes));
 
             var expectedAliases = new string[] {};
             var aliasesArray = (JArray) parameterizedCategoryRule["alias"];
             IList<string> aliases = aliasesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedAliases, aliases);
+            Assert.That(aliases, Is.EquivalentTo(expectedAliases));
 
             var expectedDefinitions = new string[] {};
             var definitionsArray = (JArray) parameterizedCategoryRule["definition"];
             IList<string> definitions = definitionsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedDefinitions, definitions);
+            Assert.That(definitions, Is.EquivalentTo(expectedDefinitions));
 
             var expectedHyperlinks = new string[] {};
             var hyperlinksArray = (JArray) parameterizedCategoryRule["hyperLink"];
             IList<string> h = hyperlinksArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedHyperlinks, h);
+            Assert.That(h, Is.EquivalentTo(expectedHyperlinks));
         }
     }
 }

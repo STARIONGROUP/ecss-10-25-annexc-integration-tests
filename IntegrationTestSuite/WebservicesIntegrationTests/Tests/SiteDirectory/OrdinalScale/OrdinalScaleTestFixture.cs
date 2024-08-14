@@ -106,7 +106,7 @@ namespace WebservicesIntegrationTests
             };
             var valueDefinitionsArray = (JArray) ordinalScale["valueDefinition"];
             IList<string> valueDefinitions = valueDefinitionsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedValueDefinitions, valueDefinitions);
+            Assert.That(valueDefinitions, Is.EquivalentTo(expectedValueDefinitions));
 
             Assert.AreEqual("NATURAL_NUMBER_SET", (string) ordinalScale["numberSet"]);
             Assert.AreEqual("0", (string) ordinalScale["minimumPermissibleValue"]);
@@ -119,22 +119,22 @@ namespace WebservicesIntegrationTests
             var expectedMappingToReferenceScales = new string[] {};
             var mappingToReferenceScalesArray = (JArray) ordinalScale["mappingToReferenceScale"];
             IList<string> mappingToReferenceScales = mappingToReferenceScalesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedMappingToReferenceScales, mappingToReferenceScales);
+            Assert.That(mappingToReferenceScales, Is.EquivalentTo(expectedMappingToReferenceScales));
 
             var expectedAliases = new string[] {};
             var aliasesArray = (JArray) ordinalScale["alias"];
             IList<string> aliases = aliasesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedAliases, aliases);
+            Assert.That(aliases, Is.EquivalentTo(expectedAliases));
 
             var expectedDefinitions = new string[] {};
             var definitionsArray = (JArray) ordinalScale["definition"];
             IList<string> definitions = definitionsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedDefinitions, definitions);
+            Assert.That(definitions, Is.EquivalentTo(expectedDefinitions));
 
             var expectedHyperlinks = new string[] {};
             var hyperlinksArray = (JArray) ordinalScale["hyperLink"];
             IList<string> h = hyperlinksArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedHyperlinks, h);
+            Assert.That(h, Is.EquivalentTo(expectedHyperlinks));
         }
     }
 }

@@ -103,22 +103,22 @@ namespace WebservicesIntegrationTests
             };
             var unitFactorsArray = JsonConvert.DeserializeObject<List<OrderedItem>>(
                 derivedUnit["unitFactor"].ToString());
-            CollectionAssert.AreEquivalent(expectedUnitFactors, unitFactorsArray);
+            Assert.That(unitFactorsArray, Is.EquivalentTo(expectedUnitFactors));
 
             var expectedAliases = new string[] {};
             var aliasesArray = (JArray) derivedUnit["alias"];
             IList<string> aliases = aliasesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedAliases, aliases);
+            Assert.That(aliases, Is.EquivalentTo(expectedAliases));
 
             var expectedDefinitions = new string[] {};
             var definitionsArray = (JArray) derivedUnit["definition"];
             IList<string> definitions = definitionsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedDefinitions, definitions);
+            Assert.That(definitions, Is.EquivalentTo(expectedDefinitions));
 
             var expectedHyperlinks = new string[] {};
             var hyperlinksArray = (JArray) derivedUnit["hyperLink"];
             IList<string> h = hyperlinksArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedHyperlinks, h);
+            Assert.That(h, Is.EquivalentTo(expectedHyperlinks));
         }
     }
 }

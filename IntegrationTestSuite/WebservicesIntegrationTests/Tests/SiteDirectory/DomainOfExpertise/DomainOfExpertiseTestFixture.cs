@@ -252,22 +252,22 @@ namespace WebservicesIntegrationTests
                 var expectedAliases = new string[] { };
                 var aliasesArray = (JArray)domainOfExpertise["alias"];
                 IList<string> aliases = aliasesArray.Select(x => (string)x).ToList();
-                CollectionAssert.AreEquivalent(expectedAliases, aliases);
+                Assert.That(aliases, Is.EquivalentTo(expectedAliases));
 
                 var expectedDefinitions = new string[] { "23658615-a170-4c0f-ba71-da1a15c736ca" };
                 var definitionsArray = (JArray)domainOfExpertise["definition"];
                 IList<string> definitions = definitionsArray.Select(x => (string)x).ToList();
-                CollectionAssert.AreEquivalent(expectedDefinitions, definitions);
+                Assert.That(definitions, Is.EquivalentTo(expectedDefinitions));
 
                 var expectedHyperlinks = new string[] { };
                 var hyperlinksArray = (JArray)domainOfExpertise["hyperLink"];
                 IList<string> h = hyperlinksArray.Select(x => (string)x).ToList();
-                CollectionAssert.AreEquivalent(expectedHyperlinks, h);
+                Assert.That(h, Is.EquivalentTo(expectedHyperlinks));
 
                 var expectedCategories = new string[] { };
                 var categoryArray = (JArray)domainOfExpertise["category"];
                 IList<string> categories = categoryArray.Select(x => (string)x).ToList();
-                CollectionAssert.AreEquivalent(expectedCategories, categories);
+                Assert.That(categories, Is.EquivalentTo(expectedCategories));
             }
 
             if ((string)domainOfExpertise["iid"] == "eb759723-14b9-49f4-8611-544d037bb764")
@@ -284,24 +284,23 @@ namespace WebservicesIntegrationTests
                 var expectedAliases = new string[] { };
                 var aliasesArray = (JArray)domainOfExpertise["alias"];
                 IList<string> aliases = aliasesArray.Select(x => (string)x).ToList();
-                CollectionAssert.AreEquivalent(expectedAliases, aliases);
+                Assert.That(aliases, Is.EquivalentTo(expectedAliases));
 
                 var expectedDefinitions = new string[] {};
                 var definitionsArray = (JArray)domainOfExpertise["definition"];
                 IList<string> definitions = definitionsArray.Select(x => (string)x).ToList();
-                CollectionAssert.AreEquivalent(expectedDefinitions, definitions);
+                Assert.That(definitions, Is.EquivalentTo(expectedDefinitions));
 
                 var expectedHyperlinks = new string[] { };
                 var hyperlinksArray = (JArray)domainOfExpertise["hyperLink"];
                 IList<string> h = hyperlinksArray.Select(x => (string)x).ToList();
-                CollectionAssert.AreEquivalent(expectedHyperlinks, h);
+                Assert.That(h, Is.EquivalentTo(expectedHyperlinks));
 
                 var expectedCategories = new string[] { };
                 var categoryArray = (JArray)domainOfExpertise["category"];
                 IList<string> categories = categoryArray.Select(x => (string)x).ToList();
-                CollectionAssert.AreEquivalent(expectedCategories, categories);
+                Assert.That(categories, Is.EquivalentTo(expectedCategories));
             }
-
         }
     }
 }

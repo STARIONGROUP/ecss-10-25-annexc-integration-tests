@@ -108,7 +108,7 @@ namespace WebservicesIntegrationTests
 
             var expectedQuantityKindFactorArray = new List<OrderedItem> { new OrderedItem(2, "6b1b9a7b-8a57-412e-a823-bcc4fd8b67e9"), new OrderedItem(2948121, "ab7e80da-6bc9-427f-b1fb-b97faeeca4c6") };
             var quantityKindFactorArray = JsonConvert.DeserializeObject<List<OrderedItem>>(derivedQuantityKind[PropertyNames.QuantityKindFactor].ToString());
-            CollectionAssert.AreEquivalent(expectedQuantityKindFactorArray, quantityKindFactorArray);
+            Assert.That(quantityKindFactorArray, Is.EquivalentTo(expectedQuantityKindFactorArray));
 
             postBodyPath = this.GetPath("Tests/SiteDirectory/QuantityKindFactor/PostReorderQuantityKindFactor.json");
 
@@ -131,7 +131,7 @@ namespace WebservicesIntegrationTests
 
             expectedQuantityKindFactorArray = new List<OrderedItem> { new OrderedItem(1, "ab7e80da-6bc9-427f-b1fb-b97faeeca4c6"), new OrderedItem(3, "6b1b9a7b-8a57-412e-a823-bcc4fd8b67e9") };
             quantityKindFactorArray = JsonConvert.DeserializeObject<List<OrderedItem>>(derivedQuantityKind[PropertyNames.QuantityKindFactor].ToString());
-            CollectionAssert.AreEquivalent(expectedQuantityKindFactorArray, quantityKindFactorArray);
+            Assert.That(quantityKindFactorArray, Is.EquivalentTo(expectedQuantityKindFactorArray));
         }
 
         /// <summary>

@@ -119,7 +119,7 @@ namespace WebservicesIntegrationTests
             var expectedCategories = new string[] { };
             var categoriesArray = (JArray)elementDefinition[PropertyNames.Category];
             IList<string> categories = categoriesArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedCategories, categories);
+            Assert.That(categories, Is.EquivalentTo(expectedCategories));
         }
 
         [Test]
@@ -133,7 +133,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
             // check if there are 2 objects
-            Assert.AreEqual(3, jArray.Count);
+            Assert.That (jArray.Count, Is.EqualTo(3));
 
             // get a specific EngineeringModel from the result by it's unique id
             var engineeeringModel = jArray.Single(
@@ -150,7 +150,7 @@ namespace WebservicesIntegrationTests
                                          };
             var parametersArray = (JArray)elementDefinition[PropertyNames.Parameter];
             IList<string> parameters = parametersArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedParameters, parameters);
+            Assert.That(parameters, Is.EquivalentTo(expectedParameters));
 
             // define the URI on which to perform a GET request 
             var parameterUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/f73860b2-12f0-43e4-b8b2-c81862c0a159/parameter/3f05483f-66ff-4f21-bc76-45956779f66e");
@@ -185,7 +185,7 @@ namespace WebservicesIntegrationTests
                                          };
             var parametersArray = (JArray)elementDefinition[PropertyNames.Parameter];
             IList<string> parameters = parametersArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedParameters, parameters);
+            Assert.That(parameters, Is.EquivalentTo(expectedParameters));
 
             // define the URI on which to perform a GET request 
             var parameterUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/f73860b2-12f0-43e4-b8b2-c81862c0a159/parameter/3f05483f-66ff-4f21-bc76-45956779f66e");
@@ -211,7 +211,7 @@ namespace WebservicesIntegrationTests
             var expectedIterations = new[] { "e163c5ad-f32b-4387-b805-f4b34600bc2c" };
             var iterationsArray = (JArray)engineeringModel[PropertyNames.Iteration];
             IList<string> iterations = iterationsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedIterations, iterations);
+            Assert.That(iterations, Is.EquivalentTo(expectedIterations));
 
             var logEntriesArray = (JArray)engineeringModel[PropertyNames.LogEntry];
             IList<string> logEntries = logEntriesArray.Select(x => (string)x).ToList();
@@ -220,7 +220,7 @@ namespace WebservicesIntegrationTests
             var expectedCommonFileStores = new[] { "8e5ca9cc-3da8-4e66-9172-7c3b2464a59c" };
             var commonFileStoresArray = (JArray)engineeringModel[PropertyNames.CommonFileStore];
             IList<string> commonFileStores = commonFileStoresArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedCommonFileStores, commonFileStores);
+            Assert.That(commonFileStores, Is.EquivalentTo(expectedCommonFileStores));
 
             Assert.AreEqual("EngineeringModel", (string)engineeringModel[PropertyNames.ClassKind]);
             Assert.AreEqual("116f6253-89bb-47d4-aa24-d11d197e43c9", (string)engineeringModel[PropertyNames.EngineeringModelSetup]);
@@ -243,44 +243,44 @@ namespace WebservicesIntegrationTests
             var expectedContainedElements = new string[] { };
             var containedElementsArray = (JArray)elementDefinition[PropertyNames.ContainedElement];
             IList<string> containedElements = containedElementsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedContainedElements, containedElements);
+            Assert.That(containedElements, Is.EquivalentTo(expectedContainedElements));
 
             var expectedParameters = new string[] { };
             var parametersArray = (JArray)elementDefinition[PropertyNames.Parameter];
             IList<string> parameters = parametersArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedParameters, parameters);
+            Assert.That(parameters, Is.EquivalentTo(expectedParameters));
 
             var expectedParameterGroups = new string[] { };
             var parameterGroupsArray = (JArray)elementDefinition[PropertyNames.ParameterGroup];
             IList<string> parameterGroups = parameterGroupsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedParameterGroups, parameterGroups);
+            Assert.That(parameterGroups, Is.EquivalentTo(expectedParameterGroups));
 
             var expectedreferencedElements = new string[] { };
             var referencedElementsArray = (JArray)elementDefinition[PropertyNames.ReferencedElement];
             IList<string> referencedElements = referencedElementsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedreferencedElements, referencedElements);
+            Assert.That(referencedElements, Is.EquivalentTo(expectedreferencedElements));
 
             Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string)elementDefinition[PropertyNames.Owner]);
 
             var expectedCategories = new string[] { };
             var categoriesArray = (JArray)elementDefinition[PropertyNames.Category];
             IList<string> categories = categoriesArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedCategories, categories);
+            Assert.That(categories, Is.EquivalentTo(expectedCategories));
 
             var expectedAliases = new string[] { };
             var aliasesArray = (JArray)elementDefinition[PropertyNames.Alias];
             IList<string> aliases = aliasesArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedAliases, aliases);
+            Assert.That(aliases, Is.EquivalentTo(expectedAliases));
 
             var expectedDefinitions = new string[] { };
             var definitionsArray = (JArray)elementDefinition[PropertyNames.Definition];
             IList<string> definitions = definitionsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedDefinitions, definitions);
+            Assert.That(definitions, Is.EquivalentTo(expectedDefinitions));
 
             var expectedHyperlinks = new string[] { };
             var hyperlinksArray = (JArray)elementDefinition[PropertyNames.HyperLink];
             IList<string> h = hyperlinksArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedHyperlinks, h);
+            Assert.That(h, Is.EquivalentTo(expectedHyperlinks));
         }
 
         /// <summary>
@@ -310,7 +310,7 @@ namespace WebservicesIntegrationTests
                 var expectedContainedElements = new string[] { };
                 var containedElementsArray = (JArray)elementDefinition[PropertyNames.ContainedElement];
                 IList<string> containedElements = containedElementsArray.Select(x => (string)x).ToList();
-                CollectionAssert.AreEquivalent(expectedContainedElements, containedElements);
+                Assert.That(containedElements, Is.EquivalentTo(expectedContainedElements));
 
                 var expectedParameters = new[]
                                              {
@@ -319,39 +319,39 @@ namespace WebservicesIntegrationTests
                                              };
                 var parametersArray = (JArray)elementDefinition[PropertyNames.Parameter];
                 IList<string> parameters = parametersArray.Select(x => (string)x).ToList();
-                CollectionAssert.AreEquivalent(expectedParameters, parameters);
+                Assert.That(parameters, Is.EquivalentTo(expectedParameters));
 
                 var expectedParameterGroups = new[] { "b739b3c6-9cc0-4e64-9cc4-ef7463edf559" };
                 var parameterGroupsArray = (JArray)elementDefinition[PropertyNames.ParameterGroup];
                 IList<string> parameterGroups = parameterGroupsArray.Select(x => (string)x).ToList();
-                CollectionAssert.AreEquivalent(expectedParameterGroups, parameterGroups);
+                Assert.That(parameterGroups, Is.EquivalentTo(expectedParameterGroups));
 
                 var expectedreferencedElements = new string[] { };
                 var referencedElementsArray = (JArray)elementDefinition[PropertyNames.ReferencedElement];
                 IList<string> referencedElements = referencedElementsArray.Select(x => (string)x).ToList();
-                CollectionAssert.AreEquivalent(expectedreferencedElements, referencedElements);
+                Assert.That(referencedElements, Is.EquivalentTo(expectedreferencedElements));
 
                 Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string)elementDefinition[PropertyNames.Owner]);
 
                 var expectedCategories = new[] { "cf059b19-235c-48be-87a3-9a8942c8e3e0" };
                 var categoriesArray = (JArray)elementDefinition[PropertyNames.Category];
                 IList<string> categories = categoriesArray.Select(x => (string)x).ToList();
-                CollectionAssert.AreEquivalent(expectedCategories, categories);
+                Assert.That(categories, Is.EquivalentTo(expectedCategories));
 
                 var expectedAliases = new string[] { };
                 var aliasesArray = (JArray)elementDefinition[PropertyNames.Alias];
                 IList<string> aliases = aliasesArray.Select(x => (string)x).ToList();
-                CollectionAssert.AreEquivalent(expectedAliases, aliases);
+                Assert.That(aliases, Is.EquivalentTo(expectedAliases));
 
                 var expectedDefinitions = new string[] { };
                 var definitionsArray = (JArray)elementDefinition[PropertyNames.Definition];
                 IList<string> definitions = definitionsArray.Select(x => (string)x).ToList();
-                CollectionAssert.AreEquivalent(expectedDefinitions, definitions);
+                Assert.That(definitions, Is.EquivalentTo(expectedDefinitions));
 
                 var expectedHyperlinks = new string[] { };
                 var hyperlinksArray = (JArray)elementDefinition[PropertyNames.HyperLink];
                 IList<string> h = hyperlinksArray.Select(x => (string)x).ToList();
-                CollectionAssert.AreEquivalent(expectedHyperlinks, h);
+                Assert.That(h, Is.EquivalentTo(expectedHyperlinks));
             }
 
             // get a specific ElementDefinition from the result by it's unique id
@@ -378,44 +378,44 @@ namespace WebservicesIntegrationTests
                                                 };
                 var containedElementsArray = (JArray)elementDefinition[PropertyNames.ContainedElement];
                 var containedElements = containedElementsArray.Select(x => (string)x).ToList();
-                CollectionAssert.AreEquivalent(expectedContainedElements, containedElements);
+                Assert.That(containedElements, Is.EquivalentTo(expectedContainedElements));
 
                 var expectedParameters = new string[] { };
                 var parametersArray = (JArray)elementDefinition[PropertyNames.Parameter];
                 var parameters = parametersArray.Select(x => (string)x).ToList();
-                CollectionAssert.AreEquivalent(expectedParameters, parameters);
+                Assert.That(parameters, Is.EquivalentTo(expectedParameters));
 
                 var expectedParameterGroups = new string[] { };
                 var parameterGroupsArray = (JArray)elementDefinition[PropertyNames.ParameterGroup];
                 var parameterGroups = parameterGroupsArray.Select(x => (string)x).ToList();
-                CollectionAssert.AreEquivalent(expectedParameterGroups, parameterGroups);
+                Assert.That(parameterGroups, Is.EquivalentTo(expectedParameterGroups));
 
                 var expectedreferencedElements = new string[] { };
                 var referencedElementsArray = (JArray)elementDefinition[PropertyNames.ReferencedElement];
                 var referencedElements = referencedElementsArray.Select(x => (string)x).ToList();
-                CollectionAssert.AreEquivalent(expectedreferencedElements, referencedElements);
+                Assert.That(referencedElements, Is.EquivalentTo(expectedreferencedElements));
 
                 Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string)elementDefinition[PropertyNames.Owner]);
 
                 var expectedCategories = new string[] { };
                 var categoriesArray = (JArray)elementDefinition[PropertyNames.Category];
                 var categories = categoriesArray.Select(x => (string)x).ToList();
-                CollectionAssert.AreEquivalent(expectedCategories, categories);
+                Assert.That(categories, Is.EquivalentTo(expectedCategories));
 
                 var expectedAliases = new string[] { };
                 var aliasesArray = (JArray)elementDefinition[PropertyNames.Alias];
                 var aliases = aliasesArray.Select(x => (string)x).ToList();
-                CollectionAssert.AreEquivalent(expectedAliases, aliases);
+                Assert.That(aliases, Is.EquivalentTo(expectedAliases));
 
                 var expectedDefinitions = new string[] { };
                 var definitionsArray = (JArray)elementDefinition[PropertyNames.Definition];
                 var definitions = definitionsArray.Select(x => (string)x).ToList();
-                CollectionAssert.AreEquivalent(expectedDefinitions, definitions);
+                Assert.That(definitions, Is.EquivalentTo(expectedDefinitions));
 
                 var expectedHyperlinks = new string[] { };
                 var hyperlinksArray = (JArray)elementDefinition[PropertyNames.HyperLink];
                 var h = hyperlinksArray.Select(x => (string)x).ToList();
-                CollectionAssert.AreEquivalent(expectedHyperlinks, h);
+                Assert.That(h, Is.EquivalentTo(expectedHyperlinks));
             }
         }
     }
