@@ -60,6 +60,9 @@
     <None Update="Tests\EngineeringModel\AndExpression\PostNewAndExpression.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Tests\EngineeringModel\ArrayParameterType\PostArrayParameterType.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Tests\EngineeringModel\Book\PostDeleteBooks.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
