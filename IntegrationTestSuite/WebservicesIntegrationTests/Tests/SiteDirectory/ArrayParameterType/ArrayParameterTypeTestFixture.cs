@@ -195,7 +195,8 @@ namespace WebservicesIntegrationTests
 
             var expectedDimensions = new List<OrderedItem>
             {
-                new OrderedItem(110835215, "2")
+                // value of 2 needs to be a long, as default newtosoft number conversion for an object type parameter is int64, not int32
+                new OrderedItem(110835215, (long)2)
             };
 
             var dimensionsArray = JsonConvert.DeserializeObject<List<OrderedItem>>(
