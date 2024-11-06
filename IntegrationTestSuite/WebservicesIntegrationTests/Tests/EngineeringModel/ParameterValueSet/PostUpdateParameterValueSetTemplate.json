@@ -4,12 +4,12 @@
   "_update": [
     {
       "classKind": "ParameterValueSet",
-      "computed": [ <INNERJSON> ],
-      "formula": [ <INNERJSON> ],
+      "computed": <INNERJSON>,
+      "formula": <INNERJSON>,
       "iid": "72ec3701-bcb5-4bf6-bd78-30fd1b65e3be",
-      "manual": [ <INNERJSON> ],
-      "published": [ <INNERJSON> ],
-      "reference": [ <INNERJSON> ],
+      "manual": <INNERJSON>,
+      "published": <INNERJSON>,
+      "reference": <INNERJSON>,
       "revisionNumber": 0,
       "valueSwitch": "MANUAL"
     }
