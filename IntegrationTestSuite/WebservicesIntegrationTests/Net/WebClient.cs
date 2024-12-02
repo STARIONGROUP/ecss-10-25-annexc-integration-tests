@@ -456,6 +456,7 @@ namespace WebservicesIntegrationTests.Net
         private HttpWebRequest CreateWebRequest(Uri uri, string method)
         {
             var request = (HttpWebRequest)WebRequest.Create(uri);
+            request.Timeout = 3600000;
             request.Method = method;
             request.ContentType = JsonContentType;
             
