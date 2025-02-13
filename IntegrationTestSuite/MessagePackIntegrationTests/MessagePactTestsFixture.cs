@@ -50,24 +50,15 @@ namespace MessagePackIntegrationTests
         [SetUp]
         public void Setup()
         {
-            var appsettings = "";
-#if LOCAL
-            appsettings = "appsettings.Local.json";
-#endif
-
-#if DEBUG
-            appsettings = "appsettings.Debug.json";
-#endif
             this.configuration = new ConfigurationBuilder()
                 .SetBasePath(TestContext.CurrentContext.TestDirectory)
-                .AddJsonFile(appsettings)
+                .AddJsonFile("appsettings.json")
                 .Build();
             
             this.httpClient = this.CreateHttpClient(
                 this.configuration.GetSection("Username").Value,
                 this.configuration.GetSection("Password").Value,
                 this.configuration.GetSection("Hostname").Value);
-
         }
 
         private HttpClient CreateHttpClient(string username, string password, string url, bool withMessagePack = true)
