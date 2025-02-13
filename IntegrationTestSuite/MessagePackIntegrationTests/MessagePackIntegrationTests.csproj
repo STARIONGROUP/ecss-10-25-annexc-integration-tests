@@ -35,10 +35,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="appsettings.Local.json">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-      <None Update="appsettings.Debug.json">
+      <None Update="appsettings.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
     </ItemGroup>
