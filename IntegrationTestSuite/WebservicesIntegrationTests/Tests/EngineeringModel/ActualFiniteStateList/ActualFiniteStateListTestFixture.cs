@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="ActualFiniteStateListTestFixture.cs" company="Starion Group S.A.">
 //
-//   Copyright 2016-2021 Starion Group S.A.
+//   Copyright 2016-2025 Starion Group S.A.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -43,7 +43,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(actualFiniteStateListUri);
 
             // check if there is the only one ActualFiniteStateList object 
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific ActualFiniteStateList from the result by it's unique id
             var actualFiniteStateList = jArray.Single(
@@ -63,7 +63,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(actualFiniteStateListUri);
 
             // check if there are 3 objects
-            Assert.AreEqual(3, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(3));
 
             // get a specific Iteration from the result by it's unique id
             var iteration = jArray.Single(x => (string) x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
@@ -90,10 +90,10 @@ namespace WebservicesIntegrationTests
             var engineeeringModel = jArray.Single(
                 x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
 
-            Assert.AreEqual(2, (int) engineeeringModel[PropertyNames.RevisionNumber]);
+            Assert.That((int)engineeeringModel[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             var iteration = jArray.Single(x => (string) x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
-            Assert.AreEqual(2, (int) iteration[PropertyNames.RevisionNumber]);
+            Assert.That((int)iteration[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             var expectedActualFiniteStateLists = new[]
             {
@@ -109,13 +109,13 @@ namespace WebservicesIntegrationTests
                 x => (string) x[PropertyNames.Iid] == "f4640b3f-7840-4cfc-9a15-80127f91c8db");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(7, actualFiniteStateList.Children().Count());
+            Assert.That(actualFiniteStateList.Children().Count(), Is.EqualTo(7));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("f4640b3f-7840-4cfc-9a15-80127f91c8db", (string) actualFiniteStateList[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int) actualFiniteStateList[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("ActualFiniteStateList", (string) actualFiniteStateList[PropertyNames.ClassKind]);
-            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string) actualFiniteStateList[PropertyNames.Owner]);
+            Assert.That((string)actualFiniteStateList[PropertyNames.Iid], Is.EqualTo("f4640b3f-7840-4cfc-9a15-80127f91c8db"));
+            Assert.That((int)actualFiniteStateList[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)actualFiniteStateList[PropertyNames.ClassKind], Is.EqualTo("ActualFiniteStateList"));
+            Assert.That((string)actualFiniteStateList[PropertyNames.Owner], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
 
             var expectedPossibleFiniteStateLists =
                 new List<OrderedItem> { new OrderedItem(2356, "449a5bca-34fd-454a-93f8-a56ac8383fee") };
@@ -134,18 +134,18 @@ namespace WebservicesIntegrationTests
             // get the created ActualState as a side effect of creating ActualFiniteStateList from the result 
             var actualStatesArray = (JArray) actualFiniteStateList[PropertyNames.ActualState];
             IList<string> actualStates = actualStatesArray.Select(x => (string) x).ToList();
-            Assert.AreEqual(1, actualStates.Count);
+            Assert.That(actualStates.Count, Is.EqualTo(1));
 
             // get a specific ActualFiniteStateList from the result 
             var actualFiniteState = jArray.Single(x => (string) x[PropertyNames.Iid] == actualStates[0]);
 
             // verify the amount of returned properties 
-            Assert.AreEqual(5, actualFiniteState.Children().Count());
+            Assert.That(actualFiniteState.Children().Count(), Is.EqualTo(5));
 
             // assert that the properties are what is expected
-            Assert.AreEqual(2, (int) actualFiniteState[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("ActualFiniteState", (string) actualFiniteState[PropertyNames.ClassKind]);
-            Assert.AreEqual("MANDATORY", (string) actualFiniteState[PropertyNames.Kind]);
+            Assert.That((int)actualFiniteState[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)actualFiniteState[PropertyNames.ClassKind], Is.EqualTo("ActualFiniteState"));
+            Assert.That((string)actualFiniteState[PropertyNames.Kind], Is.EqualTo("MANDATORY"));
 
             var expectedPossibleStates = new[] { "b8fdfac4-1c40-475a-ac6c-968654b689b6" };
             var possibleStateArray = (JArray) actualFiniteState[PropertyNames.PossibleState];
@@ -168,10 +168,10 @@ namespace WebservicesIntegrationTests
             var engineeeringModel = jArray.Single(
                 x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
 
-            Assert.AreEqual(2, (int) engineeeringModel[PropertyNames.RevisionNumber]);
+            Assert.That((int)engineeeringModel[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             var iteration = jArray.Single(x => (string) x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
-            Assert.AreEqual(2, (int) iteration[PropertyNames.RevisionNumber]);
+            Assert.That((int)iteration[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             var expectedPossibleFiniteStateLists = new[]
             {
@@ -186,20 +186,18 @@ namespace WebservicesIntegrationTests
             var possibleFiniteStateList = jArray.Single(
                 x => (string) x[PropertyNames.Iid] == "bf42cb66-f340-4764-ab48-a3938a7c59eb");
 
-            Assert.AreEqual(2, (int) iteration[PropertyNames.RevisionNumber]);
+            Assert.That((int)iteration[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             // verify the amount of returned properties 
-            Assert.AreEqual(12, possibleFiniteStateList.Children().Count());
+            Assert.That(possibleFiniteStateList.Children().Count(), Is.EqualTo(12));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("PossibleFiniteStateList", (string) possibleFiniteStateList[PropertyNames.ClassKind]);
+            Assert.That((string)possibleFiniteStateList[PropertyNames.ClassKind], Is.EqualTo("PossibleFiniteStateList"));
 
-            Assert.AreEqual("Test 2 Possible FiniteState List", (string) possibleFiniteStateList[PropertyNames.Name]);
-            Assert.AreEqual("TestPossibleFiniteStateList2", (string) possibleFiniteStateList[PropertyNames.ShortName]);
+            Assert.That((string)possibleFiniteStateList[PropertyNames.Name], Is.EqualTo("Test 2 Possible FiniteState List"));
+            Assert.That((string)possibleFiniteStateList[PropertyNames.ShortName], Is.EqualTo("TestPossibleFiniteStateList2"));
 
-            Assert.AreEqual(
-                "0e92edde-fdff-41db-9b1d-f2e484f12535",
-                (string) possibleFiniteStateList[PropertyNames.Owner]);
+            Assert.That((string) possibleFiniteStateList[PropertyNames.Owner], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
 
             var expectedPossibleFiniteStates =
                 new List<OrderedItem>
@@ -214,9 +212,7 @@ namespace WebservicesIntegrationTests
 
             Assert.That(possibleFiniteStates, Is.EquivalentTo(expectedPossibleFiniteStates));
 
-            Assert.AreEqual(
-                "20f4d6aa-f9d3-4e91-aae9-bfbe77ae9b79",
-                (string) possibleFiniteStateList[PropertyNames.DefaultState]);
+            Assert.That((string) possibleFiniteStateList[PropertyNames.DefaultState], Is.EqualTo("20f4d6aa-f9d3-4e91-aae9-bfbe77ae9b79"));
 
             var expectedCategories = new string[] { };
             var categoriesArray = (JArray) possibleFiniteStateList[PropertyNames.Category];
@@ -242,15 +238,15 @@ namespace WebservicesIntegrationTests
             var possibleFiniteState = jArray.Single(
                 x => (string) x[PropertyNames.Iid] == "20f4d6aa-f9d3-4e91-aae9-bfbe77ae9b79");
 
-            Assert.AreEqual(2, (int) iteration[PropertyNames.RevisionNumber]);
+            Assert.That((int)iteration[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             // verify the amount of returned properties 
-            Assert.AreEqual(8, possibleFiniteState.Children().Count());
+            Assert.That(possibleFiniteState.Children().Count(), Is.EqualTo(8));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("PossibleFiniteState", (string) possibleFiniteState[PropertyNames.ClassKind]);
-            Assert.AreEqual("On", (string) possibleFiniteState[PropertyNames.Name]);
-            Assert.AreEqual("On", (string) possibleFiniteState[PropertyNames.ShortName]);
+            Assert.That((string)possibleFiniteState[PropertyNames.ClassKind], Is.EqualTo("PossibleFiniteState"));
+            Assert.That((string)possibleFiniteState[PropertyNames.Name], Is.EqualTo("On"));
+            Assert.That((string)possibleFiniteState[PropertyNames.ShortName], Is.EqualTo("On"));
 
             expectedAliases = new string[] { };
             aliasesArray = (JArray) possibleFiniteState[PropertyNames.Alias];
@@ -270,15 +266,15 @@ namespace WebservicesIntegrationTests
             possibleFiniteState = jArray.Single(
                 x => (string) x[PropertyNames.Iid] == "e6eabd4f-6145-4788-8070-53bd031195bd");
 
-            Assert.AreEqual(2, (int) iteration[PropertyNames.RevisionNumber]);
+            Assert.That((int)iteration[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             // verify the amount of returned properties 
-            Assert.AreEqual(8, possibleFiniteState.Children().Count());
+            Assert.That(possibleFiniteState.Children().Count(), Is.EqualTo(8));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("PossibleFiniteState", (string) possibleFiniteState[PropertyNames.ClassKind]);
-            Assert.AreEqual("Off", (string) possibleFiniteState[PropertyNames.Name]);
-            Assert.AreEqual("Off", (string) possibleFiniteState[PropertyNames.ShortName]);
+            Assert.That((string)possibleFiniteState[PropertyNames.ClassKind], Is.EqualTo("PossibleFiniteState"));
+            Assert.That((string)possibleFiniteState[PropertyNames.Name], Is.EqualTo("Off"));
+            Assert.That((string)possibleFiniteState[PropertyNames.ShortName], Is.EqualTo("Off"));
 
             expectedAliases = new string[] { };
             aliasesArray = (JArray) possibleFiniteState[PropertyNames.Alias];
@@ -304,12 +300,12 @@ namespace WebservicesIntegrationTests
             engineeeringModel = jArray.Single(
                 x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
 
-            Assert.AreEqual(3, (int) engineeeringModel[PropertyNames.RevisionNumber]);
+            Assert.That((int)engineeeringModel[PropertyNames.RevisionNumber], Is.EqualTo(3));
 
             var actualFiniteStateList = jArray.Single(
                 x => (string) x[PropertyNames.Iid] == "db690d7d-761c-47fd-96d3-840d698a89dc");
 
-            Assert.AreEqual(3, (int) actualFiniteStateList[PropertyNames.RevisionNumber]);
+            Assert.That((int)actualFiniteStateList[PropertyNames.RevisionNumber], Is.EqualTo(3));
 
             var expectedPossibleFiniteStateListsInActualFiniteStateList =
                 new List<OrderedItem>
@@ -328,7 +324,7 @@ namespace WebservicesIntegrationTests
             // get the created ActualState as a side effect of adding PossibleFiniteStateList from the result by it's unique id
             var actualStatesArray = (JArray) actualFiniteStateList[PropertyNames.ActualState];
             IList<string> actualStates = actualStatesArray.Select(x => (string) x).ToList();
-            Assert.AreEqual(2, actualStates.Count);
+            Assert.That(actualStates.Count, Is.EqualTo(2));
 
             // get a specific ActualFiniteStateList from the result by it's unique id
             var actualFiniteState = jArray.Single(
@@ -336,12 +332,12 @@ namespace WebservicesIntegrationTests
                      && (string) x[PropertyNames.PossibleState][0] == "20f4d6aa-f9d3-4e91-aae9-bfbe77ae9b79");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(5, actualFiniteState.Children().Count());
+            Assert.That(actualFiniteState.Children().Count(), Is.EqualTo(5));
 
             // assert that the properties are what is expected
-            Assert.AreEqual(3, (int) actualFiniteState[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("ActualFiniteState", (string) actualFiniteState[PropertyNames.ClassKind]);
-            Assert.AreEqual("MANDATORY", (string) actualFiniteState[PropertyNames.Kind]);
+            Assert.That((int)actualFiniteState[PropertyNames.RevisionNumber], Is.EqualTo(3));
+            Assert.That((string)actualFiniteState[PropertyNames.ClassKind], Is.EqualTo("ActualFiniteState"));
+            Assert.That((string)actualFiniteState[PropertyNames.Kind], Is.EqualTo("MANDATORY"));
 
             var expectedPossibleStates = new[]
             {
@@ -360,12 +356,12 @@ namespace WebservicesIntegrationTests
                      && (string) x[PropertyNames.PossibleState][1] == "e6eabd4f-6145-4788-8070-53bd031195bd");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(5, actualFiniteState.Children().Count());
+            Assert.That(actualFiniteState.Children().Count(), Is.EqualTo(5));
 
             // assert that the properties are what is expected
-            Assert.AreEqual(3, (int) actualFiniteState[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("ActualFiniteState", (string) actualFiniteState[PropertyNames.ClassKind]);
-            Assert.AreEqual("MANDATORY", (string) actualFiniteState[PropertyNames.Kind]);
+            Assert.That((int)actualFiniteState[PropertyNames.RevisionNumber], Is.EqualTo(3));
+            Assert.That((string)actualFiniteState[PropertyNames.ClassKind], Is.EqualTo("ActualFiniteState"));
+            Assert.That((string)actualFiniteState[PropertyNames.Kind], Is.EqualTo("MANDATORY"));
 
             expectedPossibleStates = new[]
             {
@@ -386,7 +382,7 @@ namespace WebservicesIntegrationTests
             actualFiniteStateList = jArray.Single(
                 x => (string) x[PropertyNames.Iid] == "db690d7d-761c-47fd-96d3-840d698a89dc");
 
-            Assert.AreEqual(4, (int) actualFiniteStateList[PropertyNames.RevisionNumber]);
+            Assert.That((int)actualFiniteStateList[PropertyNames.RevisionNumber], Is.EqualTo(4));
 
             var expectedReorderedPossibleFiniteStateListsInActualFiniteStateList =
                 new List<OrderedItem>
@@ -418,12 +414,12 @@ namespace WebservicesIntegrationTests
             var engineeeringModel = jArray.Single(
                 x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
 
-            Assert.AreEqual(2, (int) engineeeringModel[PropertyNames.RevisionNumber]);
+            Assert.That((int)engineeeringModel[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             var possibleFiniteStateList = jArray.Single(
                 x => (string) x[PropertyNames.Iid] == "449a5bca-34fd-454a-93f8-a56ac8383fee");
 
-            Assert.AreEqual(2, (int) possibleFiniteStateList[PropertyNames.RevisionNumber]);
+            Assert.That((int)possibleFiniteStateList[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             var expectedPossibleFiniteStates =
                 new List<OrderedItem>
@@ -441,12 +437,12 @@ namespace WebservicesIntegrationTests
             var actualFiniteStateList = jArray.Single(
                 x => (string) x[PropertyNames.Iid] == "db690d7d-761c-47fd-96d3-840d698a89dc");
 
-            Assert.AreEqual(2, (int) actualFiniteStateList[PropertyNames.RevisionNumber]);
+            Assert.That((int)actualFiniteStateList[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             // get the created ActualState as a side effect of creating PossibleFiniteState from the result by it's unique id
             var actualStatesArray = (JArray) actualFiniteStateList[PropertyNames.ActualState];
             IList<string> actualStates = actualStatesArray.Select(x => (string) x).ToList();
-            Assert.AreEqual(2, actualStates.Count);
+            Assert.That(actualStates.Count, Is.EqualTo(2));
 
             // get a specific ActualFiniteStateList from the result by unknown id
             var actualFiniteState1 = jArray.Single(
@@ -454,12 +450,12 @@ namespace WebservicesIntegrationTests
                      && (string) x[PropertyNames.PossibleState][0] == "20f4d6aa-f9d3-4e91-aae9-bfbe77ae9b79");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(5, actualFiniteState1.Children().Count());
+            Assert.That(actualFiniteState1.Children().Count(), Is.EqualTo(5));
 
             // assert that the properties are what is expected
-            Assert.AreEqual(2, (int) actualFiniteState1[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("ActualFiniteState", (string) actualFiniteState1[PropertyNames.ClassKind]);
-            Assert.AreEqual("MANDATORY", (string) actualFiniteState1[PropertyNames.Kind]);
+            Assert.That((int)actualFiniteState1[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)actualFiniteState1[PropertyNames.ClassKind], Is.EqualTo("ActualFiniteState"));
+            Assert.That((string)actualFiniteState1[PropertyNames.Kind], Is.EqualTo("MANDATORY"));
 
             var expectedPossibleStates = new[] { "20f4d6aa-f9d3-4e91-aae9-bfbe77ae9b79" };
             var possibleStateArray = (JArray) actualFiniteState1[PropertyNames.PossibleState];
@@ -472,12 +468,12 @@ namespace WebservicesIntegrationTests
                      && (string) x[PropertyNames.PossibleState][0] == "b8fdfac4-1c40-475a-ac6c-968654b689b6");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(5, actualFiniteState2.Children().Count());
+            Assert.That(actualFiniteState2.Children().Count(), Is.EqualTo(5));
 
             // assert that the properties are what is expected
-            Assert.AreEqual(2, (int) actualFiniteState2[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("ActualFiniteState", (string) actualFiniteState2[PropertyNames.ClassKind]);
-            Assert.AreEqual("MANDATORY", (string) actualFiniteState2[PropertyNames.Kind]);
+            Assert.That((int)actualFiniteState2[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)actualFiniteState2[PropertyNames.ClassKind], Is.EqualTo("ActualFiniteState"));
+            Assert.That((string)actualFiniteState2[PropertyNames.Kind], Is.EqualTo("MANDATORY"));
 
             expectedPossibleStates = new[] { "b8fdfac4-1c40-475a-ac6c-968654b689b6" };
             possibleStateArray = (JArray) actualFiniteState2[PropertyNames.PossibleState];
@@ -495,13 +491,13 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken actualFiniteStateList)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(7, actualFiniteStateList.Children().Count());
+            Assert.That(actualFiniteStateList.Children().Count(), Is.EqualTo(7));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("db690d7d-761c-47fd-96d3-840d698a89dc", (string) actualFiniteStateList[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) actualFiniteStateList[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("ActualFiniteStateList", (string) actualFiniteStateList[PropertyNames.ClassKind]);
-            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string) actualFiniteStateList[PropertyNames.Owner]);
+            Assert.That((string)actualFiniteStateList[PropertyNames.Iid], Is.EqualTo("db690d7d-761c-47fd-96d3-840d698a89dc"));
+            Assert.That((int)actualFiniteStateList[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string)actualFiniteStateList[PropertyNames.ClassKind], Is.EqualTo("ActualFiniteStateList"));
+            Assert.That((string)actualFiniteStateList[PropertyNames.Owner], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
 
             var expectedPossibleFiniteStateLists =
                 new List<OrderedItem> { new OrderedItem(4598335, "449a5bca-34fd-454a-93f8-a56ac8383fee") };
@@ -541,23 +537,23 @@ namespace WebservicesIntegrationTests
             var engineeringModel = jArray.Single(
                 x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
 
-            Assert.AreEqual(2, (int) engineeringModel[PropertyNames.RevisionNumber]);
+            Assert.That((int)engineeringModel[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             var actualFiniteStateList = jArray.Single(
                 x => (string) x[PropertyNames.Iid] == "db690d7d-761c-47fd-96d3-840d698a89dc");
 
-            Assert.AreEqual(2, (int) actualFiniteStateList[PropertyNames.RevisionNumber]);
+            Assert.That((int)actualFiniteStateList[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             // get a specific ActualFiniteStateList from the result by unknown id
             var actualFiniteState = jArray.Single(x => (string) x[PropertyNames.ClassKind] == "ActualFiniteState");
 
             // verify the amount of returned properties
-            Assert.AreEqual(5, actualFiniteState.Children().Count());
+            Assert.That(actualFiniteState.Children().Count(), Is.EqualTo(5));
 
             // assert that the properties are what is expected
-            Assert.AreEqual(2, (int) actualFiniteState[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("ActualFiniteState", (string) actualFiniteState[PropertyNames.ClassKind]);
-            Assert.AreEqual("FORBIDDEN", (string) actualFiniteState[PropertyNames.Kind]);
+            Assert.That((int)actualFiniteState[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)actualFiniteState[PropertyNames.ClassKind], Is.EqualTo("ActualFiniteState"));
+            Assert.That((string)actualFiniteState[PropertyNames.Kind], Is.EqualTo("FORBIDDEN"));
         }
     }
 }

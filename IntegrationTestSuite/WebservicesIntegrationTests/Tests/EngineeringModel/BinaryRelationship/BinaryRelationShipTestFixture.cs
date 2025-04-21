@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="BinaryRelationShipTestFixture.cs" company="Starion Group S.A.">
 //
-//   Copyright 2016-2021 Starion Group S.A.
+//   Copyright 2016-2025 Starion Group S.A.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -42,7 +42,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(binaryRelationshipUri);
 
             //check if there is required amount of BinaryRelationship object 
-            Assert.AreEqual(2, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(2));
 
             // get a specific BinaryRelationship from the result by it's unique id
             var binaryRelationship =
@@ -66,7 +66,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(binaryRelationshipUri);
 
             //check if there are 3 objects
-            Assert.AreEqual(4, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(4));
 
             // get a specific Iteration from the result by it's unique id
             var iteration =
@@ -94,16 +94,16 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken binaryRelationship)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(7, binaryRelationship.Children().Count());
+            Assert.That(binaryRelationship.Children().Count(), Is.EqualTo(7));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("320869e4-f6d6-4dd2-a696-1b1604f4c4b7", (string)binaryRelationship[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int)binaryRelationship[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("BinaryRelationship", (string)binaryRelationship[PropertyNames.ClassKind]);
+            Assert.That((string)binaryRelationship[PropertyNames.Iid], Is.EqualTo("320869e4-f6d6-4dd2-a696-1b1604f4c4b7"));
+            Assert.That((int)binaryRelationship[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string)binaryRelationship[PropertyNames.ClassKind], Is.EqualTo("BinaryRelationship"));
 
-            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string)binaryRelationship[PropertyNames.Owner]);
-            Assert.AreEqual("790b9e60-476b-4b6d-8aba-0af15178535e", (string)binaryRelationship[PropertyNames.Source]);
-            Assert.AreEqual("ff6956dc-1882-4d61-8840-dedb3fba7b43", (string)binaryRelationship[PropertyNames.Target]);
+            Assert.That((string)binaryRelationship[PropertyNames.Owner], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
+            Assert.That((string)binaryRelationship[PropertyNames.Source], Is.EqualTo("790b9e60-476b-4b6d-8aba-0af15178535e"));
+            Assert.That((string)binaryRelationship[PropertyNames.Target], Is.EqualTo("ff6956dc-1882-4d61-8840-dedb3fba7b43"));
             
             var expectedCategories = new string[] {};
             var categoriesArray = (JArray)binaryRelationship[PropertyNames.Category];
@@ -114,16 +114,16 @@ namespace WebservicesIntegrationTests
         public static void VerifyPropertiesWithCategoryEntry(JToken binaryRelationship)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(7, binaryRelationship.Children().Count());
+            Assert.That(binaryRelationship.Children().Count(), Is.EqualTo(7));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("138f8a3e-69c6-4e21-b459-bc26b1319a2c", (string)binaryRelationship[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int)binaryRelationship[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("BinaryRelationship", (string)binaryRelationship[PropertyNames.ClassKind]);
+            Assert.That((string)binaryRelationship[PropertyNames.Iid], Is.EqualTo("138f8a3e-69c6-4e21-b459-bc26b1319a2c"));
+            Assert.That((int)binaryRelationship[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string)binaryRelationship[PropertyNames.ClassKind], Is.EqualTo("BinaryRelationship"));
 
-            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string)binaryRelationship[PropertyNames.Owner]);
-            Assert.AreEqual("67cdb7de-7721-40a0-9ca2-10a5cf7742fc", (string)binaryRelationship[PropertyNames.Source]);
-            Assert.AreEqual("95bf0f17-1273-4338-98ae-839016242775", (string)binaryRelationship[PropertyNames.Target]);
+            Assert.That((string)binaryRelationship[PropertyNames.Owner], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
+            Assert.That((string)binaryRelationship[PropertyNames.Source], Is.EqualTo("67cdb7de-7721-40a0-9ca2-10a5cf7742fc"));
+            Assert.That((string)binaryRelationship[PropertyNames.Target], Is.EqualTo("95bf0f17-1273-4338-98ae-839016242775"));
 
             var expectedCategories = new string[]
             {

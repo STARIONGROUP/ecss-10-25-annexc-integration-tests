@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="AliasTestFixture.cs" company="Starion Group S.A.">
 //
-//   Copyright 2016-2021 Starion Group S.A.
+//   Copyright 2016-2025 Starion Group S.A.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -62,24 +62,24 @@ namespace WebservicesIntegrationTests
             IList<string> commonFileStores = commonFileStoresArray.Select(x => (string)x).ToList();
             Assert.That(commonFileStores, Is.EquivalentTo(expectedCommonFileStores));
 
-            Assert.AreEqual("EngineeringModel", (string)engineeringModel[PropertyNames.ClassKind]);
-            Assert.AreEqual("116f6253-89bb-47d4-aa24-d11d197e43c9", (string)engineeringModel[PropertyNames.EngineeringModelSetup]);
-            Assert.AreEqual("9ec982e4-ef72-4953-aa85-b158a95d8d56", (string)engineeringModel[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int)engineeringModel[PropertyNames.RevisionNumber]);
+            Assert.That((string)engineeringModel[PropertyNames.ClassKind], Is.EqualTo("EngineeringModel"));
+            Assert.That((string)engineeringModel[PropertyNames.EngineeringModelSetup], Is.EqualTo("116f6253-89bb-47d4-aa24-d11d197e43c9"));
+            Assert.That((string)engineeringModel[PropertyNames.Iid], Is.EqualTo("9ec982e4-ef72-4953-aa85-b158a95d8d56"));
+            Assert.That((int)engineeringModel[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             // Get a specific Option from the result by it's unique id
             var option = jArray.Single(x => (string)x[PropertyNames.Iid] == "bebcc9f4-ff20-4569-bbf6-d1acf27a8107");
 
             // verify the amount of returned properties of Option
-            Assert.AreEqual(10, option.Children().Count());
+            Assert.That(option.Children().Count(), Is.EqualTo(10));
 
             // assert that the properties of Option are what is expected
-            Assert.AreEqual("bebcc9f4-ff20-4569-bbf6-d1acf27a8107", (string)option[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int)option[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("Option", (string)option[PropertyNames.ClassKind]);
+            Assert.That((string)option[PropertyNames.Iid], Is.EqualTo("bebcc9f4-ff20-4569-bbf6-d1acf27a8107"));
+            Assert.That((int)option[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)option[PropertyNames.ClassKind], Is.EqualTo("Option"));
 
-            Assert.AreEqual("Test Option", (string)option[PropertyNames.Name]);
-            Assert.AreEqual("TestOption", (string)option[PropertyNames.ShortName]);
+            Assert.That((string)option[PropertyNames.Name], Is.EqualTo("Test Option"));
+            Assert.That((string)option[PropertyNames.ShortName], Is.EqualTo("TestOption"));
 
             var expectedNestedElements = new string[] { };
             var nestedElementsArray = (JArray)option[PropertyNames.NestedElement];
@@ -110,15 +110,15 @@ namespace WebservicesIntegrationTests
             var alias = jArray.Single(x => (string)x[PropertyNames.Iid] == "4a506a69-5453-475a-b8d9-142331bd30ea");
 
             // Verify the amount of returned properties 
-            Assert.AreEqual(6, alias.Children().Count());
+            Assert.That(alias.Children().Count(), Is.EqualTo(6));
 
             // Assert that the properties are equal to expected values      
-            Assert.AreEqual("Alias", (string)alias[PropertyNames.ClassKind]);
-            Assert.AreEqual("test alias", (string)alias[PropertyNames.Content]);
-            Assert.AreEqual("4a506a69-5453-475a-b8d9-142331bd30ea", (string)alias[PropertyNames.Iid]);
-            Assert.AreEqual(false, (bool)alias[PropertyNames.IsSynonym]);
-            Assert.AreEqual("nl", (string)alias[PropertyNames.LanguageCode]);
-            Assert.AreEqual(2, (int)alias[PropertyNames.RevisionNumber]);        
+            Assert.That((string)alias[PropertyNames.ClassKind], Is.EqualTo("Alias"));
+            Assert.That((string)alias[PropertyNames.Content], Is.EqualTo("test alias"));
+            Assert.That((string)alias[PropertyNames.Iid], Is.EqualTo("4a506a69-5453-475a-b8d9-142331bd30ea"));
+            Assert.That((bool)alias[PropertyNames.IsSynonym], Is.EqualTo(false));
+            Assert.That((string)alias[PropertyNames.LanguageCode], Is.EqualTo("nl"));
+            Assert.That((int)alias[PropertyNames.RevisionNumber], Is.EqualTo(2));        
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="ActualFiniteStateTestFixture.cs" company="Starion Group S.A.">
 //
-//   Copyright 2016-2021 Starion Group S.A.
+//   Copyright 2016-2025 Starion Group S.A.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -42,7 +42,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(actualFiniteStateUri);
 
             //check if there is the only one ActualFiniteStateList object 
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That (jArray.Count, Is.EqualTo(1));
 
             // get a specific ActualFiniteStateList from the result by it's unique id
             var actualFiniteState = jArray.Single(x => (string)x[PropertyNames.Iid] == "b91bfdbb-4277-4a03-b519-e4db839ef5d4");
@@ -87,13 +87,13 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken actualFiniteState)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(5, actualFiniteState.Children().Count());
+            Assert.That(actualFiniteState.Children().Count(), Is.EqualTo(5));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("b91bfdbb-4277-4a03-b519-e4db839ef5d4", (string)actualFiniteState[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int)actualFiniteState[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("ActualFiniteState", (string)actualFiniteState[PropertyNames.ClassKind]);
-            Assert.AreEqual("MANDATORY", (string)actualFiniteState[PropertyNames.Kind]);
+            Assert.That((string)actualFiniteState[PropertyNames.Iid], Is.EqualTo("b91bfdbb-4277-4a03-b519-e4db839ef5d4"));
+            Assert.That((int)actualFiniteState[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string)actualFiniteState[PropertyNames.ClassKind], Is.EqualTo("ActualFiniteState"));
+            Assert.That((string)actualFiniteState[PropertyNames.Kind], Is.EqualTo("MANDATORY"));
 
             var expectedPossibleStates = new string[] { "b8fdfac4-1c40-475a-ac6c-968654b689b6" };
             var possibleStateArray = (JArray)actualFiniteState[PropertyNames.PossibleState];

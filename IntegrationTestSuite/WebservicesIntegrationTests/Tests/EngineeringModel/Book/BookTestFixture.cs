@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="BookTestFixture.cs" company="Starion Group S.A.">
 //
-//   Copyright 2016-2021 Starion Group S.A.
+//   Copyright 2016-2025 Starion Group S.A.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -51,12 +51,12 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
             //check if there are 3 classes returned
-            Assert.AreEqual(3, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(3));
 
             var engineeringModel = jArray.Single(x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
 
             // Verify the amount of returned properties of the EngineeringModel
-            Assert.AreEqual(14, engineeringModel.Children().Count());
+            Assert.That(engineeringModel.Children().Count(), Is.EqualTo(14));
 
             var bookList = JsonConvert.DeserializeObject<List<OrderedItem>>(engineeringModel[PropertyNames.Book].ToString());
 
@@ -73,8 +73,8 @@ namespace WebservicesIntegrationTests
             var book1 = jArray.Single(x => (string) x[PropertyNames.Iid] == "f84b5d72-be4d-418c-90db-19e311e75be3");
             var book2 = jArray.Single(x => (string) x[PropertyNames.Iid] == "20a8f908-94c8-4093-8f74-7b6f25433826");
 
-            Assert.AreEqual(12, book1.Children().Count());
-            Assert.AreEqual(12, book2.Children().Count());
+            Assert.That(book1.Children().Count(), Is.EqualTo(12));
+            Assert.That(book2.Children().Count(), Is.EqualTo(12));
 
             postBodyPath = this.GetPath("Tests/EngineeringModel/Book/PostDeleteBooks.json");
 
@@ -84,7 +84,7 @@ namespace WebservicesIntegrationTests
             engineeringModel = jArray.Single(x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
 
             // Verify the amount of returned properties of the EngineeringModel
-            Assert.AreEqual(14, engineeringModel.Children().Count());
+            Assert.That(engineeringModel.Children().Count(), Is.EqualTo(14));
 
             bookList = JsonConvert.DeserializeObject<List<OrderedItem>>(engineeringModel[PropertyNames.Book].ToString());
 

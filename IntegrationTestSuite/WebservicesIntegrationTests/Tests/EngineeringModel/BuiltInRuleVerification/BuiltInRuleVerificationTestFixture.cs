@@ -41,7 +41,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(builtInRuleVerificationUri);
 
             //check if there are 2 RuleVerification objects 
-            Assert.AreEqual(2, jArray.Count);
+            Assert.That( jArray.Count, Is.EqualTo(2));
 
             // get a specific BuiltInRuleVerification from the result by it's unique id
             var builtInRuleVerification =
@@ -61,7 +61,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(builtInRuleVerificationUri);
 
             //check if there are 5 objects
-            Assert.AreEqual(5, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(5));
 
             // get a specific Iteration from the result by it's unique id
             var iteration =
@@ -89,17 +89,17 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken builtInRuleVerification)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(7, builtInRuleVerification.Children().Count());
+            Assert.That(builtInRuleVerification.Children().Count(), Is.EqualTo(7));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("ccb44a8e-2460-4892-ab75-02d8828db233", (string) builtInRuleVerification[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) builtInRuleVerification[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("BuiltInRuleVerification", (string) builtInRuleVerification[PropertyNames.ClassKind]);
+            Assert.That((string) builtInRuleVerification[PropertyNames.Iid], Is.EqualTo("ccb44a8e-2460-4892-ab75-02d8828db233"));
+            Assert.That((int)builtInRuleVerification[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string)builtInRuleVerification[PropertyNames.ClassKind], Is.EqualTo("BuiltInRuleVerification"));
 
-            Assert.AreEqual("Test BuiltInRuleVerification", (string) builtInRuleVerification[PropertyNames.Name]);
-            Assert.AreEqual("NONE", (string) builtInRuleVerification[PropertyNames.Status]);
-            Assert.IsNull((string) builtInRuleVerification[PropertyNames.ExecutedOn]);
-            Assert.IsFalse((bool) builtInRuleVerification[PropertyNames.IsActive]);
+            Assert.That((string)builtInRuleVerification[PropertyNames.Name], Is.EqualTo("Test BuiltInRuleVerification"));
+            Assert.That((string)builtInRuleVerification[PropertyNames.Status], Is.EqualTo("NONE"));
+            Assert.That((string) builtInRuleVerification[PropertyNames.ExecutedOn], Is.Null);
+            Assert.That((bool) builtInRuleVerification[PropertyNames.IsActive], Is.False);
         }
     }
 }
