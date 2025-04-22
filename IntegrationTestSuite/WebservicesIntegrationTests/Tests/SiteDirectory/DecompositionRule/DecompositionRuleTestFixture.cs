@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="DecompositionRuleTestFixture.cs" company="Starion Group S.A.">
 //
-//   Copyright 2016-2021 Starion Group S.A.
+//   Copyright 2016-2025 Starion Group S.A.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -43,7 +43,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(decompositionRuleUri);
 
             //check if there is the only one DecompositionRule object 
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific DecompositionRule from the result by it's unique id
             var decompositionRule = jArray.Single(x => (string) x["iid"] == "8a5cd66e-7313-4843-813f-37081ca81bb8");
@@ -90,15 +90,15 @@ namespace WebservicesIntegrationTests
             var siteDirectory = jArray.Single(x => (string)x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
 
             // verify that the amount of returned properties 
-            Assert.AreEqual(19, siteDirectory.Children().Count());
+            Assert.That(siteDirectory.Children().Count(), Is.EqualTo(19));
 
-            Assert.AreEqual("f13de6f8-b03a-46e7-a492-53b2f260f294", (string)siteDirectory[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int)siteDirectory[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("SiteDirectory", (string)siteDirectory[PropertyNames.ClassKind]);
-            Assert.AreEqual("Test Site Directory", (string)siteDirectory[PropertyNames.Name]);
-            Assert.AreEqual("TEST-SiteDir", (string)siteDirectory[PropertyNames.ShortName]);
-            Assert.AreEqual("ee3ae5ff-ac5e-4957-bab1-7698fba2a267", (string)siteDirectory[PropertyNames.DefaultParticipantRole]);
-            Assert.AreEqual("2428f4d9-f26d-4112-9d56-1c940748df69", (string)siteDirectory[PropertyNames.DefaultPersonRole]);
+            Assert.That((string)siteDirectory[PropertyNames.Iid], Is.EqualTo("f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            Assert.That((int)siteDirectory[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)siteDirectory[PropertyNames.ClassKind], Is.EqualTo("SiteDirectory"));
+            Assert.That((string)siteDirectory[PropertyNames.Name], Is.EqualTo("Test Site Directory"));
+            Assert.That((string)siteDirectory[PropertyNames.ShortName], Is.EqualTo("TEST-SiteDir"));
+            Assert.That((string)siteDirectory[PropertyNames.DefaultParticipantRole], Is.EqualTo("ee3ae5ff-ac5e-4957-bab1-7698fba2a267"));
+            Assert.That((string)siteDirectory[PropertyNames.DefaultPersonRole], Is.EqualTo("2428f4d9-f26d-4112-9d56-1c940748df69"));
 
             var expectedOrganizations = new string[] { "cd22fc45-d898-4fac-85fc-fbcb7d7b12a7" };
             var organizationArray = (JArray)siteDirectory[PropertyNames.Organization];
@@ -162,16 +162,16 @@ namespace WebservicesIntegrationTests
             var siteReferenceDataLibrary = jArray.Single(x => (string)x[PropertyNames.Iid] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(22, siteReferenceDataLibrary.Children().Count());
+            Assert.That(siteReferenceDataLibrary.Children().Count(), Is.EqualTo(22));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("c454c687-ba3e-44c4-86bc-44544b2c7880", (string)siteReferenceDataLibrary[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int)siteReferenceDataLibrary[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("SiteReferenceDataLibrary", (string)siteReferenceDataLibrary[PropertyNames.ClassKind]);
+            Assert.That((string)siteReferenceDataLibrary[PropertyNames.Iid], Is.EqualTo("c454c687-ba3e-44c4-86bc-44544b2c7880"));
+            Assert.That((int)siteReferenceDataLibrary[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)siteReferenceDataLibrary[PropertyNames.ClassKind], Is.EqualTo("SiteReferenceDataLibrary"));
 
-            Assert.IsFalse((bool)siteReferenceDataLibrary[PropertyNames.IsDeprecated]);
-            Assert.AreEqual("Test Reference Data Library", (string)siteReferenceDataLibrary[PropertyNames.Name]);
-            Assert.AreEqual("TestRDL", (string)siteReferenceDataLibrary[PropertyNames.ShortName]);
+            Assert.That((bool)siteReferenceDataLibrary[PropertyNames.IsDeprecated], Is.False);
+            Assert.That((string)siteReferenceDataLibrary[PropertyNames.Name], Is.EqualTo("Test Reference Data Library"));
+            Assert.That((string)siteReferenceDataLibrary[PropertyNames.ShortName], Is.EqualTo("TestRDL"));
 
             var expectedAliases = new string[] { };
             var aliasesArray = (JArray)siteReferenceDataLibrary[PropertyNames.Alias];
@@ -302,7 +302,7 @@ namespace WebservicesIntegrationTests
             IList<string> rulesList = rulesArray.Select(x => (string)x).ToList();
             Assert.That(rulesList, Is.EquivalentTo(expectedRules));
 
-            Assert.IsEmpty(siteReferenceDataLibrary["requiredRdl"]);
+            Assert.That(siteReferenceDataLibrary["requiredRdl"], Is.Empty);
 
             var expectedConstants = new string[]
             {
@@ -315,21 +315,20 @@ namespace WebservicesIntegrationTests
             // DecompositionRule
             var decompositionRule = jArray.Single(x => (string)x[PropertyNames.Iid] == "11a67246-c08d-43e2-9ef5-b7dd8f3ca687");
             // verify the amount of returned properties 
-            Assert.AreEqual(13, decompositionRule.Children().Count());
+            Assert.That(decompositionRule.Children().Count(), Is.EqualTo(13));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("11a67246-c08d-43e2-9ef5-b7dd8f3ca687", (string)decompositionRule["iid"]);
-            Assert.AreEqual(2, (int)decompositionRule["revisionNumber"]);
-            Assert.AreEqual("DecompositionRule", (string)decompositionRule["classKind"]);
+            Assert.That((string)decompositionRule["iid"], Is.EqualTo("11a67246-c08d-43e2-9ef5-b7dd8f3ca687"));
+            Assert.That((int)decompositionRule["revisionNumber"], Is.EqualTo(2));
+            Assert.That((string)decompositionRule["classKind"], Is.EqualTo("DecompositionRule"));
 
-            Assert.IsFalse((bool)decompositionRule["isDeprecated"]);
-            Assert.AreEqual("Test Decomposition Rule", (string)decompositionRule["name"]);
-            Assert.AreEqual("TestDecompositionRule", (string)decompositionRule["shortName"]);
+            Assert.That((bool)decompositionRule["isDeprecated"], Is.False);
+            Assert.That((string)decompositionRule["name"], Is.EqualTo("Test Decomposition Rule"));
+            Assert.That((string)decompositionRule["shortName"], Is.EqualTo("TestDecompositionRule"));
 
-            Assert.AreEqual("cf059b19-235c-48be-87a3-9a8942c8e3e0",
-                (string)decompositionRule["containingCategory"]);
-            Assert.AreEqual(0, (int)decompositionRule["minContained"]);
-            Assert.IsEmpty(decompositionRule["maxContained"]);
+            Assert.That((string)decompositionRule["containingCategory"], Is.EqualTo("cf059b19-235c-48be-87a3-9a8942c8e3e0"));
+            Assert.That((int)decompositionRule["minContained"], Is.EqualTo(0));
+            Assert.That(decompositionRule["maxContained"], Is.Empty);
 
             var expectedContainedCategories = new string[]
             {
@@ -365,21 +364,20 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken decompositionRule)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(13, decompositionRule.Children().Count());
+            Assert.That(decompositionRule.Children().Count(), Is.EqualTo(13));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("8a5cd66e-7313-4843-813f-37081ca81bb8", (string) decompositionRule["iid"]);
-            Assert.AreEqual(1, (int) decompositionRule["revisionNumber"]);
-            Assert.AreEqual("DecompositionRule", (string) decompositionRule["classKind"]);
+            Assert.That((string)decompositionRule["iid"], Is.EqualTo("8a5cd66e-7313-4843-813f-37081ca81bb8"));
+            Assert.That((int)decompositionRule["revisionNumber"], Is.EqualTo(1));
+            Assert.That((string)decompositionRule["classKind"], Is.EqualTo("DecompositionRule"));
 
-            Assert.IsFalse((bool) decompositionRule["isDeprecated"]);
-            Assert.AreEqual("Test Decomposition Rule", (string) decompositionRule["name"]);
-            Assert.AreEqual("TestDecompositionRule", (string) decompositionRule["shortName"]);
+            Assert.That((bool) decompositionRule["isDeprecated"], Is.False);
+            Assert.That((string)decompositionRule["name"], Is.EqualTo("Test Decomposition Rule"));
+            Assert.That((string)decompositionRule["shortName"], Is.EqualTo("TestDecompositionRule"));
 
-            Assert.AreEqual("cf059b19-235c-48be-87a3-9a8942c8e3e0",
-                (string) decompositionRule["containingCategory"]);
-            Assert.AreEqual(0, (int) decompositionRule["minContained"]);
-            Assert.IsEmpty(decompositionRule["maxContained"]);
+            Assert.That((string)decompositionRule["containingCategory"], Is.EqualTo("cf059b19-235c-48be-87a3-9a8942c8e3e0"));
+            Assert.That((int)decompositionRule["minContained"], Is.EqualTo(0));
+            Assert.That(decompositionRule["maxContained"], Is.Empty);
 
             var expectedContainedCategories = new string[]
             {

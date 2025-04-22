@@ -42,7 +42,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(dateTimeParameterTypeUri);
 
             //check if there is the only one DateTimeParameterType object 
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific DateTimeParameterType from the result by it's unique id
             var dateTimeParameterType = jArray.Single(x => (string) x[PropertyNames.Iid] == "9c1d3e39-0754-4388-8e1e-070ca9a0e7b6");
@@ -61,7 +61,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(dateTimeParameterTypeUri);
 
             //check if there are 3 objects
-            Assert.AreEqual(3, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(3));
 
             // get a specific SiteDirectory from the result by it's unique id
             var siteDirectory = jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
@@ -86,18 +86,18 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken dateTimeParameterType)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(11, dateTimeParameterType.Children().Count());
+            Assert.That(dateTimeParameterType.Children().Count(), Is.EqualTo(11));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("9c1d3e39-0754-4388-8e1e-070ca9a0e7b6", (string) dateTimeParameterType[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) dateTimeParameterType[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("DateTimeParameterType", (string) dateTimeParameterType[PropertyNames.ClassKind]);
+            Assert.That((string)dateTimeParameterType[PropertyNames.Iid], Is.EqualTo("9c1d3e39-0754-4388-8e1e-070ca9a0e7b6"));
+            Assert.That((int)dateTimeParameterType[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string)dateTimeParameterType[PropertyNames.ClassKind], Is.EqualTo("DateTimeParameterType"));
 
-            Assert.IsFalse((bool) dateTimeParameterType[PropertyNames.IsDeprecated]);
-            Assert.AreEqual("Test DateTime ParameterType", (string) dateTimeParameterType[PropertyNames.Name]);
-            Assert.AreEqual("TestDateTimeParameterType", (string) dateTimeParameterType[PropertyNames.ShortName]);
+            Assert.That((bool) dateTimeParameterType[PropertyNames.IsDeprecated], Is.False);
+            Assert.That((string)dateTimeParameterType[PropertyNames.Name], Is.EqualTo("Test DateTime ParameterType"));
+            Assert.That((string)dateTimeParameterType[PropertyNames.ShortName], Is.EqualTo("TestDateTimeParameterType"));
 
-            Assert.AreEqual("datetime", (string) dateTimeParameterType[PropertyNames.Symbol]);
+            Assert.That((string)dateTimeParameterType[PropertyNames.Symbol], Is.EqualTo("datetime"));
 
             var expectedCategories = new string[] {};
             var categoriesArray = (JArray) dateTimeParameterType[PropertyNames.Category];

@@ -89,6 +89,8 @@ namespace MessagePackIntegrationTests
 
             var httpResponseMessage =  await this.httpClient.GetAsync("/SiteDirectory?extent=deep&includeReferenceData=true", cts.Token);
 
+            httpResponseMessage.EnsureSuccessStatusCode();
+
             Assert.That(httpResponseMessage.Content.Headers.ContentType.MediaType , Is.EqualTo("application/msgpack"));
 
             var messagePackSerializer = new MessagePackSerializer();
