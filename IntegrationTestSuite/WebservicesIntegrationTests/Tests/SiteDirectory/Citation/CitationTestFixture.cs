@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="CitationTestFixture.cs" company="Starion Group S.A.">
 //
-//   Copyright 2016-2021 Starion Group S.A.
+//   Copyright 2016-2025 Starion Group S.A.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -44,16 +44,16 @@ namespace WebservicesIntegrationTests
             var siteDirectory = jArray.Single(x => (string)x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
 
             // verify that the amount of returned properties 
-            Assert.AreEqual(19, siteDirectory.Children().Count());
+            Assert.That(siteDirectory.Children().Count(), Is.EqualTo(19));
 
             // Assert values are as expected
-            Assert.AreEqual("f13de6f8-b03a-46e7-a492-53b2f260f294", (string)siteDirectory[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int)siteDirectory[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("SiteDirectory", (string)siteDirectory[PropertyNames.ClassKind]);
-            Assert.AreEqual("Test Site Directory", (string)siteDirectory[PropertyNames.Name]);
-            Assert.AreEqual("TEST-SiteDir", (string)siteDirectory[PropertyNames.ShortName]);
-            Assert.AreEqual("ee3ae5ff-ac5e-4957-bab1-7698fba2a267", (string)siteDirectory[PropertyNames.DefaultParticipantRole]);
-            Assert.AreEqual("2428f4d9-f26d-4112-9d56-1c940748df69", (string)siteDirectory[PropertyNames.DefaultPersonRole]);
+            Assert.That((string)siteDirectory[PropertyNames.Iid], Is.EqualTo("f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            Assert.That((int)siteDirectory[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)siteDirectory[PropertyNames.ClassKind], Is.EqualTo("SiteDirectory"));
+            Assert.That((string)siteDirectory[PropertyNames.Name], Is.EqualTo("Test Site Directory"));
+            Assert.That((string)siteDirectory[PropertyNames.ShortName], Is.EqualTo("TEST-SiteDir"));
+            Assert.That((string)siteDirectory[PropertyNames.DefaultParticipantRole], Is.EqualTo("ee3ae5ff-ac5e-4957-bab1-7698fba2a267"));
+            Assert.That((string)siteDirectory[PropertyNames.DefaultPersonRole], Is.EqualTo("2428f4d9-f26d-4112-9d56-1c940748df69"));
 
             var expectedOrganizations = new string[] { "cd22fc45-d898-4fac-85fc-fbcb7d7b12a7" };
             var organizationArray = (JArray)siteDirectory[PropertyNames.Organization];
@@ -117,14 +117,14 @@ namespace WebservicesIntegrationTests
             var definition = jArray.Single(x => (string)x[PropertyNames.Iid] == "23658615-a170-4c0f-ba71-da1a15c736ca");
 
             // verify that the amount of returned properties 
-            Assert.AreEqual(8, definition.Children().Count());
+            Assert.That(definition.Children().Count(), Is.EqualTo(8));
 
             // Assert values are as expected
-            Assert.AreEqual("23658615-a170-4c0f-ba71-da1a15c736ca", (string)definition[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int)definition[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("Definition", (string)definition[PropertyNames.ClassKind]);
-            Assert.AreEqual("Test domain of expertise that is used for the verification of ECSS-E-TM-10-25 Web API", (string)definition[PropertyNames.Content]);
-            Assert.AreEqual("en-GB", (string)definition[PropertyNames.LanguageCode]);
+            Assert.That((string)definition[PropertyNames.Iid], Is.EqualTo("23658615-a170-4c0f-ba71-da1a15c736ca"));
+            Assert.That((int)definition[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)definition[PropertyNames.ClassKind], Is.EqualTo("Definition"));
+            Assert.That((string)definition[PropertyNames.Content], Is.EqualTo("Test domain of expertise that is used for the verification of ECSS-E-TM-10-25 Web API"));
+            Assert.That((string)definition[PropertyNames.LanguageCode], Is.EqualTo("en-GB"));
 
             var expectedCitations = new string[] { "b80c270b-8c00-4ed1-979e-9b72611aa6a0" };
             var citationsArray = (JArray)definition[PropertyNames.Citation];
@@ -145,17 +145,17 @@ namespace WebservicesIntegrationTests
             var citation = jArray.Single(x => (string)x[PropertyNames.Iid] == "b80c270b-8c00-4ed1-979e-9b72611aa6a0");
 
             // verify that the amount of returned properties 
-            Assert.AreEqual(8, citation.Children().Count());
+            Assert.That(citation.Children().Count(), Is.EqualTo(8));
 
             // Assert values are as expected
-            Assert.AreEqual("b80c270b-8c00-4ed1-979e-9b72611aa6a0", (string)citation[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int)citation[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("Citation", (string)citation[PropertyNames.ClassKind]);
-            Assert.AreEqual("NewCitation", (string)citation[PropertyNames.ShortName]);
-            Assert.AreEqual("none", (string)citation[PropertyNames.Remark]);
-            Assert.IsFalse((bool)citation[PropertyNames.IsAdaptation]);
-            Assert.AreEqual("Chapter 1", (string)citation[PropertyNames.Location]);
-            Assert.AreEqual("ffd6c100-6c72-4d2a-8565-ff24bd576a89", (string)citation[PropertyNames.Source]);
+            Assert.That((string)citation[PropertyNames.Iid], Is.EqualTo("b80c270b-8c00-4ed1-979e-9b72611aa6a0"));
+            Assert.That((int)citation[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)citation[PropertyNames.ClassKind], Is.EqualTo("Citation"));
+            Assert.That((string)citation[PropertyNames.ShortName], Is.EqualTo("NewCitation"));
+            Assert.That((string)citation[PropertyNames.Remark], Is.EqualTo("none"));
+            Assert.That((bool)citation[PropertyNames.IsAdaptation], Is.False);
+            Assert.That((string)citation[PropertyNames.Location], Is.EqualTo("Chapter 1"));
+            Assert.That((string)citation[PropertyNames.Source], Is.EqualTo("ffd6c100-6c72-4d2a-8565-ff24bd576a89"));
         }
     }
 }

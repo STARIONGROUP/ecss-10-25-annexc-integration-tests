@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="CompoundParameterTypeTestFixture.cs" company="Starion Group S.A.">
 //
-//   Copyright 2016-2021 Starion Group S.A.
+//   Copyright 2016-2025 Starion Group S.A.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -43,7 +43,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(compoundParameterTypeUri);
 
             //check if there is the only one CompoundParameterType object 
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific CompoundParameterType from the result by it's unique id
             var compoundParameterType = jArray.Single(x => (string) x[PropertyNames.Iid] == "0d3178f9-68d0-4b1a-afe8-d5df0b66f1d4");
@@ -62,7 +62,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(compoundParameterTypeUri);
 
             //check if there are 3 objects
-            Assert.AreEqual(3, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(3));
 
             // get a specific SiteDirectory from the result by it's unique id
             var siteDirectory = jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
@@ -87,19 +87,19 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken compoundParameterType)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(13, compoundParameterType.Children().Count());
+            Assert.That(compoundParameterType.Children().Count(), Is.EqualTo(13));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("0d3178f9-68d0-4b1a-afe8-d5df0b66f1d4", (string) compoundParameterType[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) compoundParameterType[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("CompoundParameterType", (string) compoundParameterType[PropertyNames.ClassKind]);
+            Assert.That((string)compoundParameterType[PropertyNames.Iid], Is.EqualTo("0d3178f9-68d0-4b1a-afe8-d5df0b66f1d4"));
+            Assert.That((int)compoundParameterType[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string)compoundParameterType[PropertyNames.ClassKind], Is.EqualTo("CompoundParameterType"));
 
-            Assert.IsFalse((bool) compoundParameterType[PropertyNames.IsDeprecated]);
-            Assert.AreEqual("TestCompoundParameterType", (string) compoundParameterType[PropertyNames.Name]);
-            Assert.AreEqual("TestCompoundParameterType", (string) compoundParameterType[PropertyNames.ShortName]);
+            Assert.That((bool) compoundParameterType[PropertyNames.IsDeprecated], Is.False);
+            Assert.That((string)compoundParameterType[PropertyNames.Name], Is.EqualTo("TestCompoundParameterType"));
+            Assert.That((string)compoundParameterType[PropertyNames.ShortName], Is.EqualTo("TestCompoundParameterType"));
 
-            Assert.AreEqual("testsymbol", (string) compoundParameterType[PropertyNames.Symbol]);
-            Assert.IsFalse((bool) compoundParameterType[PropertyNames.IsFinalized]);
+            Assert.That((string)compoundParameterType[PropertyNames.Symbol], Is.EqualTo("testsymbol"));
+            Assert.That((bool) compoundParameterType[PropertyNames.IsFinalized], Is.False);
 
             var expectedComponents = new List<OrderedItem>
             {
@@ -143,28 +143,28 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
 
             //Check the amount of objects 
-            Assert.AreEqual(5, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(5));
 
             var siteDirectory = jArray.Single(x => (string)x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
-            Assert.AreEqual(2, (int)siteDirectory[PropertyNames.RevisionNumber]);
+            Assert.That((int)siteDirectory[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             var compoundParameterType = jArray.Single(x => (string)x[PropertyNames.Iid] == "7a2b0596-bb8f-4692-adc5-04ae813fd9bd");
-            Assert.AreEqual(2, (int)compoundParameterType[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("test_CPT", (string)compoundParameterType[PropertyNames.ShortName]);
-            Assert.AreEqual("testCreateCompoundParameterType", (string)compoundParameterType[PropertyNames.Name]);
-            Assert.AreEqual("test_cpt", (string)compoundParameterType[PropertyNames.Symbol]);
+            Assert.That((int)compoundParameterType[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)compoundParameterType[PropertyNames.ShortName], Is.EqualTo("test_CPT"));
+            Assert.That((string)compoundParameterType[PropertyNames.Name], Is.EqualTo("testCreateCompoundParameterType"));
+            Assert.That((string)compoundParameterType[PropertyNames.Symbol], Is.EqualTo("test_cpt"));
 
             var component_1 = jArray.Single(x => (string)x[PropertyNames.Iid] == "ff206aaf-ca83-412a-a045-cc73a15259f2");
-            Assert.AreEqual(2, (int)component_1[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("a21c15c4-3e1e-46b5-b109-5063dec1e254", (string)component_1[PropertyNames.ParameterType]);
-            Assert.IsNull((string)component_1[PropertyNames.Scale]);
-            Assert.AreEqual("a", (string)component_1[PropertyNames.ShortName]);
+            Assert.That((int)component_1[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)component_1[PropertyNames.ParameterType], Is.EqualTo("a21c15c4-3e1e-46b5-b109-5063dec1e254"));
+            Assert.That((string)component_1[PropertyNames.Scale], Is.Null);
+            Assert.That((string)component_1[PropertyNames.ShortName], Is.EqualTo("a"));
 
             var component_2 = jArray.Single(x => (string)x[PropertyNames.Iid] == "9cec7d00-fc6b-43d0-8a0d-13d3d73e5478");
-            Assert.AreEqual(2, (int)component_2[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("4f9f3d9b-f3de-4ef5-b6cb-2e22199fab0d", (string)component_2[PropertyNames.ParameterType]);
-            Assert.AreEqual("53e82aeb-c42c-475c-b6bf-a102af883471", (string)component_2[PropertyNames.Scale]);            
-            Assert.AreEqual("b", (string)component_2[PropertyNames.ShortName]);
+            Assert.That((int)component_2[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)component_2[PropertyNames.ParameterType], Is.EqualTo("4f9f3d9b-f3de-4ef5-b6cb-2e22199fab0d"));
+            Assert.That((string)component_2[PropertyNames.Scale], Is.EqualTo("53e82aeb-c42c-475c-b6bf-a102af883471"));            
+            Assert.That((string)component_2[PropertyNames.ShortName], Is.EqualTo("b"));
         }
     }
 }

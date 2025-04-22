@@ -1,7 +1,7 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="CategoryTestFixture.cs" company="Starion Group S.A.">
 //
-//   Copyright 2016-2021 Starion Group S.A.
+//   Copyright 2016-2025 Starion Group S.A.
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -43,7 +43,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(categoryUri);
 
             //check if there are two Category objects 
-            Assert.AreEqual(3, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(3));
 
             CategoryTestFixture.VerifyProperties(jArray);
         }
@@ -59,7 +59,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(categoryUri);
 
             //check if there are 4 objects
-            Assert.AreEqual(5, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(5));
 
             // get a specific SiteDirectory from the result by it's unique id
             var siteDirectory = jArray.Single(x => (string) x["iid"] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
@@ -84,20 +84,21 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.PostDto(uri, postBody);
 
             // check if there are 2 objects
-            Assert.AreEqual(2, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(2));
 
             // get a specific SiteDirectory from the result by it's unique id
             var siteDirectory =
                 jArray.Single(x => (string)x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
-            Assert.AreEqual(2, (int)siteDirectory[PropertyNames.RevisionNumber]);
+            Assert.That((int)siteDirectory[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             // get a specific Category from the result by it's unique id
             var category = jArray.Single(x => (string)x[PropertyNames.Iid] == "cf059b19-235c-48be-87a3-9a8942c8e3e0");
-            Assert.AreEqual(2, (int)category[PropertyNames.RevisionNumber]);
+            Assert.That((int)category[PropertyNames.RevisionNumber], Is.EqualTo(2));
             var expectedSuperCategories = new string[]
                                               {
                                                   "167b5cb0-766e-4ab2-b728-a9c9a662b017"
                                               };
+
             var superCategoriesArray = (JArray)category["superCategory"];
             IList<string> superCategories = superCategoriesArray.Select(x => (string)x).ToList();
             Assert.That(superCategories, Is.EquivalentTo(expectedSuperCategories));
@@ -109,15 +110,15 @@ namespace WebservicesIntegrationTests
             jArray = this.WebClient.PostDto(uri, postBody);
 
             // check if there are 2 objects
-            Assert.AreEqual(2, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(2));
 
             // get a specific SiteDirectory from the result by it's unique id
             siteDirectory = jArray.Single(x => (string)x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
-            Assert.AreEqual(3, (int)siteDirectory[PropertyNames.RevisionNumber]);
+            Assert.That((int)siteDirectory[PropertyNames.RevisionNumber], Is.EqualTo(3));
 
             // get a specific Category from the result by it's unique id
             category = jArray.Single(x => (string)x[PropertyNames.Iid] == "cf059b19-235c-48be-87a3-9a8942c8e3e0");
-            Assert.AreEqual(3, (int)category[PropertyNames.RevisionNumber]);
+            Assert.That((int)category[PropertyNames.RevisionNumber], Is.EqualTo(3));
             expectedSuperCategories = new string[]{};
             superCategoriesArray = (JArray)category["superCategory"];
             superCategories = superCategoriesArray.Select(x => (string)x).ToList();
@@ -136,21 +137,23 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.PostDto(uri, postBody);
 
             // check if there are 2 objects
-            Assert.AreEqual(2, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(2));
 
             // get a specific SiteDirectory from the result by it's unique id
             var siteDirectory = jArray.Single(x => (string)x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
-            Assert.AreEqual(2, (int)siteDirectory[PropertyNames.RevisionNumber]);
+            Assert.That((int)siteDirectory[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             // get a specific Category from the result by it's unique id
             var category = jArray.Single(x => (string)x[PropertyNames.Iid] == "cf059b19-235c-48be-87a3-9a8942c8e3e0");
-            Assert.AreEqual(2, (int)category[PropertyNames.RevisionNumber]);
+            Assert.That((int)category[PropertyNames.RevisionNumber], Is.EqualTo(2));
+
             var expectedPermissibleClasses = new string[]
                                                {
                                                    "BinaryRelationship",
                                                    "ElementDefinition",
                                                    "ElementUsage"
                                                };
+
             var permissibleClassesArray = (JArray)category["permissibleClass"];
             IList<string> permissibleClasses = permissibleClassesArray.Select(x => (string)x).ToList();
             Assert.That(permissibleClasses, Is.EquivalentTo(expectedPermissibleClasses));
@@ -162,21 +165,23 @@ namespace WebservicesIntegrationTests
             jArray = this.WebClient.PostDto(uri, postBody);
 
             // check if there are 2 objects
-            Assert.AreEqual(2, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(2));
 
             // get a specific SiteDirectory from the result by it's unique id
             siteDirectory = jArray.Single(x => (string)x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
-            Assert.AreEqual(3, (int)siteDirectory[PropertyNames.RevisionNumber]);
+            Assert.That((int)siteDirectory[PropertyNames.RevisionNumber], Is.EqualTo(3));
 
             // get a specific Category from the result by it's unique id
             category = jArray.Single(x => (string)x[PropertyNames.Iid] == "cf059b19-235c-48be-87a3-9a8942c8e3e0");
-            Assert.AreEqual(3, (int)category[PropertyNames.RevisionNumber]);
+            Assert.That((int)category[PropertyNames.RevisionNumber], Is.EqualTo(3));
+
             expectedPermissibleClasses = new string[]
                                                  {
                                                      "ElementDefinition",
                                                      "ElementUsage"
                                                  };
             permissibleClassesArray = (JArray)category["permissibleClass"];
+
             permissibleClasses = permissibleClassesArray.Select(x => (string)x).ToList();
             Assert.That(permissibleClasses, Is.EquivalentTo(expectedPermissibleClasses));
         }
@@ -194,15 +199,15 @@ namespace WebservicesIntegrationTests
             var siteDirectory = jArray.Single(x => (string)x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
             
             // verify that the amount of returned properties 
-            Assert.AreEqual(19, siteDirectory.Children().Count());
+            Assert.That(siteDirectory.Children().Count(), Is.EqualTo(19));
 
-            Assert.AreEqual("f13de6f8-b03a-46e7-a492-53b2f260f294", (string)siteDirectory[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int)siteDirectory[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("SiteDirectory", (string)siteDirectory[PropertyNames.ClassKind]);
-            Assert.AreEqual("Test Site Directory", (string)siteDirectory[PropertyNames.Name]);
-            Assert.AreEqual("TEST-SiteDir", (string)siteDirectory[PropertyNames.ShortName]);
-            Assert.AreEqual("ee3ae5ff-ac5e-4957-bab1-7698fba2a267", (string)siteDirectory[PropertyNames.DefaultParticipantRole]);
-            Assert.AreEqual("2428f4d9-f26d-4112-9d56-1c940748df69", (string)siteDirectory[PropertyNames.DefaultPersonRole]);
+            Assert.That((string)siteDirectory[PropertyNames.Iid], Is.EqualTo("f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            Assert.That((int)siteDirectory[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)siteDirectory[PropertyNames.ClassKind], Is.EqualTo("SiteDirectory"));
+            Assert.That((string)siteDirectory[PropertyNames.Name], Is.EqualTo("Test Site Directory"));
+            Assert.That((string)siteDirectory[PropertyNames.ShortName], Is.EqualTo("TEST-SiteDir"));
+            Assert.That((string)siteDirectory[PropertyNames.DefaultParticipantRole], Is.EqualTo("ee3ae5ff-ac5e-4957-bab1-7698fba2a267"));
+            Assert.That((string)siteDirectory[PropertyNames.DefaultPersonRole], Is.EqualTo("2428f4d9-f26d-4112-9d56-1c940748df69"));
 
             var expectedOrganizations = new string[] { "cd22fc45-d898-4fac-85fc-fbcb7d7b12a7" };
             var organizationArray = (JArray)siteDirectory[PropertyNames.Organization];
@@ -265,16 +270,16 @@ namespace WebservicesIntegrationTests
             var siteReferenceDataLibrary = jArray.Single(x => (string)x[PropertyNames.Iid] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(22, siteReferenceDataLibrary.Children().Count());
+            Assert.That(siteReferenceDataLibrary.Children().Count(), Is.EqualTo(22));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("c454c687-ba3e-44c4-86bc-44544b2c7880", (string)siteReferenceDataLibrary["iid"]);
-            Assert.AreEqual(2, (int)siteReferenceDataLibrary["revisionNumber"]);
-            Assert.AreEqual("SiteReferenceDataLibrary", (string)siteReferenceDataLibrary["classKind"]);
+            Assert.That((string)siteReferenceDataLibrary["iid"], Is.EqualTo("c454c687-ba3e-44c4-86bc-44544b2c7880"));
+            Assert.That((int)siteReferenceDataLibrary["revisionNumber"], Is.EqualTo(2));
+            Assert.That((string)siteReferenceDataLibrary["classKind"], Is.EqualTo("SiteReferenceDataLibrary"));
 
-            Assert.IsFalse((bool)siteReferenceDataLibrary["isDeprecated"]);
-            Assert.AreEqual("Test Reference Data Library", (string)siteReferenceDataLibrary["name"]);
-            Assert.AreEqual("TestRDL", (string)siteReferenceDataLibrary["shortName"]);
+            Assert.That((bool)siteReferenceDataLibrary["isDeprecated"], Is.False);
+            Assert.That((string)siteReferenceDataLibrary["name"], Is.EqualTo("Test Reference Data Library"));
+            Assert.That((string)siteReferenceDataLibrary["shortName"], Is.EqualTo("TestRDL"));
 
             var expectedAliases = new string[] { };
             var aliasesArray = (JArray)siteReferenceDataLibrary["alias"];
@@ -417,14 +422,14 @@ namespace WebservicesIntegrationTests
 
             // Category
             var category = jArray.Single(x => (string)x["iid"] == "0d3f0a61-49ca-40d5-9a92-9a650c837c72");
-            Assert.AreEqual("0d3f0a61-49ca-40d5-9a92-9a650c837c72", (string)category["iid"]);
-            Assert.AreEqual(2, (int)category["revisionNumber"]);
-            Assert.AreEqual("Category", (string)category["classKind"]);
+            Assert.That((string)category["iid"], Is.EqualTo("0d3f0a61-49ca-40d5-9a92-9a650c837c72"));
+            Assert.That((int)category["revisionNumber"], Is.EqualTo(2));
+            Assert.That((string)category["classKind"], Is.EqualTo("Category"));
 
-            Assert.IsFalse((bool)category["isAbstract"]);
-            Assert.IsFalse((bool)category["isDeprecated"]);
-            Assert.AreEqual("New Category", (string)category["name"]);
-            Assert.AreEqual("NewCat", (string)category["shortName"]);
+            Assert.That((bool)category["isAbstract"], Is.False);
+            Assert.That((bool)category["isDeprecated"], Is.False);
+            Assert.That((string)category["name"], Is.EqualTo("New Category"));
+            Assert.That((string)category["shortName"], Is.EqualTo("NewCat"));
 
             var expectedSuperCategories = new string[] { };
             var superCategoriesArray = (JArray)category["superCategory"];
@@ -468,14 +473,14 @@ namespace WebservicesIntegrationTests
             // assert that all objects are what is expected
             var categoryObject =
                 category.Single(x => (string) x["iid"] == "cf059b19-235c-48be-87a3-9a8942c8e3e0");
-            Assert.AreEqual("cf059b19-235c-48be-87a3-9a8942c8e3e0", (string) categoryObject["iid"]);
-            Assert.AreEqual(1, (int) categoryObject["revisionNumber"]);
-            Assert.AreEqual("Category", (string) categoryObject["classKind"]);
+            Assert.That((string)categoryObject["iid"], Is.EqualTo("cf059b19-235c-48be-87a3-9a8942c8e3e0"));
+            Assert.That((int)categoryObject["revisionNumber"], Is.EqualTo(1));
+            Assert.That((string)categoryObject["classKind"], Is.EqualTo("Category"));
 
-            Assert.IsFalse((bool) categoryObject["isAbstract"]);
-            Assert.IsFalse((bool) categoryObject["isDeprecated"]);
-            Assert.AreEqual("Test Category", (string) categoryObject["name"]);
-            Assert.AreEqual("TestCategory", (string) categoryObject["shortName"]);
+            Assert.That((bool)categoryObject["isAbstract"], Is.False);
+            Assert.That((bool)categoryObject["isDeprecated"], Is.False);
+            Assert.That((string)categoryObject["name"], Is.EqualTo("Test Category"));
+            Assert.That((string)categoryObject["shortName"], Is.EqualTo("TestCategory"));
 
             var expectedSuperCategories = new string[] {};
             var superCategoriesArray = (JArray) categoryObject["superCategory"];
@@ -509,14 +514,14 @@ namespace WebservicesIntegrationTests
             //next object
             categoryObject =
                 category.Single(x => (string) x["iid"] == "107fc408-7e6d-4f1a-895a-1b6a6025ac20");
-            Assert.AreEqual("107fc408-7e6d-4f1a-895a-1b6a6025ac20", (string) categoryObject["iid"]);
-            Assert.AreEqual(1, (int) categoryObject["revisionNumber"]);
-            Assert.AreEqual("Category", (string) categoryObject["classKind"]);
+            Assert.That((string)categoryObject["iid"], Is.EqualTo("107fc408-7e6d-4f1a-895a-1b6a6025ac20"));
+            Assert.That((int)categoryObject["revisionNumber"], Is.EqualTo(1));
+            Assert.That((string)categoryObject["classKind"], Is.EqualTo("Category"));
 
-            Assert.IsFalse((bool) categoryObject["isAbstract"]);
-            Assert.IsFalse((bool) categoryObject["isDeprecated"]);
-            Assert.AreEqual("Test Category - BinaryRelationship", (string) categoryObject["name"]);
-            Assert.AreEqual("TestCategoryBinaryRelationship", (string) categoryObject["shortName"]);
+            Assert.That((bool)categoryObject["isAbstract"], Is.False);
+            Assert.That((bool)categoryObject["isDeprecated"], Is.False);
+            Assert.That((string)categoryObject["name"], Is.EqualTo("Test Category - BinaryRelationship"));
+            Assert.That((string)categoryObject["shortName"], Is.EqualTo("TestCategoryBinaryRelationship"));
 
             expectedSuperCategories = new string[] {};
             superCategoriesArray = (JArray) categoryObject["superCategory"];
