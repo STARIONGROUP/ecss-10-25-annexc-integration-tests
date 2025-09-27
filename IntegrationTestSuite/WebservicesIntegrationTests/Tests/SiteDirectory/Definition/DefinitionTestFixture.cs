@@ -45,15 +45,15 @@ namespace WebservicesIntegrationTests
             var siteDirectory = jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
 
             // verify that the amount of returned properties 
-            Assert.AreEqual(19, siteDirectory.Children().Count());
+            Assert.That(siteDirectory.Children().Count(), Is.EqualTo(19));
 
-            Assert.AreEqual("f13de6f8-b03a-46e7-a492-53b2f260f294", (string) siteDirectory[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int) siteDirectory[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("SiteDirectory", (string) siteDirectory[PropertyNames.ClassKind]);
-            Assert.AreEqual("Test Site Directory", (string) siteDirectory[PropertyNames.Name]);
-            Assert.AreEqual("TEST-SiteDir", (string) siteDirectory[PropertyNames.ShortName]);
-            Assert.AreEqual("ee3ae5ff-ac5e-4957-bab1-7698fba2a267", (string) siteDirectory[PropertyNames.DefaultParticipantRole]);
-            Assert.AreEqual("2428f4d9-f26d-4112-9d56-1c940748df69", (string) siteDirectory[PropertyNames.DefaultPersonRole]);
+            Assert.That((string)siteDirectory[PropertyNames.Iid], Is.EqualTo("f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            Assert.That((int)siteDirectory[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)siteDirectory[PropertyNames.ClassKind], Is.EqualTo("SiteDirectory"));
+            Assert.That((string)siteDirectory[PropertyNames.Name], Is.EqualTo("Test Site Directory"));
+            Assert.That((string)siteDirectory[PropertyNames.ShortName], Is.EqualTo("TEST-SiteDir"));
+            Assert.That((string)siteDirectory[PropertyNames.DefaultParticipantRole], Is.EqualTo("ee3ae5ff-ac5e-4957-bab1-7698fba2a267"));
+            Assert.That((string)siteDirectory[PropertyNames.DefaultPersonRole], Is.EqualTo("2428f4d9-f26d-4112-9d56-1c940748df69"));
 
             var expectedOrganizations = new string[] { "cd22fc45-d898-4fac-85fc-fbcb7d7b12a7" };
             var organizationArray = (JArray) siteDirectory[PropertyNames.Organization];
@@ -119,16 +119,16 @@ namespace WebservicesIntegrationTests
             var siteReferenceDataLibrary = jArray.Single(x => (string) x[PropertyNames.Iid] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(22, siteReferenceDataLibrary.Children().Count());
+            Assert.That(siteReferenceDataLibrary.Children().Count(), Is.EqualTo(22));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("c454c687-ba3e-44c4-86bc-44544b2c7880", (string) siteReferenceDataLibrary["iid"]);
-            Assert.AreEqual(2, (int) siteReferenceDataLibrary["revisionNumber"]);
-            Assert.AreEqual("SiteReferenceDataLibrary", (string) siteReferenceDataLibrary["classKind"]);
+            Assert.That((string)siteReferenceDataLibrary["iid"], Is.EqualTo("c454c687-ba3e-44c4-86bc-44544b2c7880"));
+            Assert.That((int)siteReferenceDataLibrary["revisionNumber"], Is.EqualTo(2));
+            Assert.That((string)siteReferenceDataLibrary["classKind"], Is.EqualTo("SiteReferenceDataLibrary"));
 
             Assert.IsFalse((bool) siteReferenceDataLibrary["isDeprecated"]);
-            Assert.AreEqual("Test Reference Data Library", (string) siteReferenceDataLibrary["name"]);
-            Assert.AreEqual("TestRDL", (string) siteReferenceDataLibrary["shortName"]);
+            Assert.That((string)siteReferenceDataLibrary["name"], Is.EqualTo("Test Reference Data Library"));
+            Assert.That((string)siteReferenceDataLibrary["shortName"], Is.EqualTo("TestRDL"));
 
             var expectedAliases = new string[] { };
             var aliasesArray = (JArray) siteReferenceDataLibrary["alias"];
@@ -285,14 +285,14 @@ namespace WebservicesIntegrationTests
             var definition = jArray.Single(x => (string) x[PropertyNames.Iid] == "28c9798f-df28-48c8-b5b2-2f190b575dd1");
 
             // verify that the amount of returned properties 
-            Assert.AreEqual(8, definition.Children().Count());
+            Assert.That(definition.Children().Count(), Is.EqualTo(8));
 
             // Assert values are as expected
-            Assert.AreEqual("28c9798f-df28-48c8-b5b2-2f190b575dd1", (string) definition[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int) definition[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("Definition", (string) definition[PropertyNames.ClassKind]);
-            Assert.AreEqual("words", (string) definition[PropertyNames.Content]);
-            Assert.AreEqual("nl", (string) definition[PropertyNames.LanguageCode]);
+            Assert.That((string)definition[PropertyNames.Iid], Is.EqualTo("28c9798f-df28-48c8-b5b2-2f190b575dd1"));
+            Assert.That((int)definition[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)definition[PropertyNames.ClassKind], Is.EqualTo("Definition"));
+            Assert.That((string)definition[PropertyNames.Content], Is.EqualTo("words"));
+            Assert.That((string)definition[PropertyNames.LanguageCode], Is.EqualTo("nl"));
 
             var expectedCitations = new List<OrderedItem> { };
 
@@ -327,24 +327,24 @@ namespace WebservicesIntegrationTests
 
             // Verify that the amount of returned properties in Definition 
             var definition = jArray.Single(x => (string) x[PropertyNames.Iid] == "28c9798f-df28-48c8-b5b2-2f190b575dd1");
-            Assert.AreEqual(8, definition.Children().Count());
-            Assert.AreEqual("28c9798f-df28-48c8-b5b2-2f190b575dd1", (string) definition[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int) definition[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("Definition", (string) definition[PropertyNames.ClassKind]);
-            Assert.AreEqual("words", (string) definition[PropertyNames.Content]);
-            Assert.AreEqual("nl", (string) definition[PropertyNames.LanguageCode]);
-            Assert.AreEqual(2, (definition[PropertyNames.Note]).Count());
-            Assert.AreEqual(2, (definition[PropertyNames.Example]).Count());
+            Assert.That(definition.Children().Count(), Is.EqualTo(8));
+            Assert.That((string)definition[PropertyNames.Iid], Is.EqualTo("28c9798f-df28-48c8-b5b2-2f190b575dd1"));
+            Assert.That((int)definition[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)definition[PropertyNames.ClassKind], Is.EqualTo("Definition"));
+            Assert.That((string)definition[PropertyNames.Content], Is.EqualTo("words"));
+            Assert.That((string)definition[PropertyNames.LanguageCode], Is.EqualTo("nl"));
+            Assert.That((definition[PropertyNames.Note]).Count(), Is.EqualTo(2));
+            Assert.That((definition[PropertyNames.Example]).Count(), Is.EqualTo(2));
 
             var firstNote = definition[PropertyNames.Note].ToList()[0];
             var secondNote = definition[PropertyNames.Note].ToList()[1];
-            Assert.AreEqual("a6f9789d-26a7-45e6-a528-3cbd1fce3880", (string) firstNote["v"]);
-            Assert.AreEqual("8ca48538-d39d-4b09-8944-77c34535ce7a", (string) secondNote["v"]);
+            Assert.That((string)firstNote["v"], Is.EqualTo("a6f9789d-26a7-45e6-a528-3cbd1fce3880"));
+            Assert.That((string)secondNote["v"], Is.EqualTo("8ca48538-d39d-4b09-8944-77c34535ce7a"));
 
             var firstExample = definition[PropertyNames.Example].ToList()[0];
             var secondExample = definition[PropertyNames.Example].ToList()[1];
-            Assert.AreEqual("a6f9789d-26a7-45e6-a528-3cbd1fce3881", (string) firstExample["v"]);
-            Assert.AreEqual("8ca48538-d39d-4b09-8944-77c34535ce7b", (string) secondExample["v"]);
+            Assert.That((string)firstExample["v"], Is.EqualTo("a6f9789d-26a7-45e6-a528-3cbd1fce3881"));
+            Assert.That((string)secondExample["v"], Is.EqualTo("8ca48538-d39d-4b09-8944-77c34535ce7b"));
 
             // Reorder Notes in Definition
             postBodyPath = this.GetPath("Tests/SiteDirectory/Definition/PostReorderNoteExampleInDefinition.json");
@@ -353,24 +353,24 @@ namespace WebservicesIntegrationTests
 
             // Verify that the amount of returned properties in Definition 
             definition = jArray.Single(x => (string) x[PropertyNames.Iid] == "28c9798f-df28-48c8-b5b2-2f190b575dd1");
-            Assert.AreEqual(8, definition.Children().Count());
-            Assert.AreEqual("28c9798f-df28-48c8-b5b2-2f190b575dd1", (string) definition[PropertyNames.Iid]);
-            Assert.AreEqual(3, (int) definition[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("Definition", (string) definition[PropertyNames.ClassKind]);
-            Assert.AreEqual("words", (string) definition[PropertyNames.Content]);
-            Assert.AreEqual("nl", (string) definition[PropertyNames.LanguageCode]);
-            Assert.AreEqual(2, (definition[PropertyNames.Note]).Count());
-            Assert.AreEqual(2, (definition[PropertyNames.Example]).Count());
+            Assert.That(definition.Children().Count(), Is.EqualTo(8));
+            Assert.That((string)definition[PropertyNames.Iid], Is.EqualTo("28c9798f-df28-48c8-b5b2-2f190b575dd1"));
+            Assert.That((int)definition[PropertyNames.RevisionNumber], Is.EqualTo(3));
+            Assert.That((string)definition[PropertyNames.ClassKind], Is.EqualTo("Definition"));
+            Assert.That((string)definition[PropertyNames.Content], Is.EqualTo("words"));
+            Assert.That((string)definition[PropertyNames.LanguageCode], Is.EqualTo("nl"));
+            Assert.That((definition[PropertyNames.Note]).Count(), Is.EqualTo(2));
+            Assert.That((definition[PropertyNames.Example]).Count(), Is.EqualTo(2));
 
             firstNote = definition[PropertyNames.Note].ToList()[0];
             secondNote = definition[PropertyNames.Note].ToList()[1];
-            Assert.AreEqual("8ca48538-d39d-4b09-8944-77c34535ce7a", (string) firstNote["v"]);
-            Assert.AreEqual("a6f9789d-26a7-45e6-a528-3cbd1fce3880", (string) secondNote["v"]);
+            Assert.That((string)firstNote["v"], Is.EqualTo("8ca48538-d39d-4b09-8944-77c34535ce7a"));
+            Assert.That((string)secondNote["v"], Is.EqualTo("a6f9789d-26a7-45e6-a528-3cbd1fce3880"));
 
             firstExample = definition[PropertyNames.Example].ToList()[0];
             secondExample = definition[PropertyNames.Example].ToList()[1];
-            Assert.AreEqual("8ca48538-d39d-4b09-8944-77c34535ce7b", (string) firstExample["v"]);
-            Assert.AreEqual("a6f9789d-26a7-45e6-a528-3cbd1fce3881", (string) secondExample["v"]);
+            Assert.That((string)firstExample["v"], Is.EqualTo("8ca48538-d39d-4b09-8944-77c34535ce7b"));
+            Assert.That((string)secondExample["v"], Is.EqualTo("a6f9789d-26a7-45e6-a528-3cbd1fce3881"));
         }
 
         [Test]
@@ -394,15 +394,15 @@ namespace WebservicesIntegrationTests
 
             // Verify that the amount of returned properties in Definition 
             var definition = jArray.Single(x => (string) x[PropertyNames.Iid] == "28c9798f-df28-48c8-b5b2-2f190b575dd1");
-            Assert.AreEqual(8, definition.Children().Count());
-            Assert.AreEqual(1, (definition[PropertyNames.Note]).Count());
-            Assert.AreEqual(1, (definition[PropertyNames.Example]).Count());
+            Assert.That(definition.Children().Count(), Is.EqualTo(8));
+            Assert.That((definition[PropertyNames.Note]).Count(), Is.EqualTo(1));
+            Assert.That((definition[PropertyNames.Example]).Count(), Is.EqualTo(1));
 
             var firstNote = definition[PropertyNames.Note].ToList()[0];
-            Assert.AreEqual("8ca48538-d39d-4b09-8944-77c34535ce7a", (string) firstNote["v"]);
+            Assert.That((string)firstNote["v"], Is.EqualTo("8ca48538-d39d-4b09-8944-77c34535ce7a"));
 
             var firstExample = definition[PropertyNames.Example].ToList()[0];
-            Assert.AreEqual("8ca48538-d39d-4b09-8944-77c34535ce7b", (string) firstExample["v"]);
+            Assert.That((string)firstExample["v"], Is.EqualTo("8ca48538-d39d-4b09-8944-77c34535ce7b"));
         }
     }
 }

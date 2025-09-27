@@ -42,7 +42,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(publicationUri);
 
             //check if there is the only one Publication object 
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific Publication from the result by it's unique id
             var publication = jArray.Single(x => (string) x[PropertyNames.Iid] == "790b9e60-476b-4b6d-8aba-0af15178535e");
@@ -61,7 +61,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(publicationUri);
 
             //check if there are 3 objects
-            Assert.AreEqual(3, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(3));
 
             // get a specific Iteration from the result by it's unique id
             var iteration = jArray.Single(x => (string) x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");

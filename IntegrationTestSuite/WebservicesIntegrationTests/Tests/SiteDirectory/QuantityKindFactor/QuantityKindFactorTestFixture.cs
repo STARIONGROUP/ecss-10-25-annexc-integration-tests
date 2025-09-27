@@ -43,7 +43,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(quantityKindFactorUri);
 
             //check if there is the only one quantityKindFactor object 
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific QuantityKindFactor from the result by it's unique id
             var quantityKindFactor = jArray.Single(x => (string) x[PropertyNames.Iid] == "ab7e80da-6bc9-427f-b1fb-b97faeeca4c6");
@@ -62,7 +62,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(quantityKindFactorUri);
 
             //check if there are 4 objects
-            Assert.AreEqual(4, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(4));
 
             // get a specific SiteDirectory from the result by it's unique id
             var siteDirectory = jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
@@ -95,7 +95,7 @@ namespace WebservicesIntegrationTests
             var postBody = this.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
 
-            Assert.AreEqual(3, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(3));
 
             var siteDirectory = jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
             Assert.AreEqual(2, (int) siteDirectory[PropertyNames.RevisionNumber]);
@@ -115,7 +115,7 @@ namespace WebservicesIntegrationTests
             postBody = this.GetJsonFromFile(postBodyPath);
             jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
 
-            Assert.AreEqual(4, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(4));
 
             siteDirectory = jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
             Assert.AreEqual(3, (int) siteDirectory[PropertyNames.RevisionNumber]);

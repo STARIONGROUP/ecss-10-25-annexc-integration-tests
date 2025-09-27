@@ -42,7 +42,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(modelReferenceDataLibraryUri);
 
             //check if there is the only one ModelReferenceDataLibrary object 
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific ModelReferenceDataLibrary from the result by it's unique id
             var modelReferenceDataLibrary = jArray.Single(x => (string) x[PropertyNames.Iid] == "3483f2b5-ea29-45cc-8a46-f5f598558fc3");
@@ -61,7 +61,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(modelReferenceDataLibraryUri);
 
             //check if there are 3 objects
-            Assert.AreEqual(3, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(3));
 
             // get a specific SiteDirectory from the result by it's unique id
             var siteDirectory = jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
@@ -88,7 +88,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
 
             //Check the amount of objects 
-            Assert.AreEqual(4, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(4));
 
             //SiteDirectory properties
             var siteDirectory = jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");

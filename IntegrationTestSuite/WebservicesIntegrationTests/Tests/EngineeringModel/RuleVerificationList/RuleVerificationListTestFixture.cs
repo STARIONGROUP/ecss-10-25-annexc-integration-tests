@@ -43,7 +43,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(ruleVerificationListUri);
 
             //check if there is the only one RuleVerificationList object 
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific RuleVerificationList from the result by it's unique id
             var ruleVerificationList = jArray.Single(x => (string) x[PropertyNames.Iid] == "dc482120-2a11-439b-913d-6a924de9ee5f");
@@ -61,7 +61,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(ruleVerificationListUri);
 
             //check if there are 3 objects
-            Assert.AreEqual(3, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(3));
 
             // get a specific Iteration from the result by it's unique id
             var iteration = jArray.Single(x => (string) x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");

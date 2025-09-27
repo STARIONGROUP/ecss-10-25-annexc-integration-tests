@@ -43,7 +43,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(siteReferenceDataLibrariesUri);
 
             //check if there is only one SiteReferenceDataLibrary object
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific SiteReferenceDataLibrary from the result by it's unique id
             var siteReferenceDataLibrary = jArray.Single(x => (string) x["iid"] == "c454c687-ba3e-44c4-86bc-44544b2c7880");

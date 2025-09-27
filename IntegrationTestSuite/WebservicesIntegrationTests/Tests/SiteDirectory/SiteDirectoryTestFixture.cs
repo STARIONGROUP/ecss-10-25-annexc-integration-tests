@@ -43,7 +43,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(siteDirectoryUri);
 
             // assert that the returned count is as expected
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific SiteDirectory from the result by it's unique id.
             var siteDirectory = jArray.Single(x => (string)x["iid"] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
@@ -67,7 +67,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(siteDirectoryUri);
 
             // assert that the returned SiteDirectory count = 1
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific SiteDirectory from the result by it's unique id
             var siteDirectory = jArray.Single(x => (string)x["iid"] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
@@ -86,7 +86,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(siteDirectoryUri);
             
             // assert that the returned count is as expected
-            Assert.AreEqual(60, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(60));
 
             // get a specific SiteDirectory from the result by it's unique id
             var siteDirectory = jArray.Single(x => (string)x["iid"] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
@@ -105,7 +105,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(siteDirectoryUri);
 
             // assert that the returned count is as expected
-            Assert.AreEqual(60, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(60));
 
             // get a specific SiteDirectory from the result by it's unique id
             var siteDirectory = jArray.Single(x => (string)x["iid"] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
@@ -128,7 +128,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(siteDirectoryUri);
 
             // assert that the returned count is as expected
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific SiteDirectory from the result by it's unique id
             var siteDirectory = jArray.Single(x => (string)x["iid"] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
@@ -146,17 +146,17 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken siteDirectory)
         {
             // verify that the amount of returned properties 
-            Assert.AreEqual(19, siteDirectory.Children().Count());
+            Assert.That(siteDirectory.Children().Count(), Is.EqualTo(19));
 
-            Assert.AreEqual("f13de6f8-b03a-46e7-a492-53b2f260f294", (string)siteDirectory[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int)siteDirectory[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("SiteDirectory", (string)siteDirectory[PropertyNames.ClassKind]);
-            Assert.AreEqual("2015-04-17T07:48:14.560Z", (string)siteDirectory[PropertyNames.LastModifiedOn]);
-            Assert.AreEqual("2016-09-01T08:14:45.461Z", (string)siteDirectory[PropertyNames.CreatedOn]);
-            Assert.AreEqual("Test Site Directory", (string)siteDirectory[PropertyNames.Name]);
-            Assert.AreEqual("TEST-SiteDir", (string)siteDirectory[PropertyNames.ShortName]);
-            Assert.AreEqual("ee3ae5ff-ac5e-4957-bab1-7698fba2a267", (string)siteDirectory[PropertyNames.DefaultParticipantRole]);
-            Assert.AreEqual("2428f4d9-f26d-4112-9d56-1c940748df69", (string)siteDirectory[PropertyNames.DefaultPersonRole]);
+            Assert.That ((string)siteDirectory[PropertyNames.Iid], Is.EqualTo("f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            Assert.That((int)siteDirectory[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string)siteDirectory[PropertyNames.ClassKind], Is.EqualTo("SiteDirectory"));
+            Assert.That((string)siteDirectory[PropertyNames.LastModifiedOn], Is.EqualTo("2015-04-17T07:48:14.560Z"));
+            Assert.That((string)siteDirectory[PropertyNames.CreatedOn], Is.EqualTo("2016-09-01T08:14:45.461Z"));
+            Assert.That ((string)siteDirectory[PropertyNames.Name], Is.EqualTo("Test Site Directory"));
+            Assert.That((string)siteDirectory[PropertyNames.ShortName], Is.EqualTo("TEST-SiteDir"));
+            Assert.That((string)siteDirectory[PropertyNames.DefaultParticipantRole], Is.EqualTo("ee3ae5ff-ac5e-4957-bab1-7698fba2a267"));
+            Assert.That((string)siteDirectory[PropertyNames.DefaultPersonRole], Is.EqualTo("2428f4d9-f26d-4112-9d56-1c940748df69"));
 
             var expectedOrganizations = new string[] { "cd22fc45-d898-4fac-85fc-fbcb7d7b12a7" };
             var organizationArray = (JArray)siteDirectory[PropertyNames.Organization];
@@ -230,7 +230,7 @@ namespace WebservicesIntegrationTests
             var jArray = testFixture.WebClient.PostDto(uri, postBody);
 
             // check if there are 30 objects
-            Assert.AreEqual(30, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(30));
 
             userName = "Jane";
             passWord = "Jane";
@@ -250,7 +250,7 @@ namespace WebservicesIntegrationTests
             var jArray = testFixture.WebClient.PostDto(uri, postBody);
 
             // check if there are 29 objects
-            Assert.AreEqual(29, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(29));
 
             userName = "Jane";
             passWord = "Jane";
@@ -270,7 +270,7 @@ namespace WebservicesIntegrationTests
             var jArray = testFixture.WebClient.PostDto(uri, postBody);
 
             // check if there are 29 objects
-            Assert.AreEqual(29, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(29));
 
             userName = "Jane";
             passWord = "Jane";

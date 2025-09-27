@@ -39,7 +39,7 @@ namespace WebservicesIntegrationTests
 
             var jArray = this.WebClient.GetDto(termUri);
             
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
             
             var term = jArray.Single(x => (string) x["iid"] == "18533006-1b9b-46c1-acc9-ae438ed4ebb2");
 
@@ -57,7 +57,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(termUri);
 
             //check if there are 3 objects
-            Assert.AreEqual(4, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(4));
 
             // get a specific SiteDirectory from the result by it's unique id
             var siteDirectory = jArray.Single(x => (string) x["iid"] == "f13de6f8-b03a-46e7-a492-53b2f260f294");

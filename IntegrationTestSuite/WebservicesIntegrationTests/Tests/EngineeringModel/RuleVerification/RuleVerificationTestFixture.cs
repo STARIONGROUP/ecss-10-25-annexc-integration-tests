@@ -158,7 +158,7 @@ namespace WebservicesIntegrationTests
             postBody = this.GetJsonFromFile(postBodyPath);
             jArray = this.WebClient.PostDto(iterationUri, postBody);
 
-            Assert.AreEqual(3, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(3));
 
             var ruleVerificationList = jArray.Single(x => (string) x[PropertyNames.Iid] == "dc482120-2a11-439b-913d-6a924de9ee5f");
             Assert.AreEqual(3, (int) ruleVerificationList[PropertyNames.RevisionNumber]);

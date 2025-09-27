@@ -42,7 +42,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(binaryRelationshipRuleUri);
 
             //check if there is the only one BinaryRelationshipRule object 
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific BinaryRelationshipRule from the result by it's unique id
             var binaryRelationshipRule = jArray.Single(x => (string) x["iid"] == "8569bd5c-de3c-4d92-855f-b2c0ca94de0e");
@@ -61,7 +61,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(binaryRelationshipRuleUri);
 
             //check if there are 3 objects
-            Assert.AreEqual(3, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(3));
 
             // get a specific SiteDirectory from the result by it's unique id
             var siteDirectory = jArray.Single(x => (string) x["iid"] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
@@ -86,23 +86,22 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken binaryRelationshipRule)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(14, binaryRelationshipRule.Children().Count());
+            Assert.That(binaryRelationshipRule.Children().Count(), Is.EqualTo(14));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("8569bd5c-de3c-4d92-855f-b2c0ca94de0e", (string) binaryRelationshipRule["iid"]);
-            Assert.AreEqual(1, (int) binaryRelationshipRule["revisionNumber"]);
-            Assert.AreEqual("BinaryRelationshipRule", (string) binaryRelationshipRule["classKind"]);
+            Assert.That((string)binaryRelationshipRule["iid"], Is.EqualTo("8569bd5c-de3c-4d92-855f-b2c0ca94de0e"));
+            Assert.That((int)binaryRelationshipRule["revisionNumber"], Is.EqualTo(1));
+            Assert.That((string)binaryRelationshipRule["classKind"], Is.EqualTo("BinaryRelationshipRule"));
 
             Assert.IsFalse((bool) binaryRelationshipRule["isDeprecated"]);
-            Assert.AreEqual("Test Binary Relationship Rule", (string) binaryRelationshipRule["name"]);
-            Assert.AreEqual("TestBinaryRelationshipRule", (string) binaryRelationshipRule["shortName"]);
+            Assert.That((string)binaryRelationshipRule["name"], Is.EqualTo("Test Binary Relationship Rule"));
+            Assert.That((string)binaryRelationshipRule["shortName"], Is.EqualTo("TestBinaryRelationshipRule"));
 
-            Assert.AreEqual("107fc408-7e6d-4f1a-895a-1b6a6025ac20",
-                (string) binaryRelationshipRule["relationshipCategory"]);
-            Assert.AreEqual("cf059b19-235c-48be-87a3-9a8942c8e3e0", (string) binaryRelationshipRule["sourceCategory"]);
-            Assert.AreEqual("cf059b19-235c-48be-87a3-9a8942c8e3e0", (string) binaryRelationshipRule["targetCategory"]);
-            Assert.AreEqual("forward", (string) binaryRelationshipRule["forwardRelationshipName"]);
-            Assert.AreEqual("inverse", (string) binaryRelationshipRule["inverseRelationshipName"]);
+            Assert.That((string)binaryRelationshipRule["relationshipCategory"], Is.EqualTo("107fc408-7e6d-4f1a-895a-1b6a6025ac20"));
+            Assert.That((string)binaryRelationshipRule["sourceCategory"], Is.EqualTo("cf059b19-235c-48be-87a3-9a8942c8e3e0"));
+            Assert.That((string)binaryRelationshipRule["targetCategory"], Is.EqualTo("cf059b19-235c-48be-87a3-9a8942c8e3e0"));
+            Assert.That((string)binaryRelationshipRule["forwardRelationshipName"], Is.EqualTo("forward"));
+            Assert.That((string)binaryRelationshipRule["inverseRelationshipName"], Is.EqualTo("inverse"));
 
             var expectedAliases = new string[] {};
             var aliasesArray = (JArray) binaryRelationshipRule["alias"];

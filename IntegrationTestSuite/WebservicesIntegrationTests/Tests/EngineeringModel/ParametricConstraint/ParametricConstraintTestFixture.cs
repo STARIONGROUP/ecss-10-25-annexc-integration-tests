@@ -43,7 +43,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(parametricConstraintUri);
 
             //check if there is the only one ParametricConstraint object 
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific ParametricConstraint from the result by it's unique id
             var parametricConstraint = jArray.Single(x => (string) x[PropertyNames.Iid] == "88200dbc-711a-47e0-a54a-dac4baca6e83");
@@ -91,7 +91,7 @@ namespace WebservicesIntegrationTests
             var postBody = this.GetJsonFromFile(postBodyPath);
 
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
-            Assert.AreEqual(4, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(4));
 
             var engineeringModel = jArray.Single(x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
             Assert.AreEqual(2, (int) engineeringModel[PropertyNames.RevisionNumber]);
@@ -114,7 +114,7 @@ namespace WebservicesIntegrationTests
             postBody = this.GetJsonFromFile(postBodyPath);
 
             jArray = this.WebClient.PostDto(iterationUri, postBody);
-            Assert.AreEqual(4, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(4));
 
             engineeringModel = jArray.Single(x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
             Assert.AreEqual(3, (int) engineeringModel[PropertyNames.RevisionNumber]);

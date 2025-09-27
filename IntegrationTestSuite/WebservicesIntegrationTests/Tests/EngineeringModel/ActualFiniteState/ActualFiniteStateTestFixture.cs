@@ -61,7 +61,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(actualFiniteStateUri);
 
             // check if there are 4 objects
-            Assert.AreEqual(4, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(4));
 
             // get a specific Iteration from the result by it's unique id
             var iteration = jArray.Single(x => (string)x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");

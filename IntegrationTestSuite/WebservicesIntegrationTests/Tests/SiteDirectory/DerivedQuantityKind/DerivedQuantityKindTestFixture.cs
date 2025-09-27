@@ -44,7 +44,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(derivedQuantityKindUri);
 
             //check if there is the only one DerivedQuantityKind object 
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific DerivedQuantityKind from the result by it's unique id
             var derivedQuantityKind = jArray.Single(x => (string) x[PropertyNames.Iid] == "74d9c38f-5ace-4f90-8841-d0f9942e9d09");
@@ -63,7 +63,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(derivedQuantityKindUri);
 
             //check if there are 3 objects
-            Assert.AreEqual(3, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(3));
 
             // get a specific SiteDirectory from the result by it's unique id
             var siteDirectory = jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
@@ -101,19 +101,19 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken derivedQuantityKind)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(15, derivedQuantityKind.Children().Count());
+            Assert.That(derivedQuantityKind.Children().Count(), Is.EqualTo(15));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("74d9c38f-5ace-4f90-8841-d0f9942e9d09", (string) derivedQuantityKind[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) derivedQuantityKind[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("DerivedQuantityKind", (string) derivedQuantityKind[PropertyNames.ClassKind]);
+            Assert.That((string)derivedQuantityKind[PropertyNames.Iid], Is.EqualTo("74d9c38f-5ace-4f90-8841-d0f9942e9d09"));
+            Assert.That((int)derivedQuantityKind[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string)derivedQuantityKind[PropertyNames.ClassKind], Is.EqualTo("DerivedQuantityKind"));
 
             Assert.IsFalse((bool) derivedQuantityKind[PropertyNames.IsDeprecated]);
-            Assert.AreEqual("Test Derived QuantityKind", (string) derivedQuantityKind[PropertyNames.Name]);
-            Assert.AreEqual("TestDerivedQuantityKind", (string) derivedQuantityKind[PropertyNames.ShortName]);
+            Assert.That((string)derivedQuantityKind[PropertyNames.Name], Is.EqualTo("Test Derived QuantityKind"));
+            Assert.That((string)derivedQuantityKind[PropertyNames.ShortName], Is.EqualTo("TestDerivedQuantityKind"));
 
-            Assert.AreEqual("symbol", (string) derivedQuantityKind[PropertyNames.Symbol]);
-            Assert.AreEqual("53e82aeb-c42c-475c-b6bf-a102af883471", (string) derivedQuantityKind[PropertyNames.DefaultScale]);
+            Assert.That((string)derivedQuantityKind[PropertyNames.Symbol], Is.EqualTo("symbol"));
+            Assert.That((string)derivedQuantityKind[PropertyNames.DefaultScale], Is.EqualTo("53e82aeb-c42c-475c-b6bf-a102af883471"));
             Assert.IsNull((string) derivedQuantityKind[PropertyNames.QuantityDimensionSymbol]);
 
             var expectedPossibleScales = new string[]

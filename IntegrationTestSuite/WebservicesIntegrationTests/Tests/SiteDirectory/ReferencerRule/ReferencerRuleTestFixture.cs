@@ -42,7 +42,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(referencerRuleUri);
 
             //check if there is the only one ReferencerRule object 
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific ReferencerRule from the result by it's unique id
             var referencerRule = jArray.Single(x => (string) x["iid"] == "e7e4eec5-ad39-40a0-9548-9c40d8e6df1b");
@@ -61,7 +61,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(referencerRuleUri);
 
             //check if there are 3 objects
-            Assert.AreEqual(3, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(3));
 
             // get a specific SiteDirectory from the result by it's unique id
             var siteDirectory = jArray.Single(x => (string) x["iid"] == "f13de6f8-b03a-46e7-a492-53b2f260f294");

@@ -43,7 +43,7 @@ namespace WebservicesIntegrationTests
             // Get the response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(domainOfExpertiseUri);
            
-            Assert.AreEqual(2, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(2));
 
             // get a specific DomainOfExpertise from the result by it's unique id
             var domainOfExpertise = jArray.Single(x => (string)x["iid"] == "0e92edde-fdff-41db-9b1d-f2e484f12535");
@@ -64,7 +64,7 @@ namespace WebservicesIntegrationTests
             // Get the response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(domainOfExpertiseUri);
             
-            Assert.AreEqual(3, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(3));
 
             var siteDirectory = jArray.Single(x => (string)x["iid"] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
             SiteDirectoryTestFixture.VerifyProperties(siteDirectory);
@@ -95,7 +95,7 @@ namespace WebservicesIntegrationTests
             // Jane is not allowed to update
             var exception = Assert.Catch<WebException>(() => this.WebClient.PostDto(siteDirectoryUri, postBody));
             var errorMessage = this.WebClient.ExtractExceptionStringFromResponse(exception.Response);
-            Assert.AreEqual(HttpStatusCode.Unauthorized, ((HttpWebResponse) exception.Response).StatusCode);
+            Assert.That(((HttpWebResponse)exception.Response).StatusCode, Is.EqualTo(HttpStatusCode.Unauthorized));
             Assert.IsTrue(errorMessage.Contains("The person Jane does not have an appropriate update permission for DomainOfExpertise."));
         }
 
@@ -117,7 +117,7 @@ namespace WebservicesIntegrationTests
             // Get the response from the data-source as a JArray (JSON Array)
             jArray = this.WebClient.GetDto(domainOfExpertiseUri);
             
-            Assert.AreEqual(4, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(4));
 
             // get a specific DomainOfExpertise from the result by it's unique id
             var domainOfExpertise = jArray.Single(x => (string)x["iid"] == "509b87d6-4262-476a-a12e-ee337df0d618");
@@ -223,7 +223,7 @@ namespace WebservicesIntegrationTests
 
             var exception = Assert.Catch<WebException>(() => this.WebClient.PostDto(iterationUri, postBody));
             
-            Assert.AreEqual(HttpStatusCode.Unauthorized, ((HttpWebResponse) exception.Response).StatusCode);
+            Assert.That(((HttpWebResponse)exception.Response).StatusCode, Is.EqualTo(HttpStatusCode.Unauthorized));
         }
 
         /// <summary>
@@ -236,17 +236,17 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken domainOfExpertise)
         {
             // verify that the amount of returned properties 
-            Assert.AreEqual(10, domainOfExpertise.Children().Count());
+            Assert.That(domainOfExpertise.Children().Count(), Is.EqualTo(10));
 
             if ((string)domainOfExpertise["iid"] == "0e92edde-fdff-41db-9b1d-f2e484f12535")
             {
-                Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string)domainOfExpertise["iid"]);
-                Assert.AreEqual(1, (int)domainOfExpertise["revisionNumber"]);
-                Assert.AreEqual("DomainOfExpertise", (string)domainOfExpertise["classKind"]);
+                Assert.That((string)domainOfExpertise["iid"], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
+                Assert.That((int)domainOfExpertise["revisionNumber"], Is.EqualTo(1));
+                Assert.That((string)domainOfExpertise["classKind"], Is.EqualTo("DomainOfExpertise"));
 
                 // assert that the properties are what is expected
-                Assert.AreEqual("Test Domain of Expertise", (string)domainOfExpertise["name"]);
-                Assert.AreEqual("TST", (string)domainOfExpertise["shortName"]);
+                Assert.That((string)domainOfExpertise["name"], Is.EqualTo("Test Domain of Expertise"));
+                Assert.That((string)domainOfExpertise["shortName"], Is.EqualTo("TST"));
                 Assert.IsFalse((bool)domainOfExpertise["isDeprecated"]);
 
                 var expectedAliases = new string[] { };
@@ -272,13 +272,13 @@ namespace WebservicesIntegrationTests
 
             if ((string)domainOfExpertise["iid"] == "eb759723-14b9-49f4-8611-544d037bb764")
             {
-                Assert.AreEqual("eb759723-14b9-49f4-8611-544d037bb764", (string)domainOfExpertise["iid"]);
-                Assert.AreEqual(1, (int)domainOfExpertise["revisionNumber"]);
-                Assert.AreEqual("DomainOfExpertise", (string)domainOfExpertise["classKind"]);
+                Assert.That((string)domainOfExpertise["iid"], Is.EqualTo("eb759723-14b9-49f4-8611-544d037bb764"));
+                Assert.That((int)domainOfExpertise["revisionNumber"], Is.EqualTo(1));
+                Assert.That((string)domainOfExpertise["classKind"], Is.EqualTo("DomainOfExpertise"));
 
                 // assert that the properties are what is expected
-                Assert.AreEqual("Additional Test Domain of Expertise", (string)domainOfExpertise["name"]);
-                Assert.AreEqual("ADD", (string)domainOfExpertise["shortName"]);
+                Assert.That((string)domainOfExpertise["name"], Is.EqualTo("Additional Test Domain of Expertise"));
+                Assert.That((string)domainOfExpertise["shortName"], Is.EqualTo("ADD"));
                 Assert.IsFalse((bool)domainOfExpertise["isDeprecated"]);
 
                 var expectedAliases = new string[] { };

@@ -324,14 +324,14 @@ namespace WebservicesIntegrationTests
             {
                 var hash = BitConverter.ToString(sha1.ComputeHash(responseBodyForTxt)).Replace("-", string.Empty);
 
-                Assert.AreEqual("2990BA2444A937A28E7B1E2465FCDF949B8F5368", hash);
+                Assert.That(hash, Is.EqualTo("2990BA2444A937A28E7B1E2465FCDF949B8F5368"));
             }
 
             using (var sha1 = new SHA1Managed())
             {
                 var hash = BitConverter.ToString(sha1.ComputeHash(responseBodyForPdf)).Replace("-", string.Empty);
 
-                Assert.AreEqual("3F64667F0F27A4C4FA1B4BF374033938A542FDD1", hash);
+                Assert.That(hash, Is.EqualTo("3F64667F0F27A4C4FA1B4BF374033938A542FDD1"));
             }
         }
 

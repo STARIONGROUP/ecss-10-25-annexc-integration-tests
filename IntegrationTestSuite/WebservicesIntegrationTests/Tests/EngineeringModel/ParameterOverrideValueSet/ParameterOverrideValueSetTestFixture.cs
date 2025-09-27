@@ -44,7 +44,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(parameterOverrideValueSetUri);
 
             //check if there is the only one ParameterOverrideValueSet object 
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific ParameterOverrideValueSet from the result by it's unique id
             var parameterOverrideValueSet = jArray.Single(x => (string)x[PropertyNames.Iid] == "985db346-a297-4ce6-956b-e675d53d415e");

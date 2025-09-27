@@ -43,7 +43,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(derivedUnitUri);
 
             //check if there is the only one DerivedUnit object 
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific DerivedUnit from the result by it's unique id
             var derivedUnit = jArray.Single(x => (string) x["iid"] == "c394eaa9-4832-4b2d-8d88-5e1b2c43732c");
@@ -61,7 +61,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(derivedUnitUri);
 
             //check if there are 3 objects
-            Assert.AreEqual(3, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(3));
 
             // get a specific SiteDirectory from the result by it's unique id
             var siteDirectory = jArray.Single(x => (string) x["iid"] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
@@ -86,16 +86,16 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken derivedUnit)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(10, derivedUnit.Children().Count());
+            Assert.That(derivedUnit.Children().Count(), Is.EqualTo(10));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("c394eaa9-4832-4b2d-8d88-5e1b2c43732c", (string) derivedUnit["iid"]);
-            Assert.AreEqual(1, (int) derivedUnit["revisionNumber"]);
-            Assert.AreEqual("DerivedUnit", (string) derivedUnit["classKind"]);
+            Assert.That((string)derivedUnit["iid"], Is.EqualTo("c394eaa9-4832-4b2d-8d88-5e1b2c43732c"));
+            Assert.That((int)derivedUnit["revisionNumber"], Is.EqualTo(1));
+            Assert.That((string)derivedUnit["classKind"], Is.EqualTo("DerivedUnit"));
 
             Assert.IsFalse((bool) derivedUnit["isDeprecated"]);
-            Assert.AreEqual("Test Derived Unit", (string) derivedUnit["name"]);
-            Assert.AreEqual("TestDerivedUnit", (string) derivedUnit["shortName"]);
+            Assert.That((string)derivedUnit["name"], Is.EqualTo("Test Derived Unit"));
+            Assert.That((string)derivedUnit["shortName"], Is.EqualTo("TestDerivedUnit"));
 
             var expectedUnitFactors = new List<OrderedItem>
             {

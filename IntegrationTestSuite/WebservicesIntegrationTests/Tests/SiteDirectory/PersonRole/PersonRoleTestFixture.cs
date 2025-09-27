@@ -46,7 +46,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(personRolesUri);
 
             //check if there is only one PersonRole object
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific PersonRole from the result by it's unique id
             var personRole = jArray.Single(x => (string) x["iid"] == "2428f4d9-f26d-4112-9d56-1c940748df69");

@@ -42,7 +42,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(orExpressionUri);
 
             //check if there is the only one OrExpression object 
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific OrExpression from the result by it's unique id
             var orExpression = jArray.Single(x => (string)x[PropertyNames.Iid] == "5f90327f-95a2-4c5a-9efe-581f8daf08ed");

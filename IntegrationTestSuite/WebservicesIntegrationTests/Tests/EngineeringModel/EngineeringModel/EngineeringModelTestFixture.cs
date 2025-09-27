@@ -130,15 +130,15 @@ namespace WebservicesIntegrationTests
                 x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(8, engineeringModel.Children().Count());
+            Assert.That(engineeringModel.Children().Count(), Is.EqualTo(8));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("9ec982e4-ef72-4953-aa85-b158a95d8d56", (string)engineeringModel[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int)engineeringModel[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("EngineeringModel", (string)engineeringModel[PropertyNames.ClassKind]);
+            Assert.That((string)engineeringModel[PropertyNames.Iid], Is.EqualTo("9ec982e4-ef72-4953-aa85-b158a95d8d56"));
+            Assert.That((int)engineeringModel[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string)engineeringModel[PropertyNames.ClassKind], Is.EqualTo("EngineeringModel"));
 
-            Assert.AreEqual("116f6253-89bb-47d4-aa24-d11d197e43c9", (string)engineeringModel[PropertyNames.EngineeringModelSetup]);
-            Assert.AreEqual("2016-09-15T08:00:00.079Z", (string)engineeringModel[PropertyNames.LastModifiedOn]);
+            Assert.That((string)engineeringModel[PropertyNames.EngineeringModelSetup], Is.EqualTo("116f6253-89bb-47d4-aa24-d11d197e43c9"));
+            Assert.That((string)engineeringModel[PropertyNames.LastModifiedOn], Is.EqualTo("2016-09-15T08:00:00.079Z"));
             
             var expectedCommonFileStores = new string[] { "8e5ca9cc-3da8-4e66-9172-7c3b2464a59c" };
             var commonFileStoreArray = (JArray)engineeringModel[PropertyNames.CommonFileStore];

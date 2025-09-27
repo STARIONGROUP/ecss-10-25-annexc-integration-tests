@@ -42,7 +42,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(booleanParameterTypeUri);
 
             //check if there is the only one BooleanParameterType object 
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific BooleanParameterType from the result by it's unique id
             var booleanParameterType = jArray.Single(x => (string) x[PropertyNames.Iid] == "35a9cf05-4eba-4cda-b60c-7cfeaac8f892");
@@ -61,7 +61,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(booleanParameterTypeUri);
 
             //check if there are 3 objects
-            Assert.AreEqual(3, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(3));
 
             // get a specific SiteDirectory from the result by it's unique id
             var siteDirectory = jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
@@ -86,18 +86,18 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken booleanParameterType)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(11, booleanParameterType.Children().Count());
+            Assert.That(booleanParameterType.Children().Count(), Is.EqualTo(11));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("35a9cf05-4eba-4cda-b60c-7cfeaac8f892", (string) booleanParameterType[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) booleanParameterType[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("BooleanParameterType", (string) booleanParameterType[PropertyNames.ClassKind]);
+            Assert.That((string)booleanParameterType[PropertyNames.Iid], Is.EqualTo("35a9cf05-4eba-4cda-b60c-7cfeaac8f892"));
+            Assert.That((int)booleanParameterType[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string)booleanParameterType[PropertyNames.ClassKind], Is.EqualTo("BooleanParameterType"));
 
             Assert.IsFalse((bool) booleanParameterType[PropertyNames.IsDeprecated]);
-            Assert.AreEqual("Test Boolean ParameterType", (string) booleanParameterType[PropertyNames.Name]);
-            Assert.AreEqual("TestBooleanParameterType", (string) booleanParameterType[PropertyNames.ShortName]);
+            Assert.That((string)booleanParameterType[PropertyNames.Name], Is.EqualTo("Test Boolean ParameterType"));
+            Assert.That((string)booleanParameterType[PropertyNames.ShortName], Is.EqualTo("TestBooleanParameterType"));
 
-            Assert.AreEqual("bool", (string) booleanParameterType[PropertyNames.Symbol]);
+            Assert.That((string)booleanParameterType[PropertyNames.Symbol], Is.EqualTo("bool"));
 
             var expectedCategories = new string[] {};
             var categoriesArray = (JArray) booleanParameterType[PropertyNames.Category];

@@ -44,7 +44,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(possibleFiniteStateListUri);
 
             //check if there is the only one PossibleFiniteStateList object 
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific PossibleFiniteStateList from the result by it's unique id
             var possibleFiniteStateList = jArray.Single(x => (string)x[PropertyNames.Iid] == "449a5bca-34fd-454a-93f8-a56ac8383fee");
@@ -63,7 +63,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(possibleFiniteStateListUri);
 
             //check if there are 3 objects
-            Assert.AreEqual(3, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(3));
 
             // get a specific Iteration from the result by it's unique id
             var iteration = jArray.Single(x => (string)x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
@@ -196,7 +196,7 @@ namespace WebservicesIntegrationTests
 
         private void VerifyDeleteResponse(JArray jArray)
         {
-            Assert.AreEqual(4, jArray.Count); // modification in actual states as well as side-effect
+            Assert.That(jArray.Count, Is.EqualTo(4)); // modification in actual states as well as side-effect
 
             var model = jArray.Single(x => x["classKind"].ToString() == "EngineeringModel");
             var pfsl = jArray.Single(x => x["classKind"].ToString() == "PossibleFiniteStateList");

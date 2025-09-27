@@ -44,7 +44,7 @@ namespace WebservicesIntegrationTests
             var engineeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
 
             // Verify the amount of returned properties of the EngineeringModel
-            Assert.AreEqual(8, engineeringModel.Children().Count());
+            Assert.That(engineeringModel.Children().Count(), Is.EqualTo(8));
 
             // Assert the properties of EngineeringModel have expected values
             var expectedIterations = new[] { "e163c5ad-f32b-4387-b805-f4b34600bc2c" };

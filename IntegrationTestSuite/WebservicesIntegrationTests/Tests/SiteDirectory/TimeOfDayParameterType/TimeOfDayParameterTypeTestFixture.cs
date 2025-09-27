@@ -42,7 +42,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(timeOfDayParameterTypeUri);
 
             //check if there is the only one TimeOfDayParameterType object 
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific TimeOfDayParameterType from the result by it's unique id
             var timeOfDayParameterType = jArray.Single(x => (string) x[PropertyNames.Iid] == "e4cfdb60-ed3a-455c-9a33-a3edc921637f");
@@ -61,7 +61,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(timeOfDayParameterTypeUri);
 
             //check if there are 3 objects
-            Assert.AreEqual(3, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(3));
 
             // get a specific SiteDirectory from the result by it's unique id
             var siteDirectory = jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");

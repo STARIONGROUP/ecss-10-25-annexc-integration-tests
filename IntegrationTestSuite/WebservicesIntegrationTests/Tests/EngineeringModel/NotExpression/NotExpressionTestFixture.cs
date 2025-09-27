@@ -41,7 +41,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(notExpressionUri);
 
             //check if there is the only one NotExpression object 
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific NotExpression from the result by it's unique id
             var notExpression =

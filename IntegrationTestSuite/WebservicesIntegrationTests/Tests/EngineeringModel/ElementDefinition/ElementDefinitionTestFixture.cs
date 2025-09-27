@@ -44,16 +44,16 @@ namespace WebservicesIntegrationTests
             var postBody = base.GetJsonFromFile(postBodyPath);
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
-            Assert.AreEqual(4, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(4));
 
             var engineeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
-            Assert.AreEqual(2, (int)engineeringModel[PropertyNames.RevisionNumber]);
+            Assert.That((int)engineeringModel[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             var iteration = jArray.Single(x => (string)x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
-            Assert.AreEqual(2, (int)iteration[PropertyNames.RevisionNumber]);
+            Assert.That((int)iteration[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             var elementDefinition = jArray.Single(x => (string)x[PropertyNames.Iid] == "f959dc33-58ff-4b6f-a3b0-d265690b4085");
-            Assert.AreEqual(2, (int)elementDefinition[PropertyNames.RevisionNumber]);
+            Assert.That((int)elementDefinition[PropertyNames.RevisionNumber], Is.EqualTo(2));
         }
         
         [Test]
@@ -67,7 +67,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(elementDefinitionUri);
 
             // check if there are only two ElementDefinition object 
-            Assert.AreEqual(2, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(2));
 
             ElementDefinitionTestFixture.VerifyProperties(jArray);
         }
@@ -83,7 +83,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(elementDefinitionUri);
 
             // check if there are 4 objects
-            Assert.AreEqual(4, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(4));
 
             // get a specific Iteration from the result by it's unique id
             var iteration = jArray.Single(x => (string)x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
@@ -105,17 +105,17 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
             // check if there are 2 objects
-            Assert.AreEqual(3, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(3));
 
             // get a specific EngineeringModel from the result by it's unique id
             var engineeeringModel = jArray.Single(
                 x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
-            Assert.AreEqual(2, (int)engineeeringModel[PropertyNames.RevisionNumber]);
+            Assert.That((int)engineeeringModel[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             // get a specific ElementDefinition from the result by it's unique id
             var elementDefinition = jArray.Single(
                 x => (string)x[PropertyNames.Iid] == "f73860b2-12f0-43e4-b8b2-c81862c0a159");
-            Assert.AreEqual(2, (int)elementDefinition[PropertyNames.RevisionNumber]);
+            Assert.That((int)elementDefinition[PropertyNames.RevisionNumber], Is.EqualTo(2));
             var expectedCategories = new string[] { };
             var categoriesArray = (JArray)elementDefinition[PropertyNames.Category];
             IList<string> categories = categoriesArray.Select(x => (string)x).ToList();
@@ -138,12 +138,12 @@ namespace WebservicesIntegrationTests
             // get a specific EngineeringModel from the result by it's unique id
             var engineeeringModel = jArray.Single(
                 x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
-            Assert.AreEqual(2, (int)engineeeringModel[PropertyNames.RevisionNumber]);
+            Assert.That((int)engineeeringModel[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             // get a specific ElementDefinition from the result by it's unique id
             var elementDefinition = jArray.Single(
                 x => (string)x[PropertyNames.Iid] == "f73860b2-12f0-43e4-b8b2-c81862c0a159");
-            Assert.AreEqual(2, (int)elementDefinition[PropertyNames.RevisionNumber]);
+            Assert.That((int)elementDefinition[PropertyNames.RevisionNumber], Is.EqualTo(2));
             var expectedParameters = new[]
                                          {
                                              "6c5aff74-f983-4aa8-a9d6-293b3429307c"
@@ -168,17 +168,17 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
             
             // check if there are 2 objects
-            Assert.AreEqual(3, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(3));
 
             // get a specific EngineeringModel from the result by it's unique id
             var engineeeringModel = jArray.Single(
                 x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
-            Assert.AreEqual(2, (int)engineeeringModel[PropertyNames.RevisionNumber]);
+            Assert.That((int)engineeeringModel[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             // get a specific ElementDefinition from the result by it's unique id
             var elementDefinition = jArray.Single(
                 x => (string)x[PropertyNames.Iid] == "f73860b2-12f0-43e4-b8b2-c81862c0a159");
-            Assert.AreEqual(2, (int)elementDefinition[PropertyNames.RevisionNumber]);
+            Assert.That((int)elementDefinition[PropertyNames.RevisionNumber], Is.EqualTo(2));
             var expectedParameters = new[]
                                          {
                                              "6c5aff74-f983-4aa8-a9d6-293b3429307c"
@@ -205,7 +205,7 @@ namespace WebservicesIntegrationTests
             var engineeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
 
             // Verify the amount of returned properties of the EngineeringModel
-            Assert.AreEqual(8, engineeringModel.Children().Count());
+            Assert.That(engineeringModel.Children().Count(), Is.EqualTo(8));
 
             // Assert the properties of EngineeringModel have expected values
             var expectedIterations = new[] { "e163c5ad-f32b-4387-b805-f4b34600bc2c" };
@@ -215,30 +215,30 @@ namespace WebservicesIntegrationTests
 
             var logEntriesArray = (JArray)engineeringModel[PropertyNames.LogEntry];
             IList<string> logEntries = logEntriesArray.Select(x => (string)x).ToList();
-            Assert.AreEqual(2, logEntries.Count);
+            Assert.That(logEntries.Count, Is.EqualTo(2));
 
             var expectedCommonFileStores = new[] { "8e5ca9cc-3da8-4e66-9172-7c3b2464a59c" };
             var commonFileStoresArray = (JArray)engineeringModel[PropertyNames.CommonFileStore];
             IList<string> commonFileStores = commonFileStoresArray.Select(x => (string)x).ToList();
             Assert.That(commonFileStores, Is.EquivalentTo(expectedCommonFileStores));
 
-            Assert.AreEqual("EngineeringModel", (string)engineeringModel[PropertyNames.ClassKind]);
-            Assert.AreEqual("116f6253-89bb-47d4-aa24-d11d197e43c9", (string)engineeringModel[PropertyNames.EngineeringModelSetup]);
-            Assert.AreEqual("9ec982e4-ef72-4953-aa85-b158a95d8d56", (string)engineeringModel[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int)engineeringModel[PropertyNames.RevisionNumber]);
+            Assert.That((string)engineeringModel[PropertyNames.ClassKind], Is.EqualTo("EngineeringModel"));
+            Assert.That((string)engineeringModel[PropertyNames.EngineeringModelSetup], Is.EqualTo("116f6253-89bb-47d4-aa24-d11d197e43c9"));
+            Assert.That((string)engineeringModel[PropertyNames.Iid], Is.EqualTo("9ec982e4-ef72-4953-aa85-b158a95d8d56"));
+            Assert.That((int)engineeringModel[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             // get a specific ElementDefinition from the result by it's unique id
             var elementDefinition = jArray.Single(x => (string)x[PropertyNames.Iid] == "f959dc33-58ff-4b6f-a3b0-d265690b4084");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(14, elementDefinition.Children().Count());
+            Assert.That(elementDefinition.Children().Count(), Is.EqualTo(14));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("f959dc33-58ff-4b6f-a3b0-d265690b4084", (string)elementDefinition[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int)elementDefinition[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("ElementDefinition", (string)elementDefinition[PropertyNames.ClassKind]);
-            Assert.AreEqual("Test Element Definition", (string)elementDefinition[PropertyNames.Name]);
-            Assert.AreEqual("TestElementDefinition", (string)elementDefinition[PropertyNames.ShortName]);
+            Assert.That((string)elementDefinition[PropertyNames.Iid], Is.EqualTo("f959dc33-58ff-4b6f-a3b0-d265690b4084"));
+            Assert.That((int)elementDefinition[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)elementDefinition[PropertyNames.ClassKind], Is.EqualTo("ElementDefinition"));
+            Assert.That((string)elementDefinition[PropertyNames.Name], Is.EqualTo("Test Element Definition"));
+            Assert.That((string)elementDefinition[PropertyNames.ShortName], Is.EqualTo("TestElementDefinition"));
 
             var expectedContainedElements = new string[] { };
             var containedElementsArray = (JArray)elementDefinition[PropertyNames.ContainedElement];
@@ -260,7 +260,7 @@ namespace WebservicesIntegrationTests
             IList<string> referencedElements = referencedElementsArray.Select(x => (string)x).ToList();
             Assert.That(referencedElements, Is.EquivalentTo(expectedreferencedElements));
 
-            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string)elementDefinition[PropertyNames.Owner]);
+            Assert.That((string)elementDefinition[PropertyNames.Owner], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
 
             var expectedCategories = new string[] { };
             var categoriesArray = (JArray)elementDefinition[PropertyNames.Category];
@@ -297,15 +297,15 @@ namespace WebservicesIntegrationTests
             if (elementDefinition != null)
             {
                 // verify the amount of returned properties 
-                Assert.AreEqual(14, elementDefinition.Children().Count());
+                Assert.That(elementDefinition.Children().Count(), Is.EqualTo(14));
 
                 // assert that the properties are what is expected
-                Assert.AreEqual("f73860b2-12f0-43e4-b8b2-c81862c0a159", (string)elementDefinition[PropertyNames.Iid]);
-                Assert.AreEqual(1, (int)elementDefinition[PropertyNames.RevisionNumber]);
-                Assert.AreEqual("ElementDefinition", (string)elementDefinition[PropertyNames.ClassKind]);
+                Assert.That((string)elementDefinition[PropertyNames.Iid], Is.EqualTo("f73860b2-12f0-43e4-b8b2-c81862c0a159"));
+                Assert.That((int)elementDefinition[PropertyNames.RevisionNumber], Is.EqualTo(1));
+                Assert.That((string)elementDefinition[PropertyNames.ClassKind], Is.EqualTo("ElementDefinition"));
 
-                Assert.AreEqual("Test Element Definition", (string)elementDefinition[PropertyNames.Name]);
-                Assert.AreEqual("TestElementDefinition", (string)elementDefinition[PropertyNames.ShortName]);
+                Assert.That((string)elementDefinition[PropertyNames.Name], Is.EqualTo("Test Element Definition"));
+                Assert.That((string)elementDefinition[PropertyNames.ShortName], Is.EqualTo("TestElementDefinition"));
 
                 var expectedContainedElements = new string[] { };
                 var containedElementsArray = (JArray)elementDefinition[PropertyNames.ContainedElement];
@@ -331,7 +331,7 @@ namespace WebservicesIntegrationTests
                 IList<string> referencedElements = referencedElementsArray.Select(x => (string)x).ToList();
                 Assert.That(referencedElements, Is.EquivalentTo(expectedreferencedElements));
 
-                Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string)elementDefinition[PropertyNames.Owner]);
+                Assert.That((string)elementDefinition[PropertyNames.Owner], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
 
                 var expectedCategories = new[] { "cf059b19-235c-48be-87a3-9a8942c8e3e0" };
                 var categoriesArray = (JArray)elementDefinition[PropertyNames.Category];
@@ -361,15 +361,15 @@ namespace WebservicesIntegrationTests
             if (elementDefinition != null)
             {
                 // verify the amount of returned properties 
-                Assert.AreEqual(14, elementDefinition.Children().Count());
+                Assert.That(elementDefinition.Children().Count(), Is.EqualTo(14));
 
                 // assert that the properties are what is expected
-                Assert.AreEqual("fe9295c5-af99-494e-86ff-e715837806ae", (string)elementDefinition[PropertyNames.Iid]);
-                Assert.AreEqual(1, (int)elementDefinition[PropertyNames.RevisionNumber]);
-                Assert.AreEqual("ElementDefinition", (string)elementDefinition[PropertyNames.ClassKind]);
+                Assert.That((string)elementDefinition[PropertyNames.Iid], Is.EqualTo("fe9295c5-af99-494e-86ff-e715837806ae"));
+                Assert.That((int)elementDefinition[PropertyNames.RevisionNumber], Is.EqualTo(1));
+                Assert.That((string)elementDefinition[PropertyNames.ClassKind], Is.EqualTo("ElementDefinition"));
 
-                Assert.AreEqual("Test 2 Element Definition", (string)elementDefinition[PropertyNames.Name]);
-                Assert.AreEqual("TestTwoElementDefinition", (string)elementDefinition[PropertyNames.ShortName]);
+                Assert.That((string)elementDefinition[PropertyNames.Name], Is.EqualTo("Test 2 Element Definition"));
+                Assert.That((string)elementDefinition[PropertyNames.ShortName], Is.EqualTo("TestTwoElementDefinition"));
 
                 var expectedContainedElements = new[]
                                                 {
@@ -395,7 +395,7 @@ namespace WebservicesIntegrationTests
                 var referencedElements = referencedElementsArray.Select(x => (string)x).ToList();
                 Assert.That(referencedElements, Is.EquivalentTo(expectedreferencedElements));
 
-                Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string)elementDefinition[PropertyNames.Owner]);
+                Assert.That((string)elementDefinition[PropertyNames.Owner], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
 
                 var expectedCategories = new string[] { };
                 var categoriesArray = (JArray)elementDefinition[PropertyNames.Category];

@@ -41,7 +41,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(idCorrespondenceUri);
 
             //check if there is the only one IdCorrespondence object 
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific IdCorrespondence from the result by it's unique id
             var idCorrespondence = jArray.Single(x => (string) x[PropertyNames.Iid] == "ff6956dc-1882-4d61-8840-dedb3fba7b43");
@@ -61,7 +61,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(idCorrespondenceUri);
 
             //check if there are 4 objects
-            Assert.AreEqual(4, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(4));
 
             // get a specific Iteration from the result by it's unique id
             var iteration =
@@ -89,16 +89,15 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken idCorrespondence)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(5, idCorrespondence.Children().Count());
+            Assert.That(idCorrespondence.Children().Count(), Is.EqualTo(5));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("ff6956dc-1882-4d61-8840-dedb3fba7b43", (string) idCorrespondence[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) idCorrespondence[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("IdCorrespondence", (string) idCorrespondence[PropertyNames.ClassKind]);
+            Assert.That((string)idCorrespondence[PropertyNames.Iid], Is.EqualTo("ff6956dc-1882-4d61-8840-dedb3fba7b43"));
+            Assert.That((int)idCorrespondence[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string)idCorrespondence[PropertyNames.ClassKind], Is.EqualTo("IdCorrespondence"));
 
-            Assert.AreEqual("internalThing", (string) idCorrespondence[PropertyNames.ExternalId]);
-            Assert.AreEqual("35a8ee03-6786-4c39-967d-3c5b438f0c64",
-                (string) idCorrespondence[PropertyNames.InternalThing]);
+            Assert.That((string)idCorrespondence[PropertyNames.ExternalId], Is.EqualTo("internalThing"));
+            Assert.AreEqual("35a8ee03-6786-4c39-967d-3c5b438f0c64", (string) idCorrespondence[PropertyNames.InternalThing]);
         }
     }
 }

@@ -42,7 +42,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(glossaryUri);
 
             //check if there is the only one Glossary object 
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific Glossary from the result by it's unique id
             var glossary = jArray.Single(x => (string)x[PropertyNames.Iid] == "bb08686b-ae03-49eb-9f48-c196b5ad6bda");
@@ -61,7 +61,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(glossaryUri);
 
             //check if there are 3 objects
-            Assert.AreEqual(3, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(3));
 
             // get a specific SiteDirectory from the result by it's unique id
             var siteDirectory = jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
@@ -86,16 +86,16 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken glossary)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(11, glossary.Children().Count());
+            Assert.That(glossary.Children().Count(), Is.EqualTo(11));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("bb08686b-ae03-49eb-9f48-c196b5ad6bda", (string) glossary[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) glossary[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("Glossary", (string) glossary[PropertyNames.ClassKind]);
+            Assert.That((string)glossary[PropertyNames.Iid], Is.EqualTo("bb08686b-ae03-49eb-9f48-c196b5ad6bda"));
+            Assert.That((int)glossary[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string)glossary[PropertyNames.ClassKind], Is.EqualTo("Glossary"));
 
             Assert.IsFalse((bool) glossary[PropertyNames.IsDeprecated]);
-            Assert.AreEqual("Test Glossary", (string) glossary[PropertyNames.Name]);
-            Assert.AreEqual("TestGlossary", (string) glossary[PropertyNames.ShortName]);
+            Assert.That((string)glossary[PropertyNames.Name], Is.EqualTo("Test Glossary"));
+            Assert.That((string)glossary[PropertyNames.ShortName], Is.EqualTo("TestGlossary"));
 
             var expectedTerms = new string[]
             {
@@ -138,17 +138,17 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
 
             var siteDirectory = jArray.Single(x => (string)x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
-            Assert.AreEqual(2, (int)siteDirectory[PropertyNames.RevisionNumber]);
+            Assert.That((int)siteDirectory[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             var glossary = jArray.Single(x => (string)x[PropertyNames.Iid] == "bb08686b-ae03-49eb-9f48-c196b5ad6bda");
-            Assert.AreEqual(2, (int)glossary[PropertyNames.RevisionNumber]);
+            Assert.That((int)glossary[PropertyNames.RevisionNumber], Is.EqualTo(2));
             Assert.IsTrue((bool)glossary[PropertyNames.IsDeprecated]);
 
             var term = jArray.Single(x => (string)x[PropertyNames.Iid] == "18533006-1b9b-46c1-acc9-ae438ed4ebb2");
-            Assert.AreEqual(2, (int)term[PropertyNames.RevisionNumber]);
+            Assert.That((int)term[PropertyNames.RevisionNumber], Is.EqualTo(2));
             Assert.IsTrue((bool)term[PropertyNames.IsDeprecated]);
 
-            Assert.AreEqual(3, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(3));
         }
     }
 }

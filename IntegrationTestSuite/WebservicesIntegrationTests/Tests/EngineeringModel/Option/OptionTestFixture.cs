@@ -127,7 +127,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(optionUri);
 
             //check if there is the only one Option object 
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific Option from the result by it's unique id
             var option = jArray.Single(x => (string) x[PropertyNames.Iid] == "bebcc9f4-ff20-4569-bbf6-d1acf27a8107");
@@ -146,7 +146,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(optionUri);
 
             //check if there are 3 objects
-            Assert.AreEqual(3, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(3));
 
             // get a specific Iteration from the result by it's unique id
             var iteration =

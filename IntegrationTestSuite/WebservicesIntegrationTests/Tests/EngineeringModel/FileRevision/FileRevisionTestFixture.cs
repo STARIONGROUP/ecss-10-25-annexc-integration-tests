@@ -46,7 +46,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(fileRevisionUri);
 
             //check if there is the only one FileRevision object 
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific FileRevision from the result by it's unique id
             var fileRevision =
@@ -65,7 +65,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(fileRevisionUri);
 
             //check if there are appropriate amount of objects
-            Assert.AreEqual(5, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(5));
 
             // get a specific Iteration from the result by it's unique id
             var iteration =
@@ -115,19 +115,19 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken fileRevision)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(9, fileRevision.Children().Count());
+            Assert.That(fileRevision.Children().Count(), Is.EqualTo(9));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("5544bb87-dc38-45d5-9d92-c580d3fe0442", (string) fileRevision[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) fileRevision[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("FileRevision", (string) fileRevision[PropertyNames.ClassKind]);
+            Assert.That((string)fileRevision[PropertyNames.Iid], Is.EqualTo("5544bb87-dc38-45d5-9d92-c580d3fe0442"));
+            Assert.That((int)fileRevision[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string)fileRevision[PropertyNames.ClassKind], Is.EqualTo("FileRevision"));
 
-            Assert.AreEqual("FileRevision", (string) fileRevision[PropertyNames.Name]);
-            Assert.AreEqual("2016-11-02T13:58:35.936Z", (string) fileRevision[PropertyNames.CreatedOn]);
+            Assert.That((string)fileRevision[PropertyNames.Name], Is.EqualTo("FileRevision"));
+            Assert.That((string)fileRevision[PropertyNames.CreatedOn], Is.EqualTo("2016-11-02T13:58:35.936Z"));
 
             Assert.IsNull((string) fileRevision[PropertyNames.ContainingFolder]);
-            Assert.AreEqual("284334dd-e8e5-42d6-bc8a-715c507a7f02", (string) fileRevision[PropertyNames.Creator]);
-            Assert.AreEqual("B95EC201AE3EE89D407449D692E69BB97C228A7E", (string) fileRevision[PropertyNames.ContentHash]);
+            Assert.That((string)fileRevision[PropertyNames.Creator], Is.EqualTo("284334dd-e8e5-42d6-bc8a-715c507a7f02"));
+            Assert.That((string)fileRevision[PropertyNames.ContentHash], Is.EqualTo("B95EC201AE3EE89D407449D692E69BB97C228A7E"));
 
             var expectedFileTypes = new List<OrderedItem>
             {

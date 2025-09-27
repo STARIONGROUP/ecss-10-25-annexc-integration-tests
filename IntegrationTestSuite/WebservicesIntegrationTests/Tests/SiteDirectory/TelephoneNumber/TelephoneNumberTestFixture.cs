@@ -58,7 +58,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(telephoneNumbersUri);
 
             // assert that there are 4 objects
-            Assert.AreEqual(4, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(4));
 
             // get a specific SiteDirectory from the result by it's unique id
             var siteDirectory = jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");

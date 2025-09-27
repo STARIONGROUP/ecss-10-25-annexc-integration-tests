@@ -48,7 +48,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
             //check if there are 3 classes returned
-            Assert.AreEqual(3, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(3));
 
             postBodyPath = this.GetPath("Tests/EngineeringModel/Section/PostNewSections.json");
             postBody = this.GetJsonFromFile(postBodyPath);
@@ -56,7 +56,7 @@ namespace WebservicesIntegrationTests
             jArray = this.WebClient.PostDto(iterationUri, postBody);
 
             //check if there are 4 classes returned
-            Assert.AreEqual(4, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(4));
 
             var book = jArray.Single(x => (string) x[PropertyNames.Iid] == "f84b5d72-be4d-418c-90db-19e311e75be3");
 

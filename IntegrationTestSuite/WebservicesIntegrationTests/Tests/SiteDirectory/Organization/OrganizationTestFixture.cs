@@ -40,7 +40,7 @@ namespace WebservicesIntegrationTests
             // Get the response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(organizationUri);
            
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific organization from the result by it's unique id
             var organization = jArray.Single(x => (string)x[PropertyNames.Iid] == "cd22fc45-d898-4fac-85fc-fbcb7d7b12a7");

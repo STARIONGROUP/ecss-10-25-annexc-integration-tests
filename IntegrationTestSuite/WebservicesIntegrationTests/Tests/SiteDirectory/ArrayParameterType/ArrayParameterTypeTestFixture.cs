@@ -43,7 +43,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(arrayParameterTypeUri);
 
             //check if there is the only one ArrayParameterType object 
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific ArrayParameterType from the result by it's unique id
             var arrayParameterType = jArray.Single(x => (string) x[PropertyNames.Iid] == "4a783624-b2bc-4e6d-95b3-11d036f6e917");
@@ -63,28 +63,28 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
 
             //Check the amount of objects 
-            Assert.AreEqual(5, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(5));
 
             var siteDirectory = jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
-            Assert.AreEqual(2, (int) siteDirectory[PropertyNames.RevisionNumber]);
+            Assert.That((int)siteDirectory[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             var arrayParameterType = jArray.Single(x => (string) x[PropertyNames.Iid] == "267b0d27-0421-453d-951a-4fcacc309a27");
-            Assert.AreEqual(2, (int) arrayParameterType[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("cta", (string) arrayParameterType[PropertyNames.ShortName]);
-            Assert.AreEqual("createTestArray", (string) arrayParameterType[PropertyNames.Name]);
-            Assert.AreEqual("cta_s", (string) arrayParameterType[PropertyNames.Symbol]);
+            Assert.That((int)arrayParameterType[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)arrayParameterType[PropertyNames.ShortName], Is.EqualTo("cta"));
+            Assert.That((string)arrayParameterType[PropertyNames.Name], Is.EqualTo("createTestArray"));
+            Assert.That((string)arrayParameterType[PropertyNames.Symbol], Is.EqualTo("cta_s"));
 
             var component_1 = jArray.Single(x => (string) x[PropertyNames.Iid] == "f51de2a2-279e-4b5e-8f07-bbc7e9993a6b");
-            Assert.AreEqual(2, (int) component_1[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("4f9f3d9b-f3de-4ef5-b6cb-2e22199fab0d", (string) component_1[PropertyNames.ParameterType]);
-            Assert.AreEqual("53e82aeb-c42c-475c-b6bf-a102af883471", (string) component_1[PropertyNames.Scale]);
-            Assert.AreEqual("{1;1}", (string) component_1[PropertyNames.ShortName]);
+            Assert.That((int)component_1[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)component_1[PropertyNames.ParameterType], Is.EqualTo("4f9f3d9b-f3de-4ef5-b6cb-2e22199fab0d"));
+            Assert.That((string)component_1[PropertyNames.Scale], Is.EqualTo("53e82aeb-c42c-475c-b6bf-a102af883471"));
+            Assert.That((string)component_1[PropertyNames.ShortName], Is.EqualTo("{1;1}"));
 
             var component_2 = jArray.Single(x => (string) x[PropertyNames.Iid] == "0715f517-1f8b-462d-9189-b4ff20548266");
-            Assert.AreEqual(2, (int) component_2[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("35a9cf05-4eba-4cda-b60c-7cfeaac8f892", (string) component_2[PropertyNames.ParameterType]);
+            Assert.That((int)component_2[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)component_2[PropertyNames.ParameterType], Is.EqualTo("35a9cf05-4eba-4cda-b60c-7cfeaac8f892"));
             Assert.IsNull((string) component_2[PropertyNames.Scale]);
-            Assert.AreEqual("{2;1}", (string) component_2[PropertyNames.ShortName]);
+            Assert.That((string)component_2[PropertyNames.ShortName], Is.EqualTo("{2;1}"));
 
             //Reorder Dimension
             postBodyPath = this.GetPath("Tests/SiteDirectory/ArrayParameterType/PostUpdateArrayParameterType.json");
@@ -93,7 +93,7 @@ namespace WebservicesIntegrationTests
             jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
 
             arrayParameterType = jArray.Single(x => (string)x[PropertyNames.Iid] == "267b0d27-0421-453d-951a-4fcacc309a27");
-            Assert.AreEqual(3, (int)arrayParameterType[PropertyNames.RevisionNumber]);
+            Assert.That((int)arrayParameterType[PropertyNames.RevisionNumber], Is.EqualTo(3));
 
             var expectedReorderedDimensions =
                 new List<OrderedItem>
@@ -114,7 +114,7 @@ namespace WebservicesIntegrationTests
             jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
 
             arrayParameterType = jArray.Single(x => (string)x[PropertyNames.Iid] == "267b0d27-0421-453d-951a-4fcacc309a27");
-            Assert.AreEqual(4, (int)arrayParameterType[PropertyNames.RevisionNumber]);
+            Assert.That((int)arrayParameterType[PropertyNames.RevisionNumber], Is.EqualTo(4));
 
             var expectedDimensions =
                 new List<OrderedItem>
@@ -139,7 +139,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(arrayParameterTypeUri);
 
             //check if there are 3 objects
-            Assert.AreEqual(3, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(3));
 
             // get a specific SiteDirectory from the result by it's unique id
             var siteDirectory = jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
@@ -166,18 +166,18 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken arrayParameterType)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(15, arrayParameterType.Children().Count());
+            Assert.That(arrayParameterType.Children().Count(), Is.EqualTo(15));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("4a783624-b2bc-4e6d-95b3-11d036f6e917", (string) arrayParameterType[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) arrayParameterType[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("ArrayParameterType", (string) arrayParameterType[PropertyNames.ClassKind]);
+            Assert.That((string)arrayParameterType[PropertyNames.Iid], Is.EqualTo("4a783624-b2bc-4e6d-95b3-11d036f6e917"));
+            Assert.That((int)arrayParameterType[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string)arrayParameterType[PropertyNames.ClassKind], Is.EqualTo("ArrayParameterType"));
 
             Assert.IsFalse((bool) arrayParameterType[PropertyNames.IsDeprecated]);
-            Assert.AreEqual("Test Array ParameterType", (string) arrayParameterType[PropertyNames.Name]);
-            Assert.AreEqual("TestArrayParameterType", (string) arrayParameterType[PropertyNames.ShortName]);
+            Assert.That((string)arrayParameterType[PropertyNames.Name], Is.EqualTo("Test Array ParameterType"));
+            Assert.That((string)arrayParameterType[PropertyNames.ShortName], Is.EqualTo("TestArrayParameterType"));
 
-            Assert.AreEqual("testarray", (string) arrayParameterType[PropertyNames.Symbol]);
+            Assert.That((string)arrayParameterType[PropertyNames.Symbol], Is.EqualTo("testarray"));
             Assert.IsFalse((bool) arrayParameterType[PropertyNames.IsFinalized]);
 
             var expectedComponents = new List<OrderedItem>

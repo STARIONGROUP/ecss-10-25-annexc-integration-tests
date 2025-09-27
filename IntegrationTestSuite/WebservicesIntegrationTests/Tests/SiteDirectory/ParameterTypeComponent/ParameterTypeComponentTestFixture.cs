@@ -43,7 +43,7 @@ namespace WebservicesIntegrationTests
             var jArrayParameterType = this.WebClient.GetDto(arrayParameterTypeComponentUri);
 
             //check if there are two ParameterTypeComponent objects 
-            Assert.AreEqual(2, jArrayParameterType.Count);
+            Assert.That(jArrayParameterType.Count, Is.EqualTo(2));
 
             // define the URI on which to perform a GET request 
             var compoundParameterTypeUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/siteReferenceDataLibrary/c454c687-ba3e-44c4-86bc-44544b2c7880/parameterType/0d3178f9-68d0-4b1a-afe8-d5df0b66f1d4/component");
@@ -52,10 +52,10 @@ namespace WebservicesIntegrationTests
             var jArrayCompoundParameterType = this.WebClient.GetDto(compoundParameterTypeUri);
 
             //check if there two ParameterTypeComponent objects 
-            Assert.AreEqual(2, jArrayCompoundParameterType.Count);
+            Assert.That(jArrayCompoundParameterType.Count, Is.EqualTo(2));
 
             var jArray = new JArray(jArrayParameterType.Union(jArrayCompoundParameterType));
-            Assert.AreEqual(4, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(4));
 
             ParameterTypeComponentTestFixture.VerifyProperties(jArray);
         }
@@ -88,7 +88,7 @@ namespace WebservicesIntegrationTests
             var jArrayParameterType = this.WebClient.GetDto(arrayParameterTypeComponentUri);
 
             //check if there are 5 objects
-            Assert.AreEqual(5, jArrayParameterType.Count);
+            Assert.That(jArrayParameterType.Count, Is.EqualTo(5));
 
             // get a specific SiteDirectory from the result by it's unique id
             var siteDirectory = jArrayParameterType.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
@@ -110,7 +110,7 @@ namespace WebservicesIntegrationTests
             var jArrayCompoundParameterType = this.WebClient.GetDto(compoundParameterTypeUri);
 
             //check if there are 5 objects
-            Assert.AreEqual(5, jArrayParameterType.Count);
+            Assert.That(jArrayParameterType.Count, Is.EqualTo(5));
 
             // get a specific SiteDirectory from the result by it's unique id
             siteDirectory = jArrayCompoundParameterType.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
@@ -128,7 +128,7 @@ namespace WebservicesIntegrationTests
             CompoundParameterTypeTestFixture.VerifyProperties(compoundParameterType);
 
             var jArray = new JArray(jArrayParameterType.Union(jArrayCompoundParameterType));
-            Assert.AreEqual(10, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(10));
 
             ParameterTypeComponentTestFixture.VerifyProperties(jArray);
         }
@@ -147,93 +147,77 @@ namespace WebservicesIntegrationTests
                     x => (string) x[PropertyNames.Iid] == "b607fdc1-7578-48f9-8597-caba56df3177");
             
             // verify the amount of returned properties 
-            Assert.AreEqual(6, parameterTypeComponentObject.Children().Count());
+            Assert.That(parameterTypeComponentObject.Children().Count(), Is.EqualTo(6));
             
             // assert that the properties are what is expected
-            Assert.AreEqual("b607fdc1-7578-48f9-8597-caba56df3177",
-                (string) parameterTypeComponentObject[PropertyNames.Iid]);
+            Assert.That((string)parameterTypeComponentObject[PropertyNames.Iid], Is.EqualTo("b607fdc1-7578-48f9-8597-caba56df3177"));
            
-            Assert.AreEqual(1, (int) parameterTypeComponentObject[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("ParameterTypeComponent", (string) parameterTypeComponentObject[PropertyNames.ClassKind]);
-            
-            Assert.AreEqual("4f9f3d9b-f3de-4ef5-b6cb-2e22199fab0d",
-                (string) parameterTypeComponentObject[PropertyNames.ParameterType]);
-            
-            Assert.AreEqual("53e82aeb-c42c-475c-b6bf-a102af883471",
-                (string) parameterTypeComponentObject[PropertyNames.Scale]);
-            
-            Assert.AreEqual("TestParameterTypeComponentA",
-                (string) parameterTypeComponentObject[PropertyNames.ShortName]);
+            Assert.That((int)parameterTypeComponentObject[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string)parameterTypeComponentObject[PropertyNames.ClassKind], Is.EqualTo("ParameterTypeComponent"));
+
+            Assert.That((string)parameterTypeComponentObject[PropertyNames.ParameterType], Is.EqualTo("4f9f3d9b-f3de-4ef5-b6cb-2e22199fab0d"));
+
+            Assert.That((string)parameterTypeComponentObject[PropertyNames.Scale], Is.EqualTo("53e82aeb-c42c-475c-b6bf-a102af883471"));
+
+            Assert.That((string)parameterTypeComponentObject[PropertyNames.ShortName], Is.EqualTo("TestParameterTypeComponentA"));
 
             parameterTypeComponentObject =
                 parameterTypeComponent.Single(
                     x => (string) x[PropertyNames.Iid] == "8019277f-8bc7-463b-b3bb-46a404493e31");
  
             // verify the amount of returned properties 
-            Assert.AreEqual(6, parameterTypeComponentObject.Children().Count());
+            Assert.That(parameterTypeComponentObject.Children().Count(), Is.EqualTo(6));
             
             // assert that the properties are what is expected
-            Assert.AreEqual("8019277f-8bc7-463b-b3bb-46a404493e31",
-                (string) parameterTypeComponentObject[PropertyNames.Iid]);
+            Assert.That((string)parameterTypeComponentObject[PropertyNames.Iid], Is.EqualTo("8019277f-8bc7-463b-b3bb-46a404493e31"));
             
-            Assert.AreEqual(1, (int) parameterTypeComponentObject[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("ParameterTypeComponent", (string) parameterTypeComponentObject[PropertyNames.ClassKind]);
+            Assert.That((int)parameterTypeComponentObject[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string)parameterTypeComponentObject[PropertyNames.ClassKind], Is.EqualTo("ParameterTypeComponent"));
             
-            Assert.AreEqual("4f9f3d9b-f3de-4ef5-b6cb-2e22199fab0d",
-                (string) parameterTypeComponentObject[PropertyNames.ParameterType]);
+            Assert.That((string)parameterTypeComponentObject[PropertyNames.ParameterType], Is.EqualTo("4f9f3d9b-f3de-4ef5-b6cb-2e22199fab0d"));
             
-            Assert.AreEqual("53e82aeb-c42c-475c-b6bf-a102af883471",
-                (string) parameterTypeComponentObject[PropertyNames.Scale]);
+            Assert.That((string)parameterTypeComponentObject[PropertyNames.Scale], Is.EqualTo("53e82aeb-c42c-475c-b6bf-a102af883471"));
            
-            Assert.AreEqual("TestParameterTypeComponentB",
-                (string) parameterTypeComponentObject[PropertyNames.ShortName]);
+            Assert.That((string)parameterTypeComponentObject[PropertyNames.ShortName], Is.EqualTo("TestParameterTypeComponentB"));
 
             parameterTypeComponentObject =
                 parameterTypeComponent.Single(
                     x => (string) x[PropertyNames.Iid] == "9f17b223-446e-4a0c-afdb-60222b8e459e");
             
             // verify the amount of returned properties 
-            Assert.AreEqual(6, parameterTypeComponentObject.Children().Count());
+            Assert.That(parameterTypeComponentObject.Children().Count(), Is.EqualTo(6));
             
             // assert that the properties are what is expected
-            Assert.AreEqual("9f17b223-446e-4a0c-afdb-60222b8e459e",
-                (string) parameterTypeComponentObject[PropertyNames.Iid]);
+            Assert.That((string)parameterTypeComponentObject[PropertyNames.Iid], Is.EqualTo("9f17b223-446e-4a0c-afdb-60222b8e459e"));
             
-            Assert.AreEqual(1, (int) parameterTypeComponentObject[PropertyNames.RevisionNumber]);
+            Assert.That((int)parameterTypeComponentObject[PropertyNames.RevisionNumber], Is.EqualTo(1));
            
-            Assert.AreEqual("ParameterTypeComponent", (string) parameterTypeComponentObject[PropertyNames.ClassKind]);
+            Assert.That((string)parameterTypeComponentObject[PropertyNames.ClassKind], Is.EqualTo("ParameterTypeComponent"));
             
-            Assert.AreEqual("4f9f3d9b-f3de-4ef5-b6cb-2e22199fab0d",
-                (string) parameterTypeComponentObject[PropertyNames.ParameterType]);
+            Assert.That((string)parameterTypeComponentObject[PropertyNames.ParameterType], Is.EqualTo("4f9f3d9b-f3de-4ef5-b6cb-2e22199fab0d"));
             
-            Assert.AreEqual("53e82aeb-c42c-475c-b6bf-a102af883471",
-                (string) parameterTypeComponentObject[PropertyNames.Scale]);
+            Assert.That((string)parameterTypeComponentObject[PropertyNames.Scale], Is.EqualTo("53e82aeb-c42c-475c-b6bf-a102af883471"));
             
-            Assert.AreEqual("TestArrayParameterTypeComponentA",
-                (string) parameterTypeComponentObject[PropertyNames.ShortName]);
+            Assert.That((string)parameterTypeComponentObject[PropertyNames.ShortName], Is.EqualTo("TestArrayParameterTypeComponentA"));
 
             parameterTypeComponentObject =
                 parameterTypeComponent.Single(
                     x => (string) x[PropertyNames.Iid] == "f3ddc526-1ce8-4298-bd95-13e95d6f4cdd");
             
             // verify the amount of returned properties 
-            Assert.AreEqual(6, parameterTypeComponentObject.Children().Count());
+            Assert.That(parameterTypeComponentObject.Children().Count(), Is.EqualTo(6));
             
             // assert that the properties are what is expected
-            Assert.AreEqual("f3ddc526-1ce8-4298-bd95-13e95d6f4cdd",
-                (string) parameterTypeComponentObject[PropertyNames.Iid]);
+            Assert.That((string)parameterTypeComponentObject[PropertyNames.Iid], Is.EqualTo("f3ddc526-1ce8-4298-bd95-13e95d6f4cdd"));
            
-            Assert.AreEqual(1, (int) parameterTypeComponentObject[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("ParameterTypeComponent", (string) parameterTypeComponentObject[PropertyNames.ClassKind]);
+            Assert.That((int)parameterTypeComponentObject[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string)parameterTypeComponentObject[PropertyNames.ClassKind], Is.EqualTo("ParameterTypeComponent"));
             
-            Assert.AreEqual("4f9f3d9b-f3de-4ef5-b6cb-2e22199fab0d",
-                (string) parameterTypeComponentObject[PropertyNames.ParameterType]);
+            Assert.That((string)parameterTypeComponentObject[PropertyNames.ParameterType], Is.EqualTo("4f9f3d9b-f3de-4ef5-b6cb-2e22199fab0d"));
             
-            Assert.AreEqual("53e82aeb-c42c-475c-b6bf-a102af883471",
-                (string) parameterTypeComponentObject[PropertyNames.Scale]);
+            Assert.That((string)parameterTypeComponentObject[PropertyNames.Scale], Is.EqualTo("53e82aeb-c42c-475c-b6bf-a102af883471"));
             
-            Assert.AreEqual("TestArrayParameterTypeComponentB",
-                (string) parameterTypeComponentObject[PropertyNames.ShortName]);
+            Assert.That((string)parameterTypeComponentObject[PropertyNames.ShortName], Is.EqualTo("TestArrayParameterTypeComponentB"));
         }
     }
 }

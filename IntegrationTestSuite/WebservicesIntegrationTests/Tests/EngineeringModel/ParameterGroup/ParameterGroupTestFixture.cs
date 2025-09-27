@@ -42,7 +42,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(parameterGroupUri);
 
             // check if there is the only one ParameterGroup object 
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific ParameterGroup from the result by it's unique id
             var parameterGroup = jArray.Single(x => (string)x[PropertyNames.Iid] == "b739b3c6-9cc0-4e64-9cc4-ef7463edf559");
@@ -61,7 +61,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(parameterGroupUri);
 
             // check if there are 4 objects
-            Assert.AreEqual(4, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(4));
 
             // get a specific Iteration from the result by it's unique id
             var iteration = jArray.Single(x => (string)x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
@@ -86,7 +86,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
             // check if there are appropriate amount of objects
-            Assert.AreEqual(3, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(3));
 
             var engineeeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
             Assert.AreEqual(2, (int)engineeeringModel[PropertyNames.RevisionNumber]);

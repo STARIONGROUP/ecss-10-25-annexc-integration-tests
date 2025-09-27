@@ -43,7 +43,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(enumerationParameterTypeUri);
 
             //check if there is the only one EnumerationParameterType object 
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific EnumerationParameterType from the result by it's unique id
             var enumerationParameterType = jArray.Single(x => (string) x["iid"] == "664d5611-c564-4eba-8f2e-e23b99385daf");
@@ -62,7 +62,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(enumerationParameterTypeUri);
 
             //check if there are 3 objects
-            Assert.AreEqual(3, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(3));
 
             // get a specific SiteDirectory from the result by it's unique id
             var siteDirectory = jArray.Single(x => (string) x["iid"] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
@@ -92,15 +92,15 @@ namespace WebservicesIntegrationTests
             var siteDirectory = jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
 
             // verify that the amount of returned properties 
-            Assert.AreEqual(19, siteDirectory.Children().Count());
+            Assert.That(siteDirectory.Children().Count(), Is.EqualTo(19));
 
-            Assert.AreEqual("f13de6f8-b03a-46e7-a492-53b2f260f294", (string) siteDirectory[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int) siteDirectory[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("SiteDirectory", (string) siteDirectory[PropertyNames.ClassKind]);
-            Assert.AreEqual("Test Site Directory", (string) siteDirectory[PropertyNames.Name]);
-            Assert.AreEqual("TEST-SiteDir", (string) siteDirectory[PropertyNames.ShortName]);
-            Assert.AreEqual("ee3ae5ff-ac5e-4957-bab1-7698fba2a267", (string) siteDirectory[PropertyNames.DefaultParticipantRole]);
-            Assert.AreEqual("2428f4d9-f26d-4112-9d56-1c940748df69", (string) siteDirectory[PropertyNames.DefaultPersonRole]);
+            Assert.That((string)siteDirectory[PropertyNames.Iid], Is.EqualTo("f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            Assert.That((int)siteDirectory[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)siteDirectory[PropertyNames.ClassKind], Is.EqualTo("SiteDirectory"));
+            Assert.That((string)siteDirectory[PropertyNames.Name], Is.EqualTo("Test Site Directory"));
+            Assert.That((string)siteDirectory[PropertyNames.ShortName], Is.EqualTo("TEST-SiteDir"));
+            Assert.That((string)siteDirectory[PropertyNames.DefaultParticipantRole], Is.EqualTo("ee3ae5ff-ac5e-4957-bab1-7698fba2a267"));
+            Assert.That((string)siteDirectory[PropertyNames.DefaultPersonRole], Is.EqualTo("2428f4d9-f26d-4112-9d56-1c940748df69"));
 
             var expectedOrganizations = new string[] { "cd22fc45-d898-4fac-85fc-fbcb7d7b12a7" };
             var organizationArray = (JArray) siteDirectory[PropertyNames.Organization];
@@ -166,16 +166,16 @@ namespace WebservicesIntegrationTests
             var siteReferenceDataLibrary = jArray.Single(x => (string) x[PropertyNames.Iid] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(22, siteReferenceDataLibrary.Children().Count());
+            Assert.That(siteReferenceDataLibrary.Children().Count(), Is.EqualTo(22));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("c454c687-ba3e-44c4-86bc-44544b2c7880", (string) siteReferenceDataLibrary[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int) siteReferenceDataLibrary[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("SiteReferenceDataLibrary", (string) siteReferenceDataLibrary[PropertyNames.ClassKind]);
+            Assert.That((string)siteReferenceDataLibrary[PropertyNames.Iid], Is.EqualTo("c454c687-ba3e-44c4-86bc-44544b2c7880"));
+            Assert.That((int)siteReferenceDataLibrary[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)siteReferenceDataLibrary[PropertyNames.ClassKind], Is.EqualTo("SiteReferenceDataLibrary"));
 
             Assert.IsFalse((bool) siteReferenceDataLibrary[PropertyNames.IsDeprecated]);
-            Assert.AreEqual("Test Reference Data Library", (string) siteReferenceDataLibrary[PropertyNames.Name]);
-            Assert.AreEqual("TestRDL", (string) siteReferenceDataLibrary[PropertyNames.ShortName]);
+            Assert.That((string)siteReferenceDataLibrary[PropertyNames.Name], Is.EqualTo("Test Reference Data Library"));
+            Assert.That((string)siteReferenceDataLibrary[PropertyNames.ShortName], Is.EqualTo("TestRDL"));
 
             var expectedAliases = new string[] { };
             var aliasesArray = (JArray) siteReferenceDataLibrary[PropertyNames.Alias];
@@ -334,16 +334,16 @@ namespace WebservicesIntegrationTests
                 jArray.Single(x => (string) x["iid"] == "af1615f0-b9c8-4654-94aa-11587d1faa59");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(13, enumerationParameterType.Children().Count());
+            Assert.That(enumerationParameterType.Children().Count(), Is.EqualTo(13));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("af1615f0-b9c8-4654-94aa-11587d1faa59", (string) enumerationParameterType["iid"]);
-            Assert.AreEqual(2, (int) enumerationParameterType["revisionNumber"]);
-            Assert.AreEqual("EnumerationParameterType", (string) enumerationParameterType["classKind"]);
+            Assert.That((string)enumerationParameterType["iid"], Is.EqualTo("af1615f0-b9c8-4654-94aa-11587d1faa59"));
+            Assert.That((int)enumerationParameterType["revisionNumber"], Is.EqualTo(2));
+            Assert.That((string)enumerationParameterType["classKind"], Is.EqualTo("EnumerationParameterType"));
 
             Assert.IsFalse((bool) enumerationParameterType["isDeprecated"]);
-            Assert.AreEqual("Test Enumeration ParameterType", (string) enumerationParameterType["name"]);
-            Assert.AreEqual("TestEnumerationParameterType", (string) enumerationParameterType["shortName"]);
+            Assert.That((string)enumerationParameterType["name"], Is.EqualTo("Test Enumeration ParameterType"));
+            Assert.That((string)enumerationParameterType["shortName"], Is.EqualTo("TestEnumerationParameterType"));
 
             Assert.IsFalse((bool) enumerationParameterType["allowMultiSelect"]);
 
@@ -357,7 +357,7 @@ namespace WebservicesIntegrationTests
 
             CollectionAssert.AreEquivalent(expectedValueDefinitions, valueDefinitionsArray);
 
-            Assert.AreEqual("enumerationparametertype", (string) enumerationParameterType["symbol"]);
+            Assert.That((string)enumerationParameterType["symbol"], Is.EqualTo("enumerationparametertype"));
 
             var expectedCategories = new string[] { };
             var categoriesArray = (JArray) enumerationParameterType["category"];
@@ -389,7 +389,7 @@ namespace WebservicesIntegrationTests
                 jArray.Single(x => (string) x["iid"] == "af1615f0-b9c8-4654-94aa-11587d1faa59");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(13, enumerationParameterType.Children().Count());
+            Assert.That(enumerationParameterType.Children().Count(), Is.EqualTo(13));
 
             expectedValueDefinitions = new List<OrderedItem>
             {
@@ -411,7 +411,7 @@ namespace WebservicesIntegrationTests
                 jArray.Single(x => (string) x["iid"] == "af1615f0-b9c8-4654-94aa-11587d1faa59");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(13, enumerationParameterType.Children().Count());
+            Assert.That(enumerationParameterType.Children().Count(), Is.EqualTo(13));
 
             expectedValueDefinitions = new List<OrderedItem>
             {
@@ -433,7 +433,7 @@ namespace WebservicesIntegrationTests
                 jArray.Single(x => (string) x["iid"] == "af1615f0-b9c8-4654-94aa-11587d1faa59");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(13, enumerationParameterType.Children().Count());
+            Assert.That(enumerationParameterType.Children().Count(), Is.EqualTo(13));
 
             expectedValueDefinitions = new List<OrderedItem>
             {
@@ -456,16 +456,16 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken enumerationParameterType)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(13, enumerationParameterType.Children().Count());
+            Assert.That(enumerationParameterType.Children().Count(), Is.EqualTo(13));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("664d5611-c564-4eba-8f2e-e23b99385daf", (string) enumerationParameterType["iid"]);
-            Assert.AreEqual(1, (int) enumerationParameterType["revisionNumber"]);
-            Assert.AreEqual("EnumerationParameterType", (string) enumerationParameterType["classKind"]);
+            Assert.That((string)enumerationParameterType["iid"], Is.EqualTo("664d5611-c564-4eba-8f2e-e23b99385daf"));
+            Assert.That((int)enumerationParameterType["revisionNumber"], Is.EqualTo(1));
+            Assert.That((string)enumerationParameterType["classKind"], Is.EqualTo("EnumerationParameterType"));
 
             Assert.IsFalse((bool) enumerationParameterType["isDeprecated"]);
-            Assert.AreEqual("Test Enumeration ParameterType", (string) enumerationParameterType["name"]);
-            Assert.AreEqual("TestEnumerationParameterType", (string) enumerationParameterType["shortName"]);
+            Assert.That((string)enumerationParameterType["name"], Is.EqualTo("Test Enumeration ParameterType"));
+            Assert.That((string)enumerationParameterType["shortName"], Is.EqualTo("TestEnumerationParameterType"));
 
             Assert.IsFalse((bool) enumerationParameterType["allowMultiSelect"]);
 
@@ -480,7 +480,7 @@ namespace WebservicesIntegrationTests
 
             CollectionAssert.AreEquivalent(expectedValueDefinitions, valueDefinitionsArray);
 
-            Assert.AreEqual("enumerationparametertype", (string) enumerationParameterType["symbol"]);
+            Assert.That((string)enumerationParameterType["symbol"], Is.EqualTo("enumerationparametertype"));
 
             var expectedCategories = new string[] { };
             var categoriesArray = (JArray) enumerationParameterType["category"];

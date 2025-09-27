@@ -42,7 +42,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(modelLogEntryUri);
 
             //check if there is the only one ModelLogEntry object 
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific ModelLogEntry from the result by it's unique id
             var modelLogEntry = jArray.Single(x => (string) x[PropertyNames.Iid] == "4e2375eb-8e37-4df2-9c7b-dd896683a891");

@@ -43,7 +43,8 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(exclusiveOrExpressionUri);
 
             //check if there is the only one ExclusiveOrExpression object 
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific ExclusiveOrExpression from the result by it's unique id
             var exclusiveOrExpression =
@@ -63,7 +64,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(exclusiveOrExpressionUri);
 
             // verify that the correct amount of objects is returned
-            Assert.AreEqual(6, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(6));
 
             // get a specific Iteration from the result by it's unique id
             var iteration = jArray.Single(x => (string) x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
@@ -102,7 +103,7 @@ namespace WebservicesIntegrationTests
                 jArray.Single(x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
 
             // Verify the amount of returned properties of the EngineeringModel
-            Assert.AreEqual(8, engineeringModel.Children().Count());
+            Assert.That(engineeringModel.Children().Count(), Is.EqualTo(8));
 
             // Assert the properties of EngineeringModel have expected values
             var expectedIterations = new[] {"e163c5ad-f32b-4387-b805-f4b34600bc2c"};
@@ -120,18 +121,17 @@ namespace WebservicesIntegrationTests
             IList<string> commonFileStores = commonFileStoresArray.Select(x => (string) x).ToList();
             Assert.That(commonFileStores, Is.EquivalentTo(expectedCommonFileStores));
 
-            Assert.AreEqual("EngineeringModel", (string) engineeringModel[PropertyNames.ClassKind]);
-            Assert.AreEqual("116f6253-89bb-47d4-aa24-d11d197e43c9",
-                (string) engineeringModel[PropertyNames.EngineeringModelSetup]);
-            Assert.AreEqual("9ec982e4-ef72-4953-aa85-b158a95d8d56", (string) engineeringModel[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int) engineeringModel[PropertyNames.RevisionNumber]);
+            Assert.That((string)engineeringModel[PropertyNames.ClassKind], Is.EqualTo("EngineeringModel"));
+            Assert.That((string)engineeringModel[PropertyNames.EngineeringModelSetup], Is.EqualTo("116f6253-89bb-47d4-aa24-d11d197e43c9"));
+            Assert.That((string)engineeringModel[PropertyNames.Iid], Is.EqualTo("9ec982e4-ef72-4953-aa85-b158a95d8d56"));
+            Assert.That((int)engineeringModel[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             // Get a specific ParametricConstraint from the result by it's unique id
             var parametricConstraint =
                 jArray.Single(x => (string) x[PropertyNames.Iid] == "88200dbc-711a-47e0-a54a-dac4baca6e83");
 
             // verify the amount of returned properties of ParametricConstraint
-            Assert.AreEqual(5, parametricConstraint.Children().Count());
+            Assert.That(parametricConstraint.Children().Count(), Is.EqualTo(5));
 
             // assert that the properties of ParametricConstraint are what is expected
             var expectedExpressions = new string[]
@@ -148,23 +148,22 @@ namespace WebservicesIntegrationTests
             IList<string> expressions = expressionArray.Select(x => (string) x).ToList();
             Assert.That(expressions, Is.EquivalentTo(expectedExpressions));
 
-            Assert.AreEqual("ParametricConstraint", (string) parametricConstraint[PropertyNames.ClassKind]);
-            Assert.AreEqual("88200dbc-711a-47e0-a54a-dac4baca6e83", (string) parametricConstraint[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int) parametricConstraint[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("30cb785a-9e72-477f-ad1a-8df6ab623e3d",
-                (string) parametricConstraint[PropertyNames.TopExpression]);
+            Assert.That((string)parametricConstraint[PropertyNames.ClassKind], Is.EqualTo("ParametricConstraint"));
+            Assert.That((string)parametricConstraint[PropertyNames.Iid], Is.EqualTo("88200dbc-711a-47e0-a54a-dac4baca6e83"));
+            Assert.That((int)parametricConstraint[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)parametricConstraint[PropertyNames.TopExpression], Is.EqualTo("30cb785a-9e72-477f-ad1a-8df6ab623e3d"));
 
             // Get the added AndExpression from the result by it's unique id
             var exclusiveOrExpression =
                 jArray.Single(x => (string) x[PropertyNames.Iid] == "3160a8e3-a17d-4037-a834-4083c4333c2a");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(4, exclusiveOrExpression.Children().Count());
+            Assert.That(exclusiveOrExpression.Children().Count(), Is.EqualTo(4));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("3160a8e3-a17d-4037-a834-4083c4333c2a", (string) exclusiveOrExpression[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int) exclusiveOrExpression[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("ExclusiveOrExpression", (string) exclusiveOrExpression[PropertyNames.ClassKind]);
+            Assert.That((string)exclusiveOrExpression[PropertyNames.Iid], Is.EqualTo("3160a8e3-a17d-4037-a834-4083c4333c2a"));
+            Assert.That((int)exclusiveOrExpression[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)exclusiveOrExpression[PropertyNames.ClassKind], Is.EqualTo("ExclusiveOrExpression"));
 
             var expectedTerms = new string[]
             {
@@ -186,12 +185,12 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken exclusiveOrExpression)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(4, exclusiveOrExpression.Children().Count());
+            Assert.That(exclusiveOrExpression.Children().Count(), Is.EqualTo(4));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("8c6df21f-07ae-4d0b-ab9b-866dd1f90158", (string) exclusiveOrExpression[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) exclusiveOrExpression[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("ExclusiveOrExpression", (string) exclusiveOrExpression[PropertyNames.ClassKind]);
+            Assert.That((string)exclusiveOrExpression[PropertyNames.Iid], Is.EqualTo("8c6df21f-07ae-4d0b-ab9b-866dd1f90158"));
+            Assert.That((int)exclusiveOrExpression[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string)exclusiveOrExpression[PropertyNames.ClassKind], Is.EqualTo("ExclusiveOrExpression"));
 
             var expectedTerms = new string[]
             {

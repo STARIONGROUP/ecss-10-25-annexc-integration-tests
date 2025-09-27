@@ -43,7 +43,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(parameterValueSetUri);
 
             // check if there is the only one ParameterValueSet object 
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific ParameterValueSet from the result by it's unique id
             var parameterValueSet = jArray.Single(x => (string)x[PropertyNames.Iid] == "af5c88c6-301f-497b-81f7-53748c3900ed");

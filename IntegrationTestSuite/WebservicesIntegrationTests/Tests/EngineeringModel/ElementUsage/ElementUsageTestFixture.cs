@@ -42,7 +42,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(elementUsageUri);
 
             // check if there are the only two ElementUsage object 
-            Assert.AreEqual(2, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(2));
 
             ElementUsageTestFixture.VerifyProperties(jArray);
         }
@@ -58,7 +58,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(elementUsageUri);
 
             // check if there are 5 objects
-            Assert.AreEqual(5, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(5));
 
             // get a specific Iteration from the result by it's unique id
             var iteration = jArray.Single(x => (string)x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
@@ -83,21 +83,19 @@ namespace WebservicesIntegrationTests
                 x => (string)x[PropertyNames.Iid] == "75399754-ee45-4bca-b033-63e2019870d1");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(14, elementUsage.Children().Count());
+            Assert.That(elementUsage.Children().Count(), Is.EqualTo(14));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("75399754-ee45-4bca-b033-63e2019870d1", (string)elementUsage[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int)elementUsage[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("ElementUsage", (string)elementUsage[PropertyNames.ClassKind]);
+            Assert.That((string)elementUsage[PropertyNames.Iid], Is.EqualTo("75399754-ee45-4bca-b033-63e2019870d1"));
+            Assert.That((int)elementUsage[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string)elementUsage[PropertyNames.ClassKind], Is.EqualTo("ElementUsage"));
 
-            Assert.AreEqual("Test ElementUsage", (string)elementUsage[PropertyNames.Name]);
-            Assert.AreEqual("TestElementUsage", (string)elementUsage[PropertyNames.ShortName]);
+            Assert.That((string)elementUsage[PropertyNames.Name], Is.EqualTo("Test ElementUsage"));
+            Assert.That((string)elementUsage[PropertyNames.ShortName], Is.EqualTo("TestElementUsage"));
 
-            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string)elementUsage[PropertyNames.Owner]);
-            Assert.AreEqual("UNDIRECTED", (string)elementUsage[PropertyNames.InterfaceEnd]);
-            Assert.AreEqual(
-                "f73860b2-12f0-43e4-b8b2-c81862c0a159",
-                (string)elementUsage[PropertyNames.ElementDefinition]);
+            Assert.That((string)elementUsage[PropertyNames.Owner], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
+            Assert.That((string)elementUsage[PropertyNames.InterfaceEnd], Is.EqualTo("UNDIRECTED"));
+            Assert.That((string)elementUsage[PropertyNames.ElementDefinition], Is.EqualTo("f73860b2-12f0-43e4-b8b2-c81862c0a159"));
 
             var expectedExcludedOptions = new string[] { };
             var excludedOptionsArray = (JArray)elementUsage[PropertyNames.ExcludeOption];
@@ -135,21 +133,19 @@ namespace WebservicesIntegrationTests
             if (elementUsage != null)
             {
                 // verify the amount of returned properties 
-            Assert.AreEqual(14, elementUsage.Children().Count());
+            Assert.That(elementUsage.Children().Count(), Is.EqualTo(14));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("f95a1580-e533-4185-b520-208615780afe", (string)elementUsage[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int)elementUsage[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("ElementUsage", (string)elementUsage[PropertyNames.ClassKind]);
+            Assert.That((string)elementUsage[PropertyNames.Iid], Is.EqualTo("f95a1580-e533-4185-b520-208615780afe"));
+            Assert.That((int)elementUsage[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string)elementUsage[PropertyNames.ClassKind], Is.EqualTo("ElementUsage"));
 
-            Assert.AreEqual("Test ElementUsage 2", (string)elementUsage[PropertyNames.Name]);
-            Assert.AreEqual("TestElementUsage2", (string)elementUsage[PropertyNames.ShortName]);
+            Assert.That((string)elementUsage[PropertyNames.Name], Is.EqualTo("Test ElementUsage 2"));
+            Assert.That((string)elementUsage[PropertyNames.ShortName], Is.EqualTo("TestElementUsage2"));
 
-            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string)elementUsage[PropertyNames.Owner]);
-            Assert.AreEqual("UNDIRECTED", (string)elementUsage[PropertyNames.InterfaceEnd]);
-            Assert.AreEqual(
-                "f73860b2-12f0-43e4-b8b2-c81862c0a159",
-                (string)elementUsage[PropertyNames.ElementDefinition]);
+            Assert.That((string)elementUsage[PropertyNames.Owner], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
+            Assert.That((string)elementUsage[PropertyNames.InterfaceEnd], Is.EqualTo("UNDIRECTED"));
+            Assert.That((string)elementUsage[PropertyNames.ElementDefinition], Is.EqualTo("f73860b2-12f0-43e4-b8b2-c81862c0a159"));
 
             expectedExcludedOptions = new string[] { };
             excludedOptionsArray = (JArray)elementUsage[PropertyNames.ExcludeOption];

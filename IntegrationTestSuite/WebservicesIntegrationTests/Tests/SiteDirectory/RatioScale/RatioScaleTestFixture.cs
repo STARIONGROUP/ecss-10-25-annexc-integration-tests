@@ -42,7 +42,7 @@ namespace WebservicesIntegrationTests.Tests.SiteDirectory.RatioScale
             var jArray = this.WebClient.GetDto(ratioScaleUri);
 
             //check if there is the only one RatioScale object 
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific RatioScale from the result by it's unique id
             var ratioScale = jArray.Single(x => (string) x["iid"] == "53e82aeb-c42c-475c-b6bf-a102af883471");
@@ -61,7 +61,7 @@ namespace WebservicesIntegrationTests.Tests.SiteDirectory.RatioScale
             var jArray = this.WebClient.GetDto(ratioScaleUri);
 
             //check if there are 3 objects
-            Assert.AreEqual(3, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(3));
 
             // get a specific SiteDirectory from the result by it's unique id
             var siteDirectory = jArray.Single(x => (string) x["iid"] == "f13de6f8-b03a-46e7-a492-53b2f260f294");

@@ -39,7 +39,7 @@ namespace WebservicesIntegrationTests
 
             var jArray = this.WebClient.GetDto(textParameterTypeUri);
 
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             var textParameterType = jArray.Single(x => (string) x[PropertyNames.Iid] == "a21c15c4-3e1e-46b5-b109-5063dec1e254");
 
@@ -57,7 +57,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(textParameterTypeUri);
 
             //check if there are 3 objects
-            Assert.AreEqual(3, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(3));
 
             // get a specific SiteDirectory from the result by it's unique id
             var siteDirectory = jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");

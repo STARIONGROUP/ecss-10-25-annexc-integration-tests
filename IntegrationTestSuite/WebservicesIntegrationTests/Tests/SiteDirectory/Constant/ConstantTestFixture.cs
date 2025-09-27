@@ -43,7 +43,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(constantUri);
 
             //check if there is the only one Constant object 
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific Constant from the result by it's unique id
             var constant = jArray.Single(x => (string) x[PropertyNames.Iid] == "239754fe-834f-4394-9c3a-26cac7f866d3");
@@ -62,7 +62,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(constantUri);
 
             //check if there are 3 objects
-            Assert.AreEqual(3, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(3));
 
             // get a specific SiteDirectory from the result by it's unique id
             var siteDirectory = jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
@@ -90,15 +90,15 @@ namespace WebservicesIntegrationTests
             var siteDirectory = jArray.Single(x => (string)x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
 
             // verify that the amount of returned properties 
-            Assert.AreEqual(19, siteDirectory.Children().Count());
+            Assert.That(siteDirectory.Children().Count(), Is.EqualTo(19));
 
-            Assert.AreEqual("f13de6f8-b03a-46e7-a492-53b2f260f294", (string)siteDirectory[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int)siteDirectory[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("SiteDirectory", (string)siteDirectory[PropertyNames.ClassKind]);
-            Assert.AreEqual("Test Site Directory", (string)siteDirectory[PropertyNames.Name]);
-            Assert.AreEqual("TEST-SiteDir", (string)siteDirectory[PropertyNames.ShortName]);
-            Assert.AreEqual("ee3ae5ff-ac5e-4957-bab1-7698fba2a267", (string)siteDirectory[PropertyNames.DefaultParticipantRole]);
-            Assert.AreEqual("2428f4d9-f26d-4112-9d56-1c940748df69", (string)siteDirectory[PropertyNames.DefaultPersonRole]);
+            Assert.That((string)siteDirectory[PropertyNames.Iid], Is.EqualTo("f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            Assert.That((int)siteDirectory[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)siteDirectory[PropertyNames.ClassKind], Is.EqualTo("SiteDirectory"));
+            Assert.That((string)siteDirectory[PropertyNames.Name], Is.EqualTo("Test Site Directory"));
+            Assert.That((string)siteDirectory[PropertyNames.ShortName], Is.EqualTo("TEST-SiteDir"));
+            Assert.That((string)siteDirectory[PropertyNames.DefaultParticipantRole], Is.EqualTo("ee3ae5ff-ac5e-4957-bab1-7698fba2a267"));
+            Assert.That((string)siteDirectory[PropertyNames.DefaultPersonRole], Is.EqualTo("2428f4d9-f26d-4112-9d56-1c940748df69"));
 
             var expectedOrganizations = new string[] { "cd22fc45-d898-4fac-85fc-fbcb7d7b12a7" };
             var organizationArray = (JArray)siteDirectory[PropertyNames.Organization];
@@ -161,16 +161,16 @@ namespace WebservicesIntegrationTests
             var siteReferenceDataLibrary = jArray.Single(x => (string)x[PropertyNames.Iid] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(22, siteReferenceDataLibrary.Children().Count());
+            Assert.That(siteReferenceDataLibrary.Children().Count(), Is.EqualTo(22));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("c454c687-ba3e-44c4-86bc-44544b2c7880", (string)siteReferenceDataLibrary[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int)siteReferenceDataLibrary[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("SiteReferenceDataLibrary", (string)siteReferenceDataLibrary[PropertyNames.ClassKind]);
+            Assert.That((string)siteReferenceDataLibrary[PropertyNames.Iid], Is.EqualTo("c454c687-ba3e-44c4-86bc-44544b2c7880"));
+            Assert.That((int)siteReferenceDataLibrary[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)siteReferenceDataLibrary[PropertyNames.ClassKind], Is.EqualTo("SiteReferenceDataLibrary"));
 
             Assert.IsFalse((bool)siteReferenceDataLibrary[PropertyNames.IsDeprecated]);
-            Assert.AreEqual("Test Reference Data Library", (string)siteReferenceDataLibrary[PropertyNames.Name]);
-            Assert.AreEqual("TestRDL", (string)siteReferenceDataLibrary[PropertyNames.ShortName]);
+            Assert.That((string)siteReferenceDataLibrary[PropertyNames.Name], Is.EqualTo("Test Reference Data Library"));
+            Assert.That((string)siteReferenceDataLibrary[PropertyNames.ShortName], Is.EqualTo("TestRDL"));
 
             var expectedAliases = new string[] { };
             var aliasesArray = (JArray)siteReferenceDataLibrary[PropertyNames.Alias];
@@ -315,20 +315,20 @@ namespace WebservicesIntegrationTests
             var constant = jArray.Single(x => (string)x[PropertyNames.Iid] == "8ef99572-3d39-44a4-9212-159bc82f2320");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(13, constant.Children().Count());
+            Assert.That(constant.Children().Count(), Is.EqualTo(13));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("8ef99572-3d39-44a4-9212-159bc82f2320", (string)constant[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int)constant[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("Constant", (string)constant[PropertyNames.ClassKind]);
+            Assert.That((string)constant[PropertyNames.Iid], Is.EqualTo("8ef99572-3d39-44a4-9212-159bc82f2320"));
+            Assert.That((int)constant[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)constant[PropertyNames.ClassKind], Is.EqualTo("Constant"));
 
             Assert.IsFalse((bool)constant[PropertyNames.IsDeprecated]);
-            Assert.AreEqual("New Constant", (string)constant[PropertyNames.Name]);
-            Assert.AreEqual("NewConstant", (string)constant[PropertyNames.ShortName]);
+            Assert.That((string)constant[PropertyNames.Name], Is.EqualTo("New Constant"));
+            Assert.That((string)constant[PropertyNames.ShortName], Is.EqualTo("NewConstant"));
 
-            Assert.AreEqual("a21c15c4-3e1e-46b5-b109-5063dec1e254", (string)constant[PropertyNames.ParameterType]);
+            Assert.That((string)constant[PropertyNames.ParameterType], Is.EqualTo("a21c15c4-3e1e-46b5-b109-5063dec1e254"));
 
-            Assert.AreEqual("[\"word\"]", (string)constant[PropertyNames.Value]);
+            Assert.That((string)constant[PropertyNames.Value], Is.EqualTo("[\"word\"]"));
 
             Assert.IsNull((string)constant[PropertyNames.Scale]);
 
@@ -363,20 +363,20 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken constant)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(13, constant.Children().Count());
+            Assert.That(constant.Children().Count(), Is.EqualTo(13));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("239754fe-834f-4394-9c3a-26cac7f866d3", (string) constant[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) constant[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("Constant", (string) constant[PropertyNames.ClassKind]);
+            Assert.That((string)constant[PropertyNames.Iid], Is.EqualTo("239754fe-834f-4394-9c3a-26cac7f866d3"));
+            Assert.That((int)constant[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string)constant[PropertyNames.ClassKind], Is.EqualTo("Constant"));
 
             Assert.IsFalse((bool) constant[PropertyNames.IsDeprecated]);
-            Assert.AreEqual("Test Constant", (string) constant[PropertyNames.Name]);
-            Assert.AreEqual("TestConstant", (string) constant[PropertyNames.ShortName]);
+            Assert.That((string)constant[PropertyNames.Name], Is.EqualTo("Test Constant"));
+            Assert.That((string)constant[PropertyNames.ShortName], Is.EqualTo("TestConstant"));
 
-            Assert.AreEqual("35a9cf05-4eba-4cda-b60c-7cfeaac8f892", (string) constant[PropertyNames.ParameterType]);
+            Assert.That((string)constant[PropertyNames.ParameterType], Is.EqualTo("35a9cf05-4eba-4cda-b60c-7cfeaac8f892"));
 
-            Assert.AreEqual("[\"true\"]", (string) constant[PropertyNames.Value]);
+            Assert.That((string)constant[PropertyNames.Value], Is.EqualTo("[\"true\"]"));
 
             Assert.IsNull((string) constant[PropertyNames.Scale]);
 

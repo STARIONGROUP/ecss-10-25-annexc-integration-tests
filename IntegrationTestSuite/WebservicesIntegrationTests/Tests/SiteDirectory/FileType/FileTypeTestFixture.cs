@@ -42,7 +42,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(fileTypeUri);
 
             //check if there are correct amount of FileType objects 
-            Assert.AreEqual(3, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(3));
 
             FileTypeTestFixture.VerifyProperties(jArray);
         }
@@ -58,7 +58,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(fileTypeUri);
 
             //check if there are correct amount of objects
-            Assert.AreEqual(5, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(5));
 
             // get a specific SiteDirectory from the result by it's unique id
             var siteDirectory = jArray.Single(x => (string)x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
@@ -83,18 +83,18 @@ namespace WebservicesIntegrationTests
             // get a specific FileType from the result by it's unique id
             var fileType = jArray.Single(x => (string)x[PropertyNames.Iid] == "db04ac55-dd60-4607-a4e1-a9f91c9704e6");
             // verify the amount of returned properties 
-            Assert.AreEqual(11, fileType.Children().Count());
+            Assert.That(fileType.Children().Count(), Is.EqualTo(11));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("db04ac55-dd60-4607-a4e1-a9f91c9704e6", (string)fileType[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int)fileType[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("FileType", (string)fileType[PropertyNames.ClassKind]);
+            Assert.That((string)fileType[PropertyNames.Iid], Is.EqualTo("db04ac55-dd60-4607-a4e1-a9f91c9704e6"));
+            Assert.That((int)fileType[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string)fileType[PropertyNames.ClassKind], Is.EqualTo("FileType"));
 
             Assert.IsFalse((bool)fileType[PropertyNames.IsDeprecated]);
-            Assert.AreEqual("Test File Type", (string)fileType[PropertyNames.Name]);
-            Assert.AreEqual("TestFileType", (string)fileType[PropertyNames.ShortName]);
+            Assert.That((string)fileType[PropertyNames.Name], Is.EqualTo("Test File Type"));
+            Assert.That((string)fileType[PropertyNames.ShortName], Is.EqualTo("TestFileType"));
 
-            Assert.AreEqual("tst", (string)fileType[PropertyNames.Extension]);
+            Assert.That((string)fileType[PropertyNames.Extension], Is.EqualTo("tst"));
            
             var expectedCategories = new string[] {};
             var categoriesArray = (JArray)fileType[PropertyNames.Category];
@@ -119,18 +119,18 @@ namespace WebservicesIntegrationTests
             // get a specific FileType from the result by it's unique id
             fileType = jArray.Single(x => (string)x[PropertyNames.Iid] == "b16894e4-acb5-4e81-a118-16c00eb86d8f");
             // verify the amount of returned properties 
-            Assert.AreEqual(11, fileType.Children().Count());
+            Assert.That(fileType.Children().Count(), Is.EqualTo(11));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("b16894e4-acb5-4e81-a118-16c00eb86d8f", (string)fileType[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int)fileType[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("FileType", (string)fileType[PropertyNames.ClassKind]);
+            Assert.That((string)fileType[PropertyNames.Iid], Is.EqualTo("b16894e4-acb5-4e81-a118-16c00eb86d8f"));
+            Assert.That((int)fileType[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string)fileType[PropertyNames.ClassKind], Is.EqualTo("FileType"));
 
             Assert.IsFalse((bool)fileType[PropertyNames.IsDeprecated]);
-            Assert.AreEqual("Test Text Type", (string)fileType[PropertyNames.Name]);
-            Assert.AreEqual("Text", (string)fileType[PropertyNames.ShortName]);
+            Assert.That((string)fileType[PropertyNames.Name], Is.EqualTo("Test Text Type"));
+            Assert.That((string)fileType[PropertyNames.ShortName], Is.EqualTo("Text"));
 
-            Assert.AreEqual("txt", (string)fileType[PropertyNames.Extension]);
+            Assert.That((string)fileType[PropertyNames.Extension], Is.EqualTo("txt"));
 
             expectedCategories = new string[] { };
             categoriesArray = (JArray)fileType[PropertyNames.Category];
@@ -156,18 +156,18 @@ namespace WebservicesIntegrationTests
             fileType =
                 jArray.Single(x => (string)x[PropertyNames.Iid] == "f340df66-d65b-4814-a063-01d4dea1941c");
             // verify the amount of returned properties 
-            Assert.AreEqual(11, fileType.Children().Count());
+            Assert.That(fileType.Children().Count(), Is.EqualTo(11));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("f340df66-d65b-4814-a063-01d4dea1941c", (string)fileType[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int)fileType[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("FileType", (string)fileType[PropertyNames.ClassKind]);
+            Assert.That((string)fileType[PropertyNames.Iid], Is.EqualTo("f340df66-d65b-4814-a063-01d4dea1941c"));
+            Assert.That((int)fileType[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string)fileType[PropertyNames.ClassKind], Is.EqualTo("FileType"));
 
             Assert.IsFalse((bool)fileType[PropertyNames.IsDeprecated]);
-            Assert.AreEqual("Test Unknown Type", (string)fileType[PropertyNames.Name]);
-            Assert.AreEqual("Unknown", (string)fileType[PropertyNames.ShortName]);
+            Assert.That((string)fileType[PropertyNames.Name], Is.EqualTo("Test Unknown Type"));
+            Assert.That((string)fileType[PropertyNames.ShortName], Is.EqualTo("Unknown"));
 
-            Assert.AreEqual("?", (string)fileType[PropertyNames.Extension]);
+            Assert.That((string)fileType[PropertyNames.Extension], Is.EqualTo("?"));
 
             expectedCategories = new string[] { };
             categoriesArray = (JArray)fileType[PropertyNames.Category];

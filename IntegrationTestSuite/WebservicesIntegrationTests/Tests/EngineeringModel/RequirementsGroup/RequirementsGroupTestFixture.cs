@@ -42,7 +42,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(requirementsGroupUri);
 
             //check if there is the only one RequirementsSpecification object 
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific RequirementsSpecification from the result by it's unique id
             var requirementsGroup = jArray.Single(x => (string)x[PropertyNames.Iid] == "d3474e6a-f9ac-4d1a-91d9-6f8be06a03b5");
@@ -61,7 +61,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(requirementsGroupUri);
 
             //check that the correct amount of objects is returned
-            Assert.AreEqual(4, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(4));
 
             // get a specific Iteration from the result by it's unique id
             var iteration = jArray.Single(x => (string)x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
@@ -146,7 +146,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
             // check if there are appropriate amount of objects
-            Assert.AreEqual(3, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(3));
 
             var engineeeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
             Assert.AreEqual(2, (int)engineeeringModel[PropertyNames.RevisionNumber]);

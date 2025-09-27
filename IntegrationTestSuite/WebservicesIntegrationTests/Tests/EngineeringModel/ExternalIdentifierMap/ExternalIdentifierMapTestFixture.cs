@@ -42,7 +42,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(externalIdentifierMapUri);
 
             //check if there is the only one ExternalIdentifierMap object 
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific ExternalIdentifierMap from the result by it's unique id
             var externalIdentifierMap =
@@ -62,7 +62,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(externalIdentifierMapUri);
 
             //check if there are 3 objects
-            Assert.AreEqual(3, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(3));
 
             // get a specific Iteration from the result by it's unique id
             var iteration =
@@ -85,20 +85,20 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken externalIdentifierMap)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(10, externalIdentifierMap.Children().Count());
+            Assert.That(externalIdentifierMap.Children().Count(), Is.EqualTo(10));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("a0cadcd1-b14f-4552-8f97-bec386a715d0", (string) externalIdentifierMap[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) externalIdentifierMap[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("ExternalIdentifierMap", (string) externalIdentifierMap[PropertyNames.ClassKind]);
+            Assert.That((string)externalIdentifierMap[PropertyNames.Iid], Is.EqualTo("a0cadcd1-b14f-4552-8f97-bec386a715d0"));
+            Assert.That((int)externalIdentifierMap[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string)externalIdentifierMap[PropertyNames.ClassKind], Is.EqualTo("ExternalIdentifierMap"));
 
-            Assert.AreEqual("TestExternalIdentifierMap", (string) externalIdentifierMap[PropertyNames.Name]);
-            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string) externalIdentifierMap[PropertyNames.Owner]);
+            Assert.That((string)externalIdentifierMap[PropertyNames.Name], Is.EqualTo("TestExternalIdentifierMap"));
+            Assert.That((string)externalIdentifierMap[PropertyNames.Owner], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
 
             Assert.IsNull((string) externalIdentifierMap[PropertyNames.ExternalFormat]);
-            Assert.AreEqual("1.0", (string) externalIdentifierMap[PropertyNames.ExternalToolVersion]);
-            Assert.AreEqual("externalTool", (string) externalIdentifierMap[PropertyNames.ExternalToolName]);
-            Assert.AreEqual("externalModel", (string) externalIdentifierMap[PropertyNames.ExternalModelName]);
+            Assert.That((string)externalIdentifierMap[PropertyNames.ExternalToolVersion], Is.EqualTo("1.0"));
+            Assert.That((string)externalIdentifierMap[PropertyNames.ExternalToolName], Is.EqualTo("externalTool"));
+            Assert.That((string)externalIdentifierMap[PropertyNames.ExternalModelName], Is.EqualTo("externalModel"));
 
             var expectedCorrespondence = new string[]
             {

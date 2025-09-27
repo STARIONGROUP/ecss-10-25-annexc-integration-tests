@@ -41,7 +41,7 @@ namespace WebservicesIntegrationTests
             // Get the response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(domainOfExpertiseGroupUri);
            
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific DomainOfExpertiseGroup from the result by it's unique id
             var domainOfExpertiseGroup = jArray.Single(x => (string)x[PropertyNames.Iid] == "86992db5-8ce2-4431-8ff5-6fe794d14687");
@@ -59,7 +59,7 @@ namespace WebservicesIntegrationTests
             // Get the response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(domainOfExpertiseGroupUri);
             
-            Assert.AreEqual(2, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(2));
 
             var siteDirectory = jArray.Single(x => (string)x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
             SiteDirectoryTestFixture.VerifyProperties(siteDirectory);
@@ -79,15 +79,15 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken domainOfExpertiseGroup)
         {
             // verify that the amount of returned properties 
-            Assert.AreEqual(10, domainOfExpertiseGroup.Children().Count());
+            Assert.That(domainOfExpertiseGroup.Children().Count(), Is.EqualTo(10));
 
-            Assert.AreEqual("86992db5-8ce2-4431-8ff5-6fe794d14687", (string)domainOfExpertiseGroup[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int)domainOfExpertiseGroup[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("DomainOfExpertiseGroup", (string)domainOfExpertiseGroup[PropertyNames.ClassKind]);
+            Assert.That((string)domainOfExpertiseGroup[PropertyNames.Iid], Is.EqualTo("86992db5-8ce2-4431-8ff5-6fe794d14687"));
+            Assert.That((int)domainOfExpertiseGroup[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string)domainOfExpertiseGroup[PropertyNames.ClassKind], Is.EqualTo("DomainOfExpertiseGroup"));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("Test Domain Of ExpertiseGroup", (string)domainOfExpertiseGroup[PropertyNames.Name]);
-            Assert.AreEqual("TestDomainOfExpertiseGroup", (string)domainOfExpertiseGroup[PropertyNames.ShortName]);
+            Assert.That((string)domainOfExpertiseGroup[PropertyNames.Name], Is.EqualTo("Test Domain Of ExpertiseGroup"));
+            Assert.That((string)domainOfExpertiseGroup[PropertyNames.ShortName], Is.EqualTo("TestDomainOfExpertiseGroup"));
             Assert.IsFalse((bool)domainOfExpertiseGroup[PropertyNames.IsDeprecated]);
 
             var expectedAliases = new string[] { };

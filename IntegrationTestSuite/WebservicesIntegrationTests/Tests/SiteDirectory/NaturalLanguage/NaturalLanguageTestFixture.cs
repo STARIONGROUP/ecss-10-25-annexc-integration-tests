@@ -40,7 +40,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(naturalLanguageUri);
 
             // assert that the returned naturalLanguageUri count = 1.
-            Assert.AreEqual(1, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(1));
 
             // get a specific naturalLanguage from the result by it's unique id.
             var naturalLanguage = jArray.Single(x => (string)x["iid"] == "73bf30cc-3573-488f-8746-6c03ba47973e");

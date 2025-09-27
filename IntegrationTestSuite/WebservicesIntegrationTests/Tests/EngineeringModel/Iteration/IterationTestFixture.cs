@@ -93,7 +93,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
 
             //Check the amount of objects 
-            Assert.AreEqual(4, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(4));
 
             postBodyPath = this.GetPath("Tests/EngineeringModel/ElementDefinition/PostNewElementDefinition.json");
             postBody = this.GetJsonFromFile(postBodyPath);
