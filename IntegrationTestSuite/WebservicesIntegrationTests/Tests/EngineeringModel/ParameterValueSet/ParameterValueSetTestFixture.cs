@@ -179,7 +179,9 @@ namespace WebservicesIntegrationTests
                 Assert.That(1, Is.EqualTo(possibleStates.Count));
 
                 var possibleState = possibleStates.First();
-                CollectionAssert.Contains(expectedPossibleStates, possibleState);
+
+                Assert.That(expectedPossibleStates, Does.Contain(possibleState));
+
                 expectedPossibleStates.Remove(possibleState);
             }
 
@@ -250,7 +252,8 @@ namespace WebservicesIntegrationTests
                 Assert.That((string)parameterValueSet[PropertyNames.Reference], Is.EqualTo(EmptyProperty));
 
                 var actualStatesCheck = (string) parameterValueSet[PropertyNames.ActualState];
-                CollectionAssert.Contains(actualStatesCheckList, actualStatesCheck);
+                Assert.That(actualStatesCheckList, Does.Contain(actualStatesCheck));
+
                 actualStatesCheckList.Remove(actualStatesCheck);
                 Assert.That((string)parameterValueSet[PropertyNames.ActualOption], Is.Null);
             }

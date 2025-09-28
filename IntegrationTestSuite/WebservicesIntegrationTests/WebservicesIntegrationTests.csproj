@@ -17,9 +17,9 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
     <PackageReference Include="NLog" Version="6.0.4" />
-    <PackageReference Include="nunit" Version="3.14.0" />
-    <PackageReference Include="NUnit.Console" Version="3.20.0" />
-    <PackageReference Include="NUnit3TestAdapter" Version="5.0.0">
+    <PackageReference Include="nunit" Version="4.4.0" />
+    <PackageReference Include="NUnit.Console" Version="3.20.1" />
+    <PackageReference Include="NUnit3TestAdapter" Version="5.1.0">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
