@@ -90,7 +90,7 @@ namespace WebservicesIntegrationTests
             Assert.That((string) userRuleVerification[PropertyNames.ClassKind], Is.EqualTo("UserRuleVerification"));
             Assert.That((string) userRuleVerification[PropertyNames.Status], Is.EqualTo("PASSED"));
             Assert.That((string) userRuleVerification[PropertyNames.ExecutedOn], Is.Null);
-            Assert.IsTrue((bool) userRuleVerification[PropertyNames.IsActive]);
+            Assert.That((bool) userRuleVerification[PropertyNames.IsActive], Is.True);
             Assert.That((string) userRuleVerification[PropertyNames.Rule], Is.EqualTo("8a5cd66e-7313-4843-813f-37081ca81bb8"));
         }
     }

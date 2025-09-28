@@ -126,7 +126,7 @@ namespace WebservicesIntegrationTests
             Assert.That((int)siteReferenceDataLibrary["revisionNumber"], Is.EqualTo(2));
             Assert.That((string)siteReferenceDataLibrary["classKind"], Is.EqualTo("SiteReferenceDataLibrary"));
 
-            Assert.IsFalse((bool) siteReferenceDataLibrary["isDeprecated"]);
+            Assert.That((bool) siteReferenceDataLibrary["isDeprecated"], Is.False);
             Assert.That((string)siteReferenceDataLibrary["name"], Is.EqualTo("Test Reference Data Library"));
             Assert.That((string)siteReferenceDataLibrary["shortName"], Is.EqualTo("TestRDL"));
 
@@ -270,7 +270,7 @@ namespace WebservicesIntegrationTests
             IList<string> rulesList = rulesArray.Select(x => (string) x).ToList();
             Assert.That(rulesList, Is.EquivalentTo(expectedRules));
 
-            Assert.IsEmpty(siteReferenceDataLibrary["requiredRdl"]);
+            Assert.That(siteReferenceDataLibrary["requiredRdl"], Is.Empty);
 
             var expectedConstants = new string[]
             {

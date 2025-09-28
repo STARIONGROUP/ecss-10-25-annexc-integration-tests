@@ -124,7 +124,7 @@ namespace WebservicesIntegrationTests
             Assert.That((string) builtInRuleVerification[PropertyNames.Name], Is.EqualTo("Test Built In Rule Verification"));
             Assert.That((string) builtInRuleVerification[PropertyNames.Status], Is.EqualTo("NONE"));
             Assert.That((string) builtInRuleVerification[PropertyNames.ExecutedOn], Is.Null);
-            Assert.IsFalse((bool) builtInRuleVerification[PropertyNames.IsActive]);
+            Assert.That((bool) builtInRuleVerification[PropertyNames.IsActive], Is.False);
 
             // get a specific RuleVerification from the result by it's unique id
             var userRuleVerification = jArray.Single(x => (string) x[PropertyNames.Iid] == "486f4b97-fcb1-409e-b5c0-057c240f41b6");
@@ -138,7 +138,7 @@ namespace WebservicesIntegrationTests
             Assert.That((string) userRuleVerification[PropertyNames.ClassKind], Is.EqualTo("UserRuleVerification"));
             Assert.That((string) userRuleVerification[PropertyNames.Status], Is.EqualTo("NONE"));
             Assert.That((string) userRuleVerification[PropertyNames.ExecutedOn], Is.Null);
-            Assert.IsFalse((bool) userRuleVerification[PropertyNames.IsActive]);
+            Assert.That((bool) userRuleVerification[PropertyNames.IsActive], Is.False);
             Assert.That((string) userRuleVerification[PropertyNames.Rule], Is.EqualTo("8a5cd66e-7313-4843-813f-37081ca81bb8"));
         }
 

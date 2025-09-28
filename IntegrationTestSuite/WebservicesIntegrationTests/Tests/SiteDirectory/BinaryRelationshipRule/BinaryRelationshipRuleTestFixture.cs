@@ -93,7 +93,7 @@ namespace WebservicesIntegrationTests
             Assert.That((int)binaryRelationshipRule["revisionNumber"], Is.EqualTo(1));
             Assert.That((string)binaryRelationshipRule["classKind"], Is.EqualTo("BinaryRelationshipRule"));
 
-            Assert.IsFalse((bool) binaryRelationshipRule["isDeprecated"]);
+            Assert.That((bool) binaryRelationshipRule["isDeprecated"], Is.False);
             Assert.That((string)binaryRelationshipRule["name"], Is.EqualTo("Test Binary Relationship Rule"));
             Assert.That((string)binaryRelationshipRule["shortName"], Is.EqualTo("TestBinaryRelationshipRule"));
 

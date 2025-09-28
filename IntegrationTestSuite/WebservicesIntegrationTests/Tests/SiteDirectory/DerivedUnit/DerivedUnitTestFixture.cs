@@ -93,7 +93,7 @@ namespace WebservicesIntegrationTests
             Assert.That((int)derivedUnit["revisionNumber"], Is.EqualTo(1));
             Assert.That((string)derivedUnit["classKind"], Is.EqualTo("DerivedUnit"));
 
-            Assert.IsFalse((bool) derivedUnit["isDeprecated"]);
+            Assert.That((bool) derivedUnit["isDeprecated"], Is.False);
             Assert.That((string)derivedUnit["name"], Is.EqualTo("Test Derived Unit"));
             Assert.That((string)derivedUnit["shortName"], Is.EqualTo("TestDerivedUnit"));
 

@@ -97,7 +97,7 @@ namespace WebservicesIntegrationTests
             Assert.That((string) logarithmicScale["shortName"], Is.EqualTo("TestLogarithmicScale"));
             Assert.That((string) logarithmicScale["shortName"], Is.EqualTo("TestLogarithmicScale"));
 
-            Assert.IsFalse((bool) logarithmicScale["isDeprecated"]);
+            Assert.That((bool) logarithmicScale["isDeprecated"], Is.False);
             Assert.That((string) logarithmicScale["unit"], Is.EqualTo("56842970-3915-4369-8712-61cfd8273ef9"));
 
             Assert.That((string) logarithmicScale["logarithmBase"], Is.EqualTo("BASE10"));
@@ -120,9 +120,9 @@ namespace WebservicesIntegrationTests
 
             Assert.That((string) logarithmicScale["numberSet"], Is.EqualTo("REAL_NUMBER_SET"));
             Assert.That((string) logarithmicScale["minimumPermissibleValue"], Is.EqualTo("0"));
-            Assert.IsFalse((bool) logarithmicScale["isMinimumInclusive"]);
+            Assert.That((bool) logarithmicScale["isMinimumInclusive"], Is.False);
             Assert.That((string) logarithmicScale["maximumPermissibleValue"], Is.Null);
-            Assert.IsTrue((bool) logarithmicScale["isMaximumInclusive"]);
+            Assert.That((bool) logarithmicScale["isMaximumInclusive"], Is.True);
             Assert.That(logarithmicScale["positiveValueConnotation"], Is.EqualTo(""));
             Assert.That(logarithmicScale["negativeValueConnotation"], Is.EqualTo(""));
             

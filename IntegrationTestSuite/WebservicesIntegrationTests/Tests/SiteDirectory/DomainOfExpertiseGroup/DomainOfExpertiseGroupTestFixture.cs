@@ -88,7 +88,7 @@ namespace WebservicesIntegrationTests
             // assert that the properties are what is expected
             Assert.That((string)domainOfExpertiseGroup[PropertyNames.Name], Is.EqualTo("Test Domain Of ExpertiseGroup"));
             Assert.That((string)domainOfExpertiseGroup[PropertyNames.ShortName], Is.EqualTo("TestDomainOfExpertiseGroup"));
-            Assert.IsFalse((bool)domainOfExpertiseGroup[PropertyNames.IsDeprecated]);
+            Assert.That((bool)domainOfExpertiseGroup[PropertyNames.IsDeprecated], Is.False);
 
             var expectedAliases = new string[] { };
             var aliasesArray = (JArray)domainOfExpertiseGroup[PropertyNames.Alias];

@@ -183,7 +183,9 @@ namespace WebservicesIntegrationTests
                 expectedPossibleStates.Remove(possibleState);
             }
 
-            CollectionAssert.IsEmpty(expectedPossibleStates, 
+            Assert.That(
+                expectedPossibleStates,
+                Is.Empty,
                 "There still are expected possible states in the collection. " +
                 "The ones that are still present there have not been found in the result set where they should have.");
 
@@ -253,7 +255,9 @@ namespace WebservicesIntegrationTests
                 Assert.That((string)parameterValueSet[PropertyNames.ActualOption], Is.Null);
             }
 
-            CollectionAssert.IsEmpty(actualStatesCheckList,
+            Assert.That(
+                actualStatesCheckList,
+                Is.Empty,
                 "There still are expected actual states in the collection. " +
                 "The ones that are still present there have not been found in the result set where they should have.");
 

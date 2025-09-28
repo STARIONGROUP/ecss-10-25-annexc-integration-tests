@@ -119,13 +119,13 @@ namespace WebservicesIntegrationTests
             Assert.That((string) parameter[PropertyNames.ClassKind], Is.EqualTo("Parameter"));
 
             Assert.That((string) parameter[PropertyNames.RequestedBy], Is.Null);
-            Assert.IsFalse((bool) parameter[PropertyNames.AllowDifferentOwnerOfOverride]);
-            Assert.IsFalse((bool) parameter[PropertyNames.ExpectsOverride]);
+            Assert.That((bool) parameter[PropertyNames.AllowDifferentOwnerOfOverride], Is.False);
+            Assert.That((bool) parameter[PropertyNames.ExpectsOverride], Is.False);
             Assert.That((string) parameter[PropertyNames.ParameterType], Is.EqualTo("35a9cf05-4eba-4cda-b60c-7cfeaac8f892"));
             Assert.That((string) parameter[PropertyNames.Scale], Is.Null);
             Assert.That((string) parameter[PropertyNames.StateDependence], Is.Null);
             Assert.That((string) parameter[PropertyNames.Group], Is.Null);
-            Assert.IsFalse((bool) parameter[PropertyNames.IsOptionDependent]);
+            Assert.That((bool) parameter[PropertyNames.IsOptionDependent], Is.False);
             Assert.That((string) parameter[PropertyNames.Owner], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
 
             var expectedParameterSubscriptions = new string[] { };
@@ -272,13 +272,13 @@ namespace WebservicesIntegrationTests
             Assert.That((string) parameter[PropertyNames.ClassKind], Is.EqualTo("Parameter"));
 
             Assert.That((string) parameter[PropertyNames.RequestedBy], Is.Null);
-            Assert.IsFalse((bool) parameter[PropertyNames.AllowDifferentOwnerOfOverride]);
-            Assert.IsFalse((bool) parameter[PropertyNames.ExpectsOverride]);
+            Assert.That((bool) parameter[PropertyNames.AllowDifferentOwnerOfOverride], Is.False);
+            Assert.That((bool) parameter[PropertyNames.ExpectsOverride], Is.False);
             Assert.That((string) parameter[PropertyNames.ParameterType], Is.EqualTo("35a9cf05-4eba-4cda-b60c-7cfeaac8f892"));
             Assert.That((string) parameter[PropertyNames.Scale], Is.Null);
             Assert.That((string) parameter[PropertyNames.StateDependence], Is.Null);
             Assert.That((string) parameter[PropertyNames.Group], Is.Null);
-            Assert.IsFalse((bool) parameter[PropertyNames.IsOptionDependent]);
+            Assert.That((bool) parameter[PropertyNames.IsOptionDependent], Is.False);
             Assert.That((string) parameter[PropertyNames.Owner], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
 
             var expectedParameterSubscriptions = new string[] { };
@@ -357,13 +357,13 @@ namespace WebservicesIntegrationTests
             Assert.That((string) parameter[PropertyNames.ClassKind], Is.EqualTo("Parameter"));
 
             Assert.That((string) parameter[PropertyNames.RequestedBy], Is.Null);
-            Assert.IsFalse((bool) parameter[PropertyNames.AllowDifferentOwnerOfOverride]);
-            Assert.IsFalse((bool) parameter[PropertyNames.ExpectsOverride]);
+            Assert.That((bool) parameter[PropertyNames.AllowDifferentOwnerOfOverride], Is.False);
+            Assert.That((bool) parameter[PropertyNames.ExpectsOverride], Is.False);
             Assert.That((string) parameter[PropertyNames.ParameterType], Is.EqualTo("4a783624-b2bc-4e6d-95b3-11d036f6e917"));
             Assert.That((string) parameter[PropertyNames.Scale], Is.Null);
             Assert.That((string) parameter[PropertyNames.StateDependence], Is.Null);
             Assert.That((string) parameter[PropertyNames.Group], Is.Null);
-            Assert.IsFalse((bool) parameter[PropertyNames.IsOptionDependent]);
+            Assert.That((bool) parameter[PropertyNames.IsOptionDependent], Is.False);
             Assert.That((string) parameter[PropertyNames.Owner], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
 
             var expectedParameterSubscriptions = new string[] { };
@@ -441,13 +441,13 @@ namespace WebservicesIntegrationTests
             Assert.That((string) parameter[PropertyNames.ClassKind], Is.EqualTo("Parameter"));
 
             Assert.That((string) parameter[PropertyNames.RequestedBy], Is.Null);
-            Assert.IsFalse((bool) parameter[PropertyNames.AllowDifferentOwnerOfOverride]);
-            Assert.IsFalse((bool) parameter[PropertyNames.ExpectsOverride]);
+            Assert.That((bool) parameter[PropertyNames.AllowDifferentOwnerOfOverride], Is.False);
+            Assert.That((bool) parameter[PropertyNames.ExpectsOverride], Is.False);
             Assert.That((string) parameter[PropertyNames.ParameterType], Is.EqualTo("35a9cf05-4eba-4cda-b60c-7cfeaac8f892"));
             Assert.That((string) parameter[PropertyNames.Scale], Is.Null);
             Assert.That((string) parameter[PropertyNames.StateDependence], Is.Null);
             Assert.That((string) parameter[PropertyNames.Group], Is.Null);
-            Assert.IsTrue((bool) parameter[PropertyNames.IsOptionDependent]);
+            Assert.That((bool) parameter[PropertyNames.IsOptionDependent], Is.True);
             Assert.That((string) parameter[PropertyNames.Owner], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
 
             var expectedParameterSubscriptions = new string[] { };
@@ -708,13 +708,13 @@ namespace WebservicesIntegrationTests
                 Assert.That((string) parameter[PropertyNames.ClassKind], Is.EqualTo("Parameter"));
 
                 Assert.That((string) parameter[PropertyNames.RequestedBy], Is.Null);
-                Assert.IsFalse((bool) parameter[PropertyNames.AllowDifferentOwnerOfOverride]);
-                Assert.IsFalse((bool) parameter[PropertyNames.ExpectsOverride]);
+                Assert.That((bool) parameter[PropertyNames.AllowDifferentOwnerOfOverride], Is.False);
+                Assert.That((bool) parameter[PropertyNames.ExpectsOverride], Is.False);
                 Assert.That((string) parameter[PropertyNames.ParameterType], Is.EqualTo("a21c15c4-3e1e-46b5-b109-5063dec1e254"));
                 Assert.That((string) parameter[PropertyNames.Scale], Is.Null);
                 Assert.That((string) parameter[PropertyNames.StateDependence], Is.Null);
                 Assert.That("b739b3c6-9cc0-4e64-9cc4-ef7463edf559", Is.EqualTo((string) parameter[PropertyNames.Group]));
-                Assert.IsFalse((bool) parameter[PropertyNames.IsOptionDependent]);
+                Assert.That((bool) parameter[PropertyNames.IsOptionDependent], Is.False);
                 Assert.That((string) parameter[PropertyNames.Owner], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
 
                 var expectedValueSets = new[] { "af5c88c6-301f-497b-81f7-53748c3900ed" };
@@ -739,13 +739,13 @@ namespace WebservicesIntegrationTests
                 Assert.That((string) parameter[PropertyNames.ClassKind], Is.EqualTo("Parameter"));
 
                 Assert.That((string) parameter[PropertyNames.RequestedBy], Is.Null);
-                Assert.IsFalse((bool) parameter[PropertyNames.AllowDifferentOwnerOfOverride]);
-                Assert.IsFalse((bool) parameter[PropertyNames.ExpectsOverride]);
+                Assert.That((bool) parameter[PropertyNames.AllowDifferentOwnerOfOverride], Is.False);
+                Assert.That((bool) parameter[PropertyNames.ExpectsOverride], Is.False);
                 Assert.That((string) parameter[PropertyNames.ParameterType], Is.EqualTo("a21c15c4-3e1e-46b5-b109-5063dec1e254"));
                 Assert.That((string) parameter[PropertyNames.Scale], Is.Null);
                 Assert.That((string) parameter[PropertyNames.StateDependence], Is.Null);
                 Assert.That("b739b3c6-9cc0-4e64-9cc4-ef7463edf559", Is.EqualTo((string) parameter[PropertyNames.Group]));
-                Assert.IsFalse((bool) parameter[PropertyNames.IsOptionDependent]);
+                Assert.That((bool) parameter[PropertyNames.IsOptionDependent], Is.False);
                 Assert.That((string) parameter[PropertyNames.Owner], Is.EqualTo("eb759723-14b9-49f4-8611-544d037bb764"));
 
                 var expectedValueSets = new[] { "72ec3701-bcb5-4bf6-bd78-30fd1b65e3be" };

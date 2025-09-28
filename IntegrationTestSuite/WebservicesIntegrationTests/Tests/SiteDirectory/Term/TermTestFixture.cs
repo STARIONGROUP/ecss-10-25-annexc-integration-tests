@@ -93,7 +93,7 @@ namespace WebservicesIntegrationTests
             Assert.That((int) term["revisionNumber"], Is.EqualTo(1));
             Assert.That((string) term["classKind"], Is.EqualTo("Term"));
 
-            Assert.IsFalse((bool) term["isDeprecated"]);
+            Assert.That((bool) term["isDeprecated"], Is.False);
             Assert.That((string) term["name"], Is.EqualTo("Test Term"));
             Assert.That((string) term["shortName"], Is.EqualTo("TestTerm"));
 

@@ -93,7 +93,7 @@ namespace WebservicesIntegrationTests
             Assert.That((int) timeOfDayParameterType[PropertyNames.RevisionNumber], Is.EqualTo(1));
             Assert.That((string) timeOfDayParameterType[PropertyNames.ClassKind], Is.EqualTo("TimeOfDayParameterType"));
 
-            Assert.IsFalse((bool) timeOfDayParameterType[PropertyNames.IsDeprecated]);
+            Assert.That((bool) timeOfDayParameterType[PropertyNames.IsDeprecated], Is.False);
             Assert.That((string) timeOfDayParameterType[PropertyNames.Name], Is.EqualTo("Test Time Of Day ParameterType"));
             Assert.That((string) timeOfDayParameterType[PropertyNames.ShortName], Is.EqualTo("TestTimeOfDayParameterType"));
 

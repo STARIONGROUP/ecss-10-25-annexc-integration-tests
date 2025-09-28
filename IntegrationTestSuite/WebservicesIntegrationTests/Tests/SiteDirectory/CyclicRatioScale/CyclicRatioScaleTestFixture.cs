@@ -169,7 +169,7 @@ namespace WebservicesIntegrationTests
             Assert.That((int)siteReferenceDataLibrary[PropertyNames.RevisionNumber], Is.EqualTo(2));
             Assert.That((string)siteReferenceDataLibrary[PropertyNames.ClassKind], Is.EqualTo("SiteReferenceDataLibrary"));
 
-            Assert.IsFalse((bool)siteReferenceDataLibrary[PropertyNames.IsDeprecated]);
+            Assert.That((bool)siteReferenceDataLibrary[PropertyNames.IsDeprecated], Is.False);
             Assert.That((string)siteReferenceDataLibrary[PropertyNames.Name], Is.EqualTo("Test Reference Data Library"));
             Assert.That((string)siteReferenceDataLibrary[PropertyNames.ShortName], Is.EqualTo("TestRDL"));
 
@@ -302,7 +302,7 @@ namespace WebservicesIntegrationTests
             IList<string> rulesList = rulesArray.Select(x => (string)x).ToList();
             Assert.That(rulesList, Is.EquivalentTo(expectedRules));
 
-            Assert.IsEmpty(siteReferenceDataLibrary["requiredRdl"]);
+            Assert.That(siteReferenceDataLibrary["requiredRdl"], Is.Empty);
 
             var expectedConstants = new string[]
             {
@@ -325,7 +325,7 @@ namespace WebservicesIntegrationTests
             Assert.That((string)cyclicRatioScale["name"], Is.EqualTo("New CyclicRatioScale"));
             Assert.That((string)cyclicRatioScale["shortName"], Is.EqualTo("NewCyclic"));
 
-            Assert.IsFalse((bool)cyclicRatioScale["isDeprecated"]);
+            Assert.That((bool)cyclicRatioScale["isDeprecated"], Is.False);
             Assert.That((string)cyclicRatioScale["modulus"], Is.EqualTo("360"));
             Assert.That((string)cyclicRatioScale["unit"], Is.EqualTo("56842970-3915-4369-8712-61cfd8273ef9"));
 
@@ -336,9 +336,9 @@ namespace WebservicesIntegrationTests
 
             Assert.That((string)cyclicRatioScale["numberSet"], Is.EqualTo("NATURAL_NUMBER_SET"));
             Assert.That((string)cyclicRatioScale["minimumPermissibleValue"], Is.EqualTo("0"));
-            Assert.IsTrue((bool)cyclicRatioScale["isMinimumInclusive"]);
+            Assert.That((bool)cyclicRatioScale["isMinimumInclusive"], Is.True);
             Assert.That((string)cyclicRatioScale["maximumPermissibleValue"], Is.EqualTo("360"));
-            Assert.IsTrue((bool)cyclicRatioScale["isMaximumInclusive"]);
+            Assert.That((bool)cyclicRatioScale["isMaximumInclusive"], Is.True);
             Assert.That((string)cyclicRatioScale["positiveValueConnotation"], Is.EqualTo(""));
             Assert.That((string)cyclicRatioScale["negativeValueConnotation"], Is.EqualTo(""));
 
@@ -383,7 +383,7 @@ namespace WebservicesIntegrationTests
             Assert.That((string)cyclicRatioScale["name"], Is.EqualTo("Test Cyclic Ratio Scale"));
             Assert.That((string)cyclicRatioScale["shortName"], Is.EqualTo("TestCyclicRatioScale"));
 
-            Assert.IsFalse((bool) cyclicRatioScale["isDeprecated"]);
+            Assert.That((bool) cyclicRatioScale["isDeprecated"], Is.False);
             Assert.That((string)cyclicRatioScale["modulus"], Is.EqualTo("360"));
             Assert.That((string)cyclicRatioScale["unit"], Is.EqualTo("56842970-3915-4369-8712-61cfd8273ef9"));
 
@@ -394,9 +394,9 @@ namespace WebservicesIntegrationTests
 
             Assert.That((string)cyclicRatioScale["numberSet"], Is.EqualTo("NATURAL_NUMBER_SET"));
             Assert.That((string)cyclicRatioScale["minimumPermissibleValue"], Is.EqualTo("0"));
-            Assert.IsTrue((bool) cyclicRatioScale["isMinimumInclusive"]);
+            Assert.That((bool) cyclicRatioScale["isMinimumInclusive"], Is.True);
             Assert.That((string)cyclicRatioScale["maximumPermissibleValue"], Is.EqualTo("360"));
-            Assert.IsTrue((bool) cyclicRatioScale["isMaximumInclusive"]);
+            Assert.That((bool) cyclicRatioScale["isMaximumInclusive"], Is.True);
             Assert.That((string) cyclicRatioScale["positiveValueConnotation"], Is.Null);
             Assert.That((string)cyclicRatioScale["negativeValueConnotation"], Is.EqualTo(""));
             

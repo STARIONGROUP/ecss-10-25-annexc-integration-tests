@@ -85,14 +85,14 @@ namespace WebservicesIntegrationTests
             // verify that there are no affectedItemIid for this SiteLogEntry
             var affectedItemIids = (JArray) siteLogEntryObject[PropertyNames.AffectedItemIid];
             IList<string> affectedItemIidsList = affectedItemIids.Select(x => (string) x).ToList();
-            Assert.IsEmpty(affectedItemIidsList);
+            Assert.That(affectedItemIidsList, Is.Empty);
 
             Assert.That((string) siteLogEntryObject[PropertyNames.Author], Is.EqualTo("77791b12-4c2c-4499-93fa-869df3692d22"));
 
             // verify that there are no categories for this SiteLogEntry
             var categories = (JArray) siteLogEntryObject[PropertyNames.Category];
             IList<string> categoriesList = categories.Select(x => (string) x).ToList();
-            Assert.IsEmpty(categoriesList);
+            Assert.That(categoriesList, Is.Empty);
 
             Assert.That((string) siteLogEntryObject[PropertyNames.Content], Is.EqualTo("TestLogEntry"));
             Assert.That((string) siteLogEntryObject[PropertyNames.LanguageCode], Is.EqualTo("en-GB"));
@@ -108,14 +108,14 @@ namespace WebservicesIntegrationTests
             // verify that there are no affectedItemIid for this SiteLogEntry
             affectedItemIids = (JArray) siteLogEntryObject[PropertyNames.AffectedItemIid];
             affectedItemIidsList = affectedItemIids.Select(x => (string) x).ToList();
-            Assert.IsEmpty(affectedItemIidsList);
+            Assert.That(affectedItemIidsList, Is.Empty);
 
             Assert.That((string) siteLogEntryObject[PropertyNames.Author], Is.EqualTo("77791b12-4c2c-4499-93fa-869df3692d22"));
 
             // verify that there are no categories for this SiteLogEntry
             categories = (JArray) siteLogEntryObject[PropertyNames.Category];
             categoriesList = categories.Select(x => (string) x).ToList();
-            Assert.IsEmpty(categoriesList);
+            Assert.That(categoriesList, Is.Empty);
 
             Assert.That((string) siteLogEntryObject[PropertyNames.Content], Is.EqualTo("TestLogEntry"));
             Assert.That((string) siteLogEntryObject[PropertyNames.LanguageCode], Is.EqualTo("en-GB"));

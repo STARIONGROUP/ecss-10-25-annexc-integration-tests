@@ -90,7 +90,7 @@ namespace WebservicesIntegrationTests
             Assert.That((int)fileType[PropertyNames.RevisionNumber], Is.EqualTo(1));
             Assert.That((string)fileType[PropertyNames.ClassKind], Is.EqualTo("FileType"));
 
-            Assert.IsFalse((bool)fileType[PropertyNames.IsDeprecated]);
+            Assert.That((bool)fileType[PropertyNames.IsDeprecated], Is.False);
             Assert.That((string)fileType[PropertyNames.Name], Is.EqualTo("Test File Type"));
             Assert.That((string)fileType[PropertyNames.ShortName], Is.EqualTo("TestFileType"));
 
@@ -126,7 +126,7 @@ namespace WebservicesIntegrationTests
             Assert.That((int)fileType[PropertyNames.RevisionNumber], Is.EqualTo(1));
             Assert.That((string)fileType[PropertyNames.ClassKind], Is.EqualTo("FileType"));
 
-            Assert.IsFalse((bool)fileType[PropertyNames.IsDeprecated]);
+            Assert.That((bool)fileType[PropertyNames.IsDeprecated], Is.False);
             Assert.That((string)fileType[PropertyNames.Name], Is.EqualTo("Test Text Type"));
             Assert.That((string)fileType[PropertyNames.ShortName], Is.EqualTo("Text"));
 
@@ -163,7 +163,7 @@ namespace WebservicesIntegrationTests
             Assert.That((int)fileType[PropertyNames.RevisionNumber], Is.EqualTo(1));
             Assert.That((string)fileType[PropertyNames.ClassKind], Is.EqualTo("FileType"));
 
-            Assert.IsFalse((bool)fileType[PropertyNames.IsDeprecated]);
+            Assert.That((bool)fileType[PropertyNames.IsDeprecated], Is.False);
             Assert.That((string)fileType[PropertyNames.Name], Is.EqualTo("Test Unknown Type"));
             Assert.That((string)fileType[PropertyNames.ShortName], Is.EqualTo("Unknown"));
 

@@ -93,7 +93,7 @@ namespace WebservicesIntegrationTests.Tests.SiteDirectory.RatioScale
             Assert.That((int) ratioScale["revisionNumber"], Is.EqualTo(1));
             Assert.That((string) ratioScale["classKind"], Is.EqualTo("RatioScale"));
 
-            Assert.IsFalse((bool) ratioScale["isDeprecated"]);
+            Assert.That((bool) ratioScale["isDeprecated"], Is.False);
             Assert.That((string) ratioScale["name"], Is.EqualTo("Test Ratio Scale"));
             Assert.That((string) ratioScale["shortName"], Is.EqualTo("TestRatioScale"));
 
@@ -106,9 +106,9 @@ namespace WebservicesIntegrationTests.Tests.SiteDirectory.RatioScale
 
             Assert.That((string) ratioScale["numberSet"], Is.EqualTo("REAL_NUMBER_SET"));
             Assert.That((string) ratioScale["minimumPermissibleValue"], Is.Null);
-            Assert.IsTrue((bool) ratioScale["isMinimumInclusive"]);
+            Assert.That((bool) ratioScale["isMinimumInclusive"], Is.True);
             Assert.That((string) ratioScale["maximumPermissibleValue"], Is.Null);
-            Assert.IsTrue((bool) ratioScale["isMaximumInclusive"]);
+            Assert.That((bool) ratioScale["isMaximumInclusive"], Is.True);
             Assert.That((string) ratioScale["positiveValueConnotation"], Is.Null);
             Assert.That((string) ratioScale["negativeValueConnotation"], Is.Null);
 

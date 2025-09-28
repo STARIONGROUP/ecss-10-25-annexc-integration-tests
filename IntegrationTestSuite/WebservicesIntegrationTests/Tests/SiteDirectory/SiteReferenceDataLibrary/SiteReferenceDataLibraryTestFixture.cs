@@ -118,7 +118,7 @@ namespace WebservicesIntegrationTests
 
             // get a specific SimpleUnit from the result by it's unique id
             var simpleUnit = jArray.Single(x => (string)x["iid"] == "56842970-3915-4369-8712-61cfd8273ef9");
-            Assert.IsTrue((bool)simpleUnit["isDeprecated"]);
+            Assert.That((bool)simpleUnit["isDeprecated"], Is.True);
         }
 
         /// <summary>
@@ -138,7 +138,7 @@ namespace WebservicesIntegrationTests
             Assert.That((int) siteReferenceDataLibrary["revisionNumber"], Is.EqualTo(1));
             Assert.That((string) siteReferenceDataLibrary["classKind"], Is.EqualTo("SiteReferenceDataLibrary"));
 
-            Assert.IsFalse((bool) siteReferenceDataLibrary["isDeprecated"]);
+            Assert.That((bool) siteReferenceDataLibrary["isDeprecated"], Is.False);
             Assert.That((string) siteReferenceDataLibrary["name"], Is.EqualTo("Test Reference Data Library"));
             Assert.That((string) siteReferenceDataLibrary["shortName"], Is.EqualTo("TestRDL"));
 
@@ -270,7 +270,7 @@ namespace WebservicesIntegrationTests
             IList<string> rulesList = rulesArray.Select(x => (string) x).ToList();
             Assert.That(rulesList, Is.EquivalentTo(expectedRules));
 
-            Assert.IsEmpty(siteReferenceDataLibrary["requiredRdl"]);
+            Assert.That(siteReferenceDataLibrary["requiredRdl"], Is.Empty);
 
             var expectedConstants = new string[]
             {

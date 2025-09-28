@@ -173,12 +173,12 @@ namespace WebservicesIntegrationTests
             Assert.That((int)arrayParameterType[PropertyNames.RevisionNumber], Is.EqualTo(1));
             Assert.That((string)arrayParameterType[PropertyNames.ClassKind], Is.EqualTo("ArrayParameterType"));
 
-            Assert.IsFalse((bool) arrayParameterType[PropertyNames.IsDeprecated]);
+            Assert.That((bool) arrayParameterType[PropertyNames.IsDeprecated], Is.False);
             Assert.That((string)arrayParameterType[PropertyNames.Name], Is.EqualTo("Test Array ParameterType"));
             Assert.That((string)arrayParameterType[PropertyNames.ShortName], Is.EqualTo("TestArrayParameterType"));
 
             Assert.That((string)arrayParameterType[PropertyNames.Symbol], Is.EqualTo("testarray"));
-            Assert.IsFalse((bool) arrayParameterType[PropertyNames.IsFinalized]);
+            Assert.That((bool) arrayParameterType[PropertyNames.IsFinalized], Is.False);
 
             var expectedComponents = new List<OrderedItem>
             {
@@ -191,7 +191,7 @@ namespace WebservicesIntegrationTests
 
             Assert.That(componentsArray, Is.EquivalentTo(expectedComponents));
 
-            Assert.IsFalse((bool) arrayParameterType[PropertyNames.IsTensor]);
+            Assert.That((bool) arrayParameterType[PropertyNames.IsTensor], Is.False);
 
             var expectedDimensions = new List<OrderedItem>
             {

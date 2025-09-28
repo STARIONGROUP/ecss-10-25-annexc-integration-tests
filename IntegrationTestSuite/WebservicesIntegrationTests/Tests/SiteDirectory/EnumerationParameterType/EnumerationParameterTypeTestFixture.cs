@@ -173,7 +173,7 @@ namespace WebservicesIntegrationTests
             Assert.That((int)siteReferenceDataLibrary[PropertyNames.RevisionNumber], Is.EqualTo(2));
             Assert.That((string)siteReferenceDataLibrary[PropertyNames.ClassKind], Is.EqualTo("SiteReferenceDataLibrary"));
 
-            Assert.IsFalse((bool) siteReferenceDataLibrary[PropertyNames.IsDeprecated]);
+            Assert.That((bool) siteReferenceDataLibrary[PropertyNames.IsDeprecated], Is.False);
             Assert.That((string)siteReferenceDataLibrary[PropertyNames.Name], Is.EqualTo("Test Reference Data Library"));
             Assert.That((string)siteReferenceDataLibrary[PropertyNames.ShortName], Is.EqualTo("TestRDL"));
 
@@ -318,7 +318,7 @@ namespace WebservicesIntegrationTests
             IList<string> rulesList = rulesArray.Select(x => (string) x).ToList();
             Assert.That(rulesList, Is.EquivalentTo(expectedRules));
 
-            Assert.IsEmpty(siteReferenceDataLibrary["requiredRdl"]);
+            Assert.That(siteReferenceDataLibrary["requiredRdl"], Is.Empty);
 
             var expectedConstants = new string[]
             {
@@ -341,11 +341,11 @@ namespace WebservicesIntegrationTests
             Assert.That((int)enumerationParameterType["revisionNumber"], Is.EqualTo(2));
             Assert.That((string)enumerationParameterType["classKind"], Is.EqualTo("EnumerationParameterType"));
 
-            Assert.IsFalse((bool) enumerationParameterType["isDeprecated"]);
+            Assert.That((bool) enumerationParameterType["isDeprecated"], Is.False);
             Assert.That((string)enumerationParameterType["name"], Is.EqualTo("Test Enumeration ParameterType"));
             Assert.That((string)enumerationParameterType["shortName"], Is.EqualTo("TestEnumerationParameterType"));
 
-            Assert.IsFalse((bool) enumerationParameterType["allowMultiSelect"]);
+            Assert.That((bool) enumerationParameterType["allowMultiSelect"], Is.False);
 
             var expectedValueDefinitions = new List<OrderedItem>
             {
@@ -463,11 +463,11 @@ namespace WebservicesIntegrationTests
             Assert.That((int)enumerationParameterType["revisionNumber"], Is.EqualTo(1));
             Assert.That((string)enumerationParameterType["classKind"], Is.EqualTo("EnumerationParameterType"));
 
-            Assert.IsFalse((bool) enumerationParameterType["isDeprecated"]);
+            Assert.That((bool) enumerationParameterType["isDeprecated"], Is.False);
             Assert.That((string)enumerationParameterType["name"], Is.EqualTo("Test Enumeration ParameterType"));
             Assert.That((string)enumerationParameterType["shortName"], Is.EqualTo("TestEnumerationParameterType"));
 
-            Assert.IsFalse((bool) enumerationParameterType["allowMultiSelect"]);
+            Assert.That((bool) enumerationParameterType["allowMultiSelect"], Is.False);
 
             var expectedValueDefinitions = new List<OrderedItem>
             {

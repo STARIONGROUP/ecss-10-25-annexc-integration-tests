@@ -169,7 +169,7 @@ namespace WebservicesIntegrationTests
             Assert.That((int)siteReferenceDataLibrary[PropertyNames.RevisionNumber], Is.EqualTo(2));
             Assert.That((string)siteReferenceDataLibrary[PropertyNames.ClassKind], Is.EqualTo("SiteReferenceDataLibrary"));
 
-            Assert.IsFalse((bool)siteReferenceDataLibrary[PropertyNames.IsDeprecated]);
+            Assert.That((bool)siteReferenceDataLibrary[PropertyNames.IsDeprecated], Is.False);
             Assert.That((string)siteReferenceDataLibrary[PropertyNames.Name], Is.EqualTo("Test Reference Data Library"));
             Assert.That((string)siteReferenceDataLibrary[PropertyNames.ShortName], Is.EqualTo("TestRDL"));
 
@@ -302,7 +302,7 @@ namespace WebservicesIntegrationTests
             IList<string> rulesList = rulesArray.Select(x => (string)x).ToList();
             Assert.That(rulesList, Is.EquivalentTo(expectedRules));
 
-            Assert.IsEmpty(siteReferenceDataLibrary["requiredRdl"]);
+            Assert.That(siteReferenceDataLibrary["requiredRdl"], Is.Empty);
 
             var expectedConstants = new string[]
             {
@@ -323,7 +323,7 @@ namespace WebservicesIntegrationTests
             Assert.That((int)prefixedUnit[PropertyNames.RevisionNumber], Is.EqualTo(2));
             Assert.That((string)prefixedUnit[PropertyNames.ClassKind], Is.EqualTo("PrefixedUnit"));
 
-            Assert.IsFalse((bool)prefixedUnit[PropertyNames.IsDeprecated]);
+            Assert.That((bool)prefixedUnit[PropertyNames.IsDeprecated], Is.False);
             Assert.That((string)prefixedUnit[PropertyNames.Prefix], Is.EqualTo("efa6380d-9508-4f3d-9b43-6ed33125b780"));
             Assert.That((string)prefixedUnit[PropertyNames.ReferenceUnit], Is.EqualTo("56842970-3915-4369-8712-61cfd8273ef9"));
 
@@ -360,7 +360,7 @@ namespace WebservicesIntegrationTests
             Assert.That((int) prefixedUnit["revisionNumber"], Is.EqualTo(1));
             Assert.That((string) prefixedUnit["classKind"], Is.EqualTo("PrefixedUnit"));
 
-            Assert.IsFalse((bool) prefixedUnit["isDeprecated"]);
+            Assert.That((bool) prefixedUnit["isDeprecated"], Is.False);
             Assert.That((string) prefixedUnit["prefix"], Is.EqualTo("efa6380d-9508-4f3d-9b43-6ed33125b780"));
             Assert.That((string) prefixedUnit["referenceUnit"], Is.EqualTo("56842970-3915-4369-8712-61cfd8273ef9"));
 

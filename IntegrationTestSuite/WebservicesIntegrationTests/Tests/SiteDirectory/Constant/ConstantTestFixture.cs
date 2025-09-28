@@ -168,7 +168,7 @@ namespace WebservicesIntegrationTests
             Assert.That((int)siteReferenceDataLibrary[PropertyNames.RevisionNumber], Is.EqualTo(2));
             Assert.That((string)siteReferenceDataLibrary[PropertyNames.ClassKind], Is.EqualTo("SiteReferenceDataLibrary"));
 
-            Assert.IsFalse((bool)siteReferenceDataLibrary[PropertyNames.IsDeprecated]);
+            Assert.That((bool)siteReferenceDataLibrary[PropertyNames.IsDeprecated], Is.False);
             Assert.That((string)siteReferenceDataLibrary[PropertyNames.Name], Is.EqualTo("Test Reference Data Library"));
             Assert.That((string)siteReferenceDataLibrary[PropertyNames.ShortName], Is.EqualTo("TestRDL"));
 
@@ -300,7 +300,7 @@ namespace WebservicesIntegrationTests
             IList<string> rulesList = rulesArray.Select(x => (string)x).ToList();
             Assert.That(rulesList, Is.EquivalentTo(expectedRules));
 
-            Assert.IsEmpty(siteReferenceDataLibrary["requiredRdl"]);
+            Assert.That(siteReferenceDataLibrary["requiredRdl"], Is.Empty);
 
             var expectedConstants = new string[]
             {
@@ -322,7 +322,7 @@ namespace WebservicesIntegrationTests
             Assert.That((int)constant[PropertyNames.RevisionNumber], Is.EqualTo(2));
             Assert.That((string)constant[PropertyNames.ClassKind], Is.EqualTo("Constant"));
 
-            Assert.IsFalse((bool)constant[PropertyNames.IsDeprecated]);
+            Assert.That((bool)constant[PropertyNames.IsDeprecated], Is.False);
             Assert.That((string)constant[PropertyNames.Name], Is.EqualTo("New Constant"));
             Assert.That((string)constant[PropertyNames.ShortName], Is.EqualTo("NewConstant"));
 
@@ -370,7 +370,7 @@ namespace WebservicesIntegrationTests
             Assert.That((int)constant[PropertyNames.RevisionNumber], Is.EqualTo(1));
             Assert.That((string)constant[PropertyNames.ClassKind], Is.EqualTo("Constant"));
 
-            Assert.IsFalse((bool) constant[PropertyNames.IsDeprecated]);
+            Assert.That((bool) constant[PropertyNames.IsDeprecated], Is.False);
             Assert.That((string)constant[PropertyNames.Name], Is.EqualTo("Test Constant"));
             Assert.That((string)constant[PropertyNames.ShortName], Is.EqualTo("TestConstant"));
 

@@ -114,7 +114,7 @@ namespace WebservicesIntegrationTests
 
             Assert.That((string)requirementsSpecification[PropertyNames.Owner], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
 
-            Assert.IsFalse((bool)requirementsSpecification[PropertyNames.IsDeprecated]);
+            Assert.That((bool)requirementsSpecification[PropertyNames.IsDeprecated], Is.False);
 
             var expectedAliases = new string[] { };
             var aliasesArray = (JArray)requirementsSpecification[PropertyNames.Alias];
@@ -157,7 +157,7 @@ namespace WebservicesIntegrationTests
 
             Assert.That((string)requirementsSpecification[PropertyNames.Owner], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
 
-            Assert.IsFalse((bool)requirementsSpecification[PropertyNames.IsDeprecated]);
+            Assert.That((bool)requirementsSpecification[PropertyNames.IsDeprecated], Is.False);
 
             var expectedAliases = new string[] { };
             var aliasesArray = (JArray)requirementsSpecification[PropertyNames.Alias];

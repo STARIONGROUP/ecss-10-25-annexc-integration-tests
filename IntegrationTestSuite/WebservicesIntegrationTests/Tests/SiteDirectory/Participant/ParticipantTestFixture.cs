@@ -42,7 +42,7 @@ namespace WebservicesIntegrationTests
             var exception = Assert.Catch<WebException>(() => this.WebClient.PostDto(participantUri, postBody));
             var errorMessage = this.WebClient.ExtractExceptionStringFromResponse(exception.Response);
             Assert.That(((HttpWebResponse)exception.Response).StatusCode, Is.EqualTo(HttpStatusCode.Forbidden));
-            Assert.IsTrue(errorMessage.Contains("Participant selected domain must be contained in participant domain list."));
+            Assert.That(errorMessage, Does.Contain("Participant selected domain must be contained in participant domain list."));
         }
 
         [Test]
@@ -59,7 +59,7 @@ namespace WebservicesIntegrationTests
             var exception = Assert.Catch<WebException>(() => this.WebClient.PostDto(participantUri, postBody));
             var errorMessage = this.WebClient.ExtractExceptionStringFromResponse(exception.Response);
             Assert.That(((HttpWebResponse)exception.Response).StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
-            Assert.IsTrue(errorMessage.Contains("is already a Participant in EngineeringModel"));
+            Assert.That(errorMessage, Does.Contain("is already a Participant in EngineeringModel"));
         }
     }
 }
