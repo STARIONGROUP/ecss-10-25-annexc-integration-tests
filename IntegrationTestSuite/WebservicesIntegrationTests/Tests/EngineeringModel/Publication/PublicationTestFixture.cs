@@ -111,7 +111,7 @@ namespace WebservicesIntegrationTests
                                            };
             var publicationsArray = (JArray)iteration[PropertyNames.Publication];
             IList<string> publications = publicationsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedPublications, publications);
+            Assert.That(publications, Is.EquivalentTo(expectedPublications));
 
             parameterValueSet = jArray.Single(x => (string)x[PropertyNames.Iid] == "72ec3701-bcb5-4bf6-bd78-30fd1b65e3be");
             Assert.AreEqual(3, (int)parameterValueSet[PropertyNames.RevisionNumber]);
@@ -130,7 +130,7 @@ namespace WebservicesIntegrationTests
                                       };
             var domainsArray = (JArray)publication[PropertyNames.Domain];
             IList<string> domains = domainsArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedDomains, domains);
+            Assert.That(domains, Is.EquivalentTo(expectedDomains));
 
             var expectedPublishedParameters = new string[]
                                                   {
@@ -138,7 +138,7 @@ namespace WebservicesIntegrationTests
                                                   };
             var publishedParametersArray = (JArray)publication[PropertyNames.PublishedParameter];
             IList<string> publishedParameters = publishedParametersArray.Select(x => (string)x).ToList();
-            CollectionAssert.AreEquivalent(expectedPublishedParameters, publishedParameters);
+            Assert.That(publishedParameters, Is.EquivalentTo(expectedPublishedParameters));
         }
 
         /// <summary>
@@ -163,12 +163,12 @@ namespace WebservicesIntegrationTests
             var expectedDomains = new string[] {};
             var domainsArray = (JArray) publication[PropertyNames.Domain];
             IList<string> domains = domainsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedDomains, domains);
+            Assert.That(domains, Is.EquivalentTo(expectedDomains));
 
             var expectedPublishedParameters = new string[] {};
             var publishedParametersArray = (JArray) publication[PropertyNames.PublishedParameter];
             IList<string> publishedParameters = publishedParametersArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedPublishedParameters, publishedParameters);
+            Assert.That(publishedParameters, Is.EquivalentTo(expectedPublishedParameters));
         }
     }
 }

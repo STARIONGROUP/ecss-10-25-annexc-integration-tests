@@ -183,7 +183,7 @@ namespace WebservicesIntegrationTests
             };
             var parameterTypesArray = (JArray) siteReferenceDataLibrary["parameterType"];
             IList<string> parameterTypesList = parameterTypesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedParameterTypes, parameterTypesList);
+            Assert.That(parameterTypesList, Is.EquivalentTo(expectedParameterTypes));
 
             var expectedBaseQuantityKinds = new List<OrderedItem>
             {
@@ -191,7 +191,7 @@ namespace WebservicesIntegrationTests
             };
             var baseQuantityKindsArray = JsonConvert.DeserializeObject<List<OrderedItem>>(
                 siteReferenceDataLibrary["baseQuantityKind"].ToString());
-            CollectionAssert.AreEquivalent(expectedBaseQuantityKinds, baseQuantityKindsArray);
+            Assert.That(baseQuantityKindsArray, Is.EquivalentTo(expectedBaseQuantityKinds));
 
             var expectedScales = new string[]
             {
@@ -203,7 +203,7 @@ namespace WebservicesIntegrationTests
             };
             var scalesArray = (JArray) siteReferenceDataLibrary["scale"];
             IList<string> scalesList = scalesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedScales, scalesList);
+            Assert.That(scalesList, Is.EquivalentTo(expectedScales));
 
             var expectedUnitPrefixes = new string[]
             {
@@ -211,7 +211,7 @@ namespace WebservicesIntegrationTests
             };
             var unitPrefixesArray = (JArray) siteReferenceDataLibrary["unitPrefix"];
             IList<string> unitPrefixesList = unitPrefixesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedUnitPrefixes, unitPrefixesList);
+            Assert.That(unitPrefixesList, Is.EquivalentTo(expectedUnitPrefixes));
 
             var expectedUnits = new string[]
             {
@@ -222,7 +222,7 @@ namespace WebservicesIntegrationTests
             };
             var unitsArray = (JArray) siteReferenceDataLibrary["unit"];
             IList<string> unitsList = unitsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedUnits, unitsList);
+            Assert.That(unitsList, Is.EquivalentTo(expectedUnits));
 
             var expectedBaseUnits = new string[]
             {
@@ -230,7 +230,7 @@ namespace WebservicesIntegrationTests
             };
             var baseUnitsArray = (JArray) siteReferenceDataLibrary["baseUnit"];
             IList<string> baseUnitsList = baseUnitsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedBaseUnits, baseUnitsList);
+            Assert.That(baseUnitsList, Is.EquivalentTo(expectedBaseUnits));
 
             var expectedFileTypes = new string[]
             {
@@ -240,7 +240,7 @@ namespace WebservicesIntegrationTests
             };
             var fileTypesArray = (JArray) siteReferenceDataLibrary["fileType"];
             IList<string> fileTypesList = fileTypesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedFileTypes, fileTypesList);
+            Assert.That(fileTypesList, Is.EquivalentTo(expectedFileTypes));
 
             var expectedGlossaries = new string[]
             {
@@ -248,7 +248,7 @@ namespace WebservicesIntegrationTests
             };
             var glossariesArray = (JArray) siteReferenceDataLibrary["glossary"];
             IList<string> glossariesList = glossariesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedGlossaries, glossariesList);
+            Assert.That(glossariesList, Is.EquivalentTo(expectedGlossaries));
 
             var expectedReferenceSources = new string[]
             {
@@ -256,7 +256,7 @@ namespace WebservicesIntegrationTests
             };
             var referenceSourcesArray = (JArray) siteReferenceDataLibrary["referenceSource"];
             IList<string> referenceSourcesList = referenceSourcesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedReferenceSources, referenceSourcesList);
+            Assert.That(referenceSourcesList, Is.EquivalentTo(expectedReferenceSources));
 
             var expectedRules = new string[]
             {
@@ -268,7 +268,7 @@ namespace WebservicesIntegrationTests
             };
             var rulesArray = (JArray) siteReferenceDataLibrary["rule"];
             IList<string> rulesList = rulesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedRules, rulesList);
+            Assert.That(rulesList, Is.EquivalentTo(expectedRules));
 
             Assert.IsEmpty(siteReferenceDataLibrary["requiredRdl"]);
 
@@ -278,7 +278,7 @@ namespace WebservicesIntegrationTests
             };
             var constantsArray = (JArray) siteReferenceDataLibrary["constant"];
             IList<string> constantsList = constantsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedConstants, constantsList);
+            Assert.That(constantsList, Is.EquivalentTo(expectedConstants));
         }
     }
 }

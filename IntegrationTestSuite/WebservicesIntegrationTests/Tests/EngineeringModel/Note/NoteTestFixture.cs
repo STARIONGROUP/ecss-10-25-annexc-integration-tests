@@ -114,9 +114,9 @@ namespace WebservicesIntegrationTests
                     new OrderedItem(2, "85ab7b55-6af5-48fb-a14a-86d16dfe1b57")
                 };
 
-            CollectionAssert.AreEquivalent(
-                expectedNoteList,
-                noteList);
+            Assert.That(
+                noteList,
+                Is.EquivalentTo(expectedNoteList));
         }
     }
 }
