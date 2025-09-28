@@ -87,11 +87,11 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
             
             var engineeeringModel = jArray.Single(x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
-            Assert.AreEqual(2, (int) engineeeringModel[PropertyNames.RevisionNumber]);
+            Assert.That((int) engineeeringModel[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             // get a specific RequirementsSpecification from the result by it's unique id
             var requirementsSpecification = jArray.Single(x => (string)x[PropertyNames.Iid] == "8d0734f4-ca4b-4611-9187-f6970e2b02bc");
-            Assert.AreEqual(2, (int)requirementsSpecification[PropertyNames.RevisionNumber]);
+            Assert.That((int)requirementsSpecification[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             var expectedRequirementsGroups = new string[] { "cffa1f05-41b8-4b89-922b-9a9505809601" };
             var requirementsGroupsArray = (JArray)requirementsSpecification[PropertyNames.Group];
@@ -102,17 +102,17 @@ namespace WebservicesIntegrationTests
             var requirementsGroup = jArray.Single(x => (string)x[PropertyNames.Iid] == "cffa1f05-41b8-4b89-922b-9a9505809601");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(10, requirementsGroup.Children().Count());
+            Assert.That(requirementsGroup.Children().Count(), Is.EqualTo(10));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("cffa1f05-41b8-4b89-922b-9a9505809601", (string)requirementsGroup[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int)requirementsGroup[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("RequirementsGroup", (string)requirementsGroup[PropertyNames.ClassKind]);
+            Assert.That((string)requirementsGroup[PropertyNames.Iid], Is.EqualTo("cffa1f05-41b8-4b89-922b-9a9505809601"));
+            Assert.That((int)requirementsGroup[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)requirementsGroup[PropertyNames.ClassKind], Is.EqualTo("RequirementsGroup"));
 
-            Assert.AreEqual("Test Requirements Group post test", (string)requirementsGroup[PropertyNames.Name]);
-            Assert.AreEqual("TestRequirementsGroupPostTest", (string)requirementsGroup[PropertyNames.ShortName]);
+            Assert.That((string)requirementsGroup[PropertyNames.Name], Is.EqualTo("Test Requirements Group post test"));
+            Assert.That((string)requirementsGroup[PropertyNames.ShortName], Is.EqualTo("TestRequirementsGroupPostTest"));
 
-            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string)requirementsGroup[PropertyNames.Owner]);
+            Assert.That((string)requirementsGroup[PropertyNames.Owner], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
 
             var expectedAliases = new string[] { };
             var aliasesArray = (JArray)requirementsGroup[PropertyNames.Alias];
@@ -149,11 +149,11 @@ namespace WebservicesIntegrationTests
             Assert.That(jArray.Count, Is.EqualTo(3));
 
             var engineeeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
-            Assert.AreEqual(2, (int)engineeeringModel[PropertyNames.RevisionNumber]);
+            Assert.That((int)engineeeringModel[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             // get a specific RequirementsSpecification from the result by it's unique id
             var requirementsSpecification = jArray.Single(x => (string)x[PropertyNames.Iid] == "bf0cde90-9086-43d5-bcff-32a2f8331800");
-            Assert.AreEqual(2, (int)requirementsSpecification[PropertyNames.RevisionNumber]);
+            Assert.That((int)requirementsSpecification[PropertyNames.RevisionNumber], Is.EqualTo(2));
             var expectedRequirementsGroups = new string[] { };
             var requirementsGroupsArray = (JArray)requirementsSpecification[PropertyNames.Group];
             IList<string> groups = requirementsGroupsArray.Select(x => (string)x).ToList();
@@ -161,24 +161,24 @@ namespace WebservicesIntegrationTests
 
             // get a specific Requirement from the result by it's unique id
             var requirement = jArray.Single(x => (string)x[PropertyNames.Iid] == "614e2a69-d602-46be-9311-2fb4d3273e88");
-            Assert.AreEqual(2, (int)requirement[PropertyNames.RevisionNumber]);
-            Assert.IsNull((string)requirement[PropertyNames.Group]);
+            Assert.That((int)requirement[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)requirement[PropertyNames.Group], Is.Null);
         }
 
         public static void VerifyProperties(JToken requirementsGroup)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(10, requirementsGroup.Children().Count());
+            Assert.That(requirementsGroup.Children().Count(), Is.EqualTo(10));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("d3474e6a-f9ac-4d1a-91d9-6f8be06a03b5", (string)requirementsGroup[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int)requirementsGroup[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("RequirementsGroup", (string)requirementsGroup[PropertyNames.ClassKind]);
+            Assert.That((string)requirementsGroup[PropertyNames.Iid], Is.EqualTo("d3474e6a-f9ac-4d1a-91d9-6f8be06a03b5"));
+            Assert.That((int)requirementsGroup[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string)requirementsGroup[PropertyNames.ClassKind], Is.EqualTo("RequirementsGroup"));
 
-            Assert.AreEqual("Test Requirements Group", (string)requirementsGroup[PropertyNames.Name]);
-            Assert.AreEqual("TestRequirementsGroup", (string)requirementsGroup[PropertyNames.ShortName]);
+            Assert.That((string)requirementsGroup[PropertyNames.Name], Is.EqualTo("Test Requirements Group"));
+            Assert.That((string)requirementsGroup[PropertyNames.ShortName], Is.EqualTo("TestRequirementsGroup"));
 
-            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string)requirementsGroup[PropertyNames.Owner]);
+            Assert.That((string)requirementsGroup[PropertyNames.Owner], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
 
             var expectedAliases = new string[] { };
             var aliasesArray = (JArray)requirementsGroup[PropertyNames.Alias];

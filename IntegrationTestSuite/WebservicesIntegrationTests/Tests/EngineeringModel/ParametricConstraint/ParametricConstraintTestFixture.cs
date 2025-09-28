@@ -62,7 +62,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(parametricConstraintUri);
 
             // verify that the correct amount of objects is returned
-            Assert.AreEqual(5, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(5));
 
             // get a specific Iteration from the result by it's unique id
             var iteration = jArray.Single(x => (string) x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
@@ -94,17 +94,17 @@ namespace WebservicesIntegrationTests
             Assert.That(jArray.Count, Is.EqualTo(4));
 
             var engineeringModel = jArray.Single(x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
-            Assert.AreEqual(2, (int) engineeringModel[PropertyNames.RevisionNumber]);
+            Assert.That((int) engineeringModel[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             var relationalExpression = jArray.Single(x => (string) x[PropertyNames.Iid] == "d8a88095-a51f-4b3a-8746-97659f313143");
-            Assert.AreEqual(2, (int) relationalExpression[PropertyNames.RevisionNumber]);
+            Assert.That((int) relationalExpression[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             var requirement = jArray.Single(x => (string) x[PropertyNames.Iid] == "614e2a69-d602-46be-9311-2fb4d3273e87");
-            Assert.AreEqual(2, (int) requirement[PropertyNames.RevisionNumber]);
+            Assert.That((int) requirement[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             var parametricConstraint = jArray.Single(x => (string) x[PropertyNames.Iid] == "5e1ad29c-ac18-474d-832c-5f2d0d203176");
-            Assert.AreEqual(5, parametricConstraint.Children().Count());
-            Assert.AreEqual(2, (int) parametricConstraint[PropertyNames.RevisionNumber]);
+            Assert.That(parametricConstraint.Children().Count(), Is.EqualTo(5));
+            Assert.That((int) parametricConstraint[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             var expectedConstraints = new List<OrderedItem> { new OrderedItem(1, "88200dbc-711a-47e0-a54a-dac4baca6e83"), new OrderedItem(2, "5e1ad29c-ac18-474d-832c-5f2d0d203176") };
             var constraintArray = JsonConvert.DeserializeObject<List<OrderedItem>>(requirement[PropertyNames.ParametricConstraint].ToString());
@@ -117,16 +117,16 @@ namespace WebservicesIntegrationTests
             Assert.That(jArray.Count, Is.EqualTo(4));
 
             engineeringModel = jArray.Single(x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
-            Assert.AreEqual(3, (int) engineeringModel[PropertyNames.RevisionNumber]);
+            Assert.That((int) engineeringModel[PropertyNames.RevisionNumber], Is.EqualTo(3));
 
             var constraint1 = jArray.Single(x => (string) x[PropertyNames.Iid] == "5e1ad29c-ac18-474d-832c-5f2d0d203176");
-            Assert.AreEqual(3, (int) constraint1[PropertyNames.RevisionNumber]);
+            Assert.That((int) constraint1[PropertyNames.RevisionNumber], Is.EqualTo(3));
 
             var constraint2 = jArray.Single(x => (string) x[PropertyNames.Iid] == "88200dbc-711a-47e0-a54a-dac4baca6e83");
-            Assert.AreEqual(3, (int) constraint2[PropertyNames.RevisionNumber]);
+            Assert.That((int) constraint2[PropertyNames.RevisionNumber], Is.EqualTo(3));
 
             requirement = jArray.Single(x => (string) x[PropertyNames.Iid] == "614e2a69-d602-46be-9311-2fb4d3273e87");
-            Assert.AreEqual(3, (int) requirement[PropertyNames.RevisionNumber]);
+            Assert.That((int) requirement[PropertyNames.RevisionNumber], Is.EqualTo(3));
 
             expectedConstraints = new List<OrderedItem> { new OrderedItem(3, "5e1ad29c-ac18-474d-832c-5f2d0d203176"), new OrderedItem(4, "88200dbc-711a-47e0-a54a-dac4baca6e83") };
             constraintArray = JsonConvert.DeserializeObject<List<OrderedItem>>(requirement[PropertyNames.ParametricConstraint].ToString());
@@ -143,15 +143,14 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken parametricConstraint)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(5, parametricConstraint.Children().Count());
+            Assert.That(parametricConstraint.Children().Count(), Is.EqualTo(5));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("88200dbc-711a-47e0-a54a-dac4baca6e83", (string) parametricConstraint[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) parametricConstraint[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("ParametricConstraint", (string) parametricConstraint[PropertyNames.ClassKind]);
+            Assert.That((string) parametricConstraint[PropertyNames.Iid], Is.EqualTo("88200dbc-711a-47e0-a54a-dac4baca6e83"));
+            Assert.That((int) parametricConstraint[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string) parametricConstraint[PropertyNames.ClassKind], Is.EqualTo("ParametricConstraint"));
 
-            Assert.AreEqual("30cb785a-9e72-477f-ad1a-8df6ab623e3d",
-                (string) parametricConstraint[PropertyNames.TopExpression]);
+            Assert.That((string) parametricConstraint[PropertyNames.TopExpression], Is.EqualTo("30cb785a-9e72-477f-ad1a-8df6ab623e3d"));
 
             var expectedExpressions = new string[]
             {

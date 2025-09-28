@@ -86,20 +86,20 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken referencerRule)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(13, referencerRule.Children().Count());
+            Assert.That(referencerRule.Children().Count(), Is.EqualTo(13));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("e7e4eec5-ad39-40a0-9548-9c40d8e6df1b", (string) referencerRule["iid"]);
-            Assert.AreEqual(1, (int) referencerRule["revisionNumber"]);
-            Assert.AreEqual("ReferencerRule", (string) referencerRule["classKind"]);
+            Assert.That((string) referencerRule["iid"], Is.EqualTo("e7e4eec5-ad39-40a0-9548-9c40d8e6df1b"));
+            Assert.That((int) referencerRule["revisionNumber"], Is.EqualTo(1));
+            Assert.That((string) referencerRule["classKind"], Is.EqualTo("ReferencerRule"));
 
             Assert.IsFalse((bool) referencerRule["isDeprecated"]);
-            Assert.AreEqual("TestReferencerRule", (string) referencerRule["name"]);
-            Assert.AreEqual("Test Referencer Rule", (string) referencerRule["shortName"]);
+            Assert.That((string) referencerRule["name"], Is.EqualTo("TestReferencerRule"));
+            Assert.That((string) referencerRule["shortName"], Is.EqualTo("Test Referencer Rule"));
 
-            Assert.AreEqual("cf059b19-235c-48be-87a3-9a8942c8e3e0", (string) referencerRule["referencingCategory"]);
-            Assert.AreEqual(0, (int) referencerRule["minReferenced"]);
-            Assert.AreEqual(-1, (int) referencerRule["maxReferenced"]);
+            Assert.That((string) referencerRule["referencingCategory"], Is.EqualTo("cf059b19-235c-48be-87a3-9a8942c8e3e0"));
+            Assert.That((int) referencerRule["minReferenced"], Is.EqualTo(0));
+            Assert.That((int) referencerRule["maxReferenced"], Is.EqualTo(-1));
 
             var expectedAliases = new string[] {};
             var aliasesArray = (JArray) referencerRule["alias"];

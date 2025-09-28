@@ -65,7 +65,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(personRolesUri);
 
             //check if there are only two objects
-            Assert.AreEqual(2, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(2));
 
             var siteDirectory = jArray.Single(x => (string)x["iid"] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
             SiteDirectoryTestFixture.VerifyProperties(siteDirectory);
@@ -85,16 +85,16 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken personRole)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(10, personRole.Children().Count());
+            Assert.That(personRole.Children().Count(), Is.EqualTo(10));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("2428f4d9-f26d-4112-9d56-1c940748df69", (string) personRole["iid"]);
-            Assert.AreEqual(1, (int) personRole["revisionNumber"]);
-            Assert.AreEqual("PersonRole", (string) personRole["classKind"]);
+            Assert.That((string) personRole["iid"], Is.EqualTo("2428f4d9-f26d-4112-9d56-1c940748df69"));
+            Assert.That((int) personRole["revisionNumber"], Is.EqualTo(1));
+            Assert.That((string) personRole["classKind"], Is.EqualTo("PersonRole"));
 
 
-            Assert.AreEqual("Test Person Role", (string) personRole["name"]);
-            Assert.AreEqual("TestPersonRole", (string) personRole["shortName"]);
+            Assert.That((string) personRole["name"], Is.EqualTo("Test Person Role"));
+            Assert.That((string) personRole["shortName"], Is.EqualTo("TestPersonRole"));
             Assert.IsFalse((bool) personRole["isDeprecated"]);
 
             var expectedAliases = new string[] {};

@@ -42,7 +42,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(siteLogEntryUri);
 
             // assert that there are 2 SiteLogEntry objects.
-            Assert.AreEqual(2, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(2));
 
             SiteLogEntryTestFixture.VerifyProperties(jArray);
         }
@@ -77,49 +77,49 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken siteLogEntry)
         {
             var siteLogEntryObject = siteLogEntry.Single(x => (string) x[PropertyNames.Iid] == "98ba7b8a-1a1b-4569-a17c-b1ff620246a5");
-            Assert.AreEqual("98ba7b8a-1a1b-4569-a17c-b1ff620246a5", (string) siteLogEntryObject[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) siteLogEntryObject[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("SiteLogEntry", (string) siteLogEntryObject[PropertyNames.ClassKind]);
-            Assert.AreEqual("TRACE", (string) siteLogEntryObject[PropertyNames.Level]);
+            Assert.That((string) siteLogEntryObject[PropertyNames.Iid], Is.EqualTo("98ba7b8a-1a1b-4569-a17c-b1ff620246a5"));
+            Assert.That((int) siteLogEntryObject[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string) siteLogEntryObject[PropertyNames.ClassKind], Is.EqualTo("SiteLogEntry"));
+            Assert.That((string) siteLogEntryObject[PropertyNames.Level], Is.EqualTo("TRACE"));
 
             // verify that there are no affectedItemIid for this SiteLogEntry
             var affectedItemIids = (JArray) siteLogEntryObject[PropertyNames.AffectedItemIid];
             IList<string> affectedItemIidsList = affectedItemIids.Select(x => (string) x).ToList();
             Assert.IsEmpty(affectedItemIidsList);
 
-            Assert.AreEqual("77791b12-4c2c-4499-93fa-869df3692d22", (string) siteLogEntryObject[PropertyNames.Author]);
+            Assert.That((string) siteLogEntryObject[PropertyNames.Author], Is.EqualTo("77791b12-4c2c-4499-93fa-869df3692d22"));
 
             // verify that there are no categories for this SiteLogEntry
             var categories = (JArray) siteLogEntryObject[PropertyNames.Category];
             IList<string> categoriesList = categories.Select(x => (string) x).ToList();
             Assert.IsEmpty(categoriesList);
 
-            Assert.AreEqual("TestLogEntry", (string) siteLogEntryObject[PropertyNames.Content]);
-            Assert.AreEqual("en-GB", (string) siteLogEntryObject[PropertyNames.LanguageCode]);
-            Assert.AreEqual("2016-10-19T11:15:32.186Z", (string) siteLogEntryObject[PropertyNames.CreatedOn]);
+            Assert.That((string) siteLogEntryObject[PropertyNames.Content], Is.EqualTo("TestLogEntry"));
+            Assert.That((string) siteLogEntryObject[PropertyNames.LanguageCode], Is.EqualTo("en-GB"));
+            Assert.That((string) siteLogEntryObject[PropertyNames.CreatedOn], Is.EqualTo("2016-10-19T11:15:32.186Z"));
 
             //Second logEntry
             siteLogEntryObject = siteLogEntry.Single(x => (string) x[PropertyNames.Iid] == "66220289-e6ee-43cb-8fcd-d8e59a3dbf97");
-            Assert.AreEqual("66220289-e6ee-43cb-8fcd-d8e59a3dbf97", (string) siteLogEntryObject[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) siteLogEntryObject[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("SiteLogEntry", (string) siteLogEntryObject[PropertyNames.ClassKind]);
-            Assert.AreEqual("DEBUG", (string) siteLogEntryObject[PropertyNames.Level]);
+            Assert.That((string) siteLogEntryObject[PropertyNames.Iid], Is.EqualTo("66220289-e6ee-43cb-8fcd-d8e59a3dbf97"));
+            Assert.That((int) siteLogEntryObject[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string) siteLogEntryObject[PropertyNames.ClassKind], Is.EqualTo("SiteLogEntry"));
+            Assert.That((string) siteLogEntryObject[PropertyNames.Level], Is.EqualTo("DEBUG"));
 
             // verify that there are no affectedItemIid for this SiteLogEntry
             affectedItemIids = (JArray) siteLogEntryObject[PropertyNames.AffectedItemIid];
             affectedItemIidsList = affectedItemIids.Select(x => (string) x).ToList();
             Assert.IsEmpty(affectedItemIidsList);
 
-            Assert.AreEqual("77791b12-4c2c-4499-93fa-869df3692d22", (string) siteLogEntryObject[PropertyNames.Author]);
+            Assert.That((string) siteLogEntryObject[PropertyNames.Author], Is.EqualTo("77791b12-4c2c-4499-93fa-869df3692d22"));
 
             // verify that there are no categories for this SiteLogEntry
             categories = (JArray) siteLogEntryObject[PropertyNames.Category];
             categoriesList = categories.Select(x => (string) x).ToList();
             Assert.IsEmpty(categoriesList);
 
-            Assert.AreEqual("TestLogEntry", (string) siteLogEntryObject[PropertyNames.Content]);
-            Assert.AreEqual("en-GB", (string) siteLogEntryObject[PropertyNames.LanguageCode]);
-            Assert.AreEqual("2016-10-19T11:15:42.384Z", (string) siteLogEntryObject[PropertyNames.CreatedOn]);
+            Assert.That((string) siteLogEntryObject[PropertyNames.Content], Is.EqualTo("TestLogEntry"));
+            Assert.That((string) siteLogEntryObject[PropertyNames.LanguageCode], Is.EqualTo("en-GB"));
+            Assert.That((string) siteLogEntryObject[PropertyNames.CreatedOn], Is.EqualTo("2016-10-19T11:15:42.384Z"));
         }
     }
 }

@@ -99,14 +99,14 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken possibleFiniteState)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(8, possibleFiniteState.Children().Count());
+            Assert.That(possibleFiniteState.Children().Count(), Is.EqualTo(8));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("b8fdfac4-1c40-475a-ac6c-968654b689b6", (string)possibleFiniteState[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int)possibleFiniteState[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("PossibleFiniteState", (string)possibleFiniteState[PropertyNames.ClassKind]);
-            Assert.AreEqual("Test Possible Finite State", (string)possibleFiniteState[PropertyNames.Name]);
-            Assert.AreEqual("TestPossibleFiniteState", (string)possibleFiniteState[PropertyNames.ShortName]);
+            Assert.That((string)possibleFiniteState[PropertyNames.Iid], Is.EqualTo("b8fdfac4-1c40-475a-ac6c-968654b689b6"));
+            Assert.That((int)possibleFiniteState[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string)possibleFiniteState[PropertyNames.ClassKind], Is.EqualTo("PossibleFiniteState"));
+            Assert.That((string)possibleFiniteState[PropertyNames.Name], Is.EqualTo("Test Possible Finite State"));
+            Assert.That((string)possibleFiniteState[PropertyNames.ShortName], Is.EqualTo("TestPossibleFiniteState"));
 
             var expectedAliases = new string[] { };
             var aliasesArray = (JArray)possibleFiniteState[PropertyNames.Alias];

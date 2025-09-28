@@ -64,7 +64,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(parameterOverrideValueSetUri);
 
             //check if there are 6 objects
-            Assert.AreEqual(6, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(6));
 
             // get a specific Iteration from the result by it's unique id
             var iteration = jArray.Single(x => (string)x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
@@ -95,24 +95,23 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken parameterOverrideValueSet)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(10, parameterOverrideValueSet.Children().Count());
+            Assert.That(parameterOverrideValueSet.Children().Count(), Is.EqualTo(10));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("985db346-a297-4ce6-956b-e675d53d415e",
-                (string)parameterOverrideValueSet[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int)parameterOverrideValueSet[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("ParameterOverrideValueSet", (string)parameterOverrideValueSet[PropertyNames.ClassKind]);
+            Assert.That((string)parameterOverrideValueSet[PropertyNames.Iid], Is.EqualTo("985db346-a297-4ce6-956b-e675d53d415e"));
+            Assert.That((int)parameterOverrideValueSet[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string)parameterOverrideValueSet[PropertyNames.ClassKind], Is.EqualTo("ParameterOverrideValueSet"));
 
-            Assert.AreEqual("MANUAL", (string)parameterOverrideValueSet[PropertyNames.ValueSwitch]);
+            Assert.That((string)parameterOverrideValueSet[PropertyNames.ValueSwitch], Is.EqualTo("MANUAL"));
 
             const string emptyProperty = "[\"-\"]";
-            Assert.AreEqual(emptyProperty, (string)parameterOverrideValueSet[PropertyNames.Published]);
-            Assert.AreEqual(emptyProperty, (string)parameterOverrideValueSet[PropertyNames.Formula]);
-            Assert.AreEqual(emptyProperty, (string)parameterOverrideValueSet[PropertyNames.Computed]);
-            Assert.AreEqual(emptyProperty, (string)parameterOverrideValueSet[PropertyNames.Manual]);
-            Assert.AreEqual(emptyProperty, (string)parameterOverrideValueSet[PropertyNames.Reference]);
+            Assert.That((string)parameterOverrideValueSet[PropertyNames.Published], Is.EqualTo(emptyProperty));
+            Assert.That((string)parameterOverrideValueSet[PropertyNames.Formula], Is.EqualTo(emptyProperty));
+            Assert.That((string)parameterOverrideValueSet[PropertyNames.Computed], Is.EqualTo(emptyProperty));
+            Assert.That((string)parameterOverrideValueSet[PropertyNames.Manual], Is.EqualTo(emptyProperty));
+            Assert.That((string)parameterOverrideValueSet[PropertyNames.Reference], Is.EqualTo(emptyProperty));
 
-            Assert.AreEqual("af5c88c6-301f-497b-81f7-53748c3900ed", (string)parameterOverrideValueSet[PropertyNames.ParameterValueSet]);
+            Assert.That((string)parameterOverrideValueSet[PropertyNames.ParameterValueSet], Is.EqualTo("af5c88c6-301f-497b-81f7-53748c3900ed"));
         }
 
         [Test]

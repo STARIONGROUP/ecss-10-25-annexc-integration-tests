@@ -82,16 +82,16 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken ruleVerificationList)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(10, ruleVerificationList.Children().Count());
+            Assert.That(ruleVerificationList.Children().Count(), Is.EqualTo(10));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("dc482120-2a11-439b-913d-6a924de9ee5f", (string) ruleVerificationList[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) ruleVerificationList[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("RuleVerificationList", (string) ruleVerificationList[PropertyNames.ClassKind]);
+            Assert.That((string) ruleVerificationList[PropertyNames.Iid], Is.EqualTo("dc482120-2a11-439b-913d-6a924de9ee5f"));
+            Assert.That((int) ruleVerificationList[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string) ruleVerificationList[PropertyNames.ClassKind], Is.EqualTo("RuleVerificationList"));
 
-            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string) ruleVerificationList[PropertyNames.Owner]);
-            Assert.AreEqual("Test RuleVerificationList", (string) ruleVerificationList[PropertyNames.Name]);
-            Assert.AreEqual("TestRuleVerificationList", (string) ruleVerificationList[PropertyNames.ShortName]);
+            Assert.That((string) ruleVerificationList[PropertyNames.Owner], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
+            Assert.That((string) ruleVerificationList[PropertyNames.Name], Is.EqualTo("Test RuleVerificationList"));
+            Assert.That((string) ruleVerificationList[PropertyNames.ShortName], Is.EqualTo("TestRuleVerificationList"));
 
             var expectedAliases = new string[] {};
             var aliasesArray = (JArray) ruleVerificationList[PropertyNames.Alias];

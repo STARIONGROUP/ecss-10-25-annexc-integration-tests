@@ -86,22 +86,21 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken specializedQuantityKind)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(15, specializedQuantityKind.Children().Count());
+            Assert.That(specializedQuantityKind.Children().Count(), Is.EqualTo(15));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("0a6dc59d-4292-43be-a247-b8d7074d5d52", (string) specializedQuantityKind[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) specializedQuantityKind[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("SpecializedQuantityKind", (string) specializedQuantityKind[PropertyNames.ClassKind]);
+            Assert.That((string) specializedQuantityKind[PropertyNames.Iid], Is.EqualTo("0a6dc59d-4292-43be-a247-b8d7074d5d52"));
+            Assert.That((int) specializedQuantityKind[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string) specializedQuantityKind[PropertyNames.ClassKind], Is.EqualTo("SpecializedQuantityKind"));
 
             Assert.IsFalse((bool) specializedQuantityKind[PropertyNames.IsDeprecated]);
-            Assert.AreEqual("Test Specialized QuantityKind", (string) specializedQuantityKind[PropertyNames.Name]);
-            Assert.AreEqual("TestSpecializedQuantityKind", (string) specializedQuantityKind[PropertyNames.ShortName]);
+            Assert.That((string) specializedQuantityKind[PropertyNames.Name], Is.EqualTo("Test Specialized QuantityKind"));
+            Assert.That((string) specializedQuantityKind[PropertyNames.ShortName], Is.EqualTo("TestSpecializedQuantityKind"));
 
-            Assert.AreEqual("testsymbol", (string) specializedQuantityKind[PropertyNames.Symbol]);
-            Assert.AreEqual("53e82aeb-c42c-475c-b6bf-a102af883471",
-                (string) specializedQuantityKind[PropertyNames.DefaultScale]);
-            Assert.AreEqual("", (string)specializedQuantityKind[PropertyNames.QuantityDimensionSymbol]);
-            Assert.AreEqual("4f9f3d9b-f3de-4ef5-b6cb-2e22199fab0d", (string) specializedQuantityKind[PropertyNames.General]);
+            Assert.That((string) specializedQuantityKind[PropertyNames.Symbol], Is.EqualTo("testsymbol"));
+            Assert.That((string) specializedQuantityKind[PropertyNames.DefaultScale], Is.EqualTo("53e82aeb-c42c-475c-b6bf-a102af883471"));
+            Assert.That((string)specializedQuantityKind[PropertyNames.QuantityDimensionSymbol], Is.EqualTo(""));
+            Assert.That((string) specializedQuantityKind[PropertyNames.General], Is.EqualTo("4f9f3d9b-f3de-4ef5-b6cb-2e22199fab0d"));
 
             var expectedPossibleScales = new string[]
             {

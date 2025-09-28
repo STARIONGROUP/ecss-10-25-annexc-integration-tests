@@ -60,7 +60,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(modelLogEntryUri);
 
             //check if there are 2 objects
-            Assert.AreEqual(2, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(2));
 
             // get a specific ModelLogEntry from the result by it's unique id
             var modelLogEntry = jArray.Single(x => (string) x[PropertyNames.Iid] == "4e2375eb-8e37-4df2-9c7b-dd896683a891");
@@ -77,18 +77,18 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken modelLogEntry)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(11, modelLogEntry.Children().Count());
+            Assert.That(modelLogEntry.Children().Count(), Is.EqualTo(11));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("4e2375eb-8e37-4df2-9c7b-dd896683a891", (string) modelLogEntry[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) modelLogEntry[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("ModelLogEntry", (string) modelLogEntry[PropertyNames.ClassKind]);
+            Assert.That((string) modelLogEntry[PropertyNames.Iid], Is.EqualTo("4e2375eb-8e37-4df2-9c7b-dd896683a891"));
+            Assert.That((int) modelLogEntry[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string) modelLogEntry[PropertyNames.ClassKind], Is.EqualTo("ModelLogEntry"));
 
-            Assert.AreEqual("TRACE", (string) modelLogEntry[PropertyNames.Level]);
-            Assert.IsNull((string) modelLogEntry[PropertyNames.Author]);
-            Assert.AreEqual("2016-11-07T09:08:36.186Z", (string) modelLogEntry[PropertyNames.CreatedOn]);
-            Assert.AreEqual("testContent", (string) modelLogEntry[PropertyNames.Content]);
-            Assert.AreEqual("en", (string) modelLogEntry[PropertyNames.LanguageCode]);
+            Assert.That((string) modelLogEntry[PropertyNames.Level], Is.EqualTo("TRACE"));
+            Assert.That((string) modelLogEntry[PropertyNames.Author], Is.Null);
+            Assert.That((string) modelLogEntry[PropertyNames.CreatedOn], Is.EqualTo("2016-11-07T09:08:36.186Z"));
+            Assert.That((string) modelLogEntry[PropertyNames.Content], Is.EqualTo("testContent"));
+            Assert.That((string) modelLogEntry[PropertyNames.LanguageCode], Is.EqualTo("en"));
 
             var expectedCategories = new string[] {};
             var categoriesArray = (JArray) modelLogEntry[PropertyNames.Category];

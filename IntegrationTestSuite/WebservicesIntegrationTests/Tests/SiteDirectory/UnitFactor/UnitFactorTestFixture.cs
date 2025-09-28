@@ -97,13 +97,13 @@ namespace WebservicesIntegrationTests
             Assert.That(jArray.Count, Is.EqualTo(3));
 
             var siteDirectory = jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
-            Assert.AreEqual(2, (int) siteDirectory[PropertyNames.RevisionNumber]);
+            Assert.That((int) siteDirectory[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             var unitFactor = jArray.Single(x => (string) x[PropertyNames.Iid] == "7d48eebe-c4e1-4081-ab63-7e4584563708");
-            Assert.AreEqual(2, (int) unitFactor[PropertyNames.RevisionNumber]);
+            Assert.That((int) unitFactor[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             var derivedUnit = jArray.Single(x => (string) x[PropertyNames.Iid] == "c394eaa9-4832-4b2d-8d88-5e1b2c43732c");
-            Assert.AreEqual(2, (int) derivedUnit[PropertyNames.RevisionNumber]);
+            Assert.That((int) derivedUnit[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             var expectedUnitFactorArray = new List<OrderedItem> { new OrderedItem(2, "7d48eebe-c4e1-4081-ab63-7e4584563708"), new OrderedItem(23307173, "56c30a85-f648-4b31-87d2-153e8a74048b") };
             var unitFactorArray = JsonConvert.DeserializeObject<List<OrderedItem>>(derivedUnit[PropertyNames.UnitFactor].ToString());
@@ -117,16 +117,16 @@ namespace WebservicesIntegrationTests
             Assert.That(jArray.Count, Is.EqualTo(4));
 
             siteDirectory = jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
-            Assert.AreEqual(3, (int) siteDirectory[PropertyNames.RevisionNumber]);
+            Assert.That((int) siteDirectory[PropertyNames.RevisionNumber], Is.EqualTo(3));
 
             unitFactor = jArray.Single(x => (string) x[PropertyNames.Iid] == "7d48eebe-c4e1-4081-ab63-7e4584563708");
-            Assert.AreEqual(3, (int) unitFactor[PropertyNames.RevisionNumber]);
+            Assert.That((int) unitFactor[PropertyNames.RevisionNumber], Is.EqualTo(3));
 
             var unitFactor2 = jArray.Single(x => (string) x[PropertyNames.Iid] == "56c30a85-f648-4b31-87d2-153e8a74048b");
-            Assert.AreEqual(3, (int) unitFactor2[PropertyNames.RevisionNumber]);
+            Assert.That((int) unitFactor2[PropertyNames.RevisionNumber], Is.EqualTo(3));
 
             derivedUnit = jArray.Single(x => (string) x[PropertyNames.Iid] == "c394eaa9-4832-4b2d-8d88-5e1b2c43732c");
-            Assert.AreEqual(3, (int) derivedUnit[PropertyNames.RevisionNumber]);
+            Assert.That((int) derivedUnit[PropertyNames.RevisionNumber], Is.EqualTo(3));
 
             expectedUnitFactorArray = new List<OrderedItem> { new OrderedItem(1, "56c30a85-f648-4b31-87d2-153e8a74048b"), new OrderedItem(3, "7d48eebe-c4e1-4081-ab63-7e4584563708") };
             unitFactorArray = JsonConvert.DeserializeObject<List<OrderedItem>>(derivedUnit[PropertyNames.UnitFactor].ToString());
@@ -143,14 +143,14 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken unitFactor)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(5, unitFactor.Children().Count());
+            Assert.That(unitFactor.Children().Count(), Is.EqualTo(5));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("56c30a85-f648-4b31-87d2-153e8a74048b", (string) unitFactor[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) unitFactor[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("UnitFactor", (string) unitFactor[PropertyNames.ClassKind]);
-            Assert.AreEqual("56842970-3915-4369-8712-61cfd8273ef9", (string) unitFactor[PropertyNames.Unit]);
-            Assert.AreEqual("2", (string) unitFactor[PropertyNames.Exponent]);
+            Assert.That((string) unitFactor[PropertyNames.Iid], Is.EqualTo("56c30a85-f648-4b31-87d2-153e8a74048b"));
+            Assert.That((int) unitFactor[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string) unitFactor[PropertyNames.ClassKind], Is.EqualTo("UnitFactor"));
+            Assert.That((string) unitFactor[PropertyNames.Unit], Is.EqualTo("56842970-3915-4369-8712-61cfd8273ef9"));
+            Assert.That((string) unitFactor[PropertyNames.Exponent], Is.EqualTo("2"));
         }
     }
 }

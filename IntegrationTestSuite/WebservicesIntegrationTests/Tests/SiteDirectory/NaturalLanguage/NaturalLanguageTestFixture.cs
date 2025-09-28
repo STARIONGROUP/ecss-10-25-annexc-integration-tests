@@ -59,7 +59,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(naturalLanguageUri);
 
             // assert that the returned object count = 2
-            Assert.AreEqual(2, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(2));
 
             var siteDirectory = jArray.Single(x => (string)x["iid"] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
             SiteDirectoryTestFixture.VerifyProperties(siteDirectory);
@@ -79,14 +79,14 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken naturalLanguage)
         {
             // verify that the amount of returned properties 
-            Assert.AreEqual(6, naturalLanguage.Children().Count());
+            Assert.That(naturalLanguage.Children().Count(), Is.EqualTo(6));
 
-            Assert.AreEqual("73bf30cc-3573-488f-8746-6c03ba47973e", (string)naturalLanguage["iid"]);
-            Assert.AreEqual(1, (int)naturalLanguage["revisionNumber"]);
-            Assert.AreEqual("NaturalLanguage", (string)naturalLanguage["classKind"]);
-            Assert.AreEqual("Test Natural Language", (string)naturalLanguage["name"]);
-            Assert.AreEqual("TNL", (string)naturalLanguage["languageCode"]);
-            Assert.AreEqual("test naive name", (string)naturalLanguage["nativeName"]);
+            Assert.That((string)naturalLanguage["iid"], Is.EqualTo("73bf30cc-3573-488f-8746-6c03ba47973e"));
+            Assert.That((int)naturalLanguage["revisionNumber"], Is.EqualTo(1));
+            Assert.That((string)naturalLanguage["classKind"], Is.EqualTo("NaturalLanguage"));
+            Assert.That((string)naturalLanguage["name"], Is.EqualTo("Test Natural Language"));
+            Assert.That((string)naturalLanguage["languageCode"], Is.EqualTo("TNL"));
+            Assert.That((string)naturalLanguage["nativeName"], Is.EqualTo("test naive name"));
         }
     }
 }

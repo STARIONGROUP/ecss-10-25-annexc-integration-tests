@@ -42,7 +42,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(telephoneNumbersUri);
 
             // assert that there are 2 TelephoneNumber objects.
-            Assert.AreEqual(2, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(2));
 
             VerifyProperties(jArray);
         }
@@ -122,17 +122,17 @@ namespace WebservicesIntegrationTests
             var siteDirectory = jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
 
             // verify that the amount of returned properties 
-            Assert.AreEqual(19, siteDirectory.Children().Count());
+            Assert.That(siteDirectory.Children().Count(), Is.EqualTo(19));
 
-            Assert.AreEqual("f13de6f8-b03a-46e7-a492-53b2f260f294", (string) siteDirectory[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int) siteDirectory[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("SiteDirectory", (string) siteDirectory[PropertyNames.ClassKind]);
-            Assert.AreEqual("Test Site Directory", (string) siteDirectory[PropertyNames.Name]);
-            Assert.AreEqual("TEST-SiteDir", (string) siteDirectory[PropertyNames.ShortName]);
+            Assert.That((string) siteDirectory[PropertyNames.Iid], Is.EqualTo("f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            Assert.That((int) siteDirectory[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string) siteDirectory[PropertyNames.ClassKind], Is.EqualTo("SiteDirectory"));
+            Assert.That((string) siteDirectory[PropertyNames.Name], Is.EqualTo("Test Site Directory"));
+            Assert.That((string) siteDirectory[PropertyNames.ShortName], Is.EqualTo("TEST-SiteDir"));
 
-            Assert.AreEqual("ee3ae5ff-ac5e-4957-bab1-7698fba2a267", (string) siteDirectory[PropertyNames.DefaultParticipantRole]);
+            Assert.That((string) siteDirectory[PropertyNames.DefaultParticipantRole], Is.EqualTo("ee3ae5ff-ac5e-4957-bab1-7698fba2a267"));
 
-            Assert.AreEqual("2428f4d9-f26d-4112-9d56-1c940748df69", (string) siteDirectory[PropertyNames.DefaultPersonRole]);
+            Assert.That((string) siteDirectory[PropertyNames.DefaultPersonRole], Is.EqualTo("2428f4d9-f26d-4112-9d56-1c940748df69"));
 
             var expectedOrganizations = new string[] { "cd22fc45-d898-4fac-85fc-fbcb7d7b12a7" };
             var organizationArray = (JArray) siteDirectory[PropertyNames.Organization];
@@ -201,22 +201,22 @@ namespace WebservicesIntegrationTests
                 jArray.Single(x => (string) x[PropertyNames.Iid] == "77791b12-4c2c-4499-93fa-869df3692d22");
 
             // verify that the amount of returned properties 
-            Assert.AreEqual(18, person.Children().Count());
+            Assert.That(person.Children().Count(), Is.EqualTo(18));
 
-            Assert.AreEqual("77791b12-4c2c-4499-93fa-869df3692d22", (string) person[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int) person[PropertyNames.RevisionNumber]);
+            Assert.That((string) person[PropertyNames.Iid], Is.EqualTo("77791b12-4c2c-4499-93fa-869df3692d22"));
+            Assert.That((int) person[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("John", (string) person[PropertyNames.GivenName]);
-            Assert.AreEqual("Doe", (string) person[PropertyNames.Surname]);
-            Assert.AreEqual("", (string) person[PropertyNames.OrganizationalUnit]);
-            Assert.AreEqual(null, (string) person[PropertyNames.Organization]);
-            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string) person[PropertyNames.DefaultDomain]);
+            Assert.That((string) person[PropertyNames.GivenName], Is.EqualTo("John"));
+            Assert.That((string) person[PropertyNames.Surname], Is.EqualTo("Doe"));
+            Assert.That((string) person[PropertyNames.OrganizationalUnit], Is.EqualTo(""));
+            Assert.That((string) person[PropertyNames.Organization], Is.EqualTo(null));
+            Assert.That((string) person[PropertyNames.DefaultDomain], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
             Assert.IsTrue((bool) person[PropertyNames.IsActive]);
-            Assert.AreEqual("2428f4d9-f26d-4112-9d56-1c940748df69", (string) person[PropertyNames.Role]);
-            Assert.AreEqual(null, (string) person[PropertyNames.DefaultEmailAddress]);
-            Assert.AreEqual(null, (string) person[PropertyNames.DefaultTelephoneNumber]);
-            Assert.AreEqual("admin", (string) person[PropertyNames.ShortName]);
+            Assert.That((string) person[PropertyNames.Role], Is.EqualTo("2428f4d9-f26d-4112-9d56-1c940748df69"));
+            Assert.That((string) person[PropertyNames.DefaultEmailAddress], Is.EqualTo(null));
+            Assert.That((string) person[PropertyNames.DefaultTelephoneNumber], Is.EqualTo(null));
+            Assert.That((string) person[PropertyNames.ShortName], Is.EqualTo("admin"));
             Assert.IsFalse((bool) person[PropertyNames.IsDeprecated]);
 
             // verify that there are 2 emailAddresses for this person
@@ -252,10 +252,10 @@ namespace WebservicesIntegrationTests
                 jArray.Single(x => (string) x[PropertyNames.Iid] == "2e6559d6-2ccb-4627-a5f4-5906fb59e969");
 
             // assert that the properties are what is expected
-            Assert.AreEqual("2e6559d6-2ccb-4627-a5f4-5906fb59e969", (string) telephoneNumber[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int) telephoneNumber[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("TelephoneNumber", (string) telephoneNumber[PropertyNames.ClassKind]);
-            Assert.AreEqual("+38-012-345-67-89", (string) telephoneNumber[PropertyNames.Value]);
+            Assert.That((string) telephoneNumber[PropertyNames.Iid], Is.EqualTo("2e6559d6-2ccb-4627-a5f4-5906fb59e969"));
+            Assert.That((int) telephoneNumber[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string) telephoneNumber[PropertyNames.ClassKind], Is.EqualTo("TelephoneNumber"));
+            Assert.That((string) telephoneNumber[PropertyNames.Value], Is.EqualTo("+38-012-345-67-89"));
 
             var expectedVcardTypes = new string[]
             {
@@ -278,10 +278,10 @@ namespace WebservicesIntegrationTests
         {
             var telephoneNumberObject = telephoneNumber.Single(x => (string) x[PropertyNames.Iid] == "7f85a641-1844-4064-b19d-c6a447543ab3");
 
-            Assert.AreEqual("7f85a641-1844-4064-b19d-c6a447543ab3", (string) telephoneNumberObject[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) telephoneNumberObject[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("TelephoneNumber", (string) telephoneNumberObject[PropertyNames.ClassKind]);
-            Assert.AreEqual("+38-044-444-44-44", (string) telephoneNumberObject[PropertyNames.Value]);
+            Assert.That((string) telephoneNumberObject[PropertyNames.Iid], Is.EqualTo("7f85a641-1844-4064-b19d-c6a447543ab3"));
+            Assert.That((int) telephoneNumberObject[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string) telephoneNumberObject[PropertyNames.ClassKind], Is.EqualTo("TelephoneNumber"));
+            Assert.That((string) telephoneNumberObject[PropertyNames.Value], Is.EqualTo("+38-044-444-44-44"));
 
             var expectedVcardTypes = new string[]
             {
@@ -295,10 +295,10 @@ namespace WebservicesIntegrationTests
             telephoneNumberObject =
                 telephoneNumber.Single(x => (string) x[PropertyNames.Iid] == "0367167c-80cb-4f99-a24b-e713efd15436");
 
-            Assert.AreEqual("0367167c-80cb-4f99-a24b-e713efd15436", (string) telephoneNumberObject[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) telephoneNumberObject[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("TelephoneNumber", (string) telephoneNumberObject[PropertyNames.ClassKind]);
-            Assert.AreEqual("+38-066-666-66-66", (string) telephoneNumberObject[PropertyNames.Value]);
+            Assert.That((string) telephoneNumberObject[PropertyNames.Iid], Is.EqualTo("0367167c-80cb-4f99-a24b-e713efd15436"));
+            Assert.That((int) telephoneNumberObject[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string) telephoneNumberObject[PropertyNames.ClassKind], Is.EqualTo("TelephoneNumber"));
+            Assert.That((string) telephoneNumberObject[PropertyNames.Value], Is.EqualTo("+38-066-666-66-66"));
 
             expectedVcardTypes = new string[]
             {

@@ -61,7 +61,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(personsUri);
 
             // assert that the returned person count = 2
-            Assert.AreEqual(2, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(2));
 
             // get a specific SiteDirectory from the result by it's unique id
             var siteDirectory = jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
@@ -83,15 +83,15 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.PostDto(uri, postBody);
 
             // check if there are 2 objects
-            Assert.AreEqual(2, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(2));
 
             // get a specific SiteDirectory from the result by it's unique id
             var siteDirectory = jArray.Single(x => (string)x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
-            Assert.AreEqual(2, (int)siteDirectory[PropertyNames.RevisionNumber]);
+            Assert.That((int)siteDirectory[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             // get a specific Person from the result by it's unique id
             var person = jArray.Single(x => (string)x[PropertyNames.Iid] == "77791b12-4c2c-4499-93fa-869df3692d22");
-            Assert.AreEqual(2, (int)person[PropertyNames.RevisionNumber]);
+            Assert.That((int)person[PropertyNames.RevisionNumber], Is.EqualTo(2));
             var expectedTelephoneNumbers = new string[]
                                                {
                                                    "0367167c-80cb-4f99-a24b-e713efd15436"
@@ -145,21 +145,21 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.PostDto(uri, postBody);
 
             // check if there are 2 objects
-            Assert.AreEqual(2, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(2));
 
             // get a specific SiteDirectory from the result by it's unique id
             var siteDirectory = jArray.Single(x => (string)x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
             
             // verify that the amount of returned properties 
-            Assert.AreEqual(19, siteDirectory.Children().Count());
+            Assert.That(siteDirectory.Children().Count(), Is.EqualTo(19));
 
-            Assert.AreEqual("f13de6f8-b03a-46e7-a492-53b2f260f294", (string)siteDirectory[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int)siteDirectory[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("SiteDirectory", (string)siteDirectory[PropertyNames.ClassKind]);
-            Assert.AreEqual("Test Site Directory", (string)siteDirectory[PropertyNames.Name]);
-            Assert.AreEqual("TEST-SiteDir", (string)siteDirectory[PropertyNames.ShortName]);
-            Assert.AreEqual("ee3ae5ff-ac5e-4957-bab1-7698fba2a267", (string)siteDirectory[PropertyNames.DefaultParticipantRole]);
-            Assert.AreEqual("2428f4d9-f26d-4112-9d56-1c940748df69", (string)siteDirectory[PropertyNames.DefaultPersonRole]);
+            Assert.That((string)siteDirectory[PropertyNames.Iid], Is.EqualTo("f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            Assert.That((int)siteDirectory[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)siteDirectory[PropertyNames.ClassKind], Is.EqualTo("SiteDirectory"));
+            Assert.That((string)siteDirectory[PropertyNames.Name], Is.EqualTo("Test Site Directory"));
+            Assert.That((string)siteDirectory[PropertyNames.ShortName], Is.EqualTo("TEST-SiteDir"));
+            Assert.That((string)siteDirectory[PropertyNames.DefaultParticipantRole], Is.EqualTo("ee3ae5ff-ac5e-4957-bab1-7698fba2a267"));
+            Assert.That((string)siteDirectory[PropertyNames.DefaultPersonRole], Is.EqualTo("2428f4d9-f26d-4112-9d56-1c940748df69"));
 
             var expectedOrganizations = new string[] { "cd22fc45-d898-4fac-85fc-fbcb7d7b12a7" };
             var organizationArray = (JArray)siteDirectory[PropertyNames.Organization];
@@ -222,21 +222,21 @@ namespace WebservicesIntegrationTests
             // get a specific Person from the result by it's unique id
             var person = jArray.Single(x => (string)x[PropertyNames.Iid] == "01a6d208-7bb5-4855-a6fb-eb3d03f1337b");
             // verify that the amount of returned properties 
-            Assert.AreEqual(18, person.Children().Count());
+            Assert.That(person.Children().Count(), Is.EqualTo(18));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("01a6d208-7bb5-4855-a6fb-eb3d03f1337b", (string)person[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int)person[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("no", (string)person[PropertyNames.GivenName]);
-            Assert.AreEqual("role", (string)person[PropertyNames.Surname]);
-            Assert.AreEqual(null, (string)person[PropertyNames.OrganizationalUnit]);
-            Assert.AreEqual(null, (string)person[PropertyNames.Organization]);
-            Assert.AreEqual(null, (string)person[PropertyNames.DefaultDomain]);
+            Assert.That((string)person[PropertyNames.Iid], Is.EqualTo("01a6d208-7bb5-4855-a6fb-eb3d03f1337b"));
+            Assert.That((int)person[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)person[PropertyNames.GivenName], Is.EqualTo("no"));
+            Assert.That((string)person[PropertyNames.Surname], Is.EqualTo("role"));
+            Assert.That((string)person[PropertyNames.OrganizationalUnit], Is.EqualTo(null));
+            Assert.That((string)person[PropertyNames.Organization], Is.EqualTo(null));
+            Assert.That((string)person[PropertyNames.DefaultDomain], Is.EqualTo(null));
             Assert.IsFalse((bool)person[PropertyNames.IsActive]);
-            Assert.AreEqual(null, (string)person[PropertyNames.Role]);
-            Assert.AreEqual(null, (string)person[PropertyNames.DefaultEmailAddress]);
-            Assert.AreEqual(null, (string)person[PropertyNames.DefaultTelephoneNumber]);
-            Assert.AreEqual("norole", (string)person[PropertyNames.ShortName]);
+            Assert.That((string)person[PropertyNames.Role], Is.EqualTo(null));
+            Assert.That((string)person[PropertyNames.DefaultEmailAddress], Is.EqualTo(null));
+            Assert.That((string)person[PropertyNames.DefaultTelephoneNumber], Is.EqualTo(null));
+            Assert.That((string)person[PropertyNames.ShortName], Is.EqualTo("norole"));
             Assert.IsFalse((bool)person[PropertyNames.IsDeprecated]);
 
             var expectedEmailAddresses = new string[]{};
@@ -292,14 +292,14 @@ namespace WebservicesIntegrationTests
 
             this.CreateNewWebClientForUser(personWithNullPassword[PropertyNames.ShortName].ToString(), null);
             var exception = Assert.Catch<WebException>(() => this.WebClient.GetDto(personWithNullPasswordUri));
-            Assert.AreEqual(HttpStatusCode.Unauthorized, ((HttpWebResponse)exception.Response).StatusCode);
+            Assert.That(((HttpWebResponse)exception.Response).StatusCode, Is.EqualTo(HttpStatusCode.Unauthorized));
 
             var personWithEmptyPasswordUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/person/01a6d208-7bb5-4855-a6fb-eb3d03f1337c");
             
             this.CreateNewWebClientForUser(personWithEmptyPassword[PropertyNames.ShortName].ToString(), "");
             exception = Assert.Catch<WebException>(() => this.WebClient.GetDto(personWithEmptyPasswordUri));
             var errorMessage = this.WebClient.ExtractExceptionStringFromResponse(exception.Response);
-            Assert.AreEqual(HttpStatusCode.NotFound, ((HttpWebResponse)exception.Response).StatusCode);
+            Assert.That(((HttpWebResponse)exception.Response).StatusCode, Is.EqualTo(HttpStatusCode.NotFound));
             Assert.IsTrue(errorMessage.Contains("SiteDirectory f13de6f8-b03a-46e7-a492-53b2f260f294 not found"));
 
             var personWithPasswordUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/person/01a6d208-7bb5-4855-a6fb-eb3d03f1337d");
@@ -307,7 +307,7 @@ namespace WebservicesIntegrationTests
             this.CreateNewWebClientForUser(personWithPassword[PropertyNames.ShortName].ToString(), "pass");
             exception = Assert.Catch<WebException>(() => this.WebClient.GetDto(personWithPasswordUri));
             errorMessage = this.WebClient.ExtractExceptionStringFromResponse(exception.Response);
-            Assert.AreEqual(HttpStatusCode.NotFound, ((HttpWebResponse) exception.Response).StatusCode);
+            Assert.That(((HttpWebResponse) exception.Response).StatusCode, Is.EqualTo(HttpStatusCode.NotFound));
             Assert.IsTrue(errorMessage.Contains("SiteDirectory f13de6f8-b03a-46e7-a492-53b2f260f294 not found"));
         }
 
@@ -328,16 +328,16 @@ namespace WebservicesIntegrationTests
             Assert.That((int)person[PropertyNames.RevisionNumber], Is.EqualTo(1));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("John", (string) person[PropertyNames.GivenName]);
-            Assert.AreEqual("Doe", (string) person[PropertyNames.Surname]);
-            Assert.AreEqual("", (string) person[PropertyNames.OrganizationalUnit]);
-            Assert.AreEqual(null, (string) person[PropertyNames.Organization]);
-            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string) person[PropertyNames.DefaultDomain]);
+            Assert.That((string) person[PropertyNames.GivenName], Is.EqualTo("John"));
+            Assert.That((string) person[PropertyNames.Surname], Is.EqualTo("Doe"));
+            Assert.That((string) person[PropertyNames.OrganizationalUnit], Is.EqualTo(""));
+            Assert.That((string) person[PropertyNames.Organization], Is.EqualTo(null));
+            Assert.That((string) person[PropertyNames.DefaultDomain], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
             Assert.IsTrue((bool) person[PropertyNames.IsActive]);
-            Assert.AreEqual("2428f4d9-f26d-4112-9d56-1c940748df69", (string) person[PropertyNames.Role]);
-            Assert.AreEqual(null, (string) person[PropertyNames.DefaultEmailAddress]);
-            Assert.AreEqual(null, (string) person[PropertyNames.DefaultTelephoneNumber]);
-            Assert.AreEqual("admin", (string) person[PropertyNames.ShortName]);
+            Assert.That((string) person[PropertyNames.Role], Is.EqualTo("2428f4d9-f26d-4112-9d56-1c940748df69"));
+            Assert.That((string) person[PropertyNames.DefaultEmailAddress], Is.EqualTo(null));
+            Assert.That((string) person[PropertyNames.DefaultTelephoneNumber], Is.EqualTo(null));
+            Assert.That((string) person[PropertyNames.ShortName], Is.EqualTo("admin"));
             Assert.IsFalse((bool) person[PropertyNames.IsDeprecated]);
 
             // verify that there are 2 emailAddresses for this person
@@ -376,7 +376,7 @@ namespace WebservicesIntegrationTests
             var uri = new Uri($"{this.Settings.Hostname}/SiteDirectory");
 
             var exception = Assert.Catch<WebException>(() => this.WebClient.GetDto(uri));
-            Assert.AreEqual(HttpStatusCode.Forbidden, ((HttpWebResponse)exception.Response).StatusCode);
+            Assert.That(((HttpWebResponse)exception.Response).StatusCode, Is.EqualTo(HttpStatusCode.Forbidden));
         }
 
         [Test]
@@ -389,7 +389,7 @@ namespace WebservicesIntegrationTests
             var uri = new Uri($"{this.Settings.Hostname}/SiteDirectory");
 
             var exception = Assert.Catch<WebException>(() => this.WebClient.GetDto(uri));
-            Assert.AreEqual(HttpStatusCode.Forbidden, ((HttpWebResponse)exception.Response).StatusCode);
+            Assert.That(((HttpWebResponse)exception.Response).StatusCode, Is.EqualTo(HttpStatusCode.Forbidden));
         }
 
         [Test]

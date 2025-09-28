@@ -86,24 +86,24 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken logarithmicScale)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(24, logarithmicScale.Children().Count());
+            Assert.That(logarithmicScale.Children().Count(), Is.EqualTo(24));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("007b0e60-e67c-4060-88d2-2531ef9e7d9e", (string) logarithmicScale["iid"]);
-            Assert.AreEqual(1, (int) logarithmicScale["revisionNumber"]);
-            Assert.AreEqual("LogarithmicScale", (string) logarithmicScale["classKind"]);
+            Assert.That((string) logarithmicScale["iid"], Is.EqualTo("007b0e60-e67c-4060-88d2-2531ef9e7d9e"));
+            Assert.That((int) logarithmicScale["revisionNumber"], Is.EqualTo(1));
+            Assert.That((string) logarithmicScale["classKind"], Is.EqualTo("LogarithmicScale"));
 
-            Assert.AreEqual("Test Logarithmic Scale", (string) logarithmicScale["name"]);
-            Assert.AreEqual("TestLogarithmicScale", (string) logarithmicScale["shortName"]);
-            Assert.AreEqual("TestLogarithmicScale", (string) logarithmicScale["shortName"]);
+            Assert.That((string) logarithmicScale["name"], Is.EqualTo("Test Logarithmic Scale"));
+            Assert.That((string) logarithmicScale["shortName"], Is.EqualTo("TestLogarithmicScale"));
+            Assert.That((string) logarithmicScale["shortName"], Is.EqualTo("TestLogarithmicScale"));
 
             Assert.IsFalse((bool) logarithmicScale["isDeprecated"]);
-            Assert.AreEqual("56842970-3915-4369-8712-61cfd8273ef9", (string) logarithmicScale["unit"]);
+            Assert.That((string) logarithmicScale["unit"], Is.EqualTo("56842970-3915-4369-8712-61cfd8273ef9"));
 
-            Assert.AreEqual("BASE10", (string) logarithmicScale["logarithmBase"]);
-            Assert.AreEqual("10", (string) logarithmicScale["factor"]);
-            Assert.AreEqual("1", (string) logarithmicScale["exponent"]);
-            Assert.AreEqual("4f9f3d9b-f3de-4ef5-b6cb-2e22199fab0d", (string) logarithmicScale["referenceQuantityKind"]);
+            Assert.That((string) logarithmicScale["logarithmBase"], Is.EqualTo("BASE10"));
+            Assert.That((string) logarithmicScale["factor"], Is.EqualTo("10"));
+            Assert.That((string) logarithmicScale["exponent"], Is.EqualTo("1"));
+            Assert.That((string) logarithmicScale["referenceQuantityKind"], Is.EqualTo("4f9f3d9b-f3de-4ef5-b6cb-2e22199fab0d"));
 
             var expectedReferenceQuantityValues = new string[]
             {
@@ -118,13 +118,13 @@ namespace WebservicesIntegrationTests
             IList<string> valueDefinitions = valueDefinitionsArray.Select(x => (string) x).ToList();
             Assert.That(valueDefinitions, Is.EquivalentTo(expectedValueDefinitions));
 
-            Assert.AreEqual("REAL_NUMBER_SET", (string) logarithmicScale["numberSet"]);
-            Assert.AreEqual("0", (string) logarithmicScale["minimumPermissibleValue"]);
+            Assert.That((string) logarithmicScale["numberSet"], Is.EqualTo("REAL_NUMBER_SET"));
+            Assert.That((string) logarithmicScale["minimumPermissibleValue"], Is.EqualTo("0"));
             Assert.IsFalse((bool) logarithmicScale["isMinimumInclusive"]);
-            Assert.IsNull((string) logarithmicScale["maximumPermissibleValue"]);
+            Assert.That((string) logarithmicScale["maximumPermissibleValue"], Is.Null);
             Assert.IsTrue((bool) logarithmicScale["isMaximumInclusive"]);
-            Assert.AreEqual("", logarithmicScale["positiveValueConnotation"]);
-            Assert.AreEqual("", logarithmicScale["negativeValueConnotation"]);
+            Assert.That(logarithmicScale["positiveValueConnotation"], Is.EqualTo(""));
+            Assert.That(logarithmicScale["negativeValueConnotation"], Is.EqualTo(""));
             
             var expectedMappingToReferenceScales = new string[] {};
             var mappingToReferenceScalesArray = (JArray) logarithmicScale["mappingToReferenceScale"];

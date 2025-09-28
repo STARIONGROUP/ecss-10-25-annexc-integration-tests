@@ -86,19 +86,18 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken parameterizedCategoryRule)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(11, parameterizedCategoryRule.Children().Count());
+            Assert.That(parameterizedCategoryRule.Children().Count(), Is.EqualTo(11));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("7a6186ca-10c1-4074-bec1-4a92ce6ae59d", (string) parameterizedCategoryRule["iid"]);
-            Assert.AreEqual(1, (int) parameterizedCategoryRule["revisionNumber"]);
-            Assert.AreEqual("ParameterizedCategoryRule", (string) parameterizedCategoryRule["classKind"]);
+            Assert.That((string) parameterizedCategoryRule["iid"], Is.EqualTo("7a6186ca-10c1-4074-bec1-4a92ce6ae59d"));
+            Assert.That((int) parameterizedCategoryRule["revisionNumber"], Is.EqualTo(1));
+            Assert.That((string) parameterizedCategoryRule["classKind"], Is.EqualTo("ParameterizedCategoryRule"));
 
             Assert.IsFalse((bool) parameterizedCategoryRule["isDeprecated"]);
-            Assert.AreEqual("TestParameterizedCategoryRule", (string) parameterizedCategoryRule["name"]);
-            Assert.AreEqual("Test Parameterized Category Rule", (string) parameterizedCategoryRule["shortName"]);
+            Assert.That((string) parameterizedCategoryRule["name"], Is.EqualTo("TestParameterizedCategoryRule"));
+            Assert.That((string) parameterizedCategoryRule["shortName"], Is.EqualTo("Test Parameterized Category Rule"));
 
-            Assert.AreEqual("107fc408-7e6d-4f1a-895a-1b6a6025ac20",
-                (string) parameterizedCategoryRule["category"]);
+            Assert.That((string) parameterizedCategoryRule["category"], Is.EqualTo("107fc408-7e6d-4f1a-895a-1b6a6025ac20"));
 
             var expectedParameterTypes = new string[]
             {

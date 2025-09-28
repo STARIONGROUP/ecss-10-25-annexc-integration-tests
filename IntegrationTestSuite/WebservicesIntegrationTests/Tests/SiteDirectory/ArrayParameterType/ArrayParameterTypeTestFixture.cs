@@ -83,7 +83,7 @@ namespace WebservicesIntegrationTests
             var component_2 = jArray.Single(x => (string) x[PropertyNames.Iid] == "0715f517-1f8b-462d-9189-b4ff20548266");
             Assert.That((int)component_2[PropertyNames.RevisionNumber], Is.EqualTo(2));
             Assert.That((string)component_2[PropertyNames.ParameterType], Is.EqualTo("35a9cf05-4eba-4cda-b60c-7cfeaac8f892"));
-            Assert.IsNull((string) component_2[PropertyNames.Scale]);
+            Assert.That((string) component_2[PropertyNames.Scale], Is.Null);
             Assert.That((string)component_2[PropertyNames.ShortName], Is.EqualTo("{2;1}"));
 
             //Reorder Dimension

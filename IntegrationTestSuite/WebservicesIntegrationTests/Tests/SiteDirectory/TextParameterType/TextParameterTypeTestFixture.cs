@@ -82,18 +82,18 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken textParameterType)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(11, textParameterType.Children().Count());
+            Assert.That(textParameterType.Children().Count(), Is.EqualTo(11));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("a21c15c4-3e1e-46b5-b109-5063dec1e254", (string) textParameterType[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) textParameterType[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("TextParameterType", (string) textParameterType[PropertyNames.ClassKind]);
+            Assert.That((string) textParameterType[PropertyNames.Iid], Is.EqualTo("a21c15c4-3e1e-46b5-b109-5063dec1e254"));
+            Assert.That((int) textParameterType[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string) textParameterType[PropertyNames.ClassKind], Is.EqualTo("TextParameterType"));
 
             Assert.IsFalse((bool) textParameterType[PropertyNames.IsDeprecated]);
-            Assert.AreEqual("Test Text ParameterType", (string) textParameterType[PropertyNames.Name]);
-            Assert.AreEqual("TestTextParameterType", (string) textParameterType[PropertyNames.ShortName]);
+            Assert.That((string) textParameterType[PropertyNames.Name], Is.EqualTo("Test Text ParameterType"));
+            Assert.That((string) textParameterType[PropertyNames.ShortName], Is.EqualTo("TestTextParameterType"));
 
-            Assert.AreEqual("text", (string) textParameterType[PropertyNames.Symbol]);
+            Assert.That((string) textParameterType[PropertyNames.Symbol], Is.EqualTo("text"));
 
             var expectedCategories = new string[] {};
             var categoriesArray = (JArray) textParameterType[PropertyNames.Category];

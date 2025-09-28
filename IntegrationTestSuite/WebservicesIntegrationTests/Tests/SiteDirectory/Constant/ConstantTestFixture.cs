@@ -330,7 +330,7 @@ namespace WebservicesIntegrationTests
 
             Assert.That((string)constant[PropertyNames.Value], Is.EqualTo("[\"word\"]"));
 
-            Assert.IsNull((string)constant[PropertyNames.Scale]);
+            Assert.That((string)constant[PropertyNames.Scale], Is.Null);
 
             var expectedCategories = new string[] { };
             var categoriesArray = (JArray)constant[PropertyNames.Category];
@@ -378,7 +378,7 @@ namespace WebservicesIntegrationTests
 
             Assert.That((string)constant[PropertyNames.Value], Is.EqualTo("[\"true\"]"));
 
-            Assert.IsNull((string) constant[PropertyNames.Scale]);
+            Assert.That((string) constant[PropertyNames.Scale], Is.Null);
 
             var expectedCategories = new string[] {};
             var categoriesArray = (JArray) constant[PropertyNames.Category];

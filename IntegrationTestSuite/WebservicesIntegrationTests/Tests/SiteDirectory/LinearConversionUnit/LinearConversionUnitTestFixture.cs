@@ -86,19 +86,19 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken linearConversionUnit)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(11, linearConversionUnit.Children().Count());
+            Assert.That(linearConversionUnit.Children().Count(), Is.EqualTo(11));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("12f48e1a-2996-46cc-8dc1-faf4e69ae115", (string) linearConversionUnit["iid"]);
-            Assert.AreEqual(1, (int) linearConversionUnit["revisionNumber"]);
-            Assert.AreEqual("LinearConversionUnit", (string) linearConversionUnit["classKind"]);
+            Assert.That((string) linearConversionUnit["iid"], Is.EqualTo("12f48e1a-2996-46cc-8dc1-faf4e69ae115"));
+            Assert.That((int) linearConversionUnit["revisionNumber"], Is.EqualTo(1));
+            Assert.That((string) linearConversionUnit["classKind"], Is.EqualTo("LinearConversionUnit"));
 
             Assert.IsFalse((bool) linearConversionUnit["isDeprecated"]);
-            Assert.AreEqual("Test Linear Conversion Unit", (string) linearConversionUnit["name"]);
-            Assert.AreEqual("testLinearConversionUnit", (string) linearConversionUnit["shortName"]);
+            Assert.That((string) linearConversionUnit["name"], Is.EqualTo("Test Linear Conversion Unit"));
+            Assert.That((string) linearConversionUnit["shortName"], Is.EqualTo("testLinearConversionUnit"));
 
-            Assert.AreEqual("56842970-3915-4369-8712-61cfd8273ef9", (string) linearConversionUnit["referenceUnit"]);
-            Assert.AreEqual("1000", (string) linearConversionUnit["conversionFactor"]);
+            Assert.That((string) linearConversionUnit["referenceUnit"], Is.EqualTo("56842970-3915-4369-8712-61cfd8273ef9"));
+            Assert.That((string) linearConversionUnit["conversionFactor"], Is.EqualTo("1000"));
 
             var expectedAliases = new string[] {};
             var aliasesArray = (JArray) linearConversionUnit["alias"];

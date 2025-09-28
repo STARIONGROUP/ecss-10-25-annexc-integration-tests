@@ -98,13 +98,13 @@ namespace WebservicesIntegrationTests
             Assert.That(jArray.Count, Is.EqualTo(3));
 
             var siteDirectory = jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
-            Assert.AreEqual(2, (int) siteDirectory[PropertyNames.RevisionNumber]);
+            Assert.That((int) siteDirectory[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             var quantityKindFactor = jArray.Single(x => (string) x[PropertyNames.Iid] == "6b1b9a7b-8a57-412e-a823-bcc4fd8b67e9");
-            Assert.AreEqual(2, (int) quantityKindFactor[PropertyNames.RevisionNumber]);
+            Assert.That((int) quantityKindFactor[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             var derivedQuantityKind = jArray.Single(x => (string) x[PropertyNames.Iid] == "74d9c38f-5ace-4f90-8841-d0f9942e9d09");
-            Assert.AreEqual(2, (int) derivedQuantityKind[PropertyNames.RevisionNumber]);
+            Assert.That((int) derivedQuantityKind[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             var expectedQuantityKindFactorArray = new List<OrderedItem> { new OrderedItem(2, "6b1b9a7b-8a57-412e-a823-bcc4fd8b67e9"), new OrderedItem(2948121, "ab7e80da-6bc9-427f-b1fb-b97faeeca4c6") };
             var quantityKindFactorArray = JsonConvert.DeserializeObject<List<OrderedItem>>(derivedQuantityKind[PropertyNames.QuantityKindFactor].ToString());
@@ -118,16 +118,16 @@ namespace WebservicesIntegrationTests
             Assert.That(jArray.Count, Is.EqualTo(4));
 
             siteDirectory = jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
-            Assert.AreEqual(3, (int) siteDirectory[PropertyNames.RevisionNumber]);
+            Assert.That((int) siteDirectory[PropertyNames.RevisionNumber], Is.EqualTo(3));
 
             quantityKindFactor = jArray.Single(x => (string) x[PropertyNames.Iid] == "6b1b9a7b-8a57-412e-a823-bcc4fd8b67e9");
-            Assert.AreEqual(3, (int) quantityKindFactor[PropertyNames.RevisionNumber]);
+            Assert.That((int) quantityKindFactor[PropertyNames.RevisionNumber], Is.EqualTo(3));
 
             var quantityKindFactor2 = jArray.Single(x => (string) x[PropertyNames.Iid] == "ab7e80da-6bc9-427f-b1fb-b97faeeca4c6");
-            Assert.AreEqual(3, (int) quantityKindFactor2[PropertyNames.RevisionNumber]);
+            Assert.That((int) quantityKindFactor2[PropertyNames.RevisionNumber], Is.EqualTo(3));
 
             derivedQuantityKind = jArray.Single(x => (string) x[PropertyNames.Iid] == "74d9c38f-5ace-4f90-8841-d0f9942e9d09");
-            Assert.AreEqual(3, (int) derivedQuantityKind[PropertyNames.RevisionNumber]);
+            Assert.That((int) derivedQuantityKind[PropertyNames.RevisionNumber], Is.EqualTo(3));
 
             expectedQuantityKindFactorArray = new List<OrderedItem> { new OrderedItem(1, "ab7e80da-6bc9-427f-b1fb-b97faeeca4c6"), new OrderedItem(3, "6b1b9a7b-8a57-412e-a823-bcc4fd8b67e9") };
             quantityKindFactorArray = JsonConvert.DeserializeObject<List<OrderedItem>>(derivedQuantityKind[PropertyNames.QuantityKindFactor].ToString());
@@ -144,14 +144,14 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken quantityKindFactor)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(5, quantityKindFactor.Children().Count());
+            Assert.That(quantityKindFactor.Children().Count(), Is.EqualTo(5));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("ab7e80da-6bc9-427f-b1fb-b97faeeca4c6", (string) quantityKindFactor[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) quantityKindFactor[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("QuantityKindFactor", (string) quantityKindFactor[PropertyNames.ClassKind]);
-            Assert.AreEqual("4f9f3d9b-f3de-4ef5-b6cb-2e22199fab0d", (string) quantityKindFactor[PropertyNames.QuantityKind]);
-            Assert.AreEqual("-1", (string) quantityKindFactor[PropertyNames.Exponent]);
+            Assert.That((string) quantityKindFactor[PropertyNames.Iid], Is.EqualTo("ab7e80da-6bc9-427f-b1fb-b97faeeca4c6"));
+            Assert.That((int) quantityKindFactor[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string) quantityKindFactor[PropertyNames.ClassKind], Is.EqualTo("QuantityKindFactor"));
+            Assert.That((string) quantityKindFactor[PropertyNames.QuantityKind], Is.EqualTo("4f9f3d9b-f3de-4ef5-b6cb-2e22199fab0d"));
+            Assert.That((string) quantityKindFactor[PropertyNames.Exponent], Is.EqualTo("-1"));
         }
     }
 }

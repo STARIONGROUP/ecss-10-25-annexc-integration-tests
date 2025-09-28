@@ -77,7 +77,7 @@ namespace WebservicesIntegrationTests
 
             var page = jArray.Single(x => (string) x[PropertyNames.Iid] == "663114f6-9bb1-4751-a3ed-60bad354913e");
 
-            Assert.AreEqual(12, page.Children().Count());
+            Assert.That(page.Children().Count(), Is.EqualTo(12));
 
             var noteList = JsonConvert.DeserializeObject<List<OrderedItem>>(
                 page[PropertyNames.Note].ToString());
@@ -94,8 +94,8 @@ namespace WebservicesIntegrationTests
             var note1 = jArray.Single(x => (string) x[PropertyNames.Iid] == "ab5ddcfb-6302-400b-bd71-17d64a43c747");
             var note2 = jArray.Single(x => (string) x[PropertyNames.Iid] == "85ab7b55-6af5-48fb-a14a-86d16dfe1b57");
 
-            Assert.AreEqual(12, note1.Children().Count());
-            Assert.AreEqual(12, note2.Children().Count());
+            Assert.That(note1.Children().Count(), Is.EqualTo(12));
+            Assert.That(note2.Children().Count(), Is.EqualTo(12));
 
             postBodyPath = this.GetPath("Tests/EngineeringModel/Note/PostDeleteNote.json");
             postBody = this.GetJsonFromFile(postBodyPath);
@@ -103,7 +103,7 @@ namespace WebservicesIntegrationTests
 
             page = jArray.Single(x => (string) x[PropertyNames.Iid] == "663114f6-9bb1-4751-a3ed-60bad354913e");
 
-            Assert.AreEqual(12, page.Children().Count());
+            Assert.That(page.Children().Count(), Is.EqualTo(12));
 
             noteList = JsonConvert.DeserializeObject<List<OrderedItem>>(
                 page[PropertyNames.Note].ToString());

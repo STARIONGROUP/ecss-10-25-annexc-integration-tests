@@ -86,19 +86,19 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken ordinalScale)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(20, ordinalScale.Children().Count());
+            Assert.That(ordinalScale.Children().Count(), Is.EqualTo(20));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("541037e2-9f6a-466c-b56f-a09f81f36576", (string) ordinalScale["iid"]);
-            Assert.AreEqual(1, (int) ordinalScale["revisionNumber"]);
-            Assert.AreEqual("OrdinalScale", (string) ordinalScale["classKind"]);
+            Assert.That((string) ordinalScale["iid"], Is.EqualTo("541037e2-9f6a-466c-b56f-a09f81f36576"));
+            Assert.That((int) ordinalScale["revisionNumber"], Is.EqualTo(1));
+            Assert.That((string) ordinalScale["classKind"], Is.EqualTo("OrdinalScale"));
 
             Assert.IsTrue((bool) ordinalScale["useShortNameValues"]);
-            Assert.AreEqual("Test Ordinal Scale", (string) ordinalScale["name"]);
-            Assert.AreEqual("TestOrdinalScale", (string) ordinalScale["shortName"]);
+            Assert.That((string) ordinalScale["name"], Is.EqualTo("Test Ordinal Scale"));
+            Assert.That((string) ordinalScale["shortName"], Is.EqualTo("TestOrdinalScale"));
 
             Assert.IsFalse((bool) ordinalScale["isDeprecated"]);
-            Assert.AreEqual("56842970-3915-4369-8712-61cfd8273ef9", (string) ordinalScale["unit"]);
+            Assert.That((string) ordinalScale["unit"], Is.EqualTo("56842970-3915-4369-8712-61cfd8273ef9"));
 
             var expectedValueDefinitions = new string[]
             {
@@ -108,13 +108,13 @@ namespace WebservicesIntegrationTests
             IList<string> valueDefinitions = valueDefinitionsArray.Select(x => (string) x).ToList();
             Assert.That(valueDefinitions, Is.EquivalentTo(expectedValueDefinitions));
 
-            Assert.AreEqual("NATURAL_NUMBER_SET", (string) ordinalScale["numberSet"]);
-            Assert.AreEqual("0", (string) ordinalScale["minimumPermissibleValue"]);
+            Assert.That((string) ordinalScale["numberSet"], Is.EqualTo("NATURAL_NUMBER_SET"));
+            Assert.That((string) ordinalScale["minimumPermissibleValue"], Is.EqualTo("0"));
             Assert.IsTrue((bool) ordinalScale["isMinimumInclusive"]);
-            Assert.AreEqual("100", (string) ordinalScale["maximumPermissibleValue"]);
+            Assert.That((string) ordinalScale["maximumPermissibleValue"], Is.EqualTo("100"));
             Assert.IsTrue((bool) ordinalScale["isMaximumInclusive"]);
-            Assert.AreEqual("positive Value Connotation", (string) ordinalScale["positiveValueConnotation"]);
-            Assert.AreEqual("negative Value Connotation", (string) ordinalScale["negativeValueConnotation"]);
+            Assert.That((string) ordinalScale["positiveValueConnotation"], Is.EqualTo("positive Value Connotation"));
+            Assert.That((string) ordinalScale["negativeValueConnotation"], Is.EqualTo("negative Value Connotation"));
 
             var expectedMappingToReferenceScales = new string[] {};
             var mappingToReferenceScalesArray = (JArray) ordinalScale["mappingToReferenceScale"];

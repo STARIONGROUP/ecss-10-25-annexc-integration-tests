@@ -90,15 +90,15 @@ namespace WebservicesIntegrationTests
             var siteDirectory = jArray.Single(x => (string)x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
 
             // verify that the amount of returned properties 
-            Assert.AreEqual(19, siteDirectory.Children().Count());
+            Assert.That(siteDirectory.Children().Count(), Is.EqualTo(19));
 
-            Assert.AreEqual("f13de6f8-b03a-46e7-a492-53b2f260f294", (string)siteDirectory[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int)siteDirectory[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("SiteDirectory", (string)siteDirectory[PropertyNames.ClassKind]);
-            Assert.AreEqual("Test Site Directory", (string)siteDirectory[PropertyNames.Name]);
-            Assert.AreEqual("TEST-SiteDir", (string)siteDirectory[PropertyNames.ShortName]);
-            Assert.AreEqual("ee3ae5ff-ac5e-4957-bab1-7698fba2a267", (string)siteDirectory[PropertyNames.DefaultParticipantRole]);
-            Assert.AreEqual("2428f4d9-f26d-4112-9d56-1c940748df69", (string)siteDirectory[PropertyNames.DefaultPersonRole]);
+            Assert.That((string)siteDirectory[PropertyNames.Iid], Is.EqualTo("f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            Assert.That((int)siteDirectory[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)siteDirectory[PropertyNames.ClassKind], Is.EqualTo("SiteDirectory"));
+            Assert.That((string)siteDirectory[PropertyNames.Name], Is.EqualTo("Test Site Directory"));
+            Assert.That((string)siteDirectory[PropertyNames.ShortName], Is.EqualTo("TEST-SiteDir"));
+            Assert.That((string)siteDirectory[PropertyNames.DefaultParticipantRole], Is.EqualTo("ee3ae5ff-ac5e-4957-bab1-7698fba2a267"));
+            Assert.That((string)siteDirectory[PropertyNames.DefaultPersonRole], Is.EqualTo("2428f4d9-f26d-4112-9d56-1c940748df69"));
 
             var expectedOrganizations = new string[] { "cd22fc45-d898-4fac-85fc-fbcb7d7b12a7" };
             var organizationArray = (JArray)siteDirectory[PropertyNames.Organization];
@@ -162,16 +162,16 @@ namespace WebservicesIntegrationTests
             var siteReferenceDataLibrary = jArray.Single(x => (string)x[PropertyNames.Iid] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(22, siteReferenceDataLibrary.Children().Count());
+            Assert.That(siteReferenceDataLibrary.Children().Count(), Is.EqualTo(22));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("c454c687-ba3e-44c4-86bc-44544b2c7880", (string)siteReferenceDataLibrary[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int)siteReferenceDataLibrary[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("SiteReferenceDataLibrary", (string)siteReferenceDataLibrary[PropertyNames.ClassKind]);
+            Assert.That((string)siteReferenceDataLibrary[PropertyNames.Iid], Is.EqualTo("c454c687-ba3e-44c4-86bc-44544b2c7880"));
+            Assert.That((int)siteReferenceDataLibrary[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)siteReferenceDataLibrary[PropertyNames.ClassKind], Is.EqualTo("SiteReferenceDataLibrary"));
 
             Assert.IsFalse((bool)siteReferenceDataLibrary[PropertyNames.IsDeprecated]);
-            Assert.AreEqual("Test Reference Data Library", (string)siteReferenceDataLibrary[PropertyNames.Name]);
-            Assert.AreEqual("TestRDL", (string)siteReferenceDataLibrary[PropertyNames.ShortName]);
+            Assert.That((string)siteReferenceDataLibrary[PropertyNames.Name], Is.EqualTo("Test Reference Data Library"));
+            Assert.That((string)siteReferenceDataLibrary[PropertyNames.ShortName], Is.EqualTo("TestRDL"));
 
             var expectedAliases = new string[] { };
             var aliasesArray = (JArray)siteReferenceDataLibrary[PropertyNames.Alias];
@@ -317,24 +317,24 @@ namespace WebservicesIntegrationTests
                 jArray.Single(x => (string)x[PropertyNames.Iid] == "b46088aa-14dd-4fbc-9f45-c4acdaf6e9f5");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(17, referenceSource.Children().Count());
+            Assert.That(referenceSource.Children().Count(), Is.EqualTo(17));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("b46088aa-14dd-4fbc-9f45-c4acdaf6e9f5", (string)referenceSource[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int)referenceSource[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("ReferenceSource", (string)referenceSource[PropertyNames.ClassKind]);
+            Assert.That((string)referenceSource[PropertyNames.Iid], Is.EqualTo("b46088aa-14dd-4fbc-9f45-c4acdaf6e9f5"));
+            Assert.That((int)referenceSource[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)referenceSource[PropertyNames.ClassKind], Is.EqualTo("ReferenceSource"));
 
             Assert.IsFalse((bool)referenceSource[PropertyNames.IsDeprecated]);
-            Assert.AreEqual("test referenceSource", (string)referenceSource[PropertyNames.Name]);
-            Assert.AreEqual("testReferenceSource", (string)referenceSource[PropertyNames.ShortName]);
+            Assert.That((string)referenceSource[PropertyNames.Name], Is.EqualTo("test referenceSource"));
+            Assert.That((string)referenceSource[PropertyNames.ShortName], Is.EqualTo("testReferenceSource"));
 
-            Assert.IsNull((string)referenceSource[PropertyNames.VersionIdentifier]);
-            Assert.IsNull((string)referenceSource[PropertyNames.VersionDate]);
-            Assert.AreEqual("testAuthor", (string)referenceSource[PropertyNames.Author]);
-            Assert.AreEqual(1999, (int)referenceSource[PropertyNames.PublicationYear]);
-            Assert.AreEqual("cd22fc45-d898-4fac-85fc-fbcb7d7b12a7", (string)referenceSource[PropertyNames.Publisher]);
-            Assert.AreEqual("ffd6c100-6c72-4d2a-8565-ff24bd576a89", (string)referenceSource[PropertyNames.PublishedIn]);
-            Assert.AreEqual("en-GB", (string)referenceSource[PropertyNames.Language]);
+            Assert.That((string)referenceSource[PropertyNames.VersionIdentifier], Is.Null);
+            Assert.That((string)referenceSource[PropertyNames.VersionDate], Is.Null);
+            Assert.That((string)referenceSource[PropertyNames.Author], Is.EqualTo("testAuthor"));
+            Assert.That((int)referenceSource[PropertyNames.PublicationYear], Is.EqualTo(1999));
+            Assert.That((string)referenceSource[PropertyNames.Publisher], Is.EqualTo("cd22fc45-d898-4fac-85fc-fbcb7d7b12a7"));
+            Assert.That((string)referenceSource[PropertyNames.PublishedIn], Is.EqualTo("ffd6c100-6c72-4d2a-8565-ff24bd576a89"));
+            Assert.That((string)referenceSource[PropertyNames.Language], Is.EqualTo("en-GB"));
 
             var expectedReferenceSourceCategories = new string[] { };
             var referenceSourceCategoriesArray = (JArray)referenceSource[PropertyNames.Category];
@@ -366,24 +366,24 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken referenceSource)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(17, referenceSource.Children().Count());
+            Assert.That(referenceSource.Children().Count(), Is.EqualTo(17));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("ffd6c100-6c72-4d2a-8565-ff24bd576a89", (string) referenceSource[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) referenceSource[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("ReferenceSource", (string) referenceSource[PropertyNames.ClassKind]);
+            Assert.That((string) referenceSource[PropertyNames.Iid], Is.EqualTo("ffd6c100-6c72-4d2a-8565-ff24bd576a89"));
+            Assert.That((int) referenceSource[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string) referenceSource[PropertyNames.ClassKind], Is.EqualTo("ReferenceSource"));
 
             Assert.IsFalse((bool) referenceSource[PropertyNames.IsDeprecated]);
-            Assert.AreEqual("Test Reference Source", (string) referenceSource[PropertyNames.Name]);
-            Assert.AreEqual("TestReferenceSource", (string) referenceSource[PropertyNames.ShortName]);
+            Assert.That((string) referenceSource[PropertyNames.Name], Is.EqualTo("Test Reference Source"));
+            Assert.That((string) referenceSource[PropertyNames.ShortName], Is.EqualTo("TestReferenceSource"));
 
-            Assert.IsNull((string) referenceSource[PropertyNames.VersionIdentifier]);
-            Assert.IsNull((string) referenceSource[PropertyNames.VersionDate]);
-            Assert.AreEqual("", (string)referenceSource[PropertyNames.Author]);            
-            Assert.AreEqual(1999, (int) referenceSource[PropertyNames.PublicationYear]);
-            Assert.IsNull((string) referenceSource[PropertyNames.Publisher]);
-            Assert.IsNull((string) referenceSource[PropertyNames.PublishedIn]);
-            Assert.AreEqual("", (string)referenceSource[PropertyNames.Language]);
+            Assert.That((string) referenceSource[PropertyNames.VersionIdentifier], Is.Null);
+            Assert.That((string) referenceSource[PropertyNames.VersionDate], Is.Null);
+            Assert.That((string)referenceSource[PropertyNames.Author], Is.EqualTo(""));            
+            Assert.That((int) referenceSource[PropertyNames.PublicationYear], Is.EqualTo(1999));
+            Assert.That((string) referenceSource[PropertyNames.Publisher], Is.Null);
+            Assert.That((string) referenceSource[PropertyNames.PublishedIn], Is.Null);
+            Assert.That((string)referenceSource[PropertyNames.Language], Is.EqualTo(""));
             
             var expectedCategories = new string[] {};
             var categoriesArray = (JArray) referenceSource[PropertyNames.Category];

@@ -86,16 +86,16 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken term)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(9, term.Children().Count());
+            Assert.That(term.Children().Count(), Is.EqualTo(9));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("18533006-1b9b-46c1-acc9-ae438ed4ebb2", (string) term["iid"]);
-            Assert.AreEqual(1, (int) term["revisionNumber"]);
-            Assert.AreEqual("Term", (string) term["classKind"]);
+            Assert.That((string) term["iid"], Is.EqualTo("18533006-1b9b-46c1-acc9-ae438ed4ebb2"));
+            Assert.That((int) term["revisionNumber"], Is.EqualTo(1));
+            Assert.That((string) term["classKind"], Is.EqualTo("Term"));
 
             Assert.IsFalse((bool) term["isDeprecated"]);
-            Assert.AreEqual("Test Term", (string) term["name"]);
-            Assert.AreEqual("TestTerm", (string) term["shortName"]);
+            Assert.That((string) term["name"], Is.EqualTo("Test Term"));
+            Assert.That((string) term["shortName"], Is.EqualTo("TestTerm"));
 
             var expectedAliases = new string[] {};
             var aliasesArray = (JArray) term["alias"];

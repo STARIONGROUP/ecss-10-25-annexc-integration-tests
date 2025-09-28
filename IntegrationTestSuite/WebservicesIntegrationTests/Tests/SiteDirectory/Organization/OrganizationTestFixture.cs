@@ -58,7 +58,7 @@ namespace WebservicesIntegrationTests
             // Get the response from the data-source as a JArray (JSON Array)
             var jArray = this.WebClient.GetDto(personsUri);
             
-            Assert.AreEqual(2, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(2));
 
             var siteDirectory = jArray.Single(x => (string)x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
             SiteDirectoryTestFixture.VerifyProperties(siteDirectory);
@@ -78,15 +78,15 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken organization)
         {
             // verify that the amount of returned properties 
-            Assert.AreEqual(6, organization.Children().Count());
+            Assert.That(organization.Children().Count(), Is.EqualTo(6));
 
-            Assert.AreEqual("cd22fc45-d898-4fac-85fc-fbcb7d7b12a7", (string)organization[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int)organization[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("Organization", (string)organization[PropertyNames.ClassKind]);
+            Assert.That((string)organization[PropertyNames.Iid], Is.EqualTo("cd22fc45-d898-4fac-85fc-fbcb7d7b12a7"));
+            Assert.That((int)organization[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string)organization[PropertyNames.ClassKind], Is.EqualTo("Organization"));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("Test Organization", (string)organization[PropertyNames.Name]);
-            Assert.AreEqual("TestOrganization", (string)organization[PropertyNames.ShortName]);
+            Assert.That((string)organization[PropertyNames.Name], Is.EqualTo("Test Organization"));
+            Assert.That((string)organization[PropertyNames.ShortName], Is.EqualTo("TestOrganization"));
             Assert.IsFalse((bool)organization[PropertyNames.IsDeprecated]);
         }
     }

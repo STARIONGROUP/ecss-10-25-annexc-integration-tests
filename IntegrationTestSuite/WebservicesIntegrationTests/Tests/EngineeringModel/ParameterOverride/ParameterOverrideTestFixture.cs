@@ -110,7 +110,7 @@ namespace WebservicesIntegrationTests
             var parameterOverride = jArray.Single(x => (string)x[PropertyNames.Iid] == "3587bb05-0db4-4741-b5e3-da43393e13ed");
 
             // verify the amount of properties
-            Assert.AreEqual(7, parameterOverride.Children().Count());
+            Assert.That(parameterOverride.Children().Count(), Is.EqualTo(7));
 
             // assert that the properties are what is expected
             Assert.That((string)parameterOverride[PropertyNames.Iid], Is.EqualTo("3587bb05-0db4-4741-b5e3-da43393e13ed"));
@@ -242,7 +242,7 @@ namespace WebservicesIntegrationTests
             jArray = this.WebClient.GetDto(elementUsageUri);
 
             //check if there is the only one ParameterOverride object 
-            Assert.AreEqual(7, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(7));
 
             povs1 = jArray.Single(x => (string)x[PropertyNames.Iid] == (string)parameterOverrideValueSet1[PropertyNames.Iid]);
 
@@ -265,17 +265,15 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken parameterOverride)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(7, parameterOverride.Children().Count());
+            Assert.That(parameterOverride.Children().Count(), Is.EqualTo(7));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("93f767ed-4d22-45f6-ae97-d1dab0d36e1c",
-                (string) parameterOverride[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) parameterOverride[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("ParameterOverride", (string) parameterOverride[PropertyNames.ClassKind]);
+            Assert.That((string) parameterOverride[PropertyNames.Iid], Is.EqualTo("93f767ed-4d22-45f6-ae97-d1dab0d36e1c"));
+            Assert.That((int) parameterOverride[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string) parameterOverride[PropertyNames.ClassKind], Is.EqualTo("ParameterOverride"));
 
-            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string) parameterOverride[PropertyNames.Owner]);
-            Assert.AreEqual("6c5aff74-f983-4aa8-a9d6-293b3429307c",
-                (string) parameterOverride[PropertyNames.Parameter]);
+            Assert.That((string) parameterOverride[PropertyNames.Owner], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
+            Assert.That((string) parameterOverride[PropertyNames.Parameter], Is.EqualTo("6c5aff74-f983-4aa8-a9d6-293b3429307c"));
             
             var expectedParameterSubscriptions = new string[] {};
             var parameterSubscriptionsArray = (JArray) parameterOverride[PropertyNames.ParameterSubscription];
