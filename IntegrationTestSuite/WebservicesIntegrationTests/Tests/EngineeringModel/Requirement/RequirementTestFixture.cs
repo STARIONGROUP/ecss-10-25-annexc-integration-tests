@@ -44,7 +44,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(requirementUri);
 
             // check if there are only two Requirement object 
-            Assert.AreEqual(2, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(2));
 
             VerifyProperties(jArray);
         }
@@ -60,7 +60,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(requirementUri);
 
             // verify that the correct amount of objects is returned
-            Assert.AreEqual(5, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(5));
 
             // get a specific Iteration from the result by it's unique id
             var iteration = jArray.Single(x => (string) x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
@@ -84,11 +84,11 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
             var engineeeringModel = jArray.Single(x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
-            Assert.AreEqual(2, (int) engineeeringModel[PropertyNames.RevisionNumber]);
+            Assert.That((int) engineeeringModel[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             // get a specific RequirementsSpecification from the result by it's unique id
             var requirementsSpecification = jArray.Single(x => (string) x[PropertyNames.Iid] == "bf0cde90-9086-43d5-bcff-32a2f8331800");
-            Assert.AreEqual(2, (int) requirementsSpecification[PropertyNames.RevisionNumber]);
+            Assert.That((int) requirementsSpecification[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             var expectedRequirements = new[]
             {
@@ -104,9 +104,9 @@ namespace WebservicesIntegrationTests
             var requirement = jArray.Single(
                 x => (string) x[PropertyNames.Iid] == "09af5432-b7a5-4932-a983-b1065723efb7");
 
-            Assert.AreEqual(2, (int) requirement[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("create requirement", (string) requirement[PropertyNames.Name]);
-            Assert.AreEqual("createrequirement", (string) requirement[PropertyNames.ShortName]);
+            Assert.That((int) requirement[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string) requirement[PropertyNames.Name], Is.EqualTo("create requirement"));
+            Assert.That((string) requirement[PropertyNames.ShortName], Is.EqualTo("createrequirement"));
             Assert.IsFalse((bool) requirement[PropertyNames.IsDeprecated]);
         }
 
@@ -124,10 +124,10 @@ namespace WebservicesIntegrationTests
             Assert.That(jArray.Count, Is.EqualTo(4));
 
             var engineeeringModel = jArray.Single(x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
-            Assert.AreEqual(2, (int) engineeeringModel[PropertyNames.RevisionNumber]);
+            Assert.That((int) engineeeringModel[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             var requirementsSpecificationWithMovedRequirement = jArray.Single(x => (string) x[PropertyNames.Iid] == "8d0734f4-ca4b-4611-9187-f6970e2b02bc");
-            Assert.AreEqual(2, (int) requirementsSpecificationWithMovedRequirement[PropertyNames.RevisionNumber]);
+            Assert.That((int) requirementsSpecificationWithMovedRequirement[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             var expectedRequirements = new[] { "614e2a69-d602-46be-9311-2fb4d3273e87" };
             var requirementsArray = (JArray) requirementsSpecificationWithMovedRequirement[PropertyNames.Requirement];
@@ -135,7 +135,7 @@ namespace WebservicesIntegrationTests
             Assert.That(requirements, Is.EquivalentTo(expectedRequirements));
 
             var requirementsSpecificationWithoutMovedRequirement = jArray.Single(x => (string) x[PropertyNames.Iid] == "bf0cde90-9086-43d5-bcff-32a2f8331800");
-            Assert.AreEqual(2, (int) requirementsSpecificationWithoutMovedRequirement[PropertyNames.RevisionNumber]);
+            Assert.That((int) requirementsSpecificationWithoutMovedRequirement[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             expectedRequirements = new string[] { "614e2a69-d602-46be-9311-2fb4d3273e88" };
             requirementsArray = (JArray) requirementsSpecificationWithoutMovedRequirement[PropertyNames.Requirement];
@@ -143,7 +143,7 @@ namespace WebservicesIntegrationTests
             Assert.That(requirements, Is.EquivalentTo(expectedRequirements));
 
             var requirement = jArray.Single(x => (string) x[PropertyNames.Iid] == "614e2a69-d602-46be-9311-2fb4d3273e87");
-            Assert.AreEqual(2, (int) requirement[PropertyNames.RevisionNumber]);
+            Assert.That((int) requirement[PropertyNames.RevisionNumber], Is.EqualTo(2));
         }
 
         [Test]
@@ -157,14 +157,14 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
             // check if there are 2 objects
-            Assert.AreEqual(2, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(2));
 
             var engineeeringModel = jArray.Single(x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
-            Assert.AreEqual(2, (int) engineeeringModel[PropertyNames.RevisionNumber]);
+            Assert.That((int) engineeeringModel[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             // get a specific Requirement from the result by it's unique id
             var requirement = jArray.Single(x => (string) x[PropertyNames.Iid] == "614e2a69-d602-46be-9311-2fb4d3273e87");
-            Assert.AreEqual(2, (int) requirement[PropertyNames.RevisionNumber]);
+            Assert.That((int) requirement[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             var expectedParametricConstraints = new List<OrderedItem>();
 
@@ -192,20 +192,20 @@ namespace WebservicesIntegrationTests
                 x => (string) x[PropertyNames.Iid] == "614e2a69-d602-46be-9311-2fb4d3273e87");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(14, requirement.Children().Count());
+            Assert.That(requirement.Children().Count(), Is.EqualTo(14));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("614e2a69-d602-46be-9311-2fb4d3273e87", (string) requirement[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) requirement[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("Requirement", (string) requirement[PropertyNames.ClassKind]);
+            Assert.That((string) requirement[PropertyNames.Iid], Is.EqualTo("614e2a69-d602-46be-9311-2fb4d3273e87"));
+            Assert.That((int) requirement[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string) requirement[PropertyNames.ClassKind], Is.EqualTo("Requirement"));
 
-            Assert.AreEqual("Test Requirement", (string) requirement[PropertyNames.Name]);
-            Assert.AreEqual("TestRequirement", (string) requirement[PropertyNames.ShortName]);
+            Assert.That((string) requirement[PropertyNames.Name], Is.EqualTo("Test Requirement"));
+            Assert.That((string) requirement[PropertyNames.ShortName], Is.EqualTo("TestRequirement"));
 
-            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string) requirement[PropertyNames.Owner]);
+            Assert.That((string) requirement[PropertyNames.Owner], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
 
             Assert.IsFalse((bool) requirement[PropertyNames.IsDeprecated]);
-            Assert.IsNull((string) requirement[PropertyNames.Group]);
+            Assert.That((string) requirement[PropertyNames.Group], Is.Null);
 
             var expectedCategories = new[] { "167b5cb0-766e-4ab2-b728-a9c9a662b017" };
             var categoriesArray = (JArray) requirement[PropertyNames.Category];
@@ -252,20 +252,20 @@ namespace WebservicesIntegrationTests
             if (requirement != null)
             {
                 // verify the amount of returned properties 
-                Assert.AreEqual(14, requirement.Children().Count());
+                Assert.That(requirement.Children().Count(), Is.EqualTo(14));
 
                 // assert that the properties are what is expected
-                Assert.AreEqual("614e2a69-d602-46be-9311-2fb4d3273e88", (string) requirement[PropertyNames.Iid]);
-                Assert.AreEqual(1, (int) requirement[PropertyNames.RevisionNumber]);
-                Assert.AreEqual("Requirement", (string) requirement[PropertyNames.ClassKind]);
+                Assert.That((string) requirement[PropertyNames.Iid], Is.EqualTo("614e2a69-d602-46be-9311-2fb4d3273e88"));
+                Assert.That((int) requirement[PropertyNames.RevisionNumber], Is.EqualTo(1));
+                Assert.That((string) requirement[PropertyNames.ClassKind], Is.EqualTo("Requirement"));
 
-                Assert.AreEqual("Test Requirement 2", (string) requirement[PropertyNames.Name]);
-                Assert.AreEqual("TestRequirementTwo", (string) requirement[PropertyNames.ShortName]);
+                Assert.That((string) requirement[PropertyNames.Name], Is.EqualTo("Test Requirement 2"));
+                Assert.That((string) requirement[PropertyNames.ShortName], Is.EqualTo("TestRequirementTwo"));
 
-                Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string) requirement[PropertyNames.Owner]);
+                Assert.That((string) requirement[PropertyNames.Owner], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
 
                 Assert.IsFalse((bool) requirement[PropertyNames.IsDeprecated]);
-                Assert.AreEqual("d3474e6a-f9ac-4d1a-91d9-6f8be06a03b5", (string) requirement[PropertyNames.Group]);
+                Assert.That((string) requirement[PropertyNames.Group], Is.EqualTo("d3474e6a-f9ac-4d1a-91d9-6f8be06a03b5"));
 
                 expectedCategories = new string[] { };
                 categoriesArray = (JArray) requirement[PropertyNames.Category];
@@ -313,7 +313,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
             var definition = jArray.Single(x => (string) x[PropertyNames.Iid] == "3d8fa7f7-5235-4fe4-a026-207015e5822c");
-            Assert.AreEqual(2, (int) definition[PropertyNames.RevisionNumber]);
+            Assert.That((int) definition[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             SiteDirectoryTestFixture.AddDomainExpertUserJane(this, out var userName, out var passWord);
             this.CreateNewWebClientForUser(userName, passWord);
@@ -326,7 +326,7 @@ namespace WebservicesIntegrationTests
             // Jane is not allowed to update
             var exception = Assert.Catch<WebException>(() => this.WebClient.PostDto(iterationUri, postBody));
             var errorMessage = this.WebClient.ExtractExceptionStringFromResponse(exception.Response);
-            Assert.AreEqual(HttpStatusCode.Unauthorized, ((HttpWebResponse) exception.Response).StatusCode);
+            Assert.That(((HttpWebResponse) exception.Response).StatusCode, Is.EqualTo(HttpStatusCode.Unauthorized));
             Assert.IsTrue(errorMessage.Contains("The person Jane does not have an appropriate update permission for Definition."));
         }
     }

@@ -43,7 +43,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(parameterUri);
 
             // check if there appropriate amount of Parameter objects 
-            Assert.AreEqual(2, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(2));
 
             // get a specific Parameter from the result by it's unique id
             var parameter = jArray.Single(x => (string) x[PropertyNames.Iid] == "6c5aff74-f983-4aa8-a9d6-293b3429307c");
@@ -62,7 +62,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(parameterUri);
 
             // check if there are appropriate amount of objects
-            Assert.AreEqual(5, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(5));
 
             // get a specific Iteration from the result by it's unique id
             var iteration = jArray.Single(x => (string) x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
@@ -89,12 +89,12 @@ namespace WebservicesIntegrationTests
 
             var engineeeringModel = jArray.Single(x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
 
-            Assert.AreEqual(2, (int) engineeeringModel[PropertyNames.RevisionNumber]);
+            Assert.That((int) engineeeringModel[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             // get a specific ElementDefinition from the result by it's unique id
             var elementDefinition = jArray.Single(x => (string) x[PropertyNames.Iid] == "f73860b2-12f0-43e4-b8b2-c81862c0a159");
 
-            Assert.AreEqual(2, (int) elementDefinition[PropertyNames.RevisionNumber]);
+            Assert.That((int) elementDefinition[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             var expectedParameters = new[]
             {
@@ -111,22 +111,22 @@ namespace WebservicesIntegrationTests
             var parameter = jArray.Single(x => (string) x[PropertyNames.Iid] == "2cd4eb9c-e92c-41b2-968c-f03ff7010bad");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(14, parameter.Children().Count());
+            Assert.That(parameter.Children().Count(), Is.EqualTo(14));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("2cd4eb9c-e92c-41b2-968c-f03ff7010bad", (string) parameter[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int) parameter[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("Parameter", (string) parameter[PropertyNames.ClassKind]);
+            Assert.That((string) parameter[PropertyNames.Iid], Is.EqualTo("2cd4eb9c-e92c-41b2-968c-f03ff7010bad"));
+            Assert.That((int) parameter[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string) parameter[PropertyNames.ClassKind], Is.EqualTo("Parameter"));
 
-            Assert.IsNull((string) parameter[PropertyNames.RequestedBy]);
+            Assert.That((string) parameter[PropertyNames.RequestedBy], Is.Null);
             Assert.IsFalse((bool) parameter[PropertyNames.AllowDifferentOwnerOfOverride]);
             Assert.IsFalse((bool) parameter[PropertyNames.ExpectsOverride]);
-            Assert.AreEqual("35a9cf05-4eba-4cda-b60c-7cfeaac8f892", (string) parameter[PropertyNames.ParameterType]);
-            Assert.IsNull((string) parameter[PropertyNames.Scale]);
-            Assert.IsNull((string) parameter[PropertyNames.StateDependence]);
-            Assert.IsNull((string) parameter[PropertyNames.Group]);
+            Assert.That((string) parameter[PropertyNames.ParameterType], Is.EqualTo("35a9cf05-4eba-4cda-b60c-7cfeaac8f892"));
+            Assert.That((string) parameter[PropertyNames.Scale], Is.Null);
+            Assert.That((string) parameter[PropertyNames.StateDependence], Is.Null);
+            Assert.That((string) parameter[PropertyNames.Group], Is.Null);
             Assert.IsFalse((bool) parameter[PropertyNames.IsOptionDependent]);
-            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string) parameter[PropertyNames.Owner]);
+            Assert.That((string) parameter[PropertyNames.Owner], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
 
             var expectedParameterSubscriptions = new string[] { };
             var parameterSubscriptionsArray = (JArray) parameter[PropertyNames.ParameterSubscription];
@@ -136,29 +136,29 @@ namespace WebservicesIntegrationTests
             // get the created ParameterValueSet as a side effect of creating Parameter from the result by it's unique id
             var valueSetsArray = (JArray) parameter[PropertyNames.ValueSet];
             IList<string> valueSets = valueSetsArray.Select(x => (string) x).ToList();
-            Assert.AreEqual(1, valueSets.Count);
+            Assert.That(valueSets.Count, Is.EqualTo(1));
 
             var parameterValueSet = jArray.Single(x => (string) x[PropertyNames.Iid] == valueSets[0]);
 
             // verify the amount of returned properties 
-            Assert.AreEqual(11, parameterValueSet.Children().Count());
+            Assert.That(parameterValueSet.Children().Count(), Is.EqualTo(11));
 
             // assert that the properties are what is expected
-            Assert.AreEqual(valueSets[0], (string) parameterValueSet[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int) parameterValueSet[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("ParameterValueSet", (string) parameterValueSet[PropertyNames.ClassKind]);
+            Assert.That((string) parameterValueSet[PropertyNames.Iid], Is.EqualTo(valueSets[0]));
+            Assert.That((int) parameterValueSet[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string) parameterValueSet[PropertyNames.ClassKind], Is.EqualTo("ParameterValueSet"));
 
-            Assert.AreEqual("MANUAL", (string) parameterValueSet[PropertyNames.ValueSwitch]);
+            Assert.That((string) parameterValueSet[PropertyNames.ValueSwitch], Is.EqualTo("MANUAL"));
 
             const string emptyProperty = "[\"-\"]";
-            Assert.AreEqual(emptyProperty, (string) parameterValueSet[PropertyNames.Published]);
-            Assert.AreEqual(emptyProperty, (string) parameterValueSet[PropertyNames.Formula]);
-            Assert.AreEqual(emptyProperty, (string) parameterValueSet[PropertyNames.Computed]);
-            Assert.AreEqual(emptyProperty, (string) parameterValueSet[PropertyNames.Manual]);
-            Assert.AreEqual(emptyProperty, (string) parameterValueSet[PropertyNames.Reference]);
+            Assert.That((string) parameterValueSet[PropertyNames.Published], Is.EqualTo(emptyProperty));
+            Assert.That((string) parameterValueSet[PropertyNames.Formula], Is.EqualTo(emptyProperty));
+            Assert.That((string) parameterValueSet[PropertyNames.Computed], Is.EqualTo(emptyProperty));
+            Assert.That((string) parameterValueSet[PropertyNames.Manual], Is.EqualTo(emptyProperty));
+            Assert.That((string) parameterValueSet[PropertyNames.Reference], Is.EqualTo(emptyProperty));
 
-            Assert.IsNull((string) parameterValueSet[PropertyNames.ActualState]);
-            Assert.IsNull((string) parameterValueSet[PropertyNames.ActualOption]);
+            Assert.That((string) parameterValueSet[PropertyNames.ActualState], Is.Null);
+            Assert.That((string) parameterValueSet[PropertyNames.ActualOption], Is.Null);
         }
 
         [Test]
@@ -243,12 +243,12 @@ namespace WebservicesIntegrationTests
 
             var engineeeringModel = jArray.Single(x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
 
-            Assert.AreEqual(2, (int) engineeeringModel[PropertyNames.RevisionNumber]);
+            Assert.That((int) engineeeringModel[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             // get a specific ElementDefinition from the result by it's unique id
             var elementDefinition = jArray.Single(x => (string) x[PropertyNames.Iid] == "f73860b2-12f0-43e4-b8b2-c81862c0a159");
 
-            Assert.AreEqual(2, (int) elementDefinition[PropertyNames.RevisionNumber]);
+            Assert.That((int) elementDefinition[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             var expectedParameters = new[]
             {
@@ -264,22 +264,22 @@ namespace WebservicesIntegrationTests
             var parameter = jArray.Single(x => (string) x[PropertyNames.Iid] == "2cd4eb9c-e92c-41b2-968c-f03ff7010bad");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(14, parameter.Children().Count());
+            Assert.That(parameter.Children().Count(), Is.EqualTo(14));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("2cd4eb9c-e92c-41b2-968c-f03ff7010bad", (string) parameter[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int) parameter[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("Parameter", (string) parameter[PropertyNames.ClassKind]);
+            Assert.That((string) parameter[PropertyNames.Iid], Is.EqualTo("2cd4eb9c-e92c-41b2-968c-f03ff7010bad"));
+            Assert.That((int) parameter[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string) parameter[PropertyNames.ClassKind], Is.EqualTo("Parameter"));
 
-            Assert.IsNull((string) parameter[PropertyNames.RequestedBy]);
+            Assert.That((string) parameter[PropertyNames.RequestedBy], Is.Null);
             Assert.IsFalse((bool) parameter[PropertyNames.AllowDifferentOwnerOfOverride]);
             Assert.IsFalse((bool) parameter[PropertyNames.ExpectsOverride]);
-            Assert.AreEqual("35a9cf05-4eba-4cda-b60c-7cfeaac8f892", (string) parameter[PropertyNames.ParameterType]);
-            Assert.IsNull((string) parameter[PropertyNames.Scale]);
-            Assert.IsNull((string) parameter[PropertyNames.StateDependence]);
-            Assert.IsNull((string) parameter[PropertyNames.Group]);
+            Assert.That((string) parameter[PropertyNames.ParameterType], Is.EqualTo("35a9cf05-4eba-4cda-b60c-7cfeaac8f892"));
+            Assert.That((string) parameter[PropertyNames.Scale], Is.Null);
+            Assert.That((string) parameter[PropertyNames.StateDependence], Is.Null);
+            Assert.That((string) parameter[PropertyNames.Group], Is.Null);
             Assert.IsFalse((bool) parameter[PropertyNames.IsOptionDependent]);
-            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string) parameter[PropertyNames.Owner]);
+            Assert.That((string) parameter[PropertyNames.Owner], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
 
             var expectedParameterSubscriptions = new string[] { };
             var parameterSubscriptionsArray = (JArray) parameter[PropertyNames.ParameterSubscription];
@@ -289,29 +289,29 @@ namespace WebservicesIntegrationTests
             // get the created ParameterValueSet as a side effect of creating Parameter from the result by it's unique id
             var valueSetsArray = (JArray) parameter[PropertyNames.ValueSet];
             IList<string> valueSets = valueSetsArray.Select(x => (string) x).ToList();
-            Assert.AreEqual(1, valueSets.Count);
+            Assert.That(valueSets.Count, Is.EqualTo(1));
 
             var parameterValueSet = jArray.Single(x => (string) x[PropertyNames.Iid] == valueSets[0]);
 
             // verify the amount of returned properties 
-            Assert.AreEqual(11, parameterValueSet.Children().Count());
+            Assert.That(parameterValueSet.Children().Count(), Is.EqualTo(11));
 
             // assert that the properties are what is expected
-            Assert.AreEqual(valueSets[0], (string) parameterValueSet[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int) parameterValueSet[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("ParameterValueSet", (string) parameterValueSet[PropertyNames.ClassKind]);
+            Assert.That((string) parameterValueSet[PropertyNames.Iid], Is.EqualTo(valueSets[0]));
+            Assert.That((int) parameterValueSet[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string) parameterValueSet[PropertyNames.ClassKind], Is.EqualTo("ParameterValueSet"));
 
-            Assert.AreEqual("MANUAL", (string) parameterValueSet[PropertyNames.ValueSwitch]);
+            Assert.That((string) parameterValueSet[PropertyNames.ValueSwitch], Is.EqualTo("MANUAL"));
 
             const string emptyProperty = "[\"-\"]";
-            Assert.AreEqual(emptyProperty, (string) parameterValueSet[PropertyNames.Published]);
-            Assert.AreEqual(emptyProperty, (string) parameterValueSet[PropertyNames.Formula]);
-            Assert.AreEqual(emptyProperty, (string) parameterValueSet[PropertyNames.Computed]);
-            Assert.AreEqual(emptyProperty, (string) parameterValueSet[PropertyNames.Manual]);
-            Assert.AreEqual(emptyProperty, (string) parameterValueSet[PropertyNames.Reference]);
+            Assert.That((string) parameterValueSet[PropertyNames.Published], Is.EqualTo(emptyProperty));
+            Assert.That((string) parameterValueSet[PropertyNames.Formula], Is.EqualTo(emptyProperty));
+            Assert.That((string) parameterValueSet[PropertyNames.Computed], Is.EqualTo(emptyProperty));
+            Assert.That((string) parameterValueSet[PropertyNames.Manual], Is.EqualTo(emptyProperty));
+            Assert.That((string) parameterValueSet[PropertyNames.Reference], Is.EqualTo(emptyProperty));
 
-            Assert.IsNull((string) parameterValueSet[PropertyNames.ActualState]);
-            Assert.IsNull((string) parameterValueSet[PropertyNames.ActualOption]);
+            Assert.That((string) parameterValueSet[PropertyNames.ActualState], Is.Null);
+            Assert.That((string) parameterValueSet[PropertyNames.ActualOption], Is.Null);
         }
 
         [Test]
@@ -327,12 +327,12 @@ namespace WebservicesIntegrationTests
 
             var engineeeringModel = jArray.Single(x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
 
-            Assert.AreEqual(2, (int) engineeeringModel[PropertyNames.RevisionNumber]);
+            Assert.That((int) engineeeringModel[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             // get a specific ElementDefinition from the result by it's unique id
             var elementDefinition = jArray.Single(x => (string) x[PropertyNames.Iid] == "f73860b2-12f0-43e4-b8b2-c81862c0a159");
 
-            Assert.AreEqual(2, (int) elementDefinition[PropertyNames.RevisionNumber]);
+            Assert.That((int) elementDefinition[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             var expectedParameters = new[]
             {
@@ -349,22 +349,22 @@ namespace WebservicesIntegrationTests
             var parameter = jArray.Single(x => (string) x[PropertyNames.Iid] == "2460b6a5-08ff-4cc3-a2cc-8fd5c5cf2736");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(14, parameter.Children().Count());
+            Assert.That(parameter.Children().Count(), Is.EqualTo(14));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("2460b6a5-08ff-4cc3-a2cc-8fd5c5cf2736", (string) parameter[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int) parameter[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("Parameter", (string) parameter[PropertyNames.ClassKind]);
+            Assert.That((string) parameter[PropertyNames.Iid], Is.EqualTo("2460b6a5-08ff-4cc3-a2cc-8fd5c5cf2736"));
+            Assert.That((int) parameter[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string) parameter[PropertyNames.ClassKind], Is.EqualTo("Parameter"));
 
-            Assert.IsNull((string) parameter[PropertyNames.RequestedBy]);
+            Assert.That((string) parameter[PropertyNames.RequestedBy], Is.Null);
             Assert.IsFalse((bool) parameter[PropertyNames.AllowDifferentOwnerOfOverride]);
             Assert.IsFalse((bool) parameter[PropertyNames.ExpectsOverride]);
-            Assert.AreEqual("4a783624-b2bc-4e6d-95b3-11d036f6e917", (string) parameter[PropertyNames.ParameterType]);
-            Assert.IsNull((string) parameter[PropertyNames.Scale]);
-            Assert.IsNull((string) parameter[PropertyNames.StateDependence]);
-            Assert.IsNull((string) parameter[PropertyNames.Group]);
+            Assert.That((string) parameter[PropertyNames.ParameterType], Is.EqualTo("4a783624-b2bc-4e6d-95b3-11d036f6e917"));
+            Assert.That((string) parameter[PropertyNames.Scale], Is.Null);
+            Assert.That((string) parameter[PropertyNames.StateDependence], Is.Null);
+            Assert.That((string) parameter[PropertyNames.Group], Is.Null);
             Assert.IsFalse((bool) parameter[PropertyNames.IsOptionDependent]);
-            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string) parameter[PropertyNames.Owner]);
+            Assert.That((string) parameter[PropertyNames.Owner], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
 
             var expectedParameterSubscriptions = new string[] { };
             var parameterSubscriptionsArray = (JArray) parameter[PropertyNames.ParameterSubscription];
@@ -374,29 +374,29 @@ namespace WebservicesIntegrationTests
             // get the created ParameterValueSet as a side effect of creating Parameter from the result by it's unique id
             var valueSetsArray = (JArray) parameter[PropertyNames.ValueSet];
             IList<string> valueSets = valueSetsArray.Select(x => (string) x).ToList();
-            Assert.AreEqual(1, valueSets.Count);
+            Assert.That(valueSets.Count, Is.EqualTo(1));
 
             var parameterValueSet = jArray.Single(x => (string) x[PropertyNames.Iid] == valueSets[0]);
 
             // verify the amount of returned properties 
-            Assert.AreEqual(11, parameterValueSet.Children().Count());
+            Assert.That(parameterValueSet.Children().Count(), Is.EqualTo(11));
 
             // assert that the properties are what is expected
-            Assert.AreEqual(valueSets[0], (string) parameterValueSet[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int) parameterValueSet[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("ParameterValueSet", (string) parameterValueSet[PropertyNames.ClassKind]);
+            Assert.That((string) parameterValueSet[PropertyNames.Iid], Is.EqualTo(valueSets[0]));
+            Assert.That((int) parameterValueSet[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string) parameterValueSet[PropertyNames.ClassKind], Is.EqualTo("ParameterValueSet"));
 
-            Assert.AreEqual("MANUAL", (string) parameterValueSet[PropertyNames.ValueSwitch]);
+            Assert.That((string) parameterValueSet[PropertyNames.ValueSwitch], Is.EqualTo("MANUAL"));
 
             const string emptyProperty = "[\"-\",\"-\"]";
-            Assert.AreEqual(emptyProperty, (string) parameterValueSet[PropertyNames.Published]);
-            Assert.AreEqual(emptyProperty, (string) parameterValueSet[PropertyNames.Formula]);
-            Assert.AreEqual(emptyProperty, (string) parameterValueSet[PropertyNames.Computed]);
-            Assert.AreEqual(emptyProperty, (string) parameterValueSet[PropertyNames.Manual]);
-            Assert.AreEqual(emptyProperty, (string) parameterValueSet[PropertyNames.Reference]);
+            Assert.That((string) parameterValueSet[PropertyNames.Published], Is.EqualTo(emptyProperty));
+            Assert.That((string) parameterValueSet[PropertyNames.Formula], Is.EqualTo(emptyProperty));
+            Assert.That((string) parameterValueSet[PropertyNames.Computed], Is.EqualTo(emptyProperty));
+            Assert.That((string) parameterValueSet[PropertyNames.Manual], Is.EqualTo(emptyProperty));
+            Assert.That((string) parameterValueSet[PropertyNames.Reference], Is.EqualTo(emptyProperty));
 
-            Assert.IsNull((string) parameterValueSet[PropertyNames.ActualState]);
-            Assert.IsNull((string) parameterValueSet[PropertyNames.ActualOption]);
+            Assert.That((string) parameterValueSet[PropertyNames.ActualState], Is.Null);
+            Assert.That((string) parameterValueSet[PropertyNames.ActualOption], Is.Null);
         }
 
         [Test]
@@ -411,12 +411,12 @@ namespace WebservicesIntegrationTests
 
             var engineeeringModel = jArray.Single(x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
 
-            Assert.AreEqual(2, (int) engineeeringModel[PropertyNames.RevisionNumber]);
+            Assert.That((int) engineeeringModel[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             // get a specific ElementDefinition from the result by it's unique id
             var elementDefinition = jArray.Single(x => (string) x[PropertyNames.Iid] == "f73860b2-12f0-43e4-b8b2-c81862c0a159");
 
-            Assert.AreEqual(2, (int) elementDefinition[PropertyNames.RevisionNumber]);
+            Assert.That((int) elementDefinition[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             var expectedParameters = new[]
             {
@@ -433,22 +433,22 @@ namespace WebservicesIntegrationTests
             var parameter = jArray.Single(x => (string) x[PropertyNames.Iid] == "9600b225-a4be-47b1-92b1-4dc2d8894ea3");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(14, parameter.Children().Count());
+            Assert.That(parameter.Children().Count(), Is.EqualTo(14));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("9600b225-a4be-47b1-92b1-4dc2d8894ea3", (string) parameter[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int) parameter[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("Parameter", (string) parameter[PropertyNames.ClassKind]);
+            Assert.That((string) parameter[PropertyNames.Iid], Is.EqualTo("9600b225-a4be-47b1-92b1-4dc2d8894ea3"));
+            Assert.That((int) parameter[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string) parameter[PropertyNames.ClassKind], Is.EqualTo("Parameter"));
 
-            Assert.IsNull((string) parameter[PropertyNames.RequestedBy]);
+            Assert.That((string) parameter[PropertyNames.RequestedBy], Is.Null);
             Assert.IsFalse((bool) parameter[PropertyNames.AllowDifferentOwnerOfOverride]);
             Assert.IsFalse((bool) parameter[PropertyNames.ExpectsOverride]);
-            Assert.AreEqual("35a9cf05-4eba-4cda-b60c-7cfeaac8f892", (string) parameter[PropertyNames.ParameterType]);
-            Assert.IsNull((string) parameter[PropertyNames.Scale]);
-            Assert.IsNull((string) parameter[PropertyNames.StateDependence]);
-            Assert.IsNull((string) parameter[PropertyNames.Group]);
+            Assert.That((string) parameter[PropertyNames.ParameterType], Is.EqualTo("35a9cf05-4eba-4cda-b60c-7cfeaac8f892"));
+            Assert.That((string) parameter[PropertyNames.Scale], Is.Null);
+            Assert.That((string) parameter[PropertyNames.StateDependence], Is.Null);
+            Assert.That((string) parameter[PropertyNames.Group], Is.Null);
             Assert.IsTrue((bool) parameter[PropertyNames.IsOptionDependent]);
-            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string) parameter[PropertyNames.Owner]);
+            Assert.That((string) parameter[PropertyNames.Owner], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
 
             var expectedParameterSubscriptions = new string[] { };
             var parameterSubscriptionsArray = (JArray) parameter[PropertyNames.ParameterSubscription];
@@ -458,32 +458,30 @@ namespace WebservicesIntegrationTests
             // get the created ParameterValueSet as a side effect of creating Parameter from the result by it's unique id
             var valueSetsArray = (JArray) parameter[PropertyNames.ValueSet];
             IList<string> valueSets = valueSetsArray.Select(x => (string) x).ToList();
-            Assert.AreEqual(1, valueSets.Count);
+            Assert.That(valueSets.Count, Is.EqualTo(1));
 
             var parameterValueSet = jArray.Single(x => (string) x[PropertyNames.Iid] == valueSets[0]);
 
             // verify the amount of returned properties 
-            Assert.AreEqual(11, parameterValueSet.Children().Count());
+            Assert.That(parameterValueSet.Children().Count(), Is.EqualTo(11));
 
             // assert that the properties are what is expected
-            Assert.AreEqual(valueSets[0], (string) parameterValueSet[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int) parameterValueSet[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("ParameterValueSet", (string) parameterValueSet[PropertyNames.ClassKind]);
+            Assert.That((string) parameterValueSet[PropertyNames.Iid], Is.EqualTo(valueSets[0]));
+            Assert.That((int) parameterValueSet[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string) parameterValueSet[PropertyNames.ClassKind], Is.EqualTo("ParameterValueSet"));
 
-            Assert.AreEqual("MANUAL", (string) parameterValueSet[PropertyNames.ValueSwitch]);
+            Assert.That((string) parameterValueSet[PropertyNames.ValueSwitch], Is.EqualTo("MANUAL"));
 
             const string emptyProperty = "[\"-\"]";
-            Assert.AreEqual(emptyProperty, (string) parameterValueSet[PropertyNames.Published]);
-            Assert.AreEqual(emptyProperty, (string) parameterValueSet[PropertyNames.Formula]);
-            Assert.AreEqual(emptyProperty, (string) parameterValueSet[PropertyNames.Computed]);
-            Assert.AreEqual(emptyProperty, (string) parameterValueSet[PropertyNames.Manual]);
-            Assert.AreEqual(emptyProperty, (string) parameterValueSet[PropertyNames.Reference]);
+            Assert.That((string) parameterValueSet[PropertyNames.Published], Is.EqualTo(emptyProperty));
+            Assert.That((string) parameterValueSet[PropertyNames.Formula], Is.EqualTo(emptyProperty));
+            Assert.That((string) parameterValueSet[PropertyNames.Computed], Is.EqualTo(emptyProperty));
+            Assert.That((string) parameterValueSet[PropertyNames.Manual], Is.EqualTo(emptyProperty));
+            Assert.That((string) parameterValueSet[PropertyNames.Reference], Is.EqualTo(emptyProperty));
 
-            Assert.IsNull((string) parameterValueSet[PropertyNames.ActualState]);
+            Assert.That((string) parameterValueSet[PropertyNames.ActualState], Is.Null);
 
-            Assert.AreEqual(
-                "bebcc9f4-ff20-4569-bbf6-d1acf27a8107",
-                (string) parameterValueSet[PropertyNames.ActualOption]);
+            Assert.That((string) parameterValueSet[PropertyNames.ActualOption], Is.EqualTo("bebcc9f4-ff20-4569-bbf6-d1acf27a8107"));
         }
 
         [Test]
@@ -498,39 +496,33 @@ namespace WebservicesIntegrationTests
 
             var engineeeringModel = jArray.Single(x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
 
-            Assert.AreEqual(2, (int) engineeeringModel[PropertyNames.RevisionNumber]);
+            Assert.That((int) engineeeringModel[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             var parameterValueSet = jArray.Single(x => (string) x[PropertyNames.ClassKind] == "ParameterValueSet");
-            Assert.AreEqual(2, (int) parameterValueSet[PropertyNames.RevisionNumber]);
+            Assert.That((int) parameterValueSet[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             var parameterOverrideValueSet = jArray.Single(x => (string) x[PropertyNames.ClassKind] == "ParameterOverrideValueSet");
 
-            Assert.AreEqual(2, (int) parameterOverrideValueSet[PropertyNames.RevisionNumber]);
+            Assert.That((int) parameterOverrideValueSet[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
-            Assert.AreEqual(
-                (string) parameterValueSet[PropertyNames.Iid],
-                (string) parameterOverrideValueSet[PropertyNames.ParameterValueSet]);
+            Assert.That((string) parameterOverrideValueSet[PropertyNames.ParameterValueSet], Is.EqualTo((string) parameterValueSet[PropertyNames.Iid]));
 
             var parameterSubscriptionValueSet =
                 jArray.Single(x => (string) x[PropertyNames.ClassKind] == "ParameterSubscriptionValueSet");
 
-            Assert.AreEqual(2, (int) parameterSubscriptionValueSet[PropertyNames.RevisionNumber]);
+            Assert.That((int) parameterSubscriptionValueSet[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
-            Assert.AreEqual(
-                (string) parameterValueSet[PropertyNames.Iid],
-                (string) parameterSubscriptionValueSet[PropertyNames.SubscribedValueSet]);
+            Assert.That((string) parameterSubscriptionValueSet[PropertyNames.SubscribedValueSet], Is.EqualTo((string) parameterValueSet[PropertyNames.Iid]));
 
             var parameterSubscription = jArray.Single(
                 x => (string) x[PropertyNames.Iid] == "f1f076c4-5307-42b8-a171-3263a9e7bb21");
 
-            Assert.AreEqual(2, (int) parameterSubscription[PropertyNames.RevisionNumber]);
+            Assert.That((int) parameterSubscription[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
-            Assert.AreEqual(
-                (string) parameterSubscriptionValueSet[PropertyNames.Iid],
-                (string) parameterSubscription[PropertyNames.ValueSet][0]);
+            Assert.That((string) parameterSubscription[PropertyNames.ValueSet][0], Is.EqualTo((string) parameterSubscriptionValueSet[PropertyNames.Iid]));
 
             var parameter = jArray.Single(x => (string) x[PropertyNames.Iid] == "6c5aff74-f983-4aa8-a9d6-293b3429307c");
-            Assert.AreEqual(2, (int) parameter[PropertyNames.RevisionNumber]);
+            Assert.That((int) parameter[PropertyNames.RevisionNumber], Is.EqualTo(2));
             var expectedValueSets = new[] { (string) parameterValueSet[PropertyNames.Iid] };
             var valueSetsArray = (JArray) parameter[PropertyNames.ValueSet];
             IList<string> valueSets = valueSetsArray.Select(x => (string) x).ToList();
@@ -539,7 +531,7 @@ namespace WebservicesIntegrationTests
             var parameterOverride = jArray.Single(
                 x => (string) x[PropertyNames.Iid] == "93f767ed-4d22-45f6-ae97-d1dab0d36e1c");
 
-            Assert.AreEqual(2, (int) parameterOverride[PropertyNames.RevisionNumber]);
+            Assert.That((int) parameterOverride[PropertyNames.RevisionNumber], Is.EqualTo(2));
             expectedValueSets = new[] { (string) parameterOverrideValueSet[PropertyNames.Iid] };
             valueSetsArray = (JArray) parameterOverride[PropertyNames.ValueSet];
             valueSets = valueSetsArray.Select(x => (string) x).ToList();
@@ -559,32 +551,30 @@ namespace WebservicesIntegrationTests
             var engineeeringModel = jArray.Single(
                 x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
 
-            Assert.AreEqual(2, (int) engineeeringModel[PropertyNames.RevisionNumber]);
+            Assert.That((int) engineeeringModel[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             var parameterValueSet = jArray.Single(x => (string) x[PropertyNames.ClassKind] == "ParameterValueSet");
-            Assert.AreEqual(2, (int) parameterValueSet[PropertyNames.RevisionNumber]);
+            Assert.That((int) parameterValueSet[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             const string EmptyProperty = "[\"-\"]";
-            Assert.AreEqual("MANUAL", (string) parameterValueSet[PropertyNames.ValueSwitch]);
-            Assert.AreEqual(EmptyProperty, (string) parameterValueSet[PropertyNames.Published]);
-            Assert.AreEqual(EmptyProperty, (string) parameterValueSet[PropertyNames.Formula]);
-            Assert.AreEqual(EmptyProperty, (string) parameterValueSet[PropertyNames.Computed]);
-            Assert.AreEqual(EmptyProperty, (string) parameterValueSet[PropertyNames.Manual]);
-            Assert.AreEqual(EmptyProperty, (string) parameterValueSet[PropertyNames.Reference]);
+            Assert.That((string) parameterValueSet[PropertyNames.ValueSwitch], Is.EqualTo("MANUAL"));
+            Assert.That((string) parameterValueSet[PropertyNames.Published], Is.EqualTo(EmptyProperty));
+            Assert.That((string) parameterValueSet[PropertyNames.Formula], Is.EqualTo(EmptyProperty));
+            Assert.That((string) parameterValueSet[PropertyNames.Computed], Is.EqualTo(EmptyProperty));
+            Assert.That((string) parameterValueSet[PropertyNames.Manual], Is.EqualTo(EmptyProperty));
+            Assert.That((string) parameterValueSet[PropertyNames.Reference], Is.EqualTo(EmptyProperty));
 
-            Assert.AreEqual(
-                "b91bfdbb-4277-4a03-b519-e4db839ef5d4",
-                (string) parameterValueSet[PropertyNames.ActualState]);
+            Assert.That((string) parameterValueSet[PropertyNames.ActualState], Is.EqualTo("b91bfdbb-4277-4a03-b519-e4db839ef5d4"));
 
-            Assert.IsNull((string) parameterValueSet[PropertyNames.ActualOption]);
+            Assert.That((string) parameterValueSet[PropertyNames.ActualOption], Is.Null);
 
             var parameterOverride = jArray.Single(x => (string) x[PropertyNames.ClassKind] == "ParameterOverride");
-            Assert.AreEqual(2, (int) parameterOverride[PropertyNames.RevisionNumber]);
+            Assert.That((int) parameterOverride[PropertyNames.RevisionNumber], Is.EqualTo(2));
             var valueSetsArray = (JArray) parameterOverride[PropertyNames.ValueSet];
             var valueSets = valueSetsArray.Select(x => (string) x).ToList();
-            Assert.AreEqual(1, valueSets.Count);
-            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string) parameterOverride[PropertyNames.Owner]);
-            Assert.AreEqual("6c5aff74-f983-4aa8-a9d6-293b3429307c", (string) parameterOverride[PropertyNames.Parameter]);
+            Assert.That(valueSets.Count, Is.EqualTo(1));
+            Assert.That((string) parameterOverride[PropertyNames.Owner], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
+            Assert.That((string) parameterOverride[PropertyNames.Parameter], Is.EqualTo("6c5aff74-f983-4aa8-a9d6-293b3429307c"));
 
             var expectedParameterSubscriptions = new string[] { };
             var parameterSubscriptionsArray = (JArray) parameterOverride[PropertyNames.ParameterSubscription];
@@ -594,53 +584,47 @@ namespace WebservicesIntegrationTests
             var parameterOverrideValueSet = jArray.Single(
                 x => (string) x[PropertyNames.Iid] == (string) parameterOverride[PropertyNames.ValueSet][0]);
 
-            Assert.AreEqual(2, (int) parameterOverrideValueSet[PropertyNames.RevisionNumber]);
+            Assert.That((int) parameterOverrideValueSet[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
-            Assert.AreEqual(
-                (string) parameterValueSet[PropertyNames.Iid],
-                (string) parameterOverrideValueSet[PropertyNames.ParameterValueSet]);
+            Assert.That((string) parameterOverrideValueSet[PropertyNames.ParameterValueSet], Is.EqualTo((string) parameterValueSet[PropertyNames.Iid]));
 
-            Assert.AreEqual("MANUAL", (string) parameterOverrideValueSet[PropertyNames.ValueSwitch]);
+            Assert.That((string) parameterOverrideValueSet[PropertyNames.ValueSwitch], Is.EqualTo("MANUAL"));
 
-            Assert.AreEqual(EmptyProperty, (string) parameterOverrideValueSet[PropertyNames.Published]);
-            Assert.AreEqual(EmptyProperty, (string) parameterOverrideValueSet[PropertyNames.Formula]);
-            Assert.AreEqual(EmptyProperty, (string) parameterOverrideValueSet[PropertyNames.Computed]);
-            Assert.AreEqual(EmptyProperty, (string) parameterOverrideValueSet[PropertyNames.Manual]);
-            Assert.AreEqual(EmptyProperty, (string) parameterOverrideValueSet[PropertyNames.Reference]);
+            Assert.That((string) parameterOverrideValueSet[PropertyNames.Published], Is.EqualTo(EmptyProperty));
+            Assert.That((string) parameterOverrideValueSet[PropertyNames.Formula], Is.EqualTo(EmptyProperty));
+            Assert.That((string) parameterOverrideValueSet[PropertyNames.Computed], Is.EqualTo(EmptyProperty));
+            Assert.That((string) parameterOverrideValueSet[PropertyNames.Manual], Is.EqualTo(EmptyProperty));
+            Assert.That((string) parameterOverrideValueSet[PropertyNames.Reference], Is.EqualTo(EmptyProperty));
 
             var parameterSubscription = jArray.Single(
                 x => (string) x[PropertyNames.Iid] == "f1f076c4-5307-42b8-a171-3263a9e7bb21");
 
-            Assert.AreEqual(2, (int) parameterSubscription[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string) parameterOverride[PropertyNames.Owner]);
+            Assert.That((int) parameterSubscription[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string) parameterOverride[PropertyNames.Owner], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
 
             valueSetsArray = (JArray) parameterSubscription[PropertyNames.ValueSet];
             valueSets = valueSetsArray.Select(x => (string) x).ToList();
-            Assert.AreEqual(1, valueSets.Count);
+            Assert.That(valueSets.Count, Is.EqualTo(1));
 
             var parameterSubscriptionValueSet = jArray.Single(
                 x => (string) x[PropertyNames.Iid] == (string) parameterSubscription[PropertyNames.ValueSet][0]);
 
-            Assert.AreEqual(2, (int) parameterSubscriptionValueSet[PropertyNames.RevisionNumber]);
+            Assert.That((int) parameterSubscriptionValueSet[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
-            Assert.AreEqual(
-                (string) parameterValueSet[PropertyNames.Iid],
-                (string) parameterSubscriptionValueSet[PropertyNames.SubscribedValueSet]);
+            Assert.That((string) parameterSubscriptionValueSet[PropertyNames.SubscribedValueSet], Is.EqualTo((string) parameterValueSet[PropertyNames.Iid]));
 
-            Assert.AreEqual(
-                (string) parameterValueSet[PropertyNames.Iid],
-                (string) parameterSubscriptionValueSet[PropertyNames.SubscribedValueSet]);
+            Assert.That((string) parameterSubscriptionValueSet[PropertyNames.SubscribedValueSet], Is.EqualTo((string) parameterValueSet[PropertyNames.Iid]));
 
-            Assert.AreEqual(EmptyProperty, (string) parameterSubscriptionValueSet[PropertyNames.Manual]);
-            Assert.AreEqual("MANUAL", (string) parameterSubscriptionValueSet[PropertyNames.ValueSwitch]);
+            Assert.That((string) parameterSubscriptionValueSet[PropertyNames.Manual], Is.EqualTo(EmptyProperty));
+            Assert.That((string) parameterSubscriptionValueSet[PropertyNames.ValueSwitch], Is.EqualTo("MANUAL"));
 
             var parameter = jArray.Single(x => (string) x[PropertyNames.Iid] == "6c5aff74-f983-4aa8-a9d6-293b3429307c");
-            Assert.AreEqual(2, (int) parameter[PropertyNames.RevisionNumber]);
+            Assert.That((int) parameter[PropertyNames.RevisionNumber], Is.EqualTo(2));
             var expectedValueSets = new[] { (string) parameterValueSet[PropertyNames.Iid] };
             valueSetsArray = (JArray) parameter[PropertyNames.ValueSet];
             valueSets = valueSetsArray.Select(x => (string) x).ToList();
             Assert.That(valueSets, Is.EquivalentTo(expectedValueSets));
-            Assert.AreEqual("db690d7d-761c-47fd-96d3-840d698a89dc", (string) parameter[PropertyNames.StateDependence]);
+            Assert.That((string) parameter[PropertyNames.StateDependence], Is.EqualTo("db690d7d-761c-47fd-96d3-840d698a89dc"));
         }
 
         [Test]
@@ -655,10 +639,10 @@ namespace WebservicesIntegrationTests
 
             var engineeeringModel = jArray.Single(x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
 
-            Assert.AreEqual(2, (int) engineeeringModel[PropertyNames.RevisionNumber]);
+            Assert.That((int) engineeeringModel[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             var parameterValueSet = jArray.Single(x => (string) x[PropertyNames.ClassKind] == "ParameterValueSet");
-            Assert.AreEqual(2, (int) parameterValueSet[PropertyNames.RevisionNumber]);
+            Assert.That((int) parameterValueSet[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             postBodyPath = this.GetPath("Tests/EngineeringModel/ActualFiniteStateList/PostNewActualFiniteStateList.json");
 
@@ -668,10 +652,10 @@ namespace WebservicesIntegrationTests
             engineeeringModel = jArray.Single(
                 x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
 
-            Assert.AreEqual(3, (int) engineeeringModel[PropertyNames.RevisionNumber]);
+            Assert.That((int) engineeeringModel[PropertyNames.RevisionNumber], Is.EqualTo(3));
 
             var iteration = jArray.Single(x => (string) x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
-            Assert.AreEqual(3, (int) iteration[PropertyNames.RevisionNumber]);
+            Assert.That((int) iteration[PropertyNames.RevisionNumber], Is.EqualTo(3));
 
             postBodyPath = this.GetPath("Tests/EngineeringModel/Parameter/PostUpdateStateDependentParameterToAnotherState.json");
 
@@ -681,27 +665,27 @@ namespace WebservicesIntegrationTests
             engineeeringModel = jArray.Single(
                 x => (string) x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
 
-            Assert.AreEqual(4, (int) engineeeringModel[PropertyNames.RevisionNumber]);
+            Assert.That((int) engineeeringModel[PropertyNames.RevisionNumber], Is.EqualTo(4));
 
             parameterValueSet = jArray.Single(x => (string) x[PropertyNames.ClassKind] == "ParameterValueSet");
-            Assert.AreEqual(4, (int) parameterValueSet[PropertyNames.RevisionNumber]);
+            Assert.That((int) parameterValueSet[PropertyNames.RevisionNumber], Is.EqualTo(4));
 
             const string EmptyProperty = "[\"-\"]";
-            Assert.AreEqual("MANUAL", (string) parameterValueSet[PropertyNames.ValueSwitch]);
-            Assert.AreEqual(EmptyProperty, (string) parameterValueSet[PropertyNames.Published]);
-            Assert.AreEqual(EmptyProperty, (string) parameterValueSet[PropertyNames.Formula]);
-            Assert.AreEqual(EmptyProperty, (string) parameterValueSet[PropertyNames.Computed]);
-            Assert.AreEqual(EmptyProperty, (string) parameterValueSet[PropertyNames.Manual]);
-            Assert.AreEqual(EmptyProperty, (string) parameterValueSet[PropertyNames.Reference]);
+            Assert.That((string) parameterValueSet[PropertyNames.ValueSwitch], Is.EqualTo("MANUAL"));
+            Assert.That((string) parameterValueSet[PropertyNames.Published], Is.EqualTo(EmptyProperty));
+            Assert.That((string) parameterValueSet[PropertyNames.Formula], Is.EqualTo(EmptyProperty));
+            Assert.That((string) parameterValueSet[PropertyNames.Computed], Is.EqualTo(EmptyProperty));
+            Assert.That((string) parameterValueSet[PropertyNames.Manual], Is.EqualTo(EmptyProperty));
+            Assert.That((string) parameterValueSet[PropertyNames.Reference], Is.EqualTo(EmptyProperty));
 
             var parameter = jArray.Single(x => (string) x[PropertyNames.ClassKind] == "Parameter");
-            Assert.AreEqual(4, (int) parameter[PropertyNames.RevisionNumber]);
+            Assert.That((int) parameter[PropertyNames.RevisionNumber], Is.EqualTo(4));
 
             var parameterSubscription = jArray.Single(x => (string) x[PropertyNames.ClassKind] == "ParameterSubscription");
-            Assert.AreEqual(4, (int) parameterSubscription[PropertyNames.RevisionNumber]);
+            Assert.That((int) parameterSubscription[PropertyNames.RevisionNumber], Is.EqualTo(4));
 
             var parameterOverride = jArray.Single(x => (string) x[PropertyNames.ClassKind] == "ParameterOverride");
-            Assert.AreEqual(4, (int) parameterOverride[PropertyNames.RevisionNumber]);
+            Assert.That((int) parameterOverride[PropertyNames.RevisionNumber], Is.EqualTo(4));
         }
 
         /// <summary>
@@ -716,22 +700,22 @@ namespace WebservicesIntegrationTests
             if ((string) parameter[PropertyNames.Iid] == "6c5aff74-f983-4aa8-a9d6-293b3429307c")
             {
                 // verify the amount of returned properties 
-                Assert.AreEqual(14, parameter.Children().Count());
+                Assert.That(parameter.Children().Count(), Is.EqualTo(14));
 
                 // assert that the properties are what is expected
-                Assert.AreEqual("6c5aff74-f983-4aa8-a9d6-293b3429307c", (string) parameter[PropertyNames.Iid]);
-                Assert.AreEqual(1, (int) parameter[PropertyNames.RevisionNumber]);
-                Assert.AreEqual("Parameter", (string) parameter[PropertyNames.ClassKind]);
+                Assert.That((string) parameter[PropertyNames.Iid], Is.EqualTo("6c5aff74-f983-4aa8-a9d6-293b3429307c"));
+                Assert.That((int) parameter[PropertyNames.RevisionNumber], Is.EqualTo(1));
+                Assert.That((string) parameter[PropertyNames.ClassKind], Is.EqualTo("Parameter"));
 
-                Assert.IsNull((string) parameter[PropertyNames.RequestedBy]);
+                Assert.That((string) parameter[PropertyNames.RequestedBy], Is.Null);
                 Assert.IsFalse((bool) parameter[PropertyNames.AllowDifferentOwnerOfOverride]);
                 Assert.IsFalse((bool) parameter[PropertyNames.ExpectsOverride]);
-                Assert.AreEqual("a21c15c4-3e1e-46b5-b109-5063dec1e254", (string) parameter[PropertyNames.ParameterType]);
-                Assert.IsNull((string) parameter[PropertyNames.Scale]);
-                Assert.IsNull((string) parameter[PropertyNames.StateDependence]);
-                Assert.AreEqual((string) parameter[PropertyNames.Group], "b739b3c6-9cc0-4e64-9cc4-ef7463edf559");
+                Assert.That((string) parameter[PropertyNames.ParameterType], Is.EqualTo("a21c15c4-3e1e-46b5-b109-5063dec1e254"));
+                Assert.That((string) parameter[PropertyNames.Scale], Is.Null);
+                Assert.That((string) parameter[PropertyNames.StateDependence], Is.Null);
+                Assert.That("b739b3c6-9cc0-4e64-9cc4-ef7463edf559", Is.EqualTo((string) parameter[PropertyNames.Group]));
                 Assert.IsFalse((bool) parameter[PropertyNames.IsOptionDependent]);
-                Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string) parameter[PropertyNames.Owner]);
+                Assert.That((string) parameter[PropertyNames.Owner], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
 
                 var expectedValueSets = new[] { "af5c88c6-301f-497b-81f7-53748c3900ed" };
                 var valueSetsArray = (JArray) parameter[PropertyNames.ValueSet];
@@ -747,22 +731,22 @@ namespace WebservicesIntegrationTests
             if ((string) parameter[PropertyNames.Iid] == "3f05483f-66ff-4f21-bc76-45956779f66e")
             {
                 // verify the amount of returned properties 
-                Assert.AreEqual(14, parameter.Children().Count());
+                Assert.That(parameter.Children().Count(), Is.EqualTo(14));
 
                 // assert that the properties are what is expected
-                Assert.AreEqual("3f05483f-66ff-4f21-bc76-45956779f66e", (string) parameter[PropertyNames.Iid]);
-                Assert.AreEqual(1, (int) parameter[PropertyNames.RevisionNumber]);
-                Assert.AreEqual("Parameter", (string) parameter[PropertyNames.ClassKind]);
+                Assert.That((string) parameter[PropertyNames.Iid], Is.EqualTo("3f05483f-66ff-4f21-bc76-45956779f66e"));
+                Assert.That((int) parameter[PropertyNames.RevisionNumber], Is.EqualTo(1));
+                Assert.That((string) parameter[PropertyNames.ClassKind], Is.EqualTo("Parameter"));
 
-                Assert.IsNull((string) parameter[PropertyNames.RequestedBy]);
+                Assert.That((string) parameter[PropertyNames.RequestedBy], Is.Null);
                 Assert.IsFalse((bool) parameter[PropertyNames.AllowDifferentOwnerOfOverride]);
                 Assert.IsFalse((bool) parameter[PropertyNames.ExpectsOverride]);
-                Assert.AreEqual("a21c15c4-3e1e-46b5-b109-5063dec1e254", (string) parameter[PropertyNames.ParameterType]);
-                Assert.IsNull((string) parameter[PropertyNames.Scale]);
-                Assert.IsNull((string) parameter[PropertyNames.StateDependence]);
-                Assert.AreEqual((string) parameter[PropertyNames.Group], "b739b3c6-9cc0-4e64-9cc4-ef7463edf559");
+                Assert.That((string) parameter[PropertyNames.ParameterType], Is.EqualTo("a21c15c4-3e1e-46b5-b109-5063dec1e254"));
+                Assert.That((string) parameter[PropertyNames.Scale], Is.Null);
+                Assert.That((string) parameter[PropertyNames.StateDependence], Is.Null);
+                Assert.That("b739b3c6-9cc0-4e64-9cc4-ef7463edf559", Is.EqualTo((string) parameter[PropertyNames.Group]));
                 Assert.IsFalse((bool) parameter[PropertyNames.IsOptionDependent]);
-                Assert.AreEqual("eb759723-14b9-49f4-8611-544d037bb764", (string) parameter[PropertyNames.Owner]);
+                Assert.That((string) parameter[PropertyNames.Owner], Is.EqualTo("eb759723-14b9-49f4-8611-544d037bb764"));
 
                 var expectedValueSets = new[] { "72ec3701-bcb5-4bf6-bd78-30fd1b65e3be" };
                 var valueSetsArray = (JArray) parameter[PropertyNames.ValueSet];

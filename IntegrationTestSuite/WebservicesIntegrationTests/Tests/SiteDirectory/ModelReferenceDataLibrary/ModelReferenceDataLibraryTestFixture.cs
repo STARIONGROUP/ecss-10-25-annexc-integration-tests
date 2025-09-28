@@ -92,11 +92,11 @@ namespace WebservicesIntegrationTests
 
             //SiteDirectory properties
             var siteDirectory = jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
-            Assert.AreEqual(2, (int) siteDirectory[PropertyNames.RevisionNumber]);
+            Assert.That((int) siteDirectory[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             //SiteReferenceDataLibrary properties
             var siteRdl = jArray.Single(x => (string) x[PropertyNames.Iid] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
-            Assert.AreEqual(2, (int) siteRdl[PropertyNames.RevisionNumber]);
+            Assert.That((int) siteRdl[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             var expectedRules = new string[]
             {
@@ -113,7 +113,7 @@ namespace WebservicesIntegrationTests
 
             //ModelReferenceDataLibrary properties
             var modelRdl = jArray.Single(x => (string) x[PropertyNames.Iid] == "3483f2b5-ea29-45cc-8a46-f5f598558fc3");
-            Assert.AreEqual(2, (int) modelRdl[PropertyNames.RevisionNumber]);
+            Assert.That((int) modelRdl[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             expectedRules = new string[]
             {
@@ -138,15 +138,15 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
 
             //Check the amount of objects 
-            Assert.AreEqual(6, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(6));
 
             //SiteDirectory properties
             var siteDirectory = jArray.Single(x => (string) x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
-            Assert.AreEqual(2, (int) siteDirectory[PropertyNames.RevisionNumber]);
+            Assert.That((int) siteDirectory[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             //SiteReferenceDataLibrary properties
             var siteRdl = jArray.Single(x => (string) x[PropertyNames.Iid] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
-            Assert.AreEqual(2, (int) siteRdl[PropertyNames.RevisionNumber]);
+            Assert.That((int) siteRdl[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             var expectedRules = new string[]
             {
@@ -175,7 +175,7 @@ namespace WebservicesIntegrationTests
 
             //ModelReferenceDataLibrary properties
             var modelRdl = jArray.Single(x => (string) x[PropertyNames.Iid] == "3483f2b5-ea29-45cc-8a46-f5f598558fc3");
-            Assert.AreEqual(2, (int) modelRdl[PropertyNames.RevisionNumber]);
+            Assert.That((int) modelRdl[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             expectedRules = new string[]
             {
@@ -201,19 +201,17 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken modelReferenceDataLibrary)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(21, modelReferenceDataLibrary.Children().Count());
+            Assert.That(modelReferenceDataLibrary.Children().Count(), Is.EqualTo(21));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("3483f2b5-ea29-45cc-8a46-f5f598558fc3",
-                (string) modelReferenceDataLibrary[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) modelReferenceDataLibrary[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("ModelReferenceDataLibrary", (string) modelReferenceDataLibrary[PropertyNames.ClassKind]);
+            Assert.That((string) modelReferenceDataLibrary[PropertyNames.Iid], Is.EqualTo("3483f2b5-ea29-45cc-8a46-f5f598558fc3"));
+            Assert.That((int) modelReferenceDataLibrary[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string) modelReferenceDataLibrary[PropertyNames.ClassKind], Is.EqualTo("ModelReferenceDataLibrary"));
 
-            Assert.AreEqual("Test Model Reference Data Library", (string) modelReferenceDataLibrary[PropertyNames.Name]);
-            Assert.AreEqual("TestModelReferenceDataLibrary", (string) modelReferenceDataLibrary[PropertyNames.ShortName]);
+            Assert.That((string) modelReferenceDataLibrary[PropertyNames.Name], Is.EqualTo("Test Model Reference Data Library"));
+            Assert.That((string) modelReferenceDataLibrary[PropertyNames.ShortName], Is.EqualTo("TestModelReferenceDataLibrary"));
 
-            Assert.AreEqual("c454c687-ba3e-44c4-86bc-44544b2c7880",
-                (string) modelReferenceDataLibrary[PropertyNames.RequiredRdl]);
+            Assert.That((string) modelReferenceDataLibrary[PropertyNames.RequiredRdl], Is.EqualTo("c454c687-ba3e-44c4-86bc-44544b2c7880"));
 
             var expectedDefinedCategories = new string[]
             {

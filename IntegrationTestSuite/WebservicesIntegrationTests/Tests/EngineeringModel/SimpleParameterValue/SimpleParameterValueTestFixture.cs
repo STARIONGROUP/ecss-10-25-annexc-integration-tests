@@ -41,7 +41,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(simpleParameterValueUri);
 
             //check if there are the correct amount of SimpleParameterValue objects 
-            Assert.AreEqual(2, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(2));
 
             SimpleParameterValueTestFixture.VerifyProperties(jArray);
         }
@@ -57,7 +57,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(simpleParameterValueUri);
 
             // verify that the correct amount of objects is returned
-            Assert.AreEqual(6, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(6));
 
             // get a specific Iteration from the result by it's unique id
             var iteration = jArray.Single(x => (string) x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
@@ -86,24 +86,24 @@ namespace WebservicesIntegrationTests
             var simpleParameterValueObject = simpleParameterValue.Single(x => (string) x[PropertyNames.Iid] == "ef3b5740-6e0e-463c-99df-f255e38a32b6");
 
             // assert that the properties are what is expected
-            Assert.AreEqual("ef3b5740-6e0e-463c-99df-f255e38a32b6", (string) simpleParameterValueObject[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) simpleParameterValueObject[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("SimpleParameterValue", (string) simpleParameterValueObject[PropertyNames.ClassKind]);
+            Assert.That((string) simpleParameterValueObject[PropertyNames.Iid], Is.EqualTo("ef3b5740-6e0e-463c-99df-f255e38a32b6"));
+            Assert.That((int) simpleParameterValueObject[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string) simpleParameterValueObject[PropertyNames.ClassKind], Is.EqualTo("SimpleParameterValue"));
 
-            Assert.IsNull((string) simpleParameterValueObject[PropertyNames.Scale]);
-            Assert.AreEqual("35a9cf05-4eba-4cda-b60c-7cfeaac8f892", (string) simpleParameterValueObject[PropertyNames.ParameterType]);
-            Assert.AreEqual("[\"true\"]", (string) simpleParameterValueObject[PropertyNames.Value]);
+            Assert.That((string) simpleParameterValueObject[PropertyNames.Scale], Is.Null);
+            Assert.That((string) simpleParameterValueObject[PropertyNames.ParameterType], Is.EqualTo("35a9cf05-4eba-4cda-b60c-7cfeaac8f892"));
+            Assert.That((string) simpleParameterValueObject[PropertyNames.Value], Is.EqualTo("[\"true\"]"));
 
             simpleParameterValueObject = simpleParameterValue.Single(x => (string) x[PropertyNames.Iid] == "bcedefb0-b3ee-4a0b-8137-6561fa23b37f");
 
             // assert that the properties are what is expected
-            Assert.AreEqual("bcedefb0-b3ee-4a0b-8137-6561fa23b37f", (string) simpleParameterValueObject[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) simpleParameterValueObject[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("SimpleParameterValue", (string) simpleParameterValueObject[PropertyNames.ClassKind]);
+            Assert.That((string) simpleParameterValueObject[PropertyNames.Iid], Is.EqualTo("bcedefb0-b3ee-4a0b-8137-6561fa23b37f"));
+            Assert.That((int) simpleParameterValueObject[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string) simpleParameterValueObject[PropertyNames.ClassKind], Is.EqualTo("SimpleParameterValue"));
 
-            Assert.IsNull((string) simpleParameterValueObject[PropertyNames.Scale]);
-            Assert.AreEqual("a21c15c4-3e1e-46b5-b109-5063dec1e254", (string) simpleParameterValueObject[PropertyNames.ParameterType]);
-            Assert.AreEqual("[\"test\"]", (string) simpleParameterValueObject[PropertyNames.Value]);
+            Assert.That((string) simpleParameterValueObject[PropertyNames.Scale], Is.Null);
+            Assert.That((string) simpleParameterValueObject[PropertyNames.ParameterType], Is.EqualTo("a21c15c4-3e1e-46b5-b109-5063dec1e254"));
+            Assert.That((string) simpleParameterValueObject[PropertyNames.Value], Is.EqualTo("[\"test\"]"));
         }
     }
 }

@@ -86,31 +86,31 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken intervalScale)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(19, intervalScale.Children().Count());
+            Assert.That(intervalScale.Children().Count(), Is.EqualTo(19));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("6326d1ea-c032-4a4b-8b10-608c59f1a923", (string) intervalScale["iid"]);
-            Assert.AreEqual(1, (int) intervalScale["revisionNumber"]);
-            Assert.AreEqual("IntervalScale", (string) intervalScale["classKind"]);
+            Assert.That((string) intervalScale["iid"], Is.EqualTo("6326d1ea-c032-4a4b-8b10-608c59f1a923"));
+            Assert.That((int) intervalScale["revisionNumber"], Is.EqualTo(1));
+            Assert.That((string) intervalScale["classKind"], Is.EqualTo("IntervalScale"));
 
-            Assert.AreEqual("Test Interval Scale", (string) intervalScale["name"]);
-            Assert.AreEqual("TestIntervalScale", (string) intervalScale["shortName"]);
+            Assert.That((string) intervalScale["name"], Is.EqualTo("Test Interval Scale"));
+            Assert.That((string) intervalScale["shortName"], Is.EqualTo("TestIntervalScale"));
 
             Assert.IsFalse((bool) intervalScale["isDeprecated"]);
-            Assert.AreEqual("56842970-3915-4369-8712-61cfd8273ef9", (string) intervalScale["unit"]);
+            Assert.That((string) intervalScale["unit"], Is.EqualTo("56842970-3915-4369-8712-61cfd8273ef9"));
 
             var expectedValueDefinitions = new string[] {};
             var valueDefinitionsArray = (JArray) intervalScale["valueDefinition"];
             IList<string> valueDefinitions = valueDefinitionsArray.Select(x => (string) x).ToList();
             Assert.That(valueDefinitions, Is.EquivalentTo(expectedValueDefinitions));
 
-            Assert.AreEqual("NATURAL_NUMBER_SET", (string) intervalScale["numberSet"]);
-            Assert.AreEqual("1", (string) intervalScale["minimumPermissibleValue"]);
+            Assert.That((string) intervalScale["numberSet"], Is.EqualTo("NATURAL_NUMBER_SET"));
+            Assert.That((string) intervalScale["minimumPermissibleValue"], Is.EqualTo("1"));
             Assert.IsTrue((bool) intervalScale["isMinimumInclusive"]);
-            Assert.AreEqual("2", (string) intervalScale["maximumPermissibleValue"]);
+            Assert.That((string) intervalScale["maximumPermissibleValue"], Is.EqualTo("2"));
             Assert.IsTrue((bool) intervalScale["isMaximumInclusive"]);
-            Assert.AreEqual("positive Value Connotation", (string) intervalScale["positiveValueConnotation"]);
-            Assert.AreEqual("negative Value Connotation", (string) intervalScale["negativeValueConnotation"]);
+            Assert.That((string) intervalScale["positiveValueConnotation"], Is.EqualTo("positive Value Connotation"));
+            Assert.That((string) intervalScale["negativeValueConnotation"], Is.EqualTo("negative Value Connotation"));
 
             var expectedMappingToReferenceScales = new string[] {};
             var mappingToReferenceScalesArray = (JArray) intervalScale["mappingToReferenceScale"];

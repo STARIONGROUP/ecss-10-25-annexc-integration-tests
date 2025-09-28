@@ -125,7 +125,7 @@ namespace WebservicesIntegrationTests
             Assert.That((string)fileRevision[PropertyNames.Name], Is.EqualTo("FileRevision"));
             Assert.That((string)fileRevision[PropertyNames.CreatedOn], Is.EqualTo("2016-11-02T13:58:35.936Z"));
 
-            Assert.IsNull((string) fileRevision[PropertyNames.ContainingFolder]);
+            Assert.That((string) fileRevision[PropertyNames.ContainingFolder], Is.Null);
             Assert.That((string)fileRevision[PropertyNames.Creator], Is.EqualTo("284334dd-e8e5-42d6-bc8a-715c507a7f02"));
             Assert.That((string)fileRevision[PropertyNames.ContentHash], Is.EqualTo("B95EC201AE3EE89D407449D692E69BB97C228A7E"));
 

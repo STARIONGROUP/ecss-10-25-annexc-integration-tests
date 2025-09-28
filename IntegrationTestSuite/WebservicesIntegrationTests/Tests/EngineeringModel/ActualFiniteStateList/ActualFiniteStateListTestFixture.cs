@@ -348,7 +348,7 @@ namespace WebservicesIntegrationTests
             var possibleStateArray = (JArray) actualFiniteState[PropertyNames.PossibleState];
 
             IList<string> possibleStates = possibleStateArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEqual(expectedPossibleStates, possibleStates);
+            Assert.That(possibleStates, Is.EqualTo(expectedPossibleStates));
 
             // get a ActualFiniteStateList from the result by unknown id
             actualFiniteState = jArray.Single(
@@ -371,7 +371,7 @@ namespace WebservicesIntegrationTests
 
             possibleStateArray = (JArray) actualFiniteState[PropertyNames.PossibleState];
             possibleStates = possibleStateArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEqual(expectedPossibleStates, possibleStates);
+            Assert.That(possibleStates, Is.EqualTo(expectedPossibleStates));
 
             // Reorder containment
             postBodyPath = this.GetPath("Tests/EngineeringModel/ActualFiniteStateList/PostActualFiniteStateListRearrangePossibleFiniteStateList.json");
@@ -460,7 +460,7 @@ namespace WebservicesIntegrationTests
             var expectedPossibleStates = new[] { "20f4d6aa-f9d3-4e91-aae9-bfbe77ae9b79" };
             var possibleStateArray = (JArray) actualFiniteState1[PropertyNames.PossibleState];
             IList<string> possibleStates = possibleStateArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEqual(expectedPossibleStates, possibleStates);
+            Assert.That(possibleStates, Is.EqualTo(expectedPossibleStates));
 
             // get a specific ActualFiniteStateList from the result by unknown id
             var actualFiniteState2 = jArray.Single(
@@ -478,7 +478,7 @@ namespace WebservicesIntegrationTests
             expectedPossibleStates = new[] { "b8fdfac4-1c40-475a-ac6c-968654b689b6" };
             possibleStateArray = (JArray) actualFiniteState2[PropertyNames.PossibleState];
             possibleStates = possibleStateArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEqual(expectedPossibleStates, possibleStates);
+            Assert.That(possibleStates, Is.EqualTo(expectedPossibleStates));
         }
 
         /// <summary>

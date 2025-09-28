@@ -97,7 +97,7 @@ namespace WebservicesIntegrationTests
             Assert.That((string)idCorrespondence[PropertyNames.ClassKind], Is.EqualTo("IdCorrespondence"));
 
             Assert.That((string)idCorrespondence[PropertyNames.ExternalId], Is.EqualTo("internalThing"));
-            Assert.AreEqual("35a8ee03-6786-4c39-967d-3c5b438f0c64", (string) idCorrespondence[PropertyNames.InternalThing]);
+            Assert.That((string) idCorrespondence[PropertyNames.InternalThing], Is.EqualTo("35a8ee03-6786-4c39-967d-3c5b438f0c64"));
         }
     }
 }

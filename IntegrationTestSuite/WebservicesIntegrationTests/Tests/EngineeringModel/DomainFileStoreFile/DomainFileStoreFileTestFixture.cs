@@ -217,7 +217,7 @@ namespace WebservicesIntegrationTests
                             Assert.That((string)fileRevision[PropertyNames.ClassKind], Is.EqualTo("FileRevision"));
             Assert.That((string)fileRevision[PropertyNames.Name], Is.EqualTo("FileTest"));
 
-            Assert.IsNull((string) fileRevision[PropertyNames.ContainingFolder]);
+            Assert.That((string) fileRevision[PropertyNames.ContainingFolder], Is.Null);
             Assert.That((string)fileRevision[PropertyNames.Creator], Is.EqualTo("284334dd-e8e5-42d6-bc8a-715c507a7f02"));
             Assert.That((string)fileRevision[PropertyNames.ContentHash], Is.EqualTo("2990BA2444A937A28E7B1E2465FCDF949B8F5368"));
 
@@ -266,7 +266,7 @@ namespace WebservicesIntegrationTests
             Assert.That((string)fileRevision[PropertyNames.ClassKind], Is.EqualTo("FileRevision"));
             Assert.That((string)fileRevision[PropertyNames.Name], Is.EqualTo("Revision 2_1525ED651E5B609DAE099DEEDA8DBDB49CFF956F"));
 
-            Assert.IsNull((string) fileRevision[PropertyNames.ContainingFolder]);
+            Assert.That((string) fileRevision[PropertyNames.ContainingFolder], Is.Null);
             Assert.That((string)fileRevision[PropertyNames.Creator], Is.EqualTo("284334dd-e8e5-42d6-bc8a-715c507a7f02"));
             Assert.That((string)fileRevision[PropertyNames.ContentHash], Is.EqualTo("1525ED651E5B609DAE099DEEDA8DBDB49CFF956F"));
 

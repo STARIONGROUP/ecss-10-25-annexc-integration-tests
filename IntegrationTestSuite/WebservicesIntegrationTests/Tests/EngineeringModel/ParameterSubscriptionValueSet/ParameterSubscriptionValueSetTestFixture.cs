@@ -63,7 +63,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(parameterSubscriptionValueSetUri);
 
             //check if there are 6 objects
-            Assert.AreEqual(6, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(6));
 
             // get a specific Iteration from the result by it's unique id
             var iteration = jArray.Single(x => (string) x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
@@ -95,22 +95,19 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken parameterSubscriptionValueSet)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(6, parameterSubscriptionValueSet.Children().Count());
+            Assert.That(parameterSubscriptionValueSet.Children().Count(), Is.EqualTo(6));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("a179af79-fd09-44c8-a8a6-3c4c602c7dbf",
-                (string) parameterSubscriptionValueSet[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) parameterSubscriptionValueSet[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("ParameterSubscriptionValueSet",
-                (string) parameterSubscriptionValueSet[PropertyNames.ClassKind]);
+            Assert.That((string) parameterSubscriptionValueSet[PropertyNames.Iid], Is.EqualTo("a179af79-fd09-44c8-a8a6-3c4c602c7dbf"));
+            Assert.That((int) parameterSubscriptionValueSet[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string) parameterSubscriptionValueSet[PropertyNames.ClassKind], Is.EqualTo("ParameterSubscriptionValueSet"));
 
-            Assert.AreEqual("af5c88c6-301f-497b-81f7-53748c3900ed",
-                (string) parameterSubscriptionValueSet[PropertyNames.SubscribedValueSet]);
+            Assert.That((string) parameterSubscriptionValueSet[PropertyNames.SubscribedValueSet], Is.EqualTo("af5c88c6-301f-497b-81f7-53748c3900ed"));
 
             const string emptyProperty = "[\"-\"]";
-            Assert.AreEqual(emptyProperty, (string) parameterSubscriptionValueSet[PropertyNames.Manual]);
+            Assert.That((string) parameterSubscriptionValueSet[PropertyNames.Manual], Is.EqualTo(emptyProperty));
 
-            Assert.AreEqual("MANUAL", (string) parameterSubscriptionValueSet[PropertyNames.ValueSwitch]);
+            Assert.That((string) parameterSubscriptionValueSet[PropertyNames.ValueSwitch], Is.EqualTo("MANUAL"));
         }
 
         [Test]

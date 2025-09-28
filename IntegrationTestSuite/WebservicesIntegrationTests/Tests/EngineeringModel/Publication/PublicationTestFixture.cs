@@ -84,13 +84,13 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
             var engineeeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
-            Assert.AreEqual(2, (int)engineeeringModel[PropertyNames.RevisionNumber]);
+            Assert.That((int)engineeeringModel[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             // get a specific ParameterValueSet from the result by it's unique id
             var parameterValueSet = jArray.Single(x => (string)x[PropertyNames.Iid] == "72ec3701-bcb5-4bf6-bd78-30fd1b65e3be");
 
-            Assert.AreEqual(2, (int)parameterValueSet[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("[\"test\"]", (string)parameterValueSet[PropertyNames.Manual]);
+            Assert.That((int)parameterValueSet[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)parameterValueSet[PropertyNames.Manual], Is.EqualTo("[\"test\"]"));
 
             postBodyPath = this.GetPath("Tests/EngineeringModel/Publication/PostNewPublication.json");
 
@@ -98,11 +98,11 @@ namespace WebservicesIntegrationTests
             jArray = this.WebClient.PostDto(iterationUri, postBody);
 
             engineeeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
-            Assert.AreEqual(3, (int)engineeeringModel[PropertyNames.RevisionNumber]);
+            Assert.That((int)engineeeringModel[PropertyNames.RevisionNumber], Is.EqualTo(3));
 
             // get a specific Iteration from the result by it's unique id
             var iteration = jArray.Single(x => (string)x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
-            Assert.AreEqual(3, (int)iteration[PropertyNames.RevisionNumber]);
+            Assert.That((int)iteration[PropertyNames.RevisionNumber], Is.EqualTo(3));
 
             var expectedPublications = new string[]
                                            {
@@ -114,14 +114,14 @@ namespace WebservicesIntegrationTests
             Assert.That(publications, Is.EquivalentTo(expectedPublications));
 
             parameterValueSet = jArray.Single(x => (string)x[PropertyNames.Iid] == "72ec3701-bcb5-4bf6-bd78-30fd1b65e3be");
-            Assert.AreEqual(3, (int)parameterValueSet[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("[\"test\"]", (string)parameterValueSet[PropertyNames.Published]);
+            Assert.That((int)parameterValueSet[PropertyNames.RevisionNumber], Is.EqualTo(3));
+            Assert.That((string)parameterValueSet[PropertyNames.Published], Is.EqualTo("[\"test\"]"));
 
             // get a specific Publication from the result by it's unique id
             var publication = jArray.Single(x => (string)x[PropertyNames.Iid] == "aec92178-186c-40d5-b23a-78f0423906f6");
 
-            Assert.AreEqual(3, (int)publication[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("Publication", (string)publication[PropertyNames.ClassKind]);
+            Assert.That((int)publication[PropertyNames.RevisionNumber], Is.EqualTo(3));
+            Assert.That((string)publication[PropertyNames.ClassKind], Is.EqualTo("Publication"));
 
             var expectedDomains = new string[]
                                       {
@@ -151,14 +151,14 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken publication)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(6, publication.Children().Count());
+            Assert.That(publication.Children().Count(), Is.EqualTo(6));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("790b9e60-476b-4b6d-8aba-0af15178535e", (string) publication[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) publication[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("Publication", (string) publication[PropertyNames.ClassKind]);
+            Assert.That((string) publication[PropertyNames.Iid], Is.EqualTo("790b9e60-476b-4b6d-8aba-0af15178535e"));
+            Assert.That((int) publication[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string) publication[PropertyNames.ClassKind], Is.EqualTo("Publication"));
 
-            Assert.AreEqual("2016-10-25T09:00:35.936Z", (string) publication[PropertyNames.CreatedOn]);
+            Assert.That((string) publication[PropertyNames.CreatedOn], Is.EqualTo("2016-10-25T09:00:35.936Z"));
 
             var expectedDomains = new string[] {};
             var domainsArray = (JArray) publication[PropertyNames.Domain];

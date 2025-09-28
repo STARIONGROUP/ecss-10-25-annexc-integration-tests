@@ -62,7 +62,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(siteReferenceDataLibraryUri);
 
             //check if there are only two objects
-            Assert.AreEqual(2, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(2));
 
             var siteDirectory = jArray.Single(x => (string) x["iid"] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
             SiteDirectoryTestFixture.VerifyProperties(siteDirectory);
@@ -96,7 +96,7 @@ namespace WebservicesIntegrationTests
                 }
             }
 
-            Assert.AreEqual(sumOfParameterTypeElements, setOfUniqueParameterTypeIids.Count);
+            Assert.That(setOfUniqueParameterTypeIids.Count, Is.EqualTo(sumOfParameterTypeElements));
         }
 
         [Test]
@@ -111,10 +111,10 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.PostDto(uri, postBody);
 
             //check if there are only two objects
-            Assert.AreEqual(2, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(2));
 
             var siteDirectory = jArray.Single(x => (string)x["iid"] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
-            Assert.AreEqual(2, (int)siteDirectory[PropertyNames.RevisionNumber]);
+            Assert.That((int)siteDirectory[PropertyNames.RevisionNumber], Is.EqualTo(2));
 
             // get a specific SimpleUnit from the result by it's unique id
             var simpleUnit = jArray.Single(x => (string)x["iid"] == "56842970-3915-4369-8712-61cfd8273ef9");
@@ -131,16 +131,16 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken siteReferenceDataLibrary)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(22, siteReferenceDataLibrary.Children().Count());
+            Assert.That(siteReferenceDataLibrary.Children().Count(), Is.EqualTo(22));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("c454c687-ba3e-44c4-86bc-44544b2c7880", (string) siteReferenceDataLibrary["iid"]);
-            Assert.AreEqual(1, (int) siteReferenceDataLibrary["revisionNumber"]);
-            Assert.AreEqual("SiteReferenceDataLibrary", (string) siteReferenceDataLibrary["classKind"]);
+            Assert.That((string) siteReferenceDataLibrary["iid"], Is.EqualTo("c454c687-ba3e-44c4-86bc-44544b2c7880"));
+            Assert.That((int) siteReferenceDataLibrary["revisionNumber"], Is.EqualTo(1));
+            Assert.That((string) siteReferenceDataLibrary["classKind"], Is.EqualTo("SiteReferenceDataLibrary"));
 
             Assert.IsFalse((bool) siteReferenceDataLibrary["isDeprecated"]);
-            Assert.AreEqual("Test Reference Data Library", (string) siteReferenceDataLibrary["name"]);
-            Assert.AreEqual("TestRDL", (string) siteReferenceDataLibrary["shortName"]);
+            Assert.That((string) siteReferenceDataLibrary["name"], Is.EqualTo("Test Reference Data Library"));
+            Assert.That((string) siteReferenceDataLibrary["shortName"], Is.EqualTo("TestRDL"));
 
             var expectedAliases = new string[] {};
             var aliasesArray = (JArray) siteReferenceDataLibrary["alias"];

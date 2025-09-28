@@ -397,7 +397,7 @@ namespace WebservicesIntegrationTests
             Assert.IsTrue((bool) cyclicRatioScale["isMinimumInclusive"]);
             Assert.That((string)cyclicRatioScale["maximumPermissibleValue"], Is.EqualTo("360"));
             Assert.IsTrue((bool) cyclicRatioScale["isMaximumInclusive"]);
-            Assert.IsNull((string) cyclicRatioScale["positiveValueConnotation"]);
+            Assert.That((string) cyclicRatioScale["positiveValueConnotation"], Is.Null);
             Assert.That((string)cyclicRatioScale["negativeValueConnotation"], Is.EqualTo(""));
             
             var expectedMappingToReferenceScales = new string[] {};

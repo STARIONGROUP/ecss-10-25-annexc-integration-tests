@@ -41,7 +41,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(relationalExpressionUri);
 
             //check if there are the correct amount of objects 
-            Assert.AreEqual(6, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(6));
 
             RelationalExpressionTestFixture.VerifyProperties(jArray);
         }
@@ -57,7 +57,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(relationalExpressionUri);
 
             // verify that the correct amount of objects is returned
-            Assert.AreEqual(11, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(11));
 
             // get a specific Iteration from the result by it's unique id
             var iteration = jArray.Single(x => (string) x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
@@ -90,30 +90,26 @@ namespace WebservicesIntegrationTests
             var relationalExpressionObject = relationalExpression.Single(x => (string) x[PropertyNames.Iid] == "deaa2560-b704-4b2c-950b-aad02ff84052");
 
             // assert that the properties are what is expected
-            Assert.AreEqual("deaa2560-b704-4b2c-950b-aad02ff84052",
-                (string) relationalExpressionObject[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) relationalExpressionObject[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("RelationalExpression", (string) relationalExpressionObject[PropertyNames.ClassKind]);
+            Assert.That((string) relationalExpressionObject[PropertyNames.Iid], Is.EqualTo("deaa2560-b704-4b2c-950b-aad02ff84052"));
+            Assert.That((int) relationalExpressionObject[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string) relationalExpressionObject[PropertyNames.ClassKind], Is.EqualTo("RelationalExpression"));
 
-            Assert.IsNull((string) relationalExpressionObject[PropertyNames.Scale]);
-            Assert.AreEqual("[\"true\"]", (string) relationalExpressionObject[PropertyNames.Value]);
-            Assert.AreEqual("EQ", (string) relationalExpressionObject[PropertyNames.RelationalOperator]);
-            Assert.AreEqual("35a9cf05-4eba-4cda-b60c-7cfeaac8f892",
-                (string) relationalExpressionObject[PropertyNames.ParameterType]);
+            Assert.That((string) relationalExpressionObject[PropertyNames.Scale], Is.Null);
+            Assert.That((string) relationalExpressionObject[PropertyNames.Value], Is.EqualTo("[\"true\"]"));
+            Assert.That((string) relationalExpressionObject[PropertyNames.RelationalOperator], Is.EqualTo("EQ"));
+            Assert.That((string) relationalExpressionObject[PropertyNames.ParameterType], Is.EqualTo("35a9cf05-4eba-4cda-b60c-7cfeaac8f892"));
 
             relationalExpressionObject = relationalExpression.Single(x => (string) x[PropertyNames.Iid] == "a6e44651-7c4a-4a57-bdf9-c0290497f392");
 
             // assert that the properties are what is expected
-            Assert.AreEqual("a6e44651-7c4a-4a57-bdf9-c0290497f392",
-                (string) relationalExpressionObject[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) relationalExpressionObject[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("RelationalExpression", (string) relationalExpressionObject[PropertyNames.ClassKind]);
+            Assert.That((string) relationalExpressionObject[PropertyNames.Iid], Is.EqualTo("a6e44651-7c4a-4a57-bdf9-c0290497f392"));
+            Assert.That((int) relationalExpressionObject[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string) relationalExpressionObject[PropertyNames.ClassKind], Is.EqualTo("RelationalExpression"));
 
-            Assert.IsNull((string) relationalExpressionObject[PropertyNames.Scale]);
-            Assert.AreEqual("[\"test\"]", (string) relationalExpressionObject[PropertyNames.Value]);
-            Assert.AreEqual("EQ", (string) relationalExpressionObject[PropertyNames.RelationalOperator]);
-            Assert.AreEqual("a21c15c4-3e1e-46b5-b109-5063dec1e254",
-                (string) relationalExpressionObject[PropertyNames.ParameterType]);
+            Assert.That((string) relationalExpressionObject[PropertyNames.Scale], Is.Null);
+            Assert.That((string) relationalExpressionObject[PropertyNames.Value], Is.EqualTo("[\"test\"]"));
+            Assert.That((string) relationalExpressionObject[PropertyNames.RelationalOperator], Is.EqualTo("EQ"));
+            Assert.That((string) relationalExpressionObject[PropertyNames.ParameterType], Is.EqualTo("a21c15c4-3e1e-46b5-b109-5063dec1e254"));
         }
     }
 }

@@ -90,15 +90,15 @@ namespace WebservicesIntegrationTests
             var siteDirectory = jArray.Single(x => (string)x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
 
             // verify that the amount of returned properties 
-            Assert.AreEqual(19, siteDirectory.Children().Count());
+            Assert.That(siteDirectory.Children().Count(), Is.EqualTo(19));
 
-            Assert.AreEqual("f13de6f8-b03a-46e7-a492-53b2f260f294", (string)siteDirectory[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int)siteDirectory[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("SiteDirectory", (string)siteDirectory[PropertyNames.ClassKind]);
-            Assert.AreEqual("Test Site Directory", (string)siteDirectory[PropertyNames.Name]);
-            Assert.AreEqual("TEST-SiteDir", (string)siteDirectory[PropertyNames.ShortName]);
-            Assert.AreEqual("ee3ae5ff-ac5e-4957-bab1-7698fba2a267", (string)siteDirectory[PropertyNames.DefaultParticipantRole]);
-            Assert.AreEqual("2428f4d9-f26d-4112-9d56-1c940748df69", (string)siteDirectory[PropertyNames.DefaultPersonRole]);
+            Assert.That((string)siteDirectory[PropertyNames.Iid], Is.EqualTo("f13de6f8-b03a-46e7-a492-53b2f260f294"));
+            Assert.That((int)siteDirectory[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)siteDirectory[PropertyNames.ClassKind], Is.EqualTo("SiteDirectory"));
+            Assert.That((string)siteDirectory[PropertyNames.Name], Is.EqualTo("Test Site Directory"));
+            Assert.That((string)siteDirectory[PropertyNames.ShortName], Is.EqualTo("TEST-SiteDir"));
+            Assert.That((string)siteDirectory[PropertyNames.DefaultParticipantRole], Is.EqualTo("ee3ae5ff-ac5e-4957-bab1-7698fba2a267"));
+            Assert.That((string)siteDirectory[PropertyNames.DefaultPersonRole], Is.EqualTo("2428f4d9-f26d-4112-9d56-1c940748df69"));
 
             var expectedOrganizations = new string[] { "cd22fc45-d898-4fac-85fc-fbcb7d7b12a7" };
             var organizationArray = (JArray)siteDirectory[PropertyNames.Organization];
@@ -162,16 +162,16 @@ namespace WebservicesIntegrationTests
             var siteReferenceDataLibrary = jArray.Single(x => (string)x[PropertyNames.Iid] == "c454c687-ba3e-44c4-86bc-44544b2c7880");
 
             // verify the amount of returned properties 
-            Assert.AreEqual(22, siteReferenceDataLibrary.Children().Count());
+            Assert.That(siteReferenceDataLibrary.Children().Count(), Is.EqualTo(22));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("c454c687-ba3e-44c4-86bc-44544b2c7880", (string)siteReferenceDataLibrary[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int)siteReferenceDataLibrary[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("SiteReferenceDataLibrary", (string)siteReferenceDataLibrary[PropertyNames.ClassKind]);
+            Assert.That((string)siteReferenceDataLibrary[PropertyNames.Iid], Is.EqualTo("c454c687-ba3e-44c4-86bc-44544b2c7880"));
+            Assert.That((int)siteReferenceDataLibrary[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)siteReferenceDataLibrary[PropertyNames.ClassKind], Is.EqualTo("SiteReferenceDataLibrary"));
 
             Assert.IsFalse((bool)siteReferenceDataLibrary[PropertyNames.IsDeprecated]);
-            Assert.AreEqual("Test Reference Data Library", (string)siteReferenceDataLibrary[PropertyNames.Name]);
-            Assert.AreEqual("TestRDL", (string)siteReferenceDataLibrary[PropertyNames.ShortName]);
+            Assert.That((string)siteReferenceDataLibrary[PropertyNames.Name], Is.EqualTo("Test Reference Data Library"));
+            Assert.That((string)siteReferenceDataLibrary[PropertyNames.ShortName], Is.EqualTo("TestRDL"));
 
             var expectedAliases = new string[] { };
             var aliasesArray = (JArray)siteReferenceDataLibrary[PropertyNames.Alias];
@@ -316,16 +316,16 @@ namespace WebservicesIntegrationTests
             var prefixedUnit = jArray.Single(x => (string)x[PropertyNames.Iid] == "9fb8085f-a7d3-4068-95e3-686e4d954d1c");
             
             // verify the amount of returned properties 
-            Assert.AreEqual(9, prefixedUnit.Children().Count());
+            Assert.That(prefixedUnit.Children().Count(), Is.EqualTo(9));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("9fb8085f-a7d3-4068-95e3-686e4d954d1c", (string)prefixedUnit[PropertyNames.Iid]);
-            Assert.AreEqual(2, (int)prefixedUnit[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("PrefixedUnit", (string)prefixedUnit[PropertyNames.ClassKind]);
+            Assert.That((string)prefixedUnit[PropertyNames.Iid], Is.EqualTo("9fb8085f-a7d3-4068-95e3-686e4d954d1c"));
+            Assert.That((int)prefixedUnit[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)prefixedUnit[PropertyNames.ClassKind], Is.EqualTo("PrefixedUnit"));
 
             Assert.IsFalse((bool)prefixedUnit[PropertyNames.IsDeprecated]);
-            Assert.AreEqual("efa6380d-9508-4f3d-9b43-6ed33125b780", (string)prefixedUnit[PropertyNames.Prefix]);
-            Assert.AreEqual("56842970-3915-4369-8712-61cfd8273ef9", (string)prefixedUnit[PropertyNames.ReferenceUnit]);
+            Assert.That((string)prefixedUnit[PropertyNames.Prefix], Is.EqualTo("efa6380d-9508-4f3d-9b43-6ed33125b780"));
+            Assert.That((string)prefixedUnit[PropertyNames.ReferenceUnit], Is.EqualTo("56842970-3915-4369-8712-61cfd8273ef9"));
 
             var expectedPrefixedUnitAliases = new string[] { };
             var prefixedUnitAliasesArray = (JArray)prefixedUnit[PropertyNames.Alias];
@@ -353,16 +353,16 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken prefixedUnit)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(9, prefixedUnit.Children().Count());
+            Assert.That(prefixedUnit.Children().Count(), Is.EqualTo(9));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("0f69c1f9-7896-45fc-830c-1e336d22a64a", (string) prefixedUnit["iid"]);
-            Assert.AreEqual(1, (int) prefixedUnit["revisionNumber"]);
-            Assert.AreEqual("PrefixedUnit", (string) prefixedUnit["classKind"]);
+            Assert.That((string) prefixedUnit["iid"], Is.EqualTo("0f69c1f9-7896-45fc-830c-1e336d22a64a"));
+            Assert.That((int) prefixedUnit["revisionNumber"], Is.EqualTo(1));
+            Assert.That((string) prefixedUnit["classKind"], Is.EqualTo("PrefixedUnit"));
 
             Assert.IsFalse((bool) prefixedUnit["isDeprecated"]);
-            Assert.AreEqual("efa6380d-9508-4f3d-9b43-6ed33125b780", (string) prefixedUnit["prefix"]);
-            Assert.AreEqual("56842970-3915-4369-8712-61cfd8273ef9", (string) prefixedUnit["referenceUnit"]);
+            Assert.That((string) prefixedUnit["prefix"], Is.EqualTo("efa6380d-9508-4f3d-9b43-6ed33125b780"));
+            Assert.That((string) prefixedUnit["referenceUnit"], Is.EqualTo("56842970-3915-4369-8712-61cfd8273ef9"));
 
             var expectedAliases = new string[] {};
             var aliasesArray = (JArray) prefixedUnit["alias"];

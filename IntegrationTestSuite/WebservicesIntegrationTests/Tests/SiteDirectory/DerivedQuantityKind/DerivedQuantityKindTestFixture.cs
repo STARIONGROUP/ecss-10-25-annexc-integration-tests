@@ -114,7 +114,7 @@ namespace WebservicesIntegrationTests
 
             Assert.That((string)derivedQuantityKind[PropertyNames.Symbol], Is.EqualTo("symbol"));
             Assert.That((string)derivedQuantityKind[PropertyNames.DefaultScale], Is.EqualTo("53e82aeb-c42c-475c-b6bf-a102af883471"));
-            Assert.IsNull((string) derivedQuantityKind[PropertyNames.QuantityDimensionSymbol]);
+            Assert.That((string) derivedQuantityKind[PropertyNames.QuantityDimensionSymbol], Is.Null);
 
             var expectedPossibleScales = new string[]
             {

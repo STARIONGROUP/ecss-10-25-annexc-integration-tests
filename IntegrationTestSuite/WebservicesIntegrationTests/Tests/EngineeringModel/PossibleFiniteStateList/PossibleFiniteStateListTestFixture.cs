@@ -84,17 +84,17 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken possibleFiniteStateList)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(12, possibleFiniteStateList.Children().Count());
+            Assert.That(possibleFiniteStateList.Children().Count(), Is.EqualTo(12));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("449a5bca-34fd-454a-93f8-a56ac8383fee", (string)possibleFiniteStateList[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int)possibleFiniteStateList[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("PossibleFiniteStateList", (string)possibleFiniteStateList[PropertyNames.ClassKind]);
+            Assert.That((string)possibleFiniteStateList[PropertyNames.Iid], Is.EqualTo("449a5bca-34fd-454a-93f8-a56ac8383fee"));
+            Assert.That((int)possibleFiniteStateList[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string)possibleFiniteStateList[PropertyNames.ClassKind], Is.EqualTo("PossibleFiniteStateList"));
 
-            Assert.AreEqual("Test Possible FiniteState List", (string)possibleFiniteStateList[PropertyNames.Name]);
-            Assert.AreEqual("TestPossibleFiniteStateList", (string)possibleFiniteStateList[PropertyNames.ShortName]);
+            Assert.That((string)possibleFiniteStateList[PropertyNames.Name], Is.EqualTo("Test Possible FiniteState List"));
+            Assert.That((string)possibleFiniteStateList[PropertyNames.ShortName], Is.EqualTo("TestPossibleFiniteStateList"));
 
-            Assert.AreEqual("0e92edde-fdff-41db-9b1d-f2e484f12535", (string)possibleFiniteStateList[PropertyNames.Owner]);
+            Assert.That((string)possibleFiniteStateList[PropertyNames.Owner], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
 
             var expectedPossibleFiniteStates = new List<OrderedItem>
             {
@@ -104,7 +104,7 @@ namespace WebservicesIntegrationTests
                 possibleFiniteStateList[PropertyNames.PossibleState].ToString());
             Assert.That(possibleFiniteStates, Is.EquivalentTo(expectedPossibleFiniteStates));
 
-            Assert.AreEqual("b8fdfac4-1c40-475a-ac6c-968654b689b6", (string)possibleFiniteStateList[PropertyNames.DefaultState]);
+            Assert.That((string)possibleFiniteStateList[PropertyNames.DefaultState], Is.EqualTo("b8fdfac4-1c40-475a-ac6c-968654b689b6"));
 
             var expectedCategories = new string[] { };
             var categoriesArray = (JArray)possibleFiniteStateList[PropertyNames.Category];
@@ -136,7 +136,7 @@ namespace WebservicesIntegrationTests
             var postBody1 = this.GetJsonFromFile(postBodyPath1);
 
             var jArray1 = this.WebClient.PostDto(uri, postBody1);
-            Assert.AreEqual(6, jArray1.Count);
+            Assert.That(jArray1.Count, Is.EqualTo(6));
 
             var postBodyPath2 = this.GetPath("Tests/EngineeringModel/PossibleFiniteStateList/PostDeletePossibleFiniteStateAsProperty.json");
 
@@ -154,14 +154,14 @@ namespace WebservicesIntegrationTests
             var postBodyPath1 = this.GetPath("Tests/EngineeringModel/PossibleFiniteStateList/PostCreatePossibleFiniteStateListContainingTwoStates.json");
             var postBody1 = this.GetJsonFromFile(postBodyPath1);
             var jArray1 = this.WebClient.PostDto(uri, postBody1);
-            Assert.AreEqual(5, jArray1.Count);
+            Assert.That(jArray1.Count, Is.EqualTo(5));
 
             uri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
             postBodyPath1 = this.GetPath("Tests/EngineeringModel/PossibleFiniteStateList/PostCreatePossibleFiniteStateForWrongReorder.json");
             postBody1 = this.GetJsonFromFile(postBodyPath1);
 
             jArray1 = this.WebClient.PostDto(uri, postBody1);
-            Assert.AreEqual(3, jArray1.Count);
+            Assert.That(jArray1.Count, Is.EqualTo(3));
 
             var postBodyPath2 = this.GetPath("Tests/EngineeringModel/PossibleFiniteStateList/PostReorderStatesOfPossibleFiniteStateListWrong.json");
 
@@ -185,7 +185,7 @@ namespace WebservicesIntegrationTests
 
             var jArray1 = this.WebClient.PostDto(uri, postBody1);
             
-            Assert.AreEqual(6, jArray1.Count);
+            Assert.That(jArray1.Count, Is.EqualTo(6));
 
             var postBodyPath2 = this.GetPath("Tests/EngineeringModel/PossibleFiniteStateList/PostDeletePossibleFiniteState.json");
 
@@ -203,8 +203,8 @@ namespace WebservicesIntegrationTests
             var afsl = jArray.Single(x => x["classKind"].ToString() == "ActualFiniteStateList");
             var afs = jArray.Single(x => x["classKind"].ToString() == "ActualFiniteState");
 
-            Assert.AreEqual("9ec982e4-ef72-4953-aa85-b158a95d8d56", model["iid"].ToString());
-            Assert.AreEqual("449a5bca-34fd-454a-93f8-a56ac8383fee", pfsl["iid"].ToString());
+            Assert.That(model["iid"].ToString(), Is.EqualTo("9ec982e4-ef72-4953-aa85-b158a95d8d56"));
+            Assert.That(pfsl["iid"].ToString(), Is.EqualTo("449a5bca-34fd-454a-93f8-a56ac8383fee"));
         }
 
         [Test]
@@ -216,7 +216,7 @@ namespace WebservicesIntegrationTests
             var postBodyPath1 = this.GetPath("Tests/EngineeringModel/PossibleFiniteStateList/PostCreatePossibleFiniteStateListContainingTwoStates.json");
             var postBody1 = this.GetJsonFromFile(postBodyPath1);
             var jArray1 = this.WebClient.PostDto(uri, postBody1);
-            Assert.AreEqual(5, jArray1.Count);
+            Assert.That(jArray1.Count, Is.EqualTo(5));
 
             var postBodyPath2 = this.GetPath("Tests/EngineeringModel/PossibleFiniteStateList/PostReorderStatesOfPossibleFiniteStateList.json");
             var postBody2 = this.GetJsonFromFile(postBodyPath2);
@@ -227,20 +227,20 @@ namespace WebservicesIntegrationTests
             var possibleFiniteStateList = jArray2.Where(x => x["classKind"].ToString() == "PossibleFiniteStateList").ToList();
             var possibleFiniteStates = jArray2.Where(x => x["classKind"].ToString() == "PossibleFiniteState").ToList();
 
-            Assert.AreEqual(engineeringModel.Count, 1);
-            Assert.AreEqual(possibleFiniteStateList.Count, 1);
-            Assert.AreEqual(possibleFiniteStates.Count, 2);
+            Assert.That(1, Is.EqualTo(engineeringModel.Count));
+            Assert.That(1, Is.EqualTo(possibleFiniteStateList.Count));
+            Assert.That(2, Is.EqualTo(possibleFiniteStates.Count));
 
-            Assert.AreEqual(possibleFiniteStateList.First()["possibleState"].Count(), 2);
+            Assert.That(2, Is.EqualTo(possibleFiniteStateList.First()["possibleState"].Count()));
 
             var firstPossibleState = possibleFiniteStateList.First()["possibleState"].First();
             var secondPossibleState = possibleFiniteStateList.First()["possibleState"].Last();
 
-            Assert.AreEqual((int)firstPossibleState["k"], 13512213);
-            Assert.AreEqual((string)firstPossibleState["v"], "8ca48538-d39d-4b09-8944-77c34535ce7a");
+            Assert.That(13512213, Is.EqualTo((int)firstPossibleState["k"]));
+            Assert.That("8ca48538-d39d-4b09-8944-77c34535ce7a", Is.EqualTo((string)firstPossibleState["v"]));
 
-            Assert.AreEqual((int)secondPossibleState["k"], 125842400);
-            Assert.AreEqual((string)secondPossibleState["v"], "a6f9789d-26a7-45e6-a528-3cbd1fce3880");
+            Assert.That(125842400, Is.EqualTo((int)secondPossibleState["k"]));
+            Assert.That("a6f9789d-26a7-45e6-a528-3cbd1fce3880", Is.EqualTo((string)secondPossibleState["v"]));
 
         }
     }

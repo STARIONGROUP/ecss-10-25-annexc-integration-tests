@@ -60,7 +60,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(orExpressionUri);
 
             // verify that the correct amount of objects is returned
-            Assert.AreEqual(6, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(6));
 
             // get a specific Iteration from the result by it's unique id
             var iteration = jArray.Single(x => (string)x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
@@ -92,12 +92,12 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken orExpression)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(4, orExpression.Children().Count());
+            Assert.That(orExpression.Children().Count(), Is.EqualTo(4));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("5f90327f-95a2-4c5a-9efe-581f8daf08ed", (string)orExpression[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int)orExpression[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("OrExpression", (string)orExpression[PropertyNames.ClassKind]);
+            Assert.That((string)orExpression[PropertyNames.Iid], Is.EqualTo("5f90327f-95a2-4c5a-9efe-581f8daf08ed"));
+            Assert.That((int)orExpression[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string)orExpression[PropertyNames.ClassKind], Is.EqualTo("OrExpression"));
 
             var expectedTerms = new string[]
             {

@@ -95,7 +95,7 @@ namespace WebservicesIntegrationTests
             Assert.That((string)externalIdentifierMap[PropertyNames.Name], Is.EqualTo("TestExternalIdentifierMap"));
             Assert.That((string)externalIdentifierMap[PropertyNames.Owner], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
 
-            Assert.IsNull((string) externalIdentifierMap[PropertyNames.ExternalFormat]);
+            Assert.That((string) externalIdentifierMap[PropertyNames.ExternalFormat], Is.Null);
             Assert.That((string)externalIdentifierMap[PropertyNames.ExternalToolVersion], Is.EqualTo("1.0"));
             Assert.That((string)externalIdentifierMap[PropertyNames.ExternalToolName], Is.EqualTo("externalTool"));
             Assert.That((string)externalIdentifierMap[PropertyNames.ExternalModelName], Is.EqualTo("externalModel"));

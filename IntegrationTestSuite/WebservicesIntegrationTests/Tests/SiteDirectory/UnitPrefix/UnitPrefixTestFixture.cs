@@ -86,18 +86,18 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken unitPrefix)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(10, unitPrefix.Children().Count());
+            Assert.That(unitPrefix.Children().Count(), Is.EqualTo(10));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("efa6380d-9508-4f3d-9b43-6ed33125b780", (string) unitPrefix["iid"]);
-            Assert.AreEqual(1, (int) unitPrefix["revisionNumber"]);
-            Assert.AreEqual("UnitPrefix", (string) unitPrefix["classKind"]);
+            Assert.That((string) unitPrefix["iid"], Is.EqualTo("efa6380d-9508-4f3d-9b43-6ed33125b780"));
+            Assert.That((int) unitPrefix["revisionNumber"], Is.EqualTo(1));
+            Assert.That((string) unitPrefix["classKind"], Is.EqualTo("UnitPrefix"));
 
             Assert.IsFalse((bool) unitPrefix["isDeprecated"]);
-            Assert.AreEqual("kilo", (string) unitPrefix["name"]);
-            Assert.AreEqual("k", (string) unitPrefix["shortName"]);
+            Assert.That((string) unitPrefix["name"], Is.EqualTo("kilo"));
+            Assert.That((string) unitPrefix["shortName"], Is.EqualTo("k"));
 
-            Assert.AreEqual("1e3", (string) unitPrefix["conversionFactor"]);
+            Assert.That((string) unitPrefix["conversionFactor"], Is.EqualTo("1e3"));
 
             var expectedAliases = new string[] {};
             var aliasesArray = (JArray) unitPrefix["alias"];

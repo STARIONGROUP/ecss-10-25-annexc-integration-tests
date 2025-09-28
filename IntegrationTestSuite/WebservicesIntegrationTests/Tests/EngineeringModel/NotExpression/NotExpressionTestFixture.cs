@@ -60,7 +60,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(notExpressionUri);
 
             // verify that the correct amount of objects is returned
-            Assert.AreEqual(6, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(6));
 
             // get a specific Iteration from the result by it's unique id
             var iteration = jArray.Single(x => (string) x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
@@ -95,13 +95,13 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken notExpression)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(4, notExpression.Children().Count());
+            Assert.That(notExpression.Children().Count(), Is.EqualTo(4));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("30cb785a-9e72-477f-ad1a-8df6ab623e3d", (string) notExpression[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) notExpression[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("NotExpression", (string) notExpression[PropertyNames.ClassKind]);
-            Assert.AreEqual("5f90327f-95a2-4c5a-9efe-581f8daf08ed", (string) notExpression[PropertyNames.Term]);
+            Assert.That((string) notExpression[PropertyNames.Iid], Is.EqualTo("30cb785a-9e72-477f-ad1a-8df6ab623e3d"));
+            Assert.That((int) notExpression[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string) notExpression[PropertyNames.ClassKind], Is.EqualTo("NotExpression"));
+            Assert.That((string) notExpression[PropertyNames.Term], Is.EqualTo("5f90327f-95a2-4c5a-9efe-581f8daf08ed"));
         }
     }
 }

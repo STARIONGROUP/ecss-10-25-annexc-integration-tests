@@ -171,7 +171,7 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken option)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(10, option.Children().Count());
+            Assert.That(option.Children().Count(), Is.EqualTo(10));
 
             // assert that the properties are what is expected
             Assert.That((string)option[PropertyNames.Iid], Is.EqualTo("bebcc9f4-ff20-4569-bbf6-d1acf27a8107"));

@@ -86,21 +86,20 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken simpleQuantityKind)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(14, simpleQuantityKind.Children().Count());
+            Assert.That(simpleQuantityKind.Children().Count(), Is.EqualTo(14));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("4f9f3d9b-f3de-4ef5-b6cb-2e22199fab0d", (string) simpleQuantityKind[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) simpleQuantityKind[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("SimpleQuantityKind", (string) simpleQuantityKind[PropertyNames.ClassKind]);
+            Assert.That((string) simpleQuantityKind[PropertyNames.Iid], Is.EqualTo("4f9f3d9b-f3de-4ef5-b6cb-2e22199fab0d"));
+            Assert.That((int) simpleQuantityKind[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string) simpleQuantityKind[PropertyNames.ClassKind], Is.EqualTo("SimpleQuantityKind"));
 
             Assert.IsFalse((bool) simpleQuantityKind[PropertyNames.IsDeprecated]);
-            Assert.AreEqual("Test Simple QuantityKind", (string) simpleQuantityKind[PropertyNames.Name]);
-            Assert.AreEqual("TestSimpleQuantityKind", (string) simpleQuantityKind[PropertyNames.ShortName]);
+            Assert.That((string) simpleQuantityKind[PropertyNames.Name], Is.EqualTo("Test Simple QuantityKind"));
+            Assert.That((string) simpleQuantityKind[PropertyNames.ShortName], Is.EqualTo("TestSimpleQuantityKind"));
 
-            Assert.AreEqual("testsymbol", (string) simpleQuantityKind[PropertyNames.Symbol]);
-            Assert.AreEqual("53e82aeb-c42c-475c-b6bf-a102af883471", (string) simpleQuantityKind[PropertyNames.DefaultScale]);
-            Assert.AreEqual("testQuantityDimensionSymbol",
-                (string) simpleQuantityKind[PropertyNames.QuantityDimensionSymbol]);
+            Assert.That((string) simpleQuantityKind[PropertyNames.Symbol], Is.EqualTo("testsymbol"));
+            Assert.That((string) simpleQuantityKind[PropertyNames.DefaultScale], Is.EqualTo("53e82aeb-c42c-475c-b6bf-a102af883471"));
+            Assert.That((string) simpleQuantityKind[PropertyNames.QuantityDimensionSymbol], Is.EqualTo("testQuantityDimensionSymbol"));
 
             var expectedPossibleScales = new string[]
             {

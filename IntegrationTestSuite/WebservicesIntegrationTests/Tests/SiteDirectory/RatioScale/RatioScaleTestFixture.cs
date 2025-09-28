@@ -86,31 +86,31 @@ namespace WebservicesIntegrationTests.Tests.SiteDirectory.RatioScale
         public static void VerifyProperties(JToken ratioScale)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(19, ratioScale.Children().Count());
+            Assert.That(ratioScale.Children().Count(), Is.EqualTo(19));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("53e82aeb-c42c-475c-b6bf-a102af883471", (string) ratioScale["iid"]);
-            Assert.AreEqual(1, (int) ratioScale["revisionNumber"]);
-            Assert.AreEqual("RatioScale", (string) ratioScale["classKind"]);
+            Assert.That((string) ratioScale["iid"], Is.EqualTo("53e82aeb-c42c-475c-b6bf-a102af883471"));
+            Assert.That((int) ratioScale["revisionNumber"], Is.EqualTo(1));
+            Assert.That((string) ratioScale["classKind"], Is.EqualTo("RatioScale"));
 
             Assert.IsFalse((bool) ratioScale["isDeprecated"]);
-            Assert.AreEqual("Test Ratio Scale", (string) ratioScale["name"]);
-            Assert.AreEqual("TestRatioScale", (string) ratioScale["shortName"]);
+            Assert.That((string) ratioScale["name"], Is.EqualTo("Test Ratio Scale"));
+            Assert.That((string) ratioScale["shortName"], Is.EqualTo("TestRatioScale"));
 
-            Assert.AreEqual("56842970-3915-4369-8712-61cfd8273ef9", (string) ratioScale["unit"]);
+            Assert.That((string) ratioScale["unit"], Is.EqualTo("56842970-3915-4369-8712-61cfd8273ef9"));
 
             var expectedValueDefinitions = new string[] {};
             var valueDefinitionsArray = (JArray) ratioScale["valueDefinition"];
             IList<string> valueDefinitions = valueDefinitionsArray.Select(x => (string) x).ToList();
             Assert.That(valueDefinitions, Is.EquivalentTo(expectedValueDefinitions));
 
-            Assert.AreEqual("REAL_NUMBER_SET", (string) ratioScale["numberSet"]);
-            Assert.IsNull((string) ratioScale["minimumPermissibleValue"]);
+            Assert.That((string) ratioScale["numberSet"], Is.EqualTo("REAL_NUMBER_SET"));
+            Assert.That((string) ratioScale["minimumPermissibleValue"], Is.Null);
             Assert.IsTrue((bool) ratioScale["isMinimumInclusive"]);
-            Assert.IsNull((string) ratioScale["maximumPermissibleValue"]);
+            Assert.That((string) ratioScale["maximumPermissibleValue"], Is.Null);
             Assert.IsTrue((bool) ratioScale["isMaximumInclusive"]);
-            Assert.IsNull((string) ratioScale["positiveValueConnotation"]);
-            Assert.IsNull((string) ratioScale["negativeValueConnotation"]);
+            Assert.That((string) ratioScale["positiveValueConnotation"], Is.Null);
+            Assert.That((string) ratioScale["negativeValueConnotation"], Is.Null);
 
             var expectedMappingToReferenceScales = new string[] {};
             var mappingToReferenceScalesArray = (JArray) ratioScale["mappingToReferenceScale"];

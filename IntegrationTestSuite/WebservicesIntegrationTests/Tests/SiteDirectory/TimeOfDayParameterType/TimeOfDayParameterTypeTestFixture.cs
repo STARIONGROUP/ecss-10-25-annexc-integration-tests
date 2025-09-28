@@ -86,18 +86,18 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken timeOfDayParameterType)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(11, timeOfDayParameterType.Children().Count());
+            Assert.That(timeOfDayParameterType.Children().Count(), Is.EqualTo(11));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("e4cfdb60-ed3a-455c-9a33-a3edc921637f", (string) timeOfDayParameterType[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) timeOfDayParameterType[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("TimeOfDayParameterType", (string) timeOfDayParameterType[PropertyNames.ClassKind]);
+            Assert.That((string) timeOfDayParameterType[PropertyNames.Iid], Is.EqualTo("e4cfdb60-ed3a-455c-9a33-a3edc921637f"));
+            Assert.That((int) timeOfDayParameterType[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string) timeOfDayParameterType[PropertyNames.ClassKind], Is.EqualTo("TimeOfDayParameterType"));
 
             Assert.IsFalse((bool) timeOfDayParameterType[PropertyNames.IsDeprecated]);
-            Assert.AreEqual("Test Time Of Day ParameterType", (string) timeOfDayParameterType[PropertyNames.Name]);
-            Assert.AreEqual("TestTimeOfDayParameterType", (string) timeOfDayParameterType[PropertyNames.ShortName]);
+            Assert.That((string) timeOfDayParameterType[PropertyNames.Name], Is.EqualTo("Test Time Of Day ParameterType"));
+            Assert.That((string) timeOfDayParameterType[PropertyNames.ShortName], Is.EqualTo("TestTimeOfDayParameterType"));
 
-            Assert.AreEqual("timeofday", (string) timeOfDayParameterType[PropertyNames.Symbol]);
+            Assert.That((string) timeOfDayParameterType[PropertyNames.Symbol], Is.EqualTo("timeofday"));
 
             var expectedCategories = new string[] {};
             var categoriesArray = (JArray) timeOfDayParameterType[PropertyNames.Category];

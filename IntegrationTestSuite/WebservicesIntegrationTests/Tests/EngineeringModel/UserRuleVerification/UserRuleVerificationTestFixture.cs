@@ -41,7 +41,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(userRuleVerificationUri);
 
             //check if there are 2 RuleVerification objects 
-            Assert.AreEqual(2, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(2));
 
             // get a specific UserRuleVerification from the result by it's unique id
             var userRuleVerification = jArray.Single(x => (string) x[PropertyNames.Iid] == "c953263c-fc25-4048-9bb6-343a10200a0c");
@@ -59,7 +59,7 @@ namespace WebservicesIntegrationTests
             var jArray = this.WebClient.GetDto(userRuleVerificationUri);
 
             //check if there are 5 objects
-            Assert.AreEqual(5, jArray.Count);
+            Assert.That(jArray.Count, Is.EqualTo(5));
 
             // get a specific Iteration from the result by it's unique id
             var iteration = jArray.Single(x => (string) x[PropertyNames.Iid] == "e163c5ad-f32b-4387-b805-f4b34600bc2c");
@@ -83,15 +83,15 @@ namespace WebservicesIntegrationTests
         /// </param>
         public static void VerifyProperties(JToken userRuleVerification)
         {
-            Assert.AreEqual(7, userRuleVerification.Children().Count());
+            Assert.That(userRuleVerification.Children().Count(), Is.EqualTo(7));
 
-            Assert.AreEqual("c953263c-fc25-4048-9bb6-343a10200a0c", (string) userRuleVerification[PropertyNames.Iid]);
-            Assert.AreEqual(1, (int) userRuleVerification[PropertyNames.RevisionNumber]);
-            Assert.AreEqual("UserRuleVerification", (string) userRuleVerification[PropertyNames.ClassKind]);
-            Assert.AreEqual("PASSED", (string) userRuleVerification[PropertyNames.Status]);
-            Assert.IsNull((string) userRuleVerification[PropertyNames.ExecutedOn]);
+            Assert.That((string) userRuleVerification[PropertyNames.Iid], Is.EqualTo("c953263c-fc25-4048-9bb6-343a10200a0c"));
+            Assert.That((int) userRuleVerification[PropertyNames.RevisionNumber], Is.EqualTo(1));
+            Assert.That((string) userRuleVerification[PropertyNames.ClassKind], Is.EqualTo("UserRuleVerification"));
+            Assert.That((string) userRuleVerification[PropertyNames.Status], Is.EqualTo("PASSED"));
+            Assert.That((string) userRuleVerification[PropertyNames.ExecutedOn], Is.Null);
             Assert.IsTrue((bool) userRuleVerification[PropertyNames.IsActive]);
-            Assert.AreEqual("8a5cd66e-7313-4843-813f-37081ca81bb8", (string) userRuleVerification[PropertyNames.Rule]);
+            Assert.That((string) userRuleVerification[PropertyNames.Rule], Is.EqualTo("8a5cd66e-7313-4843-813f-37081ca81bb8"));
         }
     }
 }

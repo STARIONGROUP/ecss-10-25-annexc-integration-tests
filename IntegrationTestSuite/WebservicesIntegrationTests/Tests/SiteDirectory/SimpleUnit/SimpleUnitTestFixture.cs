@@ -86,16 +86,16 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken simpleUnit)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(9, simpleUnit.Children().Count());
+            Assert.That(simpleUnit.Children().Count(), Is.EqualTo(9));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("56842970-3915-4369-8712-61cfd8273ef9", (string) simpleUnit["iid"]);
-            Assert.AreEqual(1, (int) simpleUnit["revisionNumber"]);
-            Assert.AreEqual("SimpleUnit", (string) simpleUnit["classKind"]);
+            Assert.That((string) simpleUnit["iid"], Is.EqualTo("56842970-3915-4369-8712-61cfd8273ef9"));
+            Assert.That((int) simpleUnit["revisionNumber"], Is.EqualTo(1));
+            Assert.That((string) simpleUnit["classKind"], Is.EqualTo("SimpleUnit"));
 
             Assert.IsFalse((bool) simpleUnit["isDeprecated"]);
-            Assert.AreEqual("test simple unit", (string) simpleUnit["name"]);
-            Assert.AreEqual("testsimpleunit", (string) simpleUnit["shortName"]);
+            Assert.That((string) simpleUnit["name"], Is.EqualTo("test simple unit"));
+            Assert.That((string) simpleUnit["shortName"], Is.EqualTo("testsimpleunit"));
 
             var expectedAliases = new string[] {};
             var aliasesArray = (JArray) simpleUnit["alias"];

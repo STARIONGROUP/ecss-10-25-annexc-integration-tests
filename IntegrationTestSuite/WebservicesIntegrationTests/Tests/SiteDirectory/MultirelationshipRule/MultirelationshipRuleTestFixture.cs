@@ -86,21 +86,20 @@ namespace WebservicesIntegrationTests
         public static void VerifyProperties(JToken multirelationshipRule)
         {
             // verify the amount of returned properties 
-            Assert.AreEqual(13, multirelationshipRule.Children().Count());
+            Assert.That(multirelationshipRule.Children().Count(), Is.EqualTo(13));
 
             // assert that the properties are what is expected
-            Assert.AreEqual("2615f9ec-30a4-4c0e-a9d3-1d067959c248", (string) multirelationshipRule["iid"]);
-            Assert.AreEqual(1, (int) multirelationshipRule["revisionNumber"]);
-            Assert.AreEqual("MultiRelationshipRule", (string) multirelationshipRule["classKind"]);
+            Assert.That((string) multirelationshipRule["iid"], Is.EqualTo("2615f9ec-30a4-4c0e-a9d3-1d067959c248"));
+            Assert.That((int) multirelationshipRule["revisionNumber"], Is.EqualTo(1));
+            Assert.That((string) multirelationshipRule["classKind"], Is.EqualTo("MultiRelationshipRule"));
 
             Assert.IsFalse((bool) multirelationshipRule["isDeprecated"]);
-            Assert.AreEqual("Test Multi Relationship Rule", (string) multirelationshipRule["name"]);
-            Assert.AreEqual("TestMultiRelationshipRule", (string) multirelationshipRule["shortName"]);
+            Assert.That((string) multirelationshipRule["name"], Is.EqualTo("Test Multi Relationship Rule"));
+            Assert.That((string) multirelationshipRule["shortName"], Is.EqualTo("TestMultiRelationshipRule"));
 
-            Assert.AreEqual("107fc408-7e6d-4f1a-895a-1b6a6025ac20",
-                (string) multirelationshipRule["relationshipCategory"]);
-            Assert.AreEqual(0, (int) multirelationshipRule["minRelated"]);
-            Assert.AreEqual(-1, (int) multirelationshipRule["maxRelated"]);
+            Assert.That((string) multirelationshipRule["relationshipCategory"], Is.EqualTo("107fc408-7e6d-4f1a-895a-1b6a6025ac20"));
+            Assert.That((int) multirelationshipRule["minRelated"], Is.EqualTo(0));
+            Assert.That((int) multirelationshipRule["maxRelated"], Is.EqualTo(-1));
 
             var expectedRelatedCategories = new string[]
             {
