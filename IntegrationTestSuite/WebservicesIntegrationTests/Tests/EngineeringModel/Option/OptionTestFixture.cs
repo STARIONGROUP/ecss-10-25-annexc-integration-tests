@@ -85,7 +85,7 @@ namespace WebservicesIntegrationTests
             Assert.That((int)iteration[PropertyNames.RevisionNumber], Is.EqualTo(3));
             var expectedOptions = new List<OrderedItem> { new OrderedItem(1, "bebcc9f4-ff20-4569-bbf6-d1acf27a8107"), new OrderedItem(2, "e90e4bcd-6e17-4b75-80fb-6cded78bed57") };
             var optionsArray = JsonConvert.DeserializeObject<List<OrderedItem>>(iteration[PropertyNames.Option].ToString());
-            CollectionAssert.AreEquivalent(expectedOptions, optionsArray);
+            Assert.That(optionsArray, Is.EquivalentTo(expectedOptions));
 
             var option = jArray.Single(x => (string)x[PropertyNames.Iid] == "e90e4bcd-6e17-4b75-80fb-6cded78bed57");
             Assert.That((int)option[PropertyNames.RevisionNumber], Is.EqualTo(3));

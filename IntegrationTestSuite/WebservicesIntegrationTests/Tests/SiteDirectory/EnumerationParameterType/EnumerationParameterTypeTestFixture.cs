@@ -303,7 +303,7 @@ namespace WebservicesIntegrationTests
 
             var referenceSourcesArray = (JArray) siteReferenceDataLibrary[PropertyNames.ReferenceSource];
             IList<string> referenceSourcesList = referenceSourcesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedReferenceSources, referenceSourcesList);
+            Assert.That(referenceSourcesList, Is.EquivalentTo(expectedReferenceSources));
 
             var expectedRules = new string[]
             {
@@ -316,7 +316,7 @@ namespace WebservicesIntegrationTests
 
             var rulesArray = (JArray) siteReferenceDataLibrary[PropertyNames.Rule];
             IList<string> rulesList = rulesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedRules, rulesList);
+            Assert.That(rulesList, Is.EquivalentTo(expectedRules));
 
             Assert.IsEmpty(siteReferenceDataLibrary["requiredRdl"]);
 
@@ -327,7 +327,7 @@ namespace WebservicesIntegrationTests
 
             var constantsArray = (JArray) siteReferenceDataLibrary[PropertyNames.Constant];
             IList<string> constantsList = constantsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedConstants, constantsList);
+            Assert.That(constantsList, Is.EquivalentTo(expectedConstants));
 
             //
             var enumerationParameterType =
@@ -355,29 +355,29 @@ namespace WebservicesIntegrationTests
             var valueDefinitionsArray = JsonConvert.DeserializeObject<List<OrderedItem>>(
                 enumerationParameterType["valueDefinition"].ToString());
 
-            CollectionAssert.AreEquivalent(expectedValueDefinitions, valueDefinitionsArray);
+            Assert.That(valueDefinitionsArray, Is.EquivalentTo(expectedValueDefinitions));
 
             Assert.That((string)enumerationParameterType["symbol"], Is.EqualTo("enumerationparametertype"));
 
             var expectedCategories = new string[] { };
             var categoriesArray = (JArray) enumerationParameterType["category"];
             IList<string> categories = categoriesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedCategories, categories);
+            Assert.That(categories, Is.EquivalentTo(expectedCategories));
 
             var expectedEnumAliases = new string[] { };
             var enumAliasesArray = (JArray) enumerationParameterType["alias"];
             IList<string> enumAliases = enumAliasesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedEnumAliases, enumAliases);
+            Assert.That(enumAliases, Is.EquivalentTo(expectedEnumAliases));
 
             var expectedEnumDefinitions = new string[] { };
             var enumDefinitionsArray = (JArray) enumerationParameterType["definition"];
             IList<string> enumDefinitions = enumDefinitionsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedEnumDefinitions, enumDefinitions);
+            Assert.That(enumDefinitions, Is.EquivalentTo(expectedEnumDefinitions));
 
             var expectedEnumHyperlinks = new string[] { };
             var enumHyperlinksArray = (JArray) enumerationParameterType["hyperLink"];
             IList<string> hyperLinks = enumHyperlinksArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedEnumHyperlinks, hyperLinks);
+            Assert.That(hyperLinks, Is.EquivalentTo(expectedEnumHyperlinks));
 
             //Add New EnumerationParamerterDefinition
             postBodyPath = this.GetPath("Tests/SiteDirectory/EnumerationParameterType/PostAddNewEnumerationValueDefinition.json");
@@ -400,7 +400,7 @@ namespace WebservicesIntegrationTests
             valueDefinitionsArray = JsonConvert.DeserializeObject<List<OrderedItem>>(
                 enumerationParameterType["valueDefinition"].ToString());
 
-            CollectionAssert.AreEquivalent(expectedValueDefinitions, valueDefinitionsArray);
+            Assert.That(valueDefinitionsArray, Is.EquivalentTo(expectedValueDefinitions));
 
             //Reorder EnumerationValueDefinitions
             postBodyPath = this.GetPath("Tests/SiteDirectory/EnumerationParameterType/PostReorderEnumerationValueDefinition.json");
@@ -422,7 +422,7 @@ namespace WebservicesIntegrationTests
             valueDefinitionsArray = JsonConvert.DeserializeObject<List<OrderedItem>>(
                 enumerationParameterType["valueDefinition"].ToString());
 
-            CollectionAssert.AreEquivalent(expectedValueDefinitions, valueDefinitionsArray);
+            Assert.That(valueDefinitionsArray, Is.EquivalentTo(expectedValueDefinitions));
 
             //delete EnumerationValueDefinition
             postBodyPath = this.GetPath("Tests/SiteDirectory/EnumerationParameterType/PostDeleteEnumerationValueDefinition.json");
@@ -443,7 +443,7 @@ namespace WebservicesIntegrationTests
             valueDefinitionsArray = JsonConvert.DeserializeObject<List<OrderedItem>>(
                 enumerationParameterType["valueDefinition"].ToString());
 
-            CollectionAssert.AreEquivalent(expectedValueDefinitions, valueDefinitionsArray);
+            Assert.That(valueDefinitionsArray, Is.EquivalentTo(expectedValueDefinitions));
         }
 
         /// <summary>
@@ -478,29 +478,29 @@ namespace WebservicesIntegrationTests
             var valueDefinitionsArray = JsonConvert.DeserializeObject<List<OrderedItem>>(
                 enumerationParameterType["valueDefinition"].ToString());
 
-            CollectionAssert.AreEquivalent(expectedValueDefinitions, valueDefinitionsArray);
+            Assert.That(valueDefinitionsArray, Is.EquivalentTo(expectedValueDefinitions));
 
             Assert.That((string)enumerationParameterType["symbol"], Is.EqualTo("enumerationparametertype"));
 
             var expectedCategories = new string[] { };
             var categoriesArray = (JArray) enumerationParameterType["category"];
             IList<string> categories = categoriesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedCategories, categories);
+            Assert.That(categories, Is.EquivalentTo(expectedCategories));
 
             var expectedAliases = new string[] { };
             var aliasesArray = (JArray) enumerationParameterType["alias"];
             IList<string> aliases = aliasesArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedAliases, aliases);
+            Assert.That(aliases, Is.EquivalentTo(expectedAliases));
 
             var expectedDefinitions = new string[] { };
             var definitionsArray = (JArray) enumerationParameterType["definition"];
             IList<string> definitions = definitionsArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedDefinitions, definitions);
+            Assert.That(definitions, Is.EquivalentTo(expectedDefinitions));
 
             var expectedHyperlinks = new string[] { };
             var hyperlinksArray = (JArray) enumerationParameterType["hyperLink"];
             IList<string> h = hyperlinksArray.Select(x => (string) x).ToList();
-            CollectionAssert.AreEquivalent(expectedHyperlinks, h);
+            Assert.That(h, Is.EquivalentTo(expectedHyperlinks));
         }
     }
 }

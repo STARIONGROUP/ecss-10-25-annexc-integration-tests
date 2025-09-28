@@ -107,7 +107,7 @@ namespace WebservicesIntegrationTests
 
             var expectedUnitFactorArray = new List<OrderedItem> { new OrderedItem(2, "7d48eebe-c4e1-4081-ab63-7e4584563708"), new OrderedItem(23307173, "56c30a85-f648-4b31-87d2-153e8a74048b") };
             var unitFactorArray = JsonConvert.DeserializeObject<List<OrderedItem>>(derivedUnit[PropertyNames.UnitFactor].ToString());
-            CollectionAssert.AreEquivalent(expectedUnitFactorArray, unitFactorArray);
+            Assert.That(unitFactorArray, Is.EquivalentTo(expectedUnitFactorArray));
 
             postBodyPath = this.GetPath("Tests/SiteDirectory/UnitFactor/PostReorderUnitFactor.json");
 
@@ -130,7 +130,7 @@ namespace WebservicesIntegrationTests
 
             expectedUnitFactorArray = new List<OrderedItem> { new OrderedItem(1, "56c30a85-f648-4b31-87d2-153e8a74048b"), new OrderedItem(3, "7d48eebe-c4e1-4081-ab63-7e4584563708") };
             unitFactorArray = JsonConvert.DeserializeObject<List<OrderedItem>>(derivedUnit[PropertyNames.UnitFactor].ToString());
-            CollectionAssert.AreEquivalent(expectedUnitFactorArray, unitFactorArray);
+            Assert.That(unitFactorArray, Is.EquivalentTo(expectedUnitFactorArray));
         }
 
         /// <summary>
