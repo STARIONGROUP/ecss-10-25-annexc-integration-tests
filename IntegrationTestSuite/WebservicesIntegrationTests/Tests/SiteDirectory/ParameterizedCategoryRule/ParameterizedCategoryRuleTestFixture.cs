@@ -93,7 +93,7 @@ namespace WebservicesIntegrationTests
             Assert.That((int) parameterizedCategoryRule["revisionNumber"], Is.EqualTo(1));
             Assert.That((string) parameterizedCategoryRule["classKind"], Is.EqualTo("ParameterizedCategoryRule"));
 
-            Assert.IsFalse((bool) parameterizedCategoryRule["isDeprecated"]);
+            Assert.That((bool) parameterizedCategoryRule["isDeprecated"], Is.False);
             Assert.That((string) parameterizedCategoryRule["name"], Is.EqualTo("TestParameterizedCategoryRule"));
             Assert.That((string) parameterizedCategoryRule["shortName"], Is.EqualTo("Test Parameterized Category Rule"));
 

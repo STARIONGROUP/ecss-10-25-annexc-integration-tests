@@ -95,7 +95,7 @@ namespace WebservicesIntegrationTests
 
             Assert.That((string) personRole["name"], Is.EqualTo("Test Person Role"));
             Assert.That((string) personRole["shortName"], Is.EqualTo("TestPersonRole"));
-            Assert.IsFalse((bool) personRole["isDeprecated"]);
+            Assert.That((bool) personRole["isDeprecated"], Is.False);
 
             var expectedAliases = new string[] {};
             var aliasesArray = (JArray) personRole["alias"];

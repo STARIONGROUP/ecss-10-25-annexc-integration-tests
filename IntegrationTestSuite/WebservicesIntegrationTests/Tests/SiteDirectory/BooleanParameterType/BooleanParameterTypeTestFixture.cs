@@ -93,7 +93,7 @@ namespace WebservicesIntegrationTests
             Assert.That((int)booleanParameterType[PropertyNames.RevisionNumber], Is.EqualTo(1));
             Assert.That((string)booleanParameterType[PropertyNames.ClassKind], Is.EqualTo("BooleanParameterType"));
 
-            Assert.IsFalse((bool) booleanParameterType[PropertyNames.IsDeprecated]);
+            Assert.That((bool) booleanParameterType[PropertyNames.IsDeprecated], Is.False);
             Assert.That((string)booleanParameterType[PropertyNames.Name], Is.EqualTo("Test Boolean ParameterType"));
             Assert.That((string)booleanParameterType[PropertyNames.ShortName], Is.EqualTo("TestBooleanParameterType"));
 

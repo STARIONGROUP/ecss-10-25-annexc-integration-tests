@@ -108,7 +108,7 @@ namespace WebservicesIntegrationTests
             Assert.That((int)derivedQuantityKind[PropertyNames.RevisionNumber], Is.EqualTo(1));
             Assert.That((string)derivedQuantityKind[PropertyNames.ClassKind], Is.EqualTo("DerivedQuantityKind"));
 
-            Assert.IsFalse((bool) derivedQuantityKind[PropertyNames.IsDeprecated]);
+            Assert.That((bool) derivedQuantityKind[PropertyNames.IsDeprecated], Is.False);
             Assert.That((string)derivedQuantityKind[PropertyNames.Name], Is.EqualTo("Test Derived QuantityKind"));
             Assert.That((string)derivedQuantityKind[PropertyNames.ShortName], Is.EqualTo("TestDerivedQuantityKind"));
 

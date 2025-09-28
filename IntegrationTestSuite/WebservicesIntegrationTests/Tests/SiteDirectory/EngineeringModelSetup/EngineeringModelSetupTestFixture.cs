@@ -72,7 +72,7 @@ namespace WebservicesIntegrationTests
                 Assert.That((string)engineeringModelSetup[PropertyNames.Kind], Is.EqualTo("STUDY_MODEL"));
                 Assert.That((string)engineeringModelSetup[PropertyNames.StudyPhase], Is.EqualTo("PREPARATION_PHASE"));
                 Assert.That((string)engineeringModelSetup[PropertyNames.ClassKind], Is.EqualTo("EngineeringModelSetup"));
-                Assert.IsEmpty(engineeringModelSetup[PropertyNames.SourceEngineeringModelSetupIid]);
+                Assert.That(engineeringModelSetup[PropertyNames.SourceEngineeringModelSetupIid], Is.Empty);
             });
 
             var expectedAliases = new string[] { };

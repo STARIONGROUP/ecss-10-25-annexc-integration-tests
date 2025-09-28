@@ -93,11 +93,11 @@ namespace WebservicesIntegrationTests
             Assert.That((int) ordinalScale["revisionNumber"], Is.EqualTo(1));
             Assert.That((string) ordinalScale["classKind"], Is.EqualTo("OrdinalScale"));
 
-            Assert.IsTrue((bool) ordinalScale["useShortNameValues"]);
+            Assert.That((bool) ordinalScale["useShortNameValues"], Is.True);
             Assert.That((string) ordinalScale["name"], Is.EqualTo("Test Ordinal Scale"));
             Assert.That((string) ordinalScale["shortName"], Is.EqualTo("TestOrdinalScale"));
 
-            Assert.IsFalse((bool) ordinalScale["isDeprecated"]);
+            Assert.That((bool) ordinalScale["isDeprecated"], Is.False);
             Assert.That((string) ordinalScale["unit"], Is.EqualTo("56842970-3915-4369-8712-61cfd8273ef9"));
 
             var expectedValueDefinitions = new string[]
@@ -110,9 +110,9 @@ namespace WebservicesIntegrationTests
 
             Assert.That((string) ordinalScale["numberSet"], Is.EqualTo("NATURAL_NUMBER_SET"));
             Assert.That((string) ordinalScale["minimumPermissibleValue"], Is.EqualTo("0"));
-            Assert.IsTrue((bool) ordinalScale["isMinimumInclusive"]);
+            Assert.That((bool) ordinalScale["isMinimumInclusive"], Is.True);
             Assert.That((string) ordinalScale["maximumPermissibleValue"], Is.EqualTo("100"));
-            Assert.IsTrue((bool) ordinalScale["isMaximumInclusive"]);
+            Assert.That((bool) ordinalScale["isMaximumInclusive"], Is.True);
             Assert.That((string) ordinalScale["positiveValueConnotation"], Is.EqualTo("positive Value Connotation"));
             Assert.That((string) ordinalScale["negativeValueConnotation"], Is.EqualTo("negative Value Connotation"));
 

@@ -107,7 +107,7 @@ namespace WebservicesIntegrationTests
             Assert.That((int) requirement[PropertyNames.RevisionNumber], Is.EqualTo(2));
             Assert.That((string) requirement[PropertyNames.Name], Is.EqualTo("create requirement"));
             Assert.That((string) requirement[PropertyNames.ShortName], Is.EqualTo("createrequirement"));
-            Assert.IsFalse((bool) requirement[PropertyNames.IsDeprecated]);
+            Assert.That((bool) requirement[PropertyNames.IsDeprecated], Is.False);
         }
 
         [Test]
@@ -204,7 +204,7 @@ namespace WebservicesIntegrationTests
 
             Assert.That((string) requirement[PropertyNames.Owner], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
 
-            Assert.IsFalse((bool) requirement[PropertyNames.IsDeprecated]);
+            Assert.That((bool) requirement[PropertyNames.IsDeprecated], Is.False);
             Assert.That((string) requirement[PropertyNames.Group], Is.Null);
 
             var expectedCategories = new[] { "167b5cb0-766e-4ab2-b728-a9c9a662b017" };
@@ -264,7 +264,7 @@ namespace WebservicesIntegrationTests
 
                 Assert.That((string) requirement[PropertyNames.Owner], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
 
-                Assert.IsFalse((bool) requirement[PropertyNames.IsDeprecated]);
+                Assert.That((bool) requirement[PropertyNames.IsDeprecated], Is.False);
                 Assert.That((string) requirement[PropertyNames.Group], Is.EqualTo("d3474e6a-f9ac-4d1a-91d9-6f8be06a03b5"));
 
                 expectedCategories = new string[] { };
@@ -327,7 +327,7 @@ namespace WebservicesIntegrationTests
             var exception = Assert.Catch<WebException>(() => this.WebClient.PostDto(iterationUri, postBody));
             var errorMessage = this.WebClient.ExtractExceptionStringFromResponse(exception.Response);
             Assert.That(((HttpWebResponse) exception.Response).StatusCode, Is.EqualTo(HttpStatusCode.Unauthorized));
-            Assert.IsTrue(errorMessage.Contains("The person Jane does not have an appropriate update permission for Definition."));
+            Assert.That(errorMessage, Does.Contain("The person Jane does not have an appropriate update permission for Definition."));
         }
     }
 }

@@ -89,7 +89,7 @@ namespace WebservicesIntegrationTests
             Assert.That((int) textParameterType[PropertyNames.RevisionNumber], Is.EqualTo(1));
             Assert.That((string) textParameterType[PropertyNames.ClassKind], Is.EqualTo("TextParameterType"));
 
-            Assert.IsFalse((bool) textParameterType[PropertyNames.IsDeprecated]);
+            Assert.That((bool) textParameterType[PropertyNames.IsDeprecated], Is.False);
             Assert.That((string) textParameterType[PropertyNames.Name], Is.EqualTo("Test Text ParameterType"));
             Assert.That((string) textParameterType[PropertyNames.ShortName], Is.EqualTo("TestTextParameterType"));
 

@@ -93,7 +93,7 @@ namespace WebservicesIntegrationTests
             Assert.That((int) referencerRule["revisionNumber"], Is.EqualTo(1));
             Assert.That((string) referencerRule["classKind"], Is.EqualTo("ReferencerRule"));
 
-            Assert.IsFalse((bool) referencerRule["isDeprecated"]);
+            Assert.That((bool) referencerRule["isDeprecated"], Is.False);
             Assert.That((string) referencerRule["name"], Is.EqualTo("TestReferencerRule"));
             Assert.That((string) referencerRule["shortName"], Is.EqualTo("Test Referencer Rule"));
 

@@ -126,7 +126,7 @@ namespace WebservicesIntegrationTests
             Assert.That((int) siteReferenceDataLibrary[PropertyNames.RevisionNumber], Is.EqualTo(2));
             Assert.That((string) siteReferenceDataLibrary[PropertyNames.ClassKind], Is.EqualTo("SiteReferenceDataLibrary"));
 
-            Assert.IsFalse((bool) siteReferenceDataLibrary[PropertyNames.IsDeprecated]);
+            Assert.That((bool) siteReferenceDataLibrary[PropertyNames.IsDeprecated], Is.False);
             Assert.That((string) siteReferenceDataLibrary[PropertyNames.Name], Is.EqualTo("Test Reference Data Library"));
             Assert.That((string) siteReferenceDataLibrary[PropertyNames.ShortName], Is.EqualTo("TestRDL"));
 
@@ -276,7 +276,7 @@ namespace WebservicesIntegrationTests
             var rulesList = rulesArray.Select(x => (string) x).ToList();
             Assert.That(rulesList, Is.EquivalentTo(expectedRules));
 
-            Assert.IsEmpty(siteReferenceDataLibrary[PropertyNames.RequiredRdl]);
+            Assert.That(siteReferenceDataLibrary[PropertyNames.RequiredRdl], Is.Empty);
 
             var expectedConstants = new string[]
             {
@@ -302,7 +302,7 @@ namespace WebservicesIntegrationTests
             Assert.That((string) derivedQuantityKind[PropertyNames.Symbol], Is.EqualTo("testSymbol"));
             Assert.That((string) derivedQuantityKind[PropertyNames.QuantityDimensionSymbol], Is.EqualTo("testQuantityDimensionSymbol"));
             Assert.That((string) derivedQuantityKind[PropertyNames.DefaultScale], Is.EqualTo("53e82aeb-c42c-475c-b6bf-a102af883471"));
-            Assert.IsFalse((bool) derivedQuantityKind[PropertyNames.IsDeprecated]);
+            Assert.That((bool) derivedQuantityKind[PropertyNames.IsDeprecated], Is.False);
 
             var expectedQuantityKindFactors = new List<OrderedItem>
             {
@@ -355,7 +355,7 @@ namespace WebservicesIntegrationTests
             Assert.That((string) simpleQuantityKind[PropertyNames.Symbol], Is.EqualTo("testSymbol"));
             Assert.That((string) simpleQuantityKind[PropertyNames.QuantityDimensionSymbol], Is.EqualTo("testQuantityDimensionSymbol"));
             Assert.That((string) simpleQuantityKind[PropertyNames.DefaultScale], Is.EqualTo("53e82aeb-c42c-475c-b6bf-a102af883471"));
-            Assert.IsFalse((bool) simpleQuantityKind[PropertyNames.IsDeprecated]);
+            Assert.That((bool) simpleQuantityKind[PropertyNames.IsDeprecated], Is.False);
 
             var expectedSimpleCategories = new string[] { };
             var simpleCategoriesArray = (JArray) simpleQuantityKind[PropertyNames.Category];
@@ -399,7 +399,7 @@ namespace WebservicesIntegrationTests
             Assert.That((string) specializedQuantityKind[PropertyNames.QuantityDimensionSymbol], Is.EqualTo("testQuantityDimensionSymbol"));
             Assert.That((string) specializedQuantityKind[PropertyNames.General], Is.EqualTo("199bec0a-661d-408c-8ca7-718c636c5681"));
             Assert.That((string) specializedQuantityKind[PropertyNames.DefaultScale], Is.EqualTo("53e82aeb-c42c-475c-b6bf-a102af883471"));
-            Assert.IsFalse((bool) specializedQuantityKind[PropertyNames.IsDeprecated]);
+            Assert.That((bool) specializedQuantityKind[PropertyNames.IsDeprecated], Is.False);
 
             var expectedSpecializedCategories = new string[] { };
             var specializedCategoriesArray = (JArray) specializedQuantityKind[PropertyNames.Category];

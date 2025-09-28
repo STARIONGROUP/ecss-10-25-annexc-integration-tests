@@ -96,7 +96,7 @@ namespace WebservicesIntegrationTests
             var exception = Assert.Catch<WebException>(() => this.WebClient.PostDto(siteDirectoryUri, postBody));
             var errorMessage = this.WebClient.ExtractExceptionStringFromResponse(exception.Response);
             Assert.That(((HttpWebResponse)exception.Response).StatusCode, Is.EqualTo(HttpStatusCode.Unauthorized));
-            Assert.IsTrue(errorMessage.Contains("The person Jane does not have an appropriate update permission for DomainOfExpertise."));
+            Assert.That(errorMessage, Does.Contain("The person Jane does not have an appropriate update permission for DomainOfExpertise."));
         }
 
         [Test]
@@ -247,7 +247,7 @@ namespace WebservicesIntegrationTests
                 // assert that the properties are what is expected
                 Assert.That((string)domainOfExpertise["name"], Is.EqualTo("Test Domain of Expertise"));
                 Assert.That((string)domainOfExpertise["shortName"], Is.EqualTo("TST"));
-                Assert.IsFalse((bool)domainOfExpertise["isDeprecated"]);
+                Assert.That((bool)domainOfExpertise["isDeprecated"], Is.False);
 
                 var expectedAliases = new string[] { };
                 var aliasesArray = (JArray)domainOfExpertise["alias"];
@@ -279,7 +279,7 @@ namespace WebservicesIntegrationTests
                 // assert that the properties are what is expected
                 Assert.That((string)domainOfExpertise["name"], Is.EqualTo("Additional Test Domain of Expertise"));
                 Assert.That((string)domainOfExpertise["shortName"], Is.EqualTo("ADD"));
-                Assert.IsFalse((bool)domainOfExpertise["isDeprecated"]);
+                Assert.That((bool)domainOfExpertise["isDeprecated"], Is.False);
 
                 var expectedAliases = new string[] { };
                 var aliasesArray = (JArray)domainOfExpertise["alias"];

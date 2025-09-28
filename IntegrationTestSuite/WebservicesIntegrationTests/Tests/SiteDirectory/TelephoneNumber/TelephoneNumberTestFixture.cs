@@ -212,12 +212,12 @@ namespace WebservicesIntegrationTests
             Assert.That((string) person[PropertyNames.OrganizationalUnit], Is.EqualTo(""));
             Assert.That((string) person[PropertyNames.Organization], Is.EqualTo(null));
             Assert.That((string) person[PropertyNames.DefaultDomain], Is.EqualTo("0e92edde-fdff-41db-9b1d-f2e484f12535"));
-            Assert.IsTrue((bool) person[PropertyNames.IsActive]);
+            Assert.That((bool) person[PropertyNames.IsActive], Is.True);
             Assert.That((string) person[PropertyNames.Role], Is.EqualTo("2428f4d9-f26d-4112-9d56-1c940748df69"));
             Assert.That((string) person[PropertyNames.DefaultEmailAddress], Is.EqualTo(null));
             Assert.That((string) person[PropertyNames.DefaultTelephoneNumber], Is.EqualTo(null));
             Assert.That((string) person[PropertyNames.ShortName], Is.EqualTo("admin"));
-            Assert.IsFalse((bool) person[PropertyNames.IsDeprecated]);
+            Assert.That((bool) person[PropertyNames.IsDeprecated], Is.False);
 
             // verify that there are 2 emailAddresses for this person
             var expectedEmailAddresses = new string[]
@@ -245,7 +245,7 @@ namespace WebservicesIntegrationTests
             // verify that there are no userPreference for this person
             var userPreferences = (JArray) person[PropertyNames.UserPreference];
             IList<string> up = userPreferences.Select(x => (string) x).ToList();
-            Assert.IsEmpty(up);
+            Assert.That(up, Is.Empty);
 
             // get a specific telephoneNumber from the result by it's unique id
             var telephoneNumber =

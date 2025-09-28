@@ -236,7 +236,7 @@ namespace WebservicesIntegrationTests
 
             var publicationsArray = (JArray)iteration[PropertyNames.Publication];
             IList<string> publications = publicationsArray.Select(x => (string)x).ToList();
-            CollectionAssert.IsEmpty(publications); // publication shoudl be empty
+            Assert.That(publications, Is.Empty); // publication should be empty
 
             var expectedPossibleFiniteStateLists = new string[]
             {
@@ -646,7 +646,7 @@ namespace WebservicesIntegrationTests
             var exception = Assert.Catch<WebException>(() => this.WebClient.PostDto(iterationUri, postBody));
             var errorMessage = this.WebClient.ExtractExceptionStringFromResponse(exception.Response);
             Assert.That(((HttpWebResponse)exception.Response).StatusCode, Is.EqualTo(HttpStatusCode.Unauthorized));
-            Assert.That(errorMessage.Contains("The person Jane does not have an appropriate update permission for Iteration."), Is.True);
+            Assert.That(errorMessage, Does.Contain("The person Jane does not have an appropriate update permission for Iteration."));
         }
     }
 }

@@ -96,7 +96,7 @@ namespace WebservicesIntegrationTests
             Assert.That((string) intervalScale["name"], Is.EqualTo("Test Interval Scale"));
             Assert.That((string) intervalScale["shortName"], Is.EqualTo("TestIntervalScale"));
 
-            Assert.IsFalse((bool) intervalScale["isDeprecated"]);
+            Assert.That((bool) intervalScale["isDeprecated"], Is.False);
             Assert.That((string) intervalScale["unit"], Is.EqualTo("56842970-3915-4369-8712-61cfd8273ef9"));
 
             var expectedValueDefinitions = new string[] {};
@@ -106,9 +106,9 @@ namespace WebservicesIntegrationTests
 
             Assert.That((string) intervalScale["numberSet"], Is.EqualTo("NATURAL_NUMBER_SET"));
             Assert.That((string) intervalScale["minimumPermissibleValue"], Is.EqualTo("1"));
-            Assert.IsTrue((bool) intervalScale["isMinimumInclusive"]);
+            Assert.That((bool) intervalScale["isMinimumInclusive"], Is.True);
             Assert.That((string) intervalScale["maximumPermissibleValue"], Is.EqualTo("2"));
-            Assert.IsTrue((bool) intervalScale["isMaximumInclusive"]);
+            Assert.That((bool) intervalScale["isMaximumInclusive"], Is.True);
             Assert.That((string) intervalScale["positiveValueConnotation"], Is.EqualTo("positive Value Connotation"));
             Assert.That((string) intervalScale["negativeValueConnotation"], Is.EqualTo("negative Value Connotation"));
 

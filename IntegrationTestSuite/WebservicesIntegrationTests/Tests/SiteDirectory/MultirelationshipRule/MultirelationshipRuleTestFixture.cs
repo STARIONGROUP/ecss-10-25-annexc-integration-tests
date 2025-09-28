@@ -93,7 +93,7 @@ namespace WebservicesIntegrationTests
             Assert.That((int) multirelationshipRule["revisionNumber"], Is.EqualTo(1));
             Assert.That((string) multirelationshipRule["classKind"], Is.EqualTo("MultiRelationshipRule"));
 
-            Assert.IsFalse((bool) multirelationshipRule["isDeprecated"]);
+            Assert.That((bool) multirelationshipRule["isDeprecated"], Is.False);
             Assert.That((string) multirelationshipRule["name"], Is.EqualTo("Test Multi Relationship Rule"));
             Assert.That((string) multirelationshipRule["shortName"], Is.EqualTo("TestMultiRelationshipRule"));
 

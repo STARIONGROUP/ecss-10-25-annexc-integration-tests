@@ -410,7 +410,7 @@ namespace WebservicesIntegrationTests
             IList<string> rulesList = rulesArray.Select(x => (string)x).ToList();
             Assert.That(rulesList, Is.EquivalentTo(expectedRules));
 
-            Assert.IsEmpty(siteReferenceDataLibrary["requiredRdl"]);
+            Assert.That(siteReferenceDataLibrary["requiredRdl"], Is.Empty);
 
             var expectedConstants = new string[]
             {

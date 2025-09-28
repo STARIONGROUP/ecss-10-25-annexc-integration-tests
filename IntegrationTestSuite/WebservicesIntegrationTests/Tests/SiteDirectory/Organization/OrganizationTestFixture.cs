@@ -87,7 +87,7 @@ namespace WebservicesIntegrationTests
             // assert that the properties are what is expected
             Assert.That((string)organization[PropertyNames.Name], Is.EqualTo("Test Organization"));
             Assert.That((string)organization[PropertyNames.ShortName], Is.EqualTo("TestOrganization"));
-            Assert.IsFalse((bool)organization[PropertyNames.IsDeprecated]);
+            Assert.That((bool)organization[PropertyNames.IsDeprecated], Is.False);
         }
     }
 }

@@ -93,7 +93,7 @@ namespace WebservicesIntegrationTests
             Assert.That((int)glossary[PropertyNames.RevisionNumber], Is.EqualTo(1));
             Assert.That((string)glossary[PropertyNames.ClassKind], Is.EqualTo("Glossary"));
 
-            Assert.IsFalse((bool) glossary[PropertyNames.IsDeprecated]);
+            Assert.That((bool) glossary[PropertyNames.IsDeprecated], Is.False);
             Assert.That((string)glossary[PropertyNames.Name], Is.EqualTo("Test Glossary"));
             Assert.That((string)glossary[PropertyNames.ShortName], Is.EqualTo("TestGlossary"));
 
@@ -142,11 +142,11 @@ namespace WebservicesIntegrationTests
 
             var glossary = jArray.Single(x => (string)x[PropertyNames.Iid] == "bb08686b-ae03-49eb-9f48-c196b5ad6bda");
             Assert.That((int)glossary[PropertyNames.RevisionNumber], Is.EqualTo(2));
-            Assert.IsTrue((bool)glossary[PropertyNames.IsDeprecated]);
+            Assert.That((bool)glossary[PropertyNames.IsDeprecated], Is.True);
 
             var term = jArray.Single(x => (string)x[PropertyNames.Iid] == "18533006-1b9b-46c1-acc9-ae438ed4ebb2");
             Assert.That((int)term[PropertyNames.RevisionNumber], Is.EqualTo(2));
-            Assert.IsTrue((bool)term[PropertyNames.IsDeprecated]);
+            Assert.That((bool)term[PropertyNames.IsDeprecated], Is.True);
 
             Assert.That(jArray.Count, Is.EqualTo(3));
         }

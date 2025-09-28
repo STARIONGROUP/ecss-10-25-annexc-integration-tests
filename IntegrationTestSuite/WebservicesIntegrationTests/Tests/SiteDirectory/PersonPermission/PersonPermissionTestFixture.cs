@@ -84,7 +84,7 @@ namespace WebservicesIntegrationTests
             Assert.That((string) personPermissionObject["iid"], Is.EqualTo("9211fa6a-ea92-43fc-bf2e-799ffd4b05ac"));
             Assert.That((int) personPermissionObject["revisionNumber"], Is.EqualTo(1));
             Assert.That((string) personPermissionObject["classKind"], Is.EqualTo("PersonPermission"));
-            Assert.IsFalse((bool) personPermissionObject["isDeprecated"]);
+            Assert.That((bool) personPermissionObject["isDeprecated"], Is.False);
             Assert.That((string) personPermissionObject["accessRight"], Is.EqualTo("MODIFY"));
             Assert.That((string) personPermissionObject["objectClass"], Is.EqualTo("ModelReferenceDataLibrary"));
 
@@ -92,7 +92,7 @@ namespace WebservicesIntegrationTests
             Assert.That((string) personPermissionObject["iid"], Is.EqualTo("a59e0ad9-bde7-4aeb-9871-e440380c44ed"));
             Assert.That((int) personPermissionObject["revisionNumber"], Is.EqualTo(1));
             Assert.That((string) personPermissionObject["classKind"], Is.EqualTo("PersonPermission"));
-            Assert.IsFalse((bool) personPermissionObject["isDeprecated"]);
+            Assert.That((bool) personPermissionObject["isDeprecated"], Is.False);
             Assert.That((string) personPermissionObject["accessRight"], Is.EqualTo("MODIFY"));
             Assert.That((string) personPermissionObject["objectClass"], Is.EqualTo("DomainOfExpertiseGroup"));
 
@@ -100,7 +100,7 @@ namespace WebservicesIntegrationTests
             Assert.That((string) personPermissionObject["iid"], Is.EqualTo("47b4f696-cbe6-411b-b0dd-1550207aa798"));
             Assert.That((int) personPermissionObject["revisionNumber"], Is.EqualTo(1));
             Assert.That((string) personPermissionObject["classKind"], Is.EqualTo("PersonPermission"));
-            Assert.IsFalse((bool) personPermissionObject["isDeprecated"]);
+            Assert.That((bool) personPermissionObject["isDeprecated"], Is.False);
             Assert.That((string) personPermissionObject["accessRight"], Is.EqualTo("MODIFY"));
             Assert.That((string) personPermissionObject["objectClass"], Is.EqualTo("Participant"));
 
@@ -108,7 +108,7 @@ namespace WebservicesIntegrationTests
             Assert.That((string) personPermissionObject["iid"], Is.EqualTo("007e23c2-62c4-459d-8cb1-499d9d014bdc"));
             Assert.That((int) personPermissionObject["revisionNumber"], Is.EqualTo(1));
             Assert.That((string) personPermissionObject["classKind"], Is.EqualTo("PersonPermission"));
-            Assert.IsFalse((bool) personPermissionObject["isDeprecated"]);
+            Assert.That((bool) personPermissionObject["isDeprecated"], Is.False);
             Assert.That((string) personPermissionObject["accessRight"], Is.EqualTo("MODIFY"));
             Assert.That((string) personPermissionObject["objectClass"], Is.EqualTo("SiteDirectory"));
 
@@ -116,7 +116,7 @@ namespace WebservicesIntegrationTests
             Assert.That((string) personPermissionObject["iid"], Is.EqualTo("0ec4ea88-3d84-411c-9a4a-0b1fb546281e"));
             Assert.That((int) personPermissionObject["revisionNumber"], Is.EqualTo(1));
             Assert.That((string) personPermissionObject["classKind"], Is.EqualTo("PersonPermission"));
-            Assert.IsFalse((bool) personPermissionObject["isDeprecated"]);
+            Assert.That((bool) personPermissionObject["isDeprecated"], Is.False);
             Assert.That((string) personPermissionObject["accessRight"], Is.EqualTo("MODIFY"));
             Assert.That((string) personPermissionObject["objectClass"], Is.EqualTo("ParticipantPermission"));
 
@@ -124,7 +124,7 @@ namespace WebservicesIntegrationTests
             Assert.That((string) personPermissionObject["iid"], Is.EqualTo("163e6bc3-4639-4204-9a5f-4266baafd25f"));
             Assert.That((int) personPermissionObject["revisionNumber"], Is.EqualTo(1));
             Assert.That((string) personPermissionObject["classKind"], Is.EqualTo("PersonPermission"));
-            Assert.IsFalse((bool) personPermissionObject["isDeprecated"]);
+            Assert.That((bool) personPermissionObject["isDeprecated"], Is.False);
             Assert.That((string) personPermissionObject["accessRight"], Is.EqualTo("MODIFY"));
             Assert.That((string) personPermissionObject["objectClass"], Is.EqualTo("PersonPermission"));
 
@@ -132,7 +132,7 @@ namespace WebservicesIntegrationTests
             Assert.That((string) personPermissionObject["iid"], Is.EqualTo("c5c23adb-82d6-4d6e-9192-183dbd67e022"));
             Assert.That((int) personPermissionObject["revisionNumber"], Is.EqualTo(1));
             Assert.That((string) personPermissionObject["classKind"], Is.EqualTo("PersonPermission"));
-            Assert.IsFalse((bool) personPermissionObject["isDeprecated"]);
+            Assert.That((bool) personPermissionObject["isDeprecated"], Is.False);
             Assert.That((string) personPermissionObject["accessRight"], Is.EqualTo("MODIFY"));
             Assert.That((string) personPermissionObject["objectClass"], Is.EqualTo("Person"));
 
@@ -140,7 +140,7 @@ namespace WebservicesIntegrationTests
             Assert.That((string) personPermissionObject["iid"], Is.EqualTo("272c94f3-8fe4-44c4-a915-616a0d93db26"));
             Assert.That((int) personPermissionObject["revisionNumber"], Is.EqualTo(1));
             Assert.That((string) personPermissionObject["classKind"], Is.EqualTo("PersonPermission"));
-            Assert.IsFalse((bool) personPermissionObject["isDeprecated"]);
+            Assert.That((bool) personPermissionObject["isDeprecated"], Is.False);
             Assert.That((string) personPermissionObject["accessRight"], Is.EqualTo("MODIFY"));
             Assert.That((string) personPermissionObject["objectClass"], Is.EqualTo("IterationSetup"));
 
@@ -148,7 +148,7 @@ namespace WebservicesIntegrationTests
             Assert.That((string) personPermissionObject["iid"], Is.EqualTo("6d336a9b-c4c3-44aa-8e96-17d9f626f3d7"));
             Assert.That((int) personPermissionObject["revisionNumber"], Is.EqualTo(1));
             Assert.That((string) personPermissionObject["classKind"], Is.EqualTo("PersonPermission"));
-            Assert.IsFalse((bool) personPermissionObject["isDeprecated"]);
+            Assert.That((bool) personPermissionObject["isDeprecated"], Is.False);
             Assert.That((string) personPermissionObject["accessRight"], Is.EqualTo("MODIFY"));
             Assert.That((string) personPermissionObject["objectClass"], Is.EqualTo("EngineeringModelSetup"));
 
@@ -156,7 +156,7 @@ namespace WebservicesIntegrationTests
             Assert.That((string) personPermissionObject["iid"], Is.EqualTo("db0e0a1d-c182-4c49-b375-abacfb77b5a5"));
             Assert.That((int) personPermissionObject["revisionNumber"], Is.EqualTo(1));
             Assert.That((string) personPermissionObject["classKind"], Is.EqualTo("PersonPermission"));
-            Assert.IsFalse((bool) personPermissionObject["isDeprecated"]);
+            Assert.That((bool) personPermissionObject["isDeprecated"], Is.False);
             Assert.That((string) personPermissionObject["accessRight"], Is.EqualTo("MODIFY"));
             Assert.That((string) personPermissionObject["objectClass"], Is.EqualTo("SiteReferenceDataLibrary"));
 
@@ -164,7 +164,7 @@ namespace WebservicesIntegrationTests
             Assert.That((string) personPermissionObject["iid"], Is.EqualTo("9108f724-fa36-49c2-a589-e5e3f1e98be1"));
             Assert.That((int) personPermissionObject["revisionNumber"], Is.EqualTo(1));
             Assert.That((string) personPermissionObject["classKind"], Is.EqualTo("PersonPermission"));
-            Assert.IsFalse((bool) personPermissionObject["isDeprecated"]);
+            Assert.That((bool) personPermissionObject["isDeprecated"], Is.False);
             Assert.That((string) personPermissionObject["accessRight"], Is.EqualTo("MODIFY"));
             Assert.That((string) personPermissionObject["objectClass"], Is.EqualTo("DomainOfExpertise"));
 
@@ -172,7 +172,7 @@ namespace WebservicesIntegrationTests
             Assert.That((string) personPermissionObject["iid"], Is.EqualTo("1f56c492-8ce5-44a0-82eb-d515ac8653f7"));
             Assert.That((int) personPermissionObject["revisionNumber"], Is.EqualTo(1));
             Assert.That((string) personPermissionObject["classKind"], Is.EqualTo("PersonPermission"));
-            Assert.IsFalse((bool) personPermissionObject["isDeprecated"]);
+            Assert.That((bool) personPermissionObject["isDeprecated"], Is.False);
             Assert.That((string) personPermissionObject["accessRight"], Is.EqualTo("MODIFY"));
             Assert.That((string) personPermissionObject["objectClass"], Is.EqualTo("Organization"));
 
@@ -180,7 +180,7 @@ namespace WebservicesIntegrationTests
             Assert.That((string) personPermissionObject["iid"], Is.EqualTo("e2c74973-a0e0-4212-96fe-4b0a236a07a0"));
             Assert.That((int) personPermissionObject["revisionNumber"], Is.EqualTo(1));
             Assert.That((string) personPermissionObject["classKind"], Is.EqualTo("PersonPermission"));
-            Assert.IsFalse((bool) personPermissionObject["isDeprecated"]);
+            Assert.That((bool) personPermissionObject["isDeprecated"], Is.False);
             Assert.That((string) personPermissionObject["accessRight"], Is.EqualTo("MODIFY"));
             Assert.That((string) personPermissionObject["objectClass"], Is.EqualTo("ParticipantRole"));
 
@@ -188,7 +188,7 @@ namespace WebservicesIntegrationTests
             Assert.That((string) personPermissionObject["iid"], Is.EqualTo("fc37edbf-c4e3-4902-bae5-533631f36e29"));
             Assert.That((int) personPermissionObject["revisionNumber"], Is.EqualTo(1));
             Assert.That((string) personPermissionObject["classKind"], Is.EqualTo("PersonPermission"));
-            Assert.IsFalse((bool) personPermissionObject["isDeprecated"]);
+            Assert.That((bool) personPermissionObject["isDeprecated"], Is.False);
             Assert.That((string) personPermissionObject["accessRight"], Is.EqualTo("MODIFY"));
             Assert.That((string) personPermissionObject["objectClass"], Is.EqualTo("PersonRole"));
 
@@ -196,7 +196,7 @@ namespace WebservicesIntegrationTests
             Assert.That((string) personPermissionObject["iid"], Is.EqualTo("98b924e2-3709-4b2c-b304-b74e3eab13af"));
             Assert.That((int) personPermissionObject["revisionNumber"], Is.EqualTo(1));
             Assert.That((string) personPermissionObject["classKind"], Is.EqualTo("PersonPermission"));
-            Assert.IsFalse((bool) personPermissionObject["isDeprecated"]);
+            Assert.That((bool) personPermissionObject["isDeprecated"], Is.False);
             Assert.That((string) personPermissionObject["accessRight"], Is.EqualTo("MODIFY"));
             Assert.That((string) personPermissionObject["objectClass"], Is.EqualTo("SiteLogEntry"));
         }

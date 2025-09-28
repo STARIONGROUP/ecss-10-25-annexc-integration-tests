@@ -93,7 +93,7 @@ namespace WebservicesIntegrationTests
             Assert.That((int) linearConversionUnit["revisionNumber"], Is.EqualTo(1));
             Assert.That((string) linearConversionUnit["classKind"], Is.EqualTo("LinearConversionUnit"));
 
-            Assert.IsFalse((bool) linearConversionUnit["isDeprecated"]);
+            Assert.That((bool) linearConversionUnit["isDeprecated"], Is.False);
             Assert.That((string) linearConversionUnit["name"], Is.EqualTo("Test Linear Conversion Unit"));
             Assert.That((string) linearConversionUnit["shortName"], Is.EqualTo("testLinearConversionUnit"));
 
