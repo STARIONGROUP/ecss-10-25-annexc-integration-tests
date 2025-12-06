@@ -1,6 +1,6 @@
 # ecss-10-25-annexc-integration-tests
 This repository contains ECSS-E-TM-10-25 Annex C integration tests. The purpose of the software is to achieve 100% code coverage of all REST API queries that can be performed to determine wheter an ECSS-E-TM-10-25 Annex C implementation is compliant with the ECSS-E-TM-10-25 Annex C.
-In May 2020 a few tests were added for a specific CDP4 extension. These tests are decorated with an Nunit Category attribute so they can be filtered out by the Nunit runner. The Category used here name is 'CdpVersion_1_1_0'.
+In May 2020 a few tests were added for a specific CDP4-COMET extension. These tests are decorated with an Nunit Category attribute so they can be filtered out by the Nunit runner. The Category used here name is 'CdpVersion_1_1_0'.
 See [this website](https://github.com/nunit/docs/wiki/Console-Command-Line) for more info on Nunit test filtering.
 
 ## ECSS-E-TM-10-25
@@ -42,9 +42,9 @@ The URL of the restore service takes the following form: "http(s)://hostname:por
 
 Read more about setting up your development environnment [here](https://github.com/STARIONGROUP/ecss-10-25-annexc-integration-tests/wiki)
 
-# COMET
+# CDP4-COMET
 
-COMET is the Starion Group implementation of ECSS-E-TM-10-25 and is a so-called Concurrent Design Platform or collaborative MBSE application. COMET is a typical 3-tier application that contains the following application layers:
+CDP4-COMET is the Starion Group implementation of ECSS-E-TM-10-25 and is a so-called Concurrent Design Platform or collaborative MBSE application. CDP4-COMET is a typical 3-tier application that contains the following application layers:
 * Layer-1: Persistent Data Store (data layer)
   * implemented using [PostgreSQL](http://www.postgresql.org)
 * Layer-2: REST Web Services (application layer)
@@ -53,14 +53,11 @@ COMET is the Starion Group implementation of ECSS-E-TM-10-25 and is a so-called 
 * Layer-3: Client tools (presentation layer), the following applications are available:
   * COMET-IME: A desktop application
   * COMET-ADDIN: A Microsoft Excel ADDIN
+  * COMET-WEB: A browser application
 
-More information about COMET can be found on the Starion Group [Website](https://www.stariongroup.eu/services-solutions/system-engineering/concurrent-design/). A demo installer of COMET-IME can be downloaded here: https://www.stariongroup.eu/services-solutions/system-engineering/concurrent-design/cdp4-comet/.
+More information about CDP4-COMET can be found on the Starion Group [Website](https://www.stariongroup.eu/services-solutions/system-engineering/concurrent-design/). The installer of the CDP4-COMET-IME can be downloaded here: https://www.stariongroup.eu/services-solutions/system-engineering/concurrent-design/cdp4-comet/.
 
-A Public instance of COMET WebServices that is used to verify COMET WebServices compliance is available at http://cdp4services-test.cdp4.org. The content that is serviced by this instance is loaded by the contents of the [Data folder](./Data/) . The username and password to access this COMET WebServices instances are: admin/pass.   
-
-# OCDT
-
-The ESA Community open source implementation of ECSS-E-TM-10-25. More information can be found [here](https://ocdt.esa.int)
+A Public instance of COMET WebServices that is used to verify COMET WebServices compliance is available at http://cdp4services-test.cdp4.org. The content that is serviced by this instance is loaded by the contents of the [Data folder](./Data/). The username and password to access this COMET WebServices instances are: admin/pass.   
 
 # Sponsors
 

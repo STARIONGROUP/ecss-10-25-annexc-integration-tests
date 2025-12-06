@@ -12,11 +12,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="CDP4JsonSerializer-CE" Version="29.0.0" />
-        <PackageReference Include="CDP4MessagePackSerializer-CE" Version="29.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.10" />
-        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.10" />
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.0" />
+        <PackageReference Include="CDP4JsonSerializer-CE" Version="29.0.2" />
+        <PackageReference Include="CDP4MessagePackSerializer-CE" Version="29.0.2" />
+        <PackageReference Include="Microsoft.Extensions.Configuration" Version="10.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.0" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
         <PackageReference Include="Moq" Version="4.20.72" />
         <PackageReference Include="NUnit" Version="4.4.0" />
         <PackageReference Include="NUnit.Console" Version="3.20.2" />
