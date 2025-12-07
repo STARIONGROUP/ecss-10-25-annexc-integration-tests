@@ -450,7 +450,7 @@ namespace WebservicesIntegrationTests
 
             var postBody = this.GetJsonFromFile(postBodyPath);
             var inputAsInnerJson = JsonConvert.SerializeObject(inputValue); 
-            postBody = postBody.Replace("<INNERJSON>", inputAsInnerJson);
+            postBody = postBody.Replace("<INNERJSON>", $"[{inputAsInnerJson}]");
 
             var jArray = this.WebClient.PostDto(iterationUri, postBody);
 
@@ -472,7 +472,7 @@ namespace WebservicesIntegrationTests
 
             var postBody = this.GetJsonFromFile(postBodyPath);
             var inputAsInnerJson = JsonConvert.ToString("Test Revisions");
-            postBody = postBody.Replace("<INNERJSON>", inputAsInnerJson);
+            postBody = postBody.Replace("<INNERJSON>", $"[{inputAsInnerJson}]" );
 
             var jArray1 = this.WebClient.PostDto(iterationUri, postBody);
             Assert.That(jArray1.Count, Is.EqualTo(3));

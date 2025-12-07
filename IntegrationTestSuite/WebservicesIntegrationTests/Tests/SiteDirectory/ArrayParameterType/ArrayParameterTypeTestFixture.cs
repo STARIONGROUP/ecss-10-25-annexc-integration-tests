@@ -195,14 +195,15 @@ namespace WebservicesIntegrationTests
 
             var expectedDimensions = new List<OrderedItem>
             {
-                new OrderedItem(110835215, 2)
+                new OrderedItem(110835215, 2.ToString())
             };
 
             var dimensionsArray = JsonConvert.DeserializeObject<List<OrderedItem>>(
                 arrayParameterType[PropertyNames.Dimension].ToString());
 
             Assert.That(dimensionsArray[0].K, Is.EqualTo(expectedDimensions[0].K));
-            Assert.That(dimensionsArray[0].V, Is.EqualTo(expectedDimensions[0].V));
+            Assert.That(dimensionsArray[0].V.ToString(), Is.EqualTo(expectedDimensions[0].V),
+                "with newtonsoft the value is returned a string, with system.text.json as an int");
 
             var expectedCategories = new string[] { };
             var categoriesArray = (JArray) arrayParameterType[PropertyNames.Category];
