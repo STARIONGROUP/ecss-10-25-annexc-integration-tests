@@ -1,0 +1,11 @@
+﻿{
+  "_delete": [],
+  "_create": [ <<CREATE>> ],
+  "_update": [
+    {
+      "classKind": "SiteDirectory",
+      "iid": "f13de6f8-b03a-46e7-a492-53b2f260f294",
+      "person": [ <<UPDATE>> ]
+    }
+  ]
+}

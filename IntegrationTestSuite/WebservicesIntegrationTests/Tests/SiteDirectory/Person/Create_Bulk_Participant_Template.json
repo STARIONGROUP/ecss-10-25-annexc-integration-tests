@@ -1,0 +1,14 @@
+﻿{
+  "_delete": [],
+  "_create": [ <<CREATE>> ],
+  "_update": [
+    {
+      "classKind": "EngineeringModelSetup",
+      "participant": [
+        <<UPDATE>>
+      ],
+      "iid": <<EMSIID>>
+    }
+  ],
+  "_copy": []
+}

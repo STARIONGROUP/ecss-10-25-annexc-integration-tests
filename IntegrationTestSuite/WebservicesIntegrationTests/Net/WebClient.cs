@@ -456,9 +456,10 @@ namespace WebservicesIntegrationTests.Net
         private HttpWebRequest CreateWebRequest(Uri uri, string method)
         {
             var request = (HttpWebRequest)WebRequest.Create(uri);
+            request.Timeout = 999999999;
             request.Method = method;
             request.ContentType = JsonContentType;
-            
+
             var encoded = Convert.ToBase64String(Encoding.GetEncoding(Utf8).GetBytes(this.UserName + ":" + this.Password));
             request.Headers.Add("Authorization", "Basic " + encoded);
 

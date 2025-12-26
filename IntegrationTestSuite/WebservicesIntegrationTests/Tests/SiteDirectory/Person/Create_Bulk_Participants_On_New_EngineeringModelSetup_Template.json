@@ -1,0 +1,53 @@
+﻿{
+  "_delete": [],
+  "_create": [
+    {
+      "activeDomain": [],
+      "alias": [],
+      "classKind": "EngineeringModelSetup",
+      "definition": [],
+      "engineeringModelIid": <<EMIID>>,
+      "hyperLink": [],
+      "iid": <<EMSIID>>,
+      "iterationSetup": [],
+      "kind": "STUDY_MODEL",
+      "name": <<EMSNAME>>,
+      "participant": [],
+      "requiredRdl": [ <<MRDLIID>> ],
+      "revisionNumber": 0,
+      "shortName": <<EMSNAME>>,
+      "sourceEngineeringModelSetupIid": null,
+      "studyPhase": "PREPARATION_PHASE"
+    },
+    {
+      "alias": [],
+      "baseQuantityKind": [],
+      "baseUnit": [],
+      "classKind": "ModelReferenceDataLibrary",
+      "constant": [],
+      "definedCategory": [],
+      "definition": [],
+      "fileType": [],
+      "glossary": [],
+      "hyperLink": [],
+      "iid": <<MRDLIID>>,
+      "name": <<MRDLNAME>>,
+      "parameterType": [],
+      "referenceSource": [],
+      "requiredRdl": "c454c687-ba3e-44c4-86bc-44544b2c7880",
+      "revisionNumber": 0,
+      "rule": [],
+      "scale": [],
+      "shortName": <<MRDLNAME>>,
+      "unit": [],
+      "unitPrefix": []
+    }
+  ],
+  "_update": [
+    {
+      "classKind": "SiteDirectory",
+      "iid": "f13de6f8-b03a-46e7-a492-53b2f260f294",
+      "model": [ <<EMSIID>> ]
+    }
+  ]
+}

@@ -24,6 +24,7 @@ namespace WebservicesIntegrationTests
     using System.Collections.Generic;
     using System.Linq;
     using System.Net;
+    using System.Text;
 
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
@@ -71,6 +72,65 @@ namespace WebservicesIntegrationTests
             RequirementsSpecificationTestFixture.VerifyProperties(requirementsSpecification);
 
             VerifyProperties(jArray);
+        }
+
+        [Test]
+        [Explicit("Run manually")]
+        [Category("POST")]
+        public void VerifyThatBulkRequirementsCanBeCreatedWithWebApi()
+        {
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
+            var postBodyPath = this.GetPath("Tests/EngineeringModel/Requirement/BulkPostNewRequirements.json");
+
+            var postBody = this.GetJsonFromFile(postBodyPath);
+
+            var createBuilder = new StringBuilder();
+            var updateBuilder = new StringBuilder();
+
+            for (var i = 0; i < 2500; i++)
+            {
+                var reqIid = Guid.NewGuid();
+                var defIid = Guid.NewGuid();
+
+                var create = $@"
+    {{
+      ""iid"": ""{defIid}"",
+      ""revisionNumber"": 0,
+      ""classKind"": ""Definition"",
+      ""languageCode"": ""en-GB"",
+      ""content"": ""this is a definition"" 
+    }},
+    {{
+      ""iid"": ""{reqIid}"",
+      ""revisionNumber"": 0,
+      ""classKind"": ""Requirement"",
+      ""name"": ""create requirement"",
+      ""shortName"": ""createrequirement"",
+      ""alias"": [],
+      ""definition"": [ ""{defIid}"" ],
+      ""hyperlink"": [],
+      ""category"": [],
+      ""owner"": ""0e92edde-fdff-41db-9b1d-f2e484f12535"",
+      ""parameterValue"": [],
+      ""parametricConstraint"": [],
+      ""isDeprecated"": false
+    }}
+";
+
+                if (i > 0)
+                {
+                    createBuilder.Append(", ");
+                    updateBuilder.Append(", ");
+                }
+
+                createBuilder.Append(create);
+                updateBuilder.Append($@"""{reqIid}""");
+            }
+
+            postBody = postBody.Replace("<<CREATE>>", createBuilder.ToString());
+            postBody = postBody.Replace("<<UPDATE>>", updateBuilder.ToString());
+
+            var jArray = this.WebClient.PostDto(iterationUri, postBody);
         }
 
         [Test]

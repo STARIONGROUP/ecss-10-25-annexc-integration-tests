@@ -24,6 +24,7 @@ namespace WebservicesIntegrationTests
     using System.Collections.Generic;
     using System.Linq;
     using System.Net;
+    using System.Text;
 
     using Newtonsoft.Json.Linq;
 
@@ -252,6 +253,198 @@ namespace WebservicesIntegrationTests
             var userPreferences = (JArray)person[PropertyNames.UserPreference];
             IList<string> up = userPreferences.Select(x => (string)x).ToList();
             Assert.That(up, Is.Empty);
+        }
+
+        [Test]
+        [Explicit("Run manually")]
+        [Category("POST")]
+        public void Verify_That_BulkCreation_Works()
+        {
+            JArray jArray;
+            Uri uri;
+            string postBodyPath;
+            string postBody;
+
+            var numberOfPersonsToCreate = 200;
+
+            uri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
+
+            postBodyPath = this.GetPath("Tests/SiteDirectory/Person/Post_Bulk_Persons_Template.json");
+
+            postBody = this.GetJsonFromFile(postBodyPath);
+
+            var guidArray = new Guid[numberOfPersonsToCreate];
+            guidArray = guidArray.Select(x => Guid.NewGuid()).ToArray();
+
+            var createBuilder = new StringBuilder();
+            var updateBuilder = new StringBuilder();
+
+            var i = 0;
+
+            foreach (var newGuid in guidArray)
+            {
+                if (i > 0)
+                {
+                    createBuilder.Append(", ");
+                    updateBuilder.Append(", ");
+                }
+
+                i++;
+
+                createBuilder.Append(
+                    $@"
+{{
+    ""classKind"": ""Person"",
+    ""defaultDomain"": null,
+    ""defaultEmailAddress"": null,
+    ""defaultTelephoneNumber"": null,
+    ""emailAddress"": [],
+    ""givenName"": ""has"",
+    ""iid"": ""{newGuid}"",
+    ""isActive"": true,
+    ""isDeprecated"": false,
+    ""organization"": null,
+    ""organizationalUnit"": null,
+    ""password"": ""pass"",
+    ""revisionNumber"": 1,
+    ""role"": null,
+    ""shortName"": ""person{i}"",
+    ""surname"": ""person{i}"",
+    ""telephoneNumber"": [],
+    ""userPreference"": []
+}}"
+                );
+
+                updateBuilder.Append($"\"{newGuid}\"");
+            }
+
+            postBody = postBody.Replace("<<CREATE>>", createBuilder.ToString());
+            postBody = postBody.Replace("<<UPDATE>>", updateBuilder.ToString());
+
+            jArray = this.WebClient.PostDto(uri, postBody);
+
+            Assert.That(jArray.Count, Is.EqualTo(guidArray.Length + 1));
+
+            postBodyPath = this.GetPath("Tests/SiteDirectory/Person/Create_Bulk_Participant_Template.json");
+
+            postBody = this.GetJsonFromFile(postBodyPath);
+
+            var participantBuilder = new StringBuilder();
+            var participantsBuilder = new StringBuilder();
+
+            i = 0;
+
+            foreach (var personGuid in guidArray)
+            {
+                if (i > 0)
+                {
+                    participantBuilder.Append(", ");
+                    participantsBuilder.Append(", ");
+                }
+
+                i++;
+
+                var participantGuid = Guid.NewGuid();
+
+                participantBuilder.Append(
+                    $@"
+    {{
+      ""classKind"": ""Participant"",
+      ""isActive"": true,
+      ""person"": ""{personGuid}"",
+      ""role"": ""ee3ae5ff-ac5e-4957-bab1-7698fba2a267"",
+      ""domain"": [
+        ""0e92edde-fdff-41db-9b1d-f2e484f12535"",
+        ""eb759723-14b9-49f4-8611-544d037bb764""
+      ],
+      ""selectedDomain"": ""0e92edde-fdff-41db-9b1d-f2e484f12535"",
+      ""iid"": ""{participantGuid}""
+    }}"
+                );
+
+                participantsBuilder.Append($"\"{participantGuid}\"");
+            }
+
+            postBody = postBody.Replace("<<CREATE>>", participantBuilder.ToString());
+            postBody = postBody.Replace("<<UPDATE>>", participantsBuilder.ToString());
+            postBody = postBody.Replace("<<EMSIID>>", "\"116f6253-89bb-47d4-aa24-d11d197e43c9\"");
+
+            jArray = this.WebClient.PostDto(uri, postBody);
+
+            Assert.That(jArray.Count, Is.EqualTo(guidArray.Length + 2));
+
+            // define the URI on which to perform a GET request
+            var personsUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/person");
+
+            // Get the response from the data-source as a JArray (JSON Array).
+            jArray = this.WebClient.GetDto(personsUri);
+
+            var iids = jArray.Where(x => x[PropertyNames.ShortName].Value<string>() != "admin").Select(x => x[PropertyNames.Iid]).ToList();
+
+            for (var j = 0; j < 8; j++)
+            {
+                uri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
+
+                postBodyPath = this.GetPath("Tests/SiteDirectory/Person/Create_Bulk_Participants_On_New_EngineeringModelSetup_Template.json");
+
+                postBody = this.GetJsonFromFile(postBodyPath);
+
+                var emsGuid = Guid.NewGuid();
+
+                postBody = postBody.Replace("<<EMSNAME>>", $"\"EMS_{DateTime.Now.Ticks}\"");
+                postBody = postBody.Replace("<<EMSIID>>", $"\"{emsGuid}\"");
+                postBody = postBody.Replace("<<EMIID>>", $"\"{Guid.NewGuid()}\"");
+                postBody = postBody.Replace("<<MRDLIID>>", $"\"{Guid.NewGuid()}\"");
+                postBody = postBody.Replace("<<MRDLNAME>>", $"\"MRDL_{DateTime.Now.Ticks}\"");
+
+                jArray = this.WebClient.PostDto(uri, postBody);
+
+                postBodyPath = this.GetPath("Tests/SiteDirectory/Person/Create_Bulk_Participant_Template.json");
+
+                postBody = this.GetJsonFromFile(postBodyPath);
+
+                participantBuilder = new StringBuilder();
+                participantsBuilder = new StringBuilder();
+
+                i = 0;
+
+                foreach (var personGuid in iids)
+                {
+                    if (i > 0)
+                    {
+                        participantBuilder.Append(", ");
+                        participantsBuilder.Append(", ");
+                    }
+
+                    i++;
+
+                    var participantGuid = Guid.NewGuid();
+
+                    participantBuilder.Append(
+                        $@"
+        {{
+          ""classKind"": ""Participant"",
+          ""isActive"": true,
+          ""person"": ""{personGuid}"",
+          ""role"": ""ee3ae5ff-ac5e-4957-bab1-7698fba2a267"",
+          ""domain"": [
+            ""0e92edde-fdff-41db-9b1d-f2e484f12535"",
+            ""eb759723-14b9-49f4-8611-544d037bb764""
+          ],
+          ""selectedDomain"": ""0e92edde-fdff-41db-9b1d-f2e484f12535"",
+          ""iid"": ""{participantGuid}""
+        }}"
+                    );
+
+                    participantsBuilder.Append($"\"{participantGuid}\"");
+                }
+
+                postBody = postBody.Replace("<<CREATE>>", participantBuilder.ToString());
+                postBody = postBody.Replace("<<UPDATE>>", participantsBuilder.ToString());
+                postBody = postBody.Replace("<<EMSIID>>", $"\"{emsGuid}\"");
+
+                jArray = this.WebClient.PostDto(uri, postBody);
+            }
         }
 
         [Test]

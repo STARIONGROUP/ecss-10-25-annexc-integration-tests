@@ -331,6 +331,9 @@
     <None Update="Tests\EngineeringModel\RequirementsSpecification\PostNewRequirementsSpecification.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Tests\EngineeringModel\Requirement\BulkPostNewRequirements.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Tests\EngineeringModel\Requirement\PostDeleteConstraintAsProperty.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -475,7 +478,16 @@
     <None Update="Tests\SiteDirectory\Participant\Post_Participant_With_Null_Domain.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Tests\SiteDirectory\Person\Create_Bulk_Participants_On_New_EngineeringModelSetup_Template.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Tests\SiteDirectory\Person\Create_Bulk_Participant_Template.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Tests\SiteDirectory\Person\PostDeleteTelephoneAsProperty.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Tests\SiteDirectory\Person\Post_Bulk_Persons_Template.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Tests\SiteDirectory\Person\Post_Persons_With_Passwords.json">
