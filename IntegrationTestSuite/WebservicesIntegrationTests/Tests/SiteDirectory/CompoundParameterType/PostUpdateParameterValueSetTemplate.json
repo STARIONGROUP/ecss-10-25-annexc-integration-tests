@@ -1,0 +1,17 @@
+﻿{
+  "_delete": [],
+  "_create": [],
+  "_update": [
+    {
+      "classKind": "ParameterValueSet",
+      "computed": ["TestEnumerationValueDefinitionA", "-"],
+      "formula": ["TestEnumerationValueDefinitionA", "-"],
+      "iid": "<INNERIID>",
+      "manual": ["TestEnumerationValueDefinitionA", "-"],
+      "published": ["TestEnumerationValueDefinitionA", "-"],
+      "reference": ["TestEnumerationValueDefinitionA", "-"],
+      "revisionNumber": 0,
+      "valueSwitch": "MANUAL"
+    }
+  ]
+}

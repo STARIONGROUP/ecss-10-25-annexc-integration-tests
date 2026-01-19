@@ -385,7 +385,16 @@
     <None Update="Tests\SiteDirectory\Citation\PostNewCitation.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Tests\SiteDirectory\CompoundParameterType\PostCompoundParameterTypeWithEnumerationParameterTypeComponent.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Tests\SiteDirectory\CompoundParameterType\PostCompoundParameterType.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Tests\SiteDirectory\CompoundParameterType\PostNewParameterOfCompoundParameterType.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Tests\SiteDirectory\CompoundParameterType\PostUpdateParameterValueSetTemplate.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Tests\SiteDirectory\Constant\PostNewConstant.json">

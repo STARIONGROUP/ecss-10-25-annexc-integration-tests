@@ -20,14 +20,12 @@
 
 namespace WebservicesIntegrationTests
 {
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
+    using NUnit.Framework;
     using System;
     using System.Collections.Generic;
     using System.Linq;
-
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Linq;
-
-    using NUnit.Framework;
 
     [TestFixture]
     public class CompoundParameterTypeTestFixture : WebClientTestFixtureBaseWithDatabaseRestore
@@ -165,6 +163,103 @@ namespace WebservicesIntegrationTests
             Assert.That((string)component_2[PropertyNames.ParameterType], Is.EqualTo("4f9f3d9b-f3de-4ef5-b6cb-2e22199fab0d"));
             Assert.That((string)component_2[PropertyNames.Scale], Is.EqualTo("53e82aeb-c42c-475c-b6bf-a102af883471"));            
             Assert.That((string)component_2[PropertyNames.ShortName], Is.EqualTo("b"));
+        }
+
+        [Test]
+        [Category("POST")]
+        public void Verify_that_CompoundParameterTypeWithEnumerationParameterType_can_be_posted()
+        {
+            // --------------------------------------------------------------------------------------------------------------
+            // Part 1 write new ParameterType
+            // --------------------------------------------------------------------------------------------------------------
+
+            var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
+
+            var postBodyPath = this.GetPath("Tests/SiteDirectory/CompoundParameterType/PostCompoundParameterTypeWithEnumerationParameterTypeComponent.json");
+            var postBody = base.GetJsonFromFile(postBodyPath);
+
+            var jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
+
+            //Check the amount of objects 
+            Assert.That(jArray.Count, Is.EqualTo(5));
+
+            var siteDirectory = jArray.Single(x => (string)x[PropertyNames.Iid] == "f13de6f8-b03a-46e7-a492-53b2f260f294");
+            Assert.That((int)siteDirectory[PropertyNames.RevisionNumber], Is.EqualTo(2));
+
+            var compoundParameterType = jArray.Single(x => (string)x[PropertyNames.Iid] == "7a2b0596-bb8f-4692-adc5-04ae813fd9be");
+            Assert.That((int)compoundParameterType[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)compoundParameterType[PropertyNames.ShortName], Is.EqualTo("test_CPT"));
+            Assert.That((string)compoundParameterType[PropertyNames.Name], Is.EqualTo("testCreateCompoundParameterType"));
+            Assert.That((string)compoundParameterType[PropertyNames.Symbol], Is.EqualTo("test_cpt"));
+
+            var component_1 = jArray.Single(x => (string)x[PropertyNames.Iid] == "ff206aaf-ca83-412a-a045-cc73a15259f3");
+            Assert.That((int)component_1[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)component_1[PropertyNames.ParameterType], Is.EqualTo("664d5611-c564-4eba-8f2e-e23b99385daf"));
+            Assert.That((string)component_1[PropertyNames.Scale], Is.Null);
+            Assert.That((string)component_1[PropertyNames.ShortName], Is.EqualTo("a"));
+
+            var component_2 = jArray.Single(x => (string)x[PropertyNames.Iid] == "9cec7d00-fc6b-43d0-8a0d-13d3d73e5479");
+            Assert.That((int)component_2[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            Assert.That((string)component_2[PropertyNames.ParameterType], Is.EqualTo("4f9f3d9b-f3de-4ef5-b6cb-2e22199fab0d"));
+            Assert.That((string)component_2[PropertyNames.Scale], Is.EqualTo("53e82aeb-c42c-475c-b6bf-a102af883471"));
+            Assert.That((string)component_2[PropertyNames.ShortName], Is.EqualTo("b"));
+
+            // --------------------------------------------------------------------------------------------------------------
+            // Part 2 write new Parameter
+            // --------------------------------------------------------------------------------------------------------------
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
+
+            postBodyPath = this.GetPath("Tests/SiteDirectory/CompoundParameterType/PostNewParameterOfCompoundParameterType.json");
+
+            postBody = this.GetJsonFromFile(postBodyPath);
+            jArray = this.WebClient.PostDto(iterationUri, postBody);
+
+            var engineeeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+
+            Assert.That((int)engineeeringModel[PropertyNames.RevisionNumber], Is.EqualTo(2));
+
+            // get a specific ElementDefinition from the result by it's unique id
+            var elementDefinition = jArray.Single(x => (string)x[PropertyNames.Iid] == "f73860b2-12f0-43e4-b8b2-c81862c0a159");
+
+            Assert.That((int)elementDefinition[PropertyNames.RevisionNumber], Is.EqualTo(2));
+
+            var expectedParameters = new[]
+            {
+                "6c5aff74-f983-4aa8-a9d6-293b3429307c",
+                "3f05483f-66ff-4f21-bc76-45956779f66e",
+                "2460b6a5-08ff-4cc3-a2cc-8fd5c5cf2736"
+            };
+
+            var parametersArray = (JArray)elementDefinition[PropertyNames.Parameter];
+            IList<string> parameters = parametersArray.Select(x => (string)x).ToList();
+            Assert.That(parameters, Is.EquivalentTo(expectedParameters));
+
+            // get the added Parameter from the result by it's unique id
+            var parameter = jArray.Single(x => (string)x[PropertyNames.Iid] == "2460b6a5-08ff-4cc3-a2cc-8fd5c5cf2736");
+
+            // verify the amount of returned properties 
+            Assert.That(parameter.Children().Count(), Is.EqualTo(14));
+
+            var expectedParameterSubscriptions = new string[] { };
+            var parameterSubscriptionsArray = (JArray)parameter[PropertyNames.ParameterSubscription];
+            IList<string> parameterSubscriptions = parameterSubscriptionsArray.Select(x => (string)x).ToList();
+            Assert.That(parameterSubscriptions, Is.EquivalentTo(expectedParameterSubscriptions));
+
+            // get the created ParameterValueSet as a side effect of creating Parameter from the result by it's unique id
+            var valueSetsArray = (JArray)parameter[PropertyNames.ValueSet];
+            IList<string> valueSets = valueSetsArray.Select(x => (string)x).ToList();
+
+            // --------------------------------------------------------------------------------------------------------------
+            // Part 3 write ParameterValueSet
+            // --------------------------------------------------------------------------------------------------------------
+            var valueSetUpdatePath = this.GetPath("Tests/SiteDirectory/CompoundParameterType/PostUpdateParameterValueSetTemplate.json");
+
+            var initialValueSetContent = this.GetJsonFromFile(valueSetUpdatePath).Replace("<INNERIID>", valueSets[0]);
+            initialValueSetContent = initialValueSetContent.Replace("<INNERVALUE>", JsonConvert.SerializeObject(new []{ "TestEnumerationValueDefinitionA", "-"}));
+
+            postBody = initialValueSetContent;
+
+            Assert.DoesNotThrow(() => this.WebClient.PostDto(iterationUri, postBody));
         }
     }
 }

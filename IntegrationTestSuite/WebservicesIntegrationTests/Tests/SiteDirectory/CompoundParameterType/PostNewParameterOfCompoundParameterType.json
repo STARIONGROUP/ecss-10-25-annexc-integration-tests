@@ -1,0 +1,30 @@
+﻿{
+  "_delete": [],
+  "_create": [
+    {
+      "allowDifferentOwnerOfOverride": false,
+      "classKind": "Parameter",
+      "expectsOverride": false,
+      "group": null,
+      "iid": "2460b6a5-08ff-4cc3-a2cc-8fd5c5cf2736",
+      "isOptionDependent": false,
+      "owner": "0e92edde-fdff-41db-9b1d-f2e484f12535",
+      "parameterSubscription": [],
+      "parameterType": "7a2b0596-bb8f-4692-adc5-04ae813fd9be",
+      "requestedBy": null,
+      "revisionNumber": 0,
+      "scale": null,
+      "stateDependence": null,
+      "valueSet": []
+    }
+  ],
+  "_update": [
+    {
+      "classKind": "ElementDefinition",
+      "iid": "f73860b2-12f0-43e4-b8b2-c81862c0a159",
+      "parameter": [
+        "2460b6a5-08ff-4cc3-a2cc-8fd5c5cf2736"
+      ]
+    }
+  ]
+}
