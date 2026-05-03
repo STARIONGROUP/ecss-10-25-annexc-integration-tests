@@ -1,6 +1,6 @@
 # ecss-10-25-annexc-integration-tests
-This repository contains ECSS-E-TM-10-25 Annex C integration tests. The purpose of the software is to achieve 100% code coverage of all REST API queries that can be performed to determine wheter an ECSS-E-TM-10-25 Annex C implementation is compliant with the ECSS-E-TM-10-25 Annex C.
-In May 2020 a few tests were added for a specific CDP4-COMET extension. These tests are decorated with an Nunit Category attribute so they can be filtered out by the Nunit runner. The Category used here name is 'CdpVersion_1_1_0'.
+
+This repository contains ECSS-E-TM-10-25 Annex C integration tests. The purpose of the software is to achieve 100% code coverage of all REST API queries that can be performed to determine wheter an ECSS-E-TM-10-25 Annex C implementation is compliant with the ECSS-E-TM-10-25 Annex C. On top of that this test-suite also covers CDP4-COMET specific extensions, these tests are decorated with an Nunit Category attribute so they can be filtered out by the Nunit runner. The Category used here name is 'CdpVersion_1_1_0'.
 See [this website](https://github.com/nunit/docs/wiki/Console-Command-Line) for more info on Nunit test filtering.
 
 ## ECSS-E-TM-10-25
@@ -56,8 +56,6 @@ CDP4-COMET is the Starion Group implementation of ECSS-E-TM-10-25 and is a so-ca
   * COMET-WEB: A browser application
 
 More information about CDP4-COMET can be found on the Starion Group [Website](https://www.stariongroup.eu/services-solutions/system-engineering/concurrent-design/). The installer of the CDP4-COMET-IME can be downloaded here: https://www.stariongroup.eu/services-solutions/system-engineering/concurrent-design/cdp4-comet/.
-
-A Public instance of COMET WebServices that is used to verify COMET WebServices compliance is available at http://cdp4services-test.cdp4.org. The content that is serviced by this instance is loaded by the contents of the [Data folder](./Data/). The username and password to access this COMET WebServices instances are: admin/pass.   
 
 # Sponsors
 
