@@ -253,3 +253,5 @@ paket-files/
 
 .arcconfig
 /Data.zip
+
+logs/*
