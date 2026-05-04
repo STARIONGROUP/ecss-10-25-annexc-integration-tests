@@ -1,7 +1,20 @@
 # ecss-10-25-annexc-integration-tests
 
-This repository contains ECSS-E-TM-10-25 Annex C integration tests. The purpose of the software is to achieve 100% code coverage of all REST API queries that can be performed to determine wheter an ECSS-E-TM-10-25 Annex C implementation is compliant with the ECSS-E-TM-10-25 Annex C. On top of that this test-suite also covers CDP4-COMET specific extensions, these tests are decorated with an Nunit Category attribute so they can be filtered out by the Nunit runner. The Category used here name is 'CdpVersion_1_1_0'.
-See [this website](https://github.com/nunit/docs/wiki/Console-Command-Line) for more info on Nunit test filtering.
+This repository contains ECSS-E-TM-10-25 Annex C integration tests. The purpose of the software is to verify the correctnes of an **ECSS-E-TM-10-25 Annex C** implementation and to help achieve 100% code coverage of all REST API queries.
+
+> This test-suite also covers CDP4-COMET specific extensions, these tests are decorated with an Nunit Category attribute so they can be filtered out by the Nunit runner. The Category used here name is 'CdpVersion_1_1_0'.
+
+Run the test suite from the repository root:
+
+```bash
+./run-integration-tests.sh
+```
+
+To target a webservice at a different URL, set `WEBSERVICE_URL`:
+
+```bash
+WEBSERVICE_URL=http://my-host:5000 ./run-integration-tests.sh
+```
 
 ## ECSS-E-TM-10-25
 
@@ -9,7 +22,7 @@ ECSS-E-TM-10-25 is a Technical Memorandum under the E-10 System engineering bran
 
 Read more about ECSS-E-TM-10-25 [here](http://ecss.nl/hbstms/ecss-e-tm-10-25a-engineering-design-model-data-exchange-cdf-20-october-2010/)
 
-## Definition of ECSS-E-TM-10-25 Annex C (informative) 
+### Definition of ECSS-E-TM-10-25 Annex C (informative) 
 
 The following interface technologies shall be supported by a fully compliant implementation of ECSS-E-TM-10-25:
 
@@ -19,14 +32,14 @@ The following interface technologies shall be supported by a fully compliant imp
 * Annex C.3 - JSON Exchange File Format
   * The file format that is used to serialize ECSS-E-TM-10-25 datasets to a file for the purpose of file based exchange
 
-## Definition of ECSS-E-TM-10-25 Annex C - Integration test suite extensions
+### Definition of ECSS-E-TM-10-25 Annex C - Integration test suite extensions
 
 In order to support the integration testing. 2 routes have been added to Annex C.2 with the following purpose:
 
   - An "upload an Annex C.3 compliant seed file" service. The seed file forms the basis for the tests and is the known state of the data set on which the tests have been based. By uploading such a seed file the complete data set is reset to the state described in the seed file.
   - A "restore" service that restores the dataset on the service to the last seeded file.
   
-### Upload
+#### Upload
 
 The URL of the upload service is the following: "http(s)://hostname:port/Data/Exchange". The seed file shall be uploaded in a multi-part message. We use curl to upload an Annex C.3 file:
 
@@ -34,22 +47,53 @@ The URL of the upload service is the following: "http(s)://hostname:port/Data/Ex
 curl --form file=@"Data.zip" http://cdp4services-test.cdp4.org/Data/Exchange
 ```
 
-### Restore
+#### Restore
 
 The URL of the restore service takes the following form: "http(s)://hostname:port/Data/Restore".
 
-## Integration test suite how-to
+# Integration test suite how-to
 
 The integration test suite is run via the `run-integration-tests.sh` script in the repository root. This script is the canonical entry point for both local development and CI — it handles seeding, building, running, and summarising results in one go. Do not invoke `dotnet test` directly against the projects unless you are debugging a single fixture; the suite assumes the database has been freshly seeded from `Data/` before the first test runs.
 
-### Prerequisites
+## Prerequisites
 
+- A Running CDP4-COMET Test Database: `stariongroup/cdp4-test-database-community-edition:5.0.0`
 - A running ECSS-E-TM-10-25 Annex C compliant webservice reachable at the URL the script will hit (default `http://localhost:5000`).
 - `Backtier__IsDbSeedEnabled=true` set on that webservice — without it the `/Data/Exchange` seed step returns a non-2xx response and the script aborts.
 - The .NET 10 SDK on `PATH`.
 - `zip` and `curl` on `PATH`. On Windows, run the script from Git Bash or WSL — there is no PowerShell equivalent.
 
-### Running the suite
+## Setting up and running the test datbase
+
+  - Pull the Docker image: `docker pull stariongroup/cdp4-test-database-community-edition:5.0.0`
+  - Create the CDP4-COMET docker network: `docker network create cdp4-comet`
+  - Start the docker container: 
+  
+```
+docker run -p 5432:5432 \
+  --tmpfs /var/lib/postgresql/18/docker:rw,size=1g,mode=700 \
+  -it -d \
+  --name cdp4-test-database-community-edition \
+  --net cdp4 \
+  -e POSTGRES_PASSWORD=cdp4-comet \
+  stariongroup/cdp4-test-database-community-edition:5.0.0 \
+  -c fsync=off \
+  -c synchronous_commit=off \
+  -c full_page_writes=off \
+  -c shared_buffers=512MB \
+  -c max_locks_per_transaction=2048 \
+  -c statement_timeout=3000
+```
+
+> These settings are tuned for the test suite making the test database fast
+
+## Setting up and running the CDP4-COMET-Webservices
+
+The CDP4-COMET WebServices can be started, using the previously created test CDP4-COMET database, by running the [run-comet.sh](https://github.com/STARIONGROUP/COMET-WebServices-Community-Edition/blob/fafe159aa2ea64f167b0f8b8c7e4442868ce09c9/run-comet.sh) script. This will build and run the CDP4-COMET WebServices locally, ready to be tested.
+
+> The CDP4-COMET WebServices can of course also be run from an IDE to help with debugging, this will however be significantly slower.
+
+## Running the suite
 
 From the repository root:
 
@@ -73,13 +117,13 @@ The script then performs five phases, each announced with a banner in the consol
 
 The script's exit code is 0 only when every project returned 0, so it composes correctly in `&&` chains and CI pipelines.
 
-### Where to look after a run
+## Where to look after a run
 
 - `logs/<timestamp>/` — that run's artifacts. `logs/latest` is a symlink to the most recent run.
 - `logs/<timestamp>/seed-response.txt` — the webservice's response if seeding failed.
 - `logs/<timestamp>/<Project>/console.log` and `<Project>.trx` — per-project diagnostics.
 
-### Notes
+## Notes
 
 - The suite is `[SingleThreaded]` by design — every test runs against the same backend and shares state. Do not run two copies of the script against the same webservice concurrently.
 - The fixtures hard-code IIDs and revisions that come from `Data/`. Never edit `Data/` to make a test pass; the seed *is* the contract.
