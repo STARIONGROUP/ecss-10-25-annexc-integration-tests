@@ -21,22 +21,28 @@
 namespace WebservicesIntegrationTests
 {
     using System;
+    using System.Collections.Generic;
     using System.IO;
     using System.IO.Compression;
     using System.Linq;
 
+    using Newtonsoft.Json.Linq;
+
     using NUnit.Framework;
+
+    using WebservicesIntegrationTests.Net;
 
     /// <summary>
     /// Verifies that an EngineeringModel with more things of one ClassKind than fit in a single SQL
-    /// statement (PostgreSQL allows 65535 bind parameters) can be used as the source of a new model.
+    /// statement (PostgreSQL allows 65535 bind parameters) can be seeded, restored and used as the
+    /// source of a new model.
     /// </summary>
     /// <remarks>
     /// LargeModel.zip is built from the Data folder by IntegrationTestSuite/Tools/MakeLargeModel.cs; rebuild it
     /// when the Data folder changes.
-    /// The test seeds LargeModel.zip, which also replaces the data-set that /Data/Restore restores.
-    /// The tear down therefore seeds the regular Data folder again, so that the tests that run
-    /// afterwards start from the usual state.
+    /// The fixture seeds LargeModel.zip once, which also makes it the data-set that /Data/Restore restores, and
+    /// every test starts with a restore of it. The one time tear down seeds the regular Data folder again, so that
+    /// the tests that run afterwards start from the usual state.
     /// </remarks>
     [TestFixture]
     [Category("LargeModel")]
@@ -48,44 +54,60 @@ namespace WebservicesIntegrationTests
         /// </summary>
         private const int ElementDefinitionCount = 25002;
 
+        private const string SiteDirectoryIid = "f13de6f8-b03a-46e7-a492-53b2f260f294";
+
+        private const string SourceModelSetupIid = "116f6253-89bb-47d4-aa24-d11d197e43c9";
+
         private const string SourceModelIid = "9ec982e4-ef72-4953-aa85-b158a95d8d56";
 
         private const string SourceIterationIid = "e163c5ad-f32b-4387-b805-f4b34600bc2c";
 
+        private const string NewModelSetupIid = "a54467e2-5cb4-450b-a081-1e2f8a6dcd80";
+
         private const string NewModelIid = "ae1eca97-77bd-4d0b-a17f-fc9fb76b04bd";
+
+        [OneTimeSetUp]
+        public void SeedLargeModel()
+        {
+            this.LoadSettings();
+
+            var largeModel = File.ReadAllBytes(this.GetPath("Tests/SiteDirectory/EngineeringModelSetup/LargeModel/LargeModel.zip"));
+
+            try
+            {
+                this.CreateSeedClient().Seed(this.Settings.Hostname, largeModel).GetAwaiter().GetResult();
+            }
+            catch
+            {
+                // NUnit does not guarantee the one time tear down after a failed one time set up;
+                // put the regular data back here, so the tests that run afterwards are not affected
+                this.SeedRegularData();
+                throw;
+            }
+        }
+
+        [OneTimeTearDown]
+        public void SeedRegularData()
+        {
+            this.CreateSeedClient().Seed(this.Settings.Hostname, CreateArchive(this.GetPath("Data"))).GetAwaiter().GetResult();
+        }
 
         public override void SetUp()
         {
             base.SetUp();
 
-            var largeModel = File.ReadAllBytes(this.GetPath("Tests/SiteDirectory/EngineeringModelSetup/LargeModel/LargeModel.zip"));
-            this.WebClient.Seed(this.Settings.Hostname, largeModel).GetAwaiter().GetResult();
-        }
-
-        public override void TearDown()
-        {
-            this.WebClient.Seed(this.Settings.Hostname, CreateArchive(this.GetPath("Data"))).GetAwaiter().GetResult();
-
-            base.TearDown();
+            // every test starts from the seeded large model, which also verifies that it can be restored
+            this.WebClient.Restore(this.Settings.Hostname);
         }
 
         [Test]
         [Category("POST")]
         public void VerifyThatNewEngineeringModelCanBeCreatedBasedOnALargeExistingModelWithWebApi()
         {
-            var sourceElementsUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/{SourceModelIid}/iteration/{SourceIterationIid}/element");
-            Assert.That(this.WebClient.GetDto(sourceElementsUri).Count(x => (string)x[PropertyNames.ClassKind] == "ElementDefinition"), Is.EqualTo(ElementDefinitionCount));
+            Assert.That(this.GetElementDefinitions(SourceModelIid, SourceIterationIid), Has.Count.EqualTo(ElementDefinitionCount));
 
-            var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
-            var postBody = this.GetJsonFromFile(this.GetPath("Tests/SiteDirectory/EngineeringModelSetup/PostEngineeringModelSetupBasedOnExistingModel.json"));
-
-            var jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
-
-            var iterationSetup = jArray.Single(x => (string)x[PropertyNames.ClassKind] == "IterationSetup");
-            var newIterationIid = (string)iterationSetup[PropertyNames.IterationIid];
-
-            var newElementsUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/{NewModelIid}/iteration/{newIterationIid}/element");
-            var newElements = this.WebClient.GetDto(newElementsUri).Where(x => (string)x[PropertyNames.ClassKind] == "ElementDefinition").ToList();
+            var newIterationIid = this.CopySourceModel();
+            var newElements = this.GetElementDefinitions(NewModelIid, newIterationIid);
 
             Assert.Multiple(() =>
             {
@@ -94,6 +116,73 @@ namespace WebservicesIntegrationTests
                 Assert.That(newElements.Any(x => (string)x[PropertyNames.ShortName] == "LargeModelElement0"), Is.True);
                 Assert.That(newElements.Any(x => (string)x[PropertyNames.ShortName] == "LargeModelElement24999"), Is.True);
             });
+        }
+
+        [Test]
+        [Category("POST")]
+        public void VerifyThatALargeModelCanBeRestoredWithWebApi()
+        {
+            // change the data store, so that the restore has something to undo
+            this.CopySourceModel();
+            Assert.That(this.GetModelSetupIids(), Is.EquivalentTo(new[] { SourceModelSetupIid, NewModelSetupIid }));
+
+            this.WebClient.Restore(this.Settings.Hostname);
+
+            var sourceElements = this.GetElementDefinitions(SourceModelIid, SourceIterationIid);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(this.GetModelSetupIids(), Is.EquivalentTo(new[] { SourceModelSetupIid }));
+                Assert.That(sourceElements, Has.Count.EqualTo(ElementDefinitionCount));
+                Assert.That(sourceElements.Any(x => (string)x[PropertyNames.ShortName] == "LargeModelElement24999"), Is.True);
+            });
+        }
+
+        /// <summary>
+        /// Creates a new EngineeringModel with the large model as its source
+        /// </summary>
+        /// <returns>The iid of the iteration of the new model</returns>
+        private string CopySourceModel()
+        {
+            var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/{SiteDirectoryIid}");
+            var postBody = this.GetJsonFromFile(this.GetPath("Tests/SiteDirectory/EngineeringModelSetup/PostEngineeringModelSetupBasedOnExistingModel.json"));
+
+            var jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
+
+            var iterationSetup = jArray.Single(x => (string)x[PropertyNames.ClassKind] == "IterationSetup");
+            return (string)iterationSetup[PropertyNames.IterationIid];
+        }
+
+        /// <summary>
+        /// Gets the ElementDefinitions of an iteration
+        /// </summary>
+        /// <param name="modelIid">The iid of the EngineeringModel</param>
+        /// <param name="iterationIid">The iid of the Iteration</param>
+        /// <returns>The ElementDefinitions</returns>
+        private List<JToken> GetElementDefinitions(string modelIid, string iterationIid)
+        {
+            var uri = new Uri($"{this.Settings.Hostname}/EngineeringModel/{modelIid}/iteration/{iterationIid}/element");
+            return this.WebClient.GetDto(uri).Where(x => (string)x[PropertyNames.ClassKind] == "ElementDefinition").ToList();
+        }
+
+        /// <summary>
+        /// Gets the iids of the EngineeringModelSetups in the SiteDirectory
+        /// </summary>
+        /// <returns>The iids</returns>
+        private string[] GetModelSetupIids()
+        {
+            var uri = new Uri($"{this.Settings.Hostname}/SiteDirectory/{SiteDirectoryIid}");
+            var siteDirectory = this.WebClient.GetDto(uri).Single(x => (string)x[PropertyNames.Iid] == SiteDirectoryIid);
+            return ((JArray)siteDirectory[PropertyNames.Model]).Select(x => (string)x).ToArray();
+        }
+
+        /// <summary>
+        /// Creates a <see cref="WebClient"/> for the one time set up and tear down, which run outside of the per test set up
+        /// </summary>
+        /// <returns>The <see cref="WebClient"/></returns>
+        private WebClient CreateSeedClient()
+        {
+            return new WebClient(this.Settings.Username, this.Settings.Password);
         }
 
         /// <summary>
