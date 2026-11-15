@@ -447,6 +447,12 @@
     <None Update="Tests\SiteDirectory\EngineeringModelSetup\PostEngineeringModelSetupBasedOnExistingModel.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Tests\SiteDirectory\EngineeringModelSetup\LargeModel\LargeModel.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\Data\**\*" LinkBase="Data">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Tests\SiteDirectory\EnumerationParameterType\PostAddNewEnumerationValueDefinition.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

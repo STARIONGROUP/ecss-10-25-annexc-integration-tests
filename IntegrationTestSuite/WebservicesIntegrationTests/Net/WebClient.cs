@@ -108,7 +108,46 @@ namespace WebservicesIntegrationTests.Net
 
             request.GetResponse();
         }
-        
+
+        /// <summary>
+        /// Seeds the data-source with an Annex C.3 archive. This replaces all data, and also the
+        /// data-set that <see cref="Restore"/> restores.
+        /// </summary>
+        /// <param name="hostname">
+        /// The hostname where the services are hosted
+        /// </param>
+        /// <param name="archive">
+        /// The content of the Annex C.3 archive
+        /// </param>
+        /// <returns>
+        /// An awaitable <see cref="Task"/>
+        /// </returns>
+        public async Task Seed(string hostname, byte[] archive)
+        {
+            var uriBuilder = new UriBuilder(hostname);
+            uriBuilder.Path = Path.Combine(uriBuilder.Path, "Data/Exchange");
+
+            // seeding a large archive takes minutes, well beyond the default timeout of HttpClient
+            using (var httpClient = new HttpClient { Timeout = System.Threading.Timeout.InfiniteTimeSpan })
+            {
+                var encoded = Convert.ToBase64String(Encoding.GetEncoding(Utf8).GetBytes(this.UserName + ":" + this.Password));
+                httpClient.DefaultRequestHeaders.Add("Authorization", "Basic " + encoded);
+
+                var fileContent = new ByteArrayContent(archive);
+                fileContent.Headers.Add("Content-Type", "application/zip");
+
+                var form = new MultipartFormDataContent { { fileContent, "file", "Data.zip" } };
+
+                var httpResponse = await httpClient.PostAsync(uriBuilder.Uri, form);
+                var response = await httpResponse.Content.ReadAsStringAsync();
+
+                if (!httpResponse.IsSuccessStatusCode)
+                {
+                    throw new HttpRequestException($"Seeding the data-source failed with {(int)httpResponse.StatusCode}: {response}");
+                }
+            }
+        }
+
         /// <summary>
         /// Performs a GET request on the provided URI and returns an <see cref="JArray"/>
         /// </summary>
