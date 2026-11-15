@@ -190,6 +190,28 @@ namespace WebservicesIntegrationTests
 
         [Test]
         [Category("POST")]
+        public void VerifyThatExistingParameterTypeCannotBeCreatedWithWaitTimeWithWebApi()
+        {
+            // a POST that fails within the wait time answers with the same error as a POST without wait time
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c?waitTime=30");
+
+            var postBodyPath = this.GetPath("Tests/EngineeringModel/Parameter/PostNewParameterHavingExistingParameterType.json");
+
+            var postBody = this.GetJsonFromFile(postBodyPath);
+
+            Assert.That(() =>
+                    this.WebClient.PostDto(iterationUri, postBody), Throws.TypeOf<WebException>()
+                    .With
+                    .Property(nameof(WebException.Response))
+                    .TypeOf<HttpWebResponse>()
+                    .And.Property(nameof(WebException.Response))
+                        .Property(nameof(HttpWebResponse.StatusCode))
+                        .EqualTo(HttpStatusCode.BadRequest)
+            );
+        }
+
+        [Test]
+        [Category("POST")]
         public void VerifyThatExistingParameterTypeCannotBeCreatedWithWebApi()
         {
             var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
