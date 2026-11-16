@@ -194,6 +194,37 @@ namespace WebservicesIntegrationTests
 
         [Test]
         [Category("POST")]
+        public void VerifyThatAnElementDefinitionCanBeCreatedWithWaitTimeWithWebApi()
+        {
+            // a POST that completes within the wait time answers like a POST without wait time
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c?waitTime=30");
+            var postBodyPath = this.GetPath("Tests/EngineeringModel/ElementDefinition/PostNewElementDefinition.json");
+
+            var postBody = base.GetJsonFromFile(postBodyPath);
+            var jArray = this.WebClient.PostDto(iterationUri, postBody);
+
+            var engineeringModel = jArray.Single(x => (string)x[PropertyNames.Iid] == "9ec982e4-ef72-4953-aa85-b158a95d8d56");
+            Assert.That((int)engineeringModel[PropertyNames.RevisionNumber], Is.EqualTo(2));
+
+            var elementDefinition = jArray.Single(x => (string)x[PropertyNames.Iid] == "f959dc33-58ff-4b6f-a3b0-d265690b4084");
+
+            Assert.Multiple(() =>
+            {
+                Assert.That((string)elementDefinition[PropertyNames.ClassKind], Is.EqualTo("ElementDefinition"));
+                Assert.That((string)elementDefinition[PropertyNames.Name], Is.EqualTo("Test Element Definition"));
+                Assert.That((int)elementDefinition[PropertyNames.RevisionNumber], Is.EqualTo(2));
+            });
+
+            // the ElementDefinition has been stored
+            var elementDefinitionUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/f959dc33-58ff-4b6f-a3b0-d265690b4084");
+            jArray = this.WebClient.GetDto(elementDefinitionUri);
+
+            var storedElementDefinition = jArray.Single(x => (string)x[PropertyNames.Iid] == "f959dc33-58ff-4b6f-a3b0-d265690b4084");
+            Assert.That((string)storedElementDefinition[PropertyNames.Name], Is.EqualTo("Test Element Definition"));
+        }
+
+        [Test]
+        [Category("POST")]
         public void VerifyThatAnElementDefinitionCanBeCreatedWithWebApi()
         {
             var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");

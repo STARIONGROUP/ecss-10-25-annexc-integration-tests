@@ -126,6 +126,33 @@ namespace WebservicesIntegrationTests
 
         [Test]
         [Category("POST")]
+        public void VerifyThatCreateDomainOfExpertiseWithWaitTimeWorks()
+        {
+            // a POST that completes within the wait time answers like a POST without wait time
+            var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294?waitTime=30");
+
+            var postBodyPath = this.GetPath("Tests/SiteDirectory/DomainOfExpertise/PostCreateDomainOfExpertise.json");
+
+            var postBody = this.GetJsonFromFile(postBodyPath);
+
+            var jArray = this.WebClient.PostDto(siteDirectoryUri, postBody);
+
+            // the response contains the created DomainOfExpertise
+            var createdDomainOfExpertise = jArray.Single(x => (string)x["iid"] == "509b87d6-4262-476a-a12e-ee337df0d618");
+            Assert.That((string)createdDomainOfExpertise["classKind"], Is.EqualTo("DomainOfExpertise"));
+
+            // the DomainOfExpertise has been stored
+            var domainOfExpertiseUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/domain?includeAllContainers=true");
+            jArray = this.WebClient.GetDto(domainOfExpertiseUri);
+
+            Assert.That(jArray.Count, Is.EqualTo(4));
+
+            var domainOfExpertise = jArray.Single(x => (string)x["iid"] == "509b87d6-4262-476a-a12e-ee337df0d618");
+            DomainOfExpertiseTestFixture.VerifyProperties(domainOfExpertise);
+        }
+
+        [Test]
+        [Category("POST")]
         public void VerifyThatReadWorksForParticipantNotBeingPartOfADomainOfExpertise()
         {
             var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");

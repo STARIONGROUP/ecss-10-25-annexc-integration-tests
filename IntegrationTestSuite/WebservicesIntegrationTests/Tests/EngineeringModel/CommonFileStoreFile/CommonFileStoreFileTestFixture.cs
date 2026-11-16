@@ -85,6 +85,28 @@ namespace WebservicesIntegrationTests
 
         [Test]
         [Category("POST")]
+        public void VerifyThatFileCannotBeUploadedWithWaitTimeWithWebApi()
+        {
+            // a multipart POST may not have a wait time: it is rejected and must not be processed
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c?waitTime=30");
+            var postJsonPath = this.GetPath("Tests/EngineeringModel/CommonFileStoreFile/PostNewFile.json");
+            var postFilePath = this.GetPath("Tests/EngineeringModel/CommonFileStoreFile/2990BA2444A937A28E7B1E2465FCDF949B8F5368");
+
+            var exception = Assert.ThrowsAsync<HttpRequestException>(async () => await this.WebClient.PostFile(iterationUri, postJsonPath, postFilePath));
+            Assert.That(exception.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
+
+            // the File of the rejected request has not been stored
+            var commonFileStoreUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/commonFileStore/8e5ca9cc-3da8-4e66-9172-7c3b2464a59c");
+            var jArray = this.WebClient.GetDto(commonFileStoreUri);
+
+            var commonFileStore = jArray.Single(x => (string)x[PropertyNames.Iid] == "8e5ca9cc-3da8-4e66-9172-7c3b2464a59c");
+            var files = ((JArray)commonFileStore["file"]).Select(x => (string)x).ToList();
+
+            Assert.That(files, Does.Not.Contain("8ac6db3e-9525-4f3e-93ea-707076c07fc1"));
+        }
+
+        [Test]
+        [Category("POST")]
         public void VerifyThatFileAndSubsequentRevisionCannotBeUploadedWithWebApiWhenParticipantIsNotAnOwner()
         {
             SiteDirectoryTestFixture.AddDomainExpertUserJane(this, out var userName, out var passWord);

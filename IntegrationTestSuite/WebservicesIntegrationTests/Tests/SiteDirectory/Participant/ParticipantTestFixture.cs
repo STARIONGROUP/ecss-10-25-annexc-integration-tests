@@ -61,5 +61,22 @@ namespace WebservicesIntegrationTests
             Assert.That(((HttpWebResponse)exception.Response).StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
             Assert.That(errorMessage, Does.Contain("is already a Participant in EngineeringModel"));
         }
+
+        [Test]
+        [Category("POST")]
+        public void VerifyThatPersonThatIsAlreadyAParticipantInAnEngineeringModelCannotBeAddedWithWaitTime()
+        {
+            // a POST that fails within the wait time answers with the same error as a POST without wait time
+            var participantUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294?waitTime=30");
+
+            var postBodyPath = this.GetPath("Tests/SiteDirectory/Participant/Create_Existing_Participant.json");
+
+            var postBody = this.GetJsonFromFile(postBodyPath);
+
+            var exception = Assert.Catch<WebException>(() => this.WebClient.PostDto(participantUri, postBody));
+            var errorMessage = this.WebClient.ExtractExceptionStringFromResponse(exception.Response);
+            Assert.That(((HttpWebResponse)exception.Response).StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
+            Assert.That(errorMessage, Does.Contain("is already a Participant in EngineeringModel"));
+        }
     }
 }
