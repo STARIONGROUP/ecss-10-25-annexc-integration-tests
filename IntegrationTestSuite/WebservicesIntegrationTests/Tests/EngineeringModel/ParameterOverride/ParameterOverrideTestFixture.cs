@@ -22,6 +22,7 @@ namespace WebservicesIntegrationTests
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Net;
 
@@ -143,6 +144,33 @@ namespace WebservicesIntegrationTests
             Assert.That((string)parameterOverrideValueSet[PropertyNames.Computed], Is.EqualTo(emptyProperty));
             Assert.That((string)parameterOverrideValueSet[PropertyNames.Manual], Is.EqualTo(emptyProperty));
             Assert.That((string)parameterOverrideValueSet[PropertyNames.Reference], Is.EqualTo(emptyProperty));
+        }
+
+        [Test]
+        [Category("POST")]
+        public void VerifyThatAParameterOverrideWithoutOwnerCannotBeCreatedWithWebApi()
+        {
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
+            var postBodyPath = this.GetPath("Tests/EngineeringModel/ParameterOverride/PostNewParameterOverrideWithoutOwner.json");
+
+            var postBody = this.GetJsonFromFile(postBodyPath);
+
+            var exception = Assert.Throws<WebException>(() => this.WebClient.PostDto(iterationUri, postBody));
+            var response = exception?.Response as HttpWebResponse;
+
+            Assert.That(response, Is.Not.Null);
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
+
+            using (var reader = new StreamReader(response.GetResponseStream()))
+            {
+                Assert.That(reader.ReadToEnd(), Does.Contain("'Owner'").And.Contain("3587bb05-0db4-4741-b5e3-da43393e13ed"));
+            }
+
+            // nothing has been written: the ElementUsage still has only its original ParameterOverride
+            var parameterOverrideUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element/fe9295c5-af99-494e-86ff-e715837806ae/containedElement/75399754-ee45-4bca-b033-63e2019870d1/parameterOverride");
+            var jArray = this.WebClient.GetDto(parameterOverrideUri);
+
+            Assert.That(jArray.Select(x => (string)x[PropertyNames.Iid]), Is.EquivalentTo(new[] { "93f767ed-4d22-45f6-ae97-d1dab0d36e1c" }));
         }
 
         [Test]
