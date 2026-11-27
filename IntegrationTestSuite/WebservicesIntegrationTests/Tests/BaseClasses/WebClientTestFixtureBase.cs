@@ -20,9 +20,12 @@
 
 namespace WebservicesIntegrationTests
 {
+    using System;
     using System.IO;
+    using System.Threading;
 
     using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
 
     using NUnit.Framework;
 
@@ -104,6 +107,41 @@ namespace WebservicesIntegrationTests
         {
             var content = System.IO.File.ReadAllText(path);
             return content;
+        }
+
+        /// <summary>
+        /// Polls /tasks/{id} until the CometTask has finished
+        /// </summary>
+        /// <param name="taskId">
+        /// The id of the CometTask
+        /// </param>
+        /// <param name="timeout">
+        /// The longest time to wait
+        /// </param>
+        /// <returns>
+        /// The finished CometTask
+        /// </returns>
+        public JToken WaitForCometTaskToFinish(string taskId, TimeSpan timeout)
+        {
+            var taskUri = new Uri($"{this.Settings.Hostname}/tasks/{taskId}");
+            var deadline = DateTime.UtcNow + timeout;
+
+            while (true)
+            {
+                var cometTask = this.WebClient.GetJson(taskUri);
+
+                if ((int)cometTask["statusKind"] != CometTaskStatusKind.Processing)
+                {
+                    return cometTask;
+                }
+
+                if (DateTime.UtcNow > deadline)
+                {
+                    Assert.Fail($"The CometTask {taskId} did not finish within {timeout}: {cometTask}");
+                }
+
+                Thread.Sleep(TimeSpan.FromSeconds(1));
+            }
         }
     }
 }
