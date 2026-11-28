@@ -124,6 +124,30 @@ namespace WebservicesIntegrationTests
 
         [Test]
         [Category("POST")]
+        public void VerifyThatFrozenIterationDoesNotAcceptModelChangesWithWaitTime()
+        {
+            // a POST with waitTime answers a frozen iteration like a POST without waitTime: 400 with the CDP error tag
+            var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
+            var postBody = this.GetJsonFromFile(this.GetPath("Tests/EngineeringModel/Iteration/POSTNewIterationSetup.json"));
+
+            // a new IterationSetup freezes the current iteration
+            this.WebClient.PostDto(siteDirectoryUri, postBody);
+
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c?waitTime=30");
+            postBody = this.GetJsonFromFile(this.GetPath("Tests/EngineeringModel/ElementDefinition/PostNewElementDefinition.json"));
+
+            var webException = Assert.Throws<WebException>(() => this.WebClient.PostDto(iterationUri, postBody));
+            var response = (HttpWebResponse)webException.Response;
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
+                Assert.That(response.Headers.GetValues("CDP-Error-Tag")?.Single(), Is.EqualTo("#FROZEN_ITERATION"));
+            });
+        }
+
+        [Test]
+        [Category("POST")]
         public void VerifyThatExpectedIterationCanBeCreatedFromWebApi()
         {
             var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
