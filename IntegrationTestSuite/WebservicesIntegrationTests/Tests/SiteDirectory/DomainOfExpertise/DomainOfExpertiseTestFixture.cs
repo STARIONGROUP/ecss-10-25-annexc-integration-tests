@@ -153,6 +153,57 @@ namespace WebservicesIntegrationTests
 
         [Test]
         [Category("POST")]
+        public void VerifyThatDomainsOfExpertiseAreCreatedInTheBackgroundWhenThePostExceedsItsWaitTimeWithWebApi()
+        {
+            // creating this many DomainsOfExpertise in one POST takes well over a second, so the POST exceeds its
+            // waitTime: it answers with its CometTask and the work continues in the background
+            var domainOfExpertiseIids = CreateIids(BulkDomainOfExpertiseCount);
+            var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294?waitTime=1");
+
+            var cometTask = this.WebClient.PostJson(siteDirectoryUri, CreateBulkDomainOfExpertisePostBody(domainOfExpertiseIids, withUnknownCategory: false));
+
+            Assert.That((int)cometTask["statusKind"], Is.EqualTo(CometTaskStatusKind.Processing));
+
+            var finishedTask = this.WaitForCometTaskToFinish((string)cometTask["id"], TimeSpan.FromMinutes(10));
+
+            Assert.Multiple(() =>
+            {
+                Assert.That((int)finishedTask["statusKind"], Is.EqualTo(CometTaskStatusKind.Succeeded), finishedTask.ToString());
+                Assert.That((int)finishedTask["revision"], Is.EqualTo(2));
+                Assert.That(finishedTask["error"]?.Type, Is.EqualTo(JTokenType.Null));
+            });
+
+            // the DomainsOfExpertise have been stored
+            Assert.That(this.GetDomainOfExpertiseIids(), Is.SupersetOf(domainOfExpertiseIids));
+        }
+
+        [Test]
+        [Category("POST")]
+        public void VerifyThatAPostThatFailsAfterItsWaitTimeEndsWithAFailedTaskWithWebApi()
+        {
+            // the last DomainOfExpertise refers to a Category that does not exist; that is only detected when the
+            // transaction is committed, after the wait time, so the failure can only be reported through the CometTask
+            var domainOfExpertiseIids = CreateIids(BulkDomainOfExpertiseCount);
+            var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294?waitTime=1");
+
+            var cometTask = this.WebClient.PostJson(siteDirectoryUri, CreateBulkDomainOfExpertisePostBody(domainOfExpertiseIids, withUnknownCategory: true));
+
+            Assert.That((int)cometTask["statusKind"], Is.EqualTo(CometTaskStatusKind.Processing));
+
+            var finishedTask = this.WaitForCometTaskToFinish((string)cometTask["id"], TimeSpan.FromMinutes(10));
+
+            Assert.Multiple(() =>
+            {
+                Assert.That((int)finishedTask["statusKind"], Is.EqualTo(CometTaskStatusKind.Failed), finishedTask.ToString());
+                Assert.That((string)finishedTask["error"], Is.Not.Empty);
+            });
+
+            // nothing has been stored
+            Assert.That(this.GetDomainOfExpertiseIids(), Has.None.AnyOf(domainOfExpertiseIids));
+        }
+
+        [Test]
+        [Category("POST")]
         public void VerifyThatReadWorksForParticipantNotBeingPartOfADomainOfExpertise()
         {
             var siteDirectoryUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294");
@@ -328,6 +379,80 @@ namespace WebservicesIntegrationTests
                 IList<string> categories = categoryArray.Select(x => (string)x).ToList();
                 Assert.That(categories, Is.EquivalentTo(expectedCategories));
             }
+        }
+
+        /// <summary>
+        /// The number of DomainsOfExpertise in the POST that exceeds its waitTime of 1 second. Creating them takes about
+        /// 10 seconds on a developer machine
+        /// </summary>
+        private const int BulkDomainOfExpertiseCount = 1000;
+
+        /// <summary>
+        /// Creates new iids
+        /// </summary>
+        /// <param name="count">The number of iids</param>
+        /// <returns>The iids</returns>
+        private static string[] CreateIids(int count)
+        {
+            return Enumerable.Range(0, count).Select(_ => Guid.NewGuid().ToString()).ToArray();
+        }
+
+        /// <summary>
+        /// Creates the body of a POST that creates DomainsOfExpertise in the SiteDirectory
+        /// </summary>
+        /// <param name="domainOfExpertiseIids">The iids of the DomainsOfExpertise</param>
+        /// <param name="withUnknownCategory">Whether the last DomainOfExpertise refers to a Category that does not exist</param>
+        /// <returns>The POST body</returns>
+        private static string CreateBulkDomainOfExpertisePostBody(string[] domainOfExpertiseIids, bool withUnknownCategory)
+        {
+            var creates = new JArray();
+
+            for (var i = 0; i < domainOfExpertiseIids.Length; i++)
+            {
+                var category = withUnknownCategory && i == domainOfExpertiseIids.Length - 1 ? new JArray(Guid.NewGuid().ToString()) : new JArray();
+
+                creates.Add(new JObject
+                {
+                    ["iid"] = domainOfExpertiseIids[i],
+                    ["classKind"] = "DomainOfExpertise",
+                    ["revisionNumber"] = 0,
+                    ["shortName"] = $"BulkDomain{i}",
+                    ["name"] = $"Bulk Domain {i}",
+                    ["isDeprecated"] = false,
+                    ["category"] = category,
+                    ["alias"] = new JArray(),
+                    ["definition"] = new JArray(),
+                    ["hyperLink"] = new JArray()
+                });
+            }
+
+            var postBody = new JObject
+            {
+                ["_delete"] = new JArray(),
+                ["_create"] = creates,
+                ["_update"] = new JArray(new JObject
+                {
+                    ["classKind"] = "SiteDirectory",
+                    ["iid"] = "f13de6f8-b03a-46e7-a492-53b2f260f294",
+                    ["domain"] = new JArray(domainOfExpertiseIids.Cast<object>().ToArray())
+                })
+            };
+
+            return postBody.ToString();
+        }
+
+        /// <summary>
+        /// Gets the iids of the DomainsOfExpertise in the SiteDirectory
+        /// </summary>
+        /// <returns>The iids</returns>
+        private string[] GetDomainOfExpertiseIids()
+        {
+            var domainsUri = new Uri($"{this.Settings.Hostname}/SiteDirectory/f13de6f8-b03a-46e7-a492-53b2f260f294/domain");
+
+            return this.WebClient.GetDto(domainsUri)
+                .Where(x => (string)x["classKind"] == "DomainOfExpertise")
+                .Select(x => (string)x["iid"])
+                .ToArray();
         }
     }
 }

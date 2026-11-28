@@ -192,6 +192,58 @@ namespace WebservicesIntegrationTests.Net
         }
 
         /// <summary>
+        /// Performs a GET request on the provided <see cref="Uri"/> and returns the response as a <see cref="JToken"/>,
+        /// for responses that are not an array, such as a CometTask
+        /// </summary>
+        /// <param name="uri">
+        /// The <see cref="Uri"/> that the GET request is performed on
+        /// </param>
+        /// <returns>
+        /// A <see cref="JToken"/> with the response
+        /// </returns>
+        public JToken GetJson(Uri uri)
+        {
+            return ExtractJTokenFromResponse(this.RetrieveHttpGetResponse(uri));
+        }
+
+        /// <summary>
+        /// Performs a POST request on the provided <see cref="Uri"/> and returns the response as a <see cref="JToken"/>,
+        /// for responses that are not an array, such as the CometTask of a POST that exceeds its waitTime
+        /// </summary>
+        /// <param name="uri">
+        /// The <see cref="Uri"/> that the POST request is performed on
+        /// </param>
+        /// <param name="postBody">
+        /// The content that is to be posted to the <see cref="Uri"/>
+        /// </param>
+        /// <returns>
+        /// A <see cref="JToken"/> with the response
+        /// </returns>
+        public JToken PostJson(Uri uri, string postBody)
+        {
+            return ExtractJTokenFromResponse(this.RetrieveHttpPostResponse(uri, postBody));
+        }
+
+        /// <summary>
+        /// Reads the body of a <see cref="WebResponse"/> as a <see cref="JToken"/>
+        /// </summary>
+        /// <param name="webResponse">
+        /// The <see cref="WebResponse"/>
+        /// </param>
+        /// <returns>
+        /// The <see cref="JToken"/>
+        /// </returns>
+        private static JToken ExtractJTokenFromResponse(WebResponse webResponse)
+        {
+            using (var reader = new StreamReader(webResponse.GetResponseStream()))
+            using (JsonReader jsonReader = new JsonTextReader(reader))
+            {
+                jsonReader.DateParseHandling = DateParseHandling.None;
+                return JToken.Load(jsonReader);
+            }
+        }
+
+        /// <summary>
         /// Performs a POST request on the provided <see cref="Uri"/>, uploads a file and returns a pretty printed JSON string.
         /// </summary>
         /// <param name="uri">

@@ -225,6 +225,57 @@ namespace WebservicesIntegrationTests
 
         [Test]
         [Category("POST")]
+        public void VerifyThatElementDefinitionsAreCreatedInTheBackgroundWhenThePostExceedsItsWaitTimeWithWebApi()
+        {
+            // creating this many ElementDefinitions in one POST takes well over a second, so the POST exceeds its
+            // waitTime: it answers with its CometTask and the work continues in the background
+            var elementDefinitionIids = CreateIids(BulkElementDefinitionCount);
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c?waitTime=1");
+
+            var cometTask = this.WebClient.PostJson(iterationUri, CreateBulkElementDefinitionPostBody(elementDefinitionIids, withUnknownCategory: false));
+
+            Assert.That((int)cometTask["statusKind"], Is.EqualTo(CometTaskStatusKind.Processing));
+
+            var finishedTask = this.WaitForCometTaskToFinish((string)cometTask["id"], TimeSpan.FromMinutes(10));
+
+            Assert.Multiple(() =>
+            {
+                Assert.That((int)finishedTask["statusKind"], Is.EqualTo(CometTaskStatusKind.Succeeded), finishedTask.ToString());
+                Assert.That((int)finishedTask["revision"], Is.EqualTo(2));
+                Assert.That(finishedTask["error"]?.Type, Is.EqualTo(JTokenType.Null));
+            });
+
+            // the ElementDefinitions have been stored
+            Assert.That(this.GetElementDefinitionIids(), Is.SupersetOf(elementDefinitionIids));
+        }
+
+        [Test]
+        [Category("POST")]
+        public void VerifyThatAPostThatFailsAfterItsWaitTimeEndsWithAFailedTaskWithWebApi()
+        {
+            // the last ElementDefinition refers to a Category that does not exist; that is only detected when the
+            // transaction is committed, after the wait time, so the failure can only be reported through the CometTask
+            var elementDefinitionIids = CreateIids(BulkElementDefinitionCount);
+            var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c?waitTime=1");
+
+            var cometTask = this.WebClient.PostJson(iterationUri, CreateBulkElementDefinitionPostBody(elementDefinitionIids, withUnknownCategory: true));
+
+            Assert.That((int)cometTask["statusKind"], Is.EqualTo(CometTaskStatusKind.Processing));
+
+            var finishedTask = this.WaitForCometTaskToFinish((string)cometTask["id"], TimeSpan.FromMinutes(10));
+
+            Assert.Multiple(() =>
+            {
+                Assert.That((int)finishedTask["statusKind"], Is.EqualTo(CometTaskStatusKind.Failed), finishedTask.ToString());
+                Assert.That((string)finishedTask["error"], Is.Not.Empty);
+            });
+
+            // nothing has been stored
+            Assert.That(this.GetElementDefinitionIids(), Has.None.AnyOf(elementDefinitionIids));
+        }
+
+        [Test]
+        [Category("POST")]
         public void VerifyThatAnElementDefinitionCanBeCreatedWithWebApi()
         {
             var iterationUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c");
@@ -448,6 +499,84 @@ namespace WebservicesIntegrationTests
                 var h = hyperlinksArray.Select(x => (string)x).ToList();
                 Assert.That(h, Is.EquivalentTo(expectedHyperlinks));
             }
+        }
+
+        /// <summary>
+        /// The number of ElementDefinitions in the POST that exceeds its waitTime of 1 second. Creating them takes about
+        /// 10 seconds on a developer machine
+        /// </summary>
+        private const int BulkElementDefinitionCount = 300;
+
+        /// <summary>
+        /// Creates new iids
+        /// </summary>
+        /// <param name="count">The number of iids</param>
+        /// <returns>The iids</returns>
+        private static string[] CreateIids(int count)
+        {
+            return Enumerable.Range(0, count).Select(_ => Guid.NewGuid().ToString()).ToArray();
+        }
+
+        /// <summary>
+        /// Creates the body of a POST that creates ElementDefinitions in the iteration
+        /// </summary>
+        /// <param name="elementDefinitionIids">The iids of the ElementDefinitions</param>
+        /// <param name="withUnknownCategory">Whether the last ElementDefinition refers to a Category that does not exist</param>
+        /// <returns>The POST body</returns>
+        private static string CreateBulkElementDefinitionPostBody(string[] elementDefinitionIids, bool withUnknownCategory)
+        {
+            var creates = new JArray();
+
+            for (var i = 0; i < elementDefinitionIids.Length; i++)
+            {
+                var category = withUnknownCategory && i == elementDefinitionIids.Length - 1 ? new JArray(Guid.NewGuid().ToString()) : new JArray();
+
+                creates.Add(new JObject
+                {
+                    ["iid"] = elementDefinitionIids[i],
+                    ["classKind"] = "ElementDefinition",
+                    ["revisionNumber"] = 0,
+                    ["owner"] = "0e92edde-fdff-41db-9b1d-f2e484f12535",
+                    ["category"] = category,
+                    ["shortName"] = $"BulkElementDefinition{i}",
+                    ["name"] = $"Bulk Element Definition {i}",
+                    ["hyperLink"] = new JArray(),
+                    ["definition"] = new JArray(),
+                    ["alias"] = new JArray(),
+                    ["referencedElement"] = new JArray(),
+                    ["parameterGroup"] = new JArray(),
+                    ["parameter"] = new JArray(),
+                    ["containedElement"] = new JArray()
+                });
+            }
+
+            var postBody = new JObject
+            {
+                ["_delete"] = new JArray(),
+                ["_create"] = creates,
+                ["_update"] = new JArray(new JObject
+                {
+                    ["classKind"] = "Iteration",
+                    ["iid"] = "e163c5ad-f32b-4387-b805-f4b34600bc2c",
+                    ["element"] = new JArray(elementDefinitionIids.Cast<object>().ToArray())
+                })
+            };
+
+            return postBody.ToString();
+        }
+
+        /// <summary>
+        /// Gets the iids of the ElementDefinitions in the iteration
+        /// </summary>
+        /// <returns>The iids</returns>
+        private string[] GetElementDefinitionIids()
+        {
+            var elementsUri = new Uri($"{this.Settings.Hostname}/EngineeringModel/9ec982e4-ef72-4953-aa85-b158a95d8d56/iteration/e163c5ad-f32b-4387-b805-f4b34600bc2c/element");
+
+            return this.WebClient.GetDto(elementsUri)
+                .Where(x => (string)x[PropertyNames.ClassKind] == "ElementDefinition")
+                .Select(x => (string)x[PropertyNames.Iid])
+                .ToArray();
         }
     }
 }
